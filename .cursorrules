@@ -1,5 +1,5 @@
 # Cursor Rules (.cursorrules)
-# Projeto: Em Pratos Limpos (Campo Largo - PR)
+# Projeto: Em Pratos Limpos (Campo do Tenente - PR)
 
 Regras compulsórias para todas as sessões e modelos no Cursor (Composer, Chat, Inline Edit):
 
@@ -23,7 +23,7 @@ Regras compulsórias para todas as sessões e modelos no Cursor (Composer, Chat,
 - Política de Zero Secrets: zero tokens, senhas ou credenciais no repositório.
 
 5. INTEGRIDADE E SANIDADE DE DADOS:
-- Nunca invente ou estime dados legislativos. Todo dado deve vir do SAPL da Câmara de Campo Largo.
+- Nunca invente ou estime dados legislativos. Todo dado deve vir do SAPL da Câmara de Campo do Tenente.
 - Antes de qualquer commit ou abertura de PR, execute e aprove 100% da suíte de sanidade:
   * python coletor/testes_sanidade.py
   * python -m unittest tests/test_sanidade_dados.py

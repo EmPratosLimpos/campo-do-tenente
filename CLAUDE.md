@@ -1,5 +1,5 @@
 # Claude Code CLI Guidelines (CLAUDE.md)
-## Projeto: Em Pratos Limpos (Campo Largo - PR)
+## Projeto: Em Pratos Limpos (Campo do Tenente - PR)
 
 Este arquivo é lido automaticamente pela CLI do Claude Code (`claude`) ao iniciar qualquer sessão neste repositório.
 

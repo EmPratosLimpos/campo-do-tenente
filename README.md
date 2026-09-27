@@ -1,8 +1,8 @@
 # Em Pratos Limpos
 
-Painel cívico e aberto sobre a atuação legislativa da Câmara Municipal de Campo Largo (PR).
+Painel cívico e aberto sobre a atuação legislativa da Câmara Municipal de Campo do Tenente (PR).
 
-Acesse o painel online: **https://empratoslimposcl.github.io/em-pratos-limpos/**
+Acesse o painel online: **https://empratoslimpos.github.io/campo-do-tenente/**
 
 ---
 
@@ -10,7 +10,7 @@ Acesse o painel online: **https://empratoslimposcl.github.io/em-pratos-limpos/**
 
 O projeto **Em Pratos Limpos** tem como objetivo apresentar de forma clara, acessível e 100% factual o que a Câmara Municipal vota e como cada vereador votou em plenário.
 
-* **Fonte oficial**: Todos os dados exibidos são públicos e extraídos diretamente do Sistema de Apoio ao Processo Legislativo (SAPL) da Câmara Municipal de Campo Largo.
+* **Fonte oficial**: Todos os dados exibidos são públicos e extraídos diretamente do Sistema de Apoio ao Processo Legislativo (SAPL) da Câmara Municipal de Campo do Tenente.
 * **Imparcialidade total**: Sem notas, sem rankings, sem juízos de valor e sem qualquer direcionamento político. O painel apenas organiza os registros oficiais para consulta do cidadão.
 * **Transparência**: Cada votação e matéria apresentada possui link direto para a página oficial correspondente no portal da Câmara.
 

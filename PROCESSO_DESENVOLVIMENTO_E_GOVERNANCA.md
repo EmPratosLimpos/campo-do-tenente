@@ -1,12 +1,12 @@
 # Processo de Desenvolvimento, Governança, Segurança e Publicação
-## Projeto: Em Pratos Limpos (Campo Largo - PR)
+## Projeto: Em Pratos Limpos (Campo do Tenente - PR)
 
 | Campo | Valor |
 | :--- | :--- |
 | Documento | Política Oficial de Governança, Desenvolvimento, Segurança e Publicação |
 | Versão | 1.0 (documento definitivo) |
 | Data de vigência | 16 de setembro de 2026 |
-| Repositório | `empratoslimposcl/em-pratos-limpos` |
+| Repositório | `EmPratosLimpos/campo-do-tenente` |
 | Ambiente de produção | `https://empratoslimpos.pages.dev` |
 | Branch de produção | `main` (protegida) |
 | Branch de integração | `desenvolvimento` |
@@ -20,7 +20,7 @@
 
 ### 0.1 Propósito
 
-O projeto "Em Pratos Limpos" é um portal cívico de transparência que consolida, organiza e apresenta a atuação parlamentar dos 15 vereadores oficiais da Câmara Municipal de Campo Largo, Paraná. Diferente de um software comercial, o produto aqui entregue é **confiança pública**. Um dado errado, uma contagem inflada ou uma sessão faltante não gera apenas um bug: gera desinformação cívica e destrói a credibilidade do projeto perante a comunidade.
+O projeto "Em Pratos Limpos" é um portal cívico de transparência que consolida, organiza e apresenta a atuação parlamentar dos 15 vereadores oficiais da Câmara Municipal de Campo do Tenente, Paraná. Diferente de um software comercial, o produto aqui entregue é **confiança pública**. Um dado errado, uma contagem inflada ou uma sessão faltante não gera apenas um bug: gera desinformação cívica e destrói a credibilidade do projeto perante a comunidade.
 
 Este documento estabelece, em caráter normativo e obrigatório, o processo completo que vai da escrita da primeira linha de código até a homologação do dado publicado ao vivo.
 
@@ -108,8 +108,8 @@ O diretório `.venv/` está no `.gitignore` e nunca deve ser versionado.
 ### 1.3 Clonagem e posicionamento correto
 
 ```bash
-git clone https://github.com/empratoslimposcl/em-pratos-limpos.git
-cd em-pratos-limpos
+git clone https://github.com/EmPratosLimpos/campo-do-tenente.git
+cd campo-do-tenente
 git checkout desenvolvimento
 git pull --rebase origin desenvolvimento
 ```
@@ -209,7 +209,7 @@ Este checklist deve ser executado integralmente antes de qualquer Pull Request q
 
 > **Nunca, em nenhuma hipótese, codifique diretamente na branch `main`.**
 
-A `main` é a fotografia do que os cidadãos de Campo Largo estão vendo neste exato momento. Ela recebe código apenas por merge de Pull Request aprovado. Não recebe commit direto, não recebe "correção rápida", não recebe push forçado.
+A `main` é a fotografia do que os cidadãos de Campo do Tenente estão vendo neste exato momento. Ela recebe código apenas por merge de Pull Request aprovado. Não recebe commit direto, não recebe "correção rápida", não recebe push forçado.
 
 | Prática proibida na `main` | Consequência |
 | :--- | :--- |
@@ -386,8 +386,8 @@ Esta subseção tem caráter estrito e prevalece sobre conveniência de depuraç
 Configuração obrigatória de identidade Git no repositório, para evitar vazamento de e-mail pessoal em commits:
 
 ```bash
-git config user.name "empratoslimposcl"
-git config user.email "<id>+empratoslimposcl@users.noreply.github.com"
+git config user.name "EmPratosLimpos"
+git config user.email "<id>+EmPratosLimpos@users.noreply.github.com"
 ```
 
 Regra sobre dados de parlamentares: o portal trata exclusivamente de **atuação pública de agente público no exercício do mandato**, o que é informação de interesse coletivo e de publicidade obrigatória. O projeto não coleta, não infere e não publica dado de vida privada, dado sensível na acepção da LGPD, nem dado de terceiros não investidos de mandato.
@@ -721,7 +721,7 @@ O Pull Request é reprovado sem necessidade de análise adicional quando:
 
 > **Somente o mantenedor aprova merges para `main`.**
 
-Esta regra é absoluta e não comporta exceção por urgência, por horário, por feriado ou por simplicidade aparente da mudança. Não existe "aprovação automática", não existe "auto-merge", não existe aprovação por agente de IA. A automação pode preparar, testar, empacotar e propor. A decisão de publicar em nome da transparência pública de Campo Largo é humana, nominal e rastreável.
+Esta regra é absoluta e não comporta exceção por urgência, por horário, por feriado ou por simplicidade aparente da mudança. Não existe "aprovação automática", não existe "auto-merge", não existe aprovação por agente de IA. A automação pode preparar, testar, empacotar e propor. A decisão de publicar em nome da transparência pública de Campo do Tenente é humana, nominal e rastreável.
 
 ### 4.7.1 Proibições explícitas para agentes de IA
 

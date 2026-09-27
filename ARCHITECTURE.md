@@ -11,7 +11,7 @@ coletor (Python)  ->  dados/brutos/  ->  gerador de agregados  ->  validacao (sa
 
 1. **Coletor Python** (`coletor/`)
    - `sondar.py`: exploração pontual da API pública do SAPL de Campo
-     Largo (`https://sapl.campolargo.pr.leg.br`) para descobrir endpoints
+     do Tenente (`https://sapl.campodotenente.pr.leg.br`) para descobrir endpoints
      e formatos antes de automatizar a coleta.
    - `baixar_voto_presenca_ordinarias_2026.py`: coletor principal. Busca,
      sessão a sessão, os pacotes `registrovotacao`, `votoparlamentar`,

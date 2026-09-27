@@ -1,5 +1,5 @@
 # Regras Obrigatórias para Agentes de IA (AGENTS.md)
-## Projeto: Em Pratos Limpos (Campo Largo - PR)
+## Projeto: Em Pratos Limpos (Campo do Tenente - PR)
 
 Este arquivo é de leitura compulsória para qualquer agente autônomo, assistente de IA, LLM ou ferramenta de automação (Antigravity, Cursor, Claude Code, Codex, Aider, Copilot, Grok, DeepSeek, etc.) antes de ler, editar ou executar qualquer arquivo neste repositório.
 
@@ -25,7 +25,7 @@ A norma técnica soberana deste projeto é o documento:
 
 4. **Imparcialidade Cívica e Rigor com Dados:**
    * Zero rankings políticos, juízos de valor, notas, estrelas ou termos comparativos entre vereadores.
-   * Todo número na tela deve ter origem oficial rastreável no SAPL da Câmara de Campo Largo (`sapl.campolargo.pr.leg.br`).
+   * Todo número na tela deve ter origem oficial rastreável no SAPL da Câmara de Campo do Tenente (`sapl.campodotenente.pr.leg.br`).
    * Ausência não é voto: registrar com precisão presenças, faltas justificadas e faltas não justificadas.
    * Não invente dados: ausência de dado no SAPL deve ser tratada com clareza, nunca preenchida com estimativas ou valores fictícios.
 
@@ -34,7 +34,7 @@ A norma técnica soberana deste projeto é o documento:
 ## 2. Segregação de Ambientes e Fluxo de Branches
 
 * **Branch `main` (Produção):**
-  * Espelho do GitHub Pages público (`https://empratoslimposcl.github.io/em-pratos-limpos/`).
+  * Espelho do GitHub Pages público (`https://empratoslimpos.github.io/campo-do-tenente/`).
   * **NUNCA** commite diretamente na branch `main`.
   * **NUNCA** faça force push (`git push --force`).
    * Atualizações em `main` só ocorrem via Pull Request formal após validação e aprovação do mantenedor.
