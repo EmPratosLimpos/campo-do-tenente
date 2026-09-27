@@ -1,0 +1,26 @@
+{
+  "cidade": {
+    "nome": "Campo do Tenente",
+    "uf": "PR"
+  },
+  "sapl": {
+    "endereco_base": "https://sapl.campodotenente.pr.leg.br",
+    "id_tipo_sessao_ordinaria": 3,
+    "id_tipo_sessao_ordinaria_nota": "a confirmar na sondagem C2",
+    "id_legislatura_atual": 1,
+    "legislatura_inicio": 2025,
+    "legislatura_fim": 2028
+  },
+  "recorte": {
+    "anos": [2025, 2026],
+    "nota": "legislatura inteira"
+  },
+  "vereadores": {
+    "numero_esperado": null
+  },
+  "pisos_sanidade": {
+    "sessoes_ordinarias": null,
+    "plls": null,
+    "vereadores": null
+  }
+}
