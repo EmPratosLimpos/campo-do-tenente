@@ -121,7 +121,7 @@ def _paginado(caminho: str, params: dict, prefixo: str) -> dict:
 
 
 class ColetorLote:
-    def __init__(self, cfg: dict, pasta: Path):
+    def __init__(self, cfg: dict, pasta: Path, teto: int | None = None):
         if PAUSA_SAPL_SEGUNDOS < 2.5:
             raise SystemExit(
                 "PAUSA_SAPL_SEGUNDOS esta abaixo de 2,5. A pausa nao pode ser reduzida."
@@ -130,6 +130,7 @@ class ColetorLote:
         self.base = endereco_sapl(cfg)
         self.user_agent = user_agent_http(cfg)
         self.pasta = pasta
+        self.teto = TETO_PEDIDOS if teto is None else int(teto)
         self.indice_path = pasta / "indice.json"
         self.pedidos = 0
         self.consultas = []
@@ -159,7 +160,7 @@ class ColetorLote:
             "fonte": self.base,
             "pausa_segundos": PAUSA_SAPL_SEGUNDOS,
             "page_size": PAGE_SIZE,
-            "teto_pedidos": TETO_PEDIDOS,
+            "teto_pedidos": self.teto,
             "total_pedidos": self.pedidos,
             "iniciado_em": self.inicio,
             "atualizado_em": agora(),
@@ -201,9 +202,9 @@ class ColetorLote:
             print(f"  [ja tinha] {arquivo}")
             return ja
 
-        if self.pedidos >= TETO_PEDIDOS:
+        if self.pedidos >= self.teto:
             raise OrcamentoEsgotado(
-                f"teto de {TETO_PEDIDOS} pedidos atingido antes de {arquivo}"
+                f"teto de {self.teto} pedidos atingido antes de {arquivo}"
             )
 
         self._esperar_pausa()
@@ -211,9 +212,9 @@ class ColetorLote:
         tentativas_extra = 0
 
         while True:
-            if self.pedidos >= TETO_PEDIDOS:
+            if self.pedidos >= self.teto:
                 raise OrcamentoEsgotado(
-                    f"teto de {TETO_PEDIDOS} pedidos atingido antes de {arquivo}"
+                    f"teto de {self.teto} pedidos atingido antes de {arquivo}"
                 )
             quando = agora()
             status = None
@@ -259,7 +260,7 @@ class ColetorLote:
                     "arquivo": nome_gravado,
                 }
             )
-            print(f"  [{self.pedidos:03d}/{TETO_PEDIDOS}] {status or 'erro'} {nome_gravado}")
+            print(f"  [{self.pedidos:03d}/{self.teto}] {status or 'erro'} {nome_gravado}")
 
             recusar = status in (429, 500, 502, 503) or erro in (
                 "tempo esgotado",
