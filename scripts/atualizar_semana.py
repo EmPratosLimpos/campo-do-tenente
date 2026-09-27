@@ -7,7 +7,8 @@ temas, sanidade e hash.
 
 Um pedido por vez. Pausa de PAUSA_SAPL_SEGUNDOS (2,5 s). No maximo
 400 pedidos nesta execucao. Anos saem de config_cidade.json. O ano
-corrente entra sozinho quando cai dentro da legislatura.
+corrente so entra depois de um pedido ao SAPL confirmar ao menos uma
+sessao ordinaria nesse ano. Sem sessao, o recorte nao muda.
 
 Modo simulado (--simulado): nao abre rede. Usa os brutos ja salvos.
 Se nao houver dado novo, nao regrava os tratados.
@@ -34,6 +35,7 @@ from coletar_lote import (  # noqa: E402
     OrcamentoEsgotado,
     RECURSOS_ORDEM_ESTAVEL,
     _total_paginas,
+    continuar_apos_primeira,
     lista_tem_repeticao,
     plano_de_coleta,
 )
@@ -84,13 +86,74 @@ class OrcamentoExecucao:
 
 
 def anos_da_execucao(cfg: dict, hoje: date) -> list[int]:
-    """Anos do config, mais o ano corrente se estiver na legislatura."""
+    """Anos ja gravados no config. O ano corrente nao entra sozinho."""
+    if not isinstance(hoje, date):
+        raise SystemExit("Data da execucao invalida.")
+    return sorted(anos_recorte(cfg))
+
+
+def ano_corrente_candidato(cfg: dict, hoje: date) -> int | None:
+    """Ano de hoje se estiver na legislatura e ainda nao estiver no recorte."""
     anos = list(anos_recorte(cfg))
     inicio = int(cfg["sapl"]["legislatura_inicio"])
     fim = int(cfg["sapl"]["legislatura_fim"])
     if inicio <= hoje.year <= fim and hoje.year not in anos:
-        anos.append(hoje.year)
-    return sorted(anos)
+        return int(hoje.year)
+    return None
+
+
+def ha_sessao_ordinaria(dados: dict, tipo_ordinaria: int) -> bool:
+    if not isinstance(dados, dict):
+        return False
+    resultados = dados.get("results")
+    if isinstance(resultados, list) and resultados:
+        return any(
+            isinstance(item, dict) and int(item.get("tipo") or 0) == int(tipo_ordinaria)
+            for item in resultados
+        )
+    paginacao = dados.get("pagination") or {}
+    total = paginacao.get("total_entries")
+    if total is None and isinstance(dados.get("count"), int) and not isinstance(dados.get("count"), bool):
+        total = dados.get("count")
+    return isinstance(total, int) and not isinstance(total, bool) and total >= 1
+
+
+def confirmar_sessao_ordinaria_no_ano(coletor: ColetorLote, ano: int, tipo_ordinaria: int) -> bool:
+    """Um pedido ao SAPL, com a pausa do coletor. Nao pagina."""
+    dados = coletor.pedir(
+        "/api/sessao/sessaoplenaria/",
+        {
+            "data_inicio__year": int(ano),
+            "tipo": int(tipo_ordinaria),
+            "page": 1,
+            "page_size": 1,
+        },
+        f"sonda_ordinaria_ano{int(ano)}.json",
+        refrescar=True,
+    )
+    return ha_sessao_ordinaria(dados, tipo_ordinaria)
+
+
+def incluir_ano_se_confirmado(cfg: dict, hoje: date, simulado: bool, confirmar) -> tuple[list[int], bool]:
+    """Acrescenta o ano corrente so quando o SAPL tem sessao ordinaria.
+
+    No modo simulado nao ha pedido. Sem sessao, o recorte segue como esta.
+    """
+    anos = anos_da_execucao(cfg, hoje)
+    candidato = ano_corrente_candidato(cfg, hoje)
+    if candidato is None:
+        return anos, False
+    if simulado:
+        print(
+            f"Ano {candidato} esta na legislatura. "
+            "Modo simulado nao consulta o SAPL. O ano nao entrou no recorte."
+        )
+        return anos, False
+    if confirmar(candidato):
+        print(f"Ano {candidato} confirmado no SAPL e incluido no recorte.")
+        return sorted(anos + [candidato]), True
+    print(f"Ano {candidato} sem sessao ordinaria no SAPL. O recorte nao mudou.")
+    return anos, False
 
 
 def gravar_anos_no_config(anos: list[int]) -> None:
@@ -135,13 +198,18 @@ def atualizar_paginas(coletor: ColetorLote, caminho: str, params: dict, prefixo:
     if not isinstance(primeiro, dict):
         raise SystemExit(f"{prefixo}: resposta sem objeto JSON")
     pagina1_igual = simulado or bool(coletor.ultimo_igual)
-    total = _total_paginas(primeiro, PAGE_SIZE)
-    for pagina in range(2, total + 1):
+
+    def baixar(pagina: int):
         params["page"] = pagina
         arquivo = f"{prefixo}_p{pagina}.json"
         existe = (coletor.pasta / arquivo).is_file()
         refrescar = (not simulado) and existe and (not pagina1_igual)
-        coletor.pedir(caminho, params, arquivo, refrescar=refrescar)
+        dados = coletor.pedir(caminho, params, arquivo, refrescar=refrescar)
+        if not isinstance(dados, dict):
+            raise SystemExit(f"{prefixo}: resposta sem objeto JSON")
+        return dados
+
+    continuar_apos_primeira(primeiro, prefixo, baixar)
 
 
 def estimar_sondas(pasta_lote: Path, anos: list[int]) -> tuple[int, int]:
@@ -167,7 +235,14 @@ def estimar_sondas(pasta_lote: Path, anos: list[int]) -> tuple[int, int]:
         if not primeira.is_file():
             continue
         dados = json.loads(primeira.read_text(encoding="utf-8"))
-        faltantes += _total_paginas(dados, PAGE_SIZE)
+        total = _total_paginas(dados, PAGE_SIZE)
+        if total is None:
+            print(
+                f"AVISO: {prefixo} sem total_pages e sem count. "
+                "A estimativa nao inventa o numero de paginas."
+            )
+            continue
+        faltantes += total
     return conferencia, faltantes
 
 
@@ -235,13 +310,15 @@ def coletar_autoria(coletor: ColetorLote, anos: list[int], simulado: bool) -> No
         if not isinstance(pagina, dict):
             raise SystemExit(f"{prefixo}: resposta sem objeto JSON")
         pagina1_igual = simulado or bool(coletor.ultimo_igual)
-        total_paginas = _total_paginas(pagina, PAGE_SIZE)
-        for numero in range(2, total_paginas + 1):
+
+        def baixar(numero: int):
             params["page"] = numero
             arquivo = f"{prefixo}_p{numero}.json"
             existe = (coletor.pasta / arquivo).is_file()
             refrescar = (not simulado) and existe and (not pagina1_igual)
-            coletor.pedir("/api/materia/autoria/", params, arquivo, refrescar=refrescar)
+            return coletor.pedir("/api/materia/autoria/", params, arquivo, refrescar=refrescar)
+
+        continuar_apos_primeira(pagina, prefixo, baixar)
 
 
 def rodar(argumentos: list[str]) -> None:
@@ -390,11 +467,25 @@ def main(argv: list[str] | None = None) -> int:
 
     cfg = carregar_config()
     hoje = date.today()
-    anos_config = list(anos_recorte(cfg))
-    anos = anos_da_execucao(cfg, hoje)
     fonte = endereco_sapl(cfg)
     orcamento = OrcamentoExecucao(TETO_EXECUCAO)
     pasta_lote = pasta_lote_mais_recente(BRUTOS)
+    tipo = id_tipo_sessao_ordinaria(cfg)
+
+    def confirmar_ano(ano: int) -> bool:
+        coletor_sonda = preparar_coletor(cfg, pasta_lote, orcamento, False)
+        coletor_sonda.pular_pausa = False
+        confirmou = confirmar_sessao_ordinaria_no_ano(coletor_sonda, ano, tipo)
+        if not confirmou:
+            coletor_sonda.gravou = False
+        coletores.append(coletor_sonda)
+        return confirmou
+
+    coletores = []
+    anos, config_alterada = incluir_ano_se_confirmado(cfg, hoje, args.simulado, confirmar_ano)
+    if config_alterada and not args.simulado:
+        gravar_anos_no_config(anos)
+        cfg = carregar_config()
     estimativa, paginas_por_id_ausentes = estimar_sondas(pasta_lote, anos)
 
     print("Atualizacao semanal")
@@ -409,16 +500,7 @@ def main(argv: list[str] | None = None) -> int:
         "um por recurso, se couber em uma pagina."
     )
 
-    config_alterada = False
-    if anos != sorted(anos_config):
-        print(f"Ano corrente incluido no recorte: {hoje.year}.")
-        if not args.simulado:
-            gravar_anos_no_config(anos)
-            config_alterada = True
-            cfg = carregar_config()
-
     original_urlopen = coletar_lote.urllib.request.urlopen
-    coletores = []
     sessoes_novas: list[dict] = []
     try:
         if args.simulado:

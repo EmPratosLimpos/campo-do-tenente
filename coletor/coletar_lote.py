@@ -32,6 +32,7 @@ from config_cidade import (
 PAGE_SIZE = 100
 TEMPO_LIMITE = 120
 TETO_PEDIDOS = 200
+TETO_PAGINAS = 500
 MAX_REPETICOES = 2
 ESPERA_RECUSA = (30, 60)
 
@@ -344,25 +345,76 @@ class ColetorLote:
         primeiro = self.pedir(caminho, params, f"{prefixo}_p1.json")
         if not isinstance(primeiro, dict):
             raise SystemExit(f"{prefixo}: resposta sem objeto JSON")
-        total_paginas = _total_paginas(primeiro, PAGE_SIZE)
-        for pagina in range(2, total_paginas + 1):
+
+        def baixar(pagina: int):
             params["page"] = pagina
-            self.pedir(caminho, params, f"{prefixo}_p{pagina}.json")
+            return self.pedir(caminho, params, f"{prefixo}_p{pagina}.json")
+
+        continuar_apos_primeira(primeiro, prefixo, baixar)
 
 
-def _total_paginas(dados: dict, page_size: int) -> int:
+def tem_proxima_pagina(dados: dict) -> bool:
+    if not isinstance(dados, dict):
+        return False
+    paginacao = dados.get("pagination") or {}
+    links = paginacao.get("links") or {}
+    return bool(dados.get("next") or paginacao.get("next_page") or links.get("next"))
+
+
+def numero_da_proxima(dados: dict, pagina_atual: int) -> int:
+    paginacao = dados.get("pagination") or {}
+    proxima = paginacao.get("next_page")
+    if isinstance(proxima, int) and not isinstance(proxima, bool):
+        return proxima
+    link = dados.get("next") or (paginacao.get("links") or {}).get("next")
+    if isinstance(link, str):
+        consulta = urllib.parse.parse_qs(urllib.parse.urlparse(link).query)
+        bruto = (consulta.get("page") or [None])[0]
+        if bruto is not None and str(bruto).isdigit():
+            return int(bruto)
+    return int(pagina_atual) + 1
+
+
+def continuar_apos_primeira(primeiro: dict, prefixo: str, baixar_pagina) -> None:
+    """Baixa o restante. Sem total_pages e sem count, segue o link next ate acabar."""
+    if not isinstance(primeiro, dict):
+        raise SystemExit(f"{prefixo}: resposta sem objeto JSON")
+    total = _total_paginas(primeiro, PAGE_SIZE)
+    if total is None:
+        print(
+            f"AVISO: {prefixo} sem total_pages e sem count. "
+            f"Sigo o link next ate acabar. Teto de {TETO_PAGINAS} paginas."
+        )
+        atual = primeiro
+        pagina = int((primeiro.get("pagination") or {}).get("page") or 1)
+        baixadas = 1
+        while tem_proxima_pagina(atual):
+            baixadas += 1
+            if baixadas > TETO_PAGINAS:
+                raise SystemExit(
+                    f"{prefixo}: ainda ha pagina seguinte depois do teto de {TETO_PAGINAS}. Parei."
+                )
+            pagina = numero_da_proxima(atual, pagina)
+            atual = baixar_pagina(pagina)
+            if not isinstance(atual, dict):
+                raise SystemExit(f"{prefixo}: pagina {pagina} sem objeto JSON")
+        return
+    for pagina in range(2, total + 1):
+        baixar_pagina(pagina)
+
+
+def _total_paginas(dados: dict, page_size: int) -> int | None:
+    """None avisa o chamador para seguir o link next. Nunca devolve um total inventado."""
     paginacao = dados.get("pagination") or {}
     total = paginacao.get("total_pages")
     if total is None:
         count = dados.get("count")
-        if isinstance(count, int):
+        if isinstance(count, int) and not isinstance(count, bool):
             total = max(1, (count + page_size - 1) // page_size)
-        elif dados.get("next") or paginacao.get("next_page"):
-            raise SystemExit(
-                "A API nao informou total_pages. Nao vou adivinhar o numero de paginas."
-            )
+        elif tem_proxima_pagina(dados):
+            return None
         else:
-            total = 1
+            return 1
     total = int(total)
     if total < 1:
         return 1

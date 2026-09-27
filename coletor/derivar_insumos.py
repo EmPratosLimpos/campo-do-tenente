@@ -94,6 +94,44 @@ def gravar_json(caminho: Path, dado) -> None:
     tmp.replace(caminho)
 
 
+RECURSOS_COLETA_POR_SESSAO = (
+    "sessaoplenariapresenca",
+    "presencaordemdia",
+    "ordemdia",
+    "justificativaausencia",
+)
+ARQUIVO_AVISOS_LEITURA = "avisos_leitura.json"
+
+
+def base_do_prefixo(prefixo: str) -> str:
+    if prefixo.endswith("_por_id"):
+        return prefixo[: -len("_por_id")]
+    return prefixo
+
+
+def gravar_aviso_faltante(pasta: Path, aviso: dict) -> None:
+    """Registra no lote que a lista tem menos ids distintos do que total_entries."""
+    caminho = pasta / ARQUIVO_AVISOS_LEITURA
+    existentes = []
+    if caminho.exists():
+        try:
+            lidos = ler_json(caminho)
+        except (OSError, ValueError):
+            lidos = []
+        if isinstance(lidos, list):
+            existentes = [
+                item
+                for item in lidos
+                if not (isinstance(item, dict) and item.get("prefixo") == aviso["prefixo"])
+            ]
+    existentes.append(aviso)
+    gravar_json(caminho, existentes)
+    print(
+        f"AVISO: {aviso['prefixo']}: total_entries {aviso['total_entries']}, "
+        f"ids distintos {aviso['ids_distintos']}, faltam {aviso['faltantes']}."
+    )
+
+
 def ler_paginas(pasta: Path, prefixo: str) -> tuple[list, list[str]]:
     resultados = []
     nomes = []
@@ -138,6 +176,28 @@ def ler_paginas(pasta: Path, prefixo: str) -> tuple[list, list[str]]:
         if identificador is not None:
             vistos.add(identificador)
         unicos.append(linha)
+    if (
+        total_esperado is not None
+        and len(vistos) < int(total_esperado)
+        and not str(prefixo).startswith("sessao_")
+    ):
+        distintos = len(vistos)
+        faltantes = int(total_esperado) - distintos
+        gravar_aviso_faltante(
+            pasta,
+            {
+                "prefixo": prefixo,
+                "total_entries": int(total_esperado),
+                "ids_distintos": distintos,
+                "faltantes": faltantes,
+            },
+        )
+        if base_do_prefixo(prefixo) not in RECURSOS_COLETA_POR_SESSAO:
+            raise SystemExit(
+                f"{prefixo}: {distintos} ids distintos para total_entries "
+                f"{int(total_esperado)}. Faltam {faltantes} registros. "
+                "Este recurso nao tem coleta por sessao. Parei."
+            )
     return unicos, nomes
 
 
@@ -263,6 +323,53 @@ def mesclar_com_porsessao(
     return saida, cobertura
 
 
+def recursos_com_faltante(pasta: Path) -> list[str]:
+    caminho = pasta / ARQUIVO_AVISOS_LEITURA
+    if not caminho.exists():
+        return []
+    try:
+        dados = ler_json(caminho)
+    except (OSError, ValueError):
+        return []
+    if not isinstance(dados, list):
+        return []
+    achados = []
+    for item in dados:
+        if not isinstance(item, dict):
+            continue
+        base = base_do_prefixo(str(item.get("prefixo") or ""))
+        if base in RECURSOS_COLETA_POR_SESSAO and base not in achados:
+            achados.append(base)
+    return achados
+
+
+def exigir_pasta_por_sessao(incompletas: list[str], pasta_porsessao: Path | None) -> None:
+    if incompletas and pasta_porsessao is None:
+        raise SystemExit(
+            "Ids distintos menores que total_entries em "
+            + ", ".join(incompletas)
+            + ". Esses recursos dependem da coleta por sessao e essa pasta nao foi encontrada. Parei."
+        )
+
+
+def aplicar_fonte_incompleta(
+    recurso: str,
+    antigas: list,
+    pasta_porsessao: Path,
+    ids_ordinarias: set[int],
+    incompleta: bool,
+) -> tuple[list, list[str], dict]:
+    """A coleta por sessao e a fonte quando a lista geral perdeu ids."""
+    novas, nomes_novos, divergencias = ler_recurso_por_sessao(
+        pasta_porsessao, ids_ordinarias, recurso
+    )
+    mescladas, cobertura = mesclar_com_porsessao(antigas, novas, ids_ordinarias)
+    cobertura["sessoes_com_divergencia"] = divergencias
+    if incompleta:
+        cobertura["fonte"] = "coleta_por_sessao"
+    return mescladas, nomes_novos, cobertura
+
+
 def ler_ordens_avulsas(pasta: Path) -> tuple[list, list[str]]:
     linhas = []
     nomes = []
@@ -275,9 +382,6 @@ def ler_ordens_avulsas(pasta: Path) -> tuple[list, list[str]]:
 
 
 def ler_paginas_se_existir(pasta: Path, prefixo: str) -> tuple[list, list[str]]:
-    if not (pasta / f"{prefixo}_p1.json").exists():
-        return [], []
-    return ler_paginas(pasta, prefixo)
     if not (pasta / f"{prefixo}_p1.json").exists():
         return [], []
     return ler_paginas(pasta, prefixo)
@@ -447,6 +551,8 @@ def derivar(
         for sessao in sessoes
         if int(sessao.get("tipo") or 0) == int(tipo_ordinaria)
     }
+    incompletas = recursos_com_faltante(pasta_lote)
+    exigir_pasta_por_sessao(incompletas, pasta_porsessao)
     cobertura_porsessao = None
     pasta_fonte_listas = pasta_lote
     if pasta_porsessao is not None:
@@ -456,17 +562,19 @@ def derivar(
             "recursos": {},
         }
         blocos = {
-            "ordemdia": (ordem_linhas, nomes_ordem),
-            "sessaoplenariapresenca": (presencas, nomes_presenca),
-            "presencaordemdia": (presencas_ordem, nomes_presenca_ordem),
-            "justificativaausencia": (justificativas, nomes_justificativa),
+            "ordemdia": ordem_linhas,
+            "sessaoplenariapresenca": presencas,
+            "presencaordemdia": presencas_ordem,
+            "justificativaausencia": justificativas,
         }
-        for recurso, (antigas, _nomes_antigos) in blocos.items():
-            novas, nomes_novos, divergencias = ler_recurso_por_sessao(
-                pasta_porsessao, ids_ordinarias, recurso
+        for recurso, antigas in blocos.items():
+            mescladas, nomes_novos, cobertura = aplicar_fonte_incompleta(
+                recurso,
+                antigas,
+                pasta_porsessao,
+                ids_ordinarias,
+                recurso in incompletas,
             )
-            mescladas, cobertura = mesclar_com_porsessao(antigas, novas, ids_ordinarias)
-            cobertura["sessoes_com_divergencia"] = divergencias
             cobertura_porsessao["recursos"][recurso] = cobertura
             if recurso == "ordemdia":
                 ordem_linhas, nomes_ordem = mescladas, nomes_novos

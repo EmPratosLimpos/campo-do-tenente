@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 import tempfile
@@ -17,7 +18,10 @@ sys.path.insert(0, str(RAIZ / "coletor"))
 from atualizar_semana import (  # noqa: E402
     TETO_EXECUCAO,
     OrcamentoExecucao,
+    ano_corrente_candidato,
     anos_da_execucao,
+    confirmar_sessao_ordinaria_no_ano,
+    incluir_ano_se_confirmado,
     inserir_entrada,
     linhas_contagem,
     montar_entrada,
@@ -55,18 +59,101 @@ def cfg_anos(anos, inicio, fim) -> dict:
 
 
 class TestesAnos(unittest.TestCase):
-    def test_ano_corrente_entra_se_esta_na_legislatura(self):
+    def test_ano_corrente_nao_entra_sem_confirmacao(self):
         cfg = cfg_anos([2025], 2025, 2028)
-        self.assertEqual(anos_da_execucao(cfg, date(2026, 9, 27)), [2025, 2026])
+        self.assertEqual(anos_da_execucao(cfg, date(2026, 9, 27)), [2025])
+        self.assertEqual(ano_corrente_candidato(cfg, date(2026, 9, 27)), 2026)
 
     def test_ano_fora_da_legislatura_nao_entra(self):
         cfg = cfg_anos([2025], 2025, 2028)
         self.assertEqual(anos_da_execucao(cfg, date(2024, 1, 1)), [2025])
         self.assertEqual(anos_da_execucao(cfg, date(2029, 6, 1)), [2025])
+        self.assertIsNone(ano_corrente_candidato(cfg, date(2024, 1, 1)))
+        self.assertIsNone(ano_corrente_candidato(cfg, date(2029, 6, 1)))
 
     def test_ano_que_ja_esta_no_config_nao_repete(self):
         cfg = cfg_anos([2025, 2026], 2025, 2028)
         self.assertEqual(anos_da_execucao(cfg, date(2026, 9, 27)), [2025, 2026])
+        self.assertIsNone(ano_corrente_candidato(cfg, date(2026, 9, 27)))
+
+    def test_simulado_nao_consulta_e_nao_acrescenta(self):
+        cfg = cfg_anos([2025], 2025, 2028)
+        chamadas = []
+
+        def confirmar(ano):
+            chamadas.append(ano)
+            return True
+
+        anos, mudou = incluir_ano_se_confirmado(cfg, date(2027, 1, 2), True, confirmar)
+        self.assertEqual(anos, [2025])
+        self.assertFalse(mudou)
+        self.assertEqual(chamadas, [])
+
+    def test_sem_sessao_ordinaria_nao_acrescenta(self):
+        cfg = cfg_anos([2025], 2025, 2028)
+        anos, mudou = incluir_ano_se_confirmado(
+            cfg, date(2027, 3, 1), False, lambda _ano: False
+        )
+        self.assertEqual(anos, [2025])
+        self.assertFalse(mudou)
+
+    def test_sessao_ordinaria_confirmada_acrescenta_o_ano(self):
+        cfg = cfg_anos([2025], 2025, 2028)
+        anos, mudou = incluir_ano_se_confirmado(
+            cfg, date(2027, 3, 1), False, lambda _ano: True
+        )
+        self.assertEqual(anos, [2025, 2027])
+        self.assertTrue(mudou)
+
+    def test_um_pedido_com_pausa_confirma_sessao_ordinaria(self):
+        dormiu = []
+        chamadas = []
+        corpo = json.dumps(
+            {
+                "pagination": {"total_entries": 1, "total_pages": 1},
+                "results": [{"id": 10, "tipo": 3, "data_inicio": "2027-02-01"}],
+            }
+        ).encode("utf-8")
+
+        def urlopen(req, timeout=None):
+            del timeout
+            chamadas.append(req.full_url)
+            return Resposta(corpo)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            coletor = ColetorLote(CFG_COLETOR, Path(tmp), teto=10)
+            coletor.pular_pausa = False
+            with mock.patch("coletar_lote.time.sleep", dormiu.append), mock.patch(
+                "coletar_lote.urllib.request.urlopen", urlopen
+            ):
+                ok = confirmar_sessao_ordinaria_no_ano(coletor, 2027, 3)
+        self.assertTrue(ok)
+        self.assertEqual(len(chamadas), 1)
+        self.assertIn("data_inicio__year=2027", chamadas[0])
+        self.assertIn("tipo=3", chamadas[0])
+        self.assertIn("page_size=1", chamadas[0])
+        self.assertEqual(dormiu, [2.5])
+
+    def test_resposta_sem_ordinaria_nao_confirma(self):
+        corpo = json.dumps(
+            {
+                "pagination": {"total_entries": 1, "total_pages": 1},
+                "results": [{"id": 11, "tipo": 9, "data_inicio": "2027-02-01"}],
+            }
+        ).encode("utf-8")
+
+        def urlopen(req, timeout=None):
+            del req, timeout
+            return Resposta(corpo)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            coletor = ColetorLote(CFG_COLETOR, Path(tmp), teto=10)
+            coletor.pular_pausa = False
+            with mock.patch("coletar_lote.time.sleep", lambda _segundos: None), mock.patch(
+                "coletar_lote.urllib.request.urlopen", urlopen
+            ):
+                ok = confirmar_sessao_ordinaria_no_ano(coletor, 2027, 3)
+        self.assertFalse(ok)
 
 
 class TestesOrcamento(unittest.TestCase):

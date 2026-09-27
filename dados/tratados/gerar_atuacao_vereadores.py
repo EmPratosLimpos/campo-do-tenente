@@ -82,6 +82,8 @@ RESULTADO_VOTACAO = re.compile(
 )
 APROVADOS = {"UNANIMIDADE", "MAIORIA ABSOLUTA"}
 REJEITADOS = {"REJEITADO"}
+SITUACAO_NAO_MAPEADA = "Resultado nao mapeado"
+AVISO_CONFLITO_AFASTAMENTO = "conflito entre voto registrado e afastamento"
 PACOTE_SESSAO = (
     "sessaoplenariapresenca",
     "presencaordemdia",
@@ -174,6 +176,37 @@ def situacao_oficial(resultado: str | None) -> str | None:
     if resultado in REJEITADOS:
         return "Rejeitado"
     return None
+
+
+def situacao_da_votacao_escolhida(escolhida: dict) -> str:
+    """Frase fora do mapa vira rotulo fixo. O texto oficial permanece no registro."""
+    oficial = escolhida.get("situacao_oficial_sapl")
+    if oficial:
+        return str(oficial)
+    frase = str(escolhida.get("frase_resultado_sapl") or "").strip()
+    texto = str(escolhida.get("texto_registro_sapl") or "").strip()
+    if frase or texto:
+        return SITUACAO_NAO_MAPEADA
+    raise SystemExit(
+        f"Votacao {escolhida.get('id')} sem frase de resultado no SAPL."
+    )
+
+
+def aplicar_aviso_na_votacao(
+    votacao: dict, id_sapl: int, voto_texto: str | None, extra: dict
+) -> dict:
+    """Guarda o conflito na votacao e tira o aviso do estado individual."""
+    aviso = extra.get("aviso")
+    resto = {chave: valor for chave, valor in extra.items() if chave != "aviso"}
+    if aviso:
+        votacao.setdefault("avisos", []).append(
+            {
+                "aviso": aviso,
+                "id_sapl": id_sapl,
+                "voto_texto_sapl": voto_texto,
+            }
+        )
+    return resto
 
 
 def frase_apos_votacao(texto: str | None) -> str | None:
@@ -666,7 +699,10 @@ def estado_na_votacao(
         return "fora_do_mandato", voto_texto, complemento_fora(motivo)
     if voto_texto is not None:
         era_presidente = int(vereador["id_sapl"]) == presidente_id
-        return estado_do_texto(voto_texto, era_presidente), voto_texto, {}
+        extra = {}
+        if afastamento is not None:
+            extra["aviso"] = AVISO_CONFLITO_AFASTAMENTO
+        return estado_do_texto(voto_texto, era_presidente), voto_texto, extra
     if not presente and justificado:
         return "ausente_com_justificativa", None, {}
     if not presente and not justificado:
@@ -850,6 +886,9 @@ def processar_sessoes(
                     id_sapl in justificados,
                     afastamento,
                     motivo,
+                )
+                extra_estado = aplicar_aviso_na_votacao(
+                    base, id_sapl, texto, extra_estado
                 )
                 if estado not in ROTULOS_ESTADO:
                     raise SystemExit(f"Estado desconhecido: {estado}")
@@ -1120,15 +1159,12 @@ def carregar_projetos(
                 projeto["sessao_id"] = None
             else:
                 escolhida = escolher_votacao(registros)
-                if escolhida["situacao_oficial_sapl"] is not None:
-                    projeto["situacao"] = escolhida["situacao_oficial_sapl"]
-                elif escolhida["frase_resultado_sapl"]:
-                    projeto["situacao"] = escolhida["frase_resultado_sapl"]
-                else:
+                try:
+                    projeto["situacao"] = situacao_da_votacao_escolhida(escolhida)
+                except SystemExit as exc:
                     raise SystemExit(
-                        f"Materia {materia_id}: votacao {escolhida['id']} "
-                        "sem frase de resultado no SAPL."
-                    )
+                        f"Materia {materia_id}: {exc}"
+                    ) from exc
                 projeto["data_sessao"] = escolhida["data_sessao"]
                 projeto["resultado_texto_sapl"] = escolhida["resultado_texto_sapl"]
                 projeto["frase_resultado_sapl"] = escolhida["frase_resultado_sapl"]
