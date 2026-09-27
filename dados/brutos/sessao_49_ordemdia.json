@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 609,
+      "__str__": "Ordem do Dia/Expediente: 1 - Indicação nº 2 de 2026 em 8ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/609",
+      "metadata": {},
+      "data_ordem": "2026-03-31",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 49,
+      "materia": 287,
+      "tramitacao": null
+    },
+    {
+      "id": 610,
+      "__str__": "Ordem do Dia/Expediente: 2 - Indicação nº 4 de 2026 em 8ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/610",
+      "metadata": {},
+      "data_ordem": "2026-03-31",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 49,
+      "materia": 288,
+      "tramitacao": null
+    },
+    {
+      "id": 608,
+      "__str__": "Ordem do Dia/Expediente: 3 - Indicação nº 5 de 2026 em 8ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/608",
+      "metadata": {},
+      "data_ordem": "2026-03-31",
+      "observacao": "",
+      "numero_ordem": 3,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 49,
+      "materia": 285,
+      "tramitacao": null
+    }
+  ],
+  "total": 3
+}

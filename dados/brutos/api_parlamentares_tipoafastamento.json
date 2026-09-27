@@ -1,0 +1,50 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "__str__": "Cargo no Executivo Municipal",
+      "link_detail_backend": "/sistema/parlamentar/tipo-afastamento/1",
+      "metadata": {},
+      "descricao": "Cargo no Executivo Municipal",
+      "indicador": "A",
+      "dispositivo": ""
+    },
+    {
+      "id": 2,
+      "__str__": "Cassação de mandato",
+      "link_detail_backend": "/sistema/parlamentar/tipo-afastamento/2",
+      "metadata": {},
+      "descricao": "Cassação de mandato",
+      "indicador": "F",
+      "dispositivo": ""
+    },
+    {
+      "id": 3,
+      "__str__": "Extinção de mandato",
+      "link_detail_backend": "/sistema/parlamentar/tipo-afastamento/3",
+      "metadata": {},
+      "descricao": "Extinção de mandato",
+      "indicador": "F",
+      "dispositivo": ""
+    },
+    {
+      "id": 4,
+      "__str__": "Falecimento",
+      "link_detail_backend": "/sistema/parlamentar/tipo-afastamento/4",
+      "metadata": {},
+      "descricao": "Falecimento",
+      "indicador": "F",
+      "dispositivo": ""
+    },
+    {
+      "id": 5,
+      "__str__": "Pedido de Licença",
+      "link_detail_backend": "/sistema/parlamentar/tipo-afastamento/5",
+      "metadata": {},
+      "descricao": "Pedido de Licença",
+      "indicador": "A",
+      "dispositivo": ""
+    }
+  ],
+  "total": 5
+}

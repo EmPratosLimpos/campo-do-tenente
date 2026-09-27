@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 15,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 9 - Indicação nº 42 de 2025 em 21ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-06-04T11:03:06.790255-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 30,
+      "ordem": 27,
+      "expediente": null,
+      "user": 3
+    },
+    {
+      "id": 16,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 10 - Moção nº 6 de 2025 em 21ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-06-04T11:03:38.464567-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 23,
+      "ordem": 25,
+      "expediente": null,
+      "user": 3
+    },
+    {
+      "id": 17,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 11 - Moção nº 7 de 2025 em 21ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-06-04T11:04:07.572467-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 24,
+      "ordem": 26,
+      "expediente": null,
+      "user": 3
+    }
+  ],
+  "total": 3
+}

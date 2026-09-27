@@ -1,0 +1,96 @@
+{
+  "results": [
+    {
+      "id": 384,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 1 de 2026 em 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-03-19T17:22:15.946256-03:00",
+      "votacao": 169,
+      "parlamentar": 8,
+      "user": 2,
+      "ordem": 606,
+      "expediente": null
+    },
+    {
+      "id": 385,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 1 de 2026 em 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-03-19T17:22:15.962892-03:00",
+      "votacao": 169,
+      "parlamentar": 2,
+      "user": 2,
+      "ordem": 606,
+      "expediente": null
+    },
+    {
+      "id": 386,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 1 de 2026 em 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-03-19T17:22:15.981050-03:00",
+      "votacao": 169,
+      "parlamentar": 9,
+      "user": 2,
+      "ordem": 606,
+      "expediente": null
+    },
+    {
+      "id": 387,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 1 de 2026 em 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Não Votou",
+      "data_hora": "2026-03-19T17:22:15.996199-03:00",
+      "votacao": 169,
+      "parlamentar": 6,
+      "user": 2,
+      "ordem": 606,
+      "expediente": null
+    },
+    {
+      "id": 388,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 1 de 2026 em 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-03-19T17:22:16.013428-03:00",
+      "votacao": 169,
+      "parlamentar": 7,
+      "user": 2,
+      "ordem": 606,
+      "expediente": null
+    },
+    {
+      "id": 389,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 1 de 2026 em 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-03-19T17:22:16.029683-03:00",
+      "votacao": 169,
+      "parlamentar": 5,
+      "user": 2,
+      "ordem": 606,
+      "expediente": null
+    },
+    {
+      "id": 390,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 1 de 2026 em 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-03-19T17:22:16.049259-03:00",
+      "votacao": 169,
+      "parlamentar": 100,
+      "user": 2,
+      "ordem": 606,
+      "expediente": null
+    }
+  ],
+  "total": 7
+}

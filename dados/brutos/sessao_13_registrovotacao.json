@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 47,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 9 de 2025 em 29ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-07-29T19:36:25.540391-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 28,
+      "ordem": 111,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 48,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 11 de 2025 em 29ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-07-29T19:40:09.355040-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 31,
+      "ordem": 112,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 49,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 5 - Projeto de Lei Origem do Poder Legislativo nº 14 de 2025 em 29ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 9,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-07-29T19:47:03.965954-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 151,
+      "ordem": 113,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 50,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 18 - Projeto Substitutivo Legislativo nº 1 de 2025 em 29ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-07-29T19:54:08.448740-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 162,
+      "ordem": 126,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 4
+}

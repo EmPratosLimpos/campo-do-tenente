@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "id": 382,
+      "__str__": "Sessão: 47ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 33,
+      "parlamentar": 8
+    },
+    {
+      "id": 383,
+      "__str__": "Sessão: 47ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 33,
+      "parlamentar": 3
+    },
+    {
+      "id": 384,
+      "__str__": "Sessão: 47ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 33,
+      "parlamentar": 2
+    },
+    {
+      "id": 385,
+      "__str__": "Sessão: 47ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 33,
+      "parlamentar": 9
+    },
+    {
+      "id": 386,
+      "__str__": "Sessão: 47ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 33,
+      "parlamentar": 6
+    },
+    {
+      "id": 387,
+      "__str__": "Sessão: 47ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Jorge Quege",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 33,
+      "parlamentar": 1
+    },
+    {
+      "id": 388,
+      "__str__": "Sessão: 47ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 33,
+      "parlamentar": 7
+    },
+    {
+      "id": 389,
+      "__str__": "Sessão: 47ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 33,
+      "parlamentar": 4
+    },
+    {
+      "id": 390,
+      "__str__": "Sessão: 47ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 33,
+      "parlamentar": 5
+    }
+  ],
+  "total": 9
+}

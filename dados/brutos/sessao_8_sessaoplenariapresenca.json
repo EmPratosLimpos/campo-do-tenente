@@ -1,0 +1,86 @@
+{
+  "results": [
+    {
+      "id": 70,
+      "__str__": "SessaoPlenariaPresenca object (70)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 8,
+      "parlamentar": 8
+    },
+    {
+      "id": 71,
+      "__str__": "SessaoPlenariaPresenca object (71)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 8,
+      "parlamentar": 3
+    },
+    {
+      "id": 72,
+      "__str__": "SessaoPlenariaPresenca object (72)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 8,
+      "parlamentar": 2
+    },
+    {
+      "id": 73,
+      "__str__": "SessaoPlenariaPresenca object (73)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 8,
+      "parlamentar": 9
+    },
+    {
+      "id": 74,
+      "__str__": "SessaoPlenariaPresenca object (74)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 8,
+      "parlamentar": 6
+    },
+    {
+      "id": 75,
+      "__str__": "SessaoPlenariaPresenca object (75)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 8,
+      "parlamentar": 1
+    },
+    {
+      "id": 76,
+      "__str__": "SessaoPlenariaPresenca object (76)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 8,
+      "parlamentar": 7
+    },
+    {
+      "id": 77,
+      "__str__": "SessaoPlenariaPresenca object (77)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 8,
+      "parlamentar": 4
+    },
+    {
+      "id": 78,
+      "__str__": "SessaoPlenariaPresenca object (78)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 8,
+      "parlamentar": 5
+    }
+  ],
+  "total": 9
+}

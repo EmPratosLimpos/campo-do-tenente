@@ -6,7 +6,7 @@
   "sapl": {
     "endereco_base": "https://sapl.campodotenente.pr.leg.br",
     "id_tipo_sessao_ordinaria": 3,
-    "id_tipo_sessao_ordinaria_nota": "a confirmar na sondagem C2",
+    "id_tipo_sessao_ordinaria_nota": "confirmado na sondagem C2: tiposessaoplenaria id 3",
     "id_legislatura_atual": 1,
     "legislatura_inicio": 2025,
     "legislatura_fim": 2028

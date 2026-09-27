@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 86,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Decreto Legislativo nº 2 de 2025 em 27ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/86",
+      "metadata": {},
+      "data_ordem": "2025-07-15",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 11,
+      "materia": 128,
+      "tramitacao": null
+    }
+  ],
+  "total": 1
+}

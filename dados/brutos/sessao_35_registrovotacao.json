@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 126,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 2 - Projeto de Lei Origem Poder Executivo nº 26 de 2025 em 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 5,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-12-11T18:08:33.021903-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 236,
+      "ordem": 488,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 127,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 27 de 2025 em 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 6,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-12-11T18:09:20.261277-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 240,
+      "ordem": 491,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 128,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 0 - Projeto Substitutivo Executivo nº 1 de 2025 em 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 5,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-12-11T18:09:31.699416-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 239,
+      "ordem": 490,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 3
+}

@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "__str__": "Justificativa de Ausência",
+      "link_detail_backend": "/sessao/justificativaausencia/1",
+      "metadata": {},
+      "data": "2025-05-13",
+      "hora": "19:00",
+      "observacao": "Visita a Assembleia Legislativa.",
+      "ausencia": 2,
+      "upload_anexo": null,
+      "parlamentar": 9,
+      "sessao_plenaria": 1,
+      "tipo_ausencia": 3,
+      "materias_do_expediente": [],
+      "materias_da_ordem_do_dia": []
+    }
+  ],
+  "total": 1
+}

@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 129,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 19 - Requerimento nº 1 de 2026 em 1ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-02-10T19:34:31.752919-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 247,
+      "ordem": 509,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 130,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 18 - Requerimento nº 2 de 2026 em 1ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-02-10T19:49:12.712752-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 248,
+      "ordem": 510,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 172,
+      "__str__": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 1 de 2026 em 1ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-03-24T10:29:49.331754-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 277,
+      "ordem": null,
+      "expediente": 21,
+      "user": 3
+    }
+  ],
+  "total": 3
+}

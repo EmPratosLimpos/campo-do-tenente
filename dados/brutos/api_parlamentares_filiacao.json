@@ -1,0 +1,115 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "__str__": "Beto Maurer - PP - PARTIDO PROGRESSISTA",
+      "link_detail_backend": "/parlamentar/filiacao/1",
+      "metadata": {},
+      "data": "2024-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 8,
+      "partido": 16
+    },
+    {
+      "id": 2,
+      "__str__": "Cleiton Costa - PDT - PARTIDO DEMOCRÁTICO TRABALHISTA",
+      "link_detail_backend": "/parlamentar/filiacao/2",
+      "metadata": {},
+      "data": "2024-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 3,
+      "partido": 3
+    },
+    {
+      "id": 3,
+      "__str__": "Dr. Marcos Rodrigues - MDB - MOVIMENTO DEMOCRÁTICO BRASILEIRO",
+      "link_detail_backend": "/parlamentar/filiacao/3",
+      "metadata": {},
+      "data": "2024-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 2,
+      "partido": 38
+    },
+    {
+      "id": 4,
+      "__str__": "Gilmar Barbosa - UNIÃO - UNIÃO BRASIL",
+      "link_detail_backend": "/parlamentar/filiacao/4",
+      "metadata": {},
+      "data": "2024-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 9,
+      "partido": 37
+    },
+    {
+      "id": 5,
+      "__str__": "Gustavo Vizentin - UNIÃO - UNIÃO BRASIL",
+      "link_detail_backend": "/parlamentar/filiacao/5",
+      "metadata": {},
+      "data": "2024-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 6,
+      "partido": 37
+    },
+    {
+      "id": 6,
+      "__str__": "Jorge Quege - PP - PARTIDO PROGRESSISTA",
+      "link_detail_backend": "/parlamentar/filiacao/6",
+      "metadata": {},
+      "data": "2024-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 1,
+      "partido": 16
+    },
+    {
+      "id": 7,
+      "__str__": "Josemar Veiga - PL - PARTIDO LIBERAL",
+      "link_detail_backend": "/parlamentar/filiacao/7",
+      "metadata": {},
+      "data": "2024-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 7,
+      "partido": 36
+    },
+    {
+      "id": 10,
+      "__str__": "Juliano da Silva - PV - PARTIDO VERDE",
+      "link_detail_backend": "/parlamentar/filiacao/10",
+      "metadata": {},
+      "data": "2020-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 10,
+      "partido": 14
+    },
+    {
+      "id": 8,
+      "__str__": "Kinho Lazarino - MDB - MOVIMENTO DEMOCRÁTICO BRASILEIRO",
+      "link_detail_backend": "/parlamentar/filiacao/8",
+      "metadata": {},
+      "data": "2024-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 4,
+      "partido": 38
+    },
+    {
+      "id": 9,
+      "__str__": "Rafael Ventura - PL - PARTIDO LIBERAL",
+      "link_detail_backend": "/parlamentar/filiacao/9",
+      "metadata": {},
+      "data": "2024-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 5,
+      "partido": 36
+    },
+    {
+      "id": 11,
+      "__str__": "Rivanildo Cavalheiro - PP - PARTIDO PROGRESSISTA",
+      "link_detail_backend": "/parlamentar/filiacao/11",
+      "metadata": {},
+      "data": "2024-01-01",
+      "data_desfiliacao": null,
+      "parlamentar": 100,
+      "partido": 16
+    }
+  ],
+  "total": 11
+}

@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 185,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 1 - Ata Sessão nº 10 de 2026 em 9ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-04-07T19:21:08.744522-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 293,
+      "ordem": 614,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 186,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 5 - Indicação nº 6 de 2026 em 9ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-04-07T19:57:22.300508-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 295,
+      "ordem": 616,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 2
+}

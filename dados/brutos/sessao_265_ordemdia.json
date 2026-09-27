@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 663,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 9 de 2026 em 26ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/663",
+      "metadata": {},
+      "data_ordem": "2026-08-04",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Matéria lida",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 265,
+      "materia": 704,
+      "tramitacao": null
+    },
+    {
+      "id": 664,
+      "__str__": "Ordem do Dia/Expediente: 4 - Indicação nº 25 de 2026 em 26ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/664",
+      "metadata": {},
+      "data_ordem": "2026-08-04",
+      "observacao": "",
+      "numero_ordem": 4,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 265,
+      "materia": 706,
+      "tramitacao": null
+    }
+  ],
+  "total": 2
+}

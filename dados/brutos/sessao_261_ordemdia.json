@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 649,
+      "__str__": "Ordem do Dia/Expediente: 1 - Indicação nº 21 de 2026 em 22ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/649",
+      "metadata": {},
+      "data_ordem": "2026-07-07",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 261,
+      "materia": 689,
+      "tramitacao": null
+    },
+    {
+      "id": 650,
+      "__str__": "Ordem do Dia/Expediente: 2 - Indicação nº 22 de 2026 em 22ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/650",
+      "metadata": {},
+      "data_ordem": "2026-07-07",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 261,
+      "materia": 690,
+      "tramitacao": null
+    }
+  ],
+  "total": 2
+}

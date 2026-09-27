@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "id": 615,
+      "__str__": "Sessão: 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 56,
+      "parlamentar": 8
+    },
+    {
+      "id": 616,
+      "__str__": "Sessão: 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 56,
+      "parlamentar": 3
+    },
+    {
+      "id": 617,
+      "__str__": "Sessão: 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 56,
+      "parlamentar": 2
+    },
+    {
+      "id": 618,
+      "__str__": "Sessão: 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 56,
+      "parlamentar": 9
+    },
+    {
+      "id": 619,
+      "__str__": "Sessão: 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 56,
+      "parlamentar": 6
+    },
+    {
+      "id": 620,
+      "__str__": "Sessão: 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 56,
+      "parlamentar": 7
+    },
+    {
+      "id": 621,
+      "__str__": "Sessão: 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 56,
+      "parlamentar": 4
+    },
+    {
+      "id": 622,
+      "__str__": "Sessão: 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 56,
+      "parlamentar": 5
+    },
+    {
+      "id": 623,
+      "__str__": "Sessão: 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 56,
+      "parlamentar": 100
+    }
+  ],
+  "total": 9
+}

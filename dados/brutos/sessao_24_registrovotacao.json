@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 83,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 2 - Projeto de Decreto Legislativo nº 3 de 2025 em 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-10-14T19:50:09.106213-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 206,
+      "ordem": 312,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 85,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 3 - Projeto de Decreto Legislativo nº 4 de 2025 em 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 6,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 1,
+      "observacao": "Vereador Cleiton Costa - Se absteve",
+      "data_hora": "2025-10-14T20:06:54.290290-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 207,
+      "ordem": 313,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 86,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 1 - Projeto de Resolução nº 16 de 2025 em 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-10-14T20:09:23.959252-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 205,
+      "ordem": 311,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 87,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 20 - Moção nº 8 de 2025 em 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-10-14T20:19:59.693373-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 208,
+      "ordem": 330,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 4
+}

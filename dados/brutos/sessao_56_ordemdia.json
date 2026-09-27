@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 635,
+      "__str__": "Ordem do Dia/Expediente: 2 - Indicação nº 15 de 2026 em 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/635",
+      "metadata": {},
+      "data_ordem": "2026-05-19",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 56,
+      "materia": 596,
+      "tramitacao": null
+    },
+    {
+      "id": 637,
+      "__str__": "Ordem do Dia/Expediente: 3 - Indicação nº 16 de 2026 em 15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/637",
+      "metadata": {},
+      "data_ordem": "2026-05-19",
+      "observacao": "",
+      "numero_ordem": 3,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 56,
+      "materia": 598,
+      "tramitacao": 833
+    }
+  ],
+  "total": 2
+}

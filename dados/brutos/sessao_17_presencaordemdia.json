@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "id": 219,
+      "__str__": "Sessão: 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 17,
+      "parlamentar": 8
+    },
+    {
+      "id": 220,
+      "__str__": "Sessão: 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 17,
+      "parlamentar": 3
+    },
+    {
+      "id": 221,
+      "__str__": "Sessão: 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 17,
+      "parlamentar": 2
+    },
+    {
+      "id": 222,
+      "__str__": "Sessão: 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 17,
+      "parlamentar": 9
+    },
+    {
+      "id": 223,
+      "__str__": "Sessão: 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 17,
+      "parlamentar": 6
+    },
+    {
+      "id": 224,
+      "__str__": "Sessão: 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Jorge Quege",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 17,
+      "parlamentar": 1
+    },
+    {
+      "id": 225,
+      "__str__": "Sessão: 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 17,
+      "parlamentar": 7
+    },
+    {
+      "id": 226,
+      "__str__": "Sessão: 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 17,
+      "parlamentar": 4
+    },
+    {
+      "id": 227,
+      "__str__": "Sessão: 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 17,
+      "parlamentar": 5
+    }
+  ],
+  "total": 9
+}

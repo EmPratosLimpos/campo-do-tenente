@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 88,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 17 - Indicação nº 57 de 2025 em 41ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-10-21T19:35:21.243418-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 209,
+      "ordem": 347,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 89,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 18 - Indicação nº 58 de 2025 em 41ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-10-21T19:41:15.286520-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 210,
+      "ordem": 348,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 2
+}

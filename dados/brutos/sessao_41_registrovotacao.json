@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 141,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 2 - Projeto de Resolução nº 3 de 2026 em 4ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-03-03T20:07:03.226621-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 260,
+      "ordem": 549,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 142,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 3 - Projeto de Resolução nº 4 de 2026 em 4ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-03-03T20:11:58.529429-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 261,
+      "ordem": 550,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 176,
+      "__str__": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 4 de 2026 em 4ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-03-24T11:18:58.295682-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 280,
+      "ordem": null,
+      "expediente": 40,
+      "user": 3
+    },
+    {
+      "id": 177,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 1 - Projeto de Resolução nº 2 de 2026 em 4ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Pedido de Vistas",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "Aprovado o pedido de vistas do Vereador Marcos Antonio Rodrigues",
+      "data_hora": "2026-03-24T11:28:12.161810-03:00",
+      "tipo_resultado_votacao": 4,
+      "materia": 259,
+      "ordem": 548,
+      "expediente": null,
+      "user": 3
+    }
+  ],
+  "total": 4
+}

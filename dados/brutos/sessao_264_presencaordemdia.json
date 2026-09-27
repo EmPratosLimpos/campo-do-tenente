@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "id": 700,
+      "__str__": "Sessão: 25ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 264,
+      "parlamentar": 3
+    },
+    {
+      "id": 701,
+      "__str__": "Sessão: 25ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 264,
+      "parlamentar": 9
+    },
+    {
+      "id": 702,
+      "__str__": "Sessão: 25ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 264,
+      "parlamentar": 6
+    },
+    {
+      "id": 703,
+      "__str__": "Sessão: 25ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 264,
+      "parlamentar": 7
+    },
+    {
+      "id": 704,
+      "__str__": "Sessão: 25ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 264,
+      "parlamentar": 4
+    },
+    {
+      "id": 705,
+      "__str__": "Sessão: 25ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 264,
+      "parlamentar": 5
+    },
+    {
+      "id": 706,
+      "__str__": "Sessão: 25ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 264,
+      "parlamentar": 100
+    }
+  ],
+  "total": 7
+}

@@ -1,0 +1,537 @@
+{
+  "fonte": "https://sapl.campodotenente.pr.leg.br",
+  "pausa_segundos": 2.5,
+  "page_size": 100,
+  "teto_pedidos": 200,
+  "total_pedidos": 75,
+  "iniciado_em": "2026-09-26T23:58:24-03:00",
+  "atualizado_em": "2026-09-27T00:25:37-03:00",
+  "duracao_segundos": 240.2,
+  "pedidos": [
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/",
+      "quando": "2026-09-26T23:58:24-03:00",
+      "status": 200,
+      "arquivo": "api_indice.json",
+      "n": 1
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/tiposessaoplenaria/?page_size=100&page=1",
+      "quando": "2026-09-26T23:58:28-03:00",
+      "status": 200,
+      "arquivo": "tiposessaoplenaria_p1.json",
+      "n": 2
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/parlamentares/legislatura/?page_size=100&page=1",
+      "quando": "2026-09-26T23:58:30-03:00",
+      "status": 200,
+      "arquivo": "legislatura_p1.json",
+      "n": 3
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/parlamentares/mandato/?page_size=100&page=1",
+      "quando": "2026-09-26T23:58:33-03:00",
+      "status": 200,
+      "arquivo": "mandato_p1.json",
+      "n": 4
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/parlamentares/mandato/?page_size=100&page=2",
+      "quando": "2026-09-26T23:58:36-03:00",
+      "status": 200,
+      "arquivo": "mandato_p2.json",
+      "n": 5
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/parlamentares/parlamentar/?page_size=100&page=1",
+      "quando": "2026-09-26T23:58:39-03:00",
+      "status": 200,
+      "arquivo": "parlamentar_p1.json",
+      "n": 6
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/tipomaterialegislativa/?page_size=100&page=1",
+      "quando": "2026-09-26T23:58:42-03:00",
+      "status": 200,
+      "arquivo": "tipomaterialegislativa_p1.json",
+      "n": 7
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/tiporesultadovotacao/?page_size=100&page=1",
+      "quando": "2026-09-26T23:58:44-03:00",
+      "status": 200,
+      "arquivo": "tiporesultadovotacao_p1.json",
+      "n": 8
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/tipojustificativa/?page_size=100&page=1",
+      "quando": "2026-09-26T23:58:47-03:00",
+      "status": 200,
+      "arquivo": "tipojustificativa_p1.json",
+      "n": 9
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/parlamentares/tipoafastamento/?page_size=100&page=1",
+      "quando": "2026-09-26T23:58:50-03:00",
+      "status": 200,
+      "arquivo": "tipoafastamento_p1.json",
+      "n": 10
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/parlamentares/partido/?page_size=100&page=1",
+      "quando": "2026-09-26T23:58:52-03:00",
+      "status": 200,
+      "arquivo": "partido_p1.json",
+      "n": 11
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/parlamentares/filiacao/?page_size=100&page=1",
+      "quando": "2026-09-26T23:58:55-03:00",
+      "status": 200,
+      "arquivo": "filiacao_p1.json",
+      "n": 12
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenaria/?data_inicio__year=2025&page_size=100&page=1",
+      "quando": "2026-09-26T23:58:59-03:00",
+      "status": 200,
+      "arquivo": "sessaoplenaria_ano2025_p1.json",
+      "n": 13
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenaria/?data_inicio__year=2026&page_size=100&page=1",
+      "quando": "2026-09-26T23:59:02-03:00",
+      "status": 200,
+      "arquivo": "sessaoplenaria_ano2026_p1.json",
+      "n": 14
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/registrovotacao/?page_size=100&page=1",
+      "quando": "2026-09-26T23:59:05-03:00",
+      "status": 200,
+      "arquivo": "registrovotacao_p1.json",
+      "n": 15
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/registrovotacao/?page_size=100&page=2",
+      "quando": "2026-09-26T23:59:08-03:00",
+      "status": 200,
+      "arquivo": "registrovotacao_p2.json",
+      "n": 16
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/registrovotacao/?page_size=100&page=3",
+      "quando": "2026-09-26T23:59:12-03:00",
+      "status": 200,
+      "arquivo": "registrovotacao_p3.json",
+      "n": 17
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=1",
+      "quando": "2026-09-26T23:59:16-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p1.json",
+      "n": 18
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=2",
+      "quando": "2026-09-26T23:59:19-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p2.json",
+      "n": 19
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=3",
+      "quando": "2026-09-26T23:59:23-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p3.json",
+      "n": 20
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=4",
+      "quando": "2026-09-26T23:59:27-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p4.json",
+      "n": 21
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=5",
+      "quando": "2026-09-26T23:59:31-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p5.json",
+      "n": 22
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=6",
+      "quando": "2026-09-26T23:59:35-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p6.json",
+      "n": 23
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=7",
+      "quando": "2026-09-26T23:59:39-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p7.json",
+      "n": 24
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=8",
+      "quando": "2026-09-26T23:59:42-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p8.json",
+      "n": 25
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=9",
+      "quando": "2026-09-26T23:59:47-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p9.json",
+      "n": 26
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=10",
+      "quando": "2026-09-26T23:59:50-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p10.json",
+      "n": 27
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?page_size=100&page=11",
+      "quando": "2026-09-26T23:59:54-03:00",
+      "status": 200,
+      "arquivo": "votoparlamentar_p11.json",
+      "n": 28
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?page_size=100&page=1",
+      "quando": "2026-09-26T23:59:57-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_p1.json",
+      "n": 29
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?page_size=100&page=2",
+      "quando": "2026-09-27T00:00:01-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_p2.json",
+      "n": 30
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?page_size=100&page=3",
+      "quando": "2026-09-27T00:00:05-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_p3.json",
+      "n": 31
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?page_size=100&page=4",
+      "quando": "2026-09-27T00:00:08-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_p4.json",
+      "n": 32
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?page_size=100&page=5",
+      "quando": "2026-09-27T00:00:13-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_p5.json",
+      "n": 33
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?page_size=100&page=6",
+      "quando": "2026-09-27T00:00:17-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_p6.json",
+      "n": 34
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?page_size=100&page=7",
+      "quando": "2026-09-27T00:00:21-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_p7.json",
+      "n": 35
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/expedientemateria/?page_size=100&page=1",
+      "quando": "2026-09-27T00:00:24-03:00",
+      "status": 200,
+      "arquivo": "expedientemateria_p1.json",
+      "n": 36
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/materialegislativa/?ano=2025&page_size=100&page=1",
+      "quando": "2026-09-27T00:00:27-03:00",
+      "status": 200,
+      "arquivo": "materialegislativa_ano2025_p1.json",
+      "n": 37
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/materialegislativa/?ano=2025&page_size=100&page=2",
+      "quando": "2026-09-27T00:00:32-03:00",
+      "status": 200,
+      "arquivo": "materialegislativa_ano2025_p2.json",
+      "n": 38
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/materialegislativa/?ano=2025&page_size=100&page=3",
+      "quando": "2026-09-27T00:00:35-03:00",
+      "status": 200,
+      "arquivo": "materialegislativa_ano2025_p3.json",
+      "n": 39
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/materialegislativa/?ano=2026&page_size=100&page=1",
+      "quando": "2026-09-27T00:00:38-03:00",
+      "status": 200,
+      "arquivo": "materialegislativa_ano2026_p1.json",
+      "n": 40
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/materialegislativa/?ano=2026&page_size=100&page=2",
+      "quando": "2026-09-27T00:00:41-03:00",
+      "status": 200,
+      "arquivo": "materialegislativa_ano2026_p2.json",
+      "n": 41
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenariapresenca/?page_size=100&page=1",
+      "quando": "2026-09-27T00:00:44-03:00",
+      "status": 200,
+      "arquivo": "sessaoplenariapresenca_p1.json",
+      "n": 42
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenariapresenca/?page_size=100&page=2",
+      "quando": "2026-09-27T00:00:48-03:00",
+      "status": 200,
+      "arquivo": "sessaoplenariapresenca_p2.json",
+      "n": 43
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenariapresenca/?page_size=100&page=3",
+      "quando": "2026-09-27T00:00:51-03:00",
+      "status": 200,
+      "arquivo": "sessaoplenariapresenca_p3.json",
+      "n": 44
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenariapresenca/?page_size=100&page=4",
+      "quando": "2026-09-27T00:00:54-03:00",
+      "status": 200,
+      "arquivo": "sessaoplenariapresenca_p4.json",
+      "n": 45
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenariapresenca/?page_size=100&page=5",
+      "quando": "2026-09-27T00:00:57-03:00",
+      "status": 200,
+      "arquivo": "sessaoplenariapresenca_p5.json",
+      "n": 46
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenariapresenca/?page_size=100&page=6",
+      "quando": "2026-09-27T00:01:00-03:00",
+      "status": 200,
+      "arquivo": "sessaoplenariapresenca_p6.json",
+      "n": 47
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/presencaordemdia/?page_size=100&page=1",
+      "quando": "2026-09-27T00:01:04-03:00",
+      "status": 200,
+      "arquivo": "presencaordemdia_p1.json",
+      "n": 48
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/presencaordemdia/?page_size=100&page=2",
+      "quando": "2026-09-27T00:01:07-03:00",
+      "status": 200,
+      "arquivo": "presencaordemdia_p2.json",
+      "n": 49
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/presencaordemdia/?page_size=100&page=3",
+      "quando": "2026-09-27T00:01:10-03:00",
+      "status": 200,
+      "arquivo": "presencaordemdia_p3.json",
+      "n": 50
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/presencaordemdia/?page_size=100&page=4",
+      "quando": "2026-09-27T00:01:14-03:00",
+      "status": 200,
+      "arquivo": "presencaordemdia_p4.json",
+      "n": 51
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/presencaordemdia/?page_size=100&page=5",
+      "quando": "2026-09-27T00:01:17-03:00",
+      "status": 200,
+      "arquivo": "presencaordemdia_p5.json",
+      "n": 52
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/presencaordemdia/?page_size=100&page=6",
+      "quando": "2026-09-27T00:01:21-03:00",
+      "status": 200,
+      "arquivo": "presencaordemdia_p6.json",
+      "n": 53
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/justificativaausencia/?page_size=100&page=1",
+      "quando": "2026-09-27T00:01:24-03:00",
+      "status": 200,
+      "arquivo": "justificativaausencia_p1.json",
+      "n": 54
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/integrantemesa/?page_size=100&page=1",
+      "quando": "2026-09-27T00:01:27-03:00",
+      "status": 200,
+      "arquivo": "integrantemesa_p1.json",
+      "n": 55
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/integrantemesa/?page_size=100&page=2",
+      "quando": "2026-09-27T00:01:30-03:00",
+      "status": 200,
+      "arquivo": "integrantemesa_p2.json",
+      "n": 56
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/integrantemesa/?page_size=100&page=3",
+      "quando": "2026-09-27T00:01:33-03:00",
+      "status": 200,
+      "arquivo": "integrantemesa_p3.json",
+      "n": 57
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?ordering=id&page_size=100&page=1",
+      "quando": "2026-09-27T00:22:10-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_por_id_p1.json",
+      "n": 58
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?ordering=id&page_size=100&page=2",
+      "quando": "2026-09-27T00:22:14-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_por_id_p2.json",
+      "n": 59
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?ordering=id&page_size=100&page=3",
+      "quando": "2026-09-27T00:22:18-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_por_id_p3.json",
+      "n": 60
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?ordering=id&page_size=100&page=4",
+      "quando": "2026-09-27T00:22:21-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_por_id_p4.json",
+      "n": 61
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?ordering=id&page_size=100&page=5",
+      "quando": "2026-09-27T00:22:24-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_por_id_p5.json",
+      "n": 62
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?ordering=id&page_size=100&page=6",
+      "quando": "2026-09-27T00:22:28-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_por_id_p6.json",
+      "n": 63
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?ordering=id&page_size=100&page=7",
+      "quando": "2026-09-27T00:22:32-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_por_id_p7.json",
+      "n": 64
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/133/",
+      "quando": "2026-09-27T00:24:08-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_133.json",
+      "n": 65
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/532/",
+      "quando": "2026-09-27T00:25:10-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_532.json",
+      "n": 66
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/597/",
+      "quando": "2026-09-27T00:25:13-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_597.json",
+      "n": 67
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/617/",
+      "quando": "2026-09-27T00:25:15-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_617.json",
+      "n": 68
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/628/",
+      "quando": "2026-09-27T00:25:18-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_628.json",
+      "n": 69
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/666/",
+      "quando": "2026-09-27T00:25:22-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_666.json",
+      "n": 70
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/669/",
+      "quando": "2026-09-27T00:25:25-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_669.json",
+      "n": 71
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/675/",
+      "quando": "2026-09-27T00:25:28-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_675.json",
+      "n": 72
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/678/",
+      "quando": "2026-09-27T00:25:30-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_678.json",
+      "n": 73
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/686/",
+      "quando": "2026-09-27T00:25:33-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_686.json",
+      "n": 74
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/700/",
+      "quando": "2026-09-27T00:25:37-03:00",
+      "status": 200,
+      "arquivo": "ordemdia_id_700.json",
+      "n": 75
+    }
+  ]
+}

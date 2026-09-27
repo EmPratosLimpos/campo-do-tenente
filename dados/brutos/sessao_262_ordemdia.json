@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 651,
+      "__str__": "Ordem do Dia/Expediente: 1 - Emenda nº 2 de 2026 em 23ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/651",
+      "metadata": {},
+      "data_ordem": "2026-07-14",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 262,
+      "materia": 691,
+      "tramitacao": null
+    },
+    {
+      "id": 652,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem Poder Executivo nº 8 de 2026 em 23ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/652",
+      "metadata": {},
+      "data_ordem": "2026-07-14",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Rejeitada",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 262,
+      "materia": 622,
+      "tramitacao": null
+    }
+  ],
+  "total": 2
+}

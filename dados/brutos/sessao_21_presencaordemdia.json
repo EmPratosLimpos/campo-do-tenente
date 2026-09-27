@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "id": 262,
+      "__str__": "Sessão: 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 21,
+      "parlamentar": 8
+    },
+    {
+      "id": 263,
+      "__str__": "Sessão: 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 21,
+      "parlamentar": 3
+    },
+    {
+      "id": 264,
+      "__str__": "Sessão: 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 21,
+      "parlamentar": 2
+    },
+    {
+      "id": 265,
+      "__str__": "Sessão: 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 21,
+      "parlamentar": 9
+    },
+    {
+      "id": 266,
+      "__str__": "Sessão: 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 21,
+      "parlamentar": 6
+    },
+    {
+      "id": 267,
+      "__str__": "Sessão: 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Jorge Quege",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 21,
+      "parlamentar": 1
+    },
+    {
+      "id": 268,
+      "__str__": "Sessão: 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 21,
+      "parlamentar": 7
+    },
+    {
+      "id": 269,
+      "__str__": "Sessão: 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 21,
+      "parlamentar": 4
+    },
+    {
+      "id": 270,
+      "__str__": "Sessão: 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 21,
+      "parlamentar": 5
+    }
+  ],
+  "total": 9
+}

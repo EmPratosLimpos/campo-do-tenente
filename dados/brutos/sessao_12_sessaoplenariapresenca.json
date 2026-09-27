@@ -1,0 +1,86 @@
+{
+  "results": [
+    {
+      "id": 131,
+      "__str__": "SessaoPlenariaPresenca object (131)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 12,
+      "parlamentar": 8
+    },
+    {
+      "id": 132,
+      "__str__": "SessaoPlenariaPresenca object (132)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 12,
+      "parlamentar": 3
+    },
+    {
+      "id": 133,
+      "__str__": "SessaoPlenariaPresenca object (133)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 12,
+      "parlamentar": 2
+    },
+    {
+      "id": 134,
+      "__str__": "SessaoPlenariaPresenca object (134)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 12,
+      "parlamentar": 9
+    },
+    {
+      "id": 135,
+      "__str__": "SessaoPlenariaPresenca object (135)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 12,
+      "parlamentar": 6
+    },
+    {
+      "id": 136,
+      "__str__": "SessaoPlenariaPresenca object (136)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 12,
+      "parlamentar": 1
+    },
+    {
+      "id": 137,
+      "__str__": "SessaoPlenariaPresenca object (137)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 12,
+      "parlamentar": 7
+    },
+    {
+      "id": 138,
+      "__str__": "SessaoPlenariaPresenca object (138)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 12,
+      "parlamentar": 4
+    },
+    {
+      "id": 139,
+      "__str__": "SessaoPlenariaPresenca object (139)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 12,
+      "parlamentar": 5
+    }
+  ],
+  "total": 9
+}

@@ -30,7 +30,14 @@ from config_cidade import anos_recorte, carregar_config, link_materia  # noqa: E
 
 BRUTOS = RAIZ / "dados" / "brutos"
 CONFIG = carregar_config()
-RESULTADOS_DE_VOTACAO = {"UNANIMIDADE", "MAIORIA ABSOLUTA", "REJEITADO"}
+RESULTADOS_DE_VOTACAO = {
+    "UNANIMIDADE",
+    "MAIORIA ABSOLUTA",
+    "REJEITADO",
+    "APROVADA POR UNANIMIDADE",
+    "APROVADA POR MAIORIA ABSOLUTA",
+    "REJEITADA",
+}
 
 # Cada expressão recebe um peso. Termos que identificam diretamente um tema
 # pesam mais que palavras que também podem ser apenas endereço ou contexto.
@@ -197,6 +204,16 @@ def carregar_materias(ano: int):
         return {int(linha["ID"]): linha for linha in csv.DictReader(arquivo, delimiter=";")}
 
 
+def frase_apos_votacao(texto: str | None) -> str:
+    if not texto:
+        return ""
+    if "Votação:" in texto:
+        return texto.split("Votação:", 1)[1].strip()
+    if "Votacao:" in texto:
+        return texto.split("Votacao:", 1)[1].strip()
+    return ""
+
+
 def carregar_votacoes(ano: int):
     caminho = BRUTOS / f"contagem_votacoes_ordinarias_{ano}.json"
     if not caminho.exists():
@@ -208,21 +225,34 @@ def carregar_votacoes(ano: int):
     contagem = json.loads(caminho.read_text(encoding="utf-8"))
     votacoes = []
     for sessao in contagem["sessoes"]:
-        itens = []
-        caminhos = [
-            BRUTOS / f"sessao_{sessao['id']}_ordemdia.json",
-            BRUTOS / f"sessao_{sessao['id']}_ordemdia_pagina_2.json",
-        ]
-        for caminho in caminhos:
-            if caminho.exists():
-                resposta = json.loads(caminho.read_text(encoding="utf-8"))
-                itens.extend(resposta["results"])
+        caminho_registro = BRUTOS / f"sessao_{sessao['id']}_registrovotacao.json"
+        if caminho_registro.exists():
+            resposta = json.loads(caminho_registro.read_text(encoding="utf-8"))
+            votadas = [
+                {
+                    "id": item.get("ordem") or item.get("id"),
+                    "sessao_plenaria": sessao["id"],
+                    "materia": item.get("materia"),
+                    "resultado": frase_apos_votacao(item.get("__str__")),
+                }
+                for item in (resposta.get("results") or [])
+            ]
+        else:
+            itens = []
+            caminhos = [
+                BRUTOS / f"sessao_{sessao['id']}_ordemdia.json",
+                BRUTOS / f"sessao_{sessao['id']}_ordemdia_pagina_2.json",
+            ]
+            for caminho_ordem in caminhos:
+                if caminho_ordem.exists():
+                    resposta = json.loads(caminho_ordem.read_text(encoding="utf-8"))
+                    itens.extend(resposta["results"])
 
-        votadas = [
-            item
-            for item in itens
-            if item.get("resultado", "").upper() in RESULTADOS_DE_VOTACAO
-        ]
+            votadas = [
+                item
+                for item in itens
+                if item.get("resultado", "").upper() in RESULTADOS_DE_VOTACAO
+            ]
         # Se a contagem guardada diz zero votacoes, o universo do grafico
         # segue esse retrato, mesmo que a ordem do dia tenha sido atualizada depois.
         if sessao["n_votacoes"] == 0:
@@ -230,7 +260,7 @@ def carregar_votacoes(ano: int):
         if len(votadas) != sessao["n_votacoes"]:
             raise ValueError(
                 f"Sessão {sessao['id']}: a contagem guardada é "
-                f"{sessao['n_votacoes']}, mas a ordem do dia tem {len(votadas)}."
+                f"{sessao['n_votacoes']}, mas a leitura achou {len(votadas)}."
             )
         votacoes.extend(votadas)
 

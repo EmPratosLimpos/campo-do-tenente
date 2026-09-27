@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 68,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 16 - Indicação nº 52 de 2025 em 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-08-26T19:34:41.911717-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 181,
+      "ordem": 198,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 69,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 17 - Indicação nº 53 de 2025 em 33ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-08-26T19:39:16.131613-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 185,
+      "ordem": 199,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 2
+}

@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 75,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 1 - Projeto de Resolução nº 14 de 2025 em 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-09-23T19:24:02.153180-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 197,
+      "ordem": 256,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 76,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 7 de 2025 em 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-09-23T19:32:32.306124-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 193,
+      "ordem": 258,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 77,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 37ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 9,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-09-23T19:38:35.540443-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 27,
+      "ordem": 259,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 3
+}

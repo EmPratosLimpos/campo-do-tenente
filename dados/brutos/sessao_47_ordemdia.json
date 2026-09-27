@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 606,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 1 de 2026 em 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/606",
+      "metadata": {},
+      "data_ordem": "2026-03-19",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Maioria Absoluta",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 47,
+      "materia": 254,
+      "tramitacao": 726
+    }
+  ],
+  "total": 1
+}

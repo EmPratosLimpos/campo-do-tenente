@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 694,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Lei Origem do Poder Legislativo nº 4 de 2026 em 32ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/694",
+      "metadata": {},
+      "data_ordem": "2026-09-15",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Matéria lida",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 272,
+      "materia": 811,
+      "tramitacao": null
+    },
+    {
+      "id": 695,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem do Poder Legislativo nº 5 de 2026 em 32ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/695",
+      "metadata": {},
+      "data_ordem": "2026-09-15",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Matéria lida",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 272,
+      "materia": 815,
+      "tramitacao": null
+    },
+    {
+      "id": 696,
+      "__str__": "Ordem do Dia/Expediente: 3 - Indicação nº 31 de 2026 em 32ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/696",
+      "metadata": {},
+      "data_ordem": "2026-09-15",
+      "observacao": "",
+      "numero_ordem": 3,
+      "resultado": "Aprovada por Maioria Absoluta",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 272,
+      "materia": 814,
+      "tramitacao": null
+    },
+    {
+      "id": 697,
+      "__str__": "Ordem do Dia/Expediente: 4 - Indicação nº 32 de 2026 em 32ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/697",
+      "metadata": {},
+      "data_ordem": "2026-09-15",
+      "observacao": "",
+      "numero_ordem": 4,
+      "resultado": "Aprovada por Maioria Absoluta",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 272,
+      "materia": 816,
+      "tramitacao": null
+    }
+  ],
+  "total": 4
+}

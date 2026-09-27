@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 13,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Lei Origem do Poder Legislativo nº 6 de 2025 em 19ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/13",
+      "metadata": {},
+      "data_ordem": "2025-05-20",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Matéria lida",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 2,
+      "materia": 13,
+      "tramitacao": 26
+    },
+    {
+      "id": 12,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem Poder Executivo nº 10 de 2025 em 19ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/12",
+      "metadata": {},
+      "data_ordem": "2025-05-20",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Matéria lida",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 2,
+      "materia": 14,
+      "tramitacao": 31
+    }
+  ],
+  "total": 2
+}
