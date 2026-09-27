@@ -70,8 +70,9 @@ Cada número na tela tem link ou referência para o registro oficial de onde sai
 2. **Ausência não é voto.** Faltar a uma sessão não é votar sim, nem votar não, nem se abster. O painel usa rótulos separados:
    - **Falta com justificativa**: o vereador não estava presente e a Câmara registrou uma justificativa (por exemplo, licença médica, missão oficial ou força maior).
    - **Falta sem justificativa**: o vereador não estava presente e o SAPL não traz justificativa registrada para aquela sessão.
-   - **Não votou**: o vereador estava presente, mas não há voto dele registrado naquela votação.
-   - **Presidente que não votou**: quem preside a sessão pode não votar, conforme a regra da sessão. Isso não é falta.
+   - **Não votou**: a Câmara registrou no SAPL que o vereador não votou naquela votação. Não é falta e não é voto sim, voto não ou abstenção.
+   - **Presidente que não votou**: o painel só usa este rótulo quando o SAPL mostra quem presidia a sessão (a mesa da sessão) e o registro dessa pessoa naquela votação é "Não votou". O painel nunca presume isso apenas pelo cargo.
+   - A diferença: "Não votou" é um registro que existe no SAPL para aquele vereador; "voto individual não registrado no SAPL" (item 3) quer dizer que a votação não tem nenhum registro de voto individual.
 3. **Voto individual não registrado no SAPL.** Em muitas votações a Câmara registrou apenas o resultado total (quantos votos sim, quantos não), sem anotar o voto de cada vereador. Nesses casos o painel escreve "voto individual não registrado no SAPL" e mostra apenas o total oficial. O painel **não** trata isso como votação unânime e **não** distribui os votos entre os vereadores.
 4. **O painel reflete a fonte, não a corrige.** Se um dado oficial parecer estranho, o painel mostra o dado como está no SAPL e registra a observação. Correção de registro oficial cabe à Câmara.
 
