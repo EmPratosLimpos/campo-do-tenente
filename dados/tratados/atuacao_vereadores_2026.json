@@ -4,8 +4,8 @@
     "cidade": "Campo do Tenente",
     "uf": "PR",
     "ano": 2026,
-    "dado_coletado_em": "2026-09-27T11:40:56-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em",
+    "dado_coletado_em": "2026-09-27T13:17:32-03:00",
+    "fonte_data_coleta": "dados/brutos/lote_20260927_atas/indice.json campo atualizado_em",
     "n_sessoes_ordinarias": 33,
     "piso_sessoes_ordinarias": 33,
     "n_vereadores": 10,
@@ -16,8 +16,9 @@
     "piso_projetos_lei_legislativo_e_executivo": 18,
     "n_presencas": 287,
     "n_faltas_com_justificativa": 6,
-    "n_faltas_sem_justificativa": 27,
+    "n_faltas_sem_justificativa": 4,
     "n_sessoes_fora_do_mandato": 10,
+    "n_sessoes_licenca": 23,
     "n_votacoes": 120,
     "n_registros_votacao": 120,
     "n_votacoes_com_voto_individual": 100,
@@ -30,9 +31,10 @@
       "nao_votou": 0,
       "presidente_que_nao_votou": 93,
       "ausente_com_justificativa": 23,
-      "ausente_sem_justificativa": 84,
+      "ausente_sem_justificativa": 12,
       "fora_do_mandato": 28,
-      "presente_sem_voto_individual_registrado": 2
+      "presente_sem_voto_individual_registrado": 2,
+      "licenca_tratamento_saude": 72
     },
     "rotulos_estados": {
       "sim": "Sim",
@@ -43,7 +45,8 @@
       "ausente_com_justificativa": "Ausente com justificativa",
       "ausente_sem_justificativa": "Ausente sem justificativa",
       "fora_do_mandato": "Fora do mandato naquela data",
-      "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+      "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+      "licenca_tratamento_saude": "Licenca para tratamento de saude"
     },
     "lacuna_sessoes_ordinarias": {
       "numeros_ausentes_no_sapl": [],
@@ -112,9 +115,10 @@
       "dados/brutos/materias-2026-resposta-original.csv",
       "dados/tratados/vereadores.json",
       "dados/tratados/presidencia_sessoes.json",
-      "dados/tratados/autoria_materias.json"
+      "dados/tratados/autoria_materias.json",
+      "dados/tratados/afastamentos_manuais.json"
     ],
-    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não entra em presença nem em voto."
+    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não entra em presença nem em voto. Afastamento do arquivo de afastamentos não conta como falta."
   },
   "sessoes": [
     {
@@ -129,6 +133,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 1,
+      "n_licenca": 0,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 3
@@ -145,6 +150,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 1,
+      "n_licenca": 0,
       "n_registros_votacao": 7,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 7
@@ -161,6 +167,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 1,
+      "n_licenca": 0,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 2,
       "n_votacoes_sem_voto_individual": 2
@@ -177,6 +184,7 @@
       "n_faltas_com_justificativa": 1,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 1,
+      "n_licenca": 0,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 4
@@ -193,6 +201,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 1,
+      "n_licenca": 0,
       "n_registros_votacao": 7,
       "n_votacoes_com_voto_individual": 5,
       "n_votacoes_sem_voto_individual": 2
@@ -207,8 +216,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 7,
       "n_faltas_com_justificativa": 2,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 7,
       "n_votacoes_com_voto_individual": 5,
       "n_votacoes_sem_voto_individual": 2
@@ -223,8 +233,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 2,
       "n_votacoes_com_voto_individual": 2,
       "n_votacoes_sem_voto_individual": 0
@@ -239,8 +250,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 4,
       "n_votacoes_sem_voto_individual": 0
@@ -255,8 +267,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 2,
       "n_votacoes_com_voto_individual": 2,
       "n_votacoes_sem_voto_individual": 0
@@ -271,8 +284,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 6,
       "n_votacoes_com_voto_individual": 6,
       "n_votacoes_sem_voto_individual": 0
@@ -287,8 +301,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 2,
       "n_votacoes_com_voto_individual": 2,
       "n_votacoes_sem_voto_individual": 0
@@ -303,8 +318,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 2,
       "n_votacoes_com_voto_individual": 2,
       "n_votacoes_sem_voto_individual": 0
@@ -319,8 +335,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 5,
       "n_votacoes_com_voto_individual": 5,
       "n_votacoes_sem_voto_individual": 0
@@ -335,8 +352,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 3,
       "n_votacoes_sem_voto_individual": 0
@@ -351,8 +369,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 3,
       "n_votacoes_sem_voto_individual": 0
@@ -367,8 +386,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 0
@@ -383,8 +403,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 5,
       "n_votacoes_com_voto_individual": 5,
       "n_votacoes_sem_voto_individual": 0
@@ -399,8 +420,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 8,
       "n_faltas_com_justificativa": 1,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 4,
       "n_votacoes_sem_voto_individual": 0
@@ -415,8 +437,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 8,
       "n_faltas_com_justificativa": 1,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 4,
       "n_votacoes_sem_voto_individual": 0
@@ -431,8 +454,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 8,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 2,
+      "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 0
@@ -447,8 +471,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 0
@@ -463,8 +488,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 3,
       "n_votacoes_sem_voto_individual": 0
@@ -479,8 +505,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 8,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 2,
+      "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 3,
       "n_votacoes_sem_voto_individual": 0
@@ -495,8 +522,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 2,
       "n_votacoes_com_voto_individual": 2,
       "n_votacoes_sem_voto_individual": 0
@@ -511,8 +539,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 7,
       "n_faltas_com_justificativa": 1,
-      "n_faltas_sem_justificativa": 2,
+      "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 5,
       "n_votacoes_com_voto_individual": 5,
       "n_votacoes_sem_voto_individual": 0
@@ -527,8 +556,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 2,
       "n_votacoes_com_voto_individual": 2,
       "n_votacoes_sem_voto_individual": 0
@@ -543,8 +573,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 4,
       "n_votacoes_sem_voto_individual": 0
@@ -559,8 +590,9 @@
       "presidente_id_sapl": 5,
       "n_presentes": 9,
       "n_faltas_com_justificativa": 0,
-      "n_faltas_sem_justificativa": 1,
+      "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 1,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 3,
       "n_votacoes_sem_voto_individual": 0
@@ -577,6 +609,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 1,
+      "n_licenca": 0,
       "n_registros_votacao": 6,
       "n_votacoes_com_voto_individual": 6,
       "n_votacoes_sem_voto_individual": 0
@@ -593,6 +626,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 1,
+      "n_licenca": 0,
       "n_registros_votacao": 6,
       "n_votacoes_com_voto_individual": 6,
       "n_votacoes_sem_voto_individual": 0
@@ -609,6 +643,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 1,
+      "n_licenca": 0,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 0
@@ -625,6 +660,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 1,
+      "n_licenca": 0,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 3,
       "n_votacoes_sem_voto_individual": 0
@@ -641,6 +677,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 1,
+      "n_licenca": 0,
       "n_registros_votacao": 5,
       "n_votacoes_com_voto_individual": 5,
       "n_votacoes_sem_voto_individual": 0
@@ -2474,10 +2511,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -2597,10 +2637,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -2720,10 +2763,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -2843,10 +2889,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -2966,10 +3015,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -3243,10 +3295,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -3401,10 +3456,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -3514,10 +3572,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -3650,10 +3711,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -3786,10 +3850,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -3911,10 +3978,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -4024,10 +4094,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -4149,10 +4222,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -4262,10 +4338,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -4387,10 +4466,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -4512,10 +4594,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -4637,10 +4722,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -4762,10 +4850,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -4887,10 +4978,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -5000,10 +5094,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -5125,10 +5222,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -5238,10 +5338,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -5363,10 +5466,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -5488,10 +5594,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -5613,10 +5722,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -5736,10 +5848,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -5894,10 +6009,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -6019,10 +6137,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -6142,10 +6263,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -6265,10 +6389,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -6390,10 +6517,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -6513,10 +6643,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -6638,10 +6771,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -6763,10 +6899,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -6886,10 +7025,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -6999,10 +7141,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -7124,10 +7269,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -7249,10 +7397,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -7374,10 +7525,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -7499,10 +7653,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -7612,10 +7769,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -7725,10 +7885,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -7848,10 +8011,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -7971,10 +8137,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -8094,10 +8263,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -8217,10 +8389,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -8342,10 +8517,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -8467,10 +8645,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -8580,10 +8761,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -8703,10 +8887,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -8826,10 +9013,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -8951,10 +9141,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -9076,10 +9269,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -9189,10 +9385,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -9336,10 +9535,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -9459,10 +9661,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -9572,10 +9777,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -9697,10 +9905,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -9820,10 +10031,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -9945,10 +10159,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -10081,10 +10298,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -10206,10 +10426,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -10331,10 +10554,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -10444,10 +10670,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -10569,10 +10798,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -10692,10 +10924,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -10815,10 +11050,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -10951,10 +11189,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -11109,10 +11350,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -11232,10 +11476,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -11366,10 +11613,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -11489,10 +11739,13 @@
         {
           "id_sapl": 1,
           "nome_parlamentar": "Jorge Quege",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false
         },
         {
           "id_sapl": 2,
@@ -11615,7 +11868,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -11738,7 +11995,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -11874,7 +12135,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -11999,7 +12264,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -12124,7 +12393,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -12249,7 +12522,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -12372,7 +12649,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -12497,7 +12778,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -12622,7 +12907,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -12747,7 +13036,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -12872,7 +13165,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -12997,7 +13294,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -13120,7 +13421,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -13243,7 +13548,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -13368,7 +13677,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -13493,7 +13806,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -13616,7 +13933,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -13739,7 +14060,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -13864,7 +14189,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -13989,7 +14318,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -14114,7 +14447,11 @@
           "estado": "fora_do_mandato",
           "rotulo": "Fora do mandato naquela data",
           "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
         },
         {
           "id_sapl": 2,
@@ -15258,16 +15595,75 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [
+        {
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false,
+          "tipo": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
+          "data_inicio": "2026-03-17",
+          "data_fim": "2026-08-18",
+          "conta_como_falta": false,
+          "consulta_atas": [
+            {
+              "materia_id": 274,
+              "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/274",
+              "registra_licenca": false,
+              "registra": "posse do suplente na sessao de 17 de marco de 2026",
+              "trecho": "o presidente informou que seria realizada a posse do vereador suplente Rivanildo Braz Cavalheiro.",
+              "arquivo": "dados/brutos/lote_20260927_atas/materia_274_texto_original.pdf"
+            },
+            {
+              "materia_id": 275,
+              "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/275",
+              "registra_licenca": false,
+              "registra": "ausencia em sessao anterior, sem licenca",
+              "trecho": null,
+              "arquivo": "dados/brutos/lote_20260927_atas/materia_275_texto_original.docx"
+            },
+            {
+              "materia_id": 276,
+              "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/276",
+              "registra_licenca": false,
+              "registra": "sessao extraordinaria de 19 de marco de 2026, sem licenca",
+              "trecho": null,
+              "arquivo": "dados/brutos/lote_20260927_atas/materia_276_texto_original.pdf"
+            },
+            {
+              "materia_id": 283,
+              "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/283",
+              "registra_licenca": false,
+              "registra": "sessao de 10 de marco de 2026, sem licenca",
+              "trecho": null,
+              "arquivo": "dados/brutos/lote_20260927_atas/materia_283_texto_original.docx"
+            },
+            {
+              "materia_id": 284,
+              "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/284",
+              "registra_licenca": false,
+              "registra": "sessao de 24 de marco de 2026, sem licenca",
+              "trecho": null,
+              "arquivo": "dados/brutos/lote_20260927_atas/materia_284_texto_original.docx"
+            }
+          ]
+        }
+      ],
       "presenca": {
-        "sessoes_ordinarias": 28,
+        "sessoes_ordinarias": 5,
         "sessoes_do_ano": 33,
         "sessoes_fora_do_mandato": 5,
+        "sessoes_licenca": 23,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 23
+        },
         "presencas": 4,
         "faltas_com_justificativa": 1,
-        "faltas_sem_justificativa": 23,
-        "faltas_totais": 24,
-        "percentual_faltas": 85.71,
-        "taxa_presenca": 14.29,
+        "faltas_sem_justificativa": 0,
+        "faltas_totais": 1,
+        "percentual_faltas": 20.0,
+        "taxa_presenca": 80.0,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -15333,277 +15729,346 @@
             "sessao_id": 45,
             "data_sessao": "2026-03-17",
             "rotulo": "6ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 48,
             "data_sessao": "2026-03-24",
             "rotulo": "7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/48"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/48",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 49,
             "data_sessao": "2026-03-31",
             "rotulo": "8ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 50,
             "data_sessao": "2026-04-07",
             "rotulo": "9ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/50"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/50",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
             "rotulo": "10ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 52,
             "data_sessao": "2026-04-22",
             "rotulo": "11ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/52"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/52",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 53,
             "data_sessao": "2026-04-28",
             "rotulo": "12ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/53"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/53",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 54,
             "data_sessao": "2026-05-05",
             "rotulo": "13ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 55,
             "data_sessao": "2026-05-12",
             "rotulo": "14ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/55"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/55",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 56,
             "data_sessao": "2026-05-19",
             "rotulo": "15ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/56"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/56",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 80,
             "data_sessao": "2026-05-26",
             "rotulo": "16ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/80"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/80",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
             "rotulo": "17ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 257,
             "data_sessao": "2026-06-09",
             "rotulo": "18ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 258,
             "data_sessao": "2026-06-16",
             "rotulo": "19ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 259,
             "data_sessao": "2026-06-23",
             "rotulo": "20ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/259"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/259",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 260,
             "data_sessao": "2026-06-30",
             "rotulo": "21ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/260"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/260",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 261,
             "data_sessao": "2026-07-07",
             "rotulo": "22ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/261"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/261",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 262,
             "data_sessao": "2026-07-14",
             "rotulo": "23ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
             "rotulo": "24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/263"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/263",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 264,
             "data_sessao": "2026-07-28",
             "rotulo": "25ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 265,
             "data_sessao": "2026-08-04",
             "rotulo": "26ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/265"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/265",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
             "rotulo": "27ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 267,
             "data_sessao": "2026-08-18",
             "rotulo": "28ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "falta_sem_justificativa",
-            "rotulo_situacao": "Falta sem justificativa",
+            "situacao": "licenca_tratamento_saude",
+            "rotulo_situacao": "Licenca para tratamento de saude",
             "presente_sessao_plenaria": false,
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/267"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/267",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "sessao_id": 269,
@@ -15615,7 +16080,11 @@
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "sessao_id": 270,
@@ -15627,7 +16096,11 @@
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "sessao_id": 271,
@@ -15639,7 +16112,11 @@
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/271"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/271",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "sessao_id": 272,
@@ -15651,7 +16128,11 @@
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/272"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/272",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "sessao_id": 273,
@@ -15663,7 +16144,11 @@
             "presente_ordem_dia": false,
             "justificativa": false,
             "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           }
         ]
       },
@@ -15674,9 +16159,10 @@
         "nao_votou": 0,
         "presidente_que_nao_votou": 0,
         "ausente_com_justificativa": 0,
-        "ausente_sem_justificativa": 72,
+        "ausente_sem_justificativa": 0,
         "fora_do_mandato": 21,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 72,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -15686,7 +16172,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 100,
         "nominais": [
@@ -15772,792 +16259,1008 @@
             "sessao_id": 45,
             "data_sessao": "2026-03-17",
             "materia_id": 254,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 162,
             "sessao_id": 45,
             "data_sessao": "2026-03-17",
             "materia_id": 255,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 163,
             "sessao_id": 45,
             "data_sessao": "2026-03-17",
             "materia_id": 257,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 164,
             "sessao_id": 45,
             "data_sessao": "2026-03-17",
             "materia_id": 258,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 165,
             "sessao_id": 45,
             "data_sessao": "2026-03-17",
             "materia_id": 256,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 179,
             "sessao_id": 48,
             "data_sessao": "2026-03-24",
             "materia_id": 276,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/48",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/276"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/276",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 180,
             "sessao_id": 48,
             "data_sessao": "2026-03-24",
             "materia_id": 282,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/48",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/282"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/282",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 181,
             "sessao_id": 49,
             "data_sessao": "2026-03-31",
             "materia_id": 284,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/284"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/284",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 182,
             "sessao_id": 49,
             "data_sessao": "2026-03-31",
             "materia_id": 287,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/287"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/287",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 183,
             "sessao_id": 49,
             "data_sessao": "2026-03-31",
             "materia_id": 288,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/288"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/288",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 184,
             "sessao_id": 49,
             "data_sessao": "2026-03-31",
             "materia_id": 285,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/285"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/285",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 185,
             "sessao_id": 50,
             "data_sessao": "2026-04-07",
             "materia_id": 293,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/50",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/293"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/293",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 186,
             "sessao_id": 50,
             "data_sessao": "2026-04-07",
             "materia_id": 295,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/50",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/295"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/295",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 187,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
             "materia_id": 300,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/300"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/300",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 188,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
             "materia_id": 291,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 189,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
             "materia_id": 292,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
             "materia_id": 296,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/296"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/296",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 191,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
             "materia_id": 298,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/298"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/298",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 192,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
             "materia_id": 299,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/299"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/299",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 193,
             "sessao_id": 52,
             "data_sessao": "2026-04-22",
             "materia_id": 303,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/52",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/303"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/303",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 194,
             "sessao_id": 52,
             "data_sessao": "2026-04-22",
             "materia_id": 302,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/52",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/302"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/302",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 195,
             "sessao_id": 53,
             "data_sessao": "2026-04-28",
             "materia_id": 345,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/53",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/345"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/345",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 196,
             "sessao_id": 53,
             "data_sessao": "2026-04-28",
             "materia_id": 304,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/53",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/304"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/304",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 197,
             "sessao_id": 54,
             "data_sessao": "2026-05-05",
             "materia_id": 348,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/348"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/348",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 198,
             "sessao_id": 54,
             "data_sessao": "2026-05-05",
             "materia_id": 349,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 200,
             "sessao_id": 54,
             "data_sessao": "2026-05-05",
             "materia_id": 290,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 201,
             "sessao_id": 54,
             "data_sessao": "2026-05-05",
             "materia_id": 259,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/259"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/259",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 202,
             "sessao_id": 54,
             "data_sessao": "2026-05-05",
             "materia_id": 350,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/350"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/350",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 203,
             "sessao_id": 55,
             "data_sessao": "2026-05-12",
             "materia_id": 458,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/55",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/458"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/458",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 204,
             "sessao_id": 55,
             "data_sessao": "2026-05-12",
             "materia_id": 290,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/55",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 205,
             "sessao_id": 55,
             "data_sessao": "2026-05-12",
             "materia_id": 353,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/55",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/353"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/353",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 206,
             "sessao_id": 56,
             "data_sessao": "2026-05-19",
             "materia_id": 597,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/56",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/597"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/597",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 207,
             "sessao_id": 56,
             "data_sessao": "2026-05-19",
             "materia_id": 596,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/56",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/596"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/596",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 208,
             "sessao_id": 56,
             "data_sessao": "2026-05-19",
             "materia_id": 598,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/56",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/598"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/598",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 209,
             "sessao_id": 80,
             "data_sessao": "2026-05-26",
             "materia_id": 600,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/80",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 210,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
             "materia_id": 604,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
             "materia_id": 603,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/603"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/603",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 212,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
             "materia_id": 602,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/602"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/602",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 213,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
             "materia_id": 606,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/606"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/606",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 214,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
             "materia_id": 605,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/605"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/605",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 215,
             "sessao_id": 257,
             "data_sessao": "2026-06-09",
             "materia_id": 604,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 216,
             "sessao_id": 257,
             "data_sessao": "2026-06-09",
             "materia_id": 609,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/609"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/609",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 217,
             "sessao_id": 257,
             "data_sessao": "2026-06-09",
             "materia_id": 608,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 218,
             "sessao_id": 257,
             "data_sessao": "2026-06-09",
             "materia_id": 347,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 219,
             "sessao_id": 258,
             "data_sessao": "2026-06-16",
             "materia_id": 621,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/621"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/621",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 220,
             "sessao_id": 258,
             "data_sessao": "2026-06-16",
             "materia_id": 347,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 221,
             "sessao_id": 258,
             "data_sessao": "2026-06-16",
             "materia_id": 619,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/619"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/619",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 222,
             "sessao_id": 258,
             "data_sessao": "2026-06-16",
             "materia_id": 620,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/620"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/620",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 223,
             "sessao_id": 259,
             "data_sessao": "2026-06-23",
             "materia_id": 627,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/259",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/627"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/627",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 224,
             "sessao_id": 260,
             "data_sessao": "2026-06-30",
             "materia_id": 684,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/260",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/684"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/684",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 225,
             "sessao_id": 261,
             "data_sessao": "2026-07-07",
             "materia_id": 685,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/261",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/685"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/685",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 226,
             "sessao_id": 261,
             "data_sessao": "2026-07-07",
             "materia_id": 689,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/261",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/689"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/689",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 227,
             "sessao_id": 261,
             "data_sessao": "2026-07-07",
             "materia_id": 690,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/261",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/690"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/690",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 228,
             "sessao_id": 262,
             "data_sessao": "2026-07-14",
             "materia_id": 694,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/694"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/694",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 229,
             "sessao_id": 262,
             "data_sessao": "2026-07-14",
             "materia_id": 691,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 232,
             "sessao_id": 262,
             "data_sessao": "2026-07-14",
             "materia_id": 622,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
             "materia_id": 695,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/263",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/695"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/695",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 235,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
             "materia_id": 693,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/263",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/693"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/693",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 236,
             "sessao_id": 264,
             "data_sessao": "2026-07-28",
             "materia_id": 702,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/702"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/702",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 237,
             "sessao_id": 264,
             "data_sessao": "2026-07-28",
             "materia_id": 696,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/696"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/696",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 238,
             "sessao_id": 264,
             "data_sessao": "2026-07-28",
             "materia_id": 697,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/697"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/697",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 239,
             "sessao_id": 264,
             "data_sessao": "2026-07-28",
             "materia_id": 700,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/700"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/700",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 240,
             "sessao_id": 264,
             "data_sessao": "2026-07-28",
             "materia_id": 699,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/699"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/699",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 241,
             "sessao_id": 265,
             "data_sessao": "2026-08-04",
             "materia_id": 707,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/265",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/707"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/707",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 242,
             "sessao_id": 265,
             "data_sessao": "2026-08-04",
             "materia_id": 706,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/265",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/706"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/706",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 243,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
             "materia_id": 721,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 244,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
             "materia_id": 704,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 245,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
             "materia_id": 698,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 246,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
             "materia_id": 701,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/701"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/701",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 247,
             "sessao_id": 267,
             "data_sessao": "2026-08-18",
             "materia_id": 786,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/267",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/786"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/786",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 248,
             "sessao_id": 267,
             "data_sessao": "2026-08-18",
             "materia_id": 774,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/267",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/774"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/774",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 250,
             "sessao_id": 267,
             "data_sessao": "2026-08-18",
             "materia_id": 791,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
+            "estado": "licenca_tratamento_saude",
+            "rotulo": "Licenca para tratamento de saude",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/267",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/791"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/791",
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false
           },
           {
             "votacao_id": 251,
@@ -16568,7 +17271,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 252,
@@ -16579,7 +17286,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 253,
@@ -16590,7 +17301,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 254,
@@ -16601,7 +17316,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/783"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/783",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 255,
@@ -16612,7 +17331,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/794"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/794",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 257,
@@ -16623,7 +17346,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/795"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/795",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 258,
@@ -16634,7 +17361,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/798"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/798",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 259,
@@ -16645,7 +17376,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/796"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/796",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 260,
@@ -16656,7 +17391,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/805"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/805",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 261,
@@ -16667,7 +17406,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/804"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/804",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 262,
@@ -16678,7 +17421,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/802"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/802",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 263,
@@ -16689,7 +17436,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/799"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/799",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 264,
@@ -16700,7 +17451,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/271",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/810"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/810",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 265,
@@ -16711,7 +17466,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/272",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/820"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/820",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 266,
@@ -16722,7 +17481,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/272",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/814"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/814",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 267,
@@ -16733,7 +17496,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/272",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 268,
@@ -16744,7 +17511,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 269,
@@ -16755,7 +17526,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 270,
@@ -16766,7 +17541,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 271,
@@ -16777,7 +17556,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           },
           {
             "votacao_id": 272,
@@ -16788,7 +17571,11 @@
             "rotulo": "Fora do mandato naquela data",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889",
+            "motivo": "Mandato cassado",
+            "materia_motivo_id": 792,
+            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true
           }
         ]
       },
@@ -16818,10 +17605,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 33,
         "sessoes_do_ano": 33,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 31,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 1,
@@ -17237,6 +18030,7 @@
         "ausente_sem_justificativa": 1,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -17246,7 +18040,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 100,
         "nominais": [
@@ -18397,10 +19192,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 33,
         "sessoes_do_ano": 33,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 32,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 0,
@@ -18816,6 +19617,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -18825,7 +19627,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 100,
         "nominais": [
@@ -19957,10 +20760,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 33,
         "sessoes_do_ano": 33,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 31,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 1,
@@ -20376,6 +21185,7 @@
         "ausente_sem_justificativa": 3,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -20385,7 +21195,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 100,
         "nominais": [
@@ -21536,10 +22347,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 33,
         "sessoes_do_ano": 33,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 33,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
@@ -21955,6 +22772,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -21964,7 +22782,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 100,
         "nominais": [
@@ -23148,10 +23967,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 33,
         "sessoes_do_ano": 33,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 33,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
@@ -23567,6 +24392,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -23576,7 +24402,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 100,
         "nominais": [
@@ -24727,10 +25554,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 33,
         "sessoes_do_ano": 33,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 33,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
@@ -25146,6 +25979,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 2,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -25155,7 +25989,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 100,
         "nominais": [
@@ -26287,10 +27122,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 33,
         "sessoes_do_ano": 33,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 31,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 2,
@@ -26706,6 +27547,7 @@
         "ausente_sem_justificativa": 8,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -26715,7 +27557,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 100,
         "nominais": [
@@ -27847,10 +28690,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 33,
         "sessoes_do_ano": 33,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 31,
         "faltas_com_justificativa": 2,
         "faltas_sem_justificativa": 0,
@@ -28266,6 +29115,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -28275,7 +29125,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 100,
         "nominais": [
@@ -29406,10 +30257,41 @@
       "anos_com_mandato": [
         2026
       ],
+      "nota_factual": {
+        "texto": "assumiu em 2026-03-17 durante a licenca de Jorge Quege; vaga permanente apos a cassacao em 2026-08-18",
+        "fontes": [
+          {
+            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+            "link_fonte": null,
+            "fonte_oficial_encontrada": false,
+            "materia_id": null,
+            "trecho": null
+          },
+          {
+            "fonte": "Ata da sessao ordinaria de 17 de marco de 2026 registra a posse do suplente e nao registra a licenca",
+            "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/274",
+            "fonte_oficial_encontrada": true,
+            "materia_id": 274,
+            "trecho": "o presidente informou que seria realizada a posse do vereador suplente Rivanildo Braz Cavalheiro."
+          },
+          {
+            "fonte": "Projeto de Decreto Legislativo n 2 de 2026",
+            "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/792",
+            "fonte_oficial_encontrada": true,
+            "materia_id": 792,
+            "trecho": null
+          }
+        ]
+      },
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 28,
         "sessoes_do_ano": 33,
         "sessoes_fora_do_mandato": 5,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 28,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
@@ -29825,6 +30707,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 7,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -29834,7 +30717,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 100,
         "nominais": [

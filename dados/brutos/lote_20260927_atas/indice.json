@@ -1,0 +1,49 @@
+{
+  "fonte": "https://sapl.campodotenente.pr.leg.br",
+  "pausa_segundos": 2.5,
+  "teto_pedidos": 8,
+  "total_pedidos": 5,
+  "atualizado_em": "2026-09-27T13:17:32-03:00",
+  "pedidos": [
+    {
+      "n": 1,
+      "materia_id": 275,
+      "url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/materialegislativa/2026/275/ata_2851_da_sessao_ordinaria_do_dia_03_de_fevereiro.docx",
+      "quando": "2026-09-27T13:17:18-03:00",
+      "status": 200,
+      "arquivo": "materia_275_texto_original.docx"
+    },
+    {
+      "n": 2,
+      "materia_id": 283,
+      "url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/materialegislativa/2026/283/ata_2852_da_sessao_ordinaria_do_dia_10_de_marco.docx",
+      "quando": "2026-09-27T13:17:21-03:00",
+      "status": 200,
+      "arquivo": "materia_283_texto_original.docx"
+    },
+    {
+      "n": 3,
+      "materia_id": 274,
+      "url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/materialegislativa/2026/274/ata_2853_da_sessao_ordinaria_do_dia_17_de_fevereiro.pdf",
+      "quando": "2026-09-27T13:17:24-03:00",
+      "status": 200,
+      "arquivo": "materia_274_texto_original.pdf"
+    },
+    {
+      "n": 4,
+      "materia_id": 276,
+      "url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/materialegislativa/2026/276/ata_2854_da_sessao_extraordinaria_do_dia_19-03-2026..pdf",
+      "quando": "2026-09-27T13:17:27-03:00",
+      "status": 200,
+      "arquivo": "materia_276_texto_original.pdf"
+    },
+    {
+      "n": 5,
+      "materia_id": 284,
+      "url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/materialegislativa/2026/284/ata_2855_da_sessao_ordinaria_do_dia_24_de_marco.docx",
+      "quando": "2026-09-27T13:17:31-03:00",
+      "status": 200,
+      "arquivo": "materia_284_texto_original.docx"
+    }
+  ]
+}

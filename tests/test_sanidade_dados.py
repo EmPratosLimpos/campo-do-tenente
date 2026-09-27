@@ -35,6 +35,7 @@ CAMPOS_PRESENCA = (
     "taxa_presenca",
     "percentual_faltas",
     "sessoes_ordinarias",
+    "sessoes_licenca",
     "por_sessao",
 )
 
@@ -178,6 +179,84 @@ class TestSanidadeDados(unittest.TestCase):
                         )
                 for projeto in dados["projetos_lei"]:
                     self.assertTrue(projeto.get("link_sapl"))
+
+    def test_grade_fecha_com_afastamento(self):
+        for ano, caminho in self.datasets:
+            with self.subTest(ano=ano):
+                dados = self._carregar(caminho)
+                meta = dados["meta"]
+                soma = (
+                    int(meta["n_presencas"])
+                    + int(meta["n_faltas_com_justificativa"])
+                    + int(meta["n_faltas_sem_justificativa"])
+                    + int(meta["n_sessoes_licenca"])
+                    + int(meta["n_sessoes_fora_do_mandato"])
+                )
+                self.assertEqual(
+                    soma,
+                    int(meta["n_sessoes_ordinarias"]) * int(meta["n_vereadores"]),
+                )
+
+    def test_afastamento_manual_nao_conta_como_falta(self):
+        caminho = self.dir_tratados / "afastamentos_manuais.json"
+        self.assertTrue(caminho.exists(), "afastamentos_manuais.json ausente")
+        manuais = json.loads(caminho.read_text(encoding="utf-8"))
+        por_ano = {ano: self._carregar(arquivo) for ano, arquivo in self.datasets}
+        for afastamento in manuais.get("afastamentos") or []:
+            if afastamento.get("conta_como_falta"):
+                continue
+            parlamentar_id = int(afastamento["parlamentar_id_sapl"])
+            tipo = afastamento["tipo"]
+            inicio = afastamento["data_inicio"]
+            fim = afastamento["data_fim"]
+            for ano, dados in por_ano.items():
+                pessoa = next(
+                    (
+                        item
+                        for item in dados["vereadores"]
+                        if int(item["id_sapl"]) == parlamentar_id
+                    ),
+                    None,
+                )
+                if pessoa is None:
+                    continue
+                datas = [item["data"] for item in dados.get("sessoes") or []]
+                if not any(inicio <= data <= fim for data in datas):
+                    continue
+                with self.subTest(ano=ano, parlamentar=parlamentar_id):
+                    no_intervalo = [
+                        item
+                        for item in pessoa["presenca"]["por_sessao"]
+                        if inicio <= item["data_sessao"] <= fim
+                    ]
+                    self.assertTrue(no_intervalo)
+                    for item in no_intervalo:
+                        self.assertEqual(item["situacao"], tipo)
+                        self.assertEqual(item["fonte"], afastamento["fonte"])
+                        self.assertEqual(
+                            item["fonte_oficial_encontrada"],
+                            afastamento["fonte_oficial_encontrada"],
+                        )
+                    faltas = pessoa["presenca"]["faltas_sem_justificativa"]
+                    faltas_no_intervalo = [
+                        item
+                        for item in no_intervalo
+                        if item["situacao"] == "falta_sem_justificativa"
+                    ]
+                    self.assertEqual(faltas_no_intervalo, [])
+                    self.assertGreaterEqual(faltas, 0)
+                    votos_no_intervalo = [
+                        item
+                        for item in pessoa["votos"]["nominais"]
+                        if inicio <= item["data_sessao"] <= fim
+                        and item.get("voto_texto_sapl") is None
+                    ]
+                    for item in votos_no_intervalo:
+                        self.assertEqual(item["estado"], tipo)
+                        self.assertEqual(
+                            item["fonte_oficial_encontrada"],
+                            afastamento["fonte_oficial_encontrada"],
+                        )
 
 
 if __name__ == "__main__":

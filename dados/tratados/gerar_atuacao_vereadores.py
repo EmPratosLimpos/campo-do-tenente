@@ -44,6 +44,7 @@ SCRIPT_REL = "dados/tratados/gerar_atuacao_vereadores.py"
 ARQUIVO_VEREADORES = DIR_SCRIPT / "vereadores.json"
 ARQUIVO_PRESIDENCIA = DIR_SCRIPT / "presidencia_sessoes.json"
 ARQUIVO_AUTORIA = DIR_SCRIPT / "autoria_materias.json"
+ARQUIVO_AFASTAMENTOS = DIR_SCRIPT / "afastamentos_manuais.json"
 TIPOS_PROJETO = ("PLEG", "PLEX")
 TIPO_PLL = "PLEG"
 CLASSIFICADOR_TEMAS = "IA, por regras temáticas documentadas"
@@ -72,6 +73,7 @@ ROTULOS_ESTADO = {
         "Presente na sessão sem voto individual registrado"
     ),
 }
+LICENCA_TIPOS: list[str] = []
 VOTOS_SIM = {"Sim"}
 VOTOS_NAO = {"Não", "Nao"}
 VOTOS_ABSTENCAO = {"Abstenção", "Abstencao"}
@@ -374,6 +376,195 @@ def autores_da_materia(materia_id, indice: dict[int, dict], por_id: dict[int, di
     }
 
 
+def _exigir_data(valor, onde: str) -> str:
+    if not isinstance(valor, str) or len(valor) != 10 or valor[4] != "-" or valor[7] != "-":
+        raise SystemExit(f"{onde}: data invalida. Nada sera estimado.")
+    return valor
+
+
+def carregar_afastamentos() -> dict:
+    vazio = {"afastamentos": [], "motivos_fora_do_mandato": [], "notas": []}
+    if not ARQUIVO_AFASTAMENTOS.exists():
+        return vazio
+    dados = carregar_json(ARQUIVO_AFASTAMENTOS)
+    if not isinstance(dados, dict):
+        raise SystemExit(f"{rel(ARQUIVO_AFASTAMENTOS)} nao e um objeto.")
+    for chave in vazio:
+        if chave not in dados or not isinstance(dados[chave], list):
+            raise SystemExit(f"{rel(ARQUIVO_AFASTAMENTOS)} sem lista {chave}.")
+    for item in dados["afastamentos"]:
+        _exigir_data(item.get("data_inicio"), "afastamento data_inicio")
+        _exigir_data(item.get("data_fim"), "afastamento data_fim")
+        if item["data_inicio"] > item["data_fim"]:
+            raise SystemExit("Afastamento com data inicial depois da final.")
+        if not str(item.get("tipo") or "").strip():
+            raise SystemExit("Afastamento sem tipo.")
+        if not str(item.get("rotulo") or "").strip():
+            raise SystemExit("Afastamento sem rotulo.")
+        if "parlamentar_id_sapl" not in item:
+            raise SystemExit("Afastamento sem parlamentar_id_sapl.")
+        if "conta_como_falta" not in item:
+            raise SystemExit("Afastamento sem conta_como_falta.")
+        if "fonte_oficial_encontrada" not in item:
+            raise SystemExit("Afastamento sem fonte_oficial_encontrada.")
+        if not str(item.get("fonte") or "").strip():
+            raise SystemExit("Afastamento sem texto de fonte.")
+    for item in dados["motivos_fora_do_mandato"]:
+        _exigir_data(item.get("depois_de"), "motivo fora do mandato")
+        if not str(item.get("motivo") or "").strip():
+            raise SystemExit("Motivo de fora do mandato vazio.")
+        if "parlamentar_id_sapl" not in item:
+            raise SystemExit("Motivo de fora do mandato sem parlamentar_id_sapl.")
+    for item in dados["notas"]:
+        if "parlamentar_id_sapl" not in item or not str(item.get("texto") or "").strip():
+            raise SystemExit("Nota factual incompleta.")
+    return dados
+
+
+def registrar_tipos_afastamento(afastamentos: list[dict]) -> None:
+    global ORDEM_ESTADOS
+    for item in afastamentos:
+        if item.get("conta_como_falta"):
+            raise SystemExit(
+                "Afastamento com conta_como_falta verdadeiro ainda nao tem regra. "
+                "Nao vou soma-lo como falta comum."
+            )
+        tipo = str(item["tipo"])
+        rotulo = str(item["rotulo"])
+        if tipo in ROTULOS_ESTADO and ROTULOS_ESTADO[tipo] != rotulo:
+            raise SystemExit(f"Tipo {tipo} com rotulos diferentes.")
+        if tipo not in ORDEM_ESTADOS:
+            ORDEM_ESTADOS = ORDEM_ESTADOS + (tipo,)
+            ROTULOS_ESTADO[tipo] = rotulo
+        if tipo not in LICENCA_TIPOS:
+            LICENCA_TIPOS.append(tipo)
+
+
+def afastamento_na_data(afastamentos: list[dict], parlamentar_id: int, data: str):
+    achados = [
+        item
+        for item in afastamentos
+        if int(item["parlamentar_id_sapl"]) == parlamentar_id
+        and item["data_inicio"] <= data <= item["data_fim"]
+    ]
+    if len(achados) > 1:
+        raise SystemExit(
+            f"Mais de um afastamento para o parlamentar {parlamentar_id} em {data}."
+        )
+    return achados[0] if achados else None
+
+
+def motivo_fora_na_data(motivos: list[dict], parlamentar_id: int, data: str):
+    achados = [
+        item
+        for item in motivos
+        if int(item["parlamentar_id_sapl"]) == parlamentar_id and data > item["depois_de"]
+    ]
+    if len(achados) > 1:
+        raise SystemExit(
+            f"Mais de um motivo de fora do mandato para {parlamentar_id} em {data}."
+        )
+    return achados[0] if achados else None
+
+
+def fonte_da_ocorrencia(item: dict) -> dict:
+    materia_id = item.get("materia_id")
+    link = item.get("link_fonte")
+    if not link and materia_id is not None:
+        link = link_materia(int(materia_id), CONFIG)
+    return {
+        "fonte": item.get("fonte") or "",
+        "link_fonte": link,
+        "fonte_oficial_encontrada": bool(item.get("fonte_oficial_encontrada")),
+    }
+
+
+def afastamentos_publicos(lista: list[dict], parlamentar_id: int) -> list[dict]:
+    saida = []
+    for item in lista:
+        if int(item["parlamentar_id_sapl"]) != parlamentar_id:
+            continue
+        publico = fonte_da_ocorrencia(item)
+        publico["tipo"] = item["tipo"]
+        publico["rotulo"] = item["rotulo"]
+        publico["data_inicio"] = item["data_inicio"]
+        publico["data_fim"] = item["data_fim"]
+        publico["conta_como_falta"] = bool(item["conta_como_falta"])
+        consulta = []
+        for ata in item.get("consulta_atas") or []:
+            materia_ata = ata.get("materia_id")
+            consulta.append(
+                {
+                    "materia_id": materia_ata,
+                    "link_fonte": (
+                        link_materia(int(materia_ata), CONFIG)
+                        if materia_ata is not None
+                        else None
+                    ),
+                    "registra_licenca": bool(ata.get("registra_licenca")),
+                    "registra": ata.get("registra") or "",
+                    "trecho": ata.get("trecho"),
+                    "arquivo": ata.get("arquivo"),
+                }
+            )
+        publico["consulta_atas"] = consulta
+        saida.append(publico)
+    return saida
+
+
+def complemento_fora(motivo: dict | None) -> dict:
+    if not motivo:
+        return {}
+    materia_id = motivo.get("materia_id")
+    return {
+        "motivo": motivo["motivo"],
+        "materia_motivo_id": int(materia_id) if materia_id is not None else None,
+        "link_motivo": (
+            link_materia(int(materia_id), CONFIG) if materia_id is not None else None
+        ),
+        "fonte_oficial_encontrada": bool(motivo.get("fonte_oficial_encontrada")),
+    }
+
+
+def notas_publicas(notas: list[dict]) -> dict[int, dict]:
+    saida = {}
+    for nota in notas:
+        fontes = []
+        for fonte in nota.get("fontes") or []:
+            materia_id = fonte.get("materia_id")
+            link = fonte.get("link_fonte")
+            if not link and materia_id is not None:
+                link = link_materia(int(materia_id), CONFIG)
+            fontes.append(
+                {
+                    "fonte": fonte.get("fonte") or "",
+                    "link_fonte": link,
+                    "fonte_oficial_encontrada": bool(fonte.get("fonte_oficial_encontrada")),
+                    "materia_id": int(materia_id) if materia_id is not None else None,
+                    "trecho": fonte.get("trecho"),
+                }
+            )
+        parlamentar_id = int(nota["parlamentar_id_sapl"])
+        if parlamentar_id in saida:
+            raise SystemExit(f"Mais de uma nota para o parlamentar {parlamentar_id}.")
+        saida[parlamentar_id] = {"texto": nota["texto"], "fontes": fontes}
+    return saida
+
+
+def rotulo_da_situacao(situacao: str) -> str:
+    if situacao == "fora_do_mandato":
+        return "Fora do mandato naquela data"
+    if situacao == "presente":
+        return "Presente"
+    if situacao == "falta_com_justificativa":
+        return "Falta com justificativa"
+    if situacao == "falta_sem_justificativa":
+        return "Falta sem justificativa"
+    if situacao in ROTULOS_ESTADO:
+        return ROTULOS_ESTADO[situacao]
+    raise SystemExit(f"Situacao de presenca desconhecida: {situacao}")
+
+
 def estado_do_texto(voto: str, era_presidente: bool) -> str:
     if voto in VOTOS_SIM:
         return "sim"
@@ -463,17 +654,21 @@ def estado_na_votacao(
     presidente_id: int,
     presente: bool,
     justificado: bool,
-) -> tuple[str, str | None]:
+    afastamento: dict | None,
+    motivo: dict | None,
+) -> tuple[str, str | None, dict]:
+    if afastamento is not None and voto_texto is None:
+        return str(afastamento["tipo"]), None, fonte_da_ocorrencia(afastamento)
     if not dentro_do_mandato(vereador, data):
-        return "fora_do_mandato", voto_texto
+        return "fora_do_mandato", voto_texto, complemento_fora(motivo)
     if voto_texto is not None:
         era_presidente = int(vereador["id_sapl"]) == presidente_id
-        return estado_do_texto(voto_texto, era_presidente), voto_texto
+        return estado_do_texto(voto_texto, era_presidente), voto_texto, {}
     if not presente and justificado:
-        return "ausente_com_justificativa", None
+        return "ausente_com_justificativa", None, {}
     if not presente and not justificado:
-        return "ausente_sem_justificativa", None
-    return "presente_sem_voto_individual_registrado", None
+        return "ausente_sem_justificativa", None, {}
+    return "presente_sem_voto_individual_registrado", None, {}
 
 
 def processar_sessoes(
@@ -484,6 +679,8 @@ def processar_sessoes(
     indice_autoria: dict[int, dict],
     por_id: dict[int, dict],
     rotulo_sem_voto: str,
+    afastamentos: list[dict],
+    motivos_fora: list[dict],
 ) -> dict:
     ids_banca = {int(item["id_sapl"]) for item in banca}
     por_banca = {int(item["id_sapl"]): item for item in banca}
@@ -541,7 +738,11 @@ def processar_sessoes(
         for vereador in banca:
             id_sapl = int(vereador["id_sapl"])
             no_mandato = dentro_do_mandato(vereador, sessao["data"])
-            if not no_mandato:
+            afastamento = afastamento_na_data(afastamentos, id_sapl, sessao["data"])
+            motivo = motivo_fora_na_data(motivos_fora, id_sapl, sessao["data"])
+            if afastamento is not None:
+                situacao = str(afastamento["tipo"])
+            elif not no_mandato:
                 situacao = "fora_do_mandato"
             elif id_sapl in presentes:
                 situacao = "presente"
@@ -558,21 +759,17 @@ def processar_sessoes(
                 "data_sessao": sessao["data"],
                 "rotulo": sessao["rotulo"],
                 "situacao": situacao,
-                "rotulo_situacao": (
-                    "Fora do mandato naquela data"
-                    if situacao == "fora_do_mandato"
-                    else {
-                        "presente": "Presente",
-                        "falta_com_justificativa": "Falta com justificativa",
-                        "falta_sem_justificativa": "Falta sem justificativa",
-                    }[situacao]
-                ),
+                "rotulo_situacao": rotulo_da_situacao(situacao),
                 "presente_sessao_plenaria": id_sapl in plenaria,
                 "presente_ordem_dia": id_sapl in ordem,
                 "justificativa": id_sapl in justificados,
                 "era_presidente": id_sapl == presidente_id,
                 "link_sessao": sessao["link_sapl"],
             }
+            if afastamento is not None:
+                registro.update(fonte_da_ocorrencia(afastamento))
+            elif situacao == "fora_do_mandato":
+                registro.update(complemento_fora(motivo))
             presenca[id_sapl].append(registro)
             situacoes[id_sapl] = situacao
 
@@ -637,13 +834,19 @@ def processar_sessoes(
             for vereador in banca:
                 id_sapl = int(vereador["id_sapl"])
                 texto = linhas.get(id_sapl)
-                estado, texto_contado = estado_na_votacao(
+                afastamento = afastamento_na_data(
+                    afastamentos, id_sapl, sessao["data"]
+                )
+                motivo = motivo_fora_na_data(motivos_fora, id_sapl, sessao["data"])
+                estado, texto_contado, extra_estado = estado_na_votacao(
                     vereador,
                     sessao["data"],
                     texto,
                     presidente_id,
                     id_sapl in presentes,
                     id_sapl in justificados,
+                    afastamento,
+                    motivo,
                 )
                 if estado not in ROTULOS_ESTADO:
                     raise SystemExit(f"Estado desconhecido: {estado}")
@@ -657,20 +860,21 @@ def processar_sessoes(
                         texto if estado == "fora_do_mandato" else None
                     ),
                 }
+                linha_estado.update(extra_estado)
                 estados.append(linha_estado)
-                nominais[id_sapl].append(
-                    {
-                        "votacao_id": registro["id"],
-                        "sessao_id": sessao["id"],
-                        "data_sessao": sessao["data"],
-                        "materia_id": materia_id,
-                        "estado": estado,
-                        "rotulo": ROTULOS_ESTADO[estado],
-                        "voto_texto_sapl": linha_estado["voto_texto_sapl"],
-                        "link_sessao": registro["link_sessao"],
-                        "link_materia": registro["link_materia"],
-                    }
-                )
+                nominal = {
+                    "votacao_id": registro["id"],
+                    "sessao_id": sessao["id"],
+                    "data_sessao": sessao["data"],
+                    "materia_id": materia_id,
+                    "estado": estado,
+                    "rotulo": ROTULOS_ESTADO[estado],
+                    "voto_texto_sapl": linha_estado["voto_texto_sapl"],
+                    "link_sessao": registro["link_sessao"],
+                    "link_materia": registro["link_materia"],
+                }
+                nominal.update(extra_estado)
+                nominais[id_sapl].append(nominal)
             if len(estados) != len(banca):
                 raise SystemExit(
                     f"Votacao {registro['id']}: {len(estados)} estados "
@@ -708,6 +912,9 @@ def processar_sessoes(
                     for situacao in situacoes.values()
                     if situacao == "fora_do_mandato"
                 ),
+                "n_licenca": sum(
+                    1 for situacao in situacoes.values() if situacao in LICENCA_TIPOS
+                ),
                 "n_registros_votacao": len(registros),
                 "n_votacoes_com_voto_individual": sum(
                     1 for registro in registros.values() if votos.get(registro["id"])
@@ -741,7 +948,9 @@ def consolidar_presenca(lista: list[dict], nome: str) -> dict:
     faltas_just = contagem.get("falta_com_justificativa", 0)
     faltas_sem = contagem.get("falta_sem_justificativa", 0)
     fora = contagem.get("fora_do_mandato", 0)
-    if presencas + faltas_just + faltas_sem + fora != len(lista):
+    por_afastamento = {tipo: contagem.get(tipo, 0) for tipo in LICENCA_TIPOS}
+    licenca = sum(por_afastamento.values())
+    if presencas + faltas_just + faltas_sem + fora + licenca != len(lista):
         raise SystemExit(f"{nome}: presenca nao fecha o numero de sessoes.")
     no_mandato = presencas + faltas_just + faltas_sem
     if no_mandato == 0:
@@ -753,6 +962,8 @@ def consolidar_presenca(lista: list[dict], nome: str) -> dict:
         "sessoes_ordinarias": no_mandato,
         "sessoes_do_ano": len(lista),
         "sessoes_fora_do_mandato": fora,
+        "sessoes_licenca": licenca,
+        "sessoes_por_afastamento": por_afastamento,
         "presencas": presencas,
         "faltas_com_justificativa": faltas_just,
         "faltas_sem_justificativa": faltas_sem,
@@ -975,6 +1186,7 @@ def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
         "link_sapl",
         "sessoes_ordinarias",
         "sessoes_fora_do_mandato",
+        "sessoes_licenca",
         "presencas",
         "faltas_com_justificativa",
         "faltas_sem_justificativa",
@@ -990,6 +1202,7 @@ def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
         "ausente_sem_justificativa",
         "fora_do_mandato",
         "presente_sem_voto_individual_registrado",
+        *LICENCA_TIPOS,
         "votos_total_registros",
         "projetos_lei_legislativo",
         "projetos_aprovados",
@@ -1017,6 +1230,7 @@ def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
                 "link_sapl": item["link_sapl"],
                 "sessoes_ordinarias": presenca["sessoes_ordinarias"],
                 "sessoes_fora_do_mandato": presenca["sessoes_fora_do_mandato"],
+                "sessoes_licenca": presenca["sessoes_licenca"],
                 "presencas": presenca["presencas"],
                 "faltas_com_justificativa": presenca["faltas_com_justificativa"],
                 "faltas_sem_justificativa": presenca["faltas_sem_justificativa"],
@@ -1036,6 +1250,7 @@ def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
                 "presente_sem_voto_individual_registrado": votos[
                     "presente_sem_voto_individual_registrado"
                 ],
+                **{tipo: votos[tipo] for tipo in LICENCA_TIPOS},
                 "votos_total_registros": votos["total_registros"],
                 "projetos_lei_legislativo": projetos["total_propostos"],
                 "projetos_aprovados": projetos["aprovados"],
@@ -1161,13 +1376,19 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
                 "Isso não é lido como voto unânime."
             ),
             "",
-            (
-                "Presidente que não votou só vale quando o texto do SAPL é "
-                "Não Votou e essa pessoa é o presidente daquela sessão em "
-                "`presidencia_sessoes.json`."
-            ),
-            "",
-            "## Presença de cada vereador",
+                (
+                    "Presidente que não votou só vale quando o texto do SAPL é "
+                    "Não Votou e essa pessoa é o presidente daquela sessão em "
+                    "`presidencia_sessoes.json`."
+                ),
+                "",
+                (
+                    "Afastamento que não conta como falta vem de "
+                    "`afastamentos_manuais.json`. Esse período não entra em "
+                    "falta nem na taxa de presença. Cada ocorrência guarda a fonte."
+                ),
+                "",
+                "## Presença de cada vereador",
             "",
         ]
     )
@@ -1183,18 +1404,27 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
                 "",
                 (
                     f"Presente em {presenca['presencas']} das "
-                    f"{presenca['sessoes_ordinarias']} sessões ordinárias "
-                    f"dentro do mandato (taxa {pct(presenca['taxa_presenca'])}%)."
+                    f"{presenca['sessoes_ordinarias']} sessões em que a presença conta "
+                    f"(taxa {pct(presenca['taxa_presenca'])}%)."
                 ),
                 "",
                 (
                     f"Faltas com justificativa: {presenca['faltas_com_justificativa']}. "
                     f"Faltas sem justificativa: {presenca['faltas_sem_justificativa']}. "
+                    f"Afastamentos que não contam como falta: {presenca['sessoes_licenca']}. "
                     f"Sessões fora do mandato: {presenca['sessoes_fora_do_mandato']}."
                 ),
                 "",
             ]
         )
+        nota = item.get("nota_factual")
+        if nota:
+            linhas.extend([nota["texto"], ""])
+            for fonte in nota.get("fontes") or []:
+                linhas.append(
+                    f"Fonte: {fonte['fonte']}. Link: {fonte.get('link_fonte') or 'sem link'}."
+                )
+            linhas.append("")
     linhas.extend(["## Estados de voto de cada vereador", ""])
     for item in vereadores:
         votos = item["votos"]
@@ -1271,6 +1501,10 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
             f"- Presenças dentro do mandato: {meta['n_presencas']}",
             f"- Faltas com justificativa: {meta['n_faltas_com_justificativa']}",
             f"- Faltas sem justificativa: {meta['n_faltas_sem_justificativa']}",
+            (
+                "- Afastamentos que não contam como falta: "
+                f"{meta['n_sessoes_licenca']}"
+            ),
             f"- Votações: {meta['n_votacoes']}",
             f"- Votações com voto individual: {meta['n_votacoes_com_voto_individual']}",
             f"- Votações sem voto individual: {meta['n_votacoes_sem_voto_individual']}",
@@ -1318,9 +1552,20 @@ def gerar_do_ano(ano: int) -> None:
             f"{ano}: contagem sem rotulo_sem_voto_individual. "
             "Nao vou inventar o texto."
         )
+    manuais = carregar_afastamentos()
+    registrar_tipos_afastamento(manuais["afastamentos"])
     bruto = processar_sessoes(
-        ano, banca, sessoes, presidentes, indice_autoria, por_id, rotulo_sem.strip()
+        ano,
+        banca,
+        sessoes,
+        presidentes,
+        indice_autoria,
+        por_id,
+        rotulo_sem.strip(),
+        manuais["afastamentos"],
+        manuais["motivos_fora_do_mandato"],
     )
+    notas = notas_publicas(manuais["notas"])
     n_votacoes = len(bruto["votacoes"])
     if contagem.get("total_votacoes") is not None:
         if n_votacoes != int(contagem["total_votacoes"]):
@@ -1386,6 +1631,8 @@ def gerar_do_ano(ano: int) -> None:
                 "data_inicio_mandato": base.get("data_inicio_mandato"),
                 "data_fim_mandato": base.get("data_fim_mandato"),
                 "anos_com_mandato": base.get("anos_com_mandato"),
+                "nota_factual": notas.get(id_sapl),
+                "afastamentos": afastamentos_publicos(manuais["afastamentos"], id_sapl),
                 "presenca": presenca,
                 "votos": votos,
                 "projetos_lei": projetos_lei,
@@ -1400,8 +1647,9 @@ def gerar_do_ano(ano: int) -> None:
         item["presenca"]["faltas_sem_justificativa"] for item in vereadores
     )
     n_fora = sum(item["presenca"]["sessoes_fora_do_mandato"] for item in vereadores)
+    n_licenca = sum(item["presenca"]["sessoes_licenca"] for item in vereadores)
     if (
-        n_presencas + n_faltas_j + n_faltas_s + n_fora
+        n_presencas + n_faltas_j + n_faltas_s + n_fora + n_licenca
         != len(sessoes) * len(vereadores)
     ):
         raise SystemExit(f"{ano}: a grade de presenca nao fecha.")
@@ -1436,6 +1684,7 @@ def gerar_do_ano(ano: int) -> None:
             "n_faltas_com_justificativa": n_faltas_j,
             "n_faltas_sem_justificativa": n_faltas_s,
             "n_sessoes_fora_do_mandato": n_fora,
+            "n_sessoes_licenca": n_licenca,
             "n_votacoes": n_votacoes,
             "n_registros_votacao": n_votacoes,
             "n_votacoes_com_voto_individual": bruto["n_votacoes_com_voto_individual"],
@@ -1457,12 +1706,14 @@ def gerar_do_ano(ano: int) -> None:
                 rel(ARQUIVO_VEREADORES),
                 rel(ARQUIVO_PRESIDENCIA),
                 rel(ARQUIVO_AUTORIA),
+                *([rel(ARQUIVO_AFASTAMENTOS)] if ARQUIVO_AFASTAMENTOS.exists() else []),
             ],
             "observacao": (
                 "Ausência não é voto. Votação sem voto individual não é "
                 "unânime. Presidente que não votou só conta quando o SAPL "
                 "registrou Não Votou e a pessoa presidia aquela sessão. "
-                "Fora do mandato não entra em presença nem em voto."
+                "Fora do mandato não entra em presença nem em voto. "
+                "Afastamento do arquivo de afastamentos não conta como falta."
             ),
         },
         "sessoes": bruto["sessoes"],

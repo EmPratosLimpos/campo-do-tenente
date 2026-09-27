@@ -4,8 +4,8 @@
     "cidade": "Campo do Tenente",
     "uf": "PR",
     "ano": 2025,
-    "dado_coletado_em": "2026-09-27T11:40:56-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em",
+    "dado_coletado_em": "2026-09-27T13:17:32-03:00",
+    "fonte_data_coleta": "dados/brutos/lote_20260927_atas/indice.json campo atualizado_em",
     "n_sessoes_ordinarias": 32,
     "piso_sessoes_ordinarias": 32,
     "n_vereadores": 9,
@@ -18,6 +18,7 @@
     "n_faltas_com_justificativa": 2,
     "n_faltas_sem_justificativa": 7,
     "n_sessoes_fora_do_mandato": 0,
+    "n_sessoes_licenca": 0,
     "n_votacoes": 115,
     "n_registros_votacao": 115,
     "n_votacoes_com_voto_individual": 19,
@@ -32,7 +33,8 @@
       "ausente_com_justificativa": 0,
       "ausente_sem_justificativa": 6,
       "fora_do_mandato": 0,
-      "presente_sem_voto_individual_registrado": 0
+      "presente_sem_voto_individual_registrado": 0,
+      "licenca_tratamento_saude": 0
     },
     "rotulos_estados": {
       "sim": "Sim",
@@ -43,7 +45,8 @@
       "ausente_com_justificativa": "Ausente com justificativa",
       "ausente_sem_justificativa": "Ausente sem justificativa",
       "fora_do_mandato": "Fora do mandato naquela data",
-      "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+      "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+      "licenca_tratamento_saude": "Licenca para tratamento de saude"
     },
     "lacuna_sessoes_ordinarias": {
       "numeros_ausentes_no_sapl": [
@@ -88,9 +91,10 @@
       "dados/brutos/materias-2025-resposta-original.csv",
       "dados/tratados/vereadores.json",
       "dados/tratados/presidencia_sessoes.json",
-      "dados/tratados/autoria_materias.json"
+      "dados/tratados/autoria_materias.json",
+      "dados/tratados/afastamentos_manuais.json"
     ],
-    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não entra em presença nem em voto."
+    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não entra em presença nem em voto. Afastamento do arquivo de afastamentos não conta como falta."
   },
   "sessoes": [
     {
@@ -105,6 +109,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 0,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 0
@@ -121,6 +126,7 @@
       "n_faltas_com_justificativa": 1,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 9,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 9
@@ -137,6 +143,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 0,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 0
@@ -153,6 +160,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 3
@@ -169,6 +177,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 3
@@ -185,6 +194,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 1
@@ -201,6 +211,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 8,
       "n_votacoes_com_voto_individual": 2,
       "n_votacoes_sem_voto_individual": 6
@@ -217,6 +228,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 6,
       "n_votacoes_com_voto_individual": 2,
       "n_votacoes_sem_voto_individual": 4
@@ -233,6 +245,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 7,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 7
@@ -249,6 +262,7 @@
       "n_faltas_com_justificativa": 1,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 4
@@ -265,6 +279,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 0
@@ -281,6 +296,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 1
@@ -297,6 +313,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 3
@@ -313,6 +330,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 10,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 9
@@ -329,6 +347,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 2
@@ -345,6 +364,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 1
@@ -361,6 +381,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 2,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 2
@@ -377,6 +398,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 2,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 2
@@ -393,6 +415,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 2,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 2
@@ -409,6 +432,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 1
@@ -425,6 +449,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 2
@@ -441,6 +466,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 3
@@ -457,6 +483,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 1
@@ -473,6 +500,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 4
@@ -489,6 +517,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 2,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 2
@@ -505,6 +534,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 1
@@ -521,6 +551,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 3,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 3
@@ -537,6 +568,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 4
@@ -553,6 +585,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 1,
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 1
@@ -569,6 +602,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 1,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 8,
       "n_votacoes_com_voto_individual": 4,
       "n_votacoes_sem_voto_individual": 4
@@ -585,6 +619,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 8,
       "n_votacoes_com_voto_individual": 4,
       "n_votacoes_sem_voto_individual": 4
@@ -601,6 +636,7 @@
       "n_faltas_com_justificativa": 0,
       "n_faltas_sem_justificativa": 0,
       "n_fora_do_mandato": 0,
+      "n_licenca": 0,
       "n_registros_votacao": 8,
       "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 7
@@ -10139,10 +10175,69 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [
+        {
+          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
+          "link_fonte": null,
+          "fonte_oficial_encontrada": false,
+          "tipo": "licenca_tratamento_saude",
+          "rotulo": "Licenca para tratamento de saude",
+          "data_inicio": "2026-03-17",
+          "data_fim": "2026-08-18",
+          "conta_como_falta": false,
+          "consulta_atas": [
+            {
+              "materia_id": 274,
+              "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/274",
+              "registra_licenca": false,
+              "registra": "posse do suplente na sessao de 17 de marco de 2026",
+              "trecho": "o presidente informou que seria realizada a posse do vereador suplente Rivanildo Braz Cavalheiro.",
+              "arquivo": "dados/brutos/lote_20260927_atas/materia_274_texto_original.pdf"
+            },
+            {
+              "materia_id": 275,
+              "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/275",
+              "registra_licenca": false,
+              "registra": "ausencia em sessao anterior, sem licenca",
+              "trecho": null,
+              "arquivo": "dados/brutos/lote_20260927_atas/materia_275_texto_original.docx"
+            },
+            {
+              "materia_id": 276,
+              "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/276",
+              "registra_licenca": false,
+              "registra": "sessao extraordinaria de 19 de marco de 2026, sem licenca",
+              "trecho": null,
+              "arquivo": "dados/brutos/lote_20260927_atas/materia_276_texto_original.pdf"
+            },
+            {
+              "materia_id": 283,
+              "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/283",
+              "registra_licenca": false,
+              "registra": "sessao de 10 de marco de 2026, sem licenca",
+              "trecho": null,
+              "arquivo": "dados/brutos/lote_20260927_atas/materia_283_texto_original.docx"
+            },
+            {
+              "materia_id": 284,
+              "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/284",
+              "registra_licenca": false,
+              "registra": "sessao de 24 de marco de 2026, sem licenca",
+              "trecho": null,
+              "arquivo": "dados/brutos/lote_20260927_atas/materia_284_texto_original.docx"
+            }
+          ]
+        }
+      ],
       "presenca": {
         "sessoes_ordinarias": 32,
         "sessoes_do_ano": 32,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 32,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
@@ -10546,6 +10641,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -10555,7 +10651,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 19,
         "nominais": [
@@ -10796,10 +10893,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 32,
         "sessoes_do_ano": 32,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 30,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 2,
@@ -11203,6 +11306,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -11212,7 +11316,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 19,
         "nominais": [
@@ -11555,10 +11660,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 32,
         "sessoes_do_ano": 32,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 32,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
@@ -11962,6 +12073,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -11971,7 +12083,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 19,
         "nominais": [
@@ -12248,10 +12361,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 32,
         "sessoes_do_ano": 32,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 31,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 0,
@@ -12655,6 +12774,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -12664,7 +12784,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 19,
         "nominais": [
@@ -12973,10 +13094,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 32,
         "sessoes_do_ano": 32,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 32,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
@@ -13380,6 +13507,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -13389,7 +13517,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 19,
         "nominais": [
@@ -13795,10 +13924,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 32,
         "sessoes_do_ano": 32,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 32,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
@@ -14202,6 +14337,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -14211,7 +14347,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 19,
         "nominais": [
@@ -14520,10 +14657,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 32,
         "sessoes_do_ano": 32,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 32,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
@@ -14927,6 +15070,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -14936,7 +15080,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 19,
         "nominais": [
@@ -15228,10 +15373,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 32,
         "sessoes_do_ano": 32,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 29,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 3,
@@ -15635,6 +15786,7 @@
         "ausente_sem_justificativa": 6,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -15644,7 +15796,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 19,
         "nominais": [
@@ -15885,10 +16038,16 @@
         2025,
         2026
       ],
+      "nota_factual": null,
+      "afastamentos": [],
       "presenca": {
         "sessoes_ordinarias": 32,
         "sessoes_do_ano": 32,
         "sessoes_fora_do_mandato": 0,
+        "sessoes_licenca": 0,
+        "sessoes_por_afastamento": {
+          "licenca_tratamento_saude": 0
+        },
         "presencas": 29,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 2,
@@ -16292,6 +16451,7 @@
         "ausente_sem_justificativa": 0,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
+        "licenca_tratamento_saude": 0,
         "rotulos": {
           "sim": "Sim",
           "nao": "Não",
@@ -16301,7 +16461,8 @@
           "ausente_com_justificativa": "Ausente com justificativa",
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
-          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
+          "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
+          "licenca_tratamento_saude": "Licenca para tratamento de saude"
         },
         "total_registros": 19,
         "nominais": [
