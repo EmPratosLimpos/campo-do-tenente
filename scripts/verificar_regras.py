@@ -89,6 +89,8 @@ def main():
         ".cursorrules",
         "PROCESSO_DESENVOLVIMENTO_E_GOVERNANCA.md",
         "index.html",
+        "app.js",
+        "estilo.css",
         "README.md",
         "ARCHITECTURE.md",
         "CHANGELOG.md",
