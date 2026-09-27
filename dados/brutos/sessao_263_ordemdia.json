@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 654,
+      "__str__": "Ordem do Dia/Expediente: 1 - Indicação nº 23 de 2026 em 24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/654",
+      "metadata": {},
+      "data_ordem": "2026-07-21",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 263,
+      "materia": 693,
+      "tramitacao": null
+    }
+  ],
+  "total": 1
+}

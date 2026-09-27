@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 624,
+      "__str__": "Ordem do Dia/Expediente: 1 - Ata Sessão nº 12 de 2026 em 11ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/624",
+      "metadata": {},
+      "data_ordem": "2026-04-22",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 52,
+      "materia": 303,
+      "tramitacao": null
+    },
+    {
+      "id": 623,
+      "__str__": "Ordem do Dia/Expediente: 2 - Indicação nº 10 de 2026 em 11ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/623",
+      "metadata": {},
+      "data_ordem": "2026-04-22",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 52,
+      "materia": 302,
+      "tramitacao": null
+    }
+  ],
+  "total": 2
+}

@@ -1,0 +1,213 @@
+{
+  "pasta_lote": "dados/brutos/lote_20260926",
+  "rotulo_sem_voto_individual": "voto individual nao registrado no SAPL",
+  "texto_nao_votou_preservado": "Não Votou",
+  "contagens": {
+    "2025": {
+      "sessoes_ordinarias": 32,
+      "votacoes": 115,
+      "votacoes_com_voto_individual": 19,
+      "votacoes_sem_voto_individual": 96,
+      "n_nao_votou": 0,
+      "n_votacoes_com_nao_votou": 0,
+      "n_votacoes_com_exatamente_um_nao_votou": 0,
+      "n_presencas_sessao": 274,
+      "n_presencas_ordem_dia": 267,
+      "n_justificativas": 2,
+      "lacuna_sessoes_ordinarias": {
+        "numeros_ausentes_no_sapl": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "primeira_ordinaria_no_sapl": {
+          "id": 4,
+          "numero": 17,
+          "data_inicio": "2025-05-06"
+        },
+        "aviso": "As sessoes ordinarias 1 a 16 de 2025 nao existem no SAPL."
+      },
+      "arquivo": "dados/brutos/contagem_votacoes_ordinarias_2025.json"
+    },
+    "2026": {
+      "sessoes_ordinarias": 33,
+      "votacoes": 120,
+      "votacoes_com_voto_individual": 100,
+      "votacoes_sem_voto_individual": 20,
+      "n_nao_votou": 93,
+      "n_votacoes_com_nao_votou": 93,
+      "n_votacoes_com_exatamente_um_nao_votou": 93,
+      "n_presencas_sessao": 274,
+      "n_presencas_ordem_dia": 258,
+      "n_justificativas": 6,
+      "lacuna_sessoes_ordinarias": {
+        "numeros_ausentes_no_sapl": [],
+        "primeira_ordinaria_no_sapl": {
+          "id": 37,
+          "numero": 1,
+          "data_inicio": "2026-02-10"
+        },
+        "aviso": null
+      },
+      "arquivo": "dados/brutos/contagem_votacoes_ordinarias_2026.json"
+    }
+  },
+  "materias": {
+    "2025": {
+      "total": 265,
+      "por_sigla": {
+        "ATA": 44,
+        "EMD": 7,
+        "IND": 60,
+        "MOC": 8,
+        "OFEX": 30,
+        "PDL": 4,
+        "PLC": 11,
+        "PLEG": 18,
+        "PLEX": 26,
+        "PRE": 17,
+        "PSUB": 1,
+        "PSUBE": 1,
+        "REQ": 35,
+        "VET": 3
+      },
+      "arquivos": [
+        "dados/brutos/lote_20260926/materialegislativa_ano2025_p1.json",
+        "dados/brutos/lote_20260926/materialegislativa_ano2025_p2.json",
+        "dados/brutos/lote_20260926/materialegislativa_ano2025_p3.json"
+      ],
+      "autorias": "O JSON traz autores como identificadores numericos, sem nome. A coluna Autorias ficou vazia. Nomes nao foram inventados."
+    },
+    "2026": {
+      "total": 136,
+      "por_sigla": {
+        "ATA": 34,
+        "COMPR": 2,
+        "EMD": 2,
+        "IND": 32,
+        "OFEX": 22,
+        "PDL": 2,
+        "PLCL": 1,
+        "PLEG": 5,
+        "PLEX": 13,
+        "PRE": 7,
+        "REQ": 16
+      },
+      "arquivos": [
+        "dados/brutos/lote_20260926/materialegislativa_ano2026_p1.json",
+        "dados/brutos/lote_20260926/materialegislativa_ano2026_p2.json"
+      ],
+      "autorias": "O JSON traz autores como identificadores numericos, sem nome. A coluna Autorias ficou vazia. Nomes nao foram inventados."
+    }
+  },
+  "mandatos_legislatura": {
+    "legislatura_id": 1,
+    "n": 10,
+    "arquivo": "dados/brutos/mandatos_legislatura_atual.json",
+    "arquivos_de_origem": [
+      "dados/brutos/lote_20260926/mandato_p1.json",
+      "dados/brutos/lote_20260926/mandato_p2.json"
+    ]
+  },
+  "arquivos_de_origem": {
+    "ordemdia": [
+      "dados/brutos/lote_20260926/ordemdia_p1.json",
+      "dados/brutos/lote_20260926/ordemdia_p2.json",
+      "dados/brutos/lote_20260926/ordemdia_p3.json",
+      "dados/brutos/lote_20260926/ordemdia_p4.json",
+      "dados/brutos/lote_20260926/ordemdia_p5.json",
+      "dados/brutos/lote_20260926/ordemdia_p6.json",
+      "dados/brutos/lote_20260926/ordemdia_p7.json",
+      "dados/brutos/lote_20260926/ordemdia_id_133.json",
+      "dados/brutos/lote_20260926/ordemdia_id_532.json",
+      "dados/brutos/lote_20260926/ordemdia_id_597.json",
+      "dados/brutos/lote_20260926/ordemdia_id_617.json",
+      "dados/brutos/lote_20260926/ordemdia_id_628.json",
+      "dados/brutos/lote_20260926/ordemdia_id_666.json",
+      "dados/brutos/lote_20260926/ordemdia_id_669.json",
+      "dados/brutos/lote_20260926/ordemdia_id_675.json",
+      "dados/brutos/lote_20260926/ordemdia_id_678.json",
+      "dados/brutos/lote_20260926/ordemdia_id_686.json",
+      "dados/brutos/lote_20260926/ordemdia_id_700.json"
+    ],
+    "expedientemateria": [
+      "dados/brutos/lote_20260926/expedientemateria_p1.json"
+    ],
+    "registrovotacao": [
+      "dados/brutos/lote_20260926/registrovotacao_p1.json",
+      "dados/brutos/lote_20260926/registrovotacao_p2.json",
+      "dados/brutos/lote_20260926/registrovotacao_p3.json"
+    ],
+    "votoparlamentar": [
+      "dados/brutos/lote_20260926/votoparlamentar_p1.json",
+      "dados/brutos/lote_20260926/votoparlamentar_p2.json",
+      "dados/brutos/lote_20260926/votoparlamentar_p3.json",
+      "dados/brutos/lote_20260926/votoparlamentar_p4.json",
+      "dados/brutos/lote_20260926/votoparlamentar_p5.json",
+      "dados/brutos/lote_20260926/votoparlamentar_p6.json",
+      "dados/brutos/lote_20260926/votoparlamentar_p7.json",
+      "dados/brutos/lote_20260926/votoparlamentar_p8.json",
+      "dados/brutos/lote_20260926/votoparlamentar_p9.json",
+      "dados/brutos/lote_20260926/votoparlamentar_p10.json",
+      "dados/brutos/lote_20260926/votoparlamentar_p11.json"
+    ],
+    "sessaoplenariapresenca": [
+      "dados/brutos/lote_20260926/sessaoplenariapresenca_p1.json",
+      "dados/brutos/lote_20260926/sessaoplenariapresenca_p2.json",
+      "dados/brutos/lote_20260926/sessaoplenariapresenca_p3.json",
+      "dados/brutos/lote_20260926/sessaoplenariapresenca_p4.json",
+      "dados/brutos/lote_20260926/sessaoplenariapresenca_p5.json",
+      "dados/brutos/lote_20260926/sessaoplenariapresenca_p6.json"
+    ],
+    "presencaordemdia": [
+      "dados/brutos/lote_20260926/presencaordemdia_p1.json",
+      "dados/brutos/lote_20260926/presencaordemdia_p2.json",
+      "dados/brutos/lote_20260926/presencaordemdia_p3.json",
+      "dados/brutos/lote_20260926/presencaordemdia_p4.json",
+      "dados/brutos/lote_20260926/presencaordemdia_p5.json",
+      "dados/brutos/lote_20260926/presencaordemdia_p6.json"
+    ],
+    "justificativaausencia": [
+      "dados/brutos/lote_20260926/justificativaausencia_p1.json"
+    ],
+    "integrantemesa": [
+      "dados/brutos/lote_20260926/integrantemesa_p1.json",
+      "dados/brutos/lote_20260926/integrantemesa_p2.json",
+      "dados/brutos/lote_20260926/integrantemesa_p3.json"
+    ],
+    "parlamentar": [
+      "dados/brutos/lote_20260926/parlamentar_p1.json"
+    ],
+    "partido": [
+      "dados/brutos/lote_20260926/partido_p1.json"
+    ],
+    "filiacao": [
+      "dados/brutos/lote_20260926/filiacao_p1.json"
+    ],
+    "tipomaterialegislativa": [
+      "dados/brutos/lote_20260926/tipomaterialegislativa_p1.json"
+    ],
+    "tipoafastamento": [
+      "dados/brutos/lote_20260926/tipoafastamento_p1.json"
+    ]
+  },
+  "registros_sem_ligacao_de_sessao": [],
+  "registros_fora_do_recorte": [],
+  "votos_sem_sessao_no_recorte": [],
+  "sessoes_com_ano_divergente": [],
+  "parlamentares_de_mandato_ausentes_no_cadastro": [],
+  "nota_autoria": "Autorias no CSV ficaram vazias porque o lote nao traz o nome do autor, so o identificador numerico em materialegislativa.autores."
+}

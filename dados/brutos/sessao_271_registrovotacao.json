@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 264,
+      "__str__": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 32 de 2026 em 31ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-09-08T19:30:57.181322-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 810,
+      "ordem": null,
+      "expediente": 70,
+      "user": 3
+    }
+  ],
+  "total": 1
+}

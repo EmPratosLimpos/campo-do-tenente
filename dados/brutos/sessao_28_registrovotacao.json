@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 91,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 2 - Projeto de Lei Origem do Poder Legislativo nº 17 de 2025 em 43ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-11-04T20:01:45.199358-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 211,
+      "ordem": 352,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 92,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 19 - Requerimento nº 34 de 2025 em 43ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-11-04T20:11:16.637836-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 220,
+      "ordem": 369,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 93,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 21 - Requerimento nº 35 de 2025 em 43ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-11-04T20:27:14.611828-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 221,
+      "ordem": 371,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 3
+}

@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 225,
+      "__str__": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 23 de 2026 em 22ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-07-07T19:13:16.382572-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 685,
+      "ordem": null,
+      "expediente": 57,
+      "user": 5
+    },
+    {
+      "id": 226,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 1 - Indicação nº 21 de 2026 em 22ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-07-07T19:34:37.766147-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 689,
+      "ordem": 649,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 227,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 2 - Indicação nº 22 de 2026 em 22ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-07-07T19:40:48.100834-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 690,
+      "ordem": 650,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 3
+}

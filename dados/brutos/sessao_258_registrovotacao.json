@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 219,
+      "__str__": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 20 de 2026 em 19ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-06-16T19:18:28.958157-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 621,
+      "ordem": null,
+      "expediente": 53,
+      "user": 5
+    },
+    {
+      "id": 220,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 7 de 2026 em 19ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-06-16T19:26:58.950797-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 347,
+      "ordem": 645,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 221,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 2 - Indicação nº 19 de 2026 em 19ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-06-16T19:36:09.202145-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 619,
+      "ordem": 646,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 222,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 3 - Indicação nº 20 de 2026 em 19ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-06-16T19:41:54.184830-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 620,
+      "ordem": 647,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 4
+}

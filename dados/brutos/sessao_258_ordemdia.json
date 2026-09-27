@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 645,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 7 de 2026 em 19ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/645",
+      "metadata": {},
+      "data_ordem": "2026-06-16",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Maioria Absoluta",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 258,
+      "materia": 347,
+      "tramitacao": null
+    },
+    {
+      "id": 646,
+      "__str__": "Ordem do Dia/Expediente: 2 - Indicação nº 19 de 2026 em 19ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/646",
+      "metadata": {},
+      "data_ordem": "2026-06-16",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Maioria Absoluta",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 258,
+      "materia": 619,
+      "tramitacao": null
+    },
+    {
+      "id": 647,
+      "__str__": "Ordem do Dia/Expediente: 3 - Indicação nº 20 de 2026 em 19ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/647",
+      "metadata": {},
+      "data_ordem": "2026-06-16",
+      "observacao": "",
+      "numero_ordem": 3,
+      "resultado": "Aprovada por Maioria Absoluta",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 258,
+      "materia": 620,
+      "tramitacao": null
+    },
+    {
+      "id": 648,
+      "__str__": "Ordem do Dia/Expediente: 4 - Projeto de Lei Origem Poder Executivo nº 8 de 2026 em 19ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/648",
+      "metadata": {},
+      "data_ordem": "2026-06-16",
+      "observacao": "",
+      "numero_ordem": 4,
+      "resultado": "Matéria lida",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 258,
+      "materia": 622,
+      "tramitacao": null
+    }
+  ],
+  "total": 4
+}

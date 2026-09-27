@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 46,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 18 - Indicação nº 49 de 2025 em 28ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-07-22T19:54:50.160074-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 152,
+      "ordem": 108,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 1
+}

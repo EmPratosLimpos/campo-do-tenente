@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 4,
+      "__str__": "Justificativa de Ausência",
+      "link_detail_backend": "/sessao/justificativaausencia/4",
+      "metadata": {},
+      "data": "2026-03-17",
+      "hora": "19:00",
+      "observacao": "Parlamentar em viajem a Brasília, período de 17 a 19 de março de 2026.",
+      "ausencia": 2,
+      "upload_anexo": null,
+      "parlamentar": 3,
+      "sessao_plenaria": 45,
+      "tipo_ausencia": 3,
+      "materias_do_expediente": [],
+      "materias_da_ordem_do_dia": []
+    },
+    {
+      "id": 5,
+      "__str__": "Justificativa de Ausência",
+      "link_detail_backend": "/sessao/justificativaausencia/5",
+      "metadata": {},
+      "data": "2026-03-17",
+      "hora": "19:00",
+      "observacao": "Parlamentar em viajem a Brasília, período de 17 a 19 de março.",
+      "ausencia": 2,
+      "upload_anexo": null,
+      "parlamentar": 4,
+      "sessao_plenaria": 45,
+      "tipo_ausencia": 3,
+      "materias_do_expediente": [],
+      "materias_da_ordem_do_dia": []
+    }
+  ],
+  "total": 2
+}

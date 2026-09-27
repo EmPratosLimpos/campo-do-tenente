@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 19,
+      "__str__": "Sessão: 18ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 1,
+      "parlamentar": 8
+    },
+    {
+      "id": 20,
+      "__str__": "Sessão: 18ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 1,
+      "parlamentar": 3
+    },
+    {
+      "id": 21,
+      "__str__": "Sessão: 18ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 1,
+      "parlamentar": 2
+    },
+    {
+      "id": 22,
+      "__str__": "Sessão: 18ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 1,
+      "parlamentar": 6
+    },
+    {
+      "id": 23,
+      "__str__": "Sessão: 18ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Jorge Quege",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 1,
+      "parlamentar": 1
+    },
+    {
+      "id": 24,
+      "__str__": "Sessão: 18ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 1,
+      "parlamentar": 7
+    },
+    {
+      "id": 25,
+      "__str__": "Sessão: 18ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 1,
+      "parlamentar": 4
+    },
+    {
+      "id": 26,
+      "__str__": "Sessão: 18ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 1,
+      "parlamentar": 5
+    }
+  ],
+  "total": 8
+}

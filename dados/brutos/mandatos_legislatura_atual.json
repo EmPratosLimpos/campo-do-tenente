@@ -1,0 +1,109 @@
+{
+  "legislatura_id": 1,
+  "arquivos_de_origem": [
+    "dados/brutos/lote_20260926/mandato_p1.json",
+    "dados/brutos/lote_20260926/mandato_p2.json"
+  ],
+  "mandatos": [
+    {
+      "mandato_id": 1,
+      "parlamentar_id": 8,
+      "nome_parlamentar": "Beto Maurer",
+      "titular": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "tipo_afastamento_id": null,
+      "tipo_afastamento_nome": null
+    },
+    {
+      "mandato_id": 2,
+      "parlamentar_id": 3,
+      "nome_parlamentar": "Cleiton Costa",
+      "titular": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "tipo_afastamento_id": null,
+      "tipo_afastamento_nome": null
+    },
+    {
+      "mandato_id": 3,
+      "parlamentar_id": 2,
+      "nome_parlamentar": "Dr. Marcos Rodrigues",
+      "titular": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "tipo_afastamento_id": null,
+      "tipo_afastamento_nome": null
+    },
+    {
+      "mandato_id": 4,
+      "parlamentar_id": 9,
+      "nome_parlamentar": "Gilmar Barbosa",
+      "titular": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "tipo_afastamento_id": null,
+      "tipo_afastamento_nome": null
+    },
+    {
+      "mandato_id": 5,
+      "parlamentar_id": 6,
+      "nome_parlamentar": "Gustavo Vizentin",
+      "titular": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "tipo_afastamento_id": null,
+      "tipo_afastamento_nome": null
+    },
+    {
+      "mandato_id": 6,
+      "parlamentar_id": 1,
+      "nome_parlamentar": "Jorge Quege",
+      "titular": false,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2026-08-18",
+      "tipo_afastamento_id": 2,
+      "tipo_afastamento_nome": "Cassação de mandato"
+    },
+    {
+      "mandato_id": 7,
+      "parlamentar_id": 7,
+      "nome_parlamentar": "Josemar Veiga",
+      "titular": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "tipo_afastamento_id": null,
+      "tipo_afastamento_nome": null
+    },
+    {
+      "mandato_id": 8,
+      "parlamentar_id": 4,
+      "nome_parlamentar": "Kinho Lazarino",
+      "titular": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "tipo_afastamento_id": null,
+      "tipo_afastamento_nome": null
+    },
+    {
+      "mandato_id": 9,
+      "parlamentar_id": 5,
+      "nome_parlamentar": "Rafael Ventura",
+      "titular": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "tipo_afastamento_id": null,
+      "tipo_afastamento_nome": null
+    },
+    {
+      "mandato_id": 160,
+      "parlamentar_id": 100,
+      "nome_parlamentar": "Rivanildo Cavalheiro",
+      "titular": true,
+      "data_inicio_mandato": "2026-03-17",
+      "data_fim_mandato": "2028-12-31",
+      "tipo_afastamento_id": null,
+      "tipo_afastamento_nome": null
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "1": {
+    "id": 1,
+    "nome_completo": "Jorge Luiz Quege",
+    "nome_parlamentar": "Jorge Quege",
+    "__str__": "Jorge Quege",
+    "ativo": false,
+    "link_detail_backend": "/parlamentar/1",
+    "fotografia": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/1/emk00759_Rt35TkS.jpg"
+  },
+  "2": {
+    "id": 2,
+    "nome_completo": "Marcos Antonio Rodrigues",
+    "nome_parlamentar": "Dr. Marcos Rodrigues",
+    "__str__": "Dr. Marcos Rodrigues",
+    "ativo": true,
+    "link_detail_backend": "/parlamentar/2",
+    "fotografia": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/2/emk00154.jpg"
+  },
+  "3": {
+    "id": 3,
+    "nome_completo": "Cleiton Nunes da Costa",
+    "nome_parlamentar": "Cleiton Costa",
+    "__str__": "Cleiton Costa",
+    "ativo": true,
+    "link_detail_backend": "/parlamentar/3",
+    "fotografia": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/3/emk00753.jpg"
+  },
+  "4": {
+    "id": 4,
+    "nome_completo": "Marcos Wesley Lazarino",
+    "nome_parlamentar": "Kinho Lazarino",
+    "__str__": "Kinho Lazarino",
+    "ativo": true,
+    "link_detail_backend": "/parlamentar/4",
+    "fotografia": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/4/emk00770.jpg"
+  },
+  "5": {
+    "id": 5,
+    "nome_completo": "Rafael de Jesus Ventura",
+    "nome_parlamentar": "Rafael Ventura",
+    "__str__": "Rafael Ventura",
+    "ativo": true,
+    "link_detail_backend": "/parlamentar/5",
+    "fotografia": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/5/whatsapp_image_2025-04-22_at_17.32.56.jpeg"
+  },
+  "6": {
+    "id": 6,
+    "nome_completo": "Gustavo Brun Ribas Pinto Vizentin",
+    "nome_parlamentar": "Gustavo Vizentin",
+    "__str__": "Gustavo Vizentin",
+    "ativo": true,
+    "link_detail_backend": "/parlamentar/6",
+    "fotografia": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/6/emk00763.jpg"
+  },
+  "7": {
+    "id": 7,
+    "nome_completo": "Josemar Veiga",
+    "nome_parlamentar": "Josemar Veiga",
+    "__str__": "Josemar Veiga",
+    "ativo": true,
+    "link_detail_backend": "/parlamentar/7",
+    "fotografia": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/7/emk00173.jpg"
+  },
+  "8": {
+    "id": 8,
+    "nome_completo": "Roberto Carlos Maurer",
+    "nome_parlamentar": "Beto Maurer",
+    "__str__": "Beto Maurer",
+    "ativo": true,
+    "link_detail_backend": "/parlamentar/8",
+    "fotografia": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/8/emk00157.jpg"
+  },
+  "9": {
+    "id": 9,
+    "nome_completo": "Gilmar Aparecido Barbosa",
+    "nome_parlamentar": "Gilmar Barbosa",
+    "__str__": "Gilmar Barbosa",
+    "ativo": true,
+    "link_detail_backend": "/parlamentar/9",
+    "fotografia": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/9/emk00176.jpg"
+  },
+  "100": {
+    "id": 100,
+    "nome_completo": "Rivanildo Braz Cavalheiro",
+    "nome_parlamentar": "Rivanildo Cavalheiro",
+    "__str__": "Rivanildo Cavalheiro",
+    "ativo": true,
+    "link_detail_backend": "/parlamentar/100",
+    "fotografia": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/100/whatsapp_image_2026-09-02_at_11.07.49.jpeg"
+  }
+}

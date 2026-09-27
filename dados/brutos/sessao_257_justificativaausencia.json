@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 8,
+      "__str__": "Justificativa de Ausência",
+      "link_detail_backend": "/sessao/justificativaausencia/8",
+      "metadata": {},
+      "data": "2026-06-09",
+      "hora": "19:00",
+      "observacao": "Vereador sofreu acidente com amputação de dedo",
+      "ausencia": 2,
+      "upload_anexo": null,
+      "parlamentar": 9,
+      "sessao_plenaria": 257,
+      "tipo_ausencia": 2,
+      "materias_do_expediente": [],
+      "materias_da_ordem_do_dia": []
+    }
+  ],
+  "total": 1
+}

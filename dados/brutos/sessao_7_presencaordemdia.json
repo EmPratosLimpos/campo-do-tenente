@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "id": 71,
+      "__str__": "Sessão: 23ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 7,
+      "parlamentar": 3
+    },
+    {
+      "id": 72,
+      "__str__": "Sessão: 23ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 7,
+      "parlamentar": 2
+    },
+    {
+      "id": 74,
+      "__str__": "Sessão: 23ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 7,
+      "parlamentar": 6
+    },
+    {
+      "id": 75,
+      "__str__": "Sessão: 23ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Jorge Quege",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 7,
+      "parlamentar": 1
+    },
+    {
+      "id": 76,
+      "__str__": "Sessão: 23ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 7,
+      "parlamentar": 7
+    },
+    {
+      "id": 77,
+      "__str__": "Sessão: 23ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 7,
+      "parlamentar": 4
+    },
+    {
+      "id": 78,
+      "__str__": "Sessão: 23ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 7,
+      "parlamentar": 5
+    }
+  ],
+  "total": 7
+}

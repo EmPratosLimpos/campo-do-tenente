@@ -1,0 +1,83 @@
+{
+  "results": [
+    {
+      "id": 190,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 27 de 2025 em 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-12-11T18:09:20.274344-03:00",
+      "votacao": 127,
+      "parlamentar": 3,
+      "user": 5,
+      "ordem": 491,
+      "expediente": null
+    },
+    {
+      "id": 191,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 27 de 2025 em 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-12-11T18:09:20.292251-03:00",
+      "votacao": 127,
+      "parlamentar": 9,
+      "user": 5,
+      "ordem": 491,
+      "expediente": null
+    },
+    {
+      "id": 192,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 27 de 2025 em 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-12-11T18:09:20.310641-03:00",
+      "votacao": 127,
+      "parlamentar": 6,
+      "user": 5,
+      "ordem": 491,
+      "expediente": null
+    },
+    {
+      "id": 193,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 27 de 2025 em 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-12-11T18:09:20.328979-03:00",
+      "votacao": 127,
+      "parlamentar": 7,
+      "user": 5,
+      "ordem": 491,
+      "expediente": null
+    },
+    {
+      "id": 194,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 27 de 2025 em 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-12-11T18:09:20.347622-03:00",
+      "votacao": 127,
+      "parlamentar": 4,
+      "user": 5,
+      "ordem": 491,
+      "expediente": null
+    },
+    {
+      "id": 195,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 27 de 2025 em 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-12-11T18:09:20.366010-03:00",
+      "votacao": 127,
+      "parlamentar": 5,
+      "user": 5,
+      "ordem": 491,
+      "expediente": null
+    }
+  ],
+  "total": 6
+}

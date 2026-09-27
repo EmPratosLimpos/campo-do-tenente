@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 3,
+      "__str__": "Justificativa de Ausência",
+      "link_detail_backend": "/sessao/justificativaausencia/3",
+      "metadata": {},
+      "data": "2026-03-03",
+      "hora": "19:00",
+      "observacao": "",
+      "ausencia": 2,
+      "upload_anexo": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/justificativaausencia/3/anexo/declaracao_gabinete_quege.pdf",
+      "parlamentar": 1,
+      "sessao_plenaria": 41,
+      "tipo_ausencia": 3,
+      "materias_do_expediente": [],
+      "materias_da_ordem_do_dia": []
+    }
+  ],
+  "total": 1
+}

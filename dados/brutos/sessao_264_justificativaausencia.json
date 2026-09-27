@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 12,
+      "__str__": "Justificativa de Ausência",
+      "link_detail_backend": "/sessao/justificativaausencia/12",
+      "metadata": {},
+      "data": "2026-07-28",
+      "hora": "19:00",
+      "observacao": "Ausência com a apresentação de atestado médico.",
+      "ausencia": 2,
+      "upload_anexo": null,
+      "parlamentar": 2,
+      "sessao_plenaria": 264,
+      "tipo_ausencia": 2,
+      "materias_do_expediente": [],
+      "materias_da_ordem_do_dia": []
+    }
+  ],
+  "total": 1
+}

@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "id": 505,
+      "__str__": "Sessão: 6ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 45,
+      "parlamentar": 8
+    },
+    {
+      "id": 506,
+      "__str__": "Sessão: 6ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 45,
+      "parlamentar": 2
+    },
+    {
+      "id": 507,
+      "__str__": "Sessão: 6ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 45,
+      "parlamentar": 9
+    },
+    {
+      "id": 508,
+      "__str__": "Sessão: 6ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 45,
+      "parlamentar": 6
+    },
+    {
+      "id": 509,
+      "__str__": "Sessão: 6ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 45,
+      "parlamentar": 7
+    },
+    {
+      "id": 510,
+      "__str__": "Sessão: 6ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 45,
+      "parlamentar": 5
+    },
+    {
+      "id": 511,
+      "__str__": "Sessão: 6ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 45,
+      "parlamentar": 100
+    }
+  ],
+  "total": 7
+}

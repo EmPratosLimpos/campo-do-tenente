@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 203,
+      "__str__": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 15 de 2026 em 14ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-05-12T19:23:07.906011-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 458,
+      "ordem": null,
+      "expediente": 47,
+      "user": 5
+    },
+    {
+      "id": 204,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 6 de 2026 em 14ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-05-12T19:25:58.044985-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 290,
+      "ordem": 634,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 205,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 2 - Indicação nº 14 de 2026 em 14ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-05-12T19:29:39.900452-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 353,
+      "ordem": 633,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 3
+}

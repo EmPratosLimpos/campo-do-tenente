@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 6,
+      "__str__": "Justificativa de Ausência",
+      "link_detail_backend": "/sessao/justificativaausencia/6",
+      "metadata": {},
+      "data": "2026-03-19",
+      "hora": "17:00",
+      "observacao": "Vereador em viajem a Brasília",
+      "ausencia": 2,
+      "upload_anexo": null,
+      "parlamentar": 3,
+      "sessao_plenaria": 47,
+      "tipo_ausencia": 3,
+      "materias_do_expediente": [],
+      "materias_da_ordem_do_dia": []
+    },
+    {
+      "id": 7,
+      "__str__": "Justificativa de Ausência",
+      "link_detail_backend": "/sessao/justificativaausencia/7",
+      "metadata": {},
+      "data": "2026-03-19",
+      "hora": "17:00",
+      "observacao": "Vereador em viajem a Brasília",
+      "ausencia": 2,
+      "upload_anexo": null,
+      "parlamentar": 4,
+      "sessao_plenaria": 47,
+      "tipo_ausencia": 3,
+      "materias_do_expediente": [],
+      "materias_da_ordem_do_dia": []
+    }
+  ],
+  "total": 2
+}

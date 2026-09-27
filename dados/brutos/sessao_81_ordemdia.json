@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 640,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Resolução nº 6 de 2026 em 17ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/640",
+      "metadata": {},
+      "data_ordem": "2026-06-02",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 81,
+      "materia": 603,
+      "tramitacao": null
+    },
+    {
+      "id": 639,
+      "__str__": "Ordem do Dia/Expediente: 2 - Indicação nº 17 de 2026 em 17ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/639",
+      "metadata": {},
+      "data_ordem": "2026-06-02",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 81,
+      "materia": 602,
+      "tramitacao": null
+    },
+    {
+      "id": 641,
+      "__str__": "Ordem do Dia/Expediente: 3 - Indicação nº 18 de 2026 em 17ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/641",
+      "metadata": {},
+      "data_ordem": "2026-06-02",
+      "observacao": "",
+      "numero_ordem": 3,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 81,
+      "materia": 606,
+      "tramitacao": null
+    },
+    {
+      "id": 642,
+      "__str__": "Ordem do Dia/Expediente: 4 - Requerimento nº 9 de 2026 em 17ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/642",
+      "metadata": {},
+      "data_ordem": "2026-06-02",
+      "observacao": "",
+      "numero_ordem": 4,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 81,
+      "materia": 605,
+      "tramitacao": null
+    }
+  ],
+  "total": 4
+}

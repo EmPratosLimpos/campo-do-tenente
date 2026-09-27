@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "id": 525,
+      "__str__": "Sessão: 7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 48,
+      "parlamentar": 8
+    },
+    {
+      "id": 526,
+      "__str__": "Sessão: 7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 48,
+      "parlamentar": 3
+    },
+    {
+      "id": 527,
+      "__str__": "Sessão: 7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 48,
+      "parlamentar": 2
+    },
+    {
+      "id": 528,
+      "__str__": "Sessão: 7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 48,
+      "parlamentar": 9
+    },
+    {
+      "id": 529,
+      "__str__": "Sessão: 7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 48,
+      "parlamentar": 6
+    },
+    {
+      "id": 530,
+      "__str__": "Sessão: 7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 48,
+      "parlamentar": 7
+    },
+    {
+      "id": 531,
+      "__str__": "Sessão: 7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 48,
+      "parlamentar": 4
+    },
+    {
+      "id": 532,
+      "__str__": "Sessão: 7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 48,
+      "parlamentar": 5
+    },
+    {
+      "id": 533,
+      "__str__": "Sessão: 7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 48,
+      "parlamentar": 100
+    }
+  ],
+  "total": 9
+}

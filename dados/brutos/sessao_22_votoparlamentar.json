@@ -1,0 +1,122 @@
+{
+  "results": [
+    {
+      "id": 98,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 38ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-09-30T19:26:44.772275-03:00",
+      "votacao": 80,
+      "parlamentar": 8,
+      "user": 5,
+      "ordem": 278,
+      "expediente": null
+    },
+    {
+      "id": 99,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 38ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-09-30T19:26:44.790293-03:00",
+      "votacao": 80,
+      "parlamentar": 3,
+      "user": 5,
+      "ordem": 278,
+      "expediente": null
+    },
+    {
+      "id": 100,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 38ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-09-30T19:26:44.808281-03:00",
+      "votacao": 80,
+      "parlamentar": 2,
+      "user": 5,
+      "ordem": 278,
+      "expediente": null
+    },
+    {
+      "id": 101,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 38ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-09-30T19:26:44.824435-03:00",
+      "votacao": 80,
+      "parlamentar": 9,
+      "user": 5,
+      "ordem": 278,
+      "expediente": null
+    },
+    {
+      "id": 102,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 38ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-09-30T19:26:44.840029-03:00",
+      "votacao": 80,
+      "parlamentar": 6,
+      "user": 5,
+      "ordem": 278,
+      "expediente": null
+    },
+    {
+      "id": 103,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 38ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Jorge Quege",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-09-30T19:26:44.857847-03:00",
+      "votacao": 80,
+      "parlamentar": 1,
+      "user": 5,
+      "ordem": 278,
+      "expediente": null
+    },
+    {
+      "id": 104,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 38ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-09-30T19:26:44.875101-03:00",
+      "votacao": 80,
+      "parlamentar": 7,
+      "user": 5,
+      "ordem": 278,
+      "expediente": null
+    },
+    {
+      "id": 105,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 38ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-09-30T19:26:44.894508-03:00",
+      "votacao": 80,
+      "parlamentar": 4,
+      "user": 5,
+      "ordem": 278,
+      "expediente": null
+    },
+    {
+      "id": 106,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 4 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 38ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-09-30T19:26:44.912255-03:00",
+      "votacao": 80,
+      "parlamentar": 5,
+      "user": 5,
+      "ordem": 278,
+      "expediente": null
+    }
+  ],
+  "total": 9
+}

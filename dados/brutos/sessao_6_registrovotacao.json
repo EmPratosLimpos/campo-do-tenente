@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 19,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 13 - Indicação nº 44 de 2025 em 22ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-06-23T11:27:42.433822-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 38,
+      "ordem": 41,
+      "expediente": null,
+      "user": 3
+    }
+  ],
+  "total": 1
+}
