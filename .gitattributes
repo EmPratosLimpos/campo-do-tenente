@@ -7,3 +7,5 @@
 *.md text eol=lf
 *.yml text eol=lf
 *.txt text eol=lf
+dados/brutos/lote_20260927_noticia_licenca/noticia.html binary
+dados/brutos/lote_20260927_noticia_licenca/cabecalhos.txt binary

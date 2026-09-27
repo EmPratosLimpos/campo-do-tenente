@@ -36,11 +36,7 @@ def main():
     # 2. Testes de sanidade de dados
     print("\nExecutando coletor/testes_sanidade.py...")
     res = subprocess.run([sys.executable, "coletor/testes_sanidade.py"], cwd=ROOT, capture_output=True, text=True)
-    if res.returncode == 2:
-        print("ADIADO: pisos de sanidade ainda nao definidos ou dados ainda nao coletados.")
-        if res.stderr.strip():
-            print(res.stderr.strip())
-    elif res.returncode != 0:
+    if res.returncode != 0:
         erros.append(f"FALHA nos testes de sanidade:\n{res.stdout}\n{res.stderr}")
     else:
         print("OK: Testes de sanidade passaram.")
@@ -75,8 +71,15 @@ def main():
                 f"Arquivo de hash ausente para {ano}. "
                 "Execute python coletor/gerar_hash_integridade.py"
             )
-    if hashes_vistos == 0:
-        print("ADIADO: nenhum arquivo consolidado com hash para conferir.")
+        else:
+            erros.append(
+                f"Consolidado de {ano} ausente. "
+                "Rode python dados/tratados/gerar_atuacao_vereadores.py"
+            )
+    if hashes_vistos != len(anos):
+        erros.append(
+            f"Hashes conferidos: {hashes_vistos}. Anos do config: {len(anos)}."
+        )
 
     # 5. Higiene de travessoes em documentacao
     print("\nVerificando ausencia de caracteres de travessao proibidos...")

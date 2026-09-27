@@ -107,10 +107,38 @@ def testar_vereadores(ano: int, n_vereadores: int) -> None:
     )
 
 
-def dados_consolidados_existem() -> bool:
-    if not arquivo_vereadores().exists():
+def testar_arquivo_real(ano: int) -> None:
+    caminho = arquivo_atuacao_json(ano)
+    checar(caminho.exists(), f"Arquivo ausente: {caminho.name}")
+    bruto = caminho.read_bytes()
+    checar(b"\r" not in bruto, f"{caminho.name} nao esta em LF")
+    dados = json.loads(bruto.decode("utf-8"))
+    meta = dados.get("meta") or {}
+    checar(
+        isinstance(meta.get("dado_coletado_em"), str) and meta["dado_coletado_em"].strip(),
+        f"{ano}: meta.dado_coletado_em ausente",
+    )
+    checar(
+        "lacuna_sessoes_ordinarias" in meta,
+        f"{ano}: meta sem lacuna_sessoes_ordinarias",
+    )
+    contagem_caminho = DIR_RAIZ / "dados" / "brutos" / f"contagem_votacoes_ordinarias_{ano}.json"
+    if contagem_caminho.exists():
+        contagem = json.loads(contagem_caminho.read_text(encoding="utf-8"))
+        checar(
+            meta.get("lacuna_sessoes_ordinarias") == contagem.get("lacuna_sessoes_ordinarias"),
+            f"{ano}: lacuna do consolidado diferente da contagem",
+        )
+    def tem_chave_ip(obj) -> bool:
+        if isinstance(obj, dict):
+            if "ip" in obj:
+                return True
+            return any(tem_chave_ip(valor) for valor in obj.values())
+        if isinstance(obj, list):
+            return any(tem_chave_ip(valor) for valor in obj)
         return False
-    return any(arquivo_atuacao_json(ano).exists() for ano in ANOS)
+
+    checar(not tem_chave_ip(dados), f"{ano}: campo ip em dado tratado")
 
 
 def main() -> int:
@@ -127,41 +155,9 @@ def main() -> int:
             }
     except PisoNaoDefinido as erro:
         print(str(erro), file=sys.stderr)
-        if dados_consolidados_existem():
-            print(
-                "Existem arquivos consolidados, mas os pisos ainda nao foram "
-                "definidos. Nao e possivel validar a coleta.",
-                file=sys.stderr,
-            )
-            return 2
-        print(
-            "Ainda nao ha dados consolidados e os pisos ainda nao foram definidos. "
-            "Nada para validar nesta etapa.",
-            file=sys.stderr,
-        )
-        return 2
+        return 1
 
     falhas = []
-    atuacao_existe = any(arquivo_atuacao_json(ano).exists() for ano in ANOS)
-    if not atuacao_existe:
-        for ano in ANOS:
-            try:
-                testar_vereadores(ano, pisos[ano]["vereadores"])
-            except FalhaSanidade as erro:
-                falhas.append(f"testar_vereadores_{ano}: {erro}")
-        if falhas:
-            print("FALHA nos testes de sanidade:", file=sys.stderr)
-            for falha in falhas:
-                print(f"  - {falha}", file=sys.stderr)
-            return 1
-        print(
-            "Tabela de vereadores confere com o piso de cada ano. "
-            "Os arquivos de atuacao ainda nao foram gerados. "
-            "O restante da validacao fica adiado.",
-            file=sys.stderr,
-        )
-        return 2
-
     for ano in ANOS:
         piso = pisos[ano]
         for nome, teste in (
@@ -176,6 +172,7 @@ def main() -> int:
                 ),
             ),
             (f"testar_csv_atuacao_{ano}", lambda a=ano: testar_csv_atuacao(a)),
+            (f"testar_arquivo_real_{ano}", lambda a=ano: testar_arquivo_real(a)),
         ):
             try:
                 teste()
@@ -190,7 +187,7 @@ def main() -> int:
             print(f"  - {falha}", file=sys.stderr)
         return 1
 
-    n_testes = 3 * len(ANOS)
+    n_testes = 4 * len(ANOS)
     print(f"OK: {n_testes} testes de sanidade passaram.")
     return 0
 

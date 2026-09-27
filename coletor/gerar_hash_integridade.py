@@ -23,12 +23,16 @@ def gerar_hash_do_ano(ano: int) -> None:
     if not arquivo_json.exists():
         raise SystemExit(f"Arquivo nao encontrado: {arquivo_json}")
 
+    conteudo = arquivo_json.read_bytes()
+    if b"\r" in conteudo:
+        raise SystemExit(
+            f"{arquivo_json} nao esta em LF. O hash tem que ser o do conteudo com fim de linha LF."
+        )
     hash_hex = calcular_hash_sha256(arquivo_json)
     data_hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     arquivo_hash.parent.mkdir(parents=True, exist_ok=True)
-    with arquivo_hash.open("w", encoding="utf-8") as f:
-        f.write(hash_hex + "\n")
+    arquivo_hash.write_bytes((hash_hex + "\n").encode("ascii"))
 
     print(f"Arquivo: {arquivo_json}")
     print(f"SHA256: {hash_hex}")

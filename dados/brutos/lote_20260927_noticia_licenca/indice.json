@@ -1,0 +1,17 @@
+{
+  "fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+  "pausa_segundos": 2.5,
+  "compressed": true,
+  "total_pedidos": 1,
+  "atualizado_em": "2026-09-27T13:53:03-03:00",
+  "pedidos": [
+    {
+      "n": 1,
+      "url": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+      "quando": "2026-09-27T13:53:03-03:00",
+      "status": 200,
+      "content_type": "text/html;charset=utf-8",
+      "arquivo": "noticia.html"
+    }
+  ]
+}

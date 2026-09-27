@@ -9,7 +9,7 @@ ignorado pelo SAPL (devolve o acervo inteiro). O metodo que funciona e:
   registrovotacao?ordem=<id do item da ordem do dia>
   votoparlamentar?votacao=<id do registro de votacao>
 
-Rodar:  python coletor/baixar_voto_presenca_ordinarias_2026.py
+Rodar:  python coletor/baixar_voto_presenca_ordinarias.py
 
 Se o arquivo ja existe, nao baixa de novo. Pausa de 2,5 segundos entre
 pedidos. Se o servidor recusar, espera mais e tenta de novo.

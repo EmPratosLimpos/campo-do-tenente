@@ -29,7 +29,7 @@ from derivar_insumos import (  # noqa: E402
     derivar,
     pasta_lote_mais_recente,
 )
-from gerar_atuacao_vereadores_2026 import extrair_resultado  # noqa: E402
+from gerar_atuacao_vereadores import extrair_resultado  # noqa: E402
 
 IP_FIXTURE = "203.0.113.9"
 
