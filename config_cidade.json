@@ -19,8 +19,18 @@
     "numero_esperado": null
   },
   "pisos_sanidade": {
-    "sessoes_ordinarias": null,
-    "plls": null,
-    "vereadores": null
+    "nota": "D-016: um piso por ano. vereadores e exato; sessoes_ordinarias e projetos_lei_legislativo_e_executivo sao minimos. Projetos contam PLEG e PLEX juntos.",
+    "por_ano": {
+      "2025": {
+        "vereadores": 9,
+        "sessoes_ordinarias": 32,
+        "projetos_lei_legislativo_e_executivo": 44
+      },
+      "2026": {
+        "vereadores": 10,
+        "sessoes_ordinarias": 33,
+        "projetos_lei_legislativo_e_executivo": 18
+      }
+    }
   }
 }

@@ -90,23 +90,30 @@ def numero_vereadores_esperado(cfg: dict | None = None):
     return int(valor)
 
 
-def pisos_sanidade(cfg: dict | None = None) -> dict:
+CHAVES_PISO = (
+    "vereadores",
+    "sessoes_ordinarias",
+    "projetos_lei_legislativo_e_executivo",
+)
+
+
+def pisos_sanidade(ano: int, cfg: dict | None = None) -> dict:
+    """Pisos do ano (D-016). Ano sem bloco ou chave ausente fica nulo.
+
+    vereadores e exato. sessoes_ordinarias e
+    projetos_lei_legislativo_e_executivo (PLEG e PLEX somados) sao minimos.
+    """
     cfg = cfg if cfg is not None else carregar_config()
-    pisos = cfg["pisos_sanidade"]
-    vereadores = pisos.get("vereadores")
-    if vereadores is None:
-        vereadores = cfg["vereadores"]["numero_esperado"]
-    return {
-        "sessoes_ordinarias": pisos.get("sessoes_ordinarias"),
-        "plls": pisos.get("plls"),
-        "vereadores": vereadores,
-    }
+    por_ano = (cfg.get("pisos_sanidade") or {}).get("por_ano") or {}
+    bloco = por_ano.get(str(int(ano))) or {}
+    return {chave: bloco.get(chave) for chave in CHAVES_PISO}
 
 
-def exigir_piso(nome: str, valor):
+def exigir_piso(nome: str, valor, ano: int | None = None):
     if valor is None:
+        rotulo = f"{nome}' de {ano}" if ano is not None else f"{nome}'"
         raise PisoNaoDefinido(
-            f"O piso '{nome}' ainda nao foi definido em config_cidade.json. "
+            f"O piso '{rotulo} ainda nao foi definido em config_cidade.json. "
             "O mantenedor precisa definir esse valor depois da coleta. "
             "Nao vou seguir com um numero inventado."
         )

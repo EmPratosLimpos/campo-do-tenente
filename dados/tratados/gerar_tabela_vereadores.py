@@ -33,7 +33,6 @@ from config_cidade import (  # noqa: E402
     exigir_piso,
     link_parlamentar,
     nome_cidade,
-    numero_vereadores_esperado,
     pisos_sanidade,
 )
 
@@ -43,6 +42,7 @@ CIDADE = nome_cidade(CONFIG)
 ARQUIVO_PARTIDO = DIR_BRUTOS / "api_parlamentares_partido.json"
 ARQUIVO_FILIACAO = DIR_BRUTOS / "api_parlamentares_filiacao.json"
 ARQUIVO_MANDATOS = DIR_BRUTOS / "mandatos_legislatura_atual.json"
+TIPO_AUTOR_PARLAMENTAR = 2
 ARQUIVO_JSON = DIR_SCRIPT / "vereadores.json"
 ARQUIVO_CSV = DIR_SCRIPT / "vereadores.csv"
 ARQUIVO_RELATORIO = DIR_SCRIPT / "RELATORIO-TABELA-VEREADORES.md"
@@ -182,8 +182,9 @@ def carregar_partidos() -> dict[int, dict]:
 def escolher_filiacao_vigente(filiacoes: list[dict]) -> dict | None:
     if not filiacoes:
         return None
-    vigentes = [item for item in filiacoes if item.get("data_desfiliacao") is None]
-    candidatas = vigentes if vigentes else filiacoes
+    candidatas = [item for item in filiacoes if item.get("data_desfiliacao") is None]
+    if not candidatas:
+        return None
 
     def chave(item: dict):
         return (item.get("data") or "", int(item.get("id") or 0))
@@ -256,6 +257,34 @@ def varrer_sessoes(cadastro: dict[int, dict], apelidos: dict) -> set[int]:
                     if nome:
                         registrar_apelido(apelidos, id_sapl, nome, fonte)
     return ids_em_2026
+
+
+def pasta_autoria_mais_recente() -> Path | None:
+    candidatas = [
+        caminho
+        for caminho in DIR_BRUTOS.glob("lote_*_autoria")
+        if caminho.is_dir() and (caminho / "autor_p1.json").exists()
+    ]
+    if not candidatas:
+        return None
+    return sorted(candidatas)[-1]
+
+
+def varrer_autores_sapl(cadastro: dict[int, dict], apelidos: dict) -> None:
+    """Nome do autor parlamentar no SAPL (base/autor) vira apelido pelo id."""
+    pasta = pasta_autoria_mais_recente()
+    if pasta is None:
+        return
+    for caminho in sorted(pasta.glob("autor_p*.json")):
+        for linha in resultados_de_lista(carregar_json(caminho)):
+            if not isinstance(linha, dict):
+                continue
+            if linha.get("tipo") != TIPO_AUTOR_PARLAMENTAR or linha.get("object_id") is None:
+                continue
+            id_sapl = int(linha["object_id"])
+            if id_sapl not in cadastro:
+                continue
+            registrar_apelido(apelidos, id_sapl, linha.get("nome") or "", "autor_sapl")
 
 
 def montar_indice_nomes(cadastro: dict[int, dict], apelidos: dict) -> dict[str, int]:
@@ -347,6 +376,26 @@ def carregar_mandatos() -> dict[int, list[dict]]:
     return por_parlamentar
 
 
+def anos_do_mandato(mandato: dict) -> list[int]:
+    inicio = mandato.get("data_inicio_mandato") or ""
+    fim = mandato.get("data_fim_mandato") or ""
+    if len(inicio) < 4 or len(fim) < 4:
+        return []
+    return [ano for ano in ANOS if int(inicio[:4]) <= ano <= int(fim[:4])]
+
+
+def mandato_saida(mandato: dict) -> dict:
+    return {
+        "mandato_id": mandato.get("mandato_id"),
+        "condicao": "titular" if mandato.get("titular") else "suplente",
+        "titular": bool(mandato.get("titular")),
+        "data_inicio_mandato": mandato.get("data_inicio_mandato"),
+        "data_fim_mandato": mandato.get("data_fim_mandato"),
+        "tipo_afastamento_id": mandato.get("tipo_afastamento_id"),
+        "tipo_afastamento_nome": mandato.get("tipo_afastamento_nome"),
+    }
+
+
 def montar_vereadores(
     cadastro: dict[int, dict],
     apelidos: dict,
@@ -377,7 +426,28 @@ def montar_vereadores(
         caminho = dados["link_detail_backend"] or f"/parlamentar/{id_sapl}"
         filiacao = filiacoes.get(id_sapl) or {}
         foto_url = dados.get("fotografia") or None
-        lista_mandatos = list((mandatos or {}).get(id_sapl) or [])
+        lista_mandatos = [
+            mandato_saida(item)
+            for item in sorted(
+                (mandatos or {}).get(id_sapl) or [],
+                key=lambda m: int(m.get("mandato_id") or 0),
+            )
+        ]
+        anos_com_mandato = sorted(
+            {ano for item in lista_mandatos for ano in anos_do_mandato(item)}
+        )
+        condicoes = sorted({item["condicao"] for item in lista_mandatos})
+        afastamentos = [
+            {
+                "mandato_id": item["mandato_id"],
+                "tipo_afastamento_id": item["tipo_afastamento_id"],
+                "tipo_afastamento_nome": item["tipo_afastamento_nome"],
+                "data_fim_mandato": item["data_fim_mandato"],
+                "fonte": "registro oficial do mandato no SAPL",
+            }
+            for item in lista_mandatos
+            if item["tipo_afastamento_id"] is not None
+        ]
         if len(lista_mandatos) == 1:
             data_inicio = lista_mandatos[0].get("data_inicio_mandato")
             data_fim = lista_mandatos[0].get("data_fim_mandato")
@@ -404,6 +474,9 @@ def montar_vereadores(
                 "ativo_no_recorte": id_sapl in ids_em_2026,
                 "data_inicio_mandato": data_inicio,
                 "data_fim_mandato": data_fim,
+                "anos_com_mandato": anos_com_mandato,
+                "condicao": " e ".join(condicoes) if condicoes else None,
+                "afastamento_registro_oficial": afastamentos,
                 "mandatos": lista_mandatos,
                 "link_sapl": link_parlamentar(caminho, CONFIG),
             }
@@ -449,6 +522,9 @@ def escrever_csv(vereadores: list[dict]) -> None:
         "ativo_no_recorte",
         "data_inicio_mandato",
         "data_fim_mandato",
+        "anos_com_mandato",
+        "condicao",
+        "afastamento_registro_oficial",
         "link_sapl",
     ]
     with ARQUIVO_CSV.open("w", encoding="utf-8", newline="") as handle:
@@ -469,6 +545,12 @@ def escrever_csv(vereadores: list[dict]) -> None:
                     "ativo_no_recorte": "true" if item["ativo_no_recorte"] else "false",
                     "data_inicio_mandato": item.get("data_inicio_mandato") or "",
                     "data_fim_mandato": item.get("data_fim_mandato") or "",
+                    "anos_com_mandato": " | ".join(str(a) for a in item["anos_com_mandato"]),
+                    "condicao": item.get("condicao") or "",
+                    "afastamento_registro_oficial": " | ".join(
+                        afastamento["tipo_afastamento_nome"] or ""
+                        for afastamento in item["afastamento_registro_oficial"]
+                    ),
                     "link_sapl": item["link_sapl"],
                 }
             )
@@ -512,8 +594,12 @@ def escrever_relatorio(payload: dict) -> None:
         "## A banca confere?",
         "",
         (
-            "A quantidade encontrada foi conferida com o numero esperado "
-            "definido em config_cidade.json."
+            "A quantidade de vereadores com mandato em cada ano foi conferida "
+            "com o piso daquele ano em config_cidade.json: "
+            + "; ".join(
+                f"{ano}: {len(ids)}" for ano, ids in meta["banca_por_ano"].items()
+            )
+            + "."
         ),
         "",
         (
@@ -644,6 +730,7 @@ def escrever_relatorio(payload: dict) -> None:
             "- Presença na ordem do dia: `dados/brutos/sessao_*_presencaordemdia.json`",
             "- Presença na sessão: `dados/brutos/sessao_*_sessaoplenariapresenca.json` (só o número do vereador, sem nome escrito)",
             "- Autoria das materias: `dados/brutos/materias-<ano>-resposta-original.csv`",
+            "- Nome do autor parlamentar: `dados/brutos/lote_<data>_autoria/autor_p*.json` (ligado pelo id do parlamentar)",
             "",
             "Em voto, mesa, presença e autoria, o nome de urna veio igual ao cadastro. "
             "A grafia extra de cada um é o nome completo civil, que só aparece no cadastro.",
@@ -674,6 +761,7 @@ def main() -> None:
             registrar_apelido(apelidos, id_sapl, dados.get(campo, ""), "cadastro")
 
     ids_em_recorte = varrer_sessoes(cadastro, apelidos)
+    varrer_autores_sapl(cadastro, apelidos)
     indice = montar_indice_nomes(cadastro, apelidos)
     autorias_nao_vereador = varrer_autoria(indice, apelidos)
     filiacoes = carregar_filiacoes_vigentes(carregar_partidos())
@@ -683,18 +771,25 @@ def main() -> None:
     conferir_partido_e_foto(vereadores)
 
     banca_encontrada = [item["id_sapl"] for item in vereadores if item["ativo_no_recorte"]]
-    try:
-        esperado = exigir_piso(
-            "vereadores",
-            numero_vereadores_esperado(CONFIG) or pisos_sanidade(CONFIG)["vereadores"],
-        )
-    except PisoNaoDefinido as erro:
-        raise SystemExit(str(erro)) from erro
-    if len(banca_encontrada) != esperado:
+    sem_mandato = [item["id_sapl"] for item in vereadores if not item["mandatos"]]
+    if sem_mandato:
         raise SystemExit(
-            f"A banca do recorte tem {len(banca_encontrada)} vereadores, "
-            f"nao os {esperado} definidos em config_cidade.json."
+            "Parlamentar sem mandato na legislatura atual: "
+            + ", ".join(str(n) for n in sem_mandato)
         )
+    banca_por_ano = {}
+    for ano in ANOS:
+        do_ano = [item["id_sapl"] for item in vereadores if ano in item["anos_com_mandato"]]
+        try:
+            esperado = exigir_piso("vereadores", pisos_sanidade(ano, CONFIG)["vereadores"], ano)
+        except PisoNaoDefinido as erro:
+            raise SystemExit(str(erro)) from erro
+        if len(do_ano) != esperado:
+            raise SystemExit(
+                f"Em {ano} ha {len(do_ano)} vereadores com mandato, "
+                f"nao os {esperado} definidos em config_cidade.json."
+            )
+        banca_por_ano[str(ano)] = do_ano
 
     slugs = [item["slug_codigo"] for item in vereadores]
     if len(slugs) != len(set(slugs)):
@@ -708,6 +803,7 @@ def main() -> None:
             "anos_recorte": ANOS,
             "banca_encontrada": banca_encontrada,
             "banca_confere": True,
+            "banca_por_ano": banca_por_ano,
             "n_ativos_no_recorte": len(banca_encontrada),
             "n_cadastro": len(vereadores),
             "partido_no_cadastro_estruturado": True,

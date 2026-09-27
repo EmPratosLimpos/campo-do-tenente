@@ -22,7 +22,7 @@ class TestSanidadeDados(unittest.TestCase):
     def setUpClass(cls):
         cls.config = carregar_config()
         cls.anos = anos_recorte(cls.config)
-        cls.pisos = pisos_sanidade(cls.config)
+        cls.pisos = {ano: pisos_sanidade(ano, cls.config) for ano in cls.anos}
         cls.dir_tratados = DIR_RAIZ / "dados" / "tratados"
         cls.datasets = []
         for ano in cls.anos:
@@ -44,10 +44,6 @@ class TestSanidadeDados(unittest.TestCase):
                 self.assertIsInstance(dados, dict, f"JSON invalido em {caminho.name}")
 
     def test_contem_o_numero_esperado_de_vereadores(self):
-        try:
-            esperado = exigir_piso("vereadores", self.pisos["vereadores"])
-        except PisoNaoDefinido as erro:
-            self.skipTest(str(erro))
         if not self.datasets:
             self.skipTest(
                 "Arquivos de atuacao ainda nao existem. "
@@ -55,6 +51,10 @@ class TestSanidadeDados(unittest.TestCase):
             )
         for ano, caminho, dados in self.datasets:
             with self.subTest(ano=ano):
+                try:
+                    esperado = exigir_piso("vereadores", self.pisos[ano]["vereadores"], ano)
+                except PisoNaoDefinido as erro:
+                    self.fail(str(erro))
                 vereadores = dados.get("vereadores", [])
                 self.assertEqual(
                     len(vereadores),

@@ -45,6 +45,8 @@ CONFIG = carregar_config()
 CIDADE = nome_cidade(CONFIG)
 ARQUIVO_VEREADORES = DIR_SCRIPT / "vereadores.json"
 TIPO_PLL = "PLEG"
+TIPOS_PISO_PROJETOS = ("PLEG", "PLEX")
+N_PROJETOS_LEG_EXEC = None
 DESCRICAO_PLL = "Projeto de Lei Origem do Poder Legislativo"
 ANO_ATUAL = None
 ARQUIVO_CONTAGEM = None
@@ -70,11 +72,15 @@ def configurar_ano(ano: int) -> None:
     ARQUIVO_JSON = DIR_SCRIPT / f"atuacao_vereadores_{ano}.json"
     ARQUIVO_CSV = DIR_SCRIPT / f"atuacao_vereadores_{ano}.csv"
     ARQUIVO_RELATORIO = DIR_SCRIPT / f"RELATORIO-ATUACAO-VEREADORES-{ano}.md"
-    pisos = pisos_sanidade(CONFIG)
+    pisos = pisos_sanidade(ano, CONFIG)
     try:
-        N_SESSOES_ESPERADAS = exigir_piso("sessoes_ordinarias", pisos["sessoes_ordinarias"])
-        N_PLL_ESPERADOS = exigir_piso("plls", pisos["plls"])
-        N_VEREADORES_ESPERADOS = exigir_piso("vereadores", pisos["vereadores"])
+        N_SESSOES_ESPERADAS = exigir_piso("sessoes_ordinarias", pisos["sessoes_ordinarias"], ano)
+        N_PLL_ESPERADOS = exigir_piso(
+            "projetos_lei_legislativo_e_executivo",
+            pisos["projetos_lei_legislativo_e_executivo"],
+            ano,
+        )
+        N_VEREADORES_ESPERADOS = exigir_piso("vereadores", pisos["vereadores"], ano)
     except PisoNaoDefinido as erro:
         raise SystemExit(str(erro)) from erro
 
@@ -574,7 +580,9 @@ def escolher_votacao(registros: list[dict]) -> dict:
 def carregar_pll(indice_nomes: dict[str, int], por_id: dict[int, dict]) -> list[dict]:
     if not ARQUIVO_MATERIAS.exists():
         raise SystemExit(f"Arquivo nao encontrado: {ARQUIVO_MATERIAS}")
+    global N_PROJETOS_LEG_EXEC
     projetos = []
+    n_projetos_leg_exec = 0
     autorias_nao_vereador: Counter = Counter()
     with ARQUIVO_MATERIAS.open(encoding="utf-8-sig", newline="") as handle:
         leitor = csv.DictReader(handle, delimiter=";")
@@ -583,6 +591,8 @@ def carregar_pll(indice_nomes: dict[str, int], por_id: dict[int, dict]) -> list[
             descricao = (
                 linha.get("Tipo de Matéria Legislativa/Descrição") or ""
             ).strip()
+            if sigla in TIPOS_PISO_PROJETOS:
+                n_projetos_leg_exec += 1
             if sigla != TIPO_PLL and descricao != DESCRICAO_PLL:
                 continue
             materia_id = int(linha["ID"])
@@ -631,11 +641,12 @@ def carregar_pll(indice_nomes: dict[str, int], por_id: dict[int, dict]) -> list[
                     "texto_original": linha.get("Texto Original") or "",
                 }
             )
-    if len(projetos) != N_PLL_ESPERADOS:
+    if n_projetos_leg_exec < N_PLL_ESPERADOS:
         raise SystemExit(
-            f"Esperava {N_PLL_ESPERADOS} Projetos de Lei do Legislativo, "
-            f"achei {len(projetos)}."
+            f"Esperava ao menos {N_PLL_ESPERADOS} Projetos de Lei "
+            f"(Legislativo e Executivo), achei {n_projetos_leg_exec}."
         )
+    N_PROJETOS_LEG_EXEC = n_projetos_leg_exec
     ids = [item["id"] for item in projetos]
     if len(ids) != len(set(ids)):
         raise SystemExit("ID repetido entre os Projetos de Lei do Legislativo.")
@@ -1353,6 +1364,7 @@ def gerar_do_ano(ano: int) -> None:
             "n_vereadores": N_VEREADORES_ESPERADOS,
             f"n_pll_{ANO_ATUAL}": len(projetos),
             "n_pll": len(projetos),
+            "n_projetos_lei_legislativo_e_executivo": N_PROJETOS_LEG_EXEC,
             "n_presencas": n_presencas,
             "n_faltas_com_justificativa": n_faltas_j,
             "n_faltas_sem_justificativa": n_faltas_s,
