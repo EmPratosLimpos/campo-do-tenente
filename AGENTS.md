@@ -24,7 +24,7 @@ A norma técnica soberana deste projeto é o documento:
    * Política de "Zero Secrets" no Git.
 
 4. **Imparcialidade Cívica e Rigor com Dados:**
-   * Zero rankings políticos, juízos de valor, notas, estrelas ou termos comparativos entre vereadores.
+   * Zero rótulos partidários (aliado, oposição, vitória, derrota) e zero juízos de valor sem base em dado público registrado.
    * Todo número na tela deve ter origem oficial rastreável no SAPL da Câmara de Campo do Tenente (`sapl.campodotenente.pr.leg.br`).
    * Ausência não é voto: registrar com precisão presenças, faltas justificadas e faltas não justificadas.
    * Não invente dados: ausência de dado no SAPL deve ser tratada com clareza, nunca preenchida com estimativas ou valores fictícios.

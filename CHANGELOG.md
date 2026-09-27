@@ -24,6 +24,20 @@ Está prevista uma atualização semanal automática. Cada vez que ela trouxer s
 
 ---
 
+## 2026-09-27: ajuste nas regras de imparcialidade
+
+**O que mudou nos dados**
+- Nenhum.
+
+**O que mudou na tela**
+- Nenhuma.
+
+**De onde veio**
+- Decisão do mantenedor registrada nos documentos do projeto.
+- Regras de imparcialidade: deixa de proibir listas ordenadas e comparações entre vereadores; continuam proibidos rótulos partidários e dado sem fonte.
+
+---
+
 ## 2026-09-26: estrutura inicial do projeto
 
 **O que mudou nos dados**
