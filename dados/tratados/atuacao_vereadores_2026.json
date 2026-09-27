@@ -4,8 +4,8 @@
     "cidade": "Campo do Tenente",
     "uf": "PR",
     "ano": 2026,
-    "dado_coletado_em": "2026-09-27T13:17:32-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20260927_atas/indice.json campo atualizado_em",
+    "dado_coletado_em": "2026-09-27T13:53:03-03:00",
+    "fonte_data_coleta": "dados/brutos/lote_20260927_noticia_licenca/indice.json campo atualizado_em",
     "n_sessoes_ordinarias": 33,
     "piso_sessoes_ordinarias": 33,
     "n_vereadores": 10,
@@ -103,12 +103,9 @@
       }
     ],
     "presentes_com_justificativa_na_mesma_sessao": [],
-    "projetos_lei_legislativo_por_categoria": {
-      "Administração e finanças": 2,
-      "Iluminação e serviços urbanos": 1,
-      "Outros": 2
-    },
-    "classificador_temas": "IA, por regras temáticas documentadas",
+    "projetos_lei_legislativo_por_categoria": {},
+    "temas_materias_presente": false,
+    "fonte_temas": null,
     "revisada_por_humano": false,
     "arquivos_de_origem": [
       "dados/brutos/contagem_votacoes_ordinarias_2026.json",
@@ -2515,9 +2512,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -2641,9 +2640,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -2767,9 +2768,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -2893,9 +2896,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -3019,9 +3024,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -3299,9 +3306,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -3460,9 +3469,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -3576,9 +3587,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -3715,9 +3728,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -3854,9 +3869,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -3982,9 +3999,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -4098,9 +4117,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -4226,9 +4247,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -4342,9 +4365,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -4470,9 +4495,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -4598,9 +4625,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -4726,9 +4755,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -4854,9 +4885,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -4982,9 +5015,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -5098,9 +5133,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -5226,9 +5263,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -5342,9 +5381,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -5470,9 +5511,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -5598,9 +5641,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -5726,9 +5771,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -5852,9 +5899,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -6013,9 +6062,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -6141,9 +6192,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -6267,9 +6320,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -6393,9 +6448,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -6521,9 +6578,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -6647,9 +6706,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -6775,9 +6836,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -6903,9 +6966,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -7029,9 +7094,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -7145,9 +7212,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -7273,9 +7342,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -7401,9 +7472,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -7529,9 +7602,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -7657,9 +7732,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -7773,9 +7850,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -7889,9 +7968,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -8015,9 +8096,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -8141,9 +8224,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -8267,9 +8352,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -8393,9 +8480,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -8521,9 +8610,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -8649,9 +8740,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -8765,9 +8858,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -8891,9 +8986,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -9017,9 +9114,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -9145,9 +9244,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -9273,9 +9374,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -9389,9 +9492,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -9539,9 +9644,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -9665,9 +9772,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -9781,9 +9890,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -9909,9 +10020,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -10035,9 +10148,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -10163,9 +10278,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -10302,9 +10419,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -10430,9 +10549,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -10558,9 +10679,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -10674,9 +10797,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -10802,9 +10927,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -10928,9 +11055,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -11054,9 +11183,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -11193,9 +11324,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -11354,9 +11487,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -11480,9 +11615,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -11617,9 +11754,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -11743,9 +11882,11 @@
           "rotulo": "Licenca para tratamento de saude",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null,
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
         },
         {
           "id_sapl": 2,
@@ -14537,8 +14678,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "CONCEDE REVISÃO GERAL ANUAL AOS SERVIDORES EFETIVOS E EMPREGADOS PÚBLICOS MUNICIPAIS DA ADMINISTRAÇÃO DIRETA E INDIRETA, ATIVOS, INATIVOS COM E SEM PARIDADE, PENSIONISTAS, COMISSIONADOS E CONSELHEIROS TUTELARES.",
-      "categoria": "Desenvolvimento, moradia e agricultura",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -14602,8 +14742,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "ATUALIZA O VALOR DO PISO SALARIAL PROFISSIONAL DOS AGENTES COMUNITÁRIOS DE SAÚDE E DOS AGENTES DE COMBATE ÀS ENDEMIAS, REFERENTE AO REAJUSTE ANUAL PREVISTO NO ART. 2º DA LEI MUNICIPAL Nº 1.083/22.",
-      "categoria": "Saúde",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -14667,8 +14806,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "ATUALIZA O VALOR DO PISO SALARIAL DOS PROFISSIONAIS DO MAGISTÉRIO DO MUNICÍPIO DE CAMPO DO TENENTE – PR.",
-      "categoria": "Educação",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -14732,8 +14870,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "ALTERA O ART. 1º DA LEI Nº 1175/2025, QUE DISPÕE SOBRE A FIXAÇÃO DO PISO SALARIAL DOS SERVIDORES PÚBLICOS DO MUNICÍPIO DE CAMPO DO TENENTE.",
-      "categoria": "Administração e finanças",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -14797,8 +14934,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "RATIFICA O PROTOCOLO DE INTENÇÕES PARA CONSTITUIÇÃO DO CONSÓRCIO INTERMUNICIPAL MULTIFINALITÁRIO – CONSULEP.",
-      "categoria": "Outros",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -14862,8 +14998,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "“Institui o Programa de Recuperação Fiscal - Refis.”",
-      "categoria": "Outros",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -14927,8 +15062,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "DISPÕE SOBRE A CRIAÇÃO DO CONSELHO MUNICIPAL DE EDUCAÇÃO DO MUNICÍPIO DE CAMPO DO TENENTE, E DÁ OUTRAS PROVIDÊNCIAS.",
-      "categoria": "Educação",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -14992,8 +15126,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "ALTERA A REDAÇÃO DO ART. 2º DA LEI Nº 1.059/2022, QUE INSTITUI O PROGRAMA AUXÍLIO-ALIMENTAÇÃO PARA OS SERVIDORES DO MUNICÍPIO DE CAMPO DO TENENTE/PR, E DÁ OUTRAS PROVIDÊNCIAS.",
-      "categoria": "Administração e finanças",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15043,8 +15176,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "DISPÕE SOBRE A ABERTURA E DENOMINAÇÃO DE VIA PÚBLICA DENOMINADA RUA ANITA MARGARIDA COMITTI STAHLKE, NO MUNICÍPIO DE CAMPO DO TENENTE, E DÁ OUTRAS PROVIDÊNCIAS.",
-      "categoria": "Homenagens, nomes e datas",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15108,8 +15240,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "INSTITUI A POLÍTICA MUNICIPAL DE ALFABETIZAÇÃO DO MUNICÍPIO DE CAMPO DO TENENTE, ESTADO DO PARANÁ, E DÁ OUTRAS PROVIDÊNCIAS.",
-      "categoria": "Outros",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15159,8 +15290,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "ACRESCE VAGAS NOS CARGOS DO QUADRO DE CARGOS EFETIVOS DA ADMINISTRAÇÃO PÚBLICA MUNICIPAL.",
-      "categoria": "Administração e finanças",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15195,8 +15325,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "AUTORIZA O PODER EXECUTIVO MUNICIPAL A CELEBRAR ACORDO DE COOPERAÇÃO, CONVÊNIO OU INSTRUMENTO CONGÊNERE COM O MUNICÍPIO DE RIO NEGRO, ESTADO DO PARANÁ, PARA A UTILIZAÇÃO COMPARTILHADA DO SERVIÇO DE ACOLHIMENTO INSTITUCIONAL DE CRIANÇAS E ADOLESCENTES, AUTORIZA O REPASSE DE RECURSOS FINANCEIROS E DÁ OUTRAS PROVIDÊNCIAS.",
-      "categoria": "Administração e finanças",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15231,8 +15360,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "DISPÕE SOBRE AS DIRETRIZES PARA ELABORAÇÃO DO ORÇAMENTO DO MUNICÍPIO DE CAMPO DO TENENTE, ESTADO DO PARANÁ, PARA O EXERCÍCIO FINANCEIRO DE 2027 E DÁ OUTRAS PROVIDÊNCIAS",
-      "categoria": "Administração e finanças",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15267,8 +15395,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "\"CONCEDE REVISÃO GERAL ANUAL AOS SERVIDORES EFETIVOS E COMISSIONADOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE.\"",
-      "categoria": "Administração e finanças",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15334,8 +15461,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "\"CONCEDE REVISÃO DO VALOR DO AUXÍLIO-ALIMENTAÇÃO DOS SERVIDORES EFETIVOS E COMISSIONADOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE-PR ALTERA O PARÁGRAFO ÚNICO DO ARTIGO 2° DA LEI MUNICIPAL N°1.066/2022.\"",
-      "categoria": "Administração e finanças",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15401,8 +15527,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Dispõe sobre a obrigatoriedade de notificação à Companhia de Saneamento do Paraná – Sanepar, quanto da realização de obras de pavimentação.",
-      "categoria": "Iluminação e serviços urbanos",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15479,8 +15604,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Dispõe sobre princípios, critérios gerais e transparência nos programas habitacionais de interesse social que contem com participação do Município de Campo do Tenente e dá outras providências.",
-      "categoria": "Outros",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15532,8 +15656,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Altera a Lei Municipal nº 1.094, de 2022, que institui o “Título Mãe Tenenteana” no Município de Campo do Tenente.",
-      "categoria": "Outros",
-      "classificador": "IA, por regras temáticas documentadas",
+      "tema": null,
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -15598,9 +15721,11 @@
       "nota_factual": null,
       "afastamentos": [
         {
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "link_fonte": null,
-          "fonte_oficial_encontrada": false,
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "fonte_oficial_encontrada": true,
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+          "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html",
           "tipo": "licenca_tratamento_saude",
           "rotulo": "Licenca para tratamento de saude",
           "data_inicio": "2026-03-17",
@@ -15736,9 +15861,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 48,
@@ -15751,9 +15878,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/48",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 49,
@@ -15766,9 +15895,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 50,
@@ -15781,9 +15912,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/50",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 51,
@@ -15796,9 +15929,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 52,
@@ -15811,9 +15946,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/52",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 53,
@@ -15826,9 +15963,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/53",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 54,
@@ -15841,9 +15980,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 55,
@@ -15856,9 +15997,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/55",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 56,
@@ -15871,9 +16014,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/56",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 80,
@@ -15886,9 +16031,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/80",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 81,
@@ -15901,9 +16048,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 257,
@@ -15916,9 +16065,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 258,
@@ -15931,9 +16082,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 259,
@@ -15946,9 +16099,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/259",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 260,
@@ -15961,9 +16116,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/260",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 261,
@@ -15976,9 +16133,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/261",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 262,
@@ -15991,9 +16150,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 263,
@@ -16006,9 +16167,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/263",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 264,
@@ -16021,9 +16184,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 265,
@@ -16036,9 +16201,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/265",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 266,
@@ -16051,9 +16218,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 267,
@@ -16066,9 +16235,11 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/267",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "sessao_id": 269,
@@ -16264,9 +16435,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 162,
@@ -16278,9 +16451,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 163,
@@ -16292,9 +16467,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 164,
@@ -16306,9 +16483,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 165,
@@ -16320,9 +16499,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 179,
@@ -16334,9 +16515,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/48",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/276",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 180,
@@ -16348,9 +16531,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/48",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/282",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 181,
@@ -16362,9 +16547,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/284",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 182,
@@ -16376,9 +16563,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/287",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 183,
@@ -16390,9 +16579,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/288",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 184,
@@ -16404,9 +16595,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/285",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 185,
@@ -16418,9 +16611,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/50",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/293",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 186,
@@ -16432,9 +16627,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/50",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/295",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 187,
@@ -16446,9 +16643,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/300",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 188,
@@ -16460,9 +16659,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 189,
@@ -16474,9 +16675,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 190,
@@ -16488,9 +16691,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/296",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 191,
@@ -16502,9 +16707,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/298",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 192,
@@ -16516,9 +16723,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/299",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 193,
@@ -16530,9 +16739,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/52",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/303",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 194,
@@ -16544,9 +16755,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/52",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/302",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 195,
@@ -16558,9 +16771,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/53",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/345",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 196,
@@ -16572,9 +16787,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/53",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/304",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 197,
@@ -16586,9 +16803,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/348",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 198,
@@ -16600,9 +16819,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 200,
@@ -16614,9 +16835,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 201,
@@ -16628,9 +16851,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/259",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 202,
@@ -16642,9 +16867,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/350",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 203,
@@ -16656,9 +16883,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/55",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/458",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 204,
@@ -16670,9 +16899,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/55",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 205,
@@ -16684,9 +16915,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/55",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/353",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 206,
@@ -16698,9 +16931,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/56",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/597",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 207,
@@ -16712,9 +16947,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/56",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/596",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 208,
@@ -16726,9 +16963,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/56",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/598",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 209,
@@ -16740,9 +16979,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/80",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 210,
@@ -16754,9 +16995,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 211,
@@ -16768,9 +17011,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/603",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 212,
@@ -16782,9 +17027,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/602",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 213,
@@ -16796,9 +17043,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/606",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 214,
@@ -16810,9 +17059,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/605",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 215,
@@ -16824,9 +17075,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 216,
@@ -16838,9 +17091,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/609",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 217,
@@ -16852,9 +17107,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 218,
@@ -16866,9 +17123,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 219,
@@ -16880,9 +17139,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/621",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 220,
@@ -16894,9 +17155,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 221,
@@ -16908,9 +17171,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/619",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 222,
@@ -16922,9 +17187,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/620",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 223,
@@ -16936,9 +17203,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/259",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/627",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 224,
@@ -16950,9 +17219,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/260",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/684",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 225,
@@ -16964,9 +17235,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/261",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/685",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 226,
@@ -16978,9 +17251,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/261",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/689",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 227,
@@ -16992,9 +17267,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/261",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/690",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 228,
@@ -17006,9 +17283,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/694",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 229,
@@ -17020,9 +17299,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 232,
@@ -17034,9 +17315,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 233,
@@ -17048,9 +17331,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/263",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/695",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 235,
@@ -17062,9 +17347,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/263",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/693",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 236,
@@ -17076,9 +17363,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/702",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 237,
@@ -17090,9 +17379,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/696",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 238,
@@ -17104,9 +17395,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/697",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 239,
@@ -17118,9 +17411,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/700",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 240,
@@ -17132,9 +17427,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/699",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 241,
@@ -17146,9 +17443,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/265",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/707",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 242,
@@ -17160,9 +17459,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/265",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/706",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 243,
@@ -17174,9 +17475,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 244,
@@ -17188,9 +17491,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 245,
@@ -17202,9 +17507,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 246,
@@ -17216,9 +17523,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/701",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 247,
@@ -17230,9 +17539,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/267",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/786",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 248,
@@ -17244,9 +17555,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/267",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/774",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 250,
@@ -17258,9 +17571,11 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/267",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/791",
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
+            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 251,
@@ -19154,17 +19469,14 @@
         "em_tramitacao": 0,
         "outro_resultado_oficial": 0,
         "autorias_conjuntas": 0,
-        "por_categoria": {
-          "Outros": 1
-        },
+        "por_categoria": {},
         "lista": [
           {
             "id": 811,
             "numero": "4",
             "ano": "2026",
             "ementa": "Dispõe sobre princípios, critérios gerais e transparência nos programas habitacionais de interesse social que contem com participação do Município de Campo do Tenente e dá outras providências.",
-            "categoria": "Outros",
-            "classificador": "IA, por regras temáticas documentadas",
+            "tema": null,
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2026-09-22",
@@ -22309,17 +22621,14 @@
         "em_tramitacao": 0,
         "outro_resultado_oficial": 0,
         "autorias_conjuntas": 1,
-        "por_categoria": {
-          "Iluminação e serviços urbanos": 1
-        },
+        "por_categoria": {},
         "lista": [
           {
             "id": 698,
             "numero": "3",
             "ano": "2026",
             "ementa": "Dispõe sobre a obrigatoriedade de notificação à Companhia de Saneamento do Paraná – Sanepar, quanto da realização de obras de pavimentação.",
-            "categoria": "Iluminação e serviços urbanos",
-            "classificador": "IA, por regras temáticas documentadas",
+            "tema": null,
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2026-08-25",
@@ -23896,18 +24205,14 @@
         "em_tramitacao": 0,
         "outro_resultado_oficial": 0,
         "autorias_conjuntas": 0,
-        "por_categoria": {
-          "Administração e finanças": 2,
-          "Outros": 1
-        },
+        "por_categoria": {},
         "lista": [
           {
             "id": 244,
             "numero": "1",
             "ano": "2026",
             "ementa": "\"CONCEDE REVISÃO GERAL ANUAL AOS SERVIDORES EFETIVOS E COMISSIONADOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE.\"",
-            "categoria": "Administração e finanças",
-            "classificador": "IA, por regras temáticas documentadas",
+            "tema": null,
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2026-02-24",
@@ -23922,8 +24227,7 @@
             "numero": "2",
             "ano": "2026",
             "ementa": "\"CONCEDE REVISÃO DO VALOR DO AUXÍLIO-ALIMENTAÇÃO DOS SERVIDORES EFETIVOS E COMISSIONADOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE-PR ALTERA O PARÁGRAFO ÚNICO DO ARTIGO 2° DA LEI MUNICIPAL N°1.066/2022.\"",
-            "categoria": "Administração e finanças",
-            "classificador": "IA, por regras temáticas documentadas",
+            "tema": null,
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2026-02-24",
@@ -23938,8 +24242,7 @@
             "numero": "5",
             "ano": "2026",
             "ementa": "Altera a Lei Municipal nº 1.094, de 2022, que institui o “Título Mãe Tenenteana” no Município de Campo do Tenente.",
-            "categoria": "Outros",
-            "classificador": "IA, por regras temáticas documentadas",
+            "tema": null,
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2026-09-22",
@@ -25516,17 +25819,14 @@
         "em_tramitacao": 0,
         "outro_resultado_oficial": 0,
         "autorias_conjuntas": 1,
-        "por_categoria": {
-          "Iluminação e serviços urbanos": 1
-        },
+        "por_categoria": {},
         "lista": [
           {
             "id": 698,
             "numero": "3",
             "ano": "2026",
             "ementa": "Dispõe sobre a obrigatoriedade de notificação à Companhia de Saneamento do Paraná – Sanepar, quanto da realização de obras de pavimentação.",
-            "categoria": "Iluminação e serviços urbanos",
-            "classificador": "IA, por regras temáticas documentadas",
+            "tema": null,
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2026-08-25",
@@ -30261,11 +30561,11 @@
         "texto": "assumiu em 2026-03-17 durante a licenca de Jorge Quege; vaga permanente apos a cassacao em 2026-08-18",
         "fontes": [
           {
-            "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-            "link_fonte": null,
-            "fonte_oficial_encontrada": false,
+            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+            "fonte_oficial_encontrada": true,
             "materia_id": null,
-            "trecho": null
+            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde."
           },
           {
             "fonte": "Ata da sessao ordinaria de 17 de marco de 2026 registra a posse do suplente e nao registra a licenca",

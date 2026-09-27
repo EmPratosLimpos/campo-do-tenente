@@ -1,8 +1,8 @@
 # Atuação dos vereadores nas sessões ordinárias de 2025
 
 Cidade: Campo do Tenente (PR)
-Dado coletado em: 2026-09-27T13:17:32-03:00
-Fonte da data: dados/brutos/lote_20260927_atas/indice.json campo atualizado_em
+Dado coletado em: 2026-09-27T13:53:03-03:00
+Fonte da data: dados/brutos/lote_20260927_noticia_licenca/indice.json campo atualizado_em
 Script: `dados/tratados/gerar_atuacao_vereadores.py`
 Fonte dos fatos: arquivos em `dados/brutos/`, `dados/tratados/vereadores.json`, `dados/tratados/presidencia_sessoes.json` e `dados/tratados/autoria_materias.json`.
 
@@ -288,7 +288,7 @@ Projetos de lei do Legislativo: 18. Projetos de lei do Executivo: 26. Soma, conf
 
 A autoria veio de `autoria_materias.json`. A lista de cada vereador abaixo só inclui projeto de lei do Legislativo em que o id do parlamentar aparece como autor.
 
-A classificação por tema ainda não foi revisada por uma pessoa.
+O arquivo `temas_materias.json` não está nesta pasta. O tema de cada matéria ficou vazio.
 
 ### Jorge Quege
 

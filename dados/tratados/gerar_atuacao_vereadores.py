@@ -37,8 +37,6 @@ from config_cidade import (  # noqa: E402
     pisos_sanidade,
     uf_cidade,
 )
-from gerar_temas_votacoes import classificar  # noqa: E402
-
 CONFIG = carregar_config()
 SCRIPT_REL = "dados/tratados/gerar_atuacao_vereadores.py"
 ARQUIVO_VEREADORES = DIR_SCRIPT / "vereadores.json"
@@ -47,7 +45,7 @@ ARQUIVO_AUTORIA = DIR_SCRIPT / "autoria_materias.json"
 ARQUIVO_AFASTAMENTOS = DIR_SCRIPT / "afastamentos_manuais.json"
 TIPOS_PROJETO = ("PLEG", "PLEX")
 TIPO_PLL = "PLEG"
-CLASSIFICADOR_TEMAS = "IA, por regras temáticas documentadas"
+ARQUIVO_TEMAS = DIR_SCRIPT / "temas_materias.json"
 
 ORDEM_ESTADOS = (
     "sim",
@@ -472,11 +470,16 @@ def fonte_da_ocorrencia(item: dict) -> dict:
     link = item.get("link_fonte")
     if not link and materia_id is not None:
         link = link_materia(int(materia_id), CONFIG)
-    return {
+    saida = {
         "fonte": item.get("fonte") or "",
         "link_fonte": link,
         "fonte_oficial_encontrada": bool(item.get("fonte_oficial_encontrada")),
     }
+    if item.get("trecho"):
+        saida["trecho"] = item["trecho"]
+    if item.get("arquivo"):
+        saida["arquivo"] = item["arquivo"]
+    return saida
 
 
 def afastamentos_publicos(lista: list[dict], parlamentar_id: int) -> list[dict]:
@@ -1001,12 +1004,50 @@ def escolher_votacao(registros: list[dict]) -> dict:
     return sorted(registros, key=chave)[-1]
 
 
+def carregar_temas() -> dict[int, dict]:
+    if not ARQUIVO_TEMAS.exists():
+        return {}
+    dados = carregar_json(ARQUIVO_TEMAS)
+    indice = {}
+    if isinstance(dados, dict) and isinstance(dados.get("materias"), list):
+        for item in dados["materias"]:
+            chave = item.get("materia_id", item.get("id"))
+            if chave is None:
+                raise SystemExit(f"{rel(ARQUIVO_TEMAS)} tem materia sem id.")
+            indice[int(chave)] = item if isinstance(item, dict) else {"tema": item}
+        return indice
+    if isinstance(dados, dict):
+        for chave, valor in dados.items():
+            if not str(chave).isdigit():
+                continue
+            if isinstance(valor, str):
+                indice[int(chave)] = {"tema": valor}
+            elif isinstance(valor, dict):
+                indice[int(chave)] = valor
+            else:
+                raise SystemExit(f"{rel(ARQUIVO_TEMAS)}: tema de {chave} ilegivel.")
+        return indice
+    raise SystemExit(f"{rel(ARQUIVO_TEMAS)} em formato nao reconhecido.")
+
+
+def tema_da_materia(materia_id: int, indice: dict[int, dict]) -> tuple[str | None, bool]:
+    item = indice.get(int(materia_id))
+    if not item:
+        return None, False
+    tema = item.get("tema")
+    if tema is not None:
+        tema = str(tema).strip() or None
+    revisada = item.get("revisada_por_humano")
+    return tema, bool(revisada) if revisada is not None else False
+
+
 def carregar_projetos(
     ano: int,
     piso: int,
     indice_autoria: dict[int, dict],
     por_id: dict[int, dict],
     registros_por_materia: dict,
+    indice_temas: dict[int, dict],
 ) -> tuple[list[dict], int, int]:
     caminho = DIR_BRUTOS / f"materias-{ano}-resposta-original.csv"
     if not caminho.exists():
@@ -1027,6 +1068,7 @@ def carregar_projetos(
             materia_id = int(linha["ID"])
             autoria = autores_da_materia(materia_id, indice_autoria, por_id)
             ementa = linha.get("Ementa") or ""
+            tema, revisada = tema_da_materia(materia_id, indice_temas)
             registros = registros_por_materia.get(materia_id, [])
             votacoes = []
             for registro in sorted(
@@ -1062,9 +1104,8 @@ def carregar_projetos(
                     linha.get("Tipo de Matéria Legislativa/Descrição") or ""
                 ).strip(),
                 "ementa": ementa,
-                "categoria": classificar(ementa),
-                "classificador": CLASSIFICADOR_TEMAS,
-                "revisada_por_humano": False,
+                "tema": tema,
+                "revisada_por_humano": revisada,
                 "autoria": autoria,
                 "autoria_conjunta": bool(autoria and autoria["autoria_conjunta"]),
                 "link_sapl": link_materia(materia_id, CONFIG),
@@ -1122,8 +1163,7 @@ def projetos_do_vereador(id_sapl: int, projetos: list[dict]) -> dict:
                 "numero": projeto["numero"],
                 "ano": projeto["ano"],
                 "ementa": projeto["ementa"],
-                "categoria": projeto["categoria"],
-                "classificador": projeto["classificador"],
+                "tema": projeto["tema"],
                 "revisada_por_humano": projeto["revisada_por_humano"],
                 "situacao": projeto["situacao"],
                 "data_sessao": projeto["data_sessao"],
@@ -1135,7 +1175,7 @@ def projetos_do_vereador(id_sapl: int, projetos: list[dict]) -> dict:
             }
         )
     lista.sort(key=lambda item: (int(item["numero"] or 0), item["id"]))
-    categorias = Counter(item["categoria"] for item in lista)
+    categorias = Counter(item["tema"] for item in lista if item["tema"])
     return {
         "total_propostos": len(lista),
         "aprovados": sum(1 for item in lista if item["situacao"] == "Aprovado"),
@@ -1169,7 +1209,9 @@ def conferir_partido_e_foto(base: dict) -> tuple[str, str, str]:
 
 def temas_globais(projetos: list[dict]) -> dict[str, int]:
     contagem = Counter(
-        item["categoria"] for item in projetos if item["tipo_sigla"] == TIPO_PLL
+        item["tema"]
+        for item in projetos
+        if item["tipo_sigla"] == TIPO_PLL and item["tema"]
     )
     return dict(sorted(contagem.items()))
 
@@ -1460,7 +1502,9 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
             ),
             "",
             (
-                "A classificação por tema ainda não foi revisada por uma pessoa."
+                "O tema de cada matéria veio de `temas_materias.json`."
+                if meta.get("temas_materias_presente")
+                else "O arquivo `temas_materias.json` não está nesta pasta. O tema de cada matéria ficou vazio."
             ),
             "",
         ]
@@ -1588,12 +1632,14 @@ def gerar_do_ano(ano: int) -> None:
                 f"{ano}: votacoes sem voto individual nao batem com a contagem."
             )
 
+    indice_temas = carregar_temas()
     projetos, n_pleg, n_plex = carregar_projetos(
         ano,
         int(piso_projetos),
         indice_autoria,
         por_id,
         bruto["registros_por_materia"],
+        indice_temas,
     )
     vereadores = []
     for base in banca:
@@ -1698,7 +1744,8 @@ def gerar_do_ano(ano: int) -> None:
                 "presentes_e_justificados"
             ],
             "projetos_lei_legislativo_por_categoria": temas_globais(projetos),
-            "classificador_temas": CLASSIFICADOR_TEMAS,
+            "temas_materias_presente": ARQUIVO_TEMAS.exists(),
+            "fonte_temas": rel(ARQUIVO_TEMAS) if ARQUIVO_TEMAS.exists() else None,
             "revisada_por_humano": False,
             "arquivos_de_origem": [
                 rel(DIR_BRUTOS / f"contagem_votacoes_ordinarias_{ano}.json"),
@@ -1707,6 +1754,7 @@ def gerar_do_ano(ano: int) -> None:
                 rel(ARQUIVO_PRESIDENCIA),
                 rel(ARQUIVO_AUTORIA),
                 *([rel(ARQUIVO_AFASTAMENTOS)] if ARQUIVO_AFASTAMENTOS.exists() else []),
+                *([rel(ARQUIVO_TEMAS)] if ARQUIVO_TEMAS.exists() else []),
             ],
             "observacao": (
                 "Ausência não é voto. Votação sem voto individual não é "

@@ -7,9 +7,11 @@
       "tipo": "licenca_tratamento_saude",
       "rotulo": "Licenca para tratamento de saude",
       "conta_como_falta": false,
-      "fonte_oficial_encontrada": false,
-      "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-      "link_fonte": null,
+      "fonte_oficial_encontrada": true,
+      "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+      "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+      "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html",
+      "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
       "materia_id": null,
       "consulta_atas": [
         {
@@ -61,9 +63,10 @@
       "texto": "assumiu em 2026-03-17 durante a licenca de Jorge Quege; vaga permanente apos a cassacao em 2026-08-18",
       "fontes": [
         {
-          "fonte": "comunicado da Camara informado pelo mantenedor em 2026-09-27",
-          "fonte_oficial_encontrada": false,
-          "link_fonte": null
+          "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+          "fonte_oficial_encontrada": true,
+          "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
+          "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde."
         },
         {
           "fonte": "Ata da sessao ordinaria de 17 de marco de 2026 registra a posse do suplente e nao registra a licenca",
