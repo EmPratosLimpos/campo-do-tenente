@@ -45,7 +45,7 @@ Cada votação com voto individual recebe um estado para cada vereador da banca 
 - Ausente sem justificativa
 - Fora do mandato naquela data
 - Presente na sessão sem voto individual registrado
-- Licenca para tratamento de saude
+- Licença para tratamento de saúde
 
 Votação sem nenhum voto individual: voto individual nao registrado no SAPL. Ninguém recebe estado de voto. O arquivo mostra só os totais oficiais (sim, não e abstenção) e o link da sessão e da matéria. Isso não é lido como voto unânime.
 
@@ -158,7 +158,7 @@ Faltas com justificativa: 1. Faltas sem justificativa: 2. Afastamentos que não 
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
@@ -173,7 +173,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
@@ -188,7 +188,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
@@ -203,7 +203,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
@@ -218,7 +218,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
@@ -233,7 +233,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
@@ -248,7 +248,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
@@ -263,7 +263,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 6
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
@@ -278,7 +278,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
@@ -288,7 +288,7 @@ Projetos de lei do Legislativo: 18. Projetos de lei do Executivo: 26. Soma, conf
 
 A autoria veio de `autoria_materias.json`. A lista de cada vereador abaixo só inclui projeto de lei do Legislativo em que o id do parlamentar aparece como autor.
 
-O arquivo `temas_materias.json` não está nesta pasta. O tema de cada matéria ficou vazio.
+O tema de cada matéria veio de `temas_materias.json`.
 
 ### Jorge Quege
 

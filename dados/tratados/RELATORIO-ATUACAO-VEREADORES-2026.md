@@ -39,7 +39,7 @@ Cada votação com voto individual recebe um estado para cada vereador da banca 
 - Ausente sem justificativa
 - Fora do mandato naquela data
 - Presente na sessão sem voto individual registrado
-- Licenca para tratamento de saude
+- Licença para tratamento de saúde
 
 Votação sem nenhum voto individual: voto individual nao registrado no SAPL. Ninguém recebe estado de voto. O arquivo mostra só os totais oficiais (sim, não e abstenção) e o link da sessão e da matéria. Isso não é lido como voto unânime.
 
@@ -168,7 +168,7 @@ Fonte: Projeto de Decreto Legislativo n 2 de 2026. Link: https://sapl.campodoten
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 21
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 72
+- Licença para tratamento de saúde: 72
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
@@ -183,7 +183,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Ausente sem justificativa: 1
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
@@ -198,7 +198,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
@@ -213,7 +213,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Ausente sem justificativa: 3
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
@@ -228,7 +228,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
@@ -243,7 +243,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
@@ -258,7 +258,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 2
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
@@ -273,7 +273,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Ausente sem justificativa: 8
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
@@ -288,7 +288,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
@@ -303,7 +303,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 7
 - Presente na sessão sem voto individual registrado: 0
-- Licenca para tratamento de saude: 0
+- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
@@ -313,7 +313,7 @@ Projetos de lei do Legislativo: 5. Projetos de lei do Executivo: 13. Soma, confe
 
 A autoria veio de `autoria_materias.json`. A lista de cada vereador abaixo só inclui projeto de lei do Legislativo em que o id do parlamentar aparece como autor.
 
-O arquivo `temas_materias.json` não está nesta pasta. O tema de cada matéria ficou vazio.
+O tema de cada matéria veio de `temas_materias.json`.
 
 ### Jorge Quege
 

@@ -46,7 +46,7 @@
       "ausente_sem_justificativa": "Ausente sem justificativa",
       "fora_do_mandato": "Fora do mandato naquela data",
       "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
-      "licenca_tratamento_saude": "Licenca para tratamento de saude"
+      "licenca_tratamento_saude": "Licença para tratamento de saúde"
     },
     "lacuna_sessoes_ordinarias": {
       "numeros_ausentes_no_sapl": [
@@ -76,9 +76,17 @@
     },
     "sessoes_com_presenca_divergente": [],
     "presentes_com_justificativa_na_mesma_sessao": [],
-    "projetos_lei_legislativo_por_categoria": {},
-    "temas_materias_presente": false,
-    "fonte_temas": null,
+    "projetos_lei_legislativo_por_categoria": {
+      "Administração e finanças": 9,
+      "Agricultura e pecuária": 1,
+      "Assistência social e direitos": 2,
+      "Cultura, esporte e lazer": 2,
+      "Desenvolvimento e moradia": 1,
+      "Homenagens, nomes e datas": 2,
+      "Meio ambiente e proteção animal": 1
+    },
+    "temas_materias_presente": true,
+    "fonte_temas": "dados/tratados/temas_materias.json",
     "revisada_por_humano": false,
     "arquivos_de_origem": [
       "dados/brutos/contagem_votacoes_ordinarias_2025.json",
@@ -86,7 +94,8 @@
       "dados/tratados/vereadores.json",
       "dados/tratados/presidencia_sessoes.json",
       "dados/tratados/autoria_materias.json",
-      "dados/tratados/afastamentos_manuais.json"
+      "dados/tratados/afastamentos_manuais.json",
+      "dados/tratados/temas_materias.json"
     ],
     "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não entra em presença nem em voto. Afastamento do arquivo de afastamentos não conta como falta."
   },
@@ -7750,7 +7759,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "CONCEDE REVISÃO GERAL ANUAL AOS SERVIDORES EFETIVOS E EMPREGADOS PÚBLICOS MUNICIPAIS DA ADMINISTRAÇÃO DIRETA E INDIRETA, ATIVOS, INATIVOS COM E SEM PARIDADE, PENSIONISTAS, COMISSIONADOS E CONSELHEIROS TUTELARES.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -7785,7 +7794,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "ATUALIZA O VALOR DO PISO SALARIAL PROFISSIONAL DOS AGENTES COMUNITÁRIOS DE SAÚDE E DOS AGENTES DE COMBATE ÀS ENDEMIAS, REFERENTE AO REAJUSTE ANUAL PREVISTO NO ART. 2° DA LEI MUNICIPAL N° 1.083/22.",
-      "tema": null,
+      "tema": "Saúde",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -7820,7 +7829,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\nPROFESSORES E EDUCADORES INFANTIS",
-      "tema": null,
+      "tema": "Educação",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -7855,7 +7864,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "VISA ALTERAÇÃO DO ARTIGO 11, CAPUT, DA LEI MUNICIPAL N° 920/2017, REDUZINDO O VALOR DO LICENCIAMENTO ANUAL DO SERVIÇO DE TÁXI NO MUNICÍPIO DE CAMPO DO TENENTE-PR.",
-      "tema": null,
+      "tema": "Ruas, trânsito e transporte",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -7890,7 +7899,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "CONCEDE REVISÃO GERAL ANUAL PARA ADEQUAÇÃO DE VENCIMENTOS DOS CARGOS EFETIVOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE - PR.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -7925,7 +7934,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "REVOGA ENCARGO DE INALIENABILIDADE PREVISTO NA LEI 711/2011.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -7960,7 +7969,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "INSTITUI O PROGRAMA DE RECUPERAÇÃO FISCAL- REFIS NO MUNICÍPIO DE CAMPO DO TENENTE/PR",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -7995,7 +8004,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "ATUALIZA O VALOR DO PISO SALARIAL DOS PROFISSIONAIS DO MAGISTÉRIO DO MUNICÍPIO DE CAMPO DO TENENTE-PR.",
-      "tema": null,
+      "tema": "Educação",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8030,7 +8039,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "DISPÕE SOBRE A CRIAÇÃO, CONSTITUIÇÃO E FUNCIONAMENTO DO FUNDO MUNICIPAL DE ESPORTES - FME E INSTITUI O SEU CONSELHO GESTOR.",
-      "tema": null,
+      "tema": "Cultura, esporte e lazer",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8065,7 +8074,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "Acresce o número de vagas dos cargos que menciona, altera o cargo de técnico em tributação para auditor fiscal, e dá outras providências",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8129,7 +8138,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "DISPÕE SOBRE A FIXAÇÃO DO PISO SALARIAL DOS SERVIDORES PÚBLICOS DO MUNICIPIO DE CAMPO DO TENENTE E DA OUTRAS PROVIDENCIAS",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8193,7 +8202,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "PRORROGA O PLANO MUNICIPAL DE EDUCAÇÃO REGULAMENTADO PELA LEI Nº 869, DE 11 DE JUNHO DE 2015.",
-      "tema": null,
+      "tema": "Educação",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8257,7 +8266,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "“DISPÕE SOBRE O CONSELHO MUNICIPAL DOS DIREITOS DA PESSOA IDOSA, A CONFERÊNCIA MUNICIPAL DOS DIREITOS DA PESSOA IDOSA E SOBRE O FUNDO MUNICIPAL DOS DIREITOS DA PESSOA IDOSA NO MUNICÍPIO DE CAMPO DO TENENTE”.",
-      "tema": null,
+      "tema": "Assistência social e direitos",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8321,7 +8330,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "Define e delimita os bairros do perímetro urbano do município de Campo do Tenente",
-      "tema": null,
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8356,7 +8365,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "Estabelece o Código Ambiental do Município de Campo do Tenente, institui a Política Municipal de Meio Ambiente e o Sistema Municipal de Meio Ambiente, e dá outras providências",
-      "tema": null,
+      "tema": "Meio ambiente e proteção animal",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8391,7 +8400,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "Cria o Fundo de Desenvolvimento Urbano – FDU - do Município de Campo do Tenente e dá outras providências",
-      "tema": null,
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8426,7 +8435,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "DISPÕE SOBRE AS DIRETRIZES PARA ELABORAÇÃO DO ORÇAMENTO DO MUNICÍPIO DE CAMPO DO TENENTE, ESTADO DO PARANÁ, PARA O EXERCÍCIO FINANCEIRO DE 2026 E DÁ OUTRAS PROVIDÊNCIAS.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8490,7 +8499,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "DISPÕE SOBRE O PLANO PLURIANUAL DE GOVERNO DO MUNICÍPIO, PARA O PERÍODO DE 2026 A 2029, E DÁ OUTRAS PROVIDÊNCIAS.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8554,7 +8563,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "\"ESTIMA A RECEITA E FIXA A DESPESA DO MUNICÍPIO DE CAMPO DO TENENTE PARA O EXERCÍCIO DE 2026\"",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8618,7 +8627,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "DISPÕE SOBRE O PARCELAMENTO E REPARCELAMENTO DE DÉBITOS DO MUNICÍPIO DE CAMPO DO TENENTE/PR COM SEU REGIME PRÓPRIO DE PREVIDÊNCIA SOCIAL - RPPS, DE QUE TRATAM OS ARTS. 115 E 117 DO ATO DAS DISPOSIÇÕES CONSTITUCIONAIS TRANSITÓRIAS - ADCT, COM A REDAÇÃO CONFERIDA PELA EMENDA CONSTITUCIONAL Nº 136, DE 9 DE SETEMBRO DE 2025.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8653,7 +8662,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "Ratifica o Protocolo de Intenções firmado entre o Estado do Paraná e os Municípios do Estado do Paraná subscritores, com a finalidade de formalizar a constituição e adequação do Consórcio Intergestores Paraná Saúde - CIPS aos termos do regime previsto na Lei Federal nº. 11.107/2005 e sua regulamentação, voltado ao desenvolvimento de ações na área da assistência farmacêutica no âmbito do Sistema Único de Saúde (SUS).",
-      "tema": null,
+      "tema": "Saúde",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8717,7 +8726,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "DISPÕE SOBRE O SISTEMA MUNICIPAL DE  CULTURA DO MUNICÍPIO DE CAMPO DO  TENENTE/PR , E DÁ OUTRAS PROVIDÊNCIAS.",
-      "tema": null,
+      "tema": "Cultura, esporte e lazer",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8767,7 +8776,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "AUTORIZA O PODER EXECUTIVO MUNICIPAL A CEDER SERVIDOR AO INSTITUTO DE DESENVOLVIMENTO RURAL DO PARANÁ – IDR-PARANÁ, NOS TERMOS DO TERMO DE COOPERAÇÃO TÉCNICA Nº 361/2025, E DÁ OUTRAS PROVIDÊNCIAS.",
-      "tema": null,
+      "tema": "Agricultura e pecuária",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8831,7 +8840,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "ALTERA O ART. 4º DA LEI Nº 673/2010 QUE CRIA O “CONSELHO MUNICIPAL DE ESPORTES DO MUNICÍPIO DE CAMPO DO TENENTE – CMECT.” E, DÁ OUTRAS PROVIDÊNCIAS.",
-      "tema": null,
+      "tema": "Cultura, esporte e lazer",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8895,7 +8904,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "\"APROVA O PLANO MUNICIPAL DE CULTURA DO MUNICÍPIO DE CAMPO DO TENENTE/PR\".",
-      "tema": null,
+      "tema": "Cultura, esporte e lazer",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8945,7 +8954,7 @@
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
       "ementa": "Projeto de Lei nº 021/2025, que DISPÕE SOBRE O PARCELAMENTO DE DÉBITOS DO MUNICÍPIO DE CAMPO DO TENENTE/PR COM O REGIME PRÓPRIO DE PREVIDÊNCIA SOCIAL - RPPS, EM CONFORMIDADE COM A PORTARIA MTP Nº 3.803, DE 16/11/2022.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -8995,7 +9004,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Concede acréscimo sobre o valor do auxílio-alimentação dos servidores da Câmara Municipal de Campo do Tenente.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9065,7 +9074,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Dispõe sobre a redução do uso de papel no âmbito da Câmara Municipal de Campo do Tenente e dá outras providências.",
-      "tema": null,
+      "tema": "Meio ambiente e proteção animal",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9102,7 +9111,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Dispõe sobre a criação do Orçamento Participativo Digital no município de Campo do Tenente e dá outras providências.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9139,7 +9148,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Dispõe sobre o atendimento prioritário de agricultores familiares e pequenos produtores rurais do município de Campo do Tenente no âmbito do programa “Porteira Adentro” e dá outras providências.",
-      "tema": null,
+      "tema": "Agricultura e pecuária",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9176,7 +9185,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "DISPÕE SOBRE A INSTITUIÇÃO DO PROCEDIMENTO OPERACIONAL PADRÃO (POP) NO ÂMBITO DA ADMINISTRAÇÃO PÚBLICA MUNICIPAL, INCLUINDO A CÂMARA MUNICIPAL, E DÁ OUTRAS PROVIDÊNCIAS.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9224,7 +9233,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Dispõe sobre a isenção por tempo determinado de imposto predial e territorial urbano – IPTU para novos loteamentos e condomínios, regularmente cadastrados na área urbana do município de Campo do Tenente e dá outras providências.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9261,7 +9270,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "DISPÕE SOBRE A DIVULGAÇÃO DE INFORMAÇÕES SOBRE OS SERVIÇOS DE SANEAMENTO BÁSICO E DO PROGRAMA PORTEIRA ADENTRO DO MUNICÍPIO NO SITE OFICIAL DA PREFEITURA DE CAMPO DO TENENTE - PR.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9338,7 +9347,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Dispõe sobre o piso salarial ético instituído pela OAB-PR para o cargo de Advogado da Câmara Municipal de Campo do Tenente e dá outras providências.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9437,7 +9446,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Dispõe sobre a possibilidade de alteração temporária da carga horária dos servidores da Câmara Municipal de Campo do Tenente, com ajuste proporcional da remuneração, mediante concordância expressa, e dá outras providências.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9536,7 +9545,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "INSTITUI O TÍTULO DE \"EMBAIXADOR(A) HONORÁRIO(A) DE CAMPO DO TENENTE\" E DÁ OUTRAS PROVIDÊNCIAS.",
-      "tema": null,
+      "tema": "Homenagens, nomes e datas",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9616,7 +9625,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "REGULAMENTA A LEI FEDERAL Nº 12.527/2011- LEI DE ACESSO À INFORMAÇÃO - LAI, NO ÂMBITO DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE – PR.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9682,7 +9691,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "INSTITUI O PARLAMENTO MUNICIPAL DA PESSOA COM DEFICIÊNCIA NO MUNICÍPIO DE CAMPO DO TENENTE, DESTINADO A ESTUDANTES DA APAE, COM FINS EDUCATIVOS E DE CIDADANIA, E DÁ OUTRAS PROVIDÊNCIAS.",
-      "tema": null,
+      "tema": "Assistência social e direitos",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9748,7 +9757,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "INSTITUI O SELO \"EMPRESA AMIGA DA JUVENTUDE\"",
-      "tema": null,
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9814,7 +9823,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "DISPÕE ACERCA DA IMPLANTAÇÃO DE CÓDIGO QR EM TODAS AS PLACAS DE OBRAS PÚBLICAS MUNICIPAIS PARA LEITURA E FISCALIZAÇÃO ELETRÔNICA.",
-      "tema": null,
+      "tema": "Administração e finanças",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9880,7 +9889,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "DISPÕE SOBRE A RESERVA DE VAGAS PARA NEGROS E PARDOS EM CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS SIMPLIFICADOSNO ÂMBITO DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE E DÁ OUTRAS PROVIDÊNCIAS.",
-      "tema": null,
+      "tema": "Assistência social e direitos",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9946,7 +9955,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "DISPÕE SOBRE A OBRIGATORIEDADE DA INCLUSÃO DE, NO MÍNIMO, UMA ATRAÇÃO DE CARÁTER RELIGIOSO NAS FESTIVIDADES MUNICIPAIS DE CAMPO DO TENENTE COM DURAÇÃO SUPERIOR A UM DIA, E DÁ OUTRAS PROVIDÊNCIAS",
-      "tema": null,
+      "tema": "Cultura, esporte e lazer",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -9983,7 +9992,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "DISPÕE SOBRE OS CRITÉRIOS PARA  A DENOMINAÇÃO DE PRÉDIOS E EQUIPAMENTOS PÚBLICOS MUNICIPAIS NO ÂMBITO DO MUNICÍPIO DE CAMPO DO TENENTE, E DÁ OUTRAS PROVIDÊNCIAS.",
-      "tema": null,
+      "tema": "Homenagens, nomes e datas",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -10049,7 +10058,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "Dispõe sobre a prática esportiva e recreativa de manobras com motocicletas, conhecida como “grau” ou “wheeling”, no âmbito do Município de Campo do Tenente, e dá outras providências.",
-      "tema": null,
+      "tema": "Cultura, esporte e lazer",
       "revisada_por_humano": false,
       "autoria": {
         "rotulo": null,
@@ -10134,7 +10143,7 @@
           "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
           "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html",
           "tipo": "licenca_tratamento_saude",
-          "rotulo": "Licenca para tratamento de saude",
+          "rotulo": "Licença para tratamento de saúde",
           "data_inicio": "2026-03-17",
           "data_fim": "2026-08-18",
           "conta_como_falta": false,
@@ -10604,7 +10613,7 @@
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
-          "licenca_tratamento_saude": "Licenca para tratamento de saude"
+          "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
         "nominais": [
@@ -11269,7 +11278,7 @@
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
-          "licenca_tratamento_saude": "Licenca para tratamento de saude"
+          "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
         "nominais": [
@@ -11491,14 +11500,20 @@
         "em_tramitacao": 3,
         "outro_resultado_oficial": 0,
         "autorias_conjuntas": 1,
-        "por_categoria": {},
+        "por_categoria": {
+          "Administração e finanças": 1,
+          "Agricultura e pecuária": 1,
+          "Cultura, esporte e lazer": 2,
+          "Desenvolvimento e moradia": 1,
+          "Homenagens, nomes e datas": 1
+        },
         "lista": [
           {
             "id": 49,
             "numero": "4",
             "ano": "2025",
             "ementa": "Dispõe sobre o atendimento prioritário de agricultores familiares e pequenos produtores rurais do município de Campo do Tenente no âmbito do programa “Porteira Adentro” e dá outras providências.",
-            "tema": null,
+            "tema": "Agricultura e pecuária",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -11513,7 +11528,7 @@
             "numero": "5",
             "ano": "2025",
             "ementa": "DISPÕE SOBRE A INSTITUIÇÃO DO PROCEDIMENTO OPERACIONAL PADRÃO (POP) NO ÂMBITO DA ADMINISTRAÇÃO PÚBLICA MUNICIPAL, INCLUINDO A CÂMARA MUNICIPAL, E DÁ OUTRAS PROVIDÊNCIAS.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -11528,7 +11543,7 @@
             "numero": "13",
             "ano": "2025",
             "ementa": "INSTITUI O SELO \"EMPRESA AMIGA DA JUVENTUDE\"",
-            "tema": null,
+            "tema": "Desenvolvimento e moradia",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-07-08",
@@ -11543,7 +11558,7 @@
             "numero": "16",
             "ano": "2025",
             "ementa": "DISPÕE SOBRE A OBRIGATORIEDADE DA INCLUSÃO DE, NO MÍNIMO, UMA ATRAÇÃO DE CARÁTER RELIGIOSO NAS FESTIVIDADES MUNICIPAIS DE CAMPO DO TENENTE COM DURAÇÃO SUPERIOR A UM DIA, E DÁ OUTRAS PROVIDÊNCIAS",
-            "tema": null,
+            "tema": "Cultura, esporte e lazer",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -11558,7 +11573,7 @@
             "numero": "17",
             "ano": "2025",
             "ementa": "DISPÕE SOBRE OS CRITÉRIOS PARA  A DENOMINAÇÃO DE PRÉDIOS E EQUIPAMENTOS PÚBLICOS MUNICIPAIS NO ÂMBITO DO MUNICÍPIO DE CAMPO DO TENENTE, E DÁ OUTRAS PROVIDÊNCIAS.",
-            "tema": null,
+            "tema": "Homenagens, nomes e datas",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-11-11",
@@ -11573,7 +11588,7 @@
             "numero": "18",
             "ano": "2025",
             "ementa": "Dispõe sobre a prática esportiva e recreativa de manobras com motocicletas, conhecida como “grau” ou “wheeling”, no âmbito do Município de Campo do Tenente, e dá outras providências.",
-            "tema": null,
+            "tema": "Cultura, esporte e lazer",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-11-18",
@@ -12025,7 +12040,7 @@
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
-          "licenca_tratamento_saude": "Licenca para tratamento de saude"
+          "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
         "nominais": [
@@ -12247,14 +12262,16 @@
         "em_tramitacao": 1,
         "outro_resultado_oficial": 0,
         "autorias_conjuntas": 0,
-        "por_categoria": {},
+        "por_categoria": {
+          "Administração e finanças": 2
+        },
         "lista": [
           {
             "id": 13,
             "numero": "6",
             "ano": "2025",
             "ementa": "Dispõe sobre a isenção por tempo determinado de imposto predial e territorial urbano – IPTU para novos loteamentos e condomínios, regularmente cadastrados na área urbana do município de Campo do Tenente e dá outras providências.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -12269,7 +12286,7 @@
             "numero": "14",
             "ano": "2025",
             "ementa": "DISPÕE ACERCA DA IMPLANTAÇÃO DE CÓDIGO QR EM TODAS AS PLACAS DE OBRAS PÚBLICAS MUNICIPAIS PARA LEITURA E FISCALIZAÇÃO ELETRÔNICA.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-08-05",
@@ -12721,7 +12738,7 @@
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
-          "licenca_tratamento_saude": "Licenca para tratamento de saude"
+          "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
         "nominais": [
@@ -12943,14 +12960,16 @@
         "em_tramitacao": 1,
         "outro_resultado_oficial": 0,
         "autorias_conjuntas": 4,
-        "por_categoria": {},
+        "por_categoria": {
+          "Administração e finanças": 4
+        },
         "lista": [
           {
             "id": 47,
             "numero": "1",
             "ano": "2025",
             "ementa": "Concede acréscimo sobre o valor do auxílio-alimentação dos servidores da Câmara Municipal de Campo do Tenente.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -12965,7 +12984,7 @@
             "numero": "7",
             "ano": "2025",
             "ementa": "DISPÕE SOBRE A DIVULGAÇÃO DE INFORMAÇÕES SOBRE OS SERVIÇOS DE SANEAMENTO BÁSICO E DO PROGRAMA PORTEIRA ADENTRO DO MUNICÍPIO NO SITE OFICIAL DA PREFEITURA DE CAMPO DO TENENTE - PR.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-09-30",
@@ -12980,7 +12999,7 @@
             "numero": "8",
             "ano": "2025",
             "ementa": "Dispõe sobre o piso salarial ético instituído pela OAB-PR para o cargo de Advogado da Câmara Municipal de Campo do Tenente e dá outras providências.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-09-30",
@@ -12995,7 +13014,7 @@
             "numero": "9",
             "ano": "2025",
             "ementa": "Dispõe sobre a possibilidade de alteração temporária da carga horária dos servidores da Câmara Municipal de Campo do Tenente, com ajuste proporcional da remuneração, mediante concordância expressa, e dá outras providências.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-08-05",
@@ -13447,7 +13466,7 @@
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
-          "licenca_tratamento_saude": "Licenca para tratamento de saude"
+          "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
         "nominais": [
@@ -13669,14 +13688,19 @@
         "em_tramitacao": 4,
         "outro_resultado_oficial": 0,
         "autorias_conjuntas": 4,
-        "por_categoria": {},
+        "por_categoria": {
+          "Administração e finanças": 6,
+          "Assistência social e direitos": 2,
+          "Homenagens, nomes e datas": 1,
+          "Meio ambiente e proteção animal": 1
+        },
         "lista": [
           {
             "id": 47,
             "numero": "1",
             "ano": "2025",
             "ementa": "Concede acréscimo sobre o valor do auxílio-alimentação dos servidores da Câmara Municipal de Campo do Tenente.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -13691,7 +13715,7 @@
             "numero": "2",
             "ano": "2025",
             "ementa": "Dispõe sobre a redução do uso de papel no âmbito da Câmara Municipal de Campo do Tenente e dá outras providências.",
-            "tema": null,
+            "tema": "Meio ambiente e proteção animal",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -13706,7 +13730,7 @@
             "numero": "3",
             "ano": "2025",
             "ementa": "Dispõe sobre a criação do Orçamento Participativo Digital no município de Campo do Tenente e dá outras providências.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -13721,7 +13745,7 @@
             "numero": "5",
             "ano": "2025",
             "ementa": "DISPÕE SOBRE A INSTITUIÇÃO DO PROCEDIMENTO OPERACIONAL PADRÃO (POP) NO ÂMBITO DA ADMINISTRAÇÃO PÚBLICA MUNICIPAL, INCLUINDO A CÂMARA MUNICIPAL, E DÁ OUTRAS PROVIDÊNCIAS.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -13736,7 +13760,7 @@
             "numero": "8",
             "ano": "2025",
             "ementa": "Dispõe sobre o piso salarial ético instituído pela OAB-PR para o cargo de Advogado da Câmara Municipal de Campo do Tenente e dá outras providências.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-09-30",
@@ -13751,7 +13775,7 @@
             "numero": "9",
             "ano": "2025",
             "ementa": "Dispõe sobre a possibilidade de alteração temporária da carga horária dos servidores da Câmara Municipal de Campo do Tenente, com ajuste proporcional da remuneração, mediante concordância expressa, e dá outras providências.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-08-05",
@@ -13766,7 +13790,7 @@
             "numero": "10",
             "ano": "2025",
             "ementa": "INSTITUI O TÍTULO DE \"EMBAIXADOR(A) HONORÁRIO(A) DE CAMPO DO TENENTE\" E DÁ OUTRAS PROVIDÊNCIAS.",
-            "tema": null,
+            "tema": "Homenagens, nomes e datas",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-06-24",
@@ -13781,7 +13805,7 @@
             "numero": "11",
             "ano": "2025",
             "ementa": "REGULAMENTA A LEI FEDERAL Nº 12.527/2011- LEI DE ACESSO À INFORMAÇÃO - LAI, NO ÂMBITO DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE – PR.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-08-05",
@@ -13796,7 +13820,7 @@
             "numero": "12",
             "ano": "2025",
             "ementa": "INSTITUI O PARLAMENTO MUNICIPAL DA PESSOA COM DEFICIÊNCIA NO MUNICÍPIO DE CAMPO DO TENENTE, DESTINADO A ESTUDANTES DA APAE, COM FINS EDUCATIVOS E DE CIDADANIA, E DÁ OUTRAS PROVIDÊNCIAS.",
-            "tema": null,
+            "tema": "Assistência social e direitos",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-06-24",
@@ -13811,7 +13835,7 @@
             "numero": "15",
             "ano": "2025",
             "ementa": "DISPÕE SOBRE A RESERVA DE VAGAS PARA NEGROS E PARDOS EM CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS SIMPLIFICADOSNO ÂMBITO DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE E DÁ OUTRAS PROVIDÊNCIAS.",
-            "tema": null,
+            "tema": "Assistência social e direitos",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-08-12",
@@ -14263,7 +14287,7 @@
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
-          "licenca_tratamento_saude": "Licenca para tratamento de saude"
+          "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
         "nominais": [
@@ -14485,14 +14509,16 @@
         "em_tramitacao": 1,
         "outro_resultado_oficial": 0,
         "autorias_conjuntas": 4,
-        "por_categoria": {},
+        "por_categoria": {
+          "Administração e finanças": 4
+        },
         "lista": [
           {
             "id": 47,
             "numero": "1",
             "ano": "2025",
             "ementa": "Concede acréscimo sobre o valor do auxílio-alimentação dos servidores da Câmara Municipal de Campo do Tenente.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -14507,7 +14533,7 @@
             "numero": "7",
             "ano": "2025",
             "ementa": "DISPÕE SOBRE A DIVULGAÇÃO DE INFORMAÇÕES SOBRE OS SERVIÇOS DE SANEAMENTO BÁSICO E DO PROGRAMA PORTEIRA ADENTRO DO MUNICÍPIO NO SITE OFICIAL DA PREFEITURA DE CAMPO DO TENENTE - PR.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-09-30",
@@ -14522,7 +14548,7 @@
             "numero": "8",
             "ano": "2025",
             "ementa": "Dispõe sobre o piso salarial ético instituído pela OAB-PR para o cargo de Advogado da Câmara Municipal de Campo do Tenente e dá outras providências.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-09-30",
@@ -14537,7 +14563,7 @@
             "numero": "9",
             "ano": "2025",
             "ementa": "Dispõe sobre a possibilidade de alteração temporária da carga horária dos servidores da Câmara Municipal de Campo do Tenente, com ajuste proporcional da remuneração, mediante concordância expressa, e dá outras providências.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-08-05",
@@ -14989,7 +15015,7 @@
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
-          "licenca_tratamento_saude": "Licenca para tratamento de saude"
+          "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
         "nominais": [
@@ -15211,14 +15237,16 @@
         "em_tramitacao": 1,
         "outro_resultado_oficial": 0,
         "autorias_conjuntas": 3,
-        "por_categoria": {},
+        "por_categoria": {
+          "Administração e finanças": 3
+        },
         "lista": [
           {
             "id": 47,
             "numero": "1",
             "ano": "2025",
             "ementa": "Concede acréscimo sobre o valor do auxílio-alimentação dos servidores da Câmara Municipal de Campo do Tenente.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Em tramitacao",
             "data_sessao": null,
@@ -15233,7 +15261,7 @@
             "numero": "8",
             "ano": "2025",
             "ementa": "Dispõe sobre o piso salarial ético instituído pela OAB-PR para o cargo de Advogado da Câmara Municipal de Campo do Tenente e dá outras providências.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-09-30",
@@ -15248,7 +15276,7 @@
             "numero": "9",
             "ano": "2025",
             "ementa": "Dispõe sobre a possibilidade de alteração temporária da carga horária dos servidores da Câmara Municipal de Campo do Tenente, com ajuste proporcional da remuneração, mediante concordância expressa, e dá outras providências.",
-            "tema": null,
+            "tema": "Administração e finanças",
             "revisada_por_humano": false,
             "situacao": "Aprovado",
             "data_sessao": "2025-08-05",
@@ -15700,7 +15728,7 @@
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
-          "licenca_tratamento_saude": "Licenca para tratamento de saude"
+          "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
         "nominais": [
@@ -16365,7 +16393,7 @@
           "ausente_sem_justificativa": "Ausente sem justificativa",
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
-          "licenca_tratamento_saude": "Licenca para tratamento de saude"
+          "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
         "nominais": [

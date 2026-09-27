@@ -9,29 +9,23 @@ for pasta in ("coletor", "dados/tratados"):
     if str(RAIZ / pasta) not in sys.path:
         sys.path.insert(0, str(RAIZ / pasta))
 
-from config_cidade import carregar_config, endereco_sapl  # noqa: E402
+from config_cidade import (  # noqa: E402
+    carregar_config,
+    endereco_sapl,
+    nomes_categorias,
+    rotulos_especiais_tema,
+)
 from gerar_temas_votacoes import (  # noqa: E402
     ARQUIVO_TEMAS,
     REGRAS,
     TEMA_NAO_SE_APLICA,
     TEMA_SEM_EMENTA,
+    TEMAS_ACEITOS,
     USAR_REGRAS_POR_PALAVRA,
 )
 
-TEMAS_PERMITIDOS = {
-    "Homenagens, nomes e datas",
-    "Defesa Civil",
-    "Saúde",
-    "Educação",
-    "Segurança pública",
-    "Assistência social e direitos",
-    "Cultura, esporte e lazer",
-    "Meio ambiente e animais",
-    "Iluminação e serviços urbanos",
-    "Ruas, trânsito e transporte",
-    "Desenvolvimento, moradia e agricultura",
-    "Administração e finanças",
-}
+# A lista vem de config_cidade.json (D-021), nunca de uma lista fixa aqui.
+TEMAS_PERMITIDOS = set(nomes_categorias())
 PASTA_LOTE = RAIZ / "dados" / "brutos" / "lote_20260926"
 
 
@@ -47,7 +41,16 @@ class TestTemasMaterias(unittest.TestCase):
             for materia in resposta["results"]:
                 cls.brutas[int(materia["id"])] = materia
 
-    def test_lista_de_temas_igual_as_regras(self):
+    def test_categorias_vem_do_config(self):
+        self.assertEqual(len(TEMAS_PERMITIDOS), len(self.config["categorias"]["lista"]))
+        especiais = rotulos_especiais_tema(self.config)
+        self.assertEqual(TEMA_NAO_SE_APLICA, especiais["nao_se_aplica"])
+        self.assertEqual(TEMA_SEM_EMENTA, especiais["sem_ementa"])
+        self.assertEqual(set(TEMAS_ACEITOS), TEMAS_PERMITIDOS | {TEMA_NAO_SE_APLICA, TEMA_SEM_EMENTA})
+        self.assertNotIn(TEMA_NAO_SE_APLICA, TEMAS_PERMITIDOS)
+        self.assertNotIn(TEMA_SEM_EMENTA, TEMAS_PERMITIDOS)
+
+    def test_regras_desligadas_usam_nomes_do_config(self):
         self.assertEqual(set(REGRAS), TEMAS_PERMITIDOS)
         self.assertFalse(USAR_REGRAS_POR_PALAVRA)
 

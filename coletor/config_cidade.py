@@ -120,6 +120,46 @@ def exigir_piso(nome: str, valor, ano: int | None = None):
     return valor
 
 
+def categorias(cfg: dict | None = None) -> list[dict]:
+    """Categorias de tema da cidade (D-021), na ordem de exibicao.
+
+    Cada item tem nome e descricao. Nome repetido ou vazio e erro.
+    """
+    cfg = cfg if cfg is not None else carregar_config()
+    lista = (cfg.get("categorias") or {}).get("lista")
+    if not isinstance(lista, list) or not lista:
+        raise SystemExit("config_cidade.json: categorias.lista deve ser uma lista com ao menos uma categoria.")
+    saida = []
+    vistos = set()
+    for item in lista:
+        nome = str((item or {}).get("nome") or "").strip()
+        descricao = str((item or {}).get("descricao") or "").strip()
+        if not nome or not descricao:
+            raise SystemExit("config_cidade.json: toda categoria precisa de nome e descricao.")
+        if nome in vistos:
+            raise SystemExit(f"config_cidade.json: categoria repetida: {nome}.")
+        vistos.add(nome)
+        saida.append({"nome": nome, "descricao": descricao})
+    return saida
+
+
+def nomes_categorias(cfg: dict | None = None) -> list[str]:
+    return [item["nome"] for item in categorias(cfg)]
+
+
+def rotulos_especiais_tema(cfg: dict | None = None) -> dict:
+    """Rotulos fora das categorias: nao_se_aplica (ATA e OFEX) e sem_ementa."""
+    cfg = cfg if cfg is not None else carregar_config()
+    bloco = (cfg.get("categorias") or {}).get("rotulos_especiais") or {}
+    saida = {}
+    for chave in ("nao_se_aplica", "sem_ementa"):
+        valor = str(bloco.get(chave) or "").strip()
+        if not valor:
+            raise SystemExit(f"config_cidade.json: categorias.rotulos_especiais.{chave} ausente.")
+        saida[chave] = valor
+    return saida
+
+
 def user_agent_http(cfg: dict | None = None) -> str:
     slug = nome_cidade(cfg).lower().replace(" ", "-")
     return f"painel-camara-{slug}/0.1 (projeto de transparencia)"
