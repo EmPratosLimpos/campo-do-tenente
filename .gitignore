@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+
+# Temporary and Cache
+*.tmp
+*.log
+.cache/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+
+# Scratch/local-only
+scratch/
+.aider*
+
+# Secrets and credentials
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+secrets.json
+config.local.*
+token.txt
+
+# IDE and editor
+.idea/
+.vscode/
+*.code-workspace
+*.swp
+
+# Node
+node_modules/
+
+# Python test/coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Backups
+backups/local/
+*.tar.gz
+*.bak
+
+# Wrangler
+.wrangler/
+
+# Cloudflare worker (secrets in wrangler.toml)
+cloudflare-worker/wrangler.toml
+
+# Cloudflare Pages
+_wrangler/
+
+.dev.vars*
+!.dev.vars.example
+!.env.example

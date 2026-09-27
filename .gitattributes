@@ -1,0 +1,9 @@
+# Fixar line endings em LF para garantir integridade e determinismo de hashes em todas as plataformas
+* text=auto eol=lf
+*.json text eol=lf
+*.sha256 text eol=lf
+*.py text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.txt text eol=lf
