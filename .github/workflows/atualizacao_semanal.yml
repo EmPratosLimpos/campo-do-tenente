@@ -1,0 +1,87 @@
+name: Atualizacao semanal dos dados
+
+on:
+  schedule:
+    # Segunda-feira as 03:00 no horario de Brasilia (UTC-3, sem horario de verao).
+    # 03:00 em Brasilia equivale a 06:00 UTC.
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: atualizacao-semanal
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout de desenvolvimento
+        uses: actions/checkout@v7
+        with:
+          ref: desenvolvimento
+
+      - name: Configurar Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: pip install -r coletor/requirements.txt
+
+      - name: Atualizar a semana
+        run: python scripts/atualizar_semana.py
+
+      - name: Ver se houve dado novo
+        id: mudanca
+        run: |
+          if [[ -n $(git status --porcelain -- dados config_cidade.json CHANGELOG.md) ]]; then
+            echo "houve=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "houve=false" >> "$GITHUB_OUTPUT"
+            echo "Nada mudou. Nenhum Pull Request."
+          fi
+
+      - name: Abrir Pull Request para desenvolvimento
+        if: steps.mudanca.outputs.houve == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "EmPratosLimpos"
+          git config user.email "334360115+EmPratosLimpos@users.noreply.github.com"
+
+          data_br=$(TZ=America/Sao_Paulo date +%Y-%m-%d)
+          branch="atualizacao-dados/${data_br}"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            branch="atualizacao-dados/${data_br}-$(TZ=America/Sao_Paulo date +%H%M)"
+          fi
+
+          git checkout -b "$branch"
+          git add -- dados config_cidade.json CHANGELOG.md
+          git commit -m "Atualizacao semanal: dados novos do SAPL"
+          git push origin "$branch"
+
+          cat > corpo_pr.md << 'EOF'
+          Esta atualização leu o SAPL e gravou o que mudou nos dados.
+
+          O detalhe está no topo do CHANGELOG.md: o que mudou nos números, quantos pedidos foram feitos e o endereço consultado.
+
+          Nada disso entra no painel sozinho. Este pedido fica aberto para o mantenedor revisar e aprovar. A publicação não acontece nesta etapa.
+          EOF
+
+          gh pr create \
+            --base desenvolvimento \
+            --head "$branch" \
+            --title "Atualização semanal dos dados do SAPL" \
+            --body-file corpo_pr.md
+
+      - name: Registrar falha
+        if: failure()
+        run: |
+          echo "::error::A atualizacao semanal falhou. Nenhum Pull Request foi aberto e nada foi publicado."
+          echo "Job: ${{ github.job }}"
+          echo "Run: ${{ github.run_id }} (tentativa ${{ github.run_attempt }})"
