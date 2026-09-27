@@ -8,13 +8,15 @@ on:
 
 jobs:
   validacao:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout do repositorio
-        uses: actions/checkout@v4
+        # checkout v7 e setup-python v7 rodam em Node 24.
+        # Node 20 nao esta mais disponivel nos executores do GitHub Actions.
+        uses: actions/checkout@v7
 
       - name: Configurar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.11'
 

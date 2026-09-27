@@ -140,6 +140,10 @@ class ColetorLote:
         self.duracao_base = 0.0
         self.pasta.mkdir(parents=True, exist_ok=True)
         self._carregar_indice()
+        self.gravou = False
+        self.ultimo_igual = False
+        self.simulado = False
+        self.orcamento_execucao = None
 
     def _carregar_indice(self) -> None:
         if not self.indice_path.exists():
@@ -191,31 +195,71 @@ class ColetorLote:
         self._gravar_indice()
 
     def _esperar_pausa(self) -> None:
+        orc = self.orcamento_execucao
+        if orc is not None:
+            if orc.pedidos > 0:
+                time.sleep(PAUSA_SAPL_SEGUNDOS)
+            return
         if self.pular_pausa:
             self.pular_pausa = False
             return
         time.sleep(PAUSA_SAPL_SEGUNDOS)
 
-    def pedir(self, caminho: str, params: dict | None, arquivo: str):
-        ja = self._ja_baixado(arquivo)
-        if ja is not None:
-            print(f"  [ja tinha] {arquivo}")
-            return ja
+    def _recusar_orcamento(self) -> None:
+        orc = self.orcamento_execucao
+        if orc is None:
+            return
+        if orc.pedidos >= orc.teto:
+            raise OrcamentoEsgotado(
+                f"teto de {orc.teto} pedidos nesta execucao"
+            )
+
+    def _consumir_orcamento(self) -> None:
+        orc = self.orcamento_execucao
+        if orc is None:
+            return
+        self._recusar_orcamento()
+        orc.pedidos += 1
+
+    def pedir(self, caminho: str, params: dict | None, arquivo: str, refrescar: bool = False):
+        self.ultimo_igual = False
+        if not refrescar:
+            ja = self._ja_baixado(arquivo)
+            if ja is not None:
+                print(f"  [ja tinha] {arquivo}")
+                return ja
+
+        if self.simulado:
+            destino = self.pasta / arquivo
+            if destino.is_file() and destino.stat().st_size > 0:
+                try:
+                    print(f"  [simulado] {arquivo}")
+                    return json.loads(destino.read_text(encoding="utf-8"))
+                except (OSError, UnicodeDecodeError, ValueError):
+                    pass
+            raise SystemExit(
+                f"Modo simulado: {arquivo} nao esta salvo. "
+                "Nenhum pedido foi feito ao SAPL."
+            )
 
         if self.pedidos >= self.teto:
             raise OrcamentoEsgotado(
                 f"teto de {self.teto} pedidos atingido antes de {arquivo}"
             )
+        self._recusar_orcamento()
 
         self._esperar_pausa()
         url = montar_url(self.base, caminho, params)
         tentativas_extra = 0
+        destino = self.pasta / arquivo
 
         while True:
             if self.pedidos >= self.teto:
                 raise OrcamentoEsgotado(
                     f"teto de {self.teto} pedidos atingido antes de {arquivo}"
                 )
+            self._recusar_orcamento()
+            self._consumir_orcamento()
             quando = agora()
             status = None
             corpo = b""
@@ -250,8 +294,22 @@ class ColetorLote:
             except TimeoutError:
                 erro = "tempo esgotado"
 
+            if (
+                refrescar
+                and status == 200
+                and destino.is_file()
+                and destino.read_bytes() == corpo
+            ):
+                self.ultimo_igual = True
+                print(f"  [igual] {arquivo}")
+                try:
+                    return json.loads(corpo.decode("utf-8"))
+                except (UnicodeDecodeError, ValueError) as exc:
+                    raise SystemExit(f"Resposta nao e JSON: {arquivo}") from exc
+
             nome_gravado = arquivo if status == 200 else nome_falha
             (self.pasta / nome_gravado).write_bytes(corpo)
+            self.gravou = True
             self._registrar(
                 {
                     "url": url,
