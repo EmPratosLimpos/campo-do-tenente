@@ -1083,7 +1083,7 @@ def escrever_relatorio(payload: dict) -> None:
             "",
             (
                 "A ordem abaixo é a ordem da tabela única, pelo número "
-                "oficial do SAPL. Não é ranking."
+                "oficial do SAPL."
             ),
             "",
         ]
