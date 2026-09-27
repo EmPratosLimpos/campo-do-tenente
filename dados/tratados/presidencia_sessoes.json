@@ -1,0 +1,743 @@
+{
+  "meta": {
+    "gerado_por": "dados/tratados/gerar_presidencia_sessoes.py",
+    "arquivo_cargos_mesa": "dados/brutos/lote_20260927_autoria/cargomesa_p1.json",
+    "ids_cargo_presidente": [
+      1
+    ],
+    "regra": "Presidente da sessao e o integrante da mesa daquela sessao com o cargo oficial Presidente. O rotulo 'Presidente que nao votou' so vale quando o voto dessa pessoa esta registrado como 'Não Votou'."
+  },
+  "por_ano": {
+    "2025": {
+      "arquivo_sessoes": "dados/brutos/contagem_votacoes_ordinarias_2025.json",
+      "n_sessoes_ordinarias": 32,
+      "n_com_presidente": 32,
+      "lacunas": [],
+      "sessoes": [
+        {
+          "sessao_id": 4,
+          "numero": 17,
+          "data": "2025-05-06",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/4",
+          "arquivo_de_origem": "dados/brutos/sessao_4_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 5,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 1,
+          "numero": 18,
+          "data": "2025-05-13",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/1",
+          "arquivo_de_origem": "dados/brutos/sessao_1_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 1,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 2,
+          "numero": 19,
+          "data": "2025-05-20",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/2",
+          "arquivo_de_origem": "dados/brutos/sessao_2_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 9,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 3,
+          "numero": 20,
+          "data": "2025-05-27",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/3",
+          "arquivo_de_origem": "dados/brutos/sessao_3_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 13,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 5,
+          "numero": 21,
+          "data": "2025-06-03",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/5",
+          "arquivo_de_origem": "dados/brutos/sessao_5_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 17,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 6,
+          "numero": 22,
+          "data": "2025-06-10",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/6",
+          "arquivo_de_origem": "dados/brutos/sessao_6_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 21,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 7,
+          "numero": 23,
+          "data": "2025-06-17",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
+          "arquivo_de_origem": "dados/brutos/sessao_7_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 25,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 8,
+          "numero": 24,
+          "data": "2025-06-24",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
+          "arquivo_de_origem": "dados/brutos/sessao_8_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 29,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 9,
+          "numero": 25,
+          "data": "2025-07-01",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/9",
+          "arquivo_de_origem": "dados/brutos/sessao_9_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 33,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 10,
+          "numero": 26,
+          "data": "2025-07-08",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/10",
+          "arquivo_de_origem": "dados/brutos/sessao_10_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 37,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 11,
+          "numero": 27,
+          "data": "2025-07-15",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/11",
+          "arquivo_de_origem": "dados/brutos/sessao_11_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 40,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 12,
+          "numero": 28,
+          "data": "2025-07-22",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/12",
+          "arquivo_de_origem": "dados/brutos/sessao_12_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 44,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 13,
+          "numero": 29,
+          "data": "2025-07-29",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
+          "arquivo_de_origem": "dados/brutos/sessao_13_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 48,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 14,
+          "numero": 30,
+          "data": "2025-08-05",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
+          "arquivo_de_origem": "dados/brutos/sessao_14_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 52,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 15,
+          "numero": 31,
+          "data": "2025-08-12",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
+          "arquivo_de_origem": "dados/brutos/sessao_15_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 56,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 16,
+          "numero": 32,
+          "data": "2025-08-19",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/16",
+          "arquivo_de_origem": "dados/brutos/sessao_16_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 60,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 17,
+          "numero": 33,
+          "data": "2025-08-26",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/17",
+          "arquivo_de_origem": "dados/brutos/sessao_17_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 64,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 18,
+          "numero": 34,
+          "data": "2025-09-02",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/18",
+          "arquivo_de_origem": "dados/brutos/sessao_18_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 68,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 19,
+          "numero": 35,
+          "data": "2025-09-09",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/19",
+          "arquivo_de_origem": "dados/brutos/sessao_19_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 72,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 20,
+          "numero": 36,
+          "data": "2025-09-16",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/20",
+          "arquivo_de_origem": "dados/brutos/sessao_20_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 76,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 21,
+          "numero": 37,
+          "data": "2025-09-23",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
+          "arquivo_de_origem": "dados/brutos/sessao_21_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 80,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 22,
+          "numero": 38,
+          "data": "2025-09-30",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/22",
+          "arquivo_de_origem": "dados/brutos/sessao_22_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 84,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 23,
+          "numero": 39,
+          "data": "2025-10-07",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/23",
+          "arquivo_de_origem": "dados/brutos/sessao_23_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 88,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 24,
+          "numero": 40,
+          "data": "2025-10-14",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/24",
+          "arquivo_de_origem": "dados/brutos/sessao_24_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 92,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 25,
+          "numero": 41,
+          "data": "2025-10-21",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/25",
+          "arquivo_de_origem": "dados/brutos/sessao_25_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 96,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 27,
+          "numero": 42,
+          "data": "2025-10-29",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/27",
+          "arquivo_de_origem": "dados/brutos/sessao_27_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 100,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 28,
+          "numero": 43,
+          "data": "2025-11-04",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/28",
+          "arquivo_de_origem": "dados/brutos/sessao_28_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 104,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 29,
+          "numero": 44,
+          "data": "2025-11-11",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/29",
+          "arquivo_de_origem": "dados/brutos/sessao_29_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 108,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 30,
+          "numero": 45,
+          "data": "2025-11-18",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/30",
+          "arquivo_de_origem": "dados/brutos/sessao_30_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 112,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 31,
+          "numero": 46,
+          "data": "2025-11-26",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
+          "arquivo_de_origem": "dados/brutos/sessao_31_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 116,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 33,
+          "numero": 47,
+          "data": "2025-12-02",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
+          "arquivo_de_origem": "dados/brutos/sessao_33_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 120,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 34,
+          "numero": 48,
+          "data": "2025-12-09",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
+          "arquivo_de_origem": "dados/brutos/sessao_34_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 124,
+          "lacuna": null
+        }
+      ]
+    },
+    "2026": {
+      "arquivo_sessoes": "dados/brutos/contagem_votacoes_ordinarias_2026.json",
+      "n_sessoes_ordinarias": 33,
+      "n_com_presidente": 33,
+      "lacunas": [],
+      "sessoes": [
+        {
+          "sessao_id": 37,
+          "numero": 1,
+          "data": "2026-02-10",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/37",
+          "arquivo_de_origem": "dados/brutos/sessao_37_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 136,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 38,
+          "numero": 2,
+          "data": "2026-02-19",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/38",
+          "arquivo_de_origem": "dados/brutos/sessao_38_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 140,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 39,
+          "numero": 3,
+          "data": "2026-02-24",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
+          "arquivo_de_origem": "dados/brutos/sessao_39_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 148,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 41,
+          "numero": 4,
+          "data": "2026-03-03",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/41",
+          "arquivo_de_origem": "dados/brutos/sessao_41_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 152,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 42,
+          "numero": 5,
+          "data": "2026-03-10",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
+          "arquivo_de_origem": "dados/brutos/sessao_42_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 160,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 45,
+          "numero": 6,
+          "data": "2026-03-17",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
+          "arquivo_de_origem": "dados/brutos/sessao_45_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 164,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 48,
+          "numero": 7,
+          "data": "2026-03-24",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/48",
+          "arquivo_de_origem": "dados/brutos/sessao_48_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 170,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 49,
+          "numero": 8,
+          "data": "2026-03-31",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/49",
+          "arquivo_de_origem": "dados/brutos/sessao_49_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 174,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 50,
+          "numero": 9,
+          "data": "2026-04-07",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/50",
+          "arquivo_de_origem": "dados/brutos/sessao_50_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 178,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 51,
+          "numero": 10,
+          "data": "2026-04-14",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
+          "arquivo_de_origem": "dados/brutos/sessao_51_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 182,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 52,
+          "numero": 11,
+          "data": "2026-04-22",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/52",
+          "arquivo_de_origem": "dados/brutos/sessao_52_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 186,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 53,
+          "numero": 12,
+          "data": "2026-04-28",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/53",
+          "arquivo_de_origem": "dados/brutos/sessao_53_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 191,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 54,
+          "numero": 13,
+          "data": "2026-05-05",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
+          "arquivo_de_origem": "dados/brutos/sessao_54_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 195,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 55,
+          "numero": 14,
+          "data": "2026-05-12",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/55",
+          "arquivo_de_origem": "dados/brutos/sessao_55_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 200,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 56,
+          "numero": 15,
+          "data": "2026-05-19",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/56",
+          "arquivo_de_origem": "dados/brutos/sessao_56_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 204,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 80,
+          "numero": 16,
+          "data": "2026-05-26",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/80",
+          "arquivo_de_origem": "dados/brutos/sessao_80_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 208,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 81,
+          "numero": 17,
+          "data": "2026-06-02",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
+          "arquivo_de_origem": "dados/brutos/sessao_81_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 212,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 257,
+          "numero": 18,
+          "data": "2026-06-09",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
+          "arquivo_de_origem": "dados/brutos/sessao_257_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 216,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 258,
+          "numero": 19,
+          "data": "2026-06-16",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/258",
+          "arquivo_de_origem": "dados/brutos/sessao_258_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 221,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 259,
+          "numero": 20,
+          "data": "2026-06-23",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/259",
+          "arquivo_de_origem": "dados/brutos/sessao_259_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 225,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 260,
+          "numero": 21,
+          "data": "2026-06-30",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/260",
+          "arquivo_de_origem": "dados/brutos/sessao_260_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 230,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 261,
+          "numero": 22,
+          "data": "2026-07-07",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/261",
+          "arquivo_de_origem": "dados/brutos/sessao_261_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 234,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 262,
+          "numero": 23,
+          "data": "2026-07-14",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
+          "arquivo_de_origem": "dados/brutos/sessao_262_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 238,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 263,
+          "numero": 24,
+          "data": "2026-07-21",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/263",
+          "arquivo_de_origem": "dados/brutos/sessao_263_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 244,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 264,
+          "numero": 25,
+          "data": "2026-07-28",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/264",
+          "arquivo_de_origem": "dados/brutos/sessao_264_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 248,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 265,
+          "numero": 26,
+          "data": "2026-08-04",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/265",
+          "arquivo_de_origem": "dados/brutos/sessao_265_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 252,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 266,
+          "numero": 27,
+          "data": "2026-08-11",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
+          "arquivo_de_origem": "dados/brutos/sessao_266_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 256,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 267,
+          "numero": 28,
+          "data": "2026-08-18",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/267",
+          "arquivo_de_origem": "dados/brutos/sessao_267_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 260,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 269,
+          "numero": 29,
+          "data": "2026-08-25",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
+          "arquivo_de_origem": "dados/brutos/sessao_269_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 264,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 270,
+          "numero": 30,
+          "data": "2026-09-01",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
+          "arquivo_de_origem": "dados/brutos/sessao_270_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 268,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 271,
+          "numero": 31,
+          "data": "2026-09-08",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/271",
+          "arquivo_de_origem": "dados/brutos/sessao_271_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 272,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 272,
+          "numero": 32,
+          "data": "2026-09-15",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/272",
+          "arquivo_de_origem": "dados/brutos/sessao_272_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 276,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 273,
+          "numero": 33,
+          "data": "2026-09-22",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+          "arquivo_de_origem": "dados/brutos/sessao_273_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 280,
+          "lacuna": null
+        }
+      ]
+    }
+  }
+}
