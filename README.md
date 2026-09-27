@@ -56,8 +56,6 @@ Cada número na tela tem link ou referência para o registro oficial de onde sai
 
 ## O que o painel não mostra
 
-- Nota, estrela, pontuação ou ranking de vereador ou de partido.
-- Comparação do tipo "quem trabalha mais" ou "quem trabalha menos".
 - Opinião sobre o conteúdo das leis ou sobre a postura de qualquer vereador.
 - Voto deduzido. Se o SAPL não registrou como cada vereador votou, o painel não preenche.
 - Dado pessoal ou da vida privada. O painel trata apenas da atuação pública no exercício do mandato.
@@ -66,15 +64,14 @@ Cada número na tela tem link ou referência para o registro oficial de onde sai
 
 ## Regras de imparcialidade
 
-1. **Sem ranking e sem nota.** Nenhuma lista é montada para sugerir que um vereador está acima ou abaixo de outro.
-2. **Ausência não é voto.** Faltar a uma sessão não é votar sim, nem votar não, nem se abster. O painel usa rótulos separados:
+1. **Ausência não é voto.** Faltar a uma sessão não é votar sim, nem votar não, nem se abster. O painel usa rótulos separados:
    - **Falta com justificativa**: o vereador não estava presente e a Câmara registrou uma justificativa (por exemplo, licença médica, missão oficial ou força maior).
    - **Falta sem justificativa**: o vereador não estava presente e o SAPL não traz justificativa registrada para aquela sessão.
    - **Não votou**: a Câmara registrou no SAPL que o vereador não votou naquela votação. Não é falta e não é voto sim, voto não ou abstenção.
    - **Presidente que não votou**: o painel só usa este rótulo quando o SAPL mostra quem presidia a sessão (a mesa da sessão) e o registro dessa pessoa naquela votação é "Não votou". O painel nunca presume isso apenas pelo cargo.
-   - A diferença: "Não votou" é um registro que existe no SAPL para aquele vereador; "voto individual não registrado no SAPL" (item 3) quer dizer que a votação não tem nenhum registro de voto individual.
-3. **Voto individual não registrado no SAPL.** Em muitas votações a Câmara registrou apenas o resultado total (quantos votos sim, quantos não), sem anotar o voto de cada vereador. Nesses casos o painel escreve "voto individual não registrado no SAPL" e mostra apenas o total oficial. O painel **não** trata isso como votação unânime e **não** distribui os votos entre os vereadores.
-4. **O painel reflete a fonte, não a corrige.** Se um dado oficial parecer estranho, o painel mostra o dado como está no SAPL e registra a observação. Correção de registro oficial cabe à Câmara.
+   - A diferença: "Não votou" é um registro que existe no SAPL para aquele vereador; "voto individual não registrado no SAPL" (item 2) quer dizer que a votação não tem nenhum registro de voto individual.
+2. **Voto individual não registrado no SAPL.** Em muitas votações a Câmara registrou apenas o resultado total (quantos votos sim, quantos não), sem anotar o voto de cada vereador. Nesses casos o painel escreve "voto individual não registrado no SAPL" e mostra apenas o total oficial. O painel **não** trata isso como votação unânime e **não** distribui os votos entre os vereadores.
+3. **O painel reflete a fonte, não a corrige.** Se um dado oficial parecer estranho, o painel mostra o dado como está no SAPL e registra a observação. Correção de registro oficial cabe à Câmara.
 
 ---
 

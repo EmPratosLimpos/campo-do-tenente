@@ -45,4 +45,4 @@ A norma técnica soberana de governança do projeto é:
 * **SPA Estática:** O `index.html` não possui dependências de compilação/build complexas.
 * **CSP:** Manter diretivas restritas (`frame-src 'none'`, `child-src 'none'`, `worker-src 'none'`).
 * **Sanitização XSS:** Todo texto externo vindo de JSON ou API deve passar obrigatoriamente pela função `esc()`, que também remove sequências ANSI.
-* **Imparcialidade:** Nenhum juízo de valor, nota política ou ranking partidário.
+* **Imparcialidade:** Nenhum rótulo partidário (aliado, oposição, vitória, derrota) e nenhum juízo de valor sem base em dado público registrado.
