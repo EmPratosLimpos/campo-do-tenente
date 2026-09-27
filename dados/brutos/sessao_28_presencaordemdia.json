@@ -9,6 +9,14 @@
       "parlamentar": 8
     },
     {
+      "id": 348,
+      "__str__": "Sessão: 43ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 28,
+      "parlamentar": 3
+    },
+    {
       "id": 349,
       "__str__": "Sessão: 43ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
       "link_detail_backend": "",
@@ -65,5 +73,5 @@
       "parlamentar": 5
     }
   ],
-  "total": 8
+  "total": 9
 }

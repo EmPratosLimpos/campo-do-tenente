@@ -9,6 +9,14 @@
       "parlamentar": 8
     },
     {
+      "id": 255,
+      "__str__": "Sessão: 36ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 20,
+      "parlamentar": 3
+    },
+    {
       "id": 256,
       "__str__": "Sessão: 36ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
       "link_detail_backend": "",
@@ -57,5 +65,5 @@
       "parlamentar": 5
     }
   ],
-  "total": 7
+  "total": 8
 }

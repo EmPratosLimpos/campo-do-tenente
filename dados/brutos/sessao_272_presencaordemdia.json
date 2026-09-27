@@ -9,6 +9,14 @@
       "parlamentar": 8
     },
     {
+      "id": 785,
+      "__str__": "Sessão: 32ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 272,
+      "parlamentar": 3
+    },
+    {
       "id": 786,
       "__str__": "Sessão: 32ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
       "link_detail_backend": "",
@@ -57,5 +65,5 @@
       "parlamentar": 100
     }
   ],
-  "total": 7
+  "total": 8
 }

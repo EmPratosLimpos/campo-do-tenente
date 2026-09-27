@@ -97,6 +97,22 @@
       "tramitacao": null
     },
     {
+      "id": 68,
+      "__str__": "Ordem do Dia/Expediente: 7 - Projeto de Lei Origem do Poder Legislativo nº 6 de 2025 em 24ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/68",
+      "metadata": {},
+      "data_ordem": "2025-06-24",
+      "observacao": "",
+      "numero_ordem": 7,
+      "resultado": "Matéria lida",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 8,
+      "materia": 13,
+      "tramitacao": 24
+    },
+    {
       "id": 62,
       "__str__": "Ordem do Dia/Expediente: 8 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 24ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/62",
@@ -193,5 +209,5 @@
       "tramitacao": null
     }
   ],
-  "total": 12
+  "total": 13
 }

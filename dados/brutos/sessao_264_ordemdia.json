@@ -17,6 +17,22 @@
       "tramitacao": null
     },
     {
+      "id": 658,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem do Poder Legislativo nº 3 de 2026 em 25ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/658",
+      "metadata": {},
+      "data_ordem": "2026-07-28",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Matéria lida",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 264,
+      "materia": 698,
+      "tramitacao": null
+    },
+    {
       "id": 656,
       "__str__": "Ordem do Dia/Expediente: 3 - Requerimento nº 10 de 2026 em 25ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/656",
@@ -81,5 +97,5 @@
       "tramitacao": null
     }
   ],
-  "total": 5
+  "total": 6
 }

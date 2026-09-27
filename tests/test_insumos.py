@@ -19,6 +19,7 @@ sys.path.insert(0, str(RAIZ / "coletor"))
 sys.path.insert(0, str(RAIZ / "dados" / "tratados"))
 
 from coletar_lote import plano_de_coleta  # noqa: E402
+from coletar_por_sessao import RECURSOS, conferir_prefixo  # noqa: E402
 from derivar_insumos import (  # noqa: E402
     AVISO_LACUNA_2025,
     ROTULO_SEM_VOTO,
@@ -26,6 +27,7 @@ from derivar_insumos import (  # noqa: E402
     escolher_prefixo,
     contem_ip,
     derivar,
+    pasta_lote_mais_recente,
 )
 from gerar_atuacao_vereadores_2026 import extrair_resultado  # noqa: E402
 
@@ -505,6 +507,143 @@ class TestInsumos(unittest.TestCase):
         )
         self.assertEqual(extrair_resultado("trecho - Votação: Rejeitada"), "REJEITADO")
         self.assertIsNone(extrair_resultado("trecho - Votação: Pedido de Vistas"))
+
+    def test_recursos_por_sessao_nao_incluem_voto(self):
+        nomes = {nome for _caminho, nome in RECURSOS}
+        self.assertEqual(
+            nomes,
+            {
+                "sessaoplenariapresenca",
+                "presencaordemdia",
+                "ordemdia",
+                "justificativaausencia",
+            },
+        )
+
+    def test_conferencia_exige_ids_distintos(self):
+        pasta = Path(self.tmp.name) / "conf"
+        pasta.mkdir()
+        (pasta / "sessao_4_ordemdia_p1.json").write_text(
+            json.dumps(
+                {
+                    "pagination": {"total_entries": 2, "total_pages": 1, "links": {"next": None}},
+                    "results": [{"id": 10, "sessao_plenaria": 4}, {"id": 10, "sessao_plenaria": 4}],
+                }
+            ),
+            encoding="utf-8",
+        )
+        conf = conferir_prefixo(pasta, "sessao_4_ordemdia", 4, "ordemdia")
+        self.assertFalse(conf["bate"])
+        self.assertEqual(conf["ids_distintos"], 1)
+        self.assertEqual(conf["total_entries"], 2)
+
+    def test_pasta_lote_ignora_porsessao(self):
+        brutos = Path(self.tmp.name) / "brutos"
+        antigo = brutos / "lote_20260926"
+        novo = brutos / "lote_20260927_porsessao"
+        antigo.mkdir(parents=True)
+        novo.mkdir()
+        (antigo / "indice.json").write_text('{"total_pedidos": 75}', encoding="utf-8")
+        (novo / "indice.json").write_text('{"total_pedidos": 260}', encoding="utf-8")
+        self.assertEqual(pasta_lote_mais_recente(brutos), antigo)
+
+    def _pagina_por_sessao(self, pasta: Path, sid: int, recurso: str, linhas: list) -> None:
+        (pasta / f"sessao_{sid}_{recurso}_p1.json").write_text(
+            json.dumps(pagina(linhas), ensure_ascii=False),
+            encoding="utf-8",
+        )
+
+    def _montar_porsessao(self, pasta: Path, presenca_4: list) -> None:
+        pasta.mkdir()
+        self._pagina_por_sessao(pasta, 4, "sessaoplenariapresenca", presenca_4)
+        self._pagina_por_sessao(
+            pasta,
+            37,
+            "sessaoplenariapresenca",
+            [
+                {"id": 2, "sessao_plenaria": 37, "parlamentar": 8},
+                {"id": 3, "sessao_plenaria": 37, "parlamentar": 5},
+            ],
+        )
+        self._pagina_por_sessao(
+            pasta, 4, "presencaordemdia", [{"id": 1, "sessao_plenaria": 4, "parlamentar": 8}]
+        )
+        self._pagina_por_sessao(
+            pasta, 37, "presencaordemdia", [{"id": 2, "sessao_plenaria": 37, "parlamentar": 5}]
+        )
+        self._pagina_por_sessao(
+            pasta,
+            4,
+            "ordemdia",
+            [
+                {
+                    "id": 10,
+                    "sessao_plenaria": 4,
+                    "materia": 9,
+                    "resultado": "Aprovada por Maioria Absoluta",
+                    "numero_ordem": 3,
+                }
+            ],
+        )
+        self._pagina_por_sessao(
+            pasta,
+            37,
+            "ordemdia",
+            [
+                {
+                    "id": 11,
+                    "sessao_plenaria": 37,
+                    "materia": 244,
+                    "resultado": "Aprovada por Unanimidade",
+                    "numero_ordem": 1,
+                }
+            ],
+        )
+        self._pagina_por_sessao(
+            pasta,
+            4,
+            "justificativaausencia",
+            [{"id": 1, "sessao_plenaria": 4, "parlamentar": 1, "tipo_ausencia": 1}],
+        )
+        self._pagina_por_sessao(pasta, 37, "justificativaausencia", [])
+
+    def test_porsessao_acrescenta_id_e_nao_apaga_o_antigo(self):
+        pasta = Path(self.tmp.name) / "porsessao"
+        self._montar_porsessao(
+            pasta,
+            [
+                {"id": 1, "sessao_plenaria": 4, "parlamentar": 8, "ip": IP_FIXTURE},
+                {"id": 99, "sessao_plenaria": 4, "parlamentar": 3},
+            ],
+        )
+        saida = Path(self.tmp.name) / "saida_por"
+        resumo = derivar(self.lote, saida, [2025, 2026], 3, 1, pasta_porsessao=pasta)
+        cobertura = resumo["cobertura_porsessao"]["recursos"]["sessaoplenariapresenca"]
+        self.assertEqual(cobertura["ids_novos"], 1)
+        self.assertEqual(cobertura["ids_novos_lista"], [99])
+        self.assertEqual(cobertura["ids_que_sumiram"], [])
+        pacote = json.loads(
+            (saida / "sessao_4_sessaoplenariapresenca.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(sorted(item["id"] for item in pacote["results"]), [1, 99])
+        self.assertFalse(contem_ip(pacote))
+        self.assertEqual(resumo["contagens"]["2025"]["n_presencas_sessao"], 2)
+        self.assertEqual(resumo["contagens"]["2025"]["votacoes"], 1)
+
+    def test_id_antigo_que_nao_voltou_permanece_e_fica_marcado(self):
+        pasta = Path(self.tmp.name) / "porsessao_falha"
+        self._montar_porsessao(
+            pasta,
+            [{"id": 99, "sessao_plenaria": 4, "parlamentar": 3}],
+        )
+        saida = Path(self.tmp.name) / "saida_falha"
+        resumo = derivar(self.lote, saida, [2025, 2026], 3, 1, pasta_porsessao=pasta)
+        cobertura = resumo["cobertura_porsessao"]["recursos"]["sessaoplenariapresenca"]
+        self.assertEqual(cobertura["ids_que_sumiram"], [1])
+        pacote = json.loads(
+            (saida / "sessao_4_sessaoplenariapresenca.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(sorted(item["id"] for item in pacote["results"]), [1, 99])
 
 
 if __name__ == "__main__":

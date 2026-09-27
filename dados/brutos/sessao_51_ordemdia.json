@@ -17,6 +17,22 @@
       "tramitacao": null
     },
     {
+      "id": 617,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Resolução nº 5 de 2026 em 10ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/617",
+      "metadata": {},
+      "data_ordem": "2026-04-14",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 51,
+      "materia": 291,
+      "tramitacao": null
+    },
+    {
       "id": 618,
       "__str__": "Ordem do Dia/Expediente: 3 - Projeto de Lei Complementar Legislativo nº 1 de 2026 em 10ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/618",
@@ -78,22 +94,6 @@
       "registro_aberto": true,
       "sessao_plenaria": 51,
       "materia": 299,
-      "tramitacao": null
-    },
-    {
-      "id": 617,
-      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Resolução nº 5 de 2026 em 10ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-      "link_detail_backend": "/sessao/ordemdia/617",
-      "metadata": {},
-      "data_ordem": "2026-04-14",
-      "observacao": "",
-      "numero_ordem": 2,
-      "resultado": "Aprovada por Unanimidade",
-      "tipo_votacao": 2,
-      "votacao_aberta": false,
-      "registro_aberto": true,
-      "sessao_plenaria": 51,
-      "materia": 291,
       "tramitacao": null
     }
   ],

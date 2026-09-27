@@ -17,6 +17,14 @@
       "parlamentar": 2
     },
     {
+      "id": 73,
+      "__str__": "Sessão: 23ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 7,
+      "parlamentar": 9
+    },
+    {
       "id": 74,
       "__str__": "Sessão: 23ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
       "link_detail_backend": "",
@@ -57,5 +65,5 @@
       "parlamentar": 5
     }
   ],
-  "total": 7
+  "total": 8
 }

@@ -129,22 +129,6 @@
       "tramitacao": null
     },
     {
-      "id": 466,
-      "__str__": "Ordem do Dia/Expediente: 9 - Projeto de Lei Origem Poder Executivo nº 17 de 2025 em 48ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
-      "link_detail_backend": "/sessao/ordemdia/466",
-      "metadata": {},
-      "data_ordem": "2025-12-09",
-      "observacao": "",
-      "numero_ordem": 9,
-      "resultado": "",
-      "tipo_votacao": 4,
-      "votacao_aberta": false,
-      "registro_aberto": false,
-      "sessao_plenaria": 34,
-      "materia": 130,
-      "tramitacao": null
-    },
-    {
       "id": 464,
       "__str__": "Ordem do Dia/Expediente: 9 - Projeto de Lei Origem Poder Executivo nº 15 de 2025 em 48ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/464",
@@ -158,6 +142,22 @@
       "registro_aberto": false,
       "sessao_plenaria": 34,
       "materia": 127,
+      "tramitacao": null
+    },
+    {
+      "id": 466,
+      "__str__": "Ordem do Dia/Expediente: 9 - Projeto de Lei Origem Poder Executivo nº 17 de 2025 em 48ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/466",
+      "metadata": {},
+      "data_ordem": "2025-12-09",
+      "observacao": "",
+      "numero_ordem": 9,
+      "resultado": "",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 34,
+      "materia": 130,
       "tramitacao": null
     },
     {

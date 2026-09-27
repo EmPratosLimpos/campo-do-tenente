@@ -97,6 +97,22 @@
       "tramitacao": null
     },
     {
+      "id": 115,
+      "__str__": "Ordem do Dia/Expediente: 7 - Projeto de Lei Origem Poder Executivo nº 16 de 2025 em 29ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/115",
+      "metadata": {},
+      "data_ordem": "2025-07-29",
+      "observacao": "",
+      "numero_ordem": 7,
+      "resultado": "Matéria lida",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 13,
+      "materia": 129,
+      "tramitacao": null
+    },
+    {
       "id": 116,
       "__str__": "Ordem do Dia/Expediente: 8 - Projeto de Lei Origem Poder Executivo nº 17 de 2025 em 29ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/116",
@@ -273,5 +289,5 @@
       "tramitacao": null
     }
   ],
-  "total": 17
+  "total": 18
 }

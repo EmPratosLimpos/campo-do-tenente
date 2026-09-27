@@ -168,6 +168,101 @@ def _quantidade_unica(pasta: Path, prefixo: str) -> int:
     return len(ids)
 
 
+def _total_da_primeira_pagina(pasta: Path, prefixo: str):
+    dados = ler_json(pasta / f"{prefixo}_p1.json")
+    paginacao = dados.get("pagination") or {}
+    if paginacao.get("total_entries") is None:
+        return None
+    return int(paginacao["total_entries"])
+
+
+def ler_recurso_por_sessao(pasta: Path, ids_sessao: set[int], recurso: str):
+    """Le as paginas filtradas por sessao. Cada pagina ja veio pronta do SAPL."""
+    linhas = []
+    nomes = []
+    divergencias = []
+    for sid in sorted(ids_sessao):
+        prefixo = f"sessao_{sid}_{recurso}"
+        parte, nomes_parte = ler_paginas(pasta, prefixo)
+        total = _total_da_primeira_pagina(pasta, prefixo)
+        distintos = len(
+            {
+                int(item["id"])
+                for item in parte
+                if isinstance(item, dict) and item.get("id") is not None
+            }
+        )
+        if total is None or total != distintos:
+            divergencias.append(
+                {
+                    "sessao_id": sid,
+                    "recurso": recurso,
+                    "total_entries": total,
+                    "ids_distintos": distintos,
+                }
+            )
+        linhas.extend(parte)
+        nomes.extend(nomes_parte)
+    return linhas, nomes, divergencias
+
+
+def _mapa_sessao(linhas: list) -> dict[int, int | None]:
+    mapa = {}
+    for item in linhas:
+        if not isinstance(item, dict) or item.get("id") is None:
+            continue
+        sid = item.get("sessao_plenaria")
+        mapa[int(item["id"])] = int(sid) if sid is not None else None
+    return mapa
+
+
+def mesclar_com_porsessao(
+    antigas: list, novas: list, ids_ordinarias: set[int]
+) -> tuple[list, dict]:
+    """A lista por sessao vale para as ordinarias. Id antigo que nao voltou permanece."""
+    mapa_antigo = _mapa_sessao(antigas)
+    mapa_novo = _mapa_sessao(novas)
+    antigos_na_ordinaria = {
+        identificador
+        for identificador, sid in mapa_antigo.items()
+        if sid is not None and sid in ids_ordinarias
+    }
+    sumiram = sorted(antigos_na_ordinaria - set(mapa_novo))
+    acrescentados = sorted(set(mapa_novo) - set(mapa_antigo))
+    novas_por_id = indice_por_id(novas)
+    saida = []
+    vistos = set()
+    for item in novas:
+        if not isinstance(item, dict) or item.get("id") is None:
+            continue
+        sid = item.get("sessao_plenaria")
+        if sid is None or int(sid) not in ids_ordinarias:
+            continue
+        identificador = int(item["id"])
+        if identificador in vistos:
+            continue
+        vistos.add(identificador)
+        saida.append(item)
+    for item in antigas:
+        if not isinstance(item, dict) or item.get("id") is None:
+            saida.append(item)
+            continue
+        identificador = int(item["id"])
+        if identificador in vistos:
+            continue
+        vistos.add(identificador)
+        saida.append(item)
+    cobertura = {
+        "ids_lote_antigo": len(mapa_antigo),
+        "ids_lote_antigo_nas_ordinarias": len(antigos_na_ordinaria),
+        "ids_por_sessao": len(mapa_novo),
+        "ids_novos": len(acrescentados),
+        "ids_novos_lista": acrescentados,
+        "ids_que_sumiram": sumiram,
+    }
+    return saida, cobertura
+
+
 def ler_ordens_avulsas(pasta: Path) -> tuple[list, list[str]]:
     linhas = []
     nomes = []
@@ -280,6 +375,7 @@ def derivar(
     anos: list[int],
     tipo_ordinaria: int,
     legislatura_id: int,
+    pasta_porsessao: Path | None = None,
 ) -> dict:
     pasta_saida.mkdir(parents=True, exist_ok=True)
     sessoes = []
@@ -346,6 +442,40 @@ def derivar(
         sessao_por_id[sid] = sessao
 
     ids_recorte = set(sessao_por_id)
+    ids_ordinarias = {
+        int(sessao["id"])
+        for sessao in sessoes
+        if int(sessao.get("tipo") or 0) == int(tipo_ordinaria)
+    }
+    cobertura_porsessao = None
+    pasta_fonte_listas = pasta_lote
+    if pasta_porsessao is not None:
+        pasta_fonte_listas = pasta_porsessao
+        cobertura_porsessao = {
+            "pasta": f"dados/brutos/{pasta_porsessao.name}",
+            "recursos": {},
+        }
+        blocos = {
+            "ordemdia": (ordem_linhas, nomes_ordem),
+            "sessaoplenariapresenca": (presencas, nomes_presenca),
+            "presencaordemdia": (presencas_ordem, nomes_presenca_ordem),
+            "justificativaausencia": (justificativas, nomes_justificativa),
+        }
+        for recurso, (antigas, _nomes_antigos) in blocos.items():
+            novas, nomes_novos, divergencias = ler_recurso_por_sessao(
+                pasta_porsessao, ids_ordinarias, recurso
+            )
+            mescladas, cobertura = mesclar_com_porsessao(antigas, novas, ids_ordinarias)
+            cobertura["sessoes_com_divergencia"] = divergencias
+            cobertura_porsessao["recursos"][recurso] = cobertura
+            if recurso == "ordemdia":
+                ordem_linhas, nomes_ordem = mescladas, nomes_novos
+            elif recurso == "sessaoplenariapresenca":
+                presencas, nomes_presenca = mescladas, nomes_novos
+            elif recurso == "presencaordemdia":
+                presencas_ordem, nomes_presenca_ordem = mescladas, nomes_novos
+            else:
+                justificativas, nomes_justificativa = mescladas, nomes_novos
 
     sessao_do_registro = {}
     registros_sem_sessao = []
@@ -629,6 +759,7 @@ def derivar(
 
     resumo = {
         "pasta_lote": f"dados/brutos/{pasta_lote.name}",
+        "cobertura_porsessao": cobertura_porsessao,
         "rotulo_sem_voto_individual": ROTULO_SEM_VOTO,
         "texto_nao_votou_preservado": TEXTO_NAO_VOTOU,
         "contagens": contagens,
@@ -640,13 +771,13 @@ def derivar(
             "arquivos_de_origem": [fonte(pasta_lote, nome) for nome in nomes_mandato],
         },
         "arquivos_de_origem": {
-            "ordemdia": [fonte(pasta_lote, nome) for nome in nomes_ordem],
+            "ordemdia": [fonte(pasta_fonte_listas, nome) for nome in nomes_ordem],
             "expedientemateria": [fonte(pasta_lote, nome) for nome in nomes_expediente],
             "registrovotacao": [fonte(pasta_lote, nome) for nome in nomes_registro],
             "votoparlamentar": [fonte(pasta_lote, nome) for nome in nomes_voto],
-            "sessaoplenariapresenca": [fonte(pasta_lote, nome) for nome in nomes_presenca],
-            "presencaordemdia": [fonte(pasta_lote, nome) for nome in nomes_presenca_ordem],
-            "justificativaausencia": [fonte(pasta_lote, nome) for nome in nomes_justificativa],
+            "sessaoplenariapresenca": [fonte(pasta_fonte_listas, nome) for nome in nomes_presenca],
+            "presencaordemdia": [fonte(pasta_fonte_listas, nome) for nome in nomes_presenca_ordem],
+            "justificativaausencia": [fonte(pasta_fonte_listas, nome) for nome in nomes_justificativa],
             "integrantemesa": [fonte(pasta_lote, nome) for nome in nomes_mesa],
             "parlamentar": [fonte(pasta_lote, nome) for nome in nomes_parlamentar],
             "partido": [fonte(pasta_lote, nome) for nome in nomes_partido],
@@ -671,7 +802,7 @@ def derivar(
 def pasta_lote_mais_recente(brutos: Path) -> Path:
     candidatas = []
     for caminho in brutos.glob("lote_*"):
-        if not caminho.is_dir():
+        if not caminho.is_dir() or "porsessao" in caminho.name:
             continue
         indice = caminho / "indice.json"
         if not indice.exists():
@@ -688,15 +819,28 @@ def pasta_lote_mais_recente(brutos: Path) -> Path:
     return candidatas[-1][2]
 
 
+def pasta_porsessao_mais_recente(brutos: Path) -> Path | None:
+    candidatas = [
+        caminho
+        for caminho in brutos.glob("lote_*_porsessao")
+        if caminho.is_dir() and (caminho / "indice.json").exists()
+    ]
+    if not candidatas:
+        return None
+    return sorted(candidatas)[-1]
+
+
 def main() -> None:
     cfg = carregar_config()
     pasta = pasta_lote_mais_recente(BRUTOS)
+    por_sessao = pasta_porsessao_mais_recente(BRUTOS)
     resumo = derivar(
         pasta,
         BRUTOS,
         anos_recorte(cfg),
         id_tipo_sessao_ordinaria(cfg),
         id_legislatura_atual(cfg),
+        pasta_porsessao=por_sessao,
     )
     print(f"Insumos gerados a partir de dados/brutos/{pasta.name}")
     for ano, bloco in resumo["contagens"].items():

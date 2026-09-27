@@ -10,6 +10,15 @@
       "parlamentar": 8
     },
     {
+      "id": 795,
+      "__str__": "SessaoPlenariaPresenca object (795)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 271,
+      "parlamentar": 3
+    },
+    {
       "id": 796,
       "__str__": "SessaoPlenariaPresenca object (796)",
       "link_detail_backend": "",
@@ -17,6 +26,15 @@
       "data_sessao": null,
       "sessao_plenaria": 271,
       "parlamentar": 2
+    },
+    {
+      "id": 797,
+      "__str__": "SessaoPlenariaPresenca object (797)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 271,
+      "parlamentar": 9
     },
     {
       "id": 798,
@@ -64,5 +82,5 @@
       "parlamentar": 100
     }
   ],
-  "total": 7
+  "total": 9
 }

@@ -9,6 +9,14 @@
       "parlamentar": 8
     },
     {
+      "id": 741,
+      "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 269,
+      "parlamentar": 3
+    },
+    {
       "id": 742,
       "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
       "link_detail_backend": "",
@@ -65,5 +73,5 @@
       "parlamentar": 100
     }
   ],
-  "total": 8
+  "total": 9
 }

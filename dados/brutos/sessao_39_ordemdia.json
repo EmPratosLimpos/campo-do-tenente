@@ -17,6 +17,22 @@
       "tramitacao": null
     },
     {
+      "id": 532,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem do Poder Legislativo nº 2 de 2026 em 3ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/532",
+      "metadata": {},
+      "data_ordem": "2026-02-24",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 39,
+      "materia": 245,
+      "tramitacao": null
+    },
+    {
       "id": 533,
       "__str__": "Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 15 de 2025 em 3ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/533",
@@ -254,22 +270,6 @@
       "registro_aberto": false,
       "sessao_plenaria": 39,
       "materia": 253,
-      "tramitacao": null
-    },
-    {
-      "id": 532,
-      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem do Poder Legislativo nº 2 de 2026 em 3ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-      "link_detail_backend": "/sessao/ordemdia/532",
-      "metadata": {},
-      "data_ordem": "2026-02-24",
-      "observacao": "",
-      "numero_ordem": 2,
-      "resultado": "Aprovada por Unanimidade",
-      "tipo_votacao": 2,
-      "votacao_aberta": false,
-      "registro_aberto": true,
-      "sessao_plenaria": 39,
-      "materia": 245,
       "tramitacao": null
     }
   ],

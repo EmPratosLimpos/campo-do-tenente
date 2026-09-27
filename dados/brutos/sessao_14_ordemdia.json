@@ -97,6 +97,22 @@
       "tramitacao": null
     },
     {
+      "id": 133,
+      "__str__": "Ordem do Dia/Expediente: 7 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 30ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/133",
+      "metadata": {},
+      "data_ordem": "2025-08-05",
+      "observacao": "",
+      "numero_ordem": 7,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 14,
+      "materia": 163,
+      "tramitacao": null
+    },
+    {
       "id": 134,
       "__str__": "Ordem do Dia/Expediente: 8 - Projeto de Lei Origem Poder Executivo nº 15 de 2025 em 30ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/134",
@@ -366,22 +382,6 @@
       "registro_aberto": false,
       "sessao_plenaria": 14,
       "materia": 169,
-      "tramitacao": null
-    },
-    {
-      "id": 133,
-      "__str__": "Ordem do Dia/Expediente: 7 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 30ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
-      "link_detail_backend": "/sessao/ordemdia/133",
-      "metadata": {},
-      "data_ordem": "2025-08-05",
-      "observacao": "",
-      "numero_ordem": 7,
-      "resultado": "Aprovada por Unanimidade",
-      "tipo_votacao": 2,
-      "votacao_aberta": false,
-      "registro_aberto": true,
-      "sessao_plenaria": 14,
-      "materia": 163,
       "tramitacao": null
     }
   ],

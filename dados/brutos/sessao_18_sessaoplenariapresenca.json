@@ -10,6 +10,15 @@
       "parlamentar": 8
     },
     {
+      "id": 186,
+      "__str__": "SessaoPlenariaPresenca object (186)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 18,
+      "parlamentar": 3
+    },
+    {
       "id": 187,
       "__str__": "SessaoPlenariaPresenca object (187)",
       "link_detail_backend": "",
@@ -73,5 +82,5 @@
       "parlamentar": 5
     }
   ],
-  "total": 8
+  "total": 9
 }

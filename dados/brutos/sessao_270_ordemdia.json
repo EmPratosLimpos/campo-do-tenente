@@ -17,6 +17,22 @@
       "tramitacao": null
     },
     {
+      "id": 692,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem Poder Executivo nº 12 de 2026 em 30ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/692",
+      "metadata": {},
+      "data_ordem": "2026-09-01",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Matéria lida",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 270,
+      "materia": 807,
+      "tramitacao": null
+    },
+    {
       "id": 693,
       "__str__": "Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 13 de 2026 em 30ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/693",
@@ -30,6 +46,22 @@
       "registro_aberto": false,
       "sessao_plenaria": 270,
       "materia": 808,
+      "tramitacao": null
+    },
+    {
+      "id": 686,
+      "__str__": "Ordem do Dia/Expediente: 4 - Indicação nº 27 de 2026 em 30ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/686",
+      "metadata": {},
+      "data_ordem": "2026-09-01",
+      "observacao": "",
+      "numero_ordem": 4,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 270,
+      "materia": 796,
       "tramitacao": null
     },
     {
@@ -95,23 +127,7 @@
       "sessao_plenaria": 270,
       "materia": 799,
       "tramitacao": null
-    },
-    {
-      "id": 686,
-      "__str__": "Ordem do Dia/Expediente: 4 - Indicação nº 27 de 2026 em 30ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-      "link_detail_backend": "/sessao/ordemdia/686",
-      "metadata": {},
-      "data_ordem": "2026-09-01",
-      "observacao": "",
-      "numero_ordem": 4,
-      "resultado": "Aprovada por Unanimidade",
-      "tipo_votacao": 2,
-      "votacao_aberta": false,
-      "registro_aberto": true,
-      "sessao_plenaria": 270,
-      "materia": 796,
-      "tramitacao": null
     }
   ],
-  "total": 7
+  "total": 8
 }

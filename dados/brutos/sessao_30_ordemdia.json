@@ -17,6 +17,22 @@
       "tramitacao": null
     },
     {
+      "id": 395,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem Poder Executivo nº 16 de 2025 em 45ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/395",
+      "metadata": {},
+      "data_ordem": "2025-11-18",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 30,
+      "materia": 129,
+      "tramitacao": null
+    },
+    {
       "id": 396,
       "__str__": "Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 17 de 2025 em 45ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/396",
@@ -289,5 +305,5 @@
       "tramitacao": null
     }
   ],
-  "total": 18
+  "total": 19
 }

@@ -49,22 +49,6 @@
       "tramitacao": 806
     },
     {
-      "id": 631,
-      "__str__": "Ordem do Dia/Expediente: 5 - Indicação nº 12 de 2026 em 13ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-      "link_detail_backend": "/sessao/ordemdia/631",
-      "metadata": {},
-      "data_ordem": "2026-05-05",
-      "observacao": "",
-      "numero_ordem": 5,
-      "resultado": "Aprovada por Unanimidade",
-      "tipo_votacao": 2,
-      "votacao_aberta": false,
-      "registro_aberto": true,
-      "sessao_plenaria": 54,
-      "materia": 350,
-      "tramitacao": null
-    },
-    {
       "id": 628,
       "__str__": "Ordem do Dia/Expediente: 4 - Projeto de Resolução nº 2 de 2026 em 13ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/628",
@@ -79,6 +63,22 @@
       "sessao_plenaria": 54,
       "materia": 259,
       "tramitacao": 612
+    },
+    {
+      "id": 631,
+      "__str__": "Ordem do Dia/Expediente: 5 - Indicação nº 12 de 2026 em 13ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/631",
+      "metadata": {},
+      "data_ordem": "2026-05-05",
+      "observacao": "",
+      "numero_ordem": 5,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 54,
+      "materia": 350,
+      "tramitacao": null
     }
   ],
   "total": 5

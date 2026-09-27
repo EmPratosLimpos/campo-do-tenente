@@ -9,8 +9,8 @@
   "n_nao_votou": 0,
   "n_votacoes_com_nao_votou": 0,
   "n_votacoes_com_exatamente_um_nao_votou": 0,
-  "n_presencas_sessao": 274,
-  "n_presencas_ordem_dia": 267,
+  "n_presencas_sessao": 279,
+  "n_presencas_ordem_dia": 279,
   "n_justificativas": 2,
   "lacuna_sessoes_ordinarias": {
     "numeros_ausentes_no_sapl": [
@@ -53,7 +53,7 @@
       "n_votacoes_sem_voto_individual": 0,
       "n_nao_votou": 0,
       "n_presencas_sessao": 9,
-      "n_presencas_ordem_dia": 8,
+      "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": []
     },
@@ -225,7 +225,7 @@
       "n_votacoes_sem_voto_individual": 3,
       "n_nao_votou": 0,
       "n_presencas_sessao": 9,
-      "n_presencas_ordem_dia": 8,
+      "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
         {
@@ -282,8 +282,8 @@
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 3,
       "n_nao_votou": 0,
-      "n_presencas_sessao": 8,
-      "n_presencas_ordem_dia": 8,
+      "n_presencas_sessao": 9,
+      "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
         {
@@ -371,7 +371,7 @@
       "n_votacoes_sem_voto_individual": 6,
       "n_nao_votou": 0,
       "n_presencas_sessao": 8,
-      "n_presencas_ordem_dia": 7,
+      "n_presencas_ordem_dia": 8,
       "n_justificativas": 0,
       "votacoes": [
         {
@@ -499,7 +499,7 @@
       "n_votacoes_sem_voto_individual": 4,
       "n_nao_votou": 0,
       "n_presencas_sessao": 9,
-      "n_presencas_ordem_dia": 8,
+      "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
         {
@@ -598,7 +598,7 @@
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 7,
       "n_nao_votou": 0,
-      "n_presencas_sessao": 8,
+      "n_presencas_sessao": 9,
       "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
@@ -845,7 +845,7 @@
       "n_votacoes_sem_voto_individual": 3,
       "n_nao_votou": 0,
       "n_presencas_sessao": 9,
-      "n_presencas_ordem_dia": 8,
+      "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
         {
@@ -917,7 +917,7 @@
       "n_votacoes_sem_voto_individual": 9,
       "n_nao_votou": 0,
       "n_presencas_sessao": 9,
-      "n_presencas_ordem_dia": 8,
+      "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
         {
@@ -1073,7 +1073,7 @@
       "n_votacoes_sem_voto_individual": 2,
       "n_nao_votou": 0,
       "n_presencas_sessao": 9,
-      "n_presencas_ordem_dia": 8,
+      "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
         {
@@ -1130,7 +1130,7 @@
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 1,
       "n_nao_votou": 0,
-      "n_presencas_sessao": 8,
+      "n_presencas_sessao": 9,
       "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
@@ -1160,7 +1160,7 @@
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 2,
       "n_nao_votou": 0,
-      "n_presencas_sessao": 8,
+      "n_presencas_sessao": 9,
       "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
@@ -1204,7 +1204,7 @@
       "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 2,
       "n_nao_votou": 0,
-      "n_presencas_sessao": 8,
+      "n_presencas_sessao": 9,
       "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
@@ -1249,7 +1249,7 @@
       "n_votacoes_sem_voto_individual": 2,
       "n_nao_votou": 0,
       "n_presencas_sessao": 9,
-      "n_presencas_ordem_dia": 8,
+      "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
         {
@@ -1293,7 +1293,7 @@
       "n_votacoes_sem_voto_individual": 1,
       "n_nao_votou": 0,
       "n_presencas_sessao": 8,
-      "n_presencas_ordem_dia": 7,
+      "n_presencas_ordem_dia": 8,
       "n_justificativas": 0,
       "votacoes": [
         {
@@ -1381,7 +1381,7 @@
       "n_votacoes_sem_voto_individual": 3,
       "n_nao_votou": 0,
       "n_presencas_sessao": 9,
-      "n_presencas_ordem_dia": 8,
+      "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
         {
@@ -1629,7 +1629,7 @@
       "n_votacoes_sem_voto_individual": 3,
       "n_nao_votou": 0,
       "n_presencas_sessao": 9,
-      "n_presencas_ordem_dia": 8,
+      "n_presencas_ordem_dia": 9,
       "n_justificativas": 0,
       "votacoes": [
         {

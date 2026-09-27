@@ -17,6 +17,22 @@
       "tramitacao": null
     },
     {
+      "id": 295,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem do Poder Legislativo nº 16 de 2025 em 39ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/295",
+      "metadata": {},
+      "data_ordem": "2025-10-07",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 23,
+      "materia": 180,
+      "tramitacao": null
+    },
+    {
       "id": 296,
       "__str__": "Ordem do Dia/Expediente: 3 - Projeto de Lei Origem Poder Executivo nº 15 de 2025 em 39ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/296",
@@ -257,5 +273,5 @@
       "tramitacao": null
     }
   ],
-  "total": 16
+  "total": 17
 }

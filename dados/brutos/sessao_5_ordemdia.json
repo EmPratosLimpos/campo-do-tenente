@@ -97,6 +97,22 @@
       "tramitacao": 78
     },
     {
+      "id": 19,
+      "__str__": "Ordem do Dia/Expediente: 7 - Projeto de Lei Origem do Poder Legislativo nº 8 de 2025 em 21ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/19",
+      "metadata": {},
+      "data_ordem": "2025-06-03",
+      "observacao": "",
+      "numero_ordem": 7,
+      "resultado": "",
+      "tipo_votacao": 4,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 5,
+      "materia": 27,
+      "tramitacao": null
+    },
+    {
       "id": 20,
       "__str__": "Ordem do Dia/Expediente: 8 - Projeto de Lei Origem do Poder Legislativo nº 9 de 2025 em 21ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
       "link_detail_backend": "/sessao/ordemdia/20",
@@ -161,5 +177,5 @@
       "tramitacao": null
     }
   ],
-  "total": 10
+  "total": 11
 }
