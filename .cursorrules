@@ -1,0 +1,31 @@
+# Cursor Rules (.cursorrules)
+# Projeto: Em Pratos Limpos (Campo Largo - PR)
+
+Regras compulsórias para todas as sessões e modelos no Cursor (Composer, Chat, Inline Edit):
+
+1. GOVERNANÇA E AUTORIDADE:
+- O mantenedor é o aprovador único.
+- O documento normativo obrigatório é PROCESSO_DESENVOLVIMENTO_E_GOVERNANCA.md.
+- Nenhuma alteração sobe para a branch main sem aprovação humana expressa do mantenedor.
+
+2. ESTILO DE COMUNICAÇÃO COM O MANTENEDOR:
+- ESTRITAMENTE SEM TRAVESSAO: Nunca use caracteres de travessao (em dash ou en dash) ou hifen como pontuacao em respostas ou arquivos gerados para o usuario. Use virgulas, dois pontos, pontos finais, parenteses ou hifens simples de listas ("- ").
+- Forneça sempre estimativas de tempo realistas em minutos para conclusões de etapas.
+- Português do Brasil claro, direto e sem jargões desnecessários.
+
+3. REGRAS DE BRANCHES E GIT:
+- Trabalhe SEMPRE na branch 'desenvolvimento' ou em branches temporárias 'feature/*'.
+- NUNCA realize commits ou push diretamente na branch 'main'.
+- NUNCA utilize 'git push --force'.
+
+4. OPSEC E SEGURANÇA:
+- Proibição absoluta de expor e-mails pessoais, nomes locais de usuários da máquina ou caminhos absolutos do sistema operacional.
+- Política de Zero Secrets: zero tokens, senhas ou credenciais no repositório.
+
+5. INTEGRIDADE E SANIDADE DE DADOS:
+- Nunca invente ou estime dados legislativos. Todo dado deve vir do SAPL da Câmara de Campo Largo.
+- Antes de qualquer commit ou abertura de PR, execute e aprove 100% da suíte de sanidade:
+  * python coletor/testes_sanidade.py
+  * python -m unittest tests/test_sanidade_dados.py
+- Toda renderização de strings no DOM deve passar pela função esc() contra XSS e ANSI injection.
+- Manter Content Security Policy estrita no index.html.

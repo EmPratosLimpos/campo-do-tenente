@@ -1,0 +1,39 @@
+name: Validacao de Sanidade e Seguranca
+
+on:
+  pull_request:
+    branches: [ main, desenvolvimento ]
+  push:
+    branches: [ desenvolvimento ]
+
+jobs:
+  validacao:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r coletor/requirements.txt
+
+      - name: Executar testes de sanidade dos dados
+        run: |
+          python coletor/testes_sanidade.py
+          python -m unittest tests/test_sanidade_dados.py
+
+      - name: Validar hash de integridade
+        run: |
+          python -c "import hashlib, sys; h = hashlib.sha256(open('dados/tratados/atuacao_vereadores_2026.json', 'rb').read()).hexdigest(); saved = open('dados/tratados/atuacao_vereadores_2026.json.sha256').read().strip(); print(f'Hash verificado: {h}'); sys.exit(0 if h == saved else 1)"
+
+      - name: Validar regras de OPSEC e Higiene
+        run: |
+          echo "Verificando ausencia de caminhos locais e dados sensiveis..."
+          ! grep -rE "C:\\\\Users\\\\" --exclude-dir=".git" --exclude-dir=".github" --exclude="*.pyc" .
+          echo "Verificando higienizacao de travessoes em documentacoes normativas..."
+          ! grep -rE "[—–]" PROCESSO_DESENVOLVIMENTO_E_GOVERNANCA.md AGENTS.md CLAUDE.md .cursorrules
