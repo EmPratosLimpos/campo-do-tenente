@@ -1,16 +1,22 @@
-"""Gera a classificacao tematica proposta para as votacoes ordinarias
-dos anos definidos em config_cidade.json.
+"""Gera o tema de cada votacao ordinaria dos anos definidos em
+config_cidade.json.
 
 Entradas imutaveis por ano:
 - dados/brutos/contagem_votacoes_ordinarias_<ano>.json
 - dados/brutos/materias-<ano>-resposta-original.csv
 - dados/brutos/sessao_<id>_ordemdia.json e paginas adicionais
 
+Tema de cada materia:
+- dados/tratados/temas_materias.json, um tema principal por materia, lido
+  da ementa oficial. O campo revisada_por_humano diz se o mantenedor ja
+  conferiu a classificacao.
+
 Saida reproduzivel por ano:
 - dados/tratados/tema-votacoes-<ano>.csv
 
-As regras e categorias abaixo foram propostas por IA depois da leitura das
-ementas. Nenhuma classificacao foi revisada por uma pessoa.
+As regras por palavra (REGRAS e classificar) ficam apenas como alternativa
+documentada e desligada (USAR_REGRAS_POR_PALAVRA = False). Continuam
+importaveis porque outro gerador ainda chama classificar().
 """
 
 import csv
@@ -30,6 +36,14 @@ from config_cidade import anos_recorte, carregar_config, link_materia  # noqa: E
 
 BRUTOS = RAIZ / "dados" / "brutos"
 CONFIG = carregar_config()
+ARQUIVO_TEMAS = Path(__file__).with_name("temas_materias.json")
+
+# Alternativa antiga, desligada: classificar pela presenca de palavras na
+# ementa. Ligar apenas se temas_materias.json nao existir para a cidade.
+USAR_REGRAS_POR_PALAVRA = False
+
+TEMA_NAO_SE_APLICA = "não se aplica"
+TEMA_SEM_EMENTA = "sem ementa no SAPL"
 RESULTADOS_DE_VOTACAO = {
     "UNANIMIDADE",
     "MAIORIA ABSOLUTA",
@@ -192,6 +206,32 @@ def classificar(ementa):
     return next(tema for tema in REGRAS if pontos[tema] == maior)
 
 
+def carregar_temas():
+    """Le temas_materias.json e devolve {id da materia: registro}."""
+    if not ARQUIVO_TEMAS.exists():
+        raise SystemExit(
+            f"Arquivo ausente: {ARQUIVO_TEMAS.name}. "
+            "A classificacao por materia precisa existir antes deste gerador."
+        )
+    dados = json.loads(ARQUIVO_TEMAS.read_text(encoding="utf-8"))
+    return {int(item["id"]): item for item in dados["materias"]}
+
+
+def tema_da_materia(materia_id, ementa, temas):
+    """Tema, confianca, autoria da classificacao e revisao de uma materia."""
+    if USAR_REGRAS_POR_PALAVRA:
+        return classificar(ementa), "", "regras por palavra", False
+    registro = temas.get(int(materia_id))
+    if registro is None:
+        return None
+    return (
+        registro["tema"],
+        registro["confianca"],
+        registro["classificado_por"],
+        bool(registro["revisada_por_humano"]),
+    )
+
+
 def carregar_materias(ano: int):
     caminho = BRUTOS / f"materias-{ano}-resposta-original.csv"
     if not caminho.exists():
@@ -278,15 +318,22 @@ def main():
 
 def gerar_temas_do_ano(ano: int):
     materias = carregar_materias(ano)
+    temas = carregar_temas()
     votacoes = carregar_votacoes(ano)
     linhas = []
     sem_ementa = Counter()
+    sem_tema = Counter()
 
     for item in votacoes:
         materia = materias.get(item["materia"])
         if materia is None:
             sem_ementa[item["materia"]] += 1
             continue
+        classificacao = tema_da_materia(item["materia"], materia["Ementa"], temas)
+        if classificacao is None:
+            sem_tema[item["materia"]] += 1
+            continue
+        tema, confianca, classificado_por, revisada = classificacao
 
         linhas.append(
             {
@@ -299,9 +346,10 @@ def gerar_temas_do_ano(ano: int):
                 "tipo_sigla": materia["Tipo de Matéria Legislativa/Sigla"],
                 "tipo_descricao": materia["Tipo de Matéria Legislativa/Descrição"],
                 "ementa": materia["Ementa"],
-                "tema_proposto": classificar(materia["Ementa"]),
-                "classificador": "IA, por regras temáticas documentadas",
-                "revisada_por_humano": "não",
+                "tema": tema,
+                "confianca": confianca,
+                "classificado_por": classificado_por,
+                "revisada_por_humano": "sim" if revisada else "não",
                 "fonte_oficial": link_materia(item["materia"], CONFIG),
             }
         )
@@ -316,13 +364,14 @@ def gerar_temas_do_ano(ano: int):
         escritor.writeheader()
         escritor.writerows(linhas)
 
-    contagens = Counter(linha["tema_proposto"] for linha in linhas)
+    contagens = Counter(linha["tema"] for linha in linhas)
     print(f"{ano}: {len(votacoes)} votacoes localizadas")
     print(f"{ano}: {len(linhas)} votacoes classificadas")
     print(f"{ano}: {sum(sem_ementa.values())} sem ementa no CSV")
+    print(f"{ano}: {sum(sem_tema.values())} sem tema em {ARQUIVO_TEMAS.name}")
     for tema, quantidade in contagens.most_common():
         print(f"{tema}: {quantidade}")
-    print(f"  {saida}")
+    print(f"  {saida.relative_to(RAIZ).as_posix()}")
 
 
 if __name__ == "__main__":
