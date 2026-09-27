@@ -11,8 +11,18 @@
     "legislatura_inicio": 2025,
     "legislatura_fim": 2028
   },
+  "painel": {
+    "nome_projeto": "Em Pratos Limpos",
+    "endereco_publico": "https://empratoslimpos.github.io/campo-do-tenente/",
+    "repositorio": "https://github.com/EmPratosLimpos/campo-do-tenente",
+    "site_camara": "https://www.campodotenente.pr.leg.br",
+    "site_camara_nota": "fonte oficial usada so para afastamentos que o SAPL nao registra (D-020)"
+  },
   "recorte": {
-    "anos": [2025, 2026],
+    "anos": [
+      2025,
+      2026
+    ],
     "nota": "legislatura inteira"
   },
   "vereadores": {
