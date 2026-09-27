@@ -290,6 +290,8 @@ A autoria veio de `autoria_materias.json`. A lista de cada vereador abaixo só i
 
 O tema de cada matéria veio de `temas_materias.json`.
 
+Classificação por tema revisada pelo mantenedor em todas as matérias com tema.
+
 ### Jorge Quege
 
 Projetos de lei do Legislativo: 0. Aprovados: 0. Rejeitados: 0. Em tramitação: 0.
