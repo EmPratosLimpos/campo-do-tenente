@@ -1080,6 +1080,22 @@ def tema_da_materia(materia_id: int, indice: dict[int, dict]) -> tuple[str | Non
     return tema, bool(revisada) if revisada is not None else False
 
 
+def revisao_completa(indice: dict[int, dict]) -> bool:
+    """Calcula o sinal de revisao a partir dos dados, nunca fixo.
+
+    true somente quando toda materia com tema do arquivo de temas ja passou
+    pela revisao humana. Sem materia com tema nao ha revisao que declarar.
+    """
+    com_tema = [
+        item
+        for item in indice.values()
+        if isinstance(item, dict) and str(item.get("tema") or "").strip()
+    ]
+    if not com_tema:
+        return False
+    return all(bool(item.get("revisada_por_humano")) for item in com_tema)
+
+
 def carregar_projetos(
     ano: int,
     piso: int,
@@ -1543,6 +1559,13 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
                 else "O arquivo `temas_materias.json` não está nesta pasta. O tema de cada matéria ficou vazio."
             ),
             "",
+            (
+                "Classificação por tema revisada pelo mantenedor em todas as "
+                "matérias com tema."
+                if meta.get("revisada_por_humano")
+                else "Nem toda matéria com tema passou pela revisão do mantenedor."
+            ),
+            "",
         ]
     )
     for item in vereadores:
@@ -1669,6 +1692,7 @@ def gerar_do_ano(ano: int) -> None:
             )
 
     indice_temas = carregar_temas()
+    revisada_tudo = revisao_completa(indice_temas)
     projetos, n_pleg, n_plex = carregar_projetos(
         ano,
         int(piso_projetos),
@@ -1782,7 +1806,7 @@ def gerar_do_ano(ano: int) -> None:
             "projetos_lei_legislativo_por_categoria": temas_globais(projetos),
             "temas_materias_presente": ARQUIVO_TEMAS.exists(),
             "fonte_temas": rel(ARQUIVO_TEMAS) if ARQUIVO_TEMAS.exists() else None,
-            "revisada_por_humano": False,
+            "revisada_por_humano": revisada_tudo,
             "arquivos_de_origem": [
                 rel(DIR_BRUTOS / f"contagem_votacoes_ordinarias_{ano}.json"),
                 rel(DIR_BRUTOS / f"materias-{ano}-resposta-original.csv"),
