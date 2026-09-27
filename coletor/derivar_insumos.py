@@ -802,7 +802,7 @@ def derivar(
 def pasta_lote_mais_recente(brutos: Path) -> Path:
     candidatas = []
     for caminho in brutos.glob("lote_*"):
-        if not caminho.is_dir() or "porsessao" in caminho.name:
+        if not caminho.is_dir() or "porsessao" in caminho.name or caminho.name.endswith("_autoria"):
             continue
         indice = caminho / "indice.json"
         if not indice.exists():

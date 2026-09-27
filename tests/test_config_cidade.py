@@ -12,7 +12,7 @@ CAMPOS_OBRIGATORIOS = {
     ),
     "recorte": ("anos",),
     "vereadores": ("numero_esperado",),
-    "pisos_sanidade": ("sessoes_ordinarias", "plls", "vereadores"),
+    "pisos_sanidade": ("por_ano",),
 }
 
 
@@ -51,9 +51,6 @@ class TestConfigCidade(unittest.TestCase):
 
     def test_valores_desconhecidos_ficam_nulos(self):
         self.assertIsNone(self.config["vereadores"]["numero_esperado"])
-        self.assertIsNone(self.config["pisos_sanidade"]["sessoes_ordinarias"])
-        self.assertIsNone(self.config["pisos_sanidade"]["plls"])
-        self.assertIsNone(self.config["pisos_sanidade"]["vereadores"])
 
     def test_anos_do_recorte_sao_inteiros(self):
         anos = self.config["recorte"]["anos"]

@@ -1,0 +1,525 @@
+{
+  "meta": {
+    "gerado_em": "2026-09-27T11:43:45-03:00",
+    "gerado_por": "dados/tratados/gerar_tabela_vereadores.py",
+    "cidade": "Campo do Tenente",
+    "anos_recorte": [
+      2025,
+      2026
+    ],
+    "banca_encontrada": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      100
+    ],
+    "banca_confere": true,
+    "banca_por_ano": {
+      "2025": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "2026": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        100
+      ]
+    },
+    "n_ativos_no_recorte": 10,
+    "n_cadastro": 10,
+    "partido_no_cadastro_estruturado": true,
+    "observacao_partido": "O partido vigente veio de api_parlamentares_filiacao.json cruzado com api_parlamentares_partido.json. A foto veio do campo fotografia do cadastro de parlamentar."
+  },
+  "casos_de_atencao": [],
+  "autorias_que_nao_sao_vereador": [],
+  "vereadores": [
+    {
+      "id_sapl": 1,
+      "slug_codigo": "jorge-quege",
+      "nome_oficial": "Jorge Luiz Quege",
+      "nome_parlamentar": "Jorge Quege",
+      "partido": null,
+      "partido_sigla": "PP",
+      "partido_nome": "PARTIDO PROGRESSISTA",
+      "foto_url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/1/emk00759_Rt35TkS.jpg",
+      "apelidos": [
+        "Jorge Luiz Quege",
+        "Jorge Quege"
+      ],
+      "apelidos_origem": {
+        "Jorge Luiz Quege": [
+          "cadastro"
+        ],
+        "Jorge Quege": [
+          "autor_sapl",
+          "cadastro",
+          "presenca_ordem_dia",
+          "voto"
+        ]
+      },
+      "ativo_no_recorte": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2026-08-18",
+      "anos_com_mandato": [
+        2025,
+        2026
+      ],
+      "condicao": "suplente",
+      "afastamento_registro_oficial": [
+        {
+          "mandato_id": 6,
+          "tipo_afastamento_id": 2,
+          "tipo_afastamento_nome": "Cassação de mandato",
+          "data_fim_mandato": "2026-08-18",
+          "fonte": "registro oficial do mandato no SAPL"
+        }
+      ],
+      "mandatos": [
+        {
+          "mandato_id": 6,
+          "condicao": "suplente",
+          "titular": false,
+          "data_inicio_mandato": "2025-01-01",
+          "data_fim_mandato": "2026-08-18",
+          "tipo_afastamento_id": 2,
+          "tipo_afastamento_nome": "Cassação de mandato"
+        }
+      ],
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/parlamentar/1"
+    },
+    {
+      "id_sapl": 2,
+      "slug_codigo": "dr-marcos-rodrigues",
+      "nome_oficial": "Marcos Antonio Rodrigues",
+      "nome_parlamentar": "Dr. Marcos Rodrigues",
+      "partido": null,
+      "partido_sigla": "MDB",
+      "partido_nome": "MOVIMENTO DEMOCRÁTICO BRASILEIRO",
+      "foto_url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/2/emk00154.jpg",
+      "apelidos": [
+        "Dr. Marcos Rodrigues",
+        "Marcos Antonio Rodrigues"
+      ],
+      "apelidos_origem": {
+        "Dr. Marcos Rodrigues": [
+          "autor_sapl",
+          "cadastro",
+          "mesa",
+          "presenca_ordem_dia",
+          "voto"
+        ],
+        "Marcos Antonio Rodrigues": [
+          "cadastro"
+        ]
+      },
+      "ativo_no_recorte": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "anos_com_mandato": [
+        2025,
+        2026
+      ],
+      "condicao": "titular",
+      "afastamento_registro_oficial": [],
+      "mandatos": [
+        {
+          "mandato_id": 3,
+          "condicao": "titular",
+          "titular": true,
+          "data_inicio_mandato": "2025-01-01",
+          "data_fim_mandato": "2028-12-31",
+          "tipo_afastamento_id": null,
+          "tipo_afastamento_nome": null
+        }
+      ],
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/parlamentar/2"
+    },
+    {
+      "id_sapl": 3,
+      "slug_codigo": "cleiton-costa",
+      "nome_oficial": "Cleiton Nunes da Costa",
+      "nome_parlamentar": "Cleiton Costa",
+      "partido": null,
+      "partido_sigla": "PDT",
+      "partido_nome": "PARTIDO DEMOCRÁTICO TRABALHISTA",
+      "foto_url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/3/emk00753.jpg",
+      "apelidos": [
+        "Cleiton Costa",
+        "Cleiton Nunes da Costa"
+      ],
+      "apelidos_origem": {
+        "Cleiton Costa": [
+          "autor_sapl",
+          "cadastro",
+          "presenca_ordem_dia",
+          "voto"
+        ],
+        "Cleiton Nunes da Costa": [
+          "cadastro"
+        ]
+      },
+      "ativo_no_recorte": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "anos_com_mandato": [
+        2025,
+        2026
+      ],
+      "condicao": "titular",
+      "afastamento_registro_oficial": [],
+      "mandatos": [
+        {
+          "mandato_id": 2,
+          "condicao": "titular",
+          "titular": true,
+          "data_inicio_mandato": "2025-01-01",
+          "data_fim_mandato": "2028-12-31",
+          "tipo_afastamento_id": null,
+          "tipo_afastamento_nome": null
+        }
+      ],
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/parlamentar/3"
+    },
+    {
+      "id_sapl": 4,
+      "slug_codigo": "kinho-lazarino",
+      "nome_oficial": "Marcos Wesley Lazarino",
+      "nome_parlamentar": "Kinho Lazarino",
+      "partido": null,
+      "partido_sigla": "MDB",
+      "partido_nome": "MOVIMENTO DEMOCRÁTICO BRASILEIRO",
+      "foto_url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/4/emk00770.jpg",
+      "apelidos": [
+        "Kinho Lazarino",
+        "Marcos Wesley Lazarino"
+      ],
+      "apelidos_origem": {
+        "Kinho Lazarino": [
+          "autor_sapl",
+          "cadastro",
+          "mesa",
+          "presenca_ordem_dia",
+          "voto"
+        ],
+        "Marcos Wesley Lazarino": [
+          "cadastro"
+        ]
+      },
+      "ativo_no_recorte": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "anos_com_mandato": [
+        2025,
+        2026
+      ],
+      "condicao": "titular",
+      "afastamento_registro_oficial": [],
+      "mandatos": [
+        {
+          "mandato_id": 8,
+          "condicao": "titular",
+          "titular": true,
+          "data_inicio_mandato": "2025-01-01",
+          "data_fim_mandato": "2028-12-31",
+          "tipo_afastamento_id": null,
+          "tipo_afastamento_nome": null
+        }
+      ],
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/parlamentar/4"
+    },
+    {
+      "id_sapl": 5,
+      "slug_codigo": "rafael-ventura",
+      "nome_oficial": "Rafael de Jesus Ventura",
+      "nome_parlamentar": "Rafael Ventura",
+      "partido": null,
+      "partido_sigla": "PL",
+      "partido_nome": "PARTIDO LIBERAL",
+      "foto_url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/5/whatsapp_image_2025-04-22_at_17.32.56.jpeg",
+      "apelidos": [
+        "Rafael de Jesus Ventura",
+        "Rafael Ventura"
+      ],
+      "apelidos_origem": {
+        "Rafael Ventura": [
+          "autor_sapl",
+          "cadastro",
+          "mesa",
+          "presenca_ordem_dia",
+          "voto"
+        ],
+        "Rafael de Jesus Ventura": [
+          "cadastro"
+        ]
+      },
+      "ativo_no_recorte": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "anos_com_mandato": [
+        2025,
+        2026
+      ],
+      "condicao": "titular",
+      "afastamento_registro_oficial": [],
+      "mandatos": [
+        {
+          "mandato_id": 9,
+          "condicao": "titular",
+          "titular": true,
+          "data_inicio_mandato": "2025-01-01",
+          "data_fim_mandato": "2028-12-31",
+          "tipo_afastamento_id": null,
+          "tipo_afastamento_nome": null
+        }
+      ],
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/parlamentar/5"
+    },
+    {
+      "id_sapl": 6,
+      "slug_codigo": "gustavo-vizentin",
+      "nome_oficial": "Gustavo Brun Ribas Pinto Vizentin",
+      "nome_parlamentar": "Gustavo Vizentin",
+      "partido": null,
+      "partido_sigla": "UNIÃO",
+      "partido_nome": "UNIÃO BRASIL",
+      "foto_url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/6/emk00763.jpg",
+      "apelidos": [
+        "Gustavo Brun Ribas Pinto Vizentin",
+        "Gustavo Vizentin"
+      ],
+      "apelidos_origem": {
+        "Gustavo Brun Ribas Pinto Vizentin": [
+          "cadastro"
+        ],
+        "Gustavo Vizentin": [
+          "autor_sapl",
+          "cadastro",
+          "mesa",
+          "presenca_ordem_dia",
+          "voto"
+        ]
+      },
+      "ativo_no_recorte": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "anos_com_mandato": [
+        2025,
+        2026
+      ],
+      "condicao": "titular",
+      "afastamento_registro_oficial": [],
+      "mandatos": [
+        {
+          "mandato_id": 5,
+          "condicao": "titular",
+          "titular": true,
+          "data_inicio_mandato": "2025-01-01",
+          "data_fim_mandato": "2028-12-31",
+          "tipo_afastamento_id": null,
+          "tipo_afastamento_nome": null
+        }
+      ],
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/parlamentar/6"
+    },
+    {
+      "id_sapl": 7,
+      "slug_codigo": "josemar-veiga",
+      "nome_oficial": "Josemar Veiga",
+      "nome_parlamentar": "Josemar Veiga",
+      "partido": null,
+      "partido_sigla": "PL",
+      "partido_nome": "PARTIDO LIBERAL",
+      "foto_url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/7/emk00173.jpg",
+      "apelidos": [
+        "Josemar Veiga"
+      ],
+      "apelidos_origem": {
+        "Josemar Veiga": [
+          "autor_sapl",
+          "cadastro",
+          "mesa",
+          "presenca_ordem_dia",
+          "voto"
+        ]
+      },
+      "ativo_no_recorte": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "anos_com_mandato": [
+        2025,
+        2026
+      ],
+      "condicao": "titular",
+      "afastamento_registro_oficial": [],
+      "mandatos": [
+        {
+          "mandato_id": 7,
+          "condicao": "titular",
+          "titular": true,
+          "data_inicio_mandato": "2025-01-01",
+          "data_fim_mandato": "2028-12-31",
+          "tipo_afastamento_id": null,
+          "tipo_afastamento_nome": null
+        }
+      ],
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/parlamentar/7"
+    },
+    {
+      "id_sapl": 8,
+      "slug_codigo": "beto-maurer",
+      "nome_oficial": "Roberto Carlos Maurer",
+      "nome_parlamentar": "Beto Maurer",
+      "partido": null,
+      "partido_sigla": "PP",
+      "partido_nome": "PARTIDO PROGRESSISTA",
+      "foto_url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/8/emk00157.jpg",
+      "apelidos": [
+        "Beto Maurer",
+        "Roberto Carlos Maurer"
+      ],
+      "apelidos_origem": {
+        "Beto Maurer": [
+          "autor_sapl",
+          "cadastro",
+          "presenca_ordem_dia",
+          "voto"
+        ],
+        "Roberto Carlos Maurer": [
+          "cadastro"
+        ]
+      },
+      "ativo_no_recorte": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "anos_com_mandato": [
+        2025,
+        2026
+      ],
+      "condicao": "titular",
+      "afastamento_registro_oficial": [],
+      "mandatos": [
+        {
+          "mandato_id": 1,
+          "condicao": "titular",
+          "titular": true,
+          "data_inicio_mandato": "2025-01-01",
+          "data_fim_mandato": "2028-12-31",
+          "tipo_afastamento_id": null,
+          "tipo_afastamento_nome": null
+        }
+      ],
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/parlamentar/8"
+    },
+    {
+      "id_sapl": 9,
+      "slug_codigo": "gilmar-barbosa",
+      "nome_oficial": "Gilmar Aparecido Barbosa",
+      "nome_parlamentar": "Gilmar Barbosa",
+      "partido": null,
+      "partido_sigla": "UNIÃO",
+      "partido_nome": "UNIÃO BRASIL",
+      "foto_url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/9/emk00176.jpg",
+      "apelidos": [
+        "Gilmar Aparecido Barbosa",
+        "Gilmar Barbosa"
+      ],
+      "apelidos_origem": {
+        "Gilmar Aparecido Barbosa": [
+          "cadastro"
+        ],
+        "Gilmar Barbosa": [
+          "autor_sapl",
+          "cadastro",
+          "presenca_ordem_dia",
+          "voto"
+        ]
+      },
+      "ativo_no_recorte": true,
+      "data_inicio_mandato": "2025-01-01",
+      "data_fim_mandato": "2028-12-31",
+      "anos_com_mandato": [
+        2025,
+        2026
+      ],
+      "condicao": "titular",
+      "afastamento_registro_oficial": [],
+      "mandatos": [
+        {
+          "mandato_id": 4,
+          "condicao": "titular",
+          "titular": true,
+          "data_inicio_mandato": "2025-01-01",
+          "data_fim_mandato": "2028-12-31",
+          "tipo_afastamento_id": null,
+          "tipo_afastamento_nome": null
+        }
+      ],
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/parlamentar/9"
+    },
+    {
+      "id_sapl": 100,
+      "slug_codigo": "rivanildo-cavalheiro",
+      "nome_oficial": "Rivanildo Braz Cavalheiro",
+      "nome_parlamentar": "Rivanildo Cavalheiro",
+      "partido": null,
+      "partido_sigla": "PP",
+      "partido_nome": "PARTIDO PROGRESSISTA",
+      "foto_url": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/parlamentar/100/whatsapp_image_2026-09-02_at_11.07.49.jpeg",
+      "apelidos": [
+        "Rivanildo Braz Cavalheiro",
+        "Rivanildo Cavalheiro"
+      ],
+      "apelidos_origem": {
+        "Rivanildo Braz Cavalheiro": [
+          "cadastro"
+        ],
+        "Rivanildo Cavalheiro": [
+          "autor_sapl",
+          "cadastro",
+          "presenca_ordem_dia",
+          "voto"
+        ]
+      },
+      "ativo_no_recorte": true,
+      "data_inicio_mandato": "2026-03-17",
+      "data_fim_mandato": "2028-12-31",
+      "anos_com_mandato": [
+        2026
+      ],
+      "condicao": "titular",
+      "afastamento_registro_oficial": [],
+      "mandatos": [
+        {
+          "mandato_id": 160,
+          "condicao": "titular",
+          "titular": true,
+          "data_inicio_mandato": "2026-03-17",
+          "data_fim_mandato": "2028-12-31",
+          "tipo_afastamento_id": null,
+          "tipo_afastamento_nome": null
+        }
+      ],
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/parlamentar/100"
+    }
+  ]
+}
