@@ -36,7 +36,7 @@ A norma técnica soberana de governança do projeto é:
 * **Atualizar hash de integridade:**
   `python coletor/gerar_hash_integridade.py`
 * **Rate-limiting do SAPL:**
-  Manter obrigatoriamente pausa de 2.5s entre requisições em `coletor/baixar_voto_presenca_ordinarias_2026.py`.
+  Manter obrigatoriamente pausa de 2.5s entre requisições em `coletor/baixar_voto_presenca_ordinarias.py`.
 
 ---
 
