@@ -1,4 +1,4 @@
-"""Gera a atuacao consolidada dos 15 vereadores em 2026.
+"""Gera a atuacao consolidada dos vereadores nos anos do config.
 
 Le apenas arquivos em dados/brutos/ e a tabela unica em
 dados/tratados/vereadores.json. Nao inventa numero, voto, falta
@@ -22,27 +22,61 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 DIR_SCRIPT = Path(__file__).resolve().parent
+DIR_RAIZ = DIR_SCRIPT.parent.parent
 DIR_BRUTOS = DIR_SCRIPT.parent / "brutos"
 if str(DIR_SCRIPT) not in sys.path:
     sys.path.insert(0, str(DIR_SCRIPT))
+if str(DIR_RAIZ / "coletor") not in sys.path:
+    sys.path.insert(0, str(DIR_RAIZ / "coletor"))
 
+from config_cidade import (  # noqa: E402
+    PisoNaoDefinido,
+    anos_recorte,
+    carregar_config,
+    exigir_piso,
+    link_materia,
+    link_sessao,
+    nome_cidade,
+    pisos_sanidade,
+)
 from gerar_temas_votacoes_2026 import REGRAS, classificar  # noqa: E402
 
+CONFIG = carregar_config()
+CIDADE = nome_cidade(CONFIG)
 ARQUIVO_VEREADORES = DIR_SCRIPT / "vereadores.json"
-ARQUIVO_CONTAGEM = DIR_BRUTOS / "contagem_votacoes_ordinarias_2026.json"
-ARQUIVO_MATERIAS = DIR_BRUTOS / "materias-2026-resposta-original.csv"
-ARQUIVO_RESUMO_COLETA = DIR_BRUTOS / "_resumo_coleta_vereadores_2026.json"
-ARQUIVO_JSON = DIR_SCRIPT / "atuacao_vereadores_2026.json"
-ARQUIVO_CSV = DIR_SCRIPT / "atuacao_vereadores_2026.csv"
-ARQUIVO_RELATORIO = DIR_SCRIPT / "RELATORIO-ATUACAO-VEREADORES-2026.md"
-
-LINK_MATERIA = "https://sapl.campolargo.pr.leg.br/materia/{id}"
-LINK_SESSAO = "https://sapl.campolargo.pr.leg.br/sessao/{id}"
 TIPO_PLL = "PLL"
 DESCRICAO_PLL = "PROJETO DE LEI DO LEGISLATIVO"
-N_SESSOES_ESPERADAS = 26
-N_PLL_ESPERADOS = 100
-N_VEREADORES_ESPERADOS = 15
+ANO_ATUAL = None
+ARQUIVO_CONTAGEM = None
+ARQUIVO_MATERIAS = None
+ARQUIVO_RESUMO_COLETA = None
+ARQUIVO_JSON = None
+ARQUIVO_CSV = None
+ARQUIVO_RELATORIO = None
+N_SESSOES_ESPERADAS = None
+N_PLL_ESPERADOS = None
+N_VEREADORES_ESPERADOS = None
+
+
+def configurar_ano(ano: int) -> None:
+    global ANO_ATUAL
+    global ARQUIVO_CONTAGEM, ARQUIVO_MATERIAS, ARQUIVO_RESUMO_COLETA
+    global ARQUIVO_JSON, ARQUIVO_CSV, ARQUIVO_RELATORIO
+    global N_SESSOES_ESPERADAS, N_PLL_ESPERADOS, N_VEREADORES_ESPERADOS
+    ANO_ATUAL = ano
+    ARQUIVO_CONTAGEM = DIR_BRUTOS / f"contagem_votacoes_ordinarias_{ano}.json"
+    ARQUIVO_MATERIAS = DIR_BRUTOS / f"materias-{ano}-resposta-original.csv"
+    ARQUIVO_RESUMO_COLETA = DIR_BRUTOS / f"_resumo_coleta_vereadores_{ano}.json"
+    ARQUIVO_JSON = DIR_SCRIPT / f"atuacao_vereadores_{ano}.json"
+    ARQUIVO_CSV = DIR_SCRIPT / f"atuacao_vereadores_{ano}.csv"
+    ARQUIVO_RELATORIO = DIR_SCRIPT / f"RELATORIO-ATUACAO-VEREADORES-{ano}.md"
+    pisos = pisos_sanidade(CONFIG)
+    try:
+        N_SESSOES_ESPERADAS = exigir_piso("sessoes_ordinarias", pisos["sessoes_ordinarias"])
+        N_PLL_ESPERADOS = exigir_piso("plls", pisos["plls"])
+        N_VEREADORES_ESPERADOS = exigir_piso("vereadores", pisos["vereadores"])
+    except PisoNaoDefinido as erro:
+        raise SystemExit(str(erro)) from erro
 
 PREFIXO_PRESIDENTE = re.compile(r"^PRESIDENTE(\s|-)", re.IGNORECASE)
 RESULTADO_VOTACAO = re.compile(
@@ -100,7 +134,7 @@ def ler_dado_coletado_em() -> tuple[str, str]:
         if isinstance(fim, str) and fim.strip():
             return (
                 fim.strip(),
-                "dados/brutos/_resumo_coleta_vereadores_2026.json",
+                f"dados/brutos/_resumo_coleta_vereadores_{ANO_ATUAL}.json",
             )
     return (
         mtime_mais_recente_brutos(),
@@ -261,7 +295,7 @@ def carregar_sessoes() -> list[dict]:
                 "data": item["data"],
                 "rotulo": item["rotulo"],
                 "n_votacoes_contagem": int(item["n_votacoes"]),
-                "link_sapl": LINK_SESSAO.format(id=int(item["id"])),
+                "link_sapl": link_sessao(int(item["id"]), CONFIG),
             }
         )
     return saida
@@ -346,8 +380,8 @@ def carregar_registros(sessao: dict) -> dict[int, dict]:
         }
         if linha.get("materia") is not None:
             registros[registro_id]["materia_id"] = int(linha["materia"])
-            registros[registro_id]["link_materia"] = LINK_MATERIA.format(
-                id=int(linha["materia"])
+            registros[registro_id]["link_materia"] = link_materia(
+                int(linha["materia"]), CONFIG
             )
     return registros
 
@@ -590,7 +624,7 @@ def carregar_pll(indice_nomes: dict[str, int], por_id: dict[int, dict]) -> list[
                     "autoria_conjunta": len(autores) > 1,
                     "autores": autores,
                     "autorias_nao_vereador": nao_vereador,
-                    "link_sapl": LINK_MATERIA.format(id=materia_id),
+                    "link_sapl": link_materia(materia_id, CONFIG),
                     "texto_original": linha.get("Texto Original") or "",
                 }
             )
@@ -1238,6 +1272,12 @@ def main() -> None:
         raise SystemExit(f"Pasta de brutos nao encontrada: {DIR_BRUTOS}")
     if not ARQUIVO_VEREADORES.exists():
         raise SystemExit(f"Tabela de vereadores nao encontrada: {ARQUIVO_VEREADORES}")
+    for ano in anos_recorte(CONFIG):
+        gerar_do_ano(ano)
+
+
+def gerar_do_ano(ano: int) -> None:
+    configurar_ano(ano)
 
     tabela = carregar_json(ARQUIVO_VEREADORES)
     vereadores_base = tabela["vereadores"]
@@ -1294,7 +1334,9 @@ def main() -> None:
         item["presenca"]["faltas_sem_justificativa"] for item in vereadores
     )
     if n_presencas + n_faltas_j + n_faltas_s != N_SESSOES_ESPERADAS * N_VEREADORES_ESPERADOS:
-        raise SystemExit("A grade de presenca 15 x 26 nao fecha.")
+        raise SystemExit(
+            f"A grade de presenca {N_VEREADORES_ESPERADOS} x {N_SESSOES_ESPERADAS} nao fecha."
+        )
 
     n_abstencao = sum(item["votos"]["abstencao"] for item in vereadores)
     dado_coletado_em, fonte_data_coleta = ler_dado_coletado_em()
@@ -1306,7 +1348,8 @@ def main() -> None:
             "fonte_data_coleta": fonte_data_coleta,
             "n_sessoes_ordinarias": N_SESSOES_ESPERADAS,
             "n_vereadores": N_VEREADORES_ESPERADOS,
-            "n_pll_2026": len(projetos),
+            f"n_pll_{ANO_ATUAL}": len(projetos),
+            "n_pll": len(projetos),
             "n_presencas": n_presencas,
             "n_faltas_com_justificativa": n_faltas_j,
             "n_faltas_sem_justificativa": n_faltas_s,

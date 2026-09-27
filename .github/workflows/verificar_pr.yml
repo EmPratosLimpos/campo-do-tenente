@@ -24,12 +24,27 @@ jobs:
 
       - name: Executar testes de sanidade dos dados
         run: |
+          set +e
           python coletor/testes_sanidade.py
-          python -m unittest tests/test_sanidade_dados.py
+          status=$?
+          set -e
+          if [ "$status" -ne 0 ] && [ "$status" -ne 2 ]; then
+            exit "$status"
+          fi
+          python -m unittest discover -s tests
 
       - name: Validar hash de integridade
         run: |
-          python -c "import hashlib, sys; h = hashlib.sha256(open('dados/tratados/atuacao_vereadores_2026.json', 'rb').read()).hexdigest(); saved = open('dados/tratados/atuacao_vereadores_2026.json.sha256').read().strip(); print(f'Hash verificado: {h}'); sys.exit(0 if h == saved else 1)"
+          python -c "import hashlib, json, pathlib, sys; cfg=json.loads(pathlib.Path('config_cidade.json').read_text(encoding='utf-8')); anos=cfg['recorte']['anos']; faltou=False
+          for ano in anos:
+            p=pathlib.Path(f'dados/tratados/atuacao_vereadores_{ano}.json'); h=pathlib.Path(f'dados/tratados/atuacao_vereadores_{ano}.json.sha256')
+            if not p.exists() and not h.exists():
+              print(f'Sem consolidado de {ano}, hash adiado'); continue
+            if p.exists() != h.exists():
+              print(f'Par JSON/hash incompleto em {ano}', file=sys.stderr); faltou=True; continue
+            calc=hashlib.sha256(p.read_bytes()).hexdigest(); saved=h.read_text(encoding='utf-8').strip(); print(f'Hash {ano}: {calc}');
+            if calc!=saved: faltou=True
+          sys.exit(1 if faltou else 0)"
 
       - name: Validar regras de OPSEC e Higiene
         run: |

@@ -1,28 +1,35 @@
-"""Gera a classificação temática proposta para as votações ordinárias de 2026.
+"""Gera a classificacao tematica proposta para as votacoes ordinarias
+dos anos definidos em config_cidade.json.
 
-Entradas imutáveis:
-- dados/brutos/contagem_votacoes_ordinarias_2026.json
-- dados/brutos/materias-2026-resposta-original.csv
-- dados/brutos/sessao_<id>_ordemdia.json e páginas adicionais
+Entradas imutaveis por ano:
+- dados/brutos/contagem_votacoes_ordinarias_<ano>.json
+- dados/brutos/materias-<ano>-resposta-original.csv
+- dados/brutos/sessao_<id>_ordemdia.json e paginas adicionais
 
-Saída reproduzível:
-- dados/tratados/tema-votacoes-2026.csv
+Saida reproduzivel por ano:
+- dados/tratados/tema-votacoes-<ano>.csv
 
 As regras e categorias abaixo foram propostas por IA depois da leitura das
-ementas. Nenhuma classificação foi revisada por uma pessoa.
+ementas. Nenhuma classificacao foi revisada por uma pessoa.
 """
 
 import csv
 import json
 import re
+import sys
 import unicodedata
 from collections import Counter
 from pathlib import Path
 
 
 RAIZ = Path(__file__).resolve().parents[2]
+if str(RAIZ / "coletor") not in sys.path:
+    sys.path.insert(0, str(RAIZ / "coletor"))
+
+from config_cidade import anos_recorte, carregar_config, link_materia  # noqa: E402
+
 BRUTOS = RAIZ / "dados" / "brutos"
-SAIDA = Path(__file__).with_name("tema-votacoes-2026.csv")
+CONFIG = carregar_config()
 RESULTADOS_DE_VOTACAO = {"UNANIMIDADE", "MAIORIA ABSOLUTA", "REJEITADO"}
 
 # Cada expressão recebe um peso. Termos que identificam diretamente um tema
@@ -178,16 +185,27 @@ def classificar(ementa):
     return next(tema for tema in REGRAS if pontos[tema] == maior)
 
 
-def carregar_materias():
-    caminho = BRUTOS / "materias-2026-resposta-original.csv"
+def carregar_materias(ano: int):
+    caminho = BRUTOS / f"materias-{ano}-resposta-original.csv"
+    if not caminho.exists():
+        raise SystemExit(
+            f"Arquivo ausente: {caminho.name}. "
+            "Este gerador nao cria a planilha de materias. "
+            "A lacuna esta registrada no relatorio C1."
+        )
     with caminho.open(encoding="utf-8-sig", newline="") as arquivo:
         return {int(linha["ID"]): linha for linha in csv.DictReader(arquivo, delimiter=";")}
 
 
-def carregar_votacoes():
-    contagem = json.loads(
-        (BRUTOS / "contagem_votacoes_ordinarias_2026.json").read_text(encoding="utf-8")
-    )
+def carregar_votacoes(ano: int):
+    caminho = BRUTOS / f"contagem_votacoes_ordinarias_{ano}.json"
+    if not caminho.exists():
+        raise SystemExit(
+            f"Arquivo ausente: {caminho.name}. "
+            "Este gerador nao cria a lista de sessoes. "
+            "A lacuna esta registrada no relatorio C1."
+        )
+    contagem = json.loads(caminho.read_text(encoding="utf-8"))
     votacoes = []
     for sessao in contagem["sessoes"]:
         itens = []
@@ -205,9 +223,8 @@ def carregar_votacoes():
             for item in itens
             if item.get("resultado", "").upper() in RESULTADOS_DE_VOTACAO
         ]
-        # A sessão 795 aconteceu no mesmo dia da coleta da contagem. Naquele
-        # retrato ela ainda tinha zero votações; a ordem do dia baixada depois
-        # já traz resultados. O universo do gráfico é o retrato de 1.388.
+        # Se a contagem guardada diz zero votacoes, o universo do grafico
+        # segue esse retrato, mesmo que a ordem do dia tenha sido atualizada depois.
         if sessao["n_votacoes"] == 0:
             votadas = []
         if len(votadas) != sessao["n_votacoes"]:
@@ -225,8 +242,13 @@ def carregar_votacoes():
 
 
 def main():
-    materias = carregar_materias()
-    votacoes = carregar_votacoes()
+    for ano in anos_recorte(CONFIG):
+        gerar_temas_do_ano(ano)
+
+
+def gerar_temas_do_ano(ano: int):
+    materias = carregar_materias(ano)
+    votacoes = carregar_votacoes(ano)
     linhas = []
     sem_ementa = Counter()
 
@@ -250,22 +272,27 @@ def main():
                 "tema_proposto": classificar(materia["Ementa"]),
                 "classificador": "IA, por regras temáticas documentadas",
                 "revisada_por_humano": "não",
-                "fonte_oficial": f"https://sapl.campolargo.pr.leg.br/materia/{item['materia']}",
+                "fonte_oficial": link_materia(item["materia"], CONFIG),
             }
         )
 
+    if not linhas:
+        raise SystemExit(f"{ano}: nenhuma votacao classificada. Nao gravar arquivo vazio inventado.")
+
+    saida = Path(__file__).with_name(f"tema-votacoes-{ano}.csv")
     campos = list(linhas[0])
-    with SAIDA.open("w", encoding="utf-8", newline="") as arquivo:
+    with saida.open("w", encoding="utf-8", newline="") as arquivo:
         escritor = csv.DictWriter(arquivo, fieldnames=campos)
         escritor.writeheader()
         escritor.writerows(linhas)
 
     contagens = Counter(linha["tema_proposto"] for linha in linhas)
-    print(f"{len(votacoes)} votações localizadas")
-    print(f"{len(linhas)} votações classificadas")
-    print(f"{sum(sem_ementa.values())} sem ementa no CSV de 2026")
+    print(f"{ano}: {len(votacoes)} votacoes localizadas")
+    print(f"{ano}: {len(linhas)} votacoes classificadas")
+    print(f"{ano}: {sum(sem_ementa.values())} sem ementa no CSV")
     for tema, quantidade in contagens.most_common():
         print(f"{tema}: {quantidade}")
+    print(f"  {saida}")
 
 
 if __name__ == "__main__":

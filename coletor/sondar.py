@@ -1,5 +1,6 @@
 """
-Sonda a porta de dados do SAPL de Campo Largo e relata o que existe.
+Sonda a porta de dados do SAPL da cidade definida em config_cidade.json
+e relata o que existe.
 
 Esta e a primeira tarefa do projeto. Ela nao baixa o acervo: apenas bate
 na porta, com educacao, e escreve um relatorio em dados/brutos/sondagem.txt
@@ -11,19 +12,28 @@ vereador em cada materia, esta disponivel em dado estruturado?
 Rodar:  python coletor/sondar.py
 """
 
-import json
 import time
 from pathlib import Path
 
 import requests
 
-BASE = "https://sapl.campolargo.pr.leg.br"
-PAUSA = 2.0  # segundos entre pedidos, por educacao com o servidor
-TEMPO_LIMITE = 30
+from config_cidade import (
+    PAUSA_SAPL_SEGUNDOS,
+    carregar_config,
+    endereco_sapl,
+    nome_cidade,
+    user_agent_http,
+)
 
-# Caminhos confirmados no OpenAPI / indice de Campo Largo em 2026-09-14.
+CONFIG = carregar_config()
+BASE = endereco_sapl(CONFIG)
+PAUSA = PAUSA_SAPL_SEGUNDOS
+TEMPO_LIMITE = 30
+CIDADE = nome_cidade(CONFIG)
+
+# Caminhos confirmados no OpenAPI / indice de instalacoes SAPL em 2026-09-14.
 # Os primeiros eram hipotese de outras camaras; os acrescentados abaixo
-# existem de fato nesta instalacao e ajudam a ler voto, ausencia e mesa.
+# existem de fato nesta familia de instalacao e ajudam a ler voto, ausencia e mesa.
 CAMINHOS = [
     "/api/",
     "/api/materia/materialegislativa/?page_size=1",
@@ -66,7 +76,7 @@ def sondar(sessao, caminho):
         return caminho, "respondeu, mas nao em JSON", r.text[:200]
 
     if isinstance(dado, dict) and "results" in dado:
-        # Campo Largo usa pagination.total_entries; outras instalacoes usam count.
+        # Esta instalacao usa pagination.total_entries; outras usam count.
         paginacao = dado.get("pagination") or {}
         total = dado.get("count", paginacao.get("total_entries", "?"))
         exemplo = dado["results"][0] if dado["results"] else {}
@@ -84,12 +94,12 @@ def main():
     sessao = requests.Session()
     sessao.headers.update(
         {
-            "User-Agent": "painel-camara-campo-largo/0.1 (projeto de transparencia)",
+            "User-Agent": user_agent_http(CONFIG),
             "Accept": "application/json",
         }
     )
 
-    linhas = ["Sondagem da porta de dados do SAPL de Campo Largo", ""]
+    linhas = [f"Sondagem da porta de dados do SAPL de {CIDADE}", ""]
     print(linhas[0])
     print()
 

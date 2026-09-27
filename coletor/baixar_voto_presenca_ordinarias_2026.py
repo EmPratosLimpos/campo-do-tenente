@@ -1,10 +1,10 @@
 """
 Baixa voto individual, presenca, mesa e justificativa das sessoes
-ordinarias de 2026 que ainda nao tem o pacote completo.
+ordinarias dos anos definidos em config_cidade.json que ainda nao
+tem o pacote completo.
 
-O filtro sessao_plenaria em registrovotacao e votoparlamentar e ignorado
-pelo SAPL de Campo Largo (devolve o acervo inteiro). O metodo que funciona,
-o mesmo da sessao 786, e:
+O filtro sessao_plenaria em registrovotacao e votoparlamentar pode ser
+ignorado pelo SAPL (devolve o acervo inteiro). O metodo que funciona e:
 
   registrovotacao?ordem=<id do item da ordem do dia>
   votoparlamentar?votacao=<id do registro de votacao>
@@ -25,12 +25,19 @@ from pathlib import Path
 
 import requests
 
-BASE = "https://sapl.campolargo.pr.leg.br"
-PAUSA = 2.5
+from config_cidade import (
+    PAUSA_SAPL_SEGUNDOS,
+    anos_recorte,
+    carregar_config,
+    endereco_sapl,
+    user_agent_http,
+)
+
+CONFIG = carregar_config()
+BASE = endereco_sapl(CONFIG)
+PAUSA = PAUSA_SAPL_SEGUNDOS
 TEMPO_LIMITE = 120
 SAIDA = Path(__file__).resolve().parent.parent / "dados" / "brutos"
-LOG_PATH = SAIDA / "log_consultas_voto_presenca_ordinarias_2026.json"
-PROGRESSO_PATH = SAIDA / "_progresso_coleta_vereadores_2026.json"
 
 PACOTE = [
     "registrovotacao",
@@ -71,8 +78,31 @@ def salvar_json(caminho: Path, dado, tentativas=8):
     raise ultimo_erro
 
 
-def ids_ordinarias_2026():
-    cont = ler_json(SAIDA / "contagem_votacoes_ordinarias_2026.json")
+def caminho_log(ano: int) -> Path:
+    return SAIDA / f"log_consultas_voto_presenca_ordinarias_{ano}.json"
+
+
+def caminho_progresso(ano: int) -> Path:
+    return SAIDA / f"_progresso_coleta_vereadores_{ano}.json"
+
+
+def caminho_resumo(ano: int) -> Path:
+    return SAIDA / f"_resumo_coleta_vereadores_{ano}.json"
+
+
+def caminho_contagem(ano: int) -> Path:
+    return SAIDA / f"contagem_votacoes_ordinarias_{ano}.json"
+
+
+def ids_ordinarias_do_ano(ano: int):
+    caminho = caminho_contagem(ano)
+    if not caminho.exists():
+        raise SystemExit(
+            f"Arquivo ausente: {caminho.name}. "
+            "Este coletor nao cria a lista de sessoes. "
+            "A lacuna esta registrada no relatorio C1."
+        )
+    cont = ler_json(caminho)
     return [int(s["id"]) for s in cont["sessoes"]]
 
 
@@ -98,11 +128,12 @@ def pacote_completo(sid: int) -> bool:
 
 
 class Coletor:
-    def __init__(self):
+    def __init__(self, ano: int):
+        self.ano = ano
         self.http = requests.Session()
         self.http.headers.update(
             {
-                "User-Agent": "painel-camara-campo-largo/0.1 (projeto de transparencia)",
+                "User-Agent": user_agent_http(CONFIG),
                 "Accept": "application/json",
             }
         )
@@ -119,9 +150,10 @@ class Coletor:
         self._carregar_cache_parlamentar()
 
     def _carregar_log(self):
-        if LOG_PATH.exists():
+        caminho = caminho_log(self.ano)
+        if caminho.exists():
             try:
-                velho = ler_json(LOG_PATH)
+                velho = ler_json(caminho)
                 self.consultas = velho.get("consultas") or []
                 self.pedidos = int(velho.get("pedidos") or len(self.consultas))
             except (OSError, ValueError, TypeError):
@@ -153,9 +185,10 @@ class Coletor:
         self._log_sujo = 0
         try:
             salvar_json(
-                LOG_PATH,
+                caminho_log(self.ano),
                 {
                     "pedidos": self.pedidos,
+                    "ano": self.ano,
                     "atualizado_em": agora(),
                     "metodo": {
                         "registrovotacao": "filtro ordem=<id do item da ordem do dia>; sessao_plenaria e ignorado pelo servidor",
@@ -171,9 +204,10 @@ class Coletor:
     def _gravar_progresso(self, fase: str, sid=None):
         try:
             salvar_json(
-                PROGRESSO_PATH,
+                caminho_progresso(self.ano),
                 {
                     "fase": fase,
+                    "ano": self.ano,
                     "sessao_atual": sid,
                     "pedidos": self.pedidos,
                     "sessoes_baixadas": self.sessoes_baixadas,
@@ -467,10 +501,10 @@ class Coletor:
         self._gravar_log()
         self._gravar_progresso("sessao_fechada", sid)
 
-    def run(self):
-        print("Coleta de voto e presenca das ordinarias de 2026")
+    def run(self, ids=None):
+        print(f"Coleta de voto e presenca das ordinarias de {self.ano}")
         print(f"Inicio {agora()}")
-        ids = [int(x) for x in sys.argv[1:]] or ids_ordinarias_2026()
+        ids = ids if ids is not None else ids_ordinarias_do_ano(self.ano)
         for sid in ids:
             if pacote_completo(sid):
                 self.sessoes_ja_tinham.append(sid)
@@ -480,6 +514,7 @@ class Coletor:
 
         resumo = {
             "fim": agora(),
+            "ano": self.ano,
             "pedidos": self.pedidos,
             "sessoes_ja_tinham": self.sessoes_ja_tinham,
             "sessoes_baixadas": self.sessoes_baixadas,
@@ -488,7 +523,7 @@ class Coletor:
         }
         self._gravar_log()
         self._gravar_progresso("fim")
-        salvar_json(SAIDA / "_resumo_coleta_vereadores_2026.json", resumo)
+        salvar_json(caminho_resumo(self.ano), resumo)
         print()
         print(f"Pedidos feitos nesta execucao (log acumulado): {self.pedidos}")
         print(f"Ja tinham pacote: {self.sessoes_ja_tinham}")
@@ -498,4 +533,10 @@ class Coletor:
 
 
 if __name__ == "__main__":
-    Coletor().run()
+    ids_cli = [int(x) for x in sys.argv[1:]]
+    if ids_cli:
+        ano_unico = anos_recorte(CONFIG)[-1]
+        Coletor(ano_unico).run(ids_cli)
+    else:
+        for ano in anos_recorte(CONFIG):
+            Coletor(ano).run()

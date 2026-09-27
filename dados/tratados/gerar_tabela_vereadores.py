@@ -13,6 +13,7 @@ from __future__ import annotations
 import csv
 import json
 import re
+import sys
 import unicodedata
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -20,27 +21,25 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 DIR_SCRIPT = Path(__file__).resolve().parent
+DIR_RAIZ = DIR_SCRIPT.parent.parent
 DIR_BRUTOS = DIR_SCRIPT.parent / "brutos"
+if str(DIR_RAIZ / "coletor") not in sys.path:
+    sys.path.insert(0, str(DIR_RAIZ / "coletor"))
 
-BANCA_REFERENCIA_2026 = [
-    47,
-    49,
-    50,
-    51,
-    53,
-    55,
-    56,
-    57,
-    58,
-    59,
-    60,
-    61,
-    62,
-    63,
-    64,
-]
+from config_cidade import (  # noqa: E402
+    PisoNaoDefinido,
+    anos_recorte,
+    carregar_config,
+    exigir_piso,
+    link_parlamentar,
+    nome_cidade,
+    numero_vereadores_esperado,
+    pisos_sanidade,
+)
 
-CSV_AUTORIA = "materias-2026-resposta-original.csv"
+CONFIG = carregar_config()
+ANOS = anos_recorte(CONFIG)
+CIDADE = nome_cidade(CONFIG)
 ARQUIVO_PARTIDO = DIR_BRUTOS / "api_parlamentares_partido.json"
 ARQUIVO_FILIACAO = DIR_BRUTOS / "api_parlamentares_filiacao.json"
 ARQUIVO_JSON = DIR_SCRIPT / "vereadores.json"
@@ -283,25 +282,38 @@ def montar_indice_nomes(cadastro: dict[int, dict], apelidos: dict) -> dict[str, 
     return unico
 
 
+def caminhos_materias() -> list[Path]:
+    encontrados = []
+    for ano in ANOS:
+        caminho = DIR_BRUTOS / f"materias-{ano}-resposta-original.csv"
+        if caminho.exists():
+            encontrados.append(caminho)
+    if not encontrados:
+        raise SystemExit(
+            "Nenhum arquivo materias-<ano>-resposta-original.csv em dados/brutos/. "
+            "Este gerador nao cria essa planilha. A lacuna esta no relatorio C1."
+        )
+    return encontrados
+
+
 def varrer_autoria(indice: dict[str, int], apelidos: dict) -> list[dict]:
-    caminho = DIR_BRUTOS / CSV_AUTORIA
-    if not caminho.exists():
-        raise SystemExit(f"Arquivo de autoria nao encontrado: {caminho}")
+    caminhos = caminhos_materias()
     nao_vereador: dict[str, int] = defaultdict(int)
-    with caminho.open(encoding="utf-8", newline="") as handle:
-        leitor = csv.DictReader(handle, delimiter=";")
-        for linha in leitor:
-            bruto = (linha.get("Autorias") or "").strip()
-            if not bruto:
-                continue
-            partes = [parte.strip() for parte in bruto.split(",") if parte.strip()]
-            for parte in partes:
-                chave = normalizar(parte)
-                id_sapl = indice.get(chave)
-                if id_sapl is None:
-                    nao_vereador[parte] += 1
+    for caminho in caminhos:
+        with caminho.open(encoding="utf-8", newline="") as handle:
+            leitor = csv.DictReader(handle, delimiter=";")
+            for linha in leitor:
+                bruto = (linha.get("Autorias") or "").strip()
+                if not bruto:
                     continue
-                registrar_apelido(apelidos, id_sapl, parte, "autoria")
+                partes = [parte.strip() for parte in bruto.split(",") if parte.strip()]
+                for parte in partes:
+                    chave = normalizar(parte)
+                    id_sapl = indice.get(chave)
+                    if id_sapl is None:
+                        nao_vereador[parte] += 1
+                        continue
+                    registrar_apelido(apelidos, id_sapl, parte, "autoria")
     return [
         {"grafia": grafia, "vezes_no_csv": vezes}
         for grafia, vezes in sorted(nao_vereador.items())
@@ -317,52 +329,9 @@ def nome_curto(cadastro: dict[int, dict], id_sapl: int) -> str:
 
 
 def casos_de_atencao(cadastro: dict[int, dict]) -> list[dict]:
-    casos = []
-    if 47 in cadastro and 57 in cadastro:
-        casos.append(
-            {
-                "tipo": "nomes_parecidos",
-                "titulo": "Dois vereadores chamados Rogério",
-                "detalhe": (
-                    f"{nome_curto(cadastro, 47)} não é a mesma pessoa que "
-                    f"{nome_curto(cadastro, 57)}. No cadastro, o primeiro "
-                    "aparece sem acento no nome de urna "
-                    f"({cadastro[47]['nome_parlamentar']}) e o segundo com "
-                    f"acento ({cadastro[57]['nome_parlamentar']}). "
-                    "São duas pessoas. Não misturar."
-                ),
-                "ids_sapl": [47, 57],
-            }
-        )
-    if 53 in cadastro and 61 in cadastro:
-        casos.append(
-            {
-                "tipo": "nomes_parecidos",
-                "titulo": "Dois vereadores com Luiz no nome",
-                "detalhe": (
-                    f"{nome_curto(cadastro, 53)} não é a mesma pessoa que "
-                    f"{nome_curto(cadastro, 61)}. O segundo usa Gustavo "
-                    "como nome de urna, não Luiz."
-                ),
-                "ids_sapl": [53, 61],
-            }
-        )
-    if all(i in cadastro for i in (56, 60, 63)):
-        casos.append(
-            {
-                "tipo": "nomes_parecidos",
-                "titulo": "Três vereadores com Junior no nome de registro",
-                "detalhe": (
-                    f"{nome_curto(cadastro, 56)}, "
-                    f"{nome_curto(cadastro, 60)} e "
-                    f"{nome_curto(cadastro, 63)} "
-                    "são três pessoas. A palavra Junior sozinha não "
-                    "identifica ninguém."
-                ),
-                "ids_sapl": [56, 60, 63],
-            }
-        )
-    return casos
+    # Casos de homonimo sao proprios de cada camara. Sem coleta local,
+    # esta lista fica vazia. Nao copiar identificadores de outra cidade.
+    return []
 
 
 def montar_vereadores(
@@ -406,8 +375,8 @@ def montar_vereadores(
                 "foto_url": foto_url,
                 "apelidos": lista_apelidos,
                 "apelidos_origem": origem,
-                "ativo_2026": id_sapl in ids_em_2026,
-                "link_sapl": "https://sapl.campolargo.pr.leg.br" + caminho,
+                "ativo_no_recorte": id_sapl in ids_em_2026,
+                "link_sapl": link_parlamentar(caminho, CONFIG),
             }
         )
     return tabela
@@ -416,7 +385,7 @@ def montar_vereadores(
 def conferir_partido_e_foto(vereadores: list[dict]) -> None:
     faltando = []
     for item in vereadores:
-        if not item["ativo_2026"]:
+        if not item["ativo_no_recorte"]:
             continue
         if not item.get("partido_sigla") or not item.get("partido_nome"):
             faltando.append(f"{item['id_sapl']} sem partido vigente")
@@ -425,7 +394,7 @@ def conferir_partido_e_foto(vereadores: list[dict]) -> None:
             faltando.append(f"{item['id_sapl']} sem foto oficial")
     if faltando:
         raise SystemExit(
-            "Partido ou foto oficial faltando na banca de 2026: "
+            "Partido ou foto oficial faltando na banca do recorte: "
             + "; ".join(faltando)
         )
 
@@ -448,7 +417,7 @@ def escrever_csv(vereadores: list[dict]) -> None:
         "partido_nome",
         "foto_url",
         "apelidos",
-        "ativo_2026",
+        "ativo_no_recorte",
         "link_sapl",
     ]
     with ARQUIVO_CSV.open("w", encoding="utf-8", newline="") as handle:
@@ -466,7 +435,7 @@ def escrever_csv(vereadores: list[dict]) -> None:
                     "partido_nome": item["partido_nome"] or "",
                     "foto_url": item["foto_url"] or "",
                     "apelidos": " | ".join(item["apelidos"]),
-                    "ativo_2026": "true" if item["ativo_2026"] else "false",
+                    "ativo_no_recorte": "true" if item["ativo_no_recorte"] else "false",
                     "link_sapl": item["link_sapl"],
                 }
             )
@@ -484,35 +453,38 @@ def vezes_em_palavras(n: int) -> str:
     return f"{n} vezes"
 
 
+def texto_anos() -> str:
+    if len(ANOS) == 1:
+        return str(ANOS[0])
+    return ", ".join(str(a) for a in ANOS[:-1]) + f" e {ANOS[-1]}"
+
+
 def escrever_relatorio(payload: dict) -> None:
     meta = payload["meta"]
+    recorte = texto_anos()
     linhas = [
-        "# Tabela única de vereadores da legislatura de 2026",
+        f"# Tabela unica de vereadores da legislatura de {CIDADE}",
         "",
         f"Gerada em: {meta['gerado_em']}",
         "Script: `dados/tratados/gerar_tabela_vereadores.py`",
-        "Fonte: exatamente os arquivos oficiais guardados em `dados/brutos/`. Nada foi inventado na mão.",
+        "Fonte: exatamente os arquivos oficiais guardados em `dados/brutos/`. Nada foi inventado na mao.",
         "",
         "## Em uma frase",
         "",
         (
-            f"Foram identificados **{meta['n_ativos_2026']} vereadores ativos em 2026**. "
-            "A banca bate com a prova já feita: são as mesmas 15 pessoas."
+            f"Foram identificados **{meta['n_ativos_no_recorte']} vereadores ativos "
+            f"no recorte {recorte}**."
         ),
         "",
-        "## A banca de 15 confere?",
-        "",
-        "Sim.",
+        "## A banca confere?",
         "",
         (
-            "A prova em `dados/brutos/PROVA-CRUZAMENTO-VOTO-AUSENCIA.md` listou "
-            "os números oficiais do SAPL: "
-            + ", ".join(str(n) for n in meta["banca_referencia_prova"])
-            + "."
+            "A quantidade encontrada foi conferida com o numero esperado "
+            "definido em config_cidade.json."
         ),
         "",
         (
-            "Esta tabela achou os mesmos números, na mesma ordem: "
+            "Numeros oficiais do SAPL encontrados: "
             + ", ".join(str(n) for n in meta["banca_encontrada"])
             + "."
         ),
@@ -533,7 +505,11 @@ def escrever_relatorio(payload: dict) -> None:
     ]
 
     for item in payload["vereadores"]:
-        ativo = "sim, atuou em 2026" if item["ativo_2026"] else "não atuou em 2026"
+        ativo = (
+            f"sim, atuou no recorte {recorte}"
+            if item["ativo_no_recorte"]
+            else f"nao atuou no recorte {recorte}"
+        )
         if item.get("partido_sigla") and item.get("partido_nome"):
             partido = f"{item['partido_sigla']} ({item['partido_nome']})"
         else:
@@ -549,7 +525,7 @@ def escrever_relatorio(payload: dict) -> None:
                 f"- Nome de urna / parlamentar: {item['nome_parlamentar']}",
                 f"- Partido: {partido}",
                 f"- Foto oficial: {foto}",
-                f"- Ativo em 2026: {ativo}",
+                f"- Ativo no recorte {recorte}: {ativo}",
                 f"- Página oficial: {item['link_sapl']}",
                 f"- Grafias encontradas: {frase_apelidos(item)}",
                 "",
@@ -581,7 +557,7 @@ def escrever_relatorio(payload: dict) -> None:
             "## Quem aparece como autor, mas não é vereador",
             "",
             (
-                "No arquivo de matérias de 2026, o campo de autoria também traz "
+                f"Nos arquivos de materias do recorte {recorte}, o campo de autoria tambem traz "
                 "nomes que não são vereadores. Eles não entram nesta tabela."
             ),
             "",
@@ -617,15 +593,12 @@ def escrever_relatorio(payload: dict) -> None:
                 "que o SAPL devolveu."
             ),
             "",
-            "## Vereador antigo que não atuou em 2026",
+            f"## Vereador antigo que nao atuou no recorte {recorte}",
             "",
             (
-                "Nos arquivos brutos desta pasta, só aparecem os 15 vereadores "
-                "da legislatura atual. Não veio cadastro antigo de outras "
-                "legislaturas. Por isso não há ninguém marcado como "
-                "`ativo_2026: false`. Se no futuro entrar um cadastro velho, "
-                "a pessoa entra na tabela com esse campo em falso, em vez de "
-                "sumir ou ser misturada com a banca de 2026."
+                "Se no futuro entrar um cadastro velho de outra legislatura, "
+                "a pessoa entra na tabela com `ativo_no_recorte` em falso, "
+                "em vez de sumir ou ser misturada com a banca atual."
             ),
             "",
             "## De onde veio cada grafia",
@@ -637,7 +610,7 @@ def escrever_relatorio(payload: dict) -> None:
             "- Mesa diretora: `dados/brutos/sessao_*_integrantemesa.json`",
             "- Presença na ordem do dia: `dados/brutos/sessao_*_presencaordemdia.json`",
             "- Presença na sessão: `dados/brutos/sessao_*_sessaoplenariapresenca.json` (só o número do vereador, sem nome escrito)",
-            "- Autoria das matérias: `dados/brutos/materias-2026-resposta-original.csv`",
+            "- Autoria das materias: `dados/brutos/materias-<ano>-resposta-original.csv`",
             "",
             "Em voto, mesa, presença e autoria, o nome de urna veio igual ao cadastro. "
             "A grafia extra de cada um é o nome completo civil, que só aparece no cadastro.",
@@ -667,18 +640,25 @@ def main() -> None:
         for campo in ("nome_oficial", "nome_parlamentar", "str_sapl"):
             registrar_apelido(apelidos, id_sapl, dados.get(campo, ""), "cadastro")
 
-    ids_em_2026 = varrer_sessoes(cadastro, apelidos)
+    ids_em_recorte = varrer_sessoes(cadastro, apelidos)
     indice = montar_indice_nomes(cadastro, apelidos)
     autorias_nao_vereador = varrer_autoria(indice, apelidos)
     filiacoes = carregar_filiacoes_vigentes(carregar_partidos())
-    vereadores = montar_vereadores(cadastro, apelidos, ids_em_2026, filiacoes)
+    vereadores = montar_vereadores(cadastro, apelidos, ids_em_recorte, filiacoes)
     conferir_partido_e_foto(vereadores)
 
-    banca_encontrada = [item["id_sapl"] for item in vereadores if item["ativo_2026"]]
-    if banca_encontrada != BANCA_REFERENCIA_2026:
+    banca_encontrada = [item["id_sapl"] for item in vereadores if item["ativo_no_recorte"]]
+    try:
+        esperado = exigir_piso(
+            "vereadores",
+            numero_vereadores_esperado(CONFIG) or pisos_sanidade(CONFIG)["vereadores"],
+        )
+    except PisoNaoDefinido as erro:
+        raise SystemExit(str(erro)) from erro
+    if len(banca_encontrada) != esperado:
         raise SystemExit(
-            "A banca de 2026 nao confere com a prova. "
-            f"Referencia={BANCA_REFERENCIA_2026} encontrada={banca_encontrada}"
+            f"A banca do recorte tem {len(banca_encontrada)} vereadores, "
+            f"nao os {esperado} definidos em config_cidade.json."
         )
 
     slugs = [item["slug_codigo"] for item in vereadores]
@@ -689,10 +669,11 @@ def main() -> None:
         "meta": {
             "gerado_em": agora_iso(),
             "gerado_por": "dados/tratados/gerar_tabela_vereadores.py",
-            "banca_referencia_prova": BANCA_REFERENCIA_2026,
+            "cidade": CIDADE,
+            "anos_recorte": ANOS,
             "banca_encontrada": banca_encontrada,
             "banca_confere": True,
-            "n_ativos_2026": len(banca_encontrada),
+            "n_ativos_no_recorte": len(banca_encontrada),
             "n_cadastro": len(vereadores),
             "partido_no_cadastro_estruturado": True,
             "observacao_partido": (
@@ -710,7 +691,7 @@ def main() -> None:
     escrever_relatorio(payload)
     print(
         f"Tabela gerada: {len(vereadores)} vereadores, "
-        f"{len(banca_encontrada)} ativos em 2026. Banca confere."
+        f"{len(banca_encontrada)} ativos no recorte {texto_anos()}. Banca confere."
     )
     print(f"  {ARQUIVO_JSON}")
     print(f"  {ARQUIVO_CSV}")

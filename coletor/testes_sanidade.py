@@ -1,9 +1,9 @@
 """Testes de sanidade da esteira de dados, rodados antes da publicacao.
 
 Verifica que os arquivos consolidados em dados/tratados/ existem, sao
-JSON/CSV validos e batem com os totais esperados de 2026. Nao valida o
-conteudo linha a linha (isso e responsabilidade do gerador), apenas
-detecta coleta quebrada, truncada ou vazia antes que ela va para main.
+JSON/CSV validos e batem com os pisos definidos em config_cidade.json.
+Nao valida o conteudo linha a linha (isso e responsabilidade do gerador),
+apenas detecta coleta quebrada, truncada ou vazia antes que ela va para main.
 
 Uso:
     python coletor/testes_sanidade.py
@@ -16,16 +16,19 @@ import json
 import sys
 from pathlib import Path
 
+from config_cidade import (
+    PisoNaoDefinido,
+    anos_recorte,
+    carregar_config,
+    exigir_piso,
+    pisos_sanidade,
+)
+
 DIR_RAIZ = Path(__file__).resolve().parent.parent
 DIR_TRATADOS = DIR_RAIZ / "dados" / "tratados"
-
-ARQUIVO_JSON = DIR_TRATADOS / "atuacao_vereadores_2026.json"
-ARQUIVO_CSV = DIR_TRATADOS / "atuacao_vereadores_2026.csv"
-ARQUIVO_VEREADORES = DIR_TRATADOS / "vereadores.json"
-
-N_SESSOES_ESPERADAS = 26
-N_PLL_ESPERADOS = 100
-N_VEREADORES_ESPERADOS = 15
+CONFIG = carregar_config()
+ANOS = anos_recorte(CONFIG)
+PISOS = pisos_sanidade(CONFIG)
 
 
 class FalhaSanidade(Exception):
@@ -37,63 +40,116 @@ def checar(condicao: bool, mensagem: str) -> None:
         raise FalhaSanidade(mensagem)
 
 
-def testar_json_atuacao() -> None:
-    checar(ARQUIVO_JSON.exists(), f"Arquivo ausente: {ARQUIVO_JSON}")
-    dados = json.loads(ARQUIVO_JSON.read_text(encoding="utf-8"))
+def arquivo_atuacao_json(ano: int) -> Path:
+    return DIR_TRATADOS / f"atuacao_vereadores_{ano}.json"
+
+
+def arquivo_atuacao_csv(ano: int) -> Path:
+    return DIR_TRATADOS / f"atuacao_vereadores_{ano}.csv"
+
+
+def arquivo_vereadores() -> Path:
+    return DIR_TRATADOS / "vereadores.json"
+
+
+def testar_json_atuacao(ano: int, n_sessoes: int, n_pll: int, n_vereadores: int) -> None:
+    caminho = arquivo_atuacao_json(ano)
+    checar(caminho.exists(), f"Arquivo ausente: {caminho}")
+    dados = json.loads(caminho.read_text(encoding="utf-8"))
     meta = dados.get("meta", {})
-    checar(bool(meta), "atuacao_vereadores_2026.json sem bloco 'meta'")
+    checar(bool(meta), f"atuacao_vereadores_{ano}.json sem bloco 'meta'")
     checar(
-        int(meta.get("n_sessoes_ordinarias") or 0) >= N_SESSOES_ESPERADAS,
-        f"n_sessoes_ordinarias={meta.get('n_sessoes_ordinarias')!r}, "
-        f"esperado ao menos {N_SESSOES_ESPERADAS}",
+        int(meta.get("n_sessoes_ordinarias") or 0) >= n_sessoes,
+        f"{ano}: n_sessoes_ordinarias={meta.get('n_sessoes_ordinarias')!r}, "
+        f"esperado ao menos {n_sessoes}",
+    )
+    chave_pll = f"n_pll_{ano}"
+    n_pll_meta = meta.get(chave_pll)
+    if n_pll_meta is None:
+        n_pll_meta = meta.get("n_pll")
+    checar(
+        int(n_pll_meta or 0) >= n_pll,
+        f"{ano}: {chave_pll}={n_pll_meta!r}, esperado ao menos {n_pll}",
     )
     checar(
-        int(meta.get("n_pll_2026") or 0) >= N_PLL_ESPERADOS,
-        f"n_pll_2026={meta.get('n_pll_2026')!r}, esperado ao menos {N_PLL_ESPERADOS}",
-    )
-    checar(
-        meta.get("n_vereadores") == N_VEREADORES_ESPERADOS,
-        f"n_vereadores={meta.get('n_vereadores')!r}, "
-        f"esperado {N_VEREADORES_ESPERADOS}",
+        meta.get("n_vereadores") == n_vereadores,
+        f"{ano}: n_vereadores={meta.get('n_vereadores')!r}, "
+        f"esperado {n_vereadores}",
     )
     checar(
         int(meta.get("n_registros_votacao") or 0) > 0,
-        "n_registros_votacao zerado ou ausente",
+        f"{ano}: n_registros_votacao zerado ou ausente",
     )
 
 
-def testar_csv_atuacao() -> None:
-    checar(ARQUIVO_CSV.exists(), f"Arquivo ausente: {ARQUIVO_CSV}")
-    with ARQUIVO_CSV.open(encoding="utf-8", newline="") as f:
+def testar_csv_atuacao(ano: int) -> None:
+    caminho = arquivo_atuacao_csv(ano)
+    checar(caminho.exists(), f"Arquivo ausente: {caminho}")
+    with caminho.open(encoding="utf-8", newline="") as f:
         linhas = list(csv.reader(f))
-    checar(len(linhas) > 1, "atuacao_vereadores_2026.csv sem linhas de dados")
+    checar(len(linhas) > 1, f"atuacao_vereadores_{ano}.csv sem linhas de dados")
 
 
-def testar_vereadores() -> None:
-    checar(ARQUIVO_VEREADORES.exists(), f"Arquivo ausente: {ARQUIVO_VEREADORES}")
-    dados = json.loads(ARQUIVO_VEREADORES.read_text(encoding="utf-8"))
+def testar_vereadores(n_vereadores: int) -> None:
+    caminho = arquivo_vereadores()
+    checar(caminho.exists(), f"Arquivo ausente: {caminho}")
+    dados = json.loads(caminho.read_text(encoding="utf-8"))
     vereadores = dados.get("vereadores") or dados.get("dados") or []
     if isinstance(vereadores, dict):
         vereadores = list(vereadores.values())
     checar(
-        len(vereadores) == N_VEREADORES_ESPERADOS,
+        len(vereadores) == n_vereadores,
         f"vereadores.json tem {len(vereadores)} registros, "
-        f"esperado {N_VEREADORES_ESPERADOS}",
+        f"esperado {n_vereadores}",
     )
 
 
-TESTES = [testar_json_atuacao, testar_csv_atuacao, testar_vereadores]
+def dados_consolidados_existem() -> bool:
+    if not arquivo_vereadores().exists():
+        return False
+    return any(arquivo_atuacao_json(ano).exists() for ano in ANOS)
 
 
 def main() -> int:
+    try:
+        n_sessoes = exigir_piso("sessoes_ordinarias", PISOS["sessoes_ordinarias"])
+        n_pll = exigir_piso("plls", PISOS["plls"])
+        n_vereadores = exigir_piso("vereadores", PISOS["vereadores"])
+    except PisoNaoDefinido as erro:
+        print(str(erro), file=sys.stderr)
+        if dados_consolidados_existem():
+            print(
+                "Existem arquivos consolidados, mas os pisos ainda nao foram "
+                "definidos. Nao e possivel validar a coleta.",
+                file=sys.stderr,
+            )
+            return 2
+        print(
+            "Ainda nao ha dados consolidados e os pisos ainda nao foram definidos. "
+            "Nada para validar nesta etapa.",
+            file=sys.stderr,
+        )
+        return 2
+
     falhas = []
-    for teste in TESTES:
-        try:
-            teste()
-        except FalhaSanidade as erro:
-            falhas.append(f"{teste.__name__}: {erro}")
-        except Exception as erro:  # dado malformado, arquivo corrompido, etc.
-            falhas.append(f"{teste.__name__}: erro inesperado - {erro}")
+    try:
+        testar_vereadores(n_vereadores)
+    except FalhaSanidade as erro:
+        falhas.append(f"testar_vereadores: {erro}")
+    except Exception as erro:
+        falhas.append(f"testar_vereadores: erro inesperado - {erro}")
+
+    for ano in ANOS:
+        for nome, teste in (
+            (f"testar_json_atuacao_{ano}", lambda a=ano: testar_json_atuacao(a, n_sessoes, n_pll, n_vereadores)),
+            (f"testar_csv_atuacao_{ano}", lambda a=ano: testar_csv_atuacao(a)),
+        ):
+            try:
+                teste()
+            except FalhaSanidade as erro:
+                falhas.append(f"{nome}: {erro}")
+            except Exception as erro:
+                falhas.append(f"{nome}: erro inesperado - {erro}")
 
     if falhas:
         print("FALHA nos testes de sanidade:", file=sys.stderr)
@@ -101,7 +157,8 @@ def main() -> int:
             print(f"  - {falha}", file=sys.stderr)
         return 1
 
-    print(f"OK: {len(TESTES)} testes de sanidade passaram.")
+    n_testes = 1 + (2 * len(ANOS))
+    print(f"OK: {n_testes} testes de sanidade passaram.")
     return 0
 
 
