@@ -32,5 +32,68 @@
         "projetos_lei_legislativo_e_executivo": 18
       }
     }
+  },
+  "categorias": {
+    "nota": "D-021: categorias proprias da cidade, na ordem de exibicao. Cada materia recebe um tema principal lido da ementa oficial.",
+    "lista": [
+      {
+        "nome": "Administração e finanças",
+        "descricao": "Orçamento, créditos, servidores, impostos, pedidos de informação à Prefeitura, funcionamento da Câmara."
+      },
+      {
+        "nome": "Ruas, trânsito e transporte",
+        "descricao": "Asfalto, pavimentação, estradas rurais, sinalização, ônibus, rodovias."
+      },
+      {
+        "nome": "Iluminação, serviços urbanos e conectividade",
+        "descricao": "Iluminação pública, limpeza, praças, coleta de lixo, energia, internet, Wi-Fi público, sinal de celular e telefonia, serviços digitais da Prefeitura. Poda de árvores por segurança, fiação ou manutenção de via entra aqui."
+      },
+      {
+        "nome": "Desenvolvimento e moradia",
+        "descricao": "Habitação, regularização de terrenos, plano diretor, código de posturas, obras de infraestrutura urbana, emprego, comércio e indústria."
+      },
+      {
+        "nome": "Agricultura e pecuária",
+        "descricao": "Produtor rural, agricultura familiar, pecuária, programas de apoio ao campo (como o Porteira Adentro), máquinas agrícolas, feiras do produtor, assistência técnica rural."
+      },
+      {
+        "nome": "Educação",
+        "descricao": "Escolas, creches, CMEI, transporte escolar."
+      },
+      {
+        "nome": "Cultura, esporte e lazer",
+        "descricao": "Cultura, biblioteca, museu, artesanato, esporte, quadras, eventos."
+      },
+      {
+        "nome": "Homenagens, nomes e datas",
+        "descricao": "Título de cidadão, honrarias, nome de rua ou prédio, datas comemorativas."
+      },
+      {
+        "nome": "Saúde",
+        "descricao": "Unidades de saúde, UBS, hospital, atendimento médico, consórcios de saúde."
+      },
+      {
+        "nome": "Assistência social e direitos",
+        "descricao": "CRAS, famílias em vulnerabilidade, pessoa com deficiência, idosos."
+      },
+      {
+        "nome": "Meio ambiente e proteção animal",
+        "descricao": "Meio ambiente, poluição, preservação de árvores e rios, proteção animal. Poda ou corte ligados a preservação entra aqui."
+      },
+      {
+        "nome": "Segurança pública",
+        "descricao": "Polícia, guarda municipal, segurança."
+      },
+      {
+        "nome": "Defesa Civil",
+        "descricao": "Enchentes, proteção em desastres."
+      }
+    ],
+    "rotulos_especiais": {
+      "nao_se_aplica": "não se aplica",
+      "nao_se_aplica_descricao": "Atas e ofícios do Executivo (ATA e OFEX), que registram a reunião ou encaminham documentos e não tratam de um tema próprio.",
+      "sem_ementa": "sem ementa no SAPL",
+      "sem_ementa_descricao": "Matéria sem ementa registrada no SAPL."
+    }
   }
 }

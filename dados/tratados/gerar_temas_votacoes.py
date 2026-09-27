@@ -9,7 +9,9 @@ Entradas imutaveis por ano:
 Tema de cada materia:
 - dados/tratados/temas_materias.json, um tema principal por materia, lido
   da ementa oficial. O campo revisada_por_humano diz se o mantenedor ja
-  conferiu a classificacao.
+  conferiu a classificacao. Todo tema precisa estar na lista de categorias
+  de config_cidade.json (bloco categorias) ou ser um dos rotulos especiais
+  definidos ali. Nenhuma lista de temas fica fixa neste codigo.
 
 Saida reproduzivel por ano:
 - dados/tratados/tema-votacoes-<ano>.csv
@@ -32,7 +34,13 @@ RAIZ = Path(__file__).resolve().parents[2]
 if str(RAIZ / "coletor") not in sys.path:
     sys.path.insert(0, str(RAIZ / "coletor"))
 
-from config_cidade import anos_recorte, carregar_config, link_materia  # noqa: E402
+from config_cidade import (  # noqa: E402
+    anos_recorte,
+    carregar_config,
+    link_materia,
+    nomes_categorias,
+    rotulos_especiais_tema,
+)
 
 BRUTOS = RAIZ / "dados" / "brutos"
 CONFIG = carregar_config()
@@ -42,8 +50,11 @@ ARQUIVO_TEMAS = Path(__file__).with_name("temas_materias.json")
 # ementa. Ligar apenas se temas_materias.json nao existir para a cidade.
 USAR_REGRAS_POR_PALAVRA = False
 
-TEMA_NAO_SE_APLICA = "não se aplica"
-TEMA_SEM_EMENTA = "sem ementa no SAPL"
+CATEGORIAS = nomes_categorias(CONFIG)
+_ROTULOS_ESPECIAIS = rotulos_especiais_tema(CONFIG)
+TEMA_NAO_SE_APLICA = _ROTULOS_ESPECIAIS["nao_se_aplica"]
+TEMA_SEM_EMENTA = _ROTULOS_ESPECIAIS["sem_ementa"]
+TEMAS_ACEITOS = frozenset(CATEGORIAS) | {TEMA_NAO_SE_APLICA, TEMA_SEM_EMENTA}
 RESULTADOS_DE_VOTACAO = {
     "UNANIMIDADE",
     "MAIORIA ABSOLUTA",
@@ -128,14 +139,14 @@ REGRAS = {
         (r"\bacademia ao ar livre\b|\bcalistenia\b", 4),
         (r"\bevento\w*|\bturismo\b|\bshow\b|\bpnab\b", 3),
     ],
-    "Meio ambiente e animais": [
+    "Meio ambiente e proteção animal": [
         (r"\bmeio ambiente\b|\bambient\w*\b|\bpoluicao\b", 5),
         (r"\barboriz\w*|\barvor\w*\b|\bnascente\w*|\bparque natural\b", 4),
         (r"\brio\b|\bcorrego\w*|\brepresa\w*|\breciclag\w*|\bcoleta seletiva\b", 4),
         (r"\bresiduo\w*|\bdesassoreamento\b|\balagamento\w*|\benchente\w*", 4),
         (r"\banim\w*\b|\bveterin\w*|\bcastrac\w*\b|\bprotecao animal\b", 4),
     ],
-    "Iluminação e serviços urbanos": [
+    "Iluminação, serviços urbanos e conectividade": [
         (r"\biluminacao\b|\blampad\w*\b|\bluminari\w*\b", 5),
         (r"\benergia eletric[ao]\b|\bred[ea]s? eletric[ao]s?\b", 4),
         (r"\bsaneamento\b|\besgoto\b|\bagua potavel\b|\brede de agua\b", 5),
@@ -161,17 +172,20 @@ REGRAS = {
         (r"\binterligacao entre (?:as )?ruas\b|\babertura (?:das? )?ruas\b", 4),
         (r"\bruas?\b|\bavenid\w*\b|\bestrad\w*\b|\brodovi\w*\b", 1),
     ],
-    "Desenvolvimento, moradia e agricultura": [
+    "Desenvolvimento e moradia": [
         (r"\bhabitacao\b|\bprograma habitacional\b|\bregularizacao fundiaria\b", 5),
         (
             r"\bdesenvolvimento economic[oa]\b|\bexploracao economic[ao]\b"
             r"|\bempreendedor\w*|\bempreg\w*\b",
             5,
         ),
-        (r"\bagricultur\w*\b|\bagricol\w*\b|\bprodutor\w* rural\b", 5),
         (r"\btrabalho,? renda e qualificacao\b|\bagencia do trabalhador\b", 5),
         (r"\bcurso\w* (?:tecnic[ao]\w*|profissionalizante\w*)\b|\bqualificac\w*\b", 4),
         (r"\bfeira livre\b|\bcomercio\b|\bindustri\w*\b", 3),
+    ],
+    "Agricultura e pecuária": [
+        (r"\bagricultur\w*\b|\bagricol\w*\b|\bprodutor\w* rural\b", 5),
+        (r"\bpecuari\w*\b|\bporteira adentro\b|\bfeira do produtor\b", 5),
     ],
     "Administração e finanças": [
         (r"\borcamento\b|\bcredito adicional\b|\bcredito especial\b", 5),
@@ -214,6 +228,14 @@ def carregar_temas():
             "A classificacao por materia precisa existir antes deste gerador."
         )
     dados = json.loads(ARQUIVO_TEMAS.read_text(encoding="utf-8"))
+    fora_da_lista = sorted(
+        {item["tema"] for item in dados["materias"] if item["tema"] not in TEMAS_ACEITOS}
+    )
+    if fora_da_lista:
+        raise SystemExit(
+            f"{ARQUIVO_TEMAS.name} usa tema fora de config_cidade.json: "
+            + ", ".join(fora_da_lista)
+        )
     return {int(item["id"]): item for item in dados["materias"]}
 
 

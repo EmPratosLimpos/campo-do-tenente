@@ -1,6 +1,11 @@
 import json
 import pathlib
+import sys
 import unittest
+
+PASTA_COLETOR = pathlib.Path(__file__).resolve().parent.parent / "coletor"
+if str(PASTA_COLETOR) not in sys.path:
+    sys.path.insert(0, str(PASTA_COLETOR))
 
 
 CAMPOS_OBRIGATORIOS = {
@@ -13,6 +18,7 @@ CAMPOS_OBRIGATORIOS = {
     "recorte": ("anos",),
     "vereadores": ("numero_esperado",),
     "pisos_sanidade": ("por_ano",),
+    "categorias": ("lista", "rotulos_especiais"),
 }
 
 
@@ -58,6 +64,19 @@ class TestConfigCidade(unittest.TestCase):
         self.assertGreaterEqual(len(anos), 1)
         for ano in anos:
             self.assertIsInstance(ano, int)
+
+    def test_categorias_da_cidade(self):
+        from config_cidade import categorias, rotulos_especiais_tema
+
+        lista = categorias(self.config)
+        self.assertEqual(len(lista), 13, "D-021 aprovou 13 categorias")
+        nomes = [item["nome"] for item in lista]
+        self.assertEqual(len(set(nomes)), len(nomes))
+        for item in lista:
+            self.assertTrue(item["descricao"])
+        especiais = rotulos_especiais_tema(self.config)
+        self.assertEqual(set(especiais), {"nao_se_aplica", "sem_ementa"})
+        self.assertFalse(set(especiais.values()) & set(nomes))
 
 
 if __name__ == "__main__":
