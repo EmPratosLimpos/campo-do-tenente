@@ -36,9 +36,9 @@ coletor (Python)  ->  dados/brutos/  ->  gerador de agregados  ->  validacao (sa
    - `gerar_atuacao_vereadores_2026.py`: script principal de consolidação.
      Lê apenas `dados/brutos/` e `vereadores.json`, nunca infere ou
      inventa voto, presença ou autoria, e produz:
-     - `atuacao_vereadores_2026.json` / `.csv` — atuação consolidada por
+     - `atuacao_vereadores_2026.json` / `.csv`: atuação consolidada por
        vereador (presença, votos, faltas).
-     - `RELATORIO-ATUACAO-VEREADORES-2026.md` — relatório legível.
+     - `RELATORIO-ATUACAO-VEREADORES-2026.md`: relatório legível.
    - Execução determinística: rodar de novo com os mesmos dados brutos
      produz o mesmo resultado, exceto pelo timestamp de geração.
 
@@ -46,14 +46,19 @@ coletor (Python)  ->  dados/brutos/  ->  gerador de agregados  ->  validacao (sa
    - Roda antes de qualquer publicação, tanto localmente quanto na
      esteira do GitHub Actions.
    - Confere que os arquivos consolidados existem, são JSON/CSV válidos e
-     batem com os totais oficiais esperados (26 sessões ordinárias, 100
-     PLLs, 15 vereadores, contagem de registros de votação > 0).
+     batem com os pisos mínimos de `config_cidade.json` (sessões ordinárias,
+     PLLs, vereadores). Os pisos de Campo do Tenente só serão definidos
+     depois da coleta completa, com aprovação do mantenedor; enquanto
+     estiverem nulos, a verificação fica adiada.
    - Falha rápido (`exit 1`) se qualquer verificação não bater, impedindo
      que dados corrompidos ou truncados cheguem a `main`.
 
 5. **Publicação** (`.github/workflows/atualizacao_semanal.yml` +
    GitHub Pages)
-   - Roda semanalmente (terça e quarta às 21h BRT) e sob demanda.
+   - O workflow semanal ainda não existe neste repositório; o fluxo abaixo
+     é o previsto. Hoje só existe `.github/workflows/verificar_pr.yml`, que
+     roda os testes em cada Pull Request.
+   - Rodará semanalmente e sob demanda.
    - Ordem: instalar dependências -> coletor -> gerador de agregados ->
      testes de sanidade -> (se houver mudança em `dados/`) empacotar
      backup de `dados/` como `.tar.gz` e publicar como artefato do
@@ -62,6 +67,8 @@ coletor (Python)  ->  dados/brutos/  ->  gerador de agregados  ->  validacao (sa
      direto na branch de produção.
    - Em caso de falha em qualquer etapa, um passo final (`if: failure()`)
      registra no log da execução em qual etapa a esteira quebrou.
-   - Após o merge do Pull Request em `main`, o GitHub Pages publica o
-     painel (`index.html`) lendo diretamente os arquivos consolidados em
-     `dados/tratados/`.
+   - O merge do Pull Request em `main` é exclusivo do mantenedor. Após o
+     merge, o GitHub Pages publica o painel (`index.html`) lendo
+     diretamente os arquivos consolidados em `dados/tratados/`. Não há
+     deploy manual nem outra hospedagem.
+   - Não há votação popular nesta fase do projeto.

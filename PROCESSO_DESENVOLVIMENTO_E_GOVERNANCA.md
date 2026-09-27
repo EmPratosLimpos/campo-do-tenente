@@ -7,7 +7,7 @@
 | Versão | 1.0 (documento definitivo) |
 | Data de vigência | 16 de setembro de 2026 |
 | Repositório | `EmPratosLimpos/campo-do-tenente` |
-| Ambiente de produção | `https://empratoslimpos.pages.dev` |
+| Ambiente de produção | `https://empratoslimpos.github.io/campo-do-tenente/` (GitHub Pages) |
 | Branch de produção | `main` (protegida) |
 | Branch de integração | `desenvolvimento` |
 | Classificação | Público (o projeto é cívico e auditável por qualquer cidadão) |
@@ -137,7 +137,7 @@ Acesse `http://localhost:8000/index.html`.
 ### 1.5 Execução local do coletor
 
 ```bash
-python coletor/coletor.py
+python coletor/baixar_voto_presenca_ordinarias_2026.py
 python coletor/testes_sanidade.py
 python coletor/gerar_hash_integridade.py
 python -m pytest tests/test_sanidade_dados.py -v
@@ -751,9 +751,11 @@ Nenhum agente de IA (Claude, Cursor, Grok, DeepSeek, Copilot, ou qualquer outro)
 | Hospedagem | GitHub Pages |
 | Fonte | Branch `main` |
 | Gatilho | Merge de Pull Request aprovado |
-| URL de produção | `https://empratoslimpos.pages.dev` |
+| URL de produção | `https://empratoslimpos.github.io/campo-do-tenente/` |
 | Natureza | Site estático, sem backend, sem banco de dados, sem sessão de usuário |
 | Tempo típico de propagação | 1 a 5 minutos |
+
+**Fluxo de publicação:** o merge de um Pull Request aprovado para `main`, feito exclusivamente pelo mantenedor, é o que publica o site. O GitHub Pages lê a `main` e atualiza a URL de produção sozinho. Não existe deploy manual, não existe outra hospedagem e nenhum agente ou automação publica por conta própria.
 
 A ausência de backend é uma decisão arquitetural de segurança: sem servidor de aplicação, não há injeção de SQL, não há desserialização insegura, não há gestão de sessão vulnerável e não há superfície de execução remota. A superfície de ataque residual concentra-se no navegador do visitante, e é exatamente essa superfície que a CSP estrita e o `esc()` endereçam.
 
@@ -782,8 +784,8 @@ Obrigatório em **toda** publicação, sem exceção. Deve iniciar em até 10 mi
 Verificação objetiva:
 
 ```bash
-curl -I https://empratoslimpos.pages.dev/
-curl -sI https://empratoslimpos.pages.dev/dados/tratados/atuacao_vereadores_2026.json
+curl -I https://empratoslimpos.github.io/campo-do-tenente/
+curl -sI https://empratoslimpos.github.io/campo-do-tenente/dados/tratados/atuacao_vereadores_2026.json
 ```
 
 #### 5.3.2 Integridade dos dados ao vivo
@@ -796,8 +798,8 @@ curl -sI https://empratoslimpos.pages.dev/dados/tratados/atuacao_vereadores_2026
 - [ ] Contagem ao vivo: PLLs maior ou igual a 100.
 
 ```bash
-curl -sO https://empratoslimpos.pages.dev/dados/tratados/atuacao_vereadores_2026.json
-curl -sO https://empratoslimpos.pages.dev/dados/tratados/atuacao_vereadores_2026.json.sha256
+curl -sO https://empratoslimpos.github.io/campo-do-tenente/dados/tratados/atuacao_vereadores_2026.json
+curl -sO https://empratoslimpos.github.io/campo-do-tenente/dados/tratados/atuacao_vereadores_2026.json.sha256
 sha256sum -c atuacao_vereadores_2026.json.sha256
 ```
 
@@ -907,8 +909,9 @@ Procedimento:
 | 4. Empacotamento de backup | Workflow | `tar.gz` com 90 dias de retenção |
 | 5. Abertura de Pull Request para `main` | Workflow | PR em `atualizacao-dados/*` |
 | 6. Revisão humana | **Mantenedor** | Aprovação ou reprovação |
-| 7. Merge e deploy | GitHub Pages | Produção atualizada |
-| 8. Homologação pós-deploy | **Mantenedor** | Registro de conformidade |
+| 7. Merge em `main` | **Mantenedor** | Aprovação registrada no PR |
+| 8. Publicação automática | GitHub Pages, disparado pelo merge | Produção atualizada |
+| 9. Homologação pós-deploy | **Mantenedor** | Registro de conformidade |
 
 Princípio central da esteira: **valida antes de publicar e nunca faz push cego na `main`.** A automação tem autonomia para trabalhar, coletar, testar e propor. Não tem autonomia para publicar.
 
@@ -974,9 +977,9 @@ REVISÃO
 [ ] Aprovação explícita do mantenedor
 
 PUBLICAÇÃO
-[ ] Merge realizado
+[ ] Merge em main realizado pelo mantenedor (o merge publica o site)
 [ ] Tag semântica criada e enviada
-[ ] Deploy concluído no GitHub Pages
+[ ] Publicação do GitHub Pages concluída, sem deploy manual
 
 HOMOLOGAÇÃO
 [ ] HTTP 200 na URL de produção
@@ -1028,5 +1031,3 @@ O compromisso operacional do projeto "Em Pratos Limpos" se resume a quatro afirm
 Transparência pública exige, antes de tudo, que a própria ferramenta de transparência seja auditável.
 
 ---
-
-Escrevi o documento como texto, conforme solicitado, sem executar nenhuma ferramenta ou comando. Notei que já existe um arquivo `PROCESSO_DESENVOLVIMENTO_E_GOVERNANCA.md` não rastreado na raiz do repositório; se quiser, posso ler o conteúdo atual dele e gravar esta versão (substituindo ou mesclando), mas não fiz nenhuma alteração em disco sem sua confirmação.
