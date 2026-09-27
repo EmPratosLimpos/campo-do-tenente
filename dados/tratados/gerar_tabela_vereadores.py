@@ -42,6 +42,7 @@ ANOS = anos_recorte(CONFIG)
 CIDADE = nome_cidade(CONFIG)
 ARQUIVO_PARTIDO = DIR_BRUTOS / "api_parlamentares_partido.json"
 ARQUIVO_FILIACAO = DIR_BRUTOS / "api_parlamentares_filiacao.json"
+ARQUIVO_MANDATOS = DIR_BRUTOS / "mandatos_legislatura_atual.json"
 ARQUIVO_JSON = DIR_SCRIPT / "vereadores.json"
 ARQUIVO_CSV = DIR_SCRIPT / "vereadores.csv"
 ARQUIVO_RELATORIO = DIR_SCRIPT / "RELATORIO-TABELA-VEREADORES.md"
@@ -334,11 +335,24 @@ def casos_de_atencao(cadastro: dict[int, dict]) -> list[dict]:
     return []
 
 
+def carregar_mandatos() -> dict[int, list[dict]]:
+    if not ARQUIVO_MANDATOS.exists():
+        return {}
+    data = carregar_json(ARQUIVO_MANDATOS)
+    por_parlamentar: dict[int, list[dict]] = defaultdict(list)
+    for item in data.get("mandatos") or []:
+        if not isinstance(item, dict) or item.get("parlamentar_id") is None:
+            continue
+        por_parlamentar[int(item["parlamentar_id"])].append(item)
+    return por_parlamentar
+
+
 def montar_vereadores(
     cadastro: dict[int, dict],
     apelidos: dict,
     ids_em_2026: set[int],
     filiacoes: dict[int, dict],
+    mandatos: dict[int, list[dict]] | None = None,
 ) -> list[dict]:
     slugs_usados: dict[str, int] = {}
     tabela = []
@@ -363,6 +377,18 @@ def montar_vereadores(
         caminho = dados["link_detail_backend"] or f"/parlamentar/{id_sapl}"
         filiacao = filiacoes.get(id_sapl) or {}
         foto_url = dados.get("fotografia") or None
+        lista_mandatos = list((mandatos or {}).get(id_sapl) or [])
+        if len(lista_mandatos) == 1:
+            data_inicio = lista_mandatos[0].get("data_inicio_mandato")
+            data_fim = lista_mandatos[0].get("data_fim_mandato")
+        elif lista_mandatos:
+            data_inicio = min(
+                item.get("data_inicio_mandato") or "" for item in lista_mandatos
+            )
+            data_fim = max(item.get("data_fim_mandato") or "" for item in lista_mandatos)
+        else:
+            data_inicio = None
+            data_fim = None
         tabela.append(
             {
                 "id_sapl": id_sapl,
@@ -376,6 +402,9 @@ def montar_vereadores(
                 "apelidos": lista_apelidos,
                 "apelidos_origem": origem,
                 "ativo_no_recorte": id_sapl in ids_em_2026,
+                "data_inicio_mandato": data_inicio,
+                "data_fim_mandato": data_fim,
+                "mandatos": lista_mandatos,
                 "link_sapl": link_parlamentar(caminho, CONFIG),
             }
         )
@@ -418,6 +447,8 @@ def escrever_csv(vereadores: list[dict]) -> None:
         "foto_url",
         "apelidos",
         "ativo_no_recorte",
+        "data_inicio_mandato",
+        "data_fim_mandato",
         "link_sapl",
     ]
     with ARQUIVO_CSV.open("w", encoding="utf-8", newline="") as handle:
@@ -436,6 +467,8 @@ def escrever_csv(vereadores: list[dict]) -> None:
                     "foto_url": item["foto_url"] or "",
                     "apelidos": " | ".join(item["apelidos"]),
                     "ativo_no_recorte": "true" if item["ativo_no_recorte"] else "false",
+                    "data_inicio_mandato": item.get("data_inicio_mandato") or "",
+                    "data_fim_mandato": item.get("data_fim_mandato") or "",
                     "link_sapl": item["link_sapl"],
                 }
             )
@@ -644,7 +677,9 @@ def main() -> None:
     indice = montar_indice_nomes(cadastro, apelidos)
     autorias_nao_vereador = varrer_autoria(indice, apelidos)
     filiacoes = carregar_filiacoes_vigentes(carregar_partidos())
-    vereadores = montar_vereadores(cadastro, apelidos, ids_em_recorte, filiacoes)
+    vereadores = montar_vereadores(
+        cadastro, apelidos, ids_em_recorte, filiacoes, carregar_mandatos()
+    )
     conferir_partido_e_foto(vereadores)
 
     banca_encontrada = [item["id_sapl"] for item in vereadores if item["ativo_no_recorte"]]

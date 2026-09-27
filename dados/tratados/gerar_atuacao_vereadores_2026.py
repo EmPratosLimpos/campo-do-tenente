@@ -44,8 +44,8 @@ from gerar_temas_votacoes_2026 import REGRAS, classificar  # noqa: E402
 CONFIG = carregar_config()
 CIDADE = nome_cidade(CONFIG)
 ARQUIVO_VEREADORES = DIR_SCRIPT / "vereadores.json"
-TIPO_PLL = "PLL"
-DESCRICAO_PLL = "PROJETO DE LEI DO LEGISLATIVO"
+TIPO_PLL = "PLEG"
+DESCRICAO_PLL = "Projeto de Lei Origem do Poder Legislativo"
 ANO_ATUAL = None
 ARQUIVO_CONTAGEM = None
 ARQUIVO_MATERIAS = None
@@ -80,7 +80,7 @@ def configurar_ano(ano: int) -> None:
 
 PREFIXO_PRESIDENTE = re.compile(r"^PRESIDENTE(\s|-)", re.IGNORECASE)
 RESULTADO_VOTACAO = re.compile(
-    r"Votação:\s*(UNANIMIDADE|MAIORIA ABSOLUTA|REJEITADO)\s*$",
+    r"Vota(?:ção|cao):\s*(?:Aprovada por\s+)?(UNANIMIDADE|MAIORIA ABSOLUTA|REJEITAD[AO])\s*$",
     re.IGNORECASE,
 )
 APROVADOS = {"UNANIMIDADE", "MAIORIA ABSOLUTA"}
@@ -224,7 +224,10 @@ def extrair_resultado(texto: str | None) -> str | None:
     achado = RESULTADO_VOTACAO.search(texto.strip())
     if not achado:
         return None
-    return achado.group(1).upper()
+    token = achado.group(1).upper()
+    if token.startswith("REJEITAD"):
+        return "REJEITADO"
+    return token
 
 
 def situacao_do_resultado(resultado: str | None) -> str | None:
@@ -504,7 +507,7 @@ def processar_sessoes(ids_banca: set[int], sessoes: list[dict]):
         extra = cobertos - ids_banca
         if extra:
             raise SystemExit(
-                f"Sessao {sessao['id']}: pessoa fora da banca de 15: {sorted(extra)}"
+                f"Sessao {sessao['id']}: pessoa fora da banca cadastrada: {sorted(extra)}"
             )
 
         registros = carregar_registros(sessao)
