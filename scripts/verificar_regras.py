@@ -80,12 +80,21 @@ def main():
 
     # 5. Higiene de travessoes em documentacao
     print("\nVerificando ausencia de caracteres de travessao proibidos...")
-    arquivos_norma = ["AGENTS.md", "CLAUDE.md", ".cursorrules", "PROCESSO_DESENVOLVIMENTO_E_GOVERNANCA.md", "index.html"]
+    arquivos_norma = [
+        "AGENTS.md",
+        "CLAUDE.md",
+        ".cursorrules",
+        "PROCESSO_DESENVOLVIMENTO_E_GOVERNANCA.md",
+        "index.html",
+        "README.md",
+        "ARCHITECTURE.md",
+        "CHANGELOG.md",
+    ]
     for nome in arquivos_norma:
         arq = ROOT / nome
         if arq.exists():
             conteudo = arq.read_text(encoding="utf-8")
-            if re.search(r"[—–]", conteudo):
+            if re.search("[\u2014\u2013]", conteudo):
                 erros.append(f"VIOLACAO: Caractere travessao encontrado em {nome}!")
             else:
                 print(f"OK: {nome} limpo.")
