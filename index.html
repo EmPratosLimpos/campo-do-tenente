@@ -3992,9 +3992,9 @@
     return null;
   }
 
-  function classeVotoSelo(classificacao) {
-    if (classificacao === "sim") return "voto-sim";
-    if (classificacao === "nao") return "voto-nao";
+  function classeVotoSelo(estado) {
+    if (estado === "sim") return "voto-sim";
+    if (estado === "nao") return "voto-nao";
     return "voto-neutro";
   }
 
@@ -4477,18 +4477,14 @@
 
   function renderSecaoVotos(v) {
     var vo = v.votos;
-    var cards = [
-      { num: vo.sim, rot: "Sim" },
-      { num: vo.nao, rot: "Não" },
-      { num: vo.abstencao, rot: "Abstenção" },
-      { num: vo.presidente_nao_votou, rot: "Presidente que não votou" },
-      { num: vo.nao_votou_nao_era_presidente, rot: "Não votou (não era presidente)" },
-      { num: vo.ausente, rot: "Ausente na votação" }
-    ];
+    var todosCards = cardsResumoVotos(vo);
+    var cards = todosCards.filter(function(c) {
+      return c.num > 0 || c.id === 'sim' || c.id === 'nao' || c.id === 'abstencao';
+    });
 
     var nominais = vo.nominais || [];
     var filtrados = nominais.filter(function (n) {
-      if (estado.filtroClassificacao && n.classificacao !== estado.filtroClassificacao) return false;
+      if (estado.filtroClassificacao && n.estado !== estado.filtroClassificacao) return false;
       if (estado.filtroTexto) {
         var busca = normalizarTexto(estado.filtroTexto);
         var ementa = ementaVotacao(n);
@@ -4507,18 +4503,12 @@
     var inicio = (estado.pagina - 1) * POR_PAGINA;
     var fatia = filtrados.slice(inicio, inicio + POR_PAGINA);
 
-    var opcoesFiltro = Object.keys(ROTULOS_VOTO).map(function (k) {
-      var sel = estado.filtroClassificacao === k ? " selected" : "";
-      return '<option value="' + esc(k) + '"' + sel + ">" + esc(ROTULOS_VOTO[k]) + "</option>";
+    var opcoesFiltro = todosCards.filter(function(c) { return c.num > 0; }).map(function (c) {
+      var sel = estado.filtroClassificacao === c.id ? " selected" : "";
+      return '<option value="' + esc(c.id) + '"' + sel + ">" + esc(c.rot) + "</option>";
     }).join("");
 
-    var atalhosVoto = [
-      { id: "sim", rot: "Sim" },
-      { id: "nao", rot: "Não" },
-      { id: "presidente_nao_votou", rot: "Presidente que não votou" },
-      { id: "nao_votou_nao_era_presidente", rot: "Não votou" },
-      { id: "ausente", rot: "Ausente" }
-    ];
+    var atalhosVoto = todosCards.filter(function(c) { return c.num > 0; });
 
     var itens = fatia.map(function (n) {
       var ementa = ementaVotacao(n);
@@ -4536,7 +4526,7 @@
         ", sessão " + esc(n.sessao_id) + "</div>" +
         (tipoNumero ? '<div class="materia-titulo">' + esc(tipoNumero) + "</div>" : "") +
         (tagsHtml ? tagsHtml : "") +
-        '<span class="voto-selo ' + classeVotoSelo(n.classificacao) + '">' +
+        '<span class="voto-selo ' + classeVotoSelo(n.estado) + '">' +
         esc(rotuloVoto(n)) + "</span>" +
         "<span>" + textoEmenta + "</span> " +
         linkExt(linkSess, "Sessão no SAPL") + "</li>";
@@ -4751,10 +4741,7 @@
       estado.indiceEmentas[p.id] = p.ementa;
       estado.indiceMaterias[p.id] = p;
     });
-    (dados.projetos_lei_legislativo || []).forEach(function (p) {
-      estado.indiceEmentas[p.id] = p.ementa;
-      estado.indiceMaterias[p.id] = p;
-    });
+
   }
 
   function carregar() {
