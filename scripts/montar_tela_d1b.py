@@ -9,7 +9,8 @@ import re
 import sys
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
-REF = RAIZ / "referencia-campo-largo" / "index.html"
+MODELO = RAIZ / "tela" / "modelo.html"
+PATCH_DADOS = RAIZ / "tela" / "patch_dados_camara.js"
 SAIDA = RAIZ / "index.html"
 CFG = RAIZ / "config_cidade.json"
 
@@ -85,14 +86,11 @@ def main():
     anos = cfg["recorte"]["anos"]
     ano_padrao = max(anos)
 
-    html = REF.read_text(encoding="utf-8")
-    html = remover_bloco_votacao_html(html)
-    linhas = html.split("\n")
-    html = "\n".join(
-        ln
-        for ln in linhas
-        if "turnstile" not in ln.lower() and "btn-votar" not in ln.lower()
-    )
+    if not MODELO.is_file():
+        raise RuntimeError(
+            f"Modelo ausente: {MODELO}. Execute python scripts/gerar_modelo_tela.py"
+        )
+    html = MODELO.read_text(encoding="utf-8")
     html = substituir_csp(html, sapl)
 
     partes = html.split("<script>", 1)
@@ -297,6 +295,70 @@ def main():
 """
     html = injetar_apos_strict(html, injecao)
 
+    patch_dados = PATCH_DADOS.read_text(encoding="utf-8")
+    marcador_ui = "  var estadoUI = {\n    secao: \"camara\"\n  };\n"
+    if marcador_ui not in html:
+        raise RuntimeError("Marcador estadoUI nao encontrado para patch de dados")
+    html = html.replace(marcador_ui, marcador_ui + patch_dados + "\n", 1)
+
+    html = html.replace(
+        "htmlFaltas = '<p class=\"vazio\" style=\"margin-top:10px\">Nenhuma falta registrada nas 26 sessões ordinárias de 2026.</p>';",
+        "htmlFaltas = '<p class=\"vazio\" style=\"margin-top:10px\">Nenhuma falta registrada nas ' + esc(p.sessoes_ordinarias) + ' sessões ordinárias de ' + ANO_ATUAL + '.</p>';",
+    )
+    html = html.replace(
+        "' + ' sessões ordinárias de ' + ANO_ATUAL + '. Taxa de presença: <strong>' +",
+        "' sessões ordinárias de ' + ANO_ATUAL + '. Taxa de presença: <strong>' +",
+    )
+    html = re.sub(
+        r"' sessões ordinárias de 2026\. Taxa de presença: <strong>' \+",
+        "' sessões ordinárias de ' + ANO_ATUAL + '. Taxa de presença: <strong>' +",
+        html,
+        count=1,
+    )
+    html = html.replace(
+        'esc(vo.total_registros) + " votações em sessões ordinárias de 2026.</p>" +',
+        'esc(vo.total_registros) + " votações em sessões ordinárias de " + ANO_ATUAL + ".</p>" +',
+    )
+    html = html.replace(
+        "renderSecaoVotos(v) +\n"
+        '      \'<footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>";\n',
+        "renderSecaoVotos(v) +\n"
+        '      \'<footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados">\' +\n'
+        '      "<p>Dado coletado em <strong>" + esc(formatarDataHora(meta.dado_coletado_em)) +\n'
+        '      "</strong>. Fonte: SAPL (Sistema de Apoio ao Processo Legislativo) da Câmara.</p></footer>";\n',
+    )
+    html = re.sub(
+        r"  function rotuloPeriodoShare\(periodo\) \{[\s\S]*?return \"sessões ordinárias de 2026\";\n  \}",
+        """  function rotuloPeriodoShare(periodo) {
+    if (periodo === "sessao") return "última sessão ordinária (" + dataUltimaSessaoFmt() + ")";
+    if (periodo === "mes") return nomeMesAnteriorUltimaSessao().toLowerCase();
+    return "sessões ordinárias de " + ANO_ATUAL;
+  }""",
+        html,
+        count=1,
+    )
+    html = html.replace(
+        'return "sessões ordinárias de 2026";',
+        'return "sessões ordinárias de " + ANO_ATUAL;',
+    )
+    html = html.replace(
+        'return "sessões ordinárias de 2026 até " + data;',
+        'return "sessões ordinárias de " + ANO_ATUAL + " até " + data;',
+    )
+    html = re.sub(
+        r"var ultimaData = datasSessao\[datasSessao\.length - 1\] \|\| \"2026-09-08\";",
+        "var ultimaData = datasSessao[datasSessao.length - 1] || null;",
+        html,
+        count=1,
+    )
+    html = html.replace(
+        "        renderApp();\n"
+        "        atualizarCardVotacoes();\n"
+        "        atualizarPainelMes();\n"
+        "        atualizarVotacoesMes();",
+        "        atualizarInterfaceCamara();\n        renderApp();",
+    )
+
     html = html.replace(
         '  var JSON_URL = window.location.pathname.indexOf("/docs/") !== -1\n'
         '    ? "../../dados/tratados/atuacao_vereadores_2026.json"\n'
@@ -347,85 +409,6 @@ def main():
         "  function rotuloVoto(n) {\n    if (n.classificacao && ROTULOS_VOTO[n.classificacao]) {\n"
         "      return ROTULOS_VOTO[n.classificacao];\n    }\n    return n.voto || \"Sem voto\";\n  }",
         "  function rotuloVoto(n) {\n    return rotuloVotoNominal(n);\n  }",
-    )
-
-    html = re.sub(
-        r"  function renderSecaoVotos\(v\) \{[\s\S]*?  function renderApp\(\)",
-        r"""  function renderSecaoVotos(v) {
-    var vo = v.votos;
-    var rotulos = rotulosVotoMeta();
-    var chavesVoto = [
-      ["sim", rotulos.sim || "Sim"],
-      ["nao", rotulos.nao || "Não"],
-      ["abstencao", rotulos.abstencao || "Abstenção"],
-      ["nao_votou", rotulos.nao_votou || "Não votou"],
-      ["presidente_que_nao_votou", rotulos.presidente_que_nao_votou || "Presidente que não votou"],
-      ["presente_sem_voto_individual_registrado", rotulos.presente_sem_voto_individual_registrado || "Presente sem voto individual registrado"],
-      ["licenca_tratamento_saude", rotulos.licenca_tratamento_saude || "Licença para tratamento de saúde"],
-      ["fora_do_mandato", rotulos.fora_do_mandato || "Fora do mandato"]
-    ];
-    var cards = chavesVoto.map(function (par) {
-      return { num: vo[par[0]] || 0, rot: par[1] };
-    }).filter(function (c) { return c.num > 0; });
-
-    var nominais = vo.nominais || [];
-    var filtrados = nominais.filter(function (n) {
-      var cls = classificacaoNominal(n);
-      if (estado.filtroClassificacao && cls !== estado.filtroClassificacao) return false;
-      if (estado.filtroTexto) {
-        var busca = normalizarTexto(estado.filtroTexto);
-        var ementa = ementaVotacao(n);
-        var tagsBusca = n.materia_id ? tagsMateria(n.materia_id) : null;
-        var tipoNumeroBusca = tipoNumeroDoVoto(n);
-        var texto = (ementa || "") + " " + (n.materia_id || "") + " " + n.data_sessao +
-          " " + (tipoNumeroBusca || "");
-        if (tagsBusca) texto += " " + tagsBusca.tag_tipo + " " + tagsBusca.tag_tema;
-        if (normalizarTexto(texto).indexOf(busca) === -1) return false;
-      }
-      return true;
-    });
-
-    var totalPag = Math.max(1, Math.ceil(filtrados.length / POR_PAGINA));
-    if (estado.pagina > totalPag) estado.pagina = totalPag;
-    var inicio = (estado.pagina - 1) * POR_PAGINA;
-    var fatia = filtrados.slice(inicio, inicio + POR_PAGINA);
-
-    var opcoesFiltro = chavesVoto.map(function (par) {
-      if (!(vo[par[0]] > 0)) return "";
-      var sel = estado.filtroClassificacao === par[0] ? " selected" : "";
-      return '<option value="' + esc(par[0]) + '"' + sel + ">" + esc(par[1]) + "</option>";
-    }).join("");
-
-    var itens = fatia.map(function (n) {
-      var ementa = ementaVotacao(n);
-      var textoEmenta = ementa
-        ? esc(ementa.length > 180 ? ementa.slice(0, 177) + "..." : ementa)
-        : '<span class="sem-ementa">Sem ementa no SAPL</span>';
-      var cls = classificacaoNominal(n);
-      return '<article class="item-voto"><div class="cab-voto">' +
-        '<span class="selo ' + classeVotoSelo(cls) + '">' + esc(rotuloVotoNominal(n)) + "</span>" +
-        '<span class="data">' + esc(formatarData(n.data_sessao)) + "</span></div>" +
-        '<p class="ementa-voto">' + textoEmenta + "</p>" +
-        '<p class="meta-voto">' + linkExt(linkMateria(n.materia_id), "Ver matéria no SAPL") + "</p></article>";
-    }).join("");
-
-    return '<section class="secao" aria-labelledby="tit-votos">' +
-      '<h2 id="tit-votos">Como votou em plenário</h2>' +
-      '<p class="legenda">Ausência não entra nesta contagem de votos. ' +
-      esc((estado.dados.meta && estado.dados.meta.rotulo_sem_voto_individual) || "") + "</p>" +
-      '<div class="cards-voto">' + cards.map(function (c) {
-        return '<div class="card-voto"><span class="num">' + esc(c.num) + '</span><span class="rot">' + esc(c.rot) + "</span></div>";
-      }).join("") + "</div>" +
-      '<label for="filtro-class-voto">Filtrar por tipo de registro</label>' +
-      '<select id="filtro-class-voto"><option value="">Todos</option>' + opcoesFiltro + "</select>" +
-      '<label for="busca-votos">Buscar</label><input id="busca-votos" type="search" value="' + esc(estado.filtroTexto) + '">' +
-      (itens || '<p class="vazio">Nenhum registro neste filtro.</p>') +
-      "</section>";
-  }
-
-  function renderApp(""",
-        html,
-        count=1,
     )
 
     html = html.replace(
