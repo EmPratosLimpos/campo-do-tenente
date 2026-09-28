@@ -1,0 +1,217 @@
+{
+  "sessao": [
+    {
+      "id": 811,
+      "tipo": "PLL 4/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre princípios, critérios gerais e transparência nos programas habitacionais de interesse social que contem com participação do Município de Campo do Tenente e dá outras providências.",
+      "categoria": "Desenvolvimento e moradia",
+      "placar": "8 x 0",
+      "data_sessao": "2026-09-22",
+      "sessao_id": 273
+    },
+    {
+      "id": 815,
+      "tipo": "PLL 5/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Altera a Lei Municipal nº 1.094, de 2022, que institui o “Título Mãe Tenenteana” no Município de Campo do Tenente.",
+      "categoria": "Homenagens, nomes e datas",
+      "placar": "8 x 0",
+      "data_sessao": "2026-09-22",
+      "sessao_id": 273
+    }
+  ],
+  "mes": [
+    {
+      "id": 698,
+      "tipo": "PLL 3/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre a obrigatoriedade de notificação à Companhia de Saneamento do Paraná – Sanepar, quanto da realização de obras de pavimentação.",
+      "categoria": "Ruas, trânsito e transporte",
+      "placar": "8 x 0",
+      "data_sessao": "2026-08-25",
+      "sessao_id": 269
+    }
+  ],
+  "todo": [
+    {
+      "id": 193,
+      "tipo": "PLL 7/2025",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "DISPÕE SOBRE A DIVULGAÇÃO DE INFORMAÇÕES SOBRE OS SERVIÇOS DE SANEAMENTO BÁSICO E DO PROGRAMA PORTEIRA ADENTRO DO MUNICÍPIO NO SITE OFICIAL DA PREFEITURA DE CAMPO DO TENENTE - PR.",
+      "categoria": "Agricultura e pecuária",
+      "placar": "8 x 0",
+      "data_sessao": "2025-09-30",
+      "sessao_id": 22
+    },
+    {
+      "id": 27,
+      "tipo": "PLL 8/2025",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre o piso salarial ético instituído pela OAB-PR para o cargo de Advogado da Câmara Municipal de Campo do Tenente e dá outras providências.",
+      "categoria": "Administração e finanças",
+      "placar": "9 x 0",
+      "data_sessao": "2025-09-30",
+      "sessao_id": 22
+    },
+    {
+      "id": 28,
+      "tipo": "PLL 9/2025",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre a possibilidade de alteração temporária da carga horária dos servidores da Câmara Municipal de Campo do Tenente, com ajuste proporcional da remuneração, mediante concordância expressa, e dá outras providências.",
+      "categoria": "Administração e finanças",
+      "placar": "9 x 0",
+      "data_sessao": "2025-08-05",
+      "sessao_id": 14
+    },
+    {
+      "id": 26,
+      "tipo": "PLL 10/2025",
+      "resultado": "maioria",
+      "resultado_oficial": "MAIORIA ABSOLUTA",
+      "ementa": "INSTITUI O TÍTULO DE \"EMBAIXADOR(A) HONORÁRIO(A) DE CAMPO DO TENENTE\" E DÁ OUTRAS PROVIDÊNCIAS.",
+      "categoria": "Homenagens, nomes e datas",
+      "placar": "8 x 0",
+      "data_sessao": "2025-06-24",
+      "sessao_id": 8
+    },
+    {
+      "id": 31,
+      "tipo": "PLL 11/2025",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "REGULAMENTA A LEI FEDERAL Nº 12.527/2011- LEI DE ACESSO À INFORMAÇÃO - LAI, NO ÂMBITO DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE – PR.",
+      "categoria": "Administração e finanças",
+      "placar": "8 x 0",
+      "data_sessao": "2025-08-05",
+      "sessao_id": 14
+    },
+    {
+      "id": 25,
+      "tipo": "PLL 12/2025",
+      "resultado": "maioria",
+      "resultado_oficial": "MAIORIA ABSOLUTA",
+      "ementa": "INSTITUI O PARLAMENTO MUNICIPAL DA PESSOA COM DEFICIÊNCIA NO MUNICÍPIO DE CAMPO DO TENENTE, DESTINADO A ESTUDANTES DA APAE, COM FINS EDUCATIVOS E DE CIDADANIA, E DÁ OUTRAS PROVIDÊNCIAS.",
+      "categoria": "Assistência social e direitos",
+      "placar": "8 x 0",
+      "data_sessao": "2025-06-24",
+      "sessao_id": 8
+    },
+    {
+      "id": 37,
+      "tipo": "PLL 13/2025",
+      "resultado": "maioria",
+      "resultado_oficial": "MAIORIA ABSOLUTA",
+      "ementa": "INSTITUI O SELO \"EMPRESA AMIGA DA JUVENTUDE\"",
+      "categoria": "Educação",
+      "placar": "7 x 0",
+      "data_sessao": "2025-07-08",
+      "sessao_id": 10
+    },
+    {
+      "id": 151,
+      "tipo": "PLL 14/2025",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "DISPÕE ACERCA DA IMPLANTAÇÃO DE CÓDIGO QR EM TODAS AS PLACAS DE OBRAS PÚBLICAS MUNICIPAIS PARA LEITURA E FISCALIZAÇÃO ELETRÔNICA.",
+      "categoria": "Administração e finanças",
+      "placar": "8 x 0",
+      "data_sessao": "2025-08-05",
+      "sessao_id": 14
+    },
+    {
+      "id": 163,
+      "tipo": "PLL 15/2025",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "DISPÕE SOBRE A RESERVA DE VAGAS PARA NEGROS E PARDOS EM CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS SIMPLIFICADOSNO ÂMBITO DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE E DÁ OUTRAS PROVIDÊNCIAS.",
+      "categoria": "Assistência social e direitos",
+      "placar": "8 x 1",
+      "data_sessao": "2025-08-12",
+      "sessao_id": 15
+    },
+    {
+      "id": 211,
+      "tipo": "PLL 17/2025",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "DISPÕE SOBRE OS CRITÉRIOS PARA  A DENOMINAÇÃO DE PRÉDIOS E EQUIPAMENTOS PÚBLICOS MUNICIPAIS NO ÂMBITO DO MUNICÍPIO DE CAMPO DO TENENTE, E DÁ OUTRAS PROVIDÊNCIAS.",
+      "categoria": "Homenagens, nomes e datas",
+      "placar": "8 x 0",
+      "data_sessao": "2025-11-11",
+      "sessao_id": 29
+    },
+    {
+      "id": 216,
+      "tipo": "PLL 18/2025",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre a prática esportiva e recreativa de manobras com motocicletas, conhecida como “grau” ou “wheeling”, no âmbito do Município de Campo do Tenente, e dá outras providências.",
+      "categoria": "Cultura, esporte e lazer",
+      "placar": "8 x 0",
+      "data_sessao": "2025-11-18",
+      "sessao_id": 30
+    },
+    {
+      "id": 244,
+      "tipo": "PLL 1/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "\"CONCEDE REVISÃO GERAL ANUAL AOS SERVIDORES EFETIVOS E COMISSIONADOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE.\"",
+      "categoria": "Administração e finanças",
+      "placar": "9 x 0",
+      "data_sessao": "2026-02-24",
+      "sessao_id": 39
+    },
+    {
+      "id": 245,
+      "tipo": "PLL 2/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "\"CONCEDE REVISÃO DO VALOR DO AUXÍLIO-ALIMENTAÇÃO DOS SERVIDORES EFETIVOS E COMISSIONADOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE-PR ALTERA O PARÁGRAFO ÚNICO DO ARTIGO 2° DA LEI MUNICIPAL N°1.066/2022.\"",
+      "categoria": "Administração e finanças",
+      "placar": "9 x 0",
+      "data_sessao": "2026-02-24",
+      "sessao_id": 39
+    },
+    {
+      "id": 698,
+      "tipo": "PLL 3/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre a obrigatoriedade de notificação à Companhia de Saneamento do Paraná – Sanepar, quanto da realização de obras de pavimentação.",
+      "categoria": "Ruas, trânsito e transporte",
+      "placar": "8 x 0",
+      "data_sessao": "2026-08-25",
+      "sessao_id": 269
+    },
+    {
+      "id": 811,
+      "tipo": "PLL 4/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre princípios, critérios gerais e transparência nos programas habitacionais de interesse social que contem com participação do Município de Campo do Tenente e dá outras providências.",
+      "categoria": "Desenvolvimento e moradia",
+      "placar": "8 x 0",
+      "data_sessao": "2026-09-22",
+      "sessao_id": 273
+    },
+    {
+      "id": 815,
+      "tipo": "PLL 5/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Altera a Lei Municipal nº 1.094, de 2022, que institui o “Título Mãe Tenenteana” no Município de Campo do Tenente.",
+      "categoria": "Homenagens, nomes e datas",
+      "placar": "8 x 0",
+      "data_sessao": "2026-09-22",
+      "sessao_id": 273
+    }
+  ]
+}
