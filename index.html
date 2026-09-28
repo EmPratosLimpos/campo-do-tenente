@@ -283,6 +283,7 @@
     flex-direction: column;
     gap: 6px;
     margin-bottom: 10px;
+    padding-right: 48px;
   }
 
   .titulo-site {
@@ -329,13 +330,17 @@
   }
 
   .alternar-tema {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 10000;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
     padding: 0;
     border: none;
     background: var(--superficie);
@@ -3093,16 +3098,17 @@
 </style>
 </head>
 <body>
+  <button type="button" class="alternar-tema" id="btn-tema" aria-pressed="false" aria-label="Alternar para modo escuro">
+          <svg class="icone-lua" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icone-sol" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
 <a class="pular-conteudo" href="#conteudo-principal">Pular para conteúdo</a>
 <div class="pagina">
   <aside class="menu-lateral" id="menu-lateral" aria-label="Menu do painel">
     <div class="menu-lateral-cabeca">
       <div class="menu-lateral-titulo-linha">
         <p class="menu-lateral-titulo">Em Pratos Limpos</p>
-        <button type="button" class="alternar-tema menu-lateral-tema" id="btn-tema-lateral" aria-pressed="false" aria-label="Alternar para modo escuro">
-          <svg class="icone-lua" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          <svg class="icone-sol" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </button>
+        
       </div>
       <div class="selo-sapl menu-lateral-selo"><span class="ponto-status" aria-hidden="true"></span>Dados oficiais do SAPL</div>
     </div>
@@ -3122,10 +3128,7 @@
   <header class="topo-fixo">
     <div class="topo-util">
       <div class="topo-acoes">
-        <button type="button" class="alternar-tema" id="btn-tema" aria-pressed="false" aria-label="Alternar para modo escuro">
-          <svg class="icone-lua" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          <svg class="icone-sol" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </button>
+        
       </div>
     </div>
     <div class="cabecalho-bloco">
@@ -3508,6 +3511,8 @@
   var estado = {
     dados: null,
     vereadorId: null,
+    ultimoVereadorRenderizado: null,
+    sanfonasAbertas: {},
     filtroTexto: "",
     filtroClassificacao: "",
     filtroPLL: "",
@@ -3937,11 +3942,13 @@
     atualizarCabecalhoUltimaSessao();
     atualizarPresencaUltimaSessao();
     atualizarRodapesColeta();
+    restaurarSanfonas();
     atualizarPainelMes();
     atualizarTiposMes();
     atualizarPainelTodo();
     atualizarCardVotacoes();
     atualizarVotacoesMes();
+    restaurarSanfonas();
     ["sessao", "mes", "todo"].forEach(function (p) {
       renderTemasDistribuicao(p);
       renderBlocoVotadoPeriodo(p);
@@ -4625,9 +4632,42 @@
       "</div></details>";
   }
 
+  
+  document.addEventListener('toggle', function(e) {
+    if (e.target.tagName === 'DETAILS') {
+      var summary = e.target.querySelector('summary');
+      if (summary) {
+        var key = summary.textContent.trim();
+        estado.sanfonasAbertas[key] = e.target.open;
+      }
+    }
+  }, true);
+
+  function restaurarSanfonas() {
+    document.querySelectorAll("details").forEach(function(det) {
+      var summary = det.querySelector("summary");
+      if (summary) {
+        var key = summary.textContent.trim();
+        if (estado.sanfonasAbertas.hasOwnProperty(key)) {
+          if (estado.sanfonasAbertas[key]) {
+            det.setAttribute("open", "");
+          } else {
+            det.removeAttribute("open");
+          }
+          summary.setAttribute("aria-expanded", estado.sanfonasAbertas[key] ? "true" : "false");
+        }
+      }
+    });
+  }
+
   function renderApp() {
     var v = vereadorAtual();
     if (!v || !estado.dados) return;
+
+    if (estado.ultimoVereadorRenderizado !== estado.vereadorId) {
+      estado.sanfonasAbertas = {};
+      estado.ultimoVereadorRenderizado = estado.vereadorId;
+    }
 
     var meta = estado.dados.meta;
     var conteudo = document.getElementById("conteudo-vereadores");
@@ -4671,11 +4711,12 @@
       '<div class="vereadores-grade">' +
       renderSecaoPresenca(v) +
       renderSecaoPLL(v) +
-      renderSecaoVotos(v) +
       "</div>" +
+      renderSecaoVotos(v) +
       '<footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>';
 
     atualizarRodapesColeta();
+    restaurarSanfonas();
 
     document.getElementById("sel-vereador").addEventListener("change", function (e) {
       estado.vereadorId = e.target.value;
@@ -5477,6 +5518,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       '<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">' +
       '<path d="M9 18l6-6-6-6"></path></svg></span></div>' +
       htmlFiltros + htmlBusca + htmlLista + htmlVazio + htmlPaginacao;
+    restaurarSanfonas();
 
     bloco.querySelectorAll(".btn-filtro-materia").forEach(function (btn) {
       btn.addEventListener("click", function () {

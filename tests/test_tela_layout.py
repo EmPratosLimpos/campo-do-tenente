@@ -188,6 +188,28 @@ JS_LEGENDA_LINHA = """() => {
   return quebrados;
 }"""
 
+
+JS_BOTAO_TEMA = '''() => {
+    const btn = document.querySelector("#btn-tema");
+    if (!btn) return { ok: false, erro: "botao nao encontrado" };
+    const rect = btn.getBoundingClientRect();
+    if (rect.width < 32 || rect.width > 40 || rect.height < 32 || rect.height > 40) return { ok: false, erro: `tamanho incorreto: ${rect.width}x${rect.height}` };
+    if (rect.top > 24 || window.innerWidth - rect.right > 24) return { ok: false, erro: `posicao incorreta: top ${rect.top}, right ${window.innerWidth - rect.right}` };
+    
+    // Check overlap with title, share button or menu
+    const intersect = (r1, r2) => !(r2.left > r1.right || r2.right < r1.left || r2.top > r1.bottom || r2.bottom < r1.top);
+    
+    const elements = [document.querySelector(".titulo-site"), document.querySelector(".btn-abrir-share"), document.querySelector("#menu-lateral")];
+    for (let el of elements) {
+        if (el && el.offsetParent !== null) { // visible
+            if (intersect(rect, el.getBoundingClientRect())) {
+                return { ok: false, erro: "botao sobrepoe outro conteudo" };
+            }
+        }
+    }
+    
+    return { ok: true };
+}'''
 JS_TOPOS_PRIMEIRA_LINHA = """(params) => {
   const area = document.querySelector(params.selArea);
   if (!area || !window.__vis(area)) return { ok: false, motivo: 'sem-area' };
@@ -398,6 +420,9 @@ class TestTelaLayout(unittest.TestCase):
 
     def _caso_camara(self, page, largura: int) -> None:
         self._ir_aba(page, "camara")
+        btn_tema = page.evaluate(JS_BOTAO_TEMA)
+        self.assertTrue(btn_tema["ok"], f"botao de tema com problema: {btn_tema.get('erro')}")
+
         self._assert_sem_elementos_proibidos(page)
         for periodo in PERIODOS:
             with self.subTest(largura=largura, aba="camara", periodo=periodo):
@@ -430,10 +455,7 @@ class TestTelaLayout(unittest.TestCase):
                 2,
                 f"pagina nao centralizada em desktop: {centro}",
             )
-            self.assertTrue(
-                page.locator("#btn-tema-lateral").is_visible(),
-                "botao de tema deve aparecer no menu lateral em desktop",
-            )
+            
             self.assertTrue(
                 page.locator(".menu-lateral-selo").is_visible(),
                 "selo SAPL deve aparecer no menu lateral em desktop",
@@ -450,6 +472,9 @@ class TestTelaLayout(unittest.TestCase):
 
     def _caso_vereadores(self, page, largura: int) -> None:
         self._ir_aba(page, "vereadores")
+        btn_tema = page.evaluate(JS_BOTAO_TEMA)
+        self.assertTrue(btn_tema["ok"], f"botao de tema com problema: {btn_tema.get('erro')}")
+
         page.wait_for_selector(".perfil-cabecalho", timeout=60000)
         page.select_option("#sel-vereador", "1")
         page.wait_for_timeout(500)
@@ -483,8 +508,25 @@ class TestTelaLayout(unittest.TestCase):
             self.assertGreaterEqual(
                 seletor_largura, 200, f"seletor de vereador estreito em desktop: {seletor_largura}px"
             )
+            
             duas = page.evaluate(JS_DUAS_COLUNAS, "#conteudo-vereadores .vereadores-grade")
             self.assertTrue(duas, "vereadores deveria ter cartoes em duas colunas em desktop")
+            
+            # Check Votos position
+            votos_layout = page.evaluate('''() => {
+                const grade = document.querySelector("#conteudo-vereadores .vereadores-grade");
+                const votos = document.querySelector("details[aria-labelledby='tit-votos']") || document.querySelector("section[aria-labelledby='tit-votos']") || document.getElementById("tit-votos").closest("details");
+                if (!grade || !votos) return { ok: false, erro: "elementos nao encontrados" };
+                const gradeRect = grade.getBoundingClientRect();
+                const votosRect = votos.getBoundingClientRect();
+                const parentRect = grade.parentElement.getBoundingClientRect();
+                
+                if (votosRect.top < gradeRect.bottom - 5) return { ok: false, erro: "votos nao esta abaixo da grade" };
+                if (Math.abs(votosRect.width - parentRect.width) > 5) return { ok: false, erro: "votos nao ocupa a largura total" };
+                return { ok: true };
+            }''')
+            self.assertTrue(votos_layout["ok"], f"Layout de votos incorreto: {votos_layout.get('erro')}")
+
             topo = page.evaluate(
                 JS_TOPOS_PRIMEIRA_LINHA,
                 {
@@ -501,10 +543,7 @@ class TestTelaLayout(unittest.TestCase):
             self.assertFalse(duas, "vereadores deveria ter coluna unica no celular")
             nav = page.locator("#nav-principal").is_visible()
             self.assertTrue(nav, "navegacao inferior deve aparecer no celular")
-            self.assertTrue(
-                page.locator("#btn-tema").is_visible(),
-                "botao de tema deve permanecer no topo no celular",
-            )
+            
             self.assertTrue(
                 page.locator(".cabecalho-bloco .selo-sapl").is_visible(),
                 "selo SAPL deve permanecer no cabecalho no celular",
