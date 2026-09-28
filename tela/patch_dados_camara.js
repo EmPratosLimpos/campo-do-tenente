@@ -76,21 +76,95 @@
     if (metaLink) metaLink.href = href;
   }
 
+  function contagemPresencaSessao(sessao) {
+    if (!sessao) {
+      return { presentes: 0, faltas: 0, fora: 0, licenca: 0, banca: 0 };
+    }
+    var presentes = sessao.n_presentes != null ? sessao.n_presentes : 0;
+    var faltas =
+      (sessao.n_faltas_com_justificativa || 0) + (sessao.n_faltas_sem_justificativa || 0);
+    var fora = sessao.n_fora_do_mandato || 0;
+    var licenca = sessao.n_licenca || 0;
+    return {
+      presentes: presentes,
+      faltas: faltas,
+      fora: fora,
+      licenca: licenca,
+      banca: presentes + faltas + fora + licenca
+    };
+  }
+
+  function capsulaPresenca(classe, rotulo, valor) {
+    return (
+      '<div class="status-capsula ' +
+      classe +
+      '"><span class="capsula-rotulo">' +
+      esc(rotulo) +
+      '</span><span class="capsula-valor">' +
+      esc(String(valor)) +
+      "</span></div>"
+    );
+  }
+
   function atualizarPresencaUltimaSessao() {
     var s = ultimaSessaoOrdinaria();
     var meta = estado.dados && estado.dados.meta;
-    var banca = meta && meta.n_vereadores != null ? meta.n_vereadores : 0;
+    var rotulos = (meta && meta.rotulos_estados) || {};
     var textoBanca = document.getElementById("texto-meta-presenca-sessao");
     var linkMeta = document.getElementById("link-meta-presenca-sessao");
-    var elPresentes = document.querySelector("#card-presenca-sessao .capsula-verde .capsula-valor");
-    var elFaltas = document.querySelector("#card-presenca-sessao .capsula-neutro .capsula-valor");
+    var grade = document.querySelector("#card-presenca-sessao .status-grade");
     if (!s) return;
-    var faltas = (s.n_faltas_com_justificativa || 0) + (s.n_faltas_sem_justificativa || 0);
-    var rotuloBanca = banca === 1 ? "1 parlamentar" : banca + " parlamentares";
+    var c = contagemPresencaSessao(s);
+    var rotuloBanca = c.banca === 1 ? "1 parlamentar" : c.banca + " parlamentares";
     if (textoBanca) textoBanca.textContent = rotuloBanca;
     if (linkMeta) linkMeta.href = urlSegura(s.link_sapl) || "#";
-    if (elPresentes) elPresentes.textContent = String(s.n_presentes != null ? s.n_presentes : 0);
-    if (elFaltas) elFaltas.textContent = String(faltas);
+    if (grade) {
+      var html =
+        capsulaPresenca("capsula-verde", "Presentes", c.presentes) +
+        capsulaPresenca("capsula-neutro", "Faltas", c.faltas);
+      if (c.fora > 0) {
+        html += capsulaPresenca(
+          "capsula-neutro",
+          rotulos.fora_do_mandato || "Fora do mandato naquela data",
+          c.fora
+        );
+      }
+      if (c.licenca > 0) {
+        html += capsulaPresenca(
+          "capsula-neutro",
+          rotulos.licenca_tratamento_saude || "Licença",
+          c.licenca
+        );
+      }
+      grade.innerHTML = html;
+    }
+  }
+
+  function ajustarPainelUltimaSessaoSemPll() {
+    var lista = MATERIAS_CAMARA.sessao || [];
+    if (lista.length > 0) return;
+    var bloco = document.getElementById("bloco-votado-sessao");
+    if (!bloco) return;
+    var us = ultimaSessaoOrdinaria();
+    var dataFmt = us && us.data ? formatarData(us.data) : "";
+    var texto =
+      "Nenhum projeto de lei do legislativo (PLL) foi votado na última sessão ordinária";
+    if (dataFmt) texto += " (" + dataFmt + ")";
+    texto += ".";
+    var vazio = bloco.querySelector(".estado-vazio");
+    if (vazio) {
+      vazio.innerHTML = "<p>" + esc(texto) + "</p>";
+    } else {
+      bloco.insertAdjacentHTML(
+        "beforeend",
+        '<div class="estado-vazio"><p>' + esc(texto) + "</p></div>"
+      );
+    }
+    var temas = document.getElementById("temas-distribuicao-sessao");
+    if (temas && !temas.textContent.trim()) {
+      temas.innerHTML =
+        '<p class="vazio" style="margin:0">' + esc(texto) + "</p>";
+    }
   }
 
   function atualizarTiposMes() {
@@ -212,4 +286,6 @@
       renderTemasDistribuicao(p);
       renderBlocoVotadoPeriodo(p);
     });
+    estadoMaterias.listaVisivel.sessao = true;
+    ajustarPainelUltimaSessaoSemPll();
   }
