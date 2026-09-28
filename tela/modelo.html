@@ -2817,7 +2817,9 @@
           </div>
         </div>
 
-        <div class="card-app" id="card-votacoes-sessao" aria-labelledby="tit-votacoes-sessao">
+        <div class="duas-colunas-desk">
+          <div class="coluna-A">
+            <div class="card-app" id="card-votacoes-sessao" aria-labelledby="tit-votacoes-sessao">
           <div class="card-header">
             <div class="card-categoria cat-laranja">
               <div class="card-icone icone-laranja" aria-hidden="true">
@@ -2855,12 +2857,7 @@
             </div>
           </div>
         </div>
-
-        <div class="card-app" id="card-temas-sessao" aria-labelledby="tit-temas-sessao">
-          <div id="temas-distribuicao-sessao"></div>
-        </div>
-
-        <div class="card-app" id="card-presenca-sessao" aria-labelledby="tit-presenca-sessao">
+            <div class="card-app" id="card-presenca-sessao" aria-labelledby="tit-presenca-sessao">
           <div class="card-header">
             <div class="card-categoria cat-verde">
               <div class="card-icone icone-verde" aria-hidden="true">
@@ -2885,7 +2882,13 @@
 
           </div>
         </div>
-
+          </div>
+          <div class="coluna-B">
+            <div class="card-app" id="card-temas-sessao" aria-labelledby="tit-temas-sessao">
+          <div id="temas-distribuicao-sessao"></div>
+        </div>
+          </div>
+        </div>
         <div class="card-app bloco-votado" id="bloco-votado-sessao" data-periodo="sessao"></div>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
       </div>
@@ -2898,15 +2901,21 @@
           </button>
         </div>
         <p class="sessao-meta" id="meta-periodo-mes"></p>
-        <div class="card-app" id="card-votacoes-mes" aria-labelledby="tit-votacoes-mes">
+        <div class="duas-colunas-desk">
+          <div class="coluna-A">
+            <div class="card-app" id="card-votacoes-mes" aria-labelledby="tit-votacoes-mes">
           <div id="votacoes-mes-conteudo"></div>
         </div>
         <section class="secao" aria-labelledby="tit-tipos-mes">
           <h2 id="tit-tipos-mes">Quantas votações por tipo?</h2>
           <p class="legenda">Cada barra é um tipo oficial de matéria votada no período.</p>
           <div class="barra-tema-cam barra-temas" id="tipos-mes-barras"></div></section>
-        <div class="card-app" id="card-temas-mes" aria-labelledby="tit-temas-mes">
+        </div>
+          <div class="coluna-B">
+            <div class="card-app" id="card-temas-mes" aria-labelledby="tit-temas-mes">
           <div id="temas-distribuicao-mes"></div>
+        </div>
+        </div>
         </div>
         <div class="card-app bloco-votado" id="bloco-votado-mes" data-periodo="mes"></div>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
@@ -2920,7 +2929,9 @@
           </button>
         </div>
         <p class="sessao-meta"><span id="meta-periodo-todo"></span></p>
-        <section class="secao" aria-labelledby="tit-tipos-todo">
+        <div class="duas-colunas-desk">
+          <div class="coluna-A">
+            <section class="secao" aria-labelledby="tit-tipos-todo">
           <h2 id="tit-tipos-todo">Quantos projetos foram votados?</h2>
           <p class="legenda"><span id="legenda-tipos-todo"></span></p>
           <div class="barra-tema-cam barra-temas"><div id="barra-tipos-todo"></div></div>
@@ -2934,9 +2945,13 @@
           <div class="status-cartoes"><div id="cartoes-resultado-todo"></div></div>
           <p class="nota-rodape" id="nota-resultado-todo"></p>
         </section>
-        <section class="secao" aria-labelledby="tit-temas-todo">
+        </div>
+          <div class="coluna-B">
+            <section class="secao" aria-labelledby="tit-temas-todo">
           <div id="temas-distribuicao-todo"></div>
         </section>
+        </div>
+        </div>
         <div class="card-app bloco-votado" id="bloco-votado-todo" data-periodo="todo"></div>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
       </div>

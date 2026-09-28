@@ -210,6 +210,75 @@ JS_TOPOS_PRIMEIRA_LINHA = """(params) => {
   return { ok: Math.abs(t0 - t1) <= 2, t0: Math.round(t0), t1: Math.round(t1) };
 }"""
 
+JS_VERIFICA_DISPOSICAO = """(periodo) => {
+  const area = document.querySelector("#painel-periodo-" + periodo);
+  if (!area || !window.__vis(area)) return { ok: false, erro: "area invisivel" };
+  const getRect = (sel) => {
+    const el = area.querySelector(sel);
+    if (!el || !window.__vis(el)) return null;
+    return el.getBoundingClientRect();
+  };
+  
+  let a1_sel, a2_sel, b1_sel, c_sel;
+  if (periodo === "sessao") {
+    a1_sel = "#card-votacoes-sessao";
+    a2_sel = "#card-presenca-sessao";
+    b1_sel = "#card-temas-sessao";
+    c_sel = "#bloco-votado-sessao";
+  } else if (periodo === "mes") {
+    a1_sel = "#card-votacoes-mes";
+    a2_sel = "section[aria-labelledby='tit-tipos-mes']";
+    b1_sel = "#card-temas-mes";
+    c_sel = "#bloco-votado-mes";
+  } else {
+    a1_sel = "section[aria-labelledby='tit-tipos-todo']";
+    a2_sel = "section[aria-labelledby='tit-resultado-todo']";
+    b1_sel = "section[aria-labelledby='tit-temas-todo']";
+    c_sel = "#bloco-votado-todo";
+  }
+  
+  const a1 = getRect(a1_sel);
+  const a2 = getRect(a2_sel);
+  const b1 = getRect(b1_sel);
+  const c = getRect(c_sel);
+  
+  if (!a1 || !a2 || !b1 || !c) return { ok: false, erro: "elementos nao encontrados ou invisiveis: " + !a1 + " " + !a2 + " " + !b1 + " " + !c };
+  
+  const w = window.innerWidth;
+  if (w >= 900) {
+    if (Math.abs(a1.top - b1.top) > 2) return { ok: false, erro: "A1 e B1 nao alinhados no topo. diff=" + Math.abs(a1.top - b1.top) };
+    const gapA = a2.top - a1.bottom;
+    if (gapA < 0 || gapA > 24) return { ok: false, erro: "gap A1-A2 incorreto: " + gapA };
+    if (b1.left <= a1.right) return { ok: false, erro: "B1 nao esta a direita de A1" };
+    const areaRect = area.getBoundingClientRect();
+    if (c.width < areaRect.width - 100) return { ok: false, erro: "C nao tem largura total" };
+    if (c.top < a2.bottom && c.top < b1.bottom) return { ok: false, erro: "C nao esta embaixo das colunas" };
+  } else {
+    if (!(a1.bottom <= a2.top + 2 && a2.bottom <= b1.top + 2 && b1.bottom <= c.top + 2)) {
+      return { ok: false, erro: "ordem incorreta no mobile" };
+    }
+  }
+  return { ok: true };
+}"""
+
+JS_PRESENCA = """() => {
+  const card = document.getElementById("card-presenca-sessao");
+  if (!card) return { ok: false, erro: "card nao encontrado" };
+  const texto = card.innerText;
+  if (texto.includes("Fora do mandato naquela data") || texto.includes("fora do mandato")) {
+    return { ok: false, erro: "texto 'Fora do mandato' esta visivel" };
+  }
+  const bancoMatch = texto.match(/(\\d+)\\s+parlamentares/);
+  const totais = Array.from(card.querySelectorAll('.capsula-valor')).map(x => parseInt(x.innerText, 10));
+  if (bancoMatch && totais.length > 0) {
+    const soma = totais.reduce((a, b) => a + b, 0);
+    if (parseInt(bancoMatch[1], 10) !== soma) {
+      return { ok: false, erro: "soma incorreta: " + soma + " != " + bancoMatch[1] };
+    }
+  }
+  return { ok: true };
+}"""
+
 JS_DUAS_COLUNAS = """(selArea) => {
   const area = document.querySelector(selArea);
   if (!area || !window.__vis(area)) return false;
@@ -336,11 +405,14 @@ class TestTelaLayout(unittest.TestCase):
                 self._assert_so_periodo_visivel(page, periodo)
                 _sem_scroll_horizontal(page)
                 self._assert_quebra_letra(page, f"camara {periodo} {largura}px")
+                disp = page.evaluate(JS_VERIFICA_DISPOSICAO, periodo)
+                self.assertTrue(disp["ok"], f"Disposicao incorreta para {periodo} em {largura}: {disp.get('erro')}")
+                if periodo == "sessao":
+                    pres = page.evaluate(JS_PRESENCA)
+                    self.assertTrue(pres["ok"], f"Presenca com erro: {pres.get('erro')}")
         lateral = page.locator("#menu-lateral").is_visible()
         if largura >= 900:
             self.assertTrue(lateral, "menu lateral deve aparecer em desktop")
-            duas = page.evaluate(JS_DUAS_COLUNAS, "#painel-camara .painel-camara-interno.ativo")
-            self.assertTrue(duas, "camara deveria ter cartoes em duas colunas em desktop")
             largura_titulo = page.evaluate(
                 "() => Math.round(document.querySelector('.titulo-site').getBoundingClientRect().width)"
             )
@@ -372,22 +444,9 @@ class TestTelaLayout(unittest.TestCase):
             )
             texto_lateral = page.inner_text("#menu-lateral")
             self.assertIn("Dado coletado em", texto_lateral)
-            self._clicar_periodo(page, "todo")
-            topo = page.evaluate(
-                JS_TOPOS_PRIMEIRA_LINHA,
-                {
-                    "selArea": "#painel-periodo-todo",
-                    "modo": "filhos",
-                },
-            )
-            self.assertTrue(
-                topo["ok"],
-                f"primeiros cartoes da camara desalinhados: {topo}",
-            )
+
         else:
             self.assertFalse(lateral, "menu lateral nao deve aparecer no celular")
-            duas = page.evaluate(JS_DUAS_COLUNAS, "#painel-camara .painel-camara-interno.ativo")
-            self.assertFalse(duas, "camara deveria ter coluna unica no celular")
 
     def _caso_vereadores(self, page, largura: int) -> None:
         self._ir_aba(page, "vereadores")

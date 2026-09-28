@@ -53,7 +53,7 @@ def contagem_presenca(sessao: dict) -> dict[str, int]:
         "faltas": faltas,
         "fora": fora,
         "licenca": licenca,
-        "banca": presentes + faltas + fora + licenca,
+        "banca": presentes + faltas + licenca,
     }
 
 
@@ -83,7 +83,7 @@ class TestTemasRevisadosNosJson(unittest.TestCase):
             with self.subTest(ano=ano, data=sessao.get("data")):
                 self.assertGreaterEqual(c["banca"], 1)
                 self.assertEqual(
-                    c["presentes"] + c["faltas"] + c["fora"] + c["licenca"],
+                    c["presentes"] + c["faltas"] + c["licenca"],
                     c["banca"],
                 )
 
