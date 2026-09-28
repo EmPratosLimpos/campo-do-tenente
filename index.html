@@ -847,7 +847,7 @@
   }
 
   .rosca-legenda dt { font-weight: 700; }
-  .rosca-legenda dd { margin: 0; color: var(--texto-suave); }
+  .rosca-legenda dd { margin: 0; color: var(--texto-suave); white-space: nowrap; }
 
   .indicador {
     display: inline-block;
@@ -2726,6 +2726,8 @@
     }
 
     #conteudo-vereadores > .secao:first-child,
+    #conteudo-vereadores > .nota-factual,
+    #conteudo-vereadores > .faltas-lista,
     #conteudo-vereadores > .rodape-coleta {
       grid-column: 1 / -1;
     }
@@ -3082,7 +3084,7 @@
       <div class="painel-camara-interno" id="painel-periodo-todo" role="tabpanel" aria-labelledby="tab-periodo-todo" hidden>
         <div class="sessao-titulo-linha">
           <h2 class="sessao-titulo"><span id="titulo-periodo-todo"></span></h2>
-          <button type="button" class="btn-compartilhar-icone btn-abrir-share" data-periodo="todo" aria-label="Compartilhar votações de 2026" aria-haspopup="dialog" aria-controls="share-sheet">
+          <button type="button" class="btn-compartilhar-icone btn-abrir-share" data-periodo="todo" aria-label="Compartilhar votações do período" aria-haspopup="dialog" aria-controls="share-sheet">
             <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
           </button>
         </div>
@@ -3096,8 +3098,6 @@
           <h2 id="tit-resultado-todo">Como terminaram os projetos?</h2>
           <p class="legenda"><span id="legenda-resultado-todo"></span></p>
           <div class="barra-status-trilho" id="barra-resultado-todo" role="img"></div>
-            <div class="segmento segmento-maioria" style="width:2%"></div>
-          </div>
           <div class="status-cartoes"><div id="cartoes-resultado-todo"></div></div>
           <p class="nota-rodape" id="nota-resultado-todo"></p>
         </section>
@@ -4385,7 +4385,8 @@
     }).join("");
 
     if (!barras) {
-      barras = '<p class="vazio">Nenhum projeto de lei proposto por este vereador em 2026.</p>';
+      barras = '<p class="vazio">Nenhum projeto de lei proposto por este vereador em ' +
+        rotuloPeriodoLegislatura() + '.</p>';
     }
 
     var partesStatus = [
@@ -4854,7 +4855,14 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var sessoes = estado.dados.sessoes || [];
 
     var datasSessao = sessoes.map(function(s) { return s.data; }).filter(Boolean).sort();
-    var ultimaData = datasSessao[datasSessao.length - 1] || "2026-09-08";
+    var ultimaData = datasSessao[datasSessao.length - 1];
+    if (!ultimaData) {
+      var tituloVazio = document.querySelector("#painel-periodo-mes .sessao-titulo");
+      var metaVazio = document.querySelector("#painel-periodo-mes .sessao-meta");
+      if (tituloVazio) tituloVazio.textContent = "";
+      if (metaVazio) metaVazio.textContent = "";
+      return;
+    }
 
     var partes = ultimaData.split("-");
     var ano = parseInt(partes[0]);
@@ -5332,9 +5340,12 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       return "Lista com ementa (resumo oficial) e placar. Toque abre a página oficial no SAPL (Sistema de Apoio ao Processo Legislativo).";
     }
     if (periodo === "mes") {
-      return "PLLs votados em agosto de 2026. Toque abre a página oficial no SAPL.";
+      var mesVotado = nomeMesAnteriorUltimaSessao().toLowerCase();
+      return mesVotado
+        ? "PLLs votados em " + mesVotado + ". Toque abre a página oficial no SAPL."
+        : "PLLs votados no último mês. Toque abre a página oficial no SAPL.";
     }
-    return "Todas as PLLs votadas em 2026. Toque abre a página oficial no SAPL.";
+    return "Todas as PLLs votadas em " + rotuloPeriodoLegislatura() + ". Toque abre a página oficial no SAPL.";
   }
 
   var estadoVotadoPagina = { sessao: 1, mes: 1, todo: 1 };

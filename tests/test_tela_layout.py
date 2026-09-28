@@ -1,9 +1,19 @@
-"""Playwright: layout responsivo (390 e 1440 px), sem vazamento horizontal."""
+"""Playwright: layout responsivo (390 e 1440 px) das abas Camara e Vereadores.
+
+Checagens obrigatorias da D2b:
+- em 390 e 1440, nas duas abas e nos tres periodos, so os elementos do periodo
+  escolhido ficam visiveis (pelo texto e pela visibilidade real:
+  getBoundingClientRect e estilo computado, nao so o atributo hidden);
+- nenhum elemento de texto do cabecalho e do perfil se sobrepoe a outro;
+- o titulo principal nunca fica com largura menor que 300 px em 1440;
+- nenhuma palavra quebra letra a letra: nenhum elemento de texto com largura
+  menor que 60 px contendo mais de 6 caracteres;
+- sem rolagem lateral em 390 e 1440.
+"""
 
 from __future__ import annotations
 
 import pathlib
-import re
 import threading
 import time
 import unittest
@@ -26,6 +36,176 @@ class _Handler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(RAIZ), **kwargs)
 
 
+JS_HELPERS = """
+() => {
+  window.__vis = (el) => {
+    if (!el) return false;
+    const r = el.getBoundingClientRect();
+    if (r.width <= 0 || r.height <= 0) return false;
+    let n = el;
+    while (n && n !== document.body) {
+      const cs = getComputedStyle(n);
+      if (cs.display === 'none' || cs.visibility === 'hidden') return false;
+      n = n.parentElement;
+    }
+    return true;
+  };
+  return true;
+}
+"""
+
+PERIODOS = ("sessao", "mes", "todo")
+MARCADORES = {
+    "sessao": "Presença dos vereadores",
+    "mes": "Quantas votações por tipo?",
+    "todo": "Como terminaram os projetos?",
+}
+BLOCOS_CABECALHO = (".titulo-site", ".selo-sapl", ".subtitulo-site")
+BLOCOS_VEREADORES = (
+    ".titulo-site",
+    ".selo-sapl",
+    ".subtitulo-site",
+    ".titulo-vereadores",
+    ".seletor-vereador",
+    ".nav-vereador",
+    ".perfil-cabecalho",
+)
+JS_ESTRUTURA = """() => {
+  const dentro = (idPai, idFilho) => {
+    const pai = document.getElementById(idPai);
+    const filho = document.getElementById(idFilho);
+    return !!(pai && filho && pai.contains(filho));
+  };
+  const corpo = document.querySelector('.pagina-corpo');
+  return {
+    todo_em_painel: dentro('painel-periodo-todo', 'cartoes-resultado-todo')
+      && dentro('painel-periodo-todo', 'bloco-votado-todo')
+      && dentro('painel-periodo-todo', 'temas-distribuicao-todo')
+      && dentro('painel-periodo-todo', 'nota-resultado-todo'),
+    vereadores_em_main: dentro('conteudo-principal', 'painel-vereadores'),
+    camara_em_main: dentro('conteudo-principal', 'painel-camara'),
+    nav_em_corpo: !!(corpo && corpo.contains(document.getElementById('nav-principal')))
+  };
+}"""
+
+JS_PERIODO_VISIVEL = """(periodo) => {
+  const ids = { sessao: 'painel-periodo-sessao', mes: 'painel-periodo-mes', todo: 'painel-periodo-todo' };
+  const out = {};
+  Object.keys(ids).forEach(function (p) {
+    const el = document.getElementById(ids[p]);
+    const cs = el ? getComputedStyle(el) : null;
+    const r = el ? el.getBoundingClientRect() : { width: 0, height: 0 };
+    out[p] = {
+      visivel: window.__vis(el),
+      display: cs ? cs.display : 'sem-elemento',
+      area: el ? Math.round(r.width) + 'x' + Math.round(r.height) : '0x0'
+    };
+  });
+  return out;
+}"""
+
+JS_TEXTO_VISIVEL = """() => document.body.innerText"""
+
+JS_SOBRPOSICOES = """(seletores) => {
+  const els = [];
+  seletores.forEach(function (s) {
+    document.querySelectorAll(s).forEach(function (el) {
+      if (window.__vis(el)) els.push({ sel: s, el: el, r: el.getBoundingClientRect() });
+    });
+  });
+  const sobrepostos = [];
+  for (let i = 0; i < els.length; i++) {
+    for (let j = i + 1; j < els.length; j++) {
+      if (els[i].el.contains(els[j].el) || els[j].el.contains(els[i].el)) continue;
+      const a = els[i].r, b = els[j].r;
+      const ix = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+      const iy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+      if (ix > 2 && iy > 2) sobrepostos.push(els[i].sel + ' sobrepoe ' + els[j].sel);
+    }
+  }
+  return sobrepostos;
+}"""
+
+JS_QUEBRA_LETRA = """() => {
+  const problemas = [];
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
+  let el = walker.currentNode;
+  while (el) {
+    if (window.__vis(el) && !el.closest('.pular-conteudo')) {
+      let direto = '';
+      for (const n of el.childNodes) {
+        if (n.nodeType === 3) direto += n.textContent;
+      }
+      const texto = direto.replace(/\\s+/g, ' ').trim();
+      if (texto.length > 6) {
+        const r = el.getBoundingClientRect();
+        if (r.width < 60) {
+          const cs = getComputedStyle(el);
+          ctx.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+          const padH = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+          const disponivel = r.width - padH;
+          let pior = { palavra: '', largura: 0 };
+          texto.split(' ').forEach(function (palavra) {
+            const w = ctx.measureText(palavra).width;
+            if (w > pior.largura) pior = { palavra: palavra, largura: Math.round(w) };
+          });
+          if (pior.largura > disponivel + 1) {
+            problemas.push({
+              texto: texto.slice(0, 30),
+              largura: Math.round(r.width),
+              palavra: pior.palavra,
+              natural: pior.largura
+            });
+          }
+        }
+      }
+    }
+    el = walker.nextNode();
+  }
+  return problemas;
+}"""
+
+JS_LEGENDA_LINHA = """() => {
+  const quebrados = [];
+  document.querySelectorAll('.rosca-legenda').forEach(function (leg) {
+    if (!window.__vis(leg)) return;
+    const dts = leg.querySelectorAll('dt');
+    const dds = leg.querySelectorAll('dd');
+    dts.forEach(function (dt, i) {
+      const dd = dds[i];
+      if (!dd) return;
+      const rt = dt.getBoundingClientRect();
+      const rd = dd.getBoundingClientRect();
+      const centroDt = (rt.top + rt.bottom) / 2;
+      const centroDd = (rd.top + rd.bottom) / 2;
+      if (Math.abs(centroDt - centroDd) > Math.max(rt.height, rd.height) / 2) {
+        quebrados.push(dt.textContent.trim());
+      }
+    });
+  });
+  return quebrados;
+}"""
+
+JS_DUAS_COLUNAS = """(selArea) => {
+  const area = document.querySelector(selArea);
+  if (!area || !window.__vis(area)) return false;
+  const cards = Array.prototype.slice.call(area.querySelectorAll('.card-app, .secao'))
+    .filter(function (el) { return window.__vis(el); });
+  for (let i = 0; i < cards.length; i++) {
+    for (let j = i + 1; j < cards.length; j++) {
+      const a = cards[i].getBoundingClientRect();
+      const b = cards[j].getBoundingClientRect();
+      const overlapV = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+      const separadoH = Math.max(a.left, b.left) - Math.min(a.right, b.right);
+      if (overlapV > Math.min(a.height, b.height) * 0.5 && separadoH > 8) return true;
+    }
+  }
+  return false;
+}"""
+
+
 def _sem_scroll_horizontal(page) -> None:
     dims = page.evaluate(
         """() => ({
@@ -34,23 +214,6 @@ def _sem_scroll_horizontal(page) -> None:
         })"""
     )
     assert dims["sw"] <= dims["cw"] + 1, f"scroll horizontal sw={dims['sw']} cw={dims['cw']}"
-
-
-def _cartoes_dentro(page, seletor_area: str) -> None:
-    page.wait_for_selector(seletor_area, timeout=30000)
-    overflow = page.eval_on_selector(
-        seletor_area,
-        """el => {
-          const lim = el.getBoundingClientRect().right;
-          const alvos = el.querySelectorAll('.card-app, .secao, .bloco-votado');
-          for (const node of alvos) {
-            const r = node.getBoundingClientRect();
-            if (r.right > lim + 1) return node.className || node.tagName;
-          }
-          return '';
-        }""",
-    )
-    assert not overflow, f"cartao ultrapassa area: {overflow}"
 
 
 @unittest.skipUnless(PLAYWRIGHT_OK, PLAYWRIGHT_MOTIVO)
@@ -67,15 +230,31 @@ class TestTelaLayout(unittest.TestCase):
     def tearDownClass(cls):
         cls.servidor.shutdown()
 
+    def _abrir(self, page, largura: int) -> None:
+        page.set_viewport_size({"width": largura, "height": 900})
+        page.goto(self.base, wait_until="networkidle", timeout=120000)
+        page.evaluate(JS_HELPERS)
+        page.wait_for_selector("#sel-vereador", state="attached", timeout=60000)
+        page.wait_for_selector("#bloco-votado-sessao .card-header", timeout=60000)
+        page.wait_for_timeout(400)
+
     def _ir_aba(self, page, secao: str) -> None:
         largura = page.viewport_size["width"] if page.viewport_size else 390
         if largura >= 900:
             page.click(f'button[data-secao-lateral="{secao}"]')
-        elif secao == "vereadores":
-            page.click('button[data-secao="vereadores"]')
         else:
-            page.click('button[data-secao="camara"]')
+            page.click(f'button[data-secao="{secao}"]')
         page.wait_for_timeout(400)
+
+    def _clicar_periodo(self, page, periodo: str) -> None:
+        largura = page.viewport_size["width"] if page.viewport_size else 390
+        seletor = (
+            f'#seletor-periodo-lateral button[data-periodo="{periodo}"]'
+            if largura >= 900
+            else f'#seletor-periodo-mobile button[data-periodo="{periodo}"]'
+        )
+        page.click(seletor)
+        page.wait_for_timeout(500)
 
     def _assert_sem_elementos_proibidos(self, page) -> None:
         texto = page.inner_text("body")
@@ -83,33 +262,138 @@ class TestTelaLayout(unittest.TestCase):
         self.assertIsNone(page.query_selector("#seletor-ano-wrap"))
         self.assertIsNone(page.query_selector("button[data-ano]"))
 
-    def _caso(self, page, largura: int, secao: str) -> None:
-        page.set_viewport_size({"width": largura, "height": 900})
-        page.goto(self.base, wait_until="networkidle", timeout=120000)
-        page.wait_for_timeout(800)
+    def _assert_so_periodo_visivel(self, page, periodo: str) -> None:
+        estado = page.evaluate(JS_PERIODO_VISIVEL, periodo)
+        for p in PERIODOS:
+            if p == periodo:
+                self.assertTrue(
+                    estado[p]["visivel"],
+                    f"painel {p} deveria estar visivel ({estado[p]})",
+                )
+                self.assertNotEqual(estado[p]["display"], "none")
+                self.assertNotEqual(estado[p]["area"], "0x0")
+            else:
+                self.assertFalse(
+                    estado[p]["visivel"],
+                    f"painel {p} nao deveria estar visivel ({estado[p]})",
+                )
+                self.assertEqual(estado[p]["display"], "none")
+                self.assertEqual(estado[p]["area"], "0x0")
+        texto = page.evaluate(JS_TEXTO_VISIVEL)
+        self.assertIn(MARCADORES[periodo], texto)
+        for p in PERIODOS:
+            if p != periodo:
+                self.assertNotIn(MARCADORES[p], texto)
+
+    def _assert_quebra_letra(self, page, contexto: str) -> None:
+        problemas = page.evaluate(JS_QUEBRA_LETRA)
+        self.assertEqual(
+            problemas,
+            [],
+            f"{contexto}: elemento de texto estreito com palavra quebrada: {problemas}",
+        )
+
+    def test_estrutura_dom_paineis(self):
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page()
+            self._abrir(page, 1440)
+            estrutura = page.evaluate(JS_ESTRUTURA)
+            self.assertTrue(estrutura["todo_em_painel"], f"blocos do periodo todo fora do painel: {estrutura}")
+            self.assertTrue(estrutura["camara_em_main"], f"painel camara fora do main: {estrutura}")
+            self.assertTrue(estrutura["vereadores_em_main"], f"painel vereadores fora do main: {estrutura}")
+            self.assertTrue(estrutura["nav_em_corpo"], f"nav principal fora do corpo: {estrutura}")
+            browser.close()
+
+    def _caso_camara(self, page, largura: int) -> None:
+        self._ir_aba(page, "camara")
         self._assert_sem_elementos_proibidos(page)
-        self._ir_aba(page, secao)
-        _sem_scroll_horizontal(page)
-        if secao == "camara":
-            _cartoes_dentro(page, "#painel-camara")
-        else:
-            _cartoes_dentro(page, "#painel-vereadores")
-        lateral = page.query_selector("#menu-lateral")
-        self.assertIsNotNone(lateral)
-        visivel = page.locator("#menu-lateral").is_visible()
+        for periodo in PERIODOS:
+            with self.subTest(largura=largura, aba="camara", periodo=periodo):
+                self._clicar_periodo(page, periodo)
+                self._assert_so_periodo_visivel(page, periodo)
+                _sem_scroll_horizontal(page)
+                self._assert_quebra_letra(page, f"camara {periodo} {largura}px")
+        lateral = page.locator("#menu-lateral").is_visible()
         if largura >= 900:
-            self.assertTrue(visivel, "menu lateral deve aparecer em desktop")
+            self.assertTrue(lateral, "menu lateral deve aparecer em desktop")
+            duas = page.evaluate(JS_DUAS_COLUNAS, "#painel-camara .painel-camara-interno.ativo")
+            self.assertTrue(duas, "camara deveria ter cartoes em duas colunas em desktop")
+            largura_titulo = page.evaluate(
+                "() => Math.round(document.querySelector('.titulo-site').getBoundingClientRect().width)"
+            )
+            self.assertGreaterEqual(
+                largura_titulo, 300, f"titulo principal estreito em desktop: {largura_titulo}px"
+            )
+            centro = page.evaluate(
+                """() => {
+                  const pg = document.querySelector('.pagina').getBoundingClientRect();
+                  return { esq: Math.round(pg.left), dir: Math.round(window.innerWidth - pg.right) };
+                }"""
+            )
+            self.assertLessEqual(
+                abs(centro["esq"] - centro["dir"]),
+                2,
+                f"pagina nao centralizada em desktop: {centro}",
+            )
         else:
-            self.assertFalse(visivel, "menu lateral nao deve aparecer no celular")
+            self.assertFalse(lateral, "menu lateral nao deve aparecer no celular")
+            duas = page.evaluate(JS_DUAS_COLUNAS, "#painel-camara .painel-camara-interno.ativo")
+            self.assertFalse(duas, "camara deveria ter coluna unica no celular")
+
+    def _caso_vereadores(self, page, largura: int) -> None:
+        self._ir_aba(page, "vereadores")
+        page.wait_for_selector(".perfil-cabecalho", timeout=60000)
+        page.select_option("#sel-vereador", "1")
+        page.wait_for_timeout(500)
+        _sem_scroll_horizontal(page)
+        self._assert_quebra_letra(page, f"vereadores {largura}px")
+
+        estado = page.evaluate(JS_PERIODO_VISIVEL, "sessao")
+        for p in PERIODOS:
+            self.assertFalse(
+                estado[p]["visivel"], f"na aba Vereadores o painel {p} nao deveria aparecer"
+            )
+        texto = page.evaluate(JS_TEXTO_VISIVEL)
+        for marcador in MARCADORES.values():
+            self.assertNotIn(marcador, texto)
+
+        sobrepostos = page.evaluate(JS_SOBRPOSICOES, list(BLOCOS_VEREADORES))
+        self.assertEqual(sobrepostos, [], f"blocos sobrepostos em vereadores: {sobrepostos}")
+        quebrados = page.evaluate(JS_LEGENDA_LINHA)
+        self.assertEqual(quebrados, [], f"legenda de presenca fora de linha: {quebrados}")
+
+        if largura >= 900:
+            largura_titulo = page.evaluate(
+                "() => Math.round(document.querySelector('.titulo-site').getBoundingClientRect().width)"
+            )
+            self.assertGreaterEqual(
+                largura_titulo, 300, f"titulo principal estreito em desktop: {largura_titulo}px"
+            )
+            seletor_largura = page.evaluate(
+                "() => Math.round(document.querySelector('#sel-vereador').getBoundingClientRect().width)"
+            )
+            self.assertGreaterEqual(
+                seletor_largura, 200, f"seletor de vereador estreito em desktop: {seletor_largura}px"
+            )
+            duas = page.evaluate(JS_DUAS_COLUNAS, "#conteudo-vereadores")
+            self.assertTrue(duas, "vereadores deveria ter cartoes em duas colunas em desktop")
+        else:
+            duas = page.evaluate(JS_DUAS_COLUNAS, "#conteudo-vereadores")
+            self.assertFalse(duas, "vereadores deveria ter coluna unica no celular")
+            nav = page.locator("#nav-principal").is_visible()
+            self.assertTrue(nav, "navegacao inferior deve aparecer no celular")
 
     def test_layout_camara_e_vereadores(self):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page()
             for largura in (390, 1440):
-                for secao in ("camara", "vereadores"):
-                    with self.subTest(largura=largura, secao=secao):
-                        self._caso(page, largura, secao)
+                with self.subTest(largura=largura):
+                    self._abrir(page, largura)
+                    self._assert_sem_elementos_proibidos(page)
+                    self._caso_camara(page, largura)
+                    self._caso_vereadores(page, largura)
             browser.close()
 
 
