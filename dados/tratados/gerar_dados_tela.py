@@ -189,7 +189,21 @@ def filtros_de(lista: list[dict]) -> list[dict]:
 
 def gravar_camara(sufixo: str, sessao: list, mes: list, todo: list, lista: list, out: pathlib.Path) -> None:
     camara = {"sessao": sessao, "mes": mes, "todo": todo}
-    tags = {str(m["id"]): {"tag_tipo": "PLL", "tag_tema": m["categoria"]} for m in lista}
+    tags = {}
+    try:
+        import json
+        with open(RAIZ / "dados" / "tratados" / "temas_materias.json", "r", encoding="utf-8") as f_temas:
+            todas = json.load(f_temas)
+            for mat in todas.get("materias", []):
+                tags[str(mat["id"])] = {
+                    "tag_tipo": mat.get("sigla", "Outros"),
+                    "tag_tema": mat.get("tema", "Outros")
+                }
+    except Exception:
+        pass
+    # Sobrepõe com a lista atual caso necessário
+    for m in lista:
+        tags[str(m["id"])] = {"tag_tipo": "PLL", "tag_tema": m["categoria"]}
     filtros = {
         "sessao": filtros_de(sessao),
         "mes": filtros_de(mes),
@@ -388,7 +402,23 @@ def _mesclar_projetos_lei_raiz(listas: list[list]) -> list[dict]:
             if pid is None:
                 continue
             por_id[int(pid)] = p
+    
+    # Injetar motivos_fora_do_mandato a partir dos afastamentos manuais
+    try:
+        with open(RAIZ / "dados" / "tratados" / "afastamentos_manuais.json", "r", encoding="utf-8") as f:
+            manuais = json.load(f)
+            motivos = manuais.get("motivos_fora_do_mandato") or []
+            for m in motivos:
+                vid_sapl = m.get("parlamentar_id_sapl")
+                if vid_sapl in por_id:
+                    if "motivos_fora_do_mandato" not in por_id[vid_sapl]:
+                        por_id[vid_sapl]["motivos_fora_do_mandato"] = []
+                    por_id[vid_sapl]["motivos_fora_do_mandato"].append(m)
+    except Exception as e:
+        pass
+
     return list(por_id.values())
+
 
 
 def _parse_coleta_em(meta: dict) -> datetime:
@@ -444,7 +474,22 @@ def mesclar_atuacao_legislatura(dados_por_ano: list[dict], anos: list[int], cfg:
             else:
                 por_id[vid] = _mesclar_vereador(por_id[vid], v)
 
+
+    try:
+        with open(RAIZ / "dados" / "tratados" / "afastamentos_manuais.json", "r", encoding="utf-8") as f:
+            manuais = json.load(f)
+            motivos = manuais.get("motivos_fora_do_mandato") or []
+            for m in motivos:
+                vid_sapl = m.get("parlamentar_id_sapl")
+                if vid_sapl in por_id:
+                    if "motivos_fora_do_mandato" not in por_id[vid_sapl]:
+                        por_id[vid_sapl]["motivos_fora_do_mandato"] = []
+                    por_id[vid_sapl]["motivos_fora_do_mandato"].append(m)
+    except Exception as e:
+        pass
+
     vereadores = [por_id[i] for i in ordem]
+
     return {
         "meta": base_meta,
         "sessoes": sessoes,

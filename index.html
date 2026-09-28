@@ -988,10 +988,13 @@
   }
 
   .status-cartoes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 14px;
+  }
+  .status-cartoes > .status-cartao {
+    flex: 1 1 100px;
   }
 
   .status-cartao {
@@ -2613,7 +2616,6 @@
       margin-left: auto;
       margin-right: auto;
       border-radius: 20px;
-      overflow: hidden;
       box-shadow: var(--sombra);
     }
 
@@ -2631,6 +2633,8 @@
       min-height: calc(100vh - 40px);
       max-height: calc(100vh - 40px);
       overflow-y: auto;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
     }
 
     .menu-lateral-titulo {
@@ -2704,10 +2708,15 @@
     }
 
     .painel-camara-interno.ativo {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      align-items: start;
+      display: block;
+      column-count: 2;
+      column-gap: 20px;
+    }
+    .painel-camara-interno.ativo > * {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 100%;
     }
 
     .painel-camara-interno.ativo > .secao-titulo-linha,
@@ -2715,7 +2724,7 @@
     .painel-camara-interno.ativo > .sessao-titulo,
     .painel-camara-interno.ativo > .rodape-coleta,
     .painel-camara-interno.ativo > .bloco-votado {
-      grid-column: 1 / -1;
+      column-span: all; grid-column: 1 / -1;
     }
 
 
@@ -2725,17 +2734,22 @@
       margin-bottom: 20px;
     }
     #conteudo-vereadores {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      align-items: start;
+      display: block;
+      column-count: 2;
+      column-gap: 20px;
+    }
+    #conteudo-vereadores > * {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 100%;
     }
 
     #conteudo-vereadores > .secao:first-child,
     #conteudo-vereadores > .nota-factual,
     #conteudo-vereadores > .faltas-lista,
     #conteudo-vereadores > .rodape-coleta {
-      grid-column: 1 / -1;
+      column-span: all; grid-column: 1 / -1;
     }
   }
 
@@ -2924,6 +2938,69 @@
       transition: none;
     }
   }
+
+  /* Accordion Cartoes */
+  .ac-cartao {
+    background: var(--superficie);
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .ac-cabecalho {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+  }
+  .ac-cabecalho::-webkit-details-marker {
+    display: none;
+  }
+  .ac-cabecalho h2 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 700;
+  }
+  .ac-resumo {
+    font-size: 16px;
+    color: var(--texto-secundario);
+  }
+  .ac-conteudo {
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--linha);
+  }
+  .ac-cartao[open] .ac-cabecalho {
+    background: var(--fundo);
+  }
+  
+  /* Inner Accordion */
+  .ac-cartao-inner {
+    border: 1px solid var(--linha);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+  .ac-cabecalho-inner {
+    list-style: none;
+    cursor: pointer;
+    padding: 12px 16px;
+    font-weight: 600;
+    background: var(--fundo);
+  }
+  .ac-cabecalho-inner::-webkit-details-marker {
+    display: none;
+  }
+  .ac-conteudo-inner {
+    padding: 16px;
+    border-top: 1px solid var(--linha);
+  }
+  .ac-cartao-inner[open] .ac-cabecalho-inner {
+    border-bottom: 1px solid var(--linha);
+  }
 </style>
 </head>
 <body>
@@ -3104,7 +3181,7 @@
           <h2 id="tit-resultado-todo">Como terminaram os projetos?</h2>
           <p class="legenda"><span id="legenda-resultado-todo"></span></p>
           <div class="barra-status-trilho" id="barra-resultado-todo" role="img"></div>
-          <div class="status-cartoes"><div id="cartoes-resultado-todo"></div></div>
+          <div class="status-cartoes" id="cartoes-resultado-todo"></div>
           <p class="nota-rodape" id="nota-resultado-todo"></p>
         </section>
         <section class="secao" aria-labelledby="tit-temas-todo">
@@ -3886,6 +3963,18 @@
       esc(iniciaisNome(v.nome_parlamentar)) + "</span></div>";
   }
 
+  function renderBadgeCassacao(v) {
+    if (!v.motivos_fora_do_mandato) return "";
+    var cassacao = v.motivos_fora_do_mandato.find(function(m) { return m.motivo === "Mandato cassado"; });
+    if (!cassacao) return "";
+    var linkCassacao = cassacao.materia_id ? SAPL_ORIGEM + "/materia/" + cassacao.materia_id : "";
+    if (linkCassacao) {
+      return ' <a href="' + esc(linkCassacao) + '" class="selo selo-coautoria" title="Ato de cassação no SAPL" target="_blank" rel="noopener noreferrer" style="text-decoration:none;vertical-align:middle;margin-left:8px;">Cassado</a>';
+    } else {
+      return ' <span class="selo selo-coautoria" style="vertical-align:middle;margin-left:8px;">Cassado</span>';
+    }
+  }
+
   function renderBadgePartido(v) {
     if (!v.partido_sigla && !v.partido_nome) return "";
     var sigla = v.partido_sigla || "Não informado";
@@ -4109,37 +4198,37 @@
     ) {
       htmlFaltas += '<div class="faltas-lista">';
       if (p.faltas_com_justificativa > 0) {
-        htmlFaltas += "<h3>Faltas com justificativa oficial (" + esc(p.faltas_com_justificativa) + ")</h3><ul>";
+        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner">Faltas com justificativa oficial (\' + esc(p.faltas_com_justificativa) + \')</summary><div class="ac-conteudo-inner"><ul>';
         faltasJust.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
             linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
         });
-        htmlFaltas += "</ul>";
+        htmlFaltas += "</ul></div></details>";
       }
       if (p.faltas_sem_justificativa > 0) {
-        htmlFaltas += "<h3>Faltas sem justificativa (" + esc(p.faltas_sem_justificativa) + ")</h3><ul>";
+        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner">Faltas sem justificativa (\' + esc(p.faltas_sem_justificativa) + \')</summary><div class="ac-conteudo-inner"><ul>';
         faltasSem.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
             linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
         });
-        htmlFaltas += "</ul>";
+        htmlFaltas += "</ul></div></details>";
       }
       if (licencas.length) {
         var rotLic = rotMeta.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade";
-        htmlFaltas += "<h3>" + esc(rotLic) + " (" + esc(licencas.length) + ")</h3><ul>";
+        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner">\' + esc(rotLic) + \' (\' + esc(licencas.length) + \')</summary><div class="ac-conteudo-inner"><ul>';
         licencas.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
             esc(s.rotulo_situacao || rotLic) + ". " +
             linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
         });
-        htmlFaltas += "</ul>";
+        htmlFaltas += "</ul></div></details>";
       }
       if (foraMandato.length) {
         var rotFora = rotMeta.fora_do_mandato || "Fora do mandato naquela data";
-        htmlFaltas += "<h3>" + esc(rotFora) + " (" + esc(foraMandato.length) + ")</h3><ul>";
+        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner">\' + esc(rotFora) + \' (\' + esc(foraMandato.length) + \')</summary><div class="ac-conteudo-inner"><ul>';
         foraMandato.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
@@ -4147,7 +4236,7 @@
           if (s.motivo) htmlFaltas += ". " + esc(s.motivo);
           htmlFaltas += ". " + linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
         });
-        htmlFaltas += "</ul>";
+        htmlFaltas += "</ul></div></details>";
       }
       htmlFaltas += "</div>";
     } else {
@@ -4160,8 +4249,8 @@
     }
 
     return (
-      '<section class="secao" aria-labelledby="tit-presenca">' +
-      '<h2 id="tit-presenca">Presen\u00e7a nas sess\u00f5es ordin\u00e1rias</h2>' +
+      '<details class="secao ac-cartao" name="ac-ver" open>' +
+      '<summary class="ac-cabecalho"><h2 id="tit-presenca">Presen\u00e7a nas sess\u00f5es ordin\u00e1rias</h2><span class="ac-resumo">' + esc(p.taxa_presenca.toFixed(1).replace(".", ",")) + '%</span></summary><div class="ac-conteudo">' +
       '<p class="legenda">Total de ' +
       esc(p.sessoes_ordinarias) +
       " " +
@@ -4197,7 +4286,7 @@
         .join("") +
       "</dl></div></div>" +
       htmlFaltas +
-      "</section>"
+      "</div></details>"
     );
   }
 
@@ -4335,8 +4424,8 @@
     var rotuloSemVoto = ROTULO_SEM_VOTO_INDIVIDUAL || "voto individual nao registrado no SAPL";
 
     return (
-      '<section class="secao" aria-labelledby="tit-votos">' +
-      '<h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2>' +
+      '<details class="secao ac-cartao" name="ac-ver">' +
+      '<summary class="ac-cabecalho"><h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2><span class="ac-resumo">' + esc(v.votos ? v.votos.total_registros : 0) + '</span></summary><div class="ac-conteudo">' +
       '<p class="legenda">Voto nominal \u00e9 quando o nome de cada vereador fica registrado publicamente. Total: ' +
       esc(vo.total_registros) +
       " vota\u00e7\u00f5es em " +
@@ -4458,8 +4547,8 @@
         '<div class="lista-pll">' + lista + "</div>";
     }
 
-    return '<section class="secao" aria-labelledby="tit-pll">' +
-      '<h2 id="tit-pll">Projetos de lei propostos (PLL)</h2>' +
+    return '<details class="secao ac-cartao" name="ac-ver">' +
+      '<summary class="ac-cabecalho"><h2 id="tit-pll">Projetos de lei propostos (PLL)</h2><span class="ac-resumo">' + esc(pl.total_propostos || 0) + '</span></summary><div class="ac-conteudo">' +
       '<p class="legenda">PLL significa Projeto de Lei do Legislativo, proposta escrita por vereador.</p>' +
       '<div class="contagens-pll">' +
       '<div class="contagem-item"><div class="num">' + esc(pl.total_propostos) + '</div><div class="rot">Propostos</div></div>' +
@@ -4472,7 +4561,7 @@
       '<h3 style="font-size:14px;margin:14px 0 8px">Por tema (13 categorias oficiais)</h3>' +
       '<div class="barra-temas">' + barras + "</div>" +
       htmlFiltros + htmlListaPLL +
-      "</section>";
+      "</div></details>";
   }
 
   function renderSecaoVotos(v) {
@@ -4556,8 +4645,8 @@
         '<button type="button" class="btn-secundario" id="btn-limpar-votos" style="margin-top:12px;width:100%">Limpar filtro e ocultar lista</button>';
     }
 
-    return '<section class="secao" aria-labelledby="tit-votos">' +
-      '<h2 id="tit-votos">Histórico de votos nominais</h2>' +
+    return '<details class="secao ac-cartao" name="ac-ver">' +
+      '<summary class="ac-cabecalho"><h2 id="tit-votos">Histórico de votos nominais</h2><span class="ac-resumo">' + esc(v.votos ? v.votos.total_registros : 0) + '</span></summary><div class="ac-conteudo">' +
       '<p class="legenda">Voto nominal é quando o nome de cada vereador fica registrado publicamente. Total: ' +
       esc(vo.total_registros) + " vota\u00e7\u00f5es em " + rotuloPeriodoLegislatura() + ".</p>" +
       '<div class="votos-resumo">' +
@@ -4574,7 +4663,7 @@
       '<select id="filtro-voto"><option value="">Todos os tipos de voto</option>' + opcoesFiltro + "</select>" +
       "</div>" +
       htmlListaVotos +
-      "</section>";
+      "</div></details>";
   }
 
   function renderApp() {
@@ -4610,7 +4699,7 @@
       '<div class="perfil-cabecalho">' +
       renderPerfilFoto(v) +
       '<div class="perfil-info">' +
-      '<p class="perfil-nome">' + esc(v.nome_parlamentar) + "</p>" +
+      '<p class="perfil-nome">' + esc(v.nome_parlamentar) + renderBadgeCassacao(v) + "</p>" +
       renderBadgePartido(v) +
       '<p class="perfil-detalhe">Nome oficial: <strong>' + esc(v.nome_oficial) + "</strong></p>" +
       (urlSegura(v.link_sapl)
@@ -5998,6 +6087,21 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   document.addEventListener("error", function (e) {
     if (e.target && e.target.classList && e.target.classList.contains("perfil-foto")) {
       e.target.style.display = "none";
+    }
+  }, true);
+
+  
+  document.addEventListener("toggle", function (e) {
+    if (e.target.tagName !== "DETAILS") return;
+    if (!e.target.open) return;
+    var nomeGrupo = e.target.getAttribute("name");
+    if (nomeGrupo === "ac-ver" || nomeGrupo === "ac-faltas") {
+      var irmaos = document.querySelectorAll('details[name="' + nomeGrupo + '"]');
+      irmaos.forEach(function (d) {
+        if (d !== e.target && d.open) {
+          d.open = false;
+        }
+      });
     }
   }, true);
 

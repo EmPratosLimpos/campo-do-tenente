@@ -7416,7 +7416,16 @@
         "autorias_conjuntas": 0,
         "por_categoria": {},
         "lista": []
-      }
+      },
+      "motivos_fora_do_mandato": [
+        {
+          "parlamentar_id_sapl": 1,
+          "depois_de": "2026-08-18",
+          "motivo": "Mandato cassado",
+          "materia_id": 792,
+          "fonte_oficial_encontrada": true
+        }
+      ]
     },
     {
       "id_sapl": 2,
