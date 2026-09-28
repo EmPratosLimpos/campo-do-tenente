@@ -164,6 +164,9 @@ def conferir_prefixo(pasta: Path, prefixo: str, sid: int, recurso: str) -> dict:
     linhas = []
     total = None
     numero = 1
+    paginas_lidas = 0
+    ultima_paginacao: dict = {}
+    parou_por_arquivo_ausente = False
     while True:
         caminho = pasta / f"{prefixo}_p{numero}.json"
         if not caminho.exists():
@@ -177,16 +180,18 @@ def conferir_prefixo(pasta: Path, prefixo: str, sid: int, recurso: str) -> dict:
                     "linhas": 0,
                     "ids_distintos": 0,
                 }
+            parou_por_arquivo_ausente = True
             break
         dados = ler_json(caminho)
+        paginas_lidas += 1
+        ultima_paginacao = dados.get("pagination") or {}
         if numero == 1:
-            paginacao = dados.get("pagination") or {}
-            if paginacao.get("total_entries") is not None:
-                total = int(paginacao["total_entries"])
+            if ultima_paginacao.get("total_entries") is not None:
+                total = int(ultima_paginacao["total_entries"])
         for item in dados.get("results") or []:
             if isinstance(item, dict):
                 linhas.append(item)
-        paginacao = dados.get("pagination") or {}
+        paginacao = ultima_paginacao
         total_paginas = paginacao.get("total_pages")
         if total_paginas is not None and numero >= int(total_paginas):
             break
@@ -198,12 +203,34 @@ def conferir_prefixo(pasta: Path, prefixo: str, sid: int, recurso: str) -> dict:
         if item.get("id") is not None:
             ids.append(int(item["id"]))
     distintos = len(set(ids))
-    bate = total is not None and total == distintos and len(ids) == distintos
-    motivo = None
+    sem_repeticao = len(ids) == distintos
+    paginacao_pendente = False
+    if parou_por_arquivo_ausente and (
+        ultima_paginacao.get("next_page")
+        or (ultima_paginacao.get("links") or {}).get("next")
+    ):
+        paginacao_pendente = True
+    total_paginas_anunciado = ultima_paginacao.get("total_pages")
+    if (
+        total_paginas_anunciado is not None
+        and paginas_lidas < int(total_paginas_anunciado)
+    ):
+        paginacao_pendente = True
+    if total is not None:
+        bate = total == distintos and sem_repeticao
+        motivo = None
+    elif sem_repeticao and not paginacao_pendente:
+        bate = True
+        motivo = "sem total_entries, sem repeticao"
+    else:
+        bate = False
+        motivo = None
     if not bate:
-        if total is None:
-            motivo = "sem total_entries"
-        elif len(ids) != distintos:
+        if total is None and not sem_repeticao:
+            motivo = "id repetido"
+        elif total is None:
+            motivo = "sem total_entries" if motivo is None else motivo
+        elif not sem_repeticao:
             motivo = "id repetido"
         else:
             motivo = "total_entries diferente dos ids distintos"
