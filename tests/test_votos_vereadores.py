@@ -36,7 +36,7 @@ class TestVotosVereadores(unittest.TestCase):
             page.wait_for_timeout(1000)
             
             # Open Votos for Rafael before checking votes
-            page.locator("#tit-votos").locator("..").click()
+            page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
             page.wait_for_timeout(500)
             texto_rafael = page.inner_text("body")
             self.assertIn("26\nSim", texto_rafael)
@@ -45,15 +45,15 @@ class TestVotosVereadores(unittest.TestCase):
             # Check filter for Rafael
             page.select_option("#filtro-voto", label="Presidente que não votou")
             page.wait_for_timeout(1000)
-            page.locator("#tit-votos").locator("..").click()
+            page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
             page.wait_for_timeout(500)
             texto_rafael_filtro = page.inner_text("body")
             self.assertIn("93 registros", texto_rafael_filtro)
             
             # Check Accordion exclusivity
-            presenca_card = page.locator("#tit-presenca").locator("..").locator("..")
-            pll_card = page.locator("#tit-pll").locator("..").locator("..")
-            votos_card = page.locator("#tit-votos").locator("..").locator("..")
+            presenca_card = page.locator("#tit-presenca").locator("xpath=ancestor::details[1]")
+            pll_card = page.locator("#tit-pll").locator("xpath=ancestor::details[1]")
+            votos_card = page.locator("#tit-votos").locator("xpath=ancestor::details[1]")
             
             # Initially votos is open because we clicked it
             self.assertTrue(votos_card.evaluate("node => node.open"))
@@ -61,13 +61,13 @@ class TestVotosVereadores(unittest.TestCase):
             self.assertFalse(pll_card.evaluate("node => node.open"))
             
             # Click PLL
-            page.locator("#tit-pll").locator("..").click()
+            page.locator("#tit-pll").locator("xpath=ancestor::summary[1]").click()
             page.wait_for_timeout(500)
             self.assertFalse(votos_card.evaluate("node => node.open"))
             self.assertTrue(pll_card.evaluate("node => node.open"))
 
             # Click Votos
-            page.locator("#tit-votos").locator("..").click()
+            page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
             page.wait_for_timeout(500)
             self.assertTrue(votos_card.evaluate("node => node.open"))
             self.assertFalse(pll_card.evaluate("node => node.open"))
@@ -75,7 +75,7 @@ class TestVotosVereadores(unittest.TestCase):
 
             # Open Votos for Rafael
             votos_card_rafael = page.locator("#tit-votos").locator("..").locator("..")
-            page.locator("#tit-votos").locator("..").click()
+            page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
             page.wait_for_timeout(500)
             
             # Check Cassado badge for Rafael Ventura (should NOT have)
@@ -93,7 +93,7 @@ class TestVotosVereadores(unittest.TestCase):
 
             # Open Votos for Jorge
             votos_card_jorge = page.locator("#tit-votos").locator("..").locator("..")
-            page.locator("#tit-votos").locator("..").click()
+            page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
             page.wait_for_timeout(500)
 
             # Test Votos inner content
@@ -106,15 +106,15 @@ class TestVotosVereadores(unittest.TestCase):
             # Check filter for Jorge
             page.select_option("#filtro-voto", label="Licença para tratamento de saúde")
             page.wait_for_timeout(1000)
-            page.locator("#tit-votos").locator("..").click()
+            page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
             page.wait_for_timeout(500)
             texto_jorge_filtro = page.inner_text("body")
             self.assertIn("72 registros", texto_jorge_filtro)
 
 
             # Open Presenca card for Jorge
-            presenca_card = page.locator("#tit-presenca").locator("..").locator("..")
-            page.locator("#tit-presenca").locator("..").click()
+            presenca_card = page.locator("#tit-presenca").locator("xpath=ancestor::details[1]")
+            page.locator("#tit-presenca").locator("xpath=ancestor::summary[1]").click()
             page.wait_for_timeout(500)
             
             # Check inner accordion exclusivity
@@ -125,11 +125,43 @@ class TestVotosVereadores(unittest.TestCase):
             ac_2 = inner_acs.nth(1)
             self.assertFalse(ac_1.evaluate("node => node.open"))
             self.assertFalse(ac_2.evaluate("node => node.open"))
+
+            # Open all accordions to check for literal JS syntax in the DOM
+            for accordion in page.locator('details[name="ac-ver"]').all():
+                if not accordion.evaluate("n => n.open"):
+                    accordion.locator("summary").first.click()
+                    page.wait_for_timeout(200)
+            for inner in page.locator('details[name="ac-faltas"]').all():
+                if not inner.evaluate("n => n.open"):
+                    inner.locator("summary").first.click()
+                    page.wait_for_timeout(200)
+            
+            visible_text = page.locator("body").inner_text()
+            forbidden = ["esc(", "' +", "+ '", "length)", "undefined", "NaN", "null"]
+            for bad in forbidden:
+                self.assertNotIn(bad, visible_text)
+
             
             ac_1.locator("summary").first.click()
             page.wait_for_timeout(500)
             self.assertTrue(ac_1.evaluate("node => node.open"))
             self.assertFalse(ac_2.evaluate("node => node.open"))
+
+            # Open all accordions to check for literal JS syntax in the DOM
+            for accordion in page.locator('details[name="ac-ver"]').all():
+                if not accordion.evaluate("n => n.open"):
+                    accordion.locator("summary").first.click()
+                    page.wait_for_timeout(200)
+            for inner in page.locator('details[name="ac-faltas"]').all():
+                if not inner.evaluate("n => n.open"):
+                    inner.locator("summary").first.click()
+                    page.wait_for_timeout(200)
+            
+            visible_text = page.locator("body").inner_text()
+            forbidden = ["esc(", "' +", "+ '", "length)", "undefined", "NaN", "null"]
+            for bad in forbidden:
+                self.assertNotIn(bad, visible_text)
+
             
             ac_2.locator("summary").first.click()
             page.wait_for_timeout(500)

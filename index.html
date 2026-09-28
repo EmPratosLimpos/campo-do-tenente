@@ -2617,6 +2617,7 @@
       margin-right: auto;
       border-radius: 20px;
       box-shadow: var(--sombra);
+      background: var(--superficie);
     }
 
     .menu-lateral {
@@ -2628,10 +2629,9 @@
       background: var(--superficie);
       border-right: 1px solid var(--linha);
       position: sticky;
-      top: 20px;
+      top: 0;
       align-self: flex-start;
-      min-height: calc(100vh - 40px);
-      max-height: calc(100vh - 40px);
+      height: 100vh;
       overflow-y: auto;
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
@@ -2688,6 +2688,9 @@
       flex: 1;
       min-width: 0;
       max-width: 888px;
+      background: var(--fundo);
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
     }
 
     .pagina-corpo .topo-fixo {
@@ -2748,8 +2751,11 @@
     #conteudo-vereadores > .secao:first-child,
     #conteudo-vereadores > .nota-factual,
     #conteudo-vereadores > .faltas-lista,
-    #conteudo-vereadores > .rodape-coleta {
+    #conteudo-vereadores > .rodape-coleta,
+    #conteudo-vereadores > .perfil-e-notas {
       column-span: all; grid-column: 1 / -1;
+      display: block !important;
+      width: 100%;
     }
   }
 
@@ -3000,6 +3006,24 @@
   }
   .ac-cartao-inner[open] .ac-cabecalho-inner {
     border-bottom: 1px solid var(--linha);
+  }
+
+  .ac-cabecalho-texto {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ac-icone, .ac-icone-inner {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .ac-cartao[open] .ac-icone, .ac-cartao-inner[open] .ac-icone-inner {
+    transform: rotate(180deg);
+  }
+  .ac-cabecalho-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 </style>
 </head>
@@ -4198,7 +4222,7 @@
     ) {
       htmlFaltas += '<div class="faltas-lista">';
       if (p.faltas_com_justificativa > 0) {
-        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner">Faltas com justificativa oficial (\' + esc(p.faltas_com_justificativa) + \')</summary><div class="ac-conteudo-inner"><ul>';
+        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner" aria-expanded="false">Faltas com justificativa oficial (' + esc(p.faltas_com_justificativa) + ')<svg class="ac-icone-inner" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo-inner"><ul>';
         faltasJust.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
@@ -4207,7 +4231,7 @@
         htmlFaltas += "</ul></div></details>";
       }
       if (p.faltas_sem_justificativa > 0) {
-        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner">Faltas sem justificativa (\' + esc(p.faltas_sem_justificativa) + \')</summary><div class="ac-conteudo-inner"><ul>';
+        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner" aria-expanded="false">Faltas sem justificativa (' + esc(p.faltas_sem_justificativa) + ')<svg class="ac-icone-inner" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo-inner"><ul>';
         faltasSem.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
@@ -4217,7 +4241,7 @@
       }
       if (licencas.length) {
         var rotLic = rotMeta.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade";
-        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner">\' + esc(rotLic) + \' (\' + esc(licencas.length) + \')</summary><div class="ac-conteudo-inner"><ul>';
+        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner" aria-expanded="false">' + esc(rotLic) + ' (' + esc(licencas.length) + ')<svg class="ac-icone-inner" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo-inner"><ul>';
         licencas.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
@@ -4228,7 +4252,7 @@
       }
       if (foraMandato.length) {
         var rotFora = rotMeta.fora_do_mandato || "Fora do mandato naquela data";
-        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner">\' + esc(rotFora) + \' (\' + esc(foraMandato.length) + \')</summary><div class="ac-conteudo-inner"><ul>';
+        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner" aria-expanded="false">' + esc(rotFora) + ' (' + esc(foraMandato.length) + ')<svg class="ac-icone-inner" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo-inner"><ul>';
         foraMandato.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
@@ -4250,7 +4274,7 @@
 
     return (
       '<details class="secao ac-cartao" name="ac-ver" open>' +
-      '<summary class="ac-cabecalho"><h2 id="tit-presenca">Presen\u00e7a nas sess\u00f5es ordin\u00e1rias</h2><span class="ac-resumo">' + esc(p.taxa_presenca.toFixed(1).replace(".", ",")) + '%</span></summary><div class="ac-conteudo">' +
+      '<summary class="ac-cabecalho" aria-expanded="true"><div class="ac-cabecalho-texto"><h2 id="tit-presenca">Presen\u00e7a nas sess\u00f5es ordin\u00e1rias</h2><span class="ac-resumo">' + esc(p.taxa_presenca.toFixed(1).replace(".", ",")) + '%</span></div><svg class="ac-icone" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo">' +
       '<p class="legenda">Total de ' +
       esc(p.sessoes_ordinarias) +
       " " +
@@ -4548,7 +4572,7 @@
     }
 
     return '<details class="secao ac-cartao" name="ac-ver">' +
-      '<summary class="ac-cabecalho"><h2 id="tit-pll">Projetos de lei propostos (PLL)</h2><span class="ac-resumo">' + esc(pl.total_propostos || 0) + '</span></summary><div class="ac-conteudo">' +
+      '<summary class="ac-cabecalho" aria-expanded="false"><div class="ac-cabecalho-texto"><h2 id="tit-pll">Projetos de lei propostos (PLL)</h2><span class="ac-resumo">' + esc(pl.total_propostos || 0) + '</span></div><svg class="ac-icone" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo">' +
       '<p class="legenda">PLL significa Projeto de Lei do Legislativo, proposta escrita por vereador.</p>' +
       '<div class="contagens-pll">' +
       '<div class="contagem-item"><div class="num">' + esc(pl.total_propostos) + '</div><div class="rot">Propostos</div></div>' +
@@ -4694,7 +4718,8 @@
       "</div></div>";
 
     conteudo.innerHTML =
-      '<section class="secao" aria-labelledby="tit-perfil">' +
+      '<div class="perfil-e-notas" style="column-span: all; width: 100%; margin-bottom: 20px;">' +
+      '<section class="secao" aria-labelledby="tit-perfil" style="margin-bottom: 20px;">' +
       '<h2 id="tit-perfil">Perfil parlamentar</h2>' +
       '<div class="perfil-cabecalho">' +
       renderPerfilFoto(v) +
@@ -4707,6 +4732,7 @@
         : "") +
       "</div></div></section>" +
       renderNotasParlamentar(v) +
+      "</div>" +
       renderSecaoPresenca(v) +
       renderSecaoPLL(v) +
       renderSecaoVotos(v) +
@@ -6093,6 +6119,9 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   
   document.addEventListener("toggle", function (e) {
     if (e.target.tagName !== "DETAILS") return;
+    var summary = e.target.querySelector("summary");
+    if (summary) summary.setAttribute("aria-expanded", e.target.open ? "true" : "false");
+    
     if (!e.target.open) return;
     var nomeGrupo = e.target.getAttribute("name");
     if (nomeGrupo === "ac-ver" || nomeGrupo === "ac-faltas") {
@@ -6100,6 +6129,8 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       irmaos.forEach(function (d) {
         if (d !== e.target && d.open) {
           d.open = false;
+          var s = d.querySelector("summary");
+          if (s) s.setAttribute("aria-expanded", "false");
         }
       });
     }
