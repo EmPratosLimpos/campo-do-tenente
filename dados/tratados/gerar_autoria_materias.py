@@ -63,7 +63,12 @@ def pasta_com(glob_pasta: str, arquivo: str) -> Path:
 
 
 def ler_lista_repetida(pasta: Path, prefixo: str) -> tuple[list, list[str], int | None]:
-    """Le todas as paginas sem exigir total, pois a lista repete ids."""
+    """Le todas as paginas sem exigir total, pois a lista repete ids.
+
+    Devolve (linhas, nomes_de_arquivo, total_entries_informado). O total
+    informado e o numero de ids distintos vao para o meta do JSON gerado,
+    para conferencia (total_entries pode contar repeticao ou estimativa).
+    """
     linhas = []
     nomes = []
     total = None
@@ -176,6 +181,7 @@ def gerar() -> dict:
             "arquivos_tipoautor": [rel(pasta_autoria / n) for n in nomes_tipo],
             "arquivos_autoria": nomes_autoria,
             "autoria_total_entries_api": total_autoria,
+            "autoria_total_linhas_lidas": len(autoria_linhas),
             "autoria_ids_distintos": len(
                 {int(l["id"]) for l in autoria_linhas if isinstance(l, dict) and l.get("id") is not None}
             ),

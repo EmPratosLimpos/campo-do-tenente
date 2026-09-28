@@ -315,7 +315,29 @@ class Coletor:
             if erro:
                 falhas.append({"ordem": ordem_id, "erro": erro})
                 continue
-            lote = dados.get("results") or []
+            lote = list(dados.get("results") or [])
+            paginacao = dados.get("pagination") or {}
+            try:
+                total_paginas = int(paginacao.get("total_pages") or 1)
+            except (TypeError, ValueError):
+                total_paginas = 1
+            pagina = 2
+            deu_falha = False
+            while pagina <= total_paginas:
+                mais, erro_pag = self.pedir(
+                    "/api/sessao/registrovotacao/",
+                    {"ordem": ordem_id, "page_size": 100, "page": pagina},
+                )
+                if erro_pag:
+                    falhas.append(
+                        {"ordem": ordem_id, "pagina": pagina, "erro": erro_pag}
+                    )
+                    deu_falha = True
+                    break
+                lote.extend(mais.get("results") or [])
+                pagina += 1
+            if deu_falha:
+                continue
             if lote:
                 resultados.extend(lote)
             else:

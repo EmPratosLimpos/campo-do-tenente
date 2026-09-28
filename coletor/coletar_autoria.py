@@ -23,6 +23,7 @@ Rodar:  python coletor/coletar_autoria.py
 
 from __future__ import annotations
 
+import json
 from datetime import datetime
 
 from coletar_lote import BRUTOS, ColetorLote, OrcamentoEsgotado
@@ -45,13 +46,42 @@ def total_entries(dados) -> int | None:
     return int(valor) if valor is not None else None
 
 
+def gravar_aviso_filtro_ignorado(
+    coletor: ColetorLote, ano: int, total: int | None, total_sem_filtro: int | None, motivo: str
+) -> str:
+    """Grava aviso estruturado nos brutos quando o SAPL ignora o filtro por ano."""
+    nome = f"aviso_filtro_materia_ano{ano}.json"
+    aviso = {
+        "ano": int(ano),
+        "prefixo": f"autoria_materia_ano{ano}",
+        "total_entries_com_filtro": total,
+        "total_entries_sem_filtro": total_sem_filtro,
+        "motivo": motivo,
+        "conduta": "só a primeira página ficou gravada como prova; as demais não foram pedidas",
+        "registrado_em": datetime.now().astimezone().isoformat(timespec="seconds"),
+    }
+    (coletor.pasta / nome).write_text(
+        json.dumps(aviso, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return nome
+
+
 def pedir_filtrado_por_ano(coletor: ColetorLote, ano: int, total_sem_filtro: int | None) -> None:
     prefixo = f"autoria_materia_ano{ano}"
     params = {"materia__ano": ano, "page_size": 100, "page": 1}
     primeiro = coletor.pedir("/api/materia/autoria/", params, f"{prefixo}_p1.json")
     total = total_entries(primeiro)
-    if total is None or (total_sem_filtro is not None and total >= total_sem_filtro):
-        print(f"  filtro materia__ano={ano} ignorado pelo SAPL, nao pagina")
+    if total is None:
+        nome = gravar_aviso_filtro_ignorado(
+            coletor, ano, total, total_sem_filtro, "total_entries ausente na resposta com filtro"
+        )
+        print(f"  AVISO: filtro materia__ano={ano} sem total_entries, nao pagina (aviso em {nome})")
+        return
+    if total_sem_filtro is not None and total >= total_sem_filtro:
+        nome = gravar_aviso_filtro_ignorado(
+            coletor, ano, total, total_sem_filtro, "filtro materia__ano ignorado pelo SAPL"
+        )
+        print(f"  AVISO: filtro materia__ano={ano} ignorado pelo SAPL, nao pagina (aviso em {nome})")
         return
     coletor.pedir_paginas("/api/materia/autoria/", {"materia__ano": ano}, prefixo)
 
