@@ -148,33 +148,10 @@ def main():
     ):
         html = html.replace(frase, "")
 
-    seletor_ano = (
-        '      <div class="seletor-periodo seletor-ano" role="tablist" aria-label="Ano legislativo" id="seletor-ano-wrap">\n'
-        + "".join(
-            f'        <button type="button" role="tab" data-ano="{a}" id="tab-ano-{a}">{a}</button>\n'
-            for a in anos
-        )
-        + "      </div>\n"
-    )
-    html = html.replace(
-        '      <div class="seletor-periodo" role="tablist" aria-label="Período de consulta">',
-        seletor_ano + '      <div class="seletor-periodo" role="tablist" aria-label="Período de consulta">',
-        1,
-    )
-
-    aviso_2025 = (
-        '<div class="aviso-lacuna-sapl" id="aviso-lacuna-sapl" hidden role="status"><p></p></div>\n'
-    )
-    html = html.replace(
-        '<div class="sub-camara ativo" id="sub-camara">',
-        aviso_2025 + '<div class="sub-camara ativo" id="sub-camara">',
-        1,
-    )
-
     injecao = f"""
   var CONFIG_CIDADE = null;
   var ANOS_RECORTE = {json.dumps(anos)};
-  var ANO_ATUAL = {ano_padrao};
+  var SUFIXO_DADOS = "legislatura";
   var FOTOS_LOCAIS = {{}};
   var SAPL_ORIGEM = "";
   var PORTAL_OFICIAL = "";
@@ -258,41 +235,20 @@ def main():
     }});
   }}
 
-  function atualizarSeletorAno() {{
-    var wrap = document.getElementById("seletor-ano-wrap");
-    if (!wrap) return;
-    wrap.querySelectorAll("button[data-ano]").forEach(function (btn) {{
-      var a = parseInt(btn.getAttribute("data-ano"), 10);
-      var ativo = a === ANO_ATUAL;
-      btn.classList.toggle("ativo", ativo);
-      btn.setAttribute("aria-selected", ativo ? "true" : "false");
-      btn.setAttribute("tabindex", ativo ? "0" : "-1");
-    }});
-    atualizarAvisoLacunaSapl();
+  function rotuloAnosRecorte() {{
+    if (!ANOS_RECORTE || !ANOS_RECORTE.length) return "da legislatura";
+    if (ANOS_RECORTE.length === 1) return "de " + ANOS_RECORTE[0];
+    return "de " + ANOS_RECORTE[0] + " e " + ANOS_RECORTE[ANOS_RECORTE.length - 1];
   }}
 
-  function trocarAno(novoAno) {{
-    if (ANO_ATUAL === novoAno) return;
-    ANO_ATUAL = novoAno;
-    atualizarSeletorAno();
-    JSON_URL = window.location.pathname.indexOf("/docs/") !== -1
-      ? "../../dados/tratados/atuacao_vereadores_" + ANO_ATUAL + ".json"
-      : "dados/tratados/atuacao_vereadores_" + ANO_ATUAL + ".json";
-    carregarMateriasCamara().then(function () {{
-      initMateriasCamara();
-      carregar();
-    }});
+  function rotuloPeriodoLegislatura() {{
+    return "sess\\u00f5es ordin\\u00e1rias " + rotuloAnosRecorte();
   }}
 
-  function initSeletorAno() {{
-    var wrap = document.getElementById("seletor-ano-wrap");
-    if (!wrap) return;
-    wrap.addEventListener("click", function (e) {{
-      var btn = e.target.closest("button[data-ano]");
-      if (!btn) return;
-      trocarAno(parseInt(btn.getAttribute("data-ano"), 10));
-    }});
-    atualizarSeletorAno();
+  function prefixoDadosTratados() {{
+    return window.location.pathname.indexOf("/docs/") !== -1
+      ? "../../dados/tratados/"
+      : "dados/tratados/";
   }}
 """
     html = injetar_apos_strict(html, injecao)
@@ -467,9 +423,7 @@ def main():
         '  var JSON_URL = window.location.pathname.indexOf("/docs/") !== -1\n'
         '    ? "../../dados/tratados/atuacao_vereadores_2026.json"\n'
         '    : "dados/tratados/atuacao_vereadores_2026.json";',
-        '  var JSON_URL = window.location.pathname.indexOf("/docs/") !== -1\n'
-        '    ? "../../dados/tratados/atuacao_vereadores_" + ANO_ATUAL + ".json"\n'
-        '    : "dados/tratados/atuacao_vereadores_" + ANO_ATUAL + ".json";',
+        '  var JSON_URL = prefixoDadosTratados() + "atuacao_vereadores_" + SUFIXO_DADOS + ".json";',
     )
 
     html = re.sub(
@@ -532,14 +486,14 @@ def main():
         "      MATERIAS_URL + \"materias_camara.json\",\n"
         "      MATERIAS_URL + \"materias_tags.json\",\n"
         '      MATERIAS_URL + "filtros_materia.json"',
-        '      MATERIAS_URL + "materias_camara_" + ANO_ATUAL + ".json",\n'
-        '      MATERIAS_URL + "materias_tags_" + ANO_ATUAL + ".json",\n'
-        '      MATERIAS_URL + "filtros_materia_" + ANO_ATUAL + ".json"',
+        '      MATERIAS_URL + "materias_camara_" + SUFIXO_DADOS + ".json",\n'
+        '      MATERIAS_URL + "materias_tags_" + SUFIXO_DADOS + ".json",\n'
+        '      MATERIAS_URL + "filtros_materia_" + SUFIXO_DADOS + ".json"',
     )
 
     html = re.sub(
         r"  aplicarTema\(temaInicial\(\)\);\n  initShareSheet\(\);\n  initResumoSheet\(\);\n  carregarMateriasCamara\(\)\.then\(initMateriasCamara\);\n  initNavegacao\(\);\n  carregar\(\);",
-        "  carregarConfig().then(function () {\n    aplicarTema(temaInicial());\n    initSeletorAno();\n    initShareSheet();\n    initResumoSheet();\n    initNavegacao();\n    return carregarMateriasCamara().then(initMateriasCamara);\n  }).then(carregar);",
+        "  carregarConfig().then(function () {\n    aplicarTema(temaInicial());\n    initShareSheet();\n    initResumoSheet();\n    initNavegacao();\n    return carregarMateriasCamara().then(initMateriasCamara);\n  }).then(carregar);",
         html,
         count=1,
     )

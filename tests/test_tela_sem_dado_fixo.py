@@ -63,6 +63,12 @@ def meta_ano(ano: int) -> dict:
     return dados["meta"]
 
 
+def meta_legislatura() -> dict:
+    path = RAIZ / "dados" / "tratados" / "atuacao_vereadores_legislatura.json"
+    dados = json.loads(path.read_text(encoding="utf-8"))
+    return dados["meta"]
+
+
 def data_coleta_exibida(meta: dict) -> str:
     raw = meta.get("dado_coletado_em") or ""
     dia = raw.split("T")[0]
@@ -117,13 +123,12 @@ class TestTelaSemDadoFixo(unittest.TestCase):
     def tearDownClass(cls):
         cls.servidor.shutdown()
 
-    def _texto_pagina(self, page, ano: int):
+    def _texto_pagina(self, page):
         page.goto(self.base, wait_until="networkidle", timeout=120000)
-        page.click(f'button[data-ano="{ano}"]')
-        page.wait_for_timeout(1200)
+        page.wait_for_timeout(800)
         for periodo in ("sessao", "mes", "todo"):
             page.click(f'button[data-periodo="{periodo}"]')
-            page.wait_for_timeout(600)
+            page.wait_for_timeout(400)
         return page.inner_text("body")
 
     def _links_sapl(self, page):
@@ -133,60 +138,60 @@ class TestTelaSemDadoFixo(unittest.TestCase):
         )
         return hrefs or []
 
-    def test_anos_2025_e_2026(self):
+    def test_legislatura_sem_dado_fixo(self):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page()
+            meta = meta_legislatura()
+            banca = meta["n_vereadores"]
+            data_coleta = data_coleta_exibida(meta)
+            datas_ok: set[str] = set()
             for ano in (2025, 2026):
-                meta = meta_ano(ano)
-                banca = meta["n_vereadores"]
-                data_coleta = data_coleta_exibida(meta)
-                datas_ok = datas_sessoes_ano(ano)
+                datas_ok |= datas_sessoes_ano(ano)
 
-                page.goto(self.base, wait_until="networkidle", timeout=120000)
-                page.click(f'button[data-ano="{ano}"]')
-                page.wait_for_timeout(2500)
-                page.click('button[data-periodo="sessao"]')
-                rodape = page.locator("#painel-periodo-sessao .rodape-coleta")
-                page.wait_for_function(
-                    """(sel) => {
-                      var el = document.querySelector(sel);
-                      return el && el.innerText.indexOf('Dado coletado') !== -1;
-                    }""",
-                    arg="#painel-periodo-sessao .rodape-coleta",
-                    timeout=15000,
-                )
-                rodapes = rodape.inner_text()
-                self.assertIn(data_coleta, rodapes, f"data de coleta do meta {ano}")
+            page.goto(self.base, wait_until="networkidle", timeout=120000)
+            page.wait_for_timeout(1200)
+            page.click('button[data-periodo="sessao"]')
+            rodape = page.locator("#painel-periodo-sessao .rodape-coleta")
+            page.wait_for_function(
+                """(sel) => {
+                  var el = document.querySelector(sel);
+                  return el && el.innerText.indexOf('Dado coletado') !== -1;
+                }""",
+                arg="#painel-periodo-sessao .rodape-coleta",
+                timeout=15000,
+            )
+            rodapes = rodape.inner_text()
+            self.assertIn(data_coleta, rodapes, "data de coleta do meta da legislatura")
 
-                texto = page.inner_text("body")
-                if "parlamentar" in texto:
-                    self.assertIn(str(banca), texto, f"banca {ano}")
+            texto = page.inner_text("body")
+            if "parlamentar" in texto:
+                self.assertIn(str(banca), texto, "banca da legislatura")
 
-                for href in self._links_sapl(page):
-                    m_sess = re.search(r"/sessao/(\d+)", href)
-                    if m_sess:
-                        sid = int(m_sess.group(1))
-                        self.assertIn(sid, self.sessoes_brutas, f"sessao {sid} em {ano}")
-                    m_mat = re.search(r"/materia/(\d+)", href)
-                    if m_mat:
-                        mid = int(m_mat.group(1))
-                        self.assertIn(mid, self.materias_brutas, f"materia {mid} em {ano}")
+            for href in self._links_sapl(page):
+                m_sess = re.search(r"/sessao/(\d+)", href)
+                if m_sess:
+                    sid = int(m_sess.group(1))
+                    self.assertIn(sid, self.sessoes_brutas, f"sessao {sid}")
+                m_mat = re.search(r"/materia/(\d+)", href)
+                if m_mat:
+                    mid = int(m_mat.group(1))
+                    self.assertIn(mid, self.materias_brutas, f"materia {mid}")
 
-                for periodo in ("sessao", "mes", "todo"):
-                    page.click(f'button[data-periodo="{periodo}"]')
-                    page.wait_for_timeout(700)
-                    bloco = page.inner_text("body")
-                    for data_sess in re.findall(r"\b\d{2}/\d{2}/\d{4}\b", bloco):
-                        if data_sess in data_coleta:
-                            continue
-                        if data_coleta.startswith(data_sess):
-                            continue
-                        self.assertIn(
-                            data_sess,
-                            datas_ok,
-                            f"data de sessao {data_sess} fora do consolidado {ano} ({periodo})",
-                        )
+            for periodo in ("sessao", "mes", "todo"):
+                page.click(f'button[data-periodo="{periodo}"]')
+                page.wait_for_timeout(500)
+                bloco = page.inner_text("body")
+                for data_sess in re.findall(r"\b\d{2}/\d{2}/\d{4}\b", bloco):
+                    if data_sess in data_coleta:
+                        continue
+                    if data_coleta.startswith(data_sess):
+                        continue
+                    self.assertIn(
+                        data_sess,
+                        datas_ok,
+                        f"data de sessao {data_sess} fora do consolidado ({periodo})",
+                    )
 
             browser.close()
 

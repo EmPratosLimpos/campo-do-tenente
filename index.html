@@ -2574,8 +2574,161 @@
   }
   .voto-popular-vazio { opacity: 0.5; }
   .sem-dados { font-size: 11px; color: var(--texto-suave); font-style: italic; }
-    min-height: 0;
-    overflow: hidden;
+
+  .menu-lateral {
+    display: none !important;
+  }
+
+  @media (max-width: 899px) {
+    .menu-lateral {
+      display: none !important;
+    }
+  }
+
+  #painel-vereadores,
+  #conteudo-vereadores {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  #conteudo-vereadores .secao,
+  #conteudo-vereadores .faltas-lista,
+  #conteudo-vereadores .lista-votos,
+  #conteudo-vereadores .perfil-cabecalho {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+  }
+
+  @media (min-width: 900px) {
+    body {
+      padding: 20px 16px;
+    }
+
+    .pagina {
+      max-width: 1120px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--sombra);
+    }
+
+    .menu-lateral {
+      display: flex !important;
+      flex-direction: column;
+      flex-shrink: 0;
+      width: 232px;
+      padding: 20px 14px 24px;
+      background: var(--superficie);
+      border-right: 1px solid var(--linha);
+      position: sticky;
+      top: 20px;
+      align-self: flex-start;
+      min-height: calc(100vh - 40px);
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+
+    .menu-lateral-titulo {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1.25;
+      margin: 0 0 16px;
+      color: var(--texto);
+    }
+
+    .menu-lateral-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .menu-lateral-nav button {
+      text-align: left;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 12px;
+      min-height: 44px;
+      font-family: "Noto Sans", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      background: transparent;
+      color: var(--texto-suave);
+      cursor: pointer;
+    }
+
+    .menu-lateral-nav button.ativo {
+      background: var(--marca-fundo);
+      color: var(--marca);
+    }
+
+    .menu-lateral-periodos .seletor-periodo {
+      flex-direction: column;
+      margin-top: 0;
+      padding: 4px;
+    }
+
+    .menu-lateral-periodos .seletor-periodo button {
+      width: 100%;
+      text-align: left;
+      padding: 10px 12px;
+    }
+
+    .pagina-corpo {
+      flex: 1;
+      min-width: 0;
+      max-width: 888px;
+    }
+
+    .pagina-corpo .topo-fixo {
+      position: sticky;
+      top: 0;
+    }
+
+    .sub-camara .seletor-periodo-wrap-mobile {
+      display: none;
+    }
+
+    .nav-principal {
+      display: none !important;
+    }
+
+    .conteudo {
+      padding-bottom: 28px;
+    }
+
+    .painel-camara-interno.ativo {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+
+    .painel-camara-interno.ativo > .secao-titulo-linha,
+    .painel-camara-interno.ativo > .sessao-meta,
+    .painel-camara-interno.ativo > .sessao-titulo,
+    .painel-camara-interno.ativo > .rodape-coleta,
+    .painel-camara-interno.ativo > .bloco-votado {
+      grid-column: 1 / -1;
+    }
+
+    #conteudo-vereadores {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+
+    #conteudo-vereadores > .secao:first-child,
+    #conteudo-vereadores > .rodape-coleta {
+      grid-column: 1 / -1;
+    }
   }
 
   @media (min-width: 520px) {
@@ -2768,6 +2921,15 @@
 <body>
 <a class="pular-conteudo" href="#conteudo-principal">Pular para conteúdo</a>
 <div class="pagina">
+  <aside class="menu-lateral" id="menu-lateral" aria-label="Menu do painel">
+    <p class="menu-lateral-titulo">Em Pratos Limpos</p>
+    <nav class="menu-lateral-nav" id="menu-lateral-nav" aria-label="Seções do painel">
+      <button type="button" class="ativo" data-secao-lateral="camara">Câmara</button>
+      <button type="button" data-secao-lateral="vereadores">Vereadores</button>
+    </nav>
+    <div class="menu-lateral-periodos" id="menu-lateral-periodos"></div>
+  </aside>
+  <div class="pagina-corpo">
   <section class="cabecalho-impressao" aria-label="Cabeçalho do boletim impresso">
     <h1>Em Pratos Limpos: Boletim Cívico da Câmara Municipal de Campo do Tenente</h1>
     <p>Dados oficiais coletados em <strong id="data-coleta-impressao"></strong>.</p>
@@ -2787,17 +2949,14 @@
       <div class="selo-sapl"><span class="ponto-status" aria-hidden="true"></span>Dados oficiais do SAPL</div>
       <p class="subtitulo-site">O que a Câmara de Campo do Tenente vota, e como cada vereador votou</p>
     </div>
-    <div class="aviso-lacuna-sapl" id="aviso-lacuna-sapl" hidden role="status"><p></p></div>
 <div class="sub-camara ativo" id="sub-camara">
       <h2 class="secao-camara-titulo">O que a Câmara votou</h2>
-      <div class="seletor-periodo seletor-ano" role="tablist" aria-label="Ano legislativo" id="seletor-ano-wrap">
-        <button type="button" role="tab" data-ano="2025" id="tab-ano-2025">2025</button>
-        <button type="button" role="tab" data-ano="2026" id="tab-ano-2026">2026</button>
-      </div>
-      <div class="seletor-periodo" role="tablist" aria-label="Período de consulta">
+      <div class="seletor-periodo-wrap-mobile">
+      <div class="seletor-periodo" id="seletor-periodo-mobile" role="tablist" aria-label="Período de consulta">
         <button type="button" class="ativo" role="tab" aria-selected="true" tabindex="0" aria-controls="painel-periodo-sessao" id="tab-periodo-sessao" data-periodo="sessao">Última sessão</button>
         <button type="button" role="tab" aria-selected="false" tabindex="-1" aria-controls="painel-periodo-mes" id="tab-periodo-mes" data-periodo="mes">Último mês</button>
         <button type="button" role="tab" aria-selected="false" tabindex="-1" aria-controls="painel-periodo-todo" id="tab-periodo-todo" data-periodo="todo">Todo o período</button>
+      </div>
       </div>
     </div>
     <div class="sub-vereadores" id="sub-vereadores">
@@ -2963,6 +3122,7 @@
       <span>Vereadores</span>
     </button>
   </nav>
+  </div>
 </div>
 
 <div class="share-sheet-backdrop" id="share-sheet-backdrop" aria-hidden="true">
@@ -3025,7 +3185,7 @@
 
   var CONFIG_CIDADE = null;
   var ANOS_RECORTE = [2025, 2026];
-  var ANO_ATUAL = 2026;
+  var SUFIXO_DADOS = "legislatura";
   var FOTOS_LOCAIS = {};
   var SAPL_ORIGEM = "";
   var PORTAL_OFICIAL = "";
@@ -3092,12 +3252,29 @@
     return "SAPL da Câmara Municipal de " + nomeCidade();
   }
 
+  function rotuloAnosRecorte() {
+    if (!ANOS_RECORTE || !ANOS_RECORTE.length) return "da legislatura";
+    if (ANOS_RECORTE.length === 1) return "de " + ANOS_RECORTE[0];
+    return "de " + ANOS_RECORTE[0] + " e " + ANOS_RECORTE[ANOS_RECORTE.length - 1];
+  }
+
+  function rotuloPeriodoLegislatura() {
+    return "sess\u00f5es ordin\u00e1rias " + rotuloAnosRecorte();
+  }
+
+  function prefixoDadosTratados() {
+    return window.location.pathname.indexOf("/docs/") !== -1
+      ? "../../dados/tratados/"
+      : "dados/tratados/";
+  }
+
   function carregarConfig() {
     return fetch("config_cidade.json").then(function (r) {
       if (!r.ok) throw new Error("config");
       return r.json();
     }).then(function (cfg) {
       CONFIG_CIDADE = cfg;
+      ANOS_RECORTE = (cfg.recorte && cfg.recorte.anos) ? cfg.recorte.anos.slice() : ANOS_RECORTE;
       SAPL_ORIGEM = cfg.sapl.endereco_base.replace(/\/$/, "");
       PORTAL_OFICIAL = cfg.painel.endereco_publico.replace(/\/$/, "");
       return fetch("dados/brutos/fotos_vereadores/indice.json").then(function (r) {
@@ -3109,47 +3286,8 @@
     });
   }
 
-  function atualizarSeletorAno() {
-    var wrap = document.getElementById("seletor-ano-wrap");
-    if (!wrap) return;
-    wrap.querySelectorAll("button[data-ano]").forEach(function (btn) {
-      var a = parseInt(btn.getAttribute("data-ano"), 10);
-      var ativo = a === ANO_ATUAL;
-      btn.classList.toggle("ativo", ativo);
-      btn.setAttribute("aria-selected", ativo ? "true" : "false");
-      btn.setAttribute("tabindex", ativo ? "0" : "-1");
-    });
-    atualizarAvisoLacunaSapl();
-  }
-
-  function trocarAno(novoAno) {
-    if (ANO_ATUAL === novoAno) return;
-    ANO_ATUAL = novoAno;
-    atualizarSeletorAno();
-    JSON_URL = window.location.pathname.indexOf("/docs/") !== -1
-      ? "../../dados/tratados/atuacao_vereadores_" + ANO_ATUAL + ".json"
-      : "dados/tratados/atuacao_vereadores_" + ANO_ATUAL + ".json";
-    carregarMateriasCamara().then(function () {
-      initMateriasCamara();
-      carregar();
-    });
-  }
-
-  function initSeletorAno() {
-    var wrap = document.getElementById("seletor-ano-wrap");
-    if (!wrap) return;
-    wrap.addEventListener("click", function (e) {
-      var btn = e.target.closest("button[data-ano]");
-      if (!btn) return;
-      trocarAno(parseInt(btn.getAttribute("data-ano"), 10));
-    });
-    atualizarSeletorAno();
-  }
-
   var STORAGE_TEMA = "dashboard-campo-tenente-tema";
-  var JSON_URL = window.location.pathname.indexOf("/docs/") !== -1
-    ? "../../dados/tratados/atuacao_vereadores_" + ANO_ATUAL + ".json"
-    : "dados/tratados/atuacao_vereadores_" + ANO_ATUAL + ".json";
+  var JSON_URL = prefixoDadosTratados() + "atuacao_vereadores_" + SUFIXO_DADOS + ".json";
   var POR_PAGINA = 20;
 
   var ROTULOS_VOTO = {
@@ -3306,21 +3444,6 @@
     return out;
   }
 
-  function atualizarAvisoLacunaSapl() {
-    var aviso = document.getElementById("aviso-lacuna-sapl");
-    if (!aviso) return;
-    var meta = estado.dados && estado.dados.meta;
-    var lacuna = meta && meta.lacuna_sessoes_ordinarias;
-    var par = aviso.querySelector("p");
-    if (!lacuna || !lacuna.aviso || !meta || meta.ano !== ANO_ATUAL) {
-      aviso.hidden = true;
-      if (par) par.textContent = "";
-      return;
-    }
-    if (par) par.innerHTML = "<strong>Aviso:</strong> " + esc(lacuna.aviso);
-    aviso.hidden = false;
-  }
-
   function atualizarPresencaUltimaSessao() {
     var s = ultimaSessaoOrdinaria();
     var meta = estado.dados && estado.dados.meta;
@@ -3408,17 +3531,16 @@
     var lista = MATERIAS_CAMARA.todo || [];
     var total = lista.length;
     var nSessoes = meta && meta.n_sessoes_ordinarias != null ? meta.n_sessoes_ordinarias : 0;
-    var ano = ANO_ATUAL;
     var titulo = document.getElementById("titulo-periodo-todo");
-    if (titulo) titulo.textContent = "Ano de " + ano;
+    if (titulo) titulo.textContent = "Todo o per\u00edodo";
     var metaEl = document.getElementById("meta-periodo-todo");
     if (metaEl) {
-      metaEl.textContent = nSessoes + " sess\u00f5es ordin\u00e1rias, " + total + " PLLs votados.";
+      metaEl.textContent = nSessoes + " sess\u00f5es ordin\u00e1rias " + rotuloAnosRecorte() + ", " + total + " PLLs votados.";
     }
     var legTipos = document.getElementById("legenda-tipos-todo");
     if (legTipos) {
       legTipos.textContent =
-        "Projetos de Lei do Legislativo (PLL) votados em sess\u00f5es ordin\u00e1rias de " + ano + ".";
+        "Projetos de Lei do Legislativo (PLL) votados em " + rotuloPeriodoLegislatura() + ".";
     }
     var barraTipos = document.getElementById("barra-tipos-todo");
     if (barraTipos) {
@@ -3439,7 +3561,7 @@
     var legRes = document.getElementById("legenda-resultado-todo");
     if (legRes) {
       legRes.textContent =
-        "Resultado dos " + total + " PLLs votados em sess\u00f5es ordin\u00e1rias de " + ano + ".";
+        "Resultado dos " + total + " PLLs votados em " + rotuloPeriodoLegislatura() + ".";
     }
     var barraRes = document.getElementById("barra-resultado-todo");
     if (barraRes && total > 0) {
@@ -3510,10 +3632,10 @@
     var nota = document.getElementById("nota-resultado-todo");
     if (nota) {
       nota.textContent =
-        "Total: " + total + " PLLs votados em sess\u00f5es ordin\u00e1rias de " + ano + ".";
+        "Total: " + total + " PLLs votados em " + rotuloPeriodoLegislatura() + ".";
     }
     var btnShare = document.querySelector("#painel-periodo-todo .btn-compartilhar-icone");
-    if (btnShare) btnShare.setAttribute("aria-label", "Compartilhar vota\u00e7\u00f5es de " + ano);
+    if (btnShare) btnShare.setAttribute("aria-label", "Compartilhar vota\u00e7\u00f5es " + rotuloAnosRecorte());
   }
 
   function atualizarVotacoesMes() {
@@ -3619,7 +3741,6 @@
 
   function atualizarInterfaceCamara() {
     dataUltimaSessaoFmt();
-    atualizarAvisoLacunaSapl();
     atualizarCabecalhoUltimaSessao();
     atualizarPresencaUltimaSessao();
     atualizarRodapesColeta();
@@ -4027,8 +4148,8 @@
       htmlFaltas =
         '<p class="vazio" style="margin-top:10px">Nenhuma falta registrada nas ' +
         esc(p.sessoes_ordinarias) +
-        " sess\u00f5es ordin\u00e1rias de " +
-        ANO_ATUAL +
+        " " +
+        rotuloPeriodoLegislatura() +
         ".</p>";
     }
 
@@ -4037,8 +4158,8 @@
       '<h2 id="tit-presenca">Presen\u00e7a nas sess\u00f5es ordin\u00e1rias</h2>' +
       '<p class="legenda">Total de ' +
       esc(p.sessoes_ordinarias) +
-      " sess\u00f5es ordin\u00e1rias de " +
-      ANO_ATUAL +
+      " " +
+      rotuloPeriodoLegislatura() +
       '. Taxa de presen\u00e7a: <strong>' +
       esc(p.taxa_presenca.toFixed(2).replace(".", ",")) +
       "%</strong>. Percentual de faltas: <strong>" +
@@ -4212,8 +4333,8 @@
       '<h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2>' +
       '<p class="legenda">Voto nominal \u00e9 quando o nome de cada vereador fica registrado publicamente. Total: ' +
       esc(vo.total_registros) +
-      " vota\u00e7\u00f5es em sess\u00f5es ordin\u00e1rias de " +
-      ANO_ATUAL +
+      " vota\u00e7\u00f5es em " +
+      rotuloPeriodoLegislatura() +
       ". " +
       esc(rotuloSemVoto) +
       ".</p>" +
@@ -4441,7 +4562,7 @@
     return '<section class="secao" aria-labelledby="tit-votos">' +
       '<h2 id="tit-votos">Histórico de votos nominais</h2>' +
       '<p class="legenda">Voto nominal é quando o nome de cada vereador fica registrado publicamente. Total: ' +
-      esc(vo.total_registros) + " votações em sessões ordinárias de " + ANO_ATUAL + ".</p>" +
+      esc(vo.total_registros) + " vota\u00e7\u00f5es em " + rotuloPeriodoLegislatura() + ".</p>" +
       '<div class="votos-resumo">' +
       cards.map(function (c) {
         return '<div class="voto-card"><div class="num">' + esc(c.num) +
@@ -4661,15 +4782,13 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   var MATERIAS_TAGS = {};
   var FILTROS_MATERIA = { sessao: [], mes: [], todo: [] };
 
-  var MATERIAS_URL = window.location.pathname.indexOf("/docs/") !== -1
-    ? "../../dados/tratados/"
-    : "dados/tratados/";
+  var MATERIAS_URL = prefixoDadosTratados();
 
   function carregarMateriasCamara() {
     var urls = [
-      MATERIAS_URL + "materias_camara_" + ANO_ATUAL + ".json",
-      MATERIAS_URL + "materias_tags_" + ANO_ATUAL + ".json",
-      MATERIAS_URL + "filtros_materia_" + ANO_ATUAL + ".json"
+      MATERIAS_URL + "materias_camara_" + SUFIXO_DADOS + ".json",
+      MATERIAS_URL + "materias_tags_" + SUFIXO_DADOS + ".json",
+      MATERIAS_URL + "filtros_materia_" + SUFIXO_DADOS + ".json"
     ];
     return Promise.all(urls.map(function (url) {
       return fetch(url).then(function (r) {
@@ -4885,18 +5004,18 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   function rotuloPeriodoShare(periodo) {
     if (periodo === "sessao") return "última sessão ordinária (" + dataUltimaSessaoFmt() + ")";
     if (periodo === "mes") return nomeMesAnteriorUltimaSessao().toLowerCase();
-    return "sessões ordinárias de " + ANO_ATUAL;
+    return rotuloPeriodoLegislatura();
   }
 
   function periodoVereadorShare() {
     var dados = estado.dados;
     if (!dados || !dados.sessoes || !dados.sessoes.length) {
-      return "sessões ordinárias de " + ANO_ATUAL;
+      return rotuloPeriodoLegislatura();
     }
     var ultima = dados.sessoes[dados.sessoes.length - 1];
     var data = formatarData(ultima.data);
-    if (!data) return "sessões ordinárias de " + ANO_ATUAL;
-    return "sessões ordinárias de " + ANO_ATUAL + " até " + data;
+    if (!data) return rotuloPeriodoLegislatura();
+    return rotuloPeriodoLegislatura() + " at\u00e9 " + data;
   }
 
   function urlPortalVereador() {
@@ -5722,10 +5841,20 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
 
   function initNavegacao() {
     var navBtns = document.querySelectorAll("#nav-principal button");
+    var lateralBtns = document.querySelectorAll("#menu-lateral-nav button");
     var painelCamara = document.getElementById("painel-camara");
     var painelVereadores = document.getElementById("painel-vereadores");
     var subCamara = document.getElementById("sub-camara");
     var subVereadores = document.getElementById("sub-vereadores");
+    var lateralPeriodos = document.getElementById("menu-lateral-periodos");
+    var mobilePeriodos = document.getElementById("seletor-periodo-mobile");
+
+    if (lateralPeriodos && mobilePeriodos && !lateralPeriodos.firstChild) {
+      var clonePeriodos = mobilePeriodos.cloneNode(true);
+      clonePeriodos.id = "seletor-periodo-lateral";
+      clonePeriodos.setAttribute("aria-label", "Per\u00edodo de consulta no menu lateral");
+      lateralPeriodos.appendChild(clonePeriodos);
+    }
 
     function trocarSecao(secao) {
       estadoUI.secao = secao;
@@ -5734,6 +5863,13 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
         btn.classList.toggle("ativo", ativo);
         btn.setAttribute("aria-current", ativo ? "page" : "false");
       });
+      lateralBtns.forEach(function (btn) {
+        var ativo = btn.getAttribute("data-secao-lateral") === secao;
+        btn.classList.toggle("ativo", ativo);
+      });
+      if (lateralPeriodos) {
+        lateralPeriodos.hidden = secao !== "camara";
+      }
       painelCamara.classList.toggle("ativo", secao === "camara");
       painelVereadores.classList.toggle("ativo", secao === "vereadores");
       subCamara.classList.toggle("ativo", secao === "camara");
@@ -5746,19 +5882,25 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
         trocarSecao(btn.getAttribute("data-secao"));
       });
     });
+    lateralBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        trocarSecao(btn.getAttribute("data-secao-lateral"));
+      });
+    });
 
-    var tabsPeriodo = document.querySelectorAll(".seletor-periodo button");
-    var tablistPeriodo = document.querySelector(".seletor-periodo");
     var paineisPeriodo = {
       sessao: document.getElementById("painel-periodo-sessao"),
       mes: document.getElementById("painel-periodo-mes"),
       todo: document.getElementById("painel-periodo-todo")
     };
+    function tabsPeriodoAtivos() {
+      return document.querySelectorAll(".seletor-periodo button[data-periodo]");
+    }
     function ativarAbaPeriodo(tab, focar) {
       if (!tab) return;
       var id = tab.getAttribute("data-periodo");
-      tabsPeriodo.forEach(function (t) {
-        var ativo = t === tab;
+      tabsPeriodoAtivos().forEach(function (t) {
+        var ativo = t.getAttribute("data-periodo") === id;
         t.classList.toggle("ativo", ativo);
         t.setAttribute("aria-selected", ativo ? "true" : "false");
         t.setAttribute("tabindex", ativo ? "0" : "-1");
@@ -5772,15 +5914,18 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       atualizarRotuloBotaoShare();
       if (focar && tab.focus) tab.focus();
     }
-    tabsPeriodo.forEach(function (tab) {
+    tabsPeriodoAtivos().forEach(function (tab) {
       tab.addEventListener("click", function () {
         ativarAbaPeriodo(tab, false);
       });
     });
-    if (tablistPeriodo) {
+    [mobilePeriodos, document.getElementById("seletor-periodo-lateral")].forEach(function (tablistPeriodo) {
+      if (!tablistPeriodo) return;
       tablistPeriodo.addEventListener("keydown", function (e) {
         if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
-        var tabs = Array.prototype.slice.call(tabsPeriodo);
+        var tabs = Array.prototype.slice.call(tabsPeriodoAtivos()).filter(function (t) {
+          return tablistPeriodo.contains(t);
+        });
         if (!tabs.length) return;
         var atual = tabs.indexOf(document.activeElement);
         if (atual < 0) {
@@ -5793,7 +5938,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
         e.preventDefault();
         ativarAbaPeriodo(tabs[proximo], true);
       });
-    }
+    });
 
     document.getElementById("btn-tema").addEventListener("click", function () {
       alternarTema();
@@ -5820,7 +5965,6 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
 
   carregarConfig().then(function () {
     aplicarTema(temaInicial());
-    initSeletorAno();
     initShareSheet();
     initResumoSheet();
     initNavegacao();

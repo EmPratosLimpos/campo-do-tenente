@@ -109,40 +109,37 @@ class TestTemasRevisadosPlaywright(unittest.TestCase):
         cls.servidor.shutdown()
 
     def test_cartao_presenca_bate_com_ultima_sessao(self):
-        cfg = carregar_config()
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page()
-            for ano in anos_recorte(cfg):
-                path = RAIZ / "dados" / "tratados" / f"atuacao_vereadores_{ano}.json"
-                dados = json.loads(path.read_text(encoding="utf-8"))
-                sessao = ultima_sessao(dados)
-                self.assertIsNotNone(sessao)
-                c = contagem_presenca(sessao)
+            path = RAIZ / "dados" / "tratados" / "atuacao_vereadores_legislatura.json"
+            dados = json.loads(path.read_text(encoding="utf-8"))
+            sessao = ultima_sessao(dados)
+            self.assertIsNotNone(sessao)
+            c = contagem_presenca(sessao)
 
-                page.goto(self.base, wait_until="networkidle", timeout=120000)
-                page.click(f'button[data-ano="{ano}"]')
-                page.wait_for_timeout(2000)
-                page.click('button[data-periodo="sessao"]')
-                page.wait_for_timeout(800)
+            page.goto(self.base, wait_until="networkidle", timeout=120000)
+            page.wait_for_timeout(1200)
+            page.click('button[data-periodo="sessao"]')
+            page.wait_for_timeout(600)
 
-                meta_txt = page.locator("#texto-meta-presenca-sessao").inner_text()
-                m = re.search(r"(\d+)\s+parlamentar", meta_txt)
-                self.assertIsNotNone(m, msg=f"meta presenca {ano}: {meta_txt}")
-                self.assertEqual(int(m.group(1)), c["banca"], msg=ano)
+            meta_txt = page.locator("#texto-meta-presenca-sessao").inner_text()
+            m = re.search(r"(\d+)\s+parlamentar", meta_txt)
+            self.assertIsNotNone(m, msg=f"meta presenca: {meta_txt}")
+            self.assertEqual(int(m.group(1)), c["banca"])
 
-                presentes = int(
-                    page.locator(
-                        "#card-presenca-sessao .capsula-verde .capsula-valor"
-                    ).inner_text()
-                )
-                faltas = int(
-                    page.locator(
-                        "#card-presenca-sessao .capsula-neutro .capsula-valor"
-                    ).first.inner_text()
-                )
-                self.assertEqual(presentes, c["presentes"], msg=ano)
-                self.assertEqual(faltas, c["faltas"], msg=ano)
+            presentes = int(
+                page.locator(
+                    "#card-presenca-sessao .capsula-verde .capsula-valor"
+                ).inner_text()
+            )
+            faltas = int(
+                page.locator(
+                    "#card-presenca-sessao .capsula-neutro .capsula-valor"
+                ).first.inner_text()
+            )
+            self.assertEqual(presentes, c["presentes"])
+            self.assertEqual(faltas, c["faltas"])
 
             browser.close()
 
