@@ -78,7 +78,8 @@ def montar_item(entry: dict, cfg: dict, temas: dict[int, str]) -> dict:
     p = entry["projeto"]
     v = entry["votacao"]
     mid = int(p["id"])
-    tema = tema_display(p.get("tema") or temas.get(mid, "Outros"), cfg)
+    tema_bruto = temas.get(mid) or p.get("tema") or "Outros"
+    tema = tema_display(tema_bruto, cfg)
     resultado = normalizar_resultado(v.get("resultado_texto_sapl"), v.get("frase_resultado_sapl"))
     tipo = f"PLL {p.get('numero')}/{p.get('ano')}"
     return {
