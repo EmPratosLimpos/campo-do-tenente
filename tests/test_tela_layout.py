@@ -188,6 +188,28 @@ JS_LEGENDA_LINHA = """() => {
   return quebrados;
 }"""
 
+JS_TOPOS_PRIMEIRA_LINHA = """(params) => {
+  const area = document.querySelector(params.selArea);
+  if (!area || !window.__vis(area)) return { ok: false, motivo: 'sem-area' };
+  var items;
+  if (params.modo === 'filhos') {
+    items = Array.from(area.children).filter(function (el) {
+      if (!window.__vis(el)) return false;
+      if (el.classList.contains('sessao-titulo-linha') || el.classList.contains('sessao-meta')) return false;
+      if (el.classList.contains('rodape-coleta') || el.classList.contains('bloco-votado')) return false;
+      return true;
+    });
+  } else {
+    items = Array.from(area.querySelectorAll(params.seletorItem)).filter(function (el) {
+      return window.__vis(el);
+    });
+  }
+  if (items.length < 2) return { ok: false, motivo: 'poucos-itens', n: items.length };
+  const t0 = items[0].getBoundingClientRect().top;
+  const t1 = items[1].getBoundingClientRect().top;
+  return { ok: Math.abs(t0 - t1) <= 2, t0: Math.round(t0), t1: Math.round(t1) };
+}"""
+
 JS_DUAS_COLUNAS = """(selArea) => {
   const area = document.querySelector(selArea);
   if (!area || !window.__vis(area)) return false;
@@ -336,6 +358,32 @@ class TestTelaLayout(unittest.TestCase):
                 2,
                 f"pagina nao centralizada em desktop: {centro}",
             )
+            self.assertTrue(
+                page.locator("#btn-tema-lateral").is_visible(),
+                "botao de tema deve aparecer no menu lateral em desktop",
+            )
+            self.assertTrue(
+                page.locator(".menu-lateral-selo").is_visible(),
+                "selo SAPL deve aparecer no menu lateral em desktop",
+            )
+            self.assertTrue(
+                page.locator("#rodape-menu-lateral").is_visible(),
+                "rodape de coleta deve aparecer no menu lateral em desktop",
+            )
+            texto_lateral = page.inner_text("#menu-lateral")
+            self.assertIn("Dado coletado em", texto_lateral)
+            self._clicar_periodo(page, "todo")
+            topo = page.evaluate(
+                JS_TOPOS_PRIMEIRA_LINHA,
+                {
+                    "selArea": "#painel-periodo-todo",
+                    "modo": "filhos",
+                },
+            )
+            self.assertTrue(
+                topo["ok"],
+                f"primeiros cartoes da camara desalinhados: {topo}",
+            )
         else:
             self.assertFalse(lateral, "menu lateral nao deve aparecer no celular")
             duas = page.evaluate(JS_DUAS_COLUNAS, "#painel-camara .painel-camara-interno.ativo")
@@ -376,13 +424,38 @@ class TestTelaLayout(unittest.TestCase):
             self.assertGreaterEqual(
                 seletor_largura, 200, f"seletor de vereador estreito em desktop: {seletor_largura}px"
             )
-            duas = page.evaluate(JS_DUAS_COLUNAS, "#conteudo-vereadores")
+            duas = page.evaluate(JS_DUAS_COLUNAS, "#conteudo-vereadores .vereadores-grade")
             self.assertTrue(duas, "vereadores deveria ter cartoes em duas colunas em desktop")
+            topo = page.evaluate(
+                JS_TOPOS_PRIMEIRA_LINHA,
+                {
+                    "selArea": "#conteudo-vereadores .vereadores-grade",
+                    "seletorItem": ":scope > .ac-cartao",
+                },
+            )
+            self.assertTrue(
+                topo["ok"],
+                f"primeiros cartoes de vereadores desalinhados: {topo}",
+            )
         else:
             duas = page.evaluate(JS_DUAS_COLUNAS, "#conteudo-vereadores")
             self.assertFalse(duas, "vereadores deveria ter coluna unica no celular")
             nav = page.locator("#nav-principal").is_visible()
             self.assertTrue(nav, "navegacao inferior deve aparecer no celular")
+            self.assertTrue(
+                page.locator("#btn-tema").is_visible(),
+                "botao de tema deve permanecer no topo no celular",
+            )
+            self.assertTrue(
+                page.locator(".cabecalho-bloco .selo-sapl").is_visible(),
+                "selo SAPL deve permanecer no cabecalho no celular",
+            )
+            rodape_corpo = page.locator("#conteudo-vereadores .rodape-coleta").first
+            if rodape_corpo.count():
+                self.assertTrue(
+                    rodape_corpo.is_visible(),
+                    "rodape de coleta deve permanecer no conteudo no celular",
+                )
 
     def test_layout_camara_e_vereadores(self):
         with sync_playwright() as p:

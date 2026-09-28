@@ -2637,13 +2637,48 @@
       border-bottom-left-radius: 20px;
     }
 
+    .menu-lateral-cabeca {
+      margin-bottom: 14px;
+    }
+    .menu-lateral-titulo-linha {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
     .menu-lateral-titulo {
       font-family: "Space Grotesk", sans-serif;
       font-weight: 700;
       font-size: 17px;
       line-height: 1.25;
-      margin: 0 0 16px;
+      margin: 0;
       color: var(--texto);
+      flex: 1;
+      min-width: 0;
+    }
+    .menu-lateral-tema {
+      flex-shrink: 0;
+    }
+    .menu-lateral-selo {
+      font-size: 12px;
+      margin: 0;
+    }
+    .menu-lateral-periodos {
+      flex: 1;
+    }
+    .menu-lateral-rodape {
+      margin-top: auto;
+      padding-top: 16px;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+    .topo-fixo .topo-acoes,
+    .cabecalho-bloco .selo-sapl {
+      display: none !important;
+    }
+    .pagina-corpo .rodape-coleta {
+      display: none !important;
     }
 
     .menu-lateral-nav {
@@ -2711,15 +2746,14 @@
     }
 
     .painel-camara-interno.ativo {
-      display: block;
-      column-count: 2;
-      column-gap: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
     }
     .painel-camara-interno.ativo > * {
-      break-inside: avoid;
-      margin-bottom: 20px;
-      display: inline-block;
-      width: 100%;
+      margin-bottom: 0;
+      min-width: 0;
     }
 
     .painel-camara-interno.ativo > .secao-titulo-linha,
@@ -2727,7 +2761,7 @@
     .painel-camara-interno.ativo > .sessao-titulo,
     .painel-camara-interno.ativo > .rodape-coleta,
     .painel-camara-interno.ativo > .bloco-votado {
-      column-span: all; grid-column: 1 / -1;
+      grid-column: 1 / -1;
     }
 
 
@@ -2740,14 +2774,14 @@
       display: block;
     }
     #conteudo-vereadores .vereadores-grade {
-      column-count: 2;
-      column-gap: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
     }
     #conteudo-vereadores .vereadores-grade > * {
-      break-inside: avoid;
-      margin-bottom: 20px;
-      display: inline-block;
-      width: 100%;
+      margin-bottom: 0;
+      min-width: 0;
       box-sizing: border-box;
     }
 
@@ -2975,18 +3009,12 @@
     margin: 0;
     font-weight: 700;
   }
-  .ac-resumo {
-    font-size: 16px;
-    color: var(--texto-secundario);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
   .ac-conteudo {
-    padding: 0 20px 20px;
-    border-top: 1px solid var(--linha);
+    padding: 14px 20px 20px;
   }
   .ac-cartao[open] .ac-cabecalho {
     background: var(--fundo);
+    border-bottom: 1px solid var(--linha);
   }
   
   /* Inner Accordion */
@@ -3007,11 +3035,15 @@
     display: none;
   }
   .ac-conteudo-inner {
-    padding: 16px;
-    border-top: 1px solid var(--linha);
+    padding: 14px 16px 16px;
   }
   .ac-cartao-inner[open] .ac-cabecalho-inner {
     border-bottom: 1px solid var(--linha);
+  }
+  .legenda-inner {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: var(--texto-secundario);
   }
 
   .ac-cabecalho-texto {
@@ -3043,12 +3075,22 @@
 <a class="pular-conteudo" href="#conteudo-principal">Pular para conteúdo</a>
 <div class="pagina">
   <aside class="menu-lateral" id="menu-lateral" aria-label="Menu do painel">
-    <p class="menu-lateral-titulo">Em Pratos Limpos</p>
+    <div class="menu-lateral-cabeca">
+      <div class="menu-lateral-titulo-linha">
+        <p class="menu-lateral-titulo">Em Pratos Limpos</p>
+        <button type="button" class="alternar-tema menu-lateral-tema" id="btn-tema-lateral" aria-pressed="false" aria-label="Alternar para modo escuro">
+          <svg class="icone-lua" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icone-sol" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+      <div class="selo-sapl menu-lateral-selo"><span class="ponto-status" aria-hidden="true"></span>Dados oficiais do SAPL</div>
+    </div>
     <nav class="menu-lateral-nav" id="menu-lateral-nav" aria-label="Seções do painel">
       <button type="button" class="ativo" data-secao-lateral="camara">Câmara</button>
       <button type="button" data-secao-lateral="vereadores">Vereadores</button>
     </nav>
     <div class="menu-lateral-periodos" id="menu-lateral-periodos"></div>
+    <footer class="rodape-coleta menu-lateral-rodape" id="rodape-menu-lateral" aria-label="Informações sobre a coleta de dados"></footer>
   </aside>
   <div class="pagina-corpo">
   <section class="cabecalho-impressao" aria-label="Cabeçalho do boletim impresso">
@@ -3487,8 +3529,11 @@
     var us = ultimaSessaoOrdinaria();
     var linkSessao = us && us.link_sapl ? urlSegura(us.link_sapl) : "";
     document.querySelectorAll(".rodape-coleta").forEach(function (footer) {
-      var painel = footer.closest(".painel-camara-interno");
-      var comLink = painel && painel.id === "painel-periodo-sessao" && linkSessao;
+      var comLink = false;
+      if (footer.id !== "rodape-menu-lateral") {
+        var painel = footer.closest(".painel-camara-interno");
+        comLink = painel && painel.id === "painel-periodo-sessao" && linkSessao;
+      }
       var html = "<p>Dado coletado em <strong>" + esc(data) + "</strong>. Fonte: ";
       if (comLink) {
         html += '<a href="' + esc(linkSessao) + '" target="_blank" rel="noopener noreferrer">' + esc(fonte) + "</a>";
@@ -3911,15 +3956,14 @@
   function aplicarTema(tema) {
     document.documentElement.setAttribute("data-tema", tema);
     localStorage.setItem(STORAGE_TEMA, tema);
-    var btn = document.getElementById("btn-tema");
-    if (btn) {
+    document.querySelectorAll(".alternar-tema").forEach(function (btn) {
       btn.setAttribute("aria-pressed", tema === "escuro" ? "true" : "false");
       btn.setAttribute("aria-label", tema === "escuro"
         ? "Alternar para modo claro"
         : "Alternar para modo escuro");
       var rot = btn.querySelector(".rotulo-tema");
       if (rot) rot.textContent = tema === "escuro" ? "Modo escuro" : "Modo claro";
-    }
+    });
   }
 
   function alternarTema() {
@@ -3999,8 +4043,29 @@
       esc(iniciaisNome(v.nome_parlamentar)) + "</span></div>";
   }
 
+  function vereadorComCassacao(v) {
+    if (!v || !v.motivos_fora_do_mandato) return false;
+    return v.motivos_fora_do_mandato.some(function (m) {
+      return m.motivo === "Mandato cassado";
+    });
+  }
+
+  function rotuloOpcaoVereador(v) {
+    var nome = v.nome_parlamentar || "";
+    if (!vereadorComCassacao(v)) return nome;
+    return nome + " (Cassado)";
+  }
+
+  function iconeSanfonaPrincipal() {
+    return '<svg class="ac-icone" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>';
+  }
+
+  function iconeSanfonaInner() {
+    return '<svg class="ac-icone-inner" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>';
+  }
+
   function renderBadgeCassacao(v) {
-    if (!v.motivos_fora_do_mandato) return "";
+    if (!vereadorComCassacao(v)) return "";
     var cassacao = v.motivos_fora_do_mandato.find(function(m) { return m.motivo === "Mandato cassado"; });
     if (!cassacao) return "";
     var linkCassacao = cassacao.materia_id ? SAPL_ORIGEM + "/materia/" + cassacao.materia_id : "";
@@ -4234,7 +4299,7 @@
     ) {
       htmlFaltas += '<div class="faltas-lista">';
       if (p.faltas_com_justificativa > 0) {
-        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner" aria-expanded="false">Faltas com justificativa oficial (' + esc(p.faltas_com_justificativa) + ')<svg class="ac-icone-inner" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo-inner"><ul>';
+        htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">Faltas com justificativa oficial' + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(p.faltas_com_justificativa) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
         faltasJust.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
@@ -4243,7 +4308,7 @@
         htmlFaltas += "</ul></div></details>";
       }
       if (p.faltas_sem_justificativa > 0) {
-        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner" aria-expanded="false">Faltas sem justificativa (' + esc(p.faltas_sem_justificativa) + ')<svg class="ac-icone-inner" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo-inner"><ul>';
+        htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">Faltas sem justificativa' + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(p.faltas_sem_justificativa) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
         faltasSem.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
@@ -4253,7 +4318,7 @@
       }
       if (licencas.length) {
         var rotLic = rotMeta.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade";
-        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner" aria-expanded="false">' + esc(rotLic) + ' (' + esc(licencas.length) + ')<svg class="ac-icone-inner" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo-inner"><ul>';
+        htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">' + esc(rotLic) + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(licencas.length) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
         licencas.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
@@ -4264,7 +4329,7 @@
       }
       if (foraMandato.length) {
         var rotFora = rotMeta.fora_do_mandato || "Fora do mandato naquela data";
-        htmlFaltas += '<details class="ac-cartao-inner" name="ac-faltas"><summary class="ac-cabecalho-inner" aria-expanded="false">' + esc(rotFora) + ' (' + esc(foraMandato.length) + ')<svg class="ac-icone-inner" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo-inner"><ul>';
+        htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">' + esc(rotFora) + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(foraMandato.length) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
         foraMandato.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
@@ -4285,8 +4350,8 @@
     }
 
     return (
-      '<details class="secao ac-cartao" name="ac-ver" open>' +
-      '<summary class="ac-cabecalho" aria-expanded="true"><div class="ac-cabecalho-texto"><h2 id="tit-presenca">Presen\u00e7a nas sess\u00f5es ordin\u00e1rias</h2><span class="ac-resumo">' + esc(p.taxa_presenca.toFixed(1).replace(".", ",")) + '%</span></div><svg class="ac-icone" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo">' +
+      '<details class="secao ac-cartao" open>' +
+      '<summary class="ac-cabecalho" aria-expanded="true"><h2 id="tit-presenca">Presen\u00e7a nas sess\u00f5es ordin\u00e1rias</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
       '<p class="legenda">Total de ' +
       esc(p.sessoes_ordinarias) +
       " " +
@@ -4412,8 +4477,8 @@
         '<div class="lista-pll">' + lista + "</div>";
     }
 
-    return '<details class="secao ac-cartao" name="ac-ver">' +
-      '<summary class="ac-cabecalho" aria-expanded="false"><div class="ac-cabecalho-texto"><h2 id="tit-pll">Projetos de lei propostos (PLL)</h2><span class="ac-resumo">' + esc(pl.total_propostos || 0) + '</span></div><svg class="ac-icone" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo">' +
+    return '<details class="secao ac-cartao">' +
+      '<summary class="ac-cabecalho" aria-expanded="false"><h2 id="tit-pll">Projetos de lei propostos (PLL)</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
       '<p class="legenda">PLL significa Projeto de Lei do Legislativo, proposta escrita por vereador.</p>' +
       '<div class="contagens-pll">' +
       '<div class="contagem-item"><div class="num">' + esc(pl.total_propostos) + '</div><div class="rot">Propostos</div></div>' +
@@ -4510,8 +4575,8 @@
         '<button type="button" class="btn-secundario" id="btn-limpar-votos" style="margin-top:12px;width:100%">Limpar filtro e ocultar lista</button>';
     }
 
-    return '<details class="secao ac-cartao" name="ac-ver">' +
-      '<summary class="ac-cabecalho" aria-expanded="false"><div class="ac-cabecalho-texto"><h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2><span class="ac-resumo">' + esc(v.votos ? v.votos.total_registros : 0) + '</span></div><svg class="ac-icone" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo">' +
+    return '<details class="secao ac-cartao">' +
+      '<summary class="ac-cabecalho" aria-expanded="false"><h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
       '<p class="legenda">Voto nominal é quando o nome de cada vereador fica registrado publicamente. Total: ' +
       esc(vo.total_registros) + " vota\u00e7\u00f5es em " + rotuloPeriodoLegislatura() + ".</p>" +
       '<div class="votos-resumo">' +
@@ -4542,7 +4607,7 @@
     var opcoes = estado.dados.vereadores.map(function (ver) {
       var sel = String(ver.id_sapl) === String(estado.vereadorId) ? " selected" : "";
       return '<option value="' + esc(ver.id_sapl) + '"' + sel + ">" +
-        esc(ver.nome_parlamentar) + "</option>";
+        esc(rotuloOpcaoVereador(ver)) + "</option>";
     }).join("");
 
     var idxAtual = estado.dados.vereadores.findIndex(function (ver) {
@@ -4579,9 +4644,9 @@
       renderSecaoPLL(v) +
       renderSecaoVotos(v) +
       "</div>" +
-      '<footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados">' +
-      "<p>Dado coletado em <strong>" + esc(formatarDataHora(meta.dado_coletado_em)) +
-      "</strong>. Fonte: SAPL (Sistema de Apoio ao Processo Legislativo) da Câmara.</p></footer>";
+      '<footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>';
+
+    atualizarRodapesColeta();
 
     document.getElementById("sel-vereador").addEventListener("change", function (e) {
       estado.vereadorId = e.target.value;
@@ -5935,8 +6000,8 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       });
     });
 
-    document.getElementById("btn-tema").addEventListener("click", function () {
-      alternarTema();
+    document.querySelectorAll(".alternar-tema").forEach(function (btn) {
+      btn.addEventListener("click", alternarTema);
     });
 
     if (window.location.hash === "#vereadores") {
@@ -5964,19 +6029,6 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (e.target.tagName !== "DETAILS") return;
     var summary = e.target.querySelector("summary");
     if (summary) summary.setAttribute("aria-expanded", e.target.open ? "true" : "false");
-    
-    if (!e.target.open) return;
-    var nomeGrupo = e.target.getAttribute("name");
-    if (nomeGrupo === "ac-ver" || nomeGrupo === "ac-faltas") {
-      var irmaos = document.querySelectorAll('details[name="' + nomeGrupo + '"]');
-      irmaos.forEach(function (d) {
-        if (d !== e.target && d.open) {
-          d.open = false;
-          var s = d.querySelector("summary");
-          if (s) s.setAttribute("aria-expanded", "false");
-        }
-      });
-    }
   }, true);
 
   carregarConfig().then(function () {
