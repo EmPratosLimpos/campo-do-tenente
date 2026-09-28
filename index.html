@@ -2630,8 +2630,8 @@
       border-right: 1px solid var(--linha);
       position: sticky;
       top: 0;
-      align-self: flex-start;
-      height: 100vh;
+      align-self: stretch;
+      min-height: 100vh;
       overflow-y: auto;
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
@@ -2738,24 +2738,28 @@
     }
     #conteudo-vereadores {
       display: block;
+    }
+    #conteudo-vereadores .vereadores-grade {
       column-count: 2;
       column-gap: 20px;
     }
-    #conteudo-vereadores > * {
+    #conteudo-vereadores .vereadores-grade > * {
       break-inside: avoid;
       margin-bottom: 20px;
       display: inline-block;
       width: 100%;
+      box-sizing: border-box;
     }
 
-    #conteudo-vereadores > .secao:first-child,
-    #conteudo-vereadores > .nota-factual,
-    #conteudo-vereadores > .faltas-lista,
-    #conteudo-vereadores > .rodape-coleta,
-    #conteudo-vereadores > .perfil-e-notas {
-      column-span: all; grid-column: 1 / -1;
+    #conteudo-vereadores > .perfil-e-notas,
+    #conteudo-vereadores > .rodape-coleta {
       display: block !important;
       width: 100%;
+    }
+    #conteudo-vereadores .perfil-e-notas .nota-factual,
+    #conteudo-vereadores .perfil-e-notas .faltas-lista {
+      max-width: 100%;
+      box-sizing: border-box;
     }
   }
 
@@ -2974,6 +2978,8 @@
   .ac-resumo {
     font-size: 16px;
     color: var(--texto-secundario);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .ac-conteudo {
     padding: 0 20px 20px;
@@ -3012,6 +3018,12 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    flex: 1;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+  .ac-cabecalho-texto h2 {
+    min-width: 0;
   }
   .ac-icone, .ac-icone-inner {
     transition: transform 0.2s ease;
@@ -4314,177 +4326,6 @@
     );
   }
 
-  function renderSecaoVotos(v) {
-    var vo = v.votos;
-    var cards = cardsResumoVotos(vo).filter(function (c) {
-      return c.num > 0;
-    });
-
-    var nominais = vo.nominais || [];
-    var filtrados = nominais.filter(function (n) {
-      if (estado.filtroClassificacao && classificacaoNominal(n) !== estado.filtroClassificacao) {
-        return false;
-      }
-      if (estado.filtroTexto) {
-        var busca = normalizarTexto(estado.filtroTexto);
-        var ementa = ementaVotacao(n);
-        var tagsBusca = n.materia_id ? tagsMateria(n.materia_id) : null;
-        var tipoNumeroBusca = tipoNumeroDoVoto(n);
-        var texto =
-          (ementa || "") +
-          " " +
-          (n.materia_id || "") +
-          " " +
-          n.data_sessao +
-          " " +
-          (tipoNumeroBusca || "");
-        if (tagsBusca) texto += " " + tagsBusca.tag_tipo + " " + tagsBusca.tag_tema;
-        if (normalizarTexto(texto).indexOf(busca) === -1) return false;
-      }
-      return true;
-    });
-
-    var totalPag = Math.max(1, Math.ceil(filtrados.length / POR_PAGINA));
-    if (estado.pagina > totalPag) estado.pagina = totalPag;
-    var inicio = (estado.pagina - 1) * POR_PAGINA;
-    var fatia = filtrados.slice(inicio, inicio + POR_PAGINA);
-
-    var opcoesFiltro = Object.keys(ROTULOS_VOTO)
-      .map(function (k) {
-        var sel = estado.filtroClassificacao === k ? " selected" : "";
-        return '<option value="' + esc(k) + '"' + sel + ">" + esc(ROTULOS_VOTO[k]) + "</option>";
-      })
-      .join("");
-
-    var atalhosVoto = cardsResumoVotos(vo)
-      .filter(function (c) {
-        return c.num > 0;
-      })
-      .map(function (c) {
-        return { id: c.id, rot: c.rot };
-      });
-
-    var itens = fatia
-      .map(function (n) {
-        var ementa = ementaVotacao(n);
-        var textoEmenta = ementa
-          ? esc(ementa.length > 180 ? ementa.slice(0, 177) + "..." : ementa)
-          : n.materia_id
-            ? "Mat\u00e9ria " +
-              esc(n.materia_id) +
-              " (" +
-              linkExt(linkMateria(n.materia_id), "ementa no SAPL") +
-              ")"
-            : "Mat\u00e9ria n\u00e3o identificada no registro";
-        var linkSess =
-          estado.linksSessao[n.sessao_id] || SAPL_ORIGEM + "/sessao/" + n.sessao_id;
-        var tagsHtml = n.materia_id ? htmlTagsMateria(n.materia_id) : "";
-        var tipoNumero = tipoNumeroDoVoto(n);
-        return (
-          "<li>" +
-          '<div class="data-voto">' +
-          esc(formatarData(n.data_sessao)) +
-          ", sess\u00e3o " +
-          esc(n.sessao_id) +
-          "</div>" +
-          (tipoNumero ? '<div class="materia-titulo">' + esc(tipoNumero) + "</div>" : "") +
-          (tagsHtml ? tagsHtml : "") +
-          '<span class="voto-selo ' +
-          classeVotoSelo(classificacaoNominal(n)) +
-          '">' +
-          esc(rotuloVotoNominal(n)) +
-          "</span>" +
-          "<span>" +
-          textoEmenta +
-          "</span> " +
-          linkExt(linkSess, "Sess\u00e3o no SAPL") +
-          "</li>"
-        );
-      })
-      .join("");
-
-    var listaAtiva = listaVotosAtiva();
-    var htmlListaVotos = "";
-    if (!listaAtiva) {
-      htmlListaVotos =
-        '<div class="estado-vazio" id="votos-estado-vazio">' +
-        "<p>Escolha um tipo de voto ou busque por ementa para ver a lista detalhada.</p>" +
-        '<div class="atalhos-voto" role="group" aria-label="Filtrar por tipo de voto">' +
-        atalhosVoto
-          .map(function (a) {
-            return (
-              '<button type="button" class="btn-atalho-voto" data-voto="' +
-              esc(a.id) +
-              '">' +
-              esc(a.rot) +
-              "</button>"
-            );
-          })
-          .join("") +
-        "</div></div>";
-    } else {
-      htmlListaVotos =
-        '<ul class="lista-votos" aria-live="polite">' +
-        (itens || '<li class="vazio">Nenhum registro neste filtro.</li>') +
-        "</ul>" +
-        '<div class="paginacao">' +
-        '<button type="button" id="btn-anterior"' +
-        (estado.pagina <= 1 ? " disabled" : "") +
-        ">Anterior</button>" +
-        "<span>P\u00e1gina " +
-        estado.pagina +
-        " de " +
-        totalPag +
-        " (" +
-        filtrados.length +
-        " registros)</span>" +
-        '<button type="button" id="btn-proximo"' +
-        (estado.pagina >= totalPag ? " disabled" : "") +
-        ">Pr\u00f3xima</button>" +
-        "</div>" +
-        '<button type="button" class="btn-secundario" id="btn-limpar-votos" style="margin-top:12px;width:100%">Limpar filtro e ocultar lista</button>';
-    }
-
-    var rotuloSemVoto = ROTULO_SEM_VOTO_INDIVIDUAL || "voto individual nao registrado no SAPL";
-
-    return (
-      '<details class="secao ac-cartao" name="ac-ver">' +
-      '<summary class="ac-cabecalho"><h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2><span class="ac-resumo">' + esc(v.votos ? v.votos.total_registros : 0) + '</span></summary><div class="ac-conteudo">' +
-      '<p class="legenda">Voto nominal \u00e9 quando o nome de cada vereador fica registrado publicamente. Total: ' +
-      esc(vo.total_registros) +
-      " vota\u00e7\u00f5es em " +
-      rotuloPeriodoLegislatura() +
-      ". " +
-      esc(rotuloSemVoto) +
-      ".</p>" +
-      '<div class="votos-resumo">' +
-      cards
-        .map(function (c) {
-          return (
-            '<div class="voto-card"><div class="num">' +
-            esc(c.num) +
-            '</div><div class="rot">' +
-            esc(c.rot) +
-            "</div></div>"
-          );
-        })
-        .join("") +
-      "</div>" +
-      '<div class="filtros-votos">' +
-      '<label for="filtro-texto">Buscar por ementa ou n\u00famero da mat\u00e9ria</label>' +
-      '<input type="search" id="filtro-texto" value="' +
-      esc(estado.filtroTexto) +
-      '" placeholder="Digite parte da ementa ou ID">' +
-      '<label for="filtro-voto">Filtrar por tipo de voto</label>' +
-      '<select id="filtro-voto"><option value="">Todos os tipos de voto</option>' +
-      opcoesFiltro +
-      "</select>" +
-      "</div>" +
-      htmlListaVotos +
-      "</section>"
-    );
-  }
-
   function renderSecaoPLL(v) {
     var pl = v.projetos_lei;
     var categorias = Object.keys(pl.por_categoria || {});
@@ -4670,7 +4511,7 @@
     }
 
     return '<details class="secao ac-cartao" name="ac-ver">' +
-      '<summary class="ac-cabecalho"><h2 id="tit-votos">Histórico de votos nominais</h2><span class="ac-resumo">' + esc(v.votos ? v.votos.total_registros : 0) + '</span></summary><div class="ac-conteudo">' +
+      '<summary class="ac-cabecalho" aria-expanded="false"><div class="ac-cabecalho-texto"><h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2><span class="ac-resumo">' + esc(v.votos ? v.votos.total_registros : 0) + '</span></div><svg class="ac-icone" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><div class="ac-conteudo">' +
       '<p class="legenda">Voto nominal é quando o nome de cada vereador fica registrado publicamente. Total: ' +
       esc(vo.total_registros) + " vota\u00e7\u00f5es em " + rotuloPeriodoLegislatura() + ".</p>" +
       '<div class="votos-resumo">' +
@@ -4733,9 +4574,11 @@
       "</div></div></section>" +
       renderNotasParlamentar(v) +
       "</div>" +
+      '<div class="vereadores-grade">' +
       renderSecaoPresenca(v) +
       renderSecaoPLL(v) +
       renderSecaoVotos(v) +
+      "</div>" +
       '<footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados">' +
       "<p>Dado coletado em <strong>" + esc(formatarDataHora(meta.dado_coletado_em)) +
       "</strong>. Fonte: SAPL (Sistema de Apoio ao Processo Legislativo) da Câmara.</p></footer>";

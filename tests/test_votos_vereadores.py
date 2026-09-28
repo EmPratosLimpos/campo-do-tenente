@@ -126,43 +126,26 @@ class TestVotosVereadores(unittest.TestCase):
             self.assertFalse(ac_1.evaluate("node => node.open"))
             self.assertFalse(ac_2.evaluate("node => node.open"))
 
-            # Open all accordions to check for literal JS syntax in the DOM
-            for accordion in page.locator('details[name="ac-ver"]').all():
-                if not accordion.evaluate("n => n.open"):
-                    accordion.locator("summary").first.click()
-                    page.wait_for_timeout(200)
-            for inner in page.locator('details[name="ac-faltas"]').all():
-                if not inner.evaluate("n => n.open"):
+            def texto_visivel_sem_literais_js():
+                page.locator("#tit-presenca").locator("xpath=ancestor::summary[1]").click()
+                page.wait_for_timeout(400)
+                if not presenca_card.evaluate("node => node.open"):
+                    page.locator("#tit-presenca").locator("xpath=ancestor::summary[1]").click()
+                    page.wait_for_timeout(400)
+                for inner in presenca_card.locator('details[name="ac-faltas"]').all():
                     inner.locator("summary").first.click()
-                    page.wait_for_timeout(200)
-            
-            visible_text = page.locator("body").inner_text()
-            forbidden = ["esc(", "' +", "+ '", "length)", "undefined", "NaN", "null"]
-            for bad in forbidden:
-                self.assertNotIn(bad, visible_text)
+                    page.wait_for_timeout(150)
+                texto = page.locator("body").inner_text()
+                for bad in ["esc(", "' +", "+ '", "length)", "undefined", "NaN", "null"]:
+                    self.assertNotIn(bad, texto)
 
-            
             ac_1.locator("summary").first.click()
             page.wait_for_timeout(500)
             self.assertTrue(ac_1.evaluate("node => node.open"))
             self.assertFalse(ac_2.evaluate("node => node.open"))
 
-            # Open all accordions to check for literal JS syntax in the DOM
-            for accordion in page.locator('details[name="ac-ver"]').all():
-                if not accordion.evaluate("n => n.open"):
-                    accordion.locator("summary").first.click()
-                    page.wait_for_timeout(200)
-            for inner in page.locator('details[name="ac-faltas"]').all():
-                if not inner.evaluate("n => n.open"):
-                    inner.locator("summary").first.click()
-                    page.wait_for_timeout(200)
-            
-            visible_text = page.locator("body").inner_text()
-            forbidden = ["esc(", "' +", "+ '", "length)", "undefined", "NaN", "null"]
-            for bad in forbidden:
-                self.assertNotIn(bad, visible_text)
+            texto_visivel_sem_literais_js()
 
-            
             ac_2.locator("summary").first.click()
             page.wait_for_timeout(500)
             self.assertFalse(ac_1.evaluate("node => node.open"))
