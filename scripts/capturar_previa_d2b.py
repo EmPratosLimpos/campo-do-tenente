@@ -28,7 +28,7 @@ VEREADORES = (("1", "jorge-quege"), ("5", "rafael-ventura"))
 MARCADORES = {
     "sessao": "Presença dos vereadores",
     "mes": "Quantas votações por tipo?",
-    "todo": "Como terminaram os projetos?",
+    "todo": "Qual foi o resultado das votacoes?",
 }
 
 JS_HELPERS = """
