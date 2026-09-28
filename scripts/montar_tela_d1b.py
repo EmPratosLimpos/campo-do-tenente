@@ -11,6 +11,7 @@ import sys
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 MODELO = RAIZ / "tela" / "modelo.html"
 PATCH_DADOS = RAIZ / "tela" / "patch_dados_camara.js"
+PATCH_VEREADORES = RAIZ / "tela" / "patch_dados_vereadores.js"
 SAIDA = RAIZ / "index.html"
 CFG = RAIZ / "config_cidade.json"
 
@@ -45,7 +46,6 @@ def remover_js_votacao(html: str) -> str:
     html = html.replace("  var SAPL_ORIGEM = ", "  /* SAPL_ORIGEM */ var SAPL_ORIGEM_LEGACY = ")
     if "<script>" in html:
         antes, depois = html.split("<script>", 1)
-        depois = depois.replace("Campo Largo", "município")
         depois = depois.replace("campolargo", "campodotenente")
         html = antes + "<script>" + depois
     html = html.replace("  carregarResultadosRemotos();\n", "")
@@ -163,9 +163,7 @@ def main():
     )
 
     aviso_2025 = (
-        '<div class="aviso-lacuna-sapl" id="aviso-lacuna-sapl" hidden role="status">'
-        "<p><strong>Aviso:</strong> as sessões ordinárias 1 a 16 de 2025 não existem no SAPL. "
-        "Os dados de 2025 começam na 17ª sessão ordinária (06/05/2025).</p></div>\n"
+        '<div class="aviso-lacuna-sapl" id="aviso-lacuna-sapl" hidden role="status"><p></p></div>\n'
     )
     html = html.replace(
         '<div class="sub-camara ativo" id="sub-camara">',
@@ -180,6 +178,11 @@ def main():
   var FOTOS_LOCAIS = {{}};
   var SAPL_ORIGEM = "";
   var PORTAL_OFICIAL = "";
+  var ROTULO_SEM_VOTO_INDIVIDUAL = "voto individual nao registrado no SAPL";
+
+  function nomeCamaraMunicipal() {{
+    return "C\u00e2mara Municipal de " + nomeCidade();
+  }}
   if (window.top !== window.self) {{
     document.documentElement.setAttribute("data-moldura-bloqueada", "1");
     document.body.innerHTML = '<main style="padding:24px;font-family:sans-serif;max-width:640px;margin:0 auto">'
@@ -265,8 +268,7 @@ def main():
       btn.setAttribute("aria-selected", ativo ? "true" : "false");
       btn.setAttribute("tabindex", ativo ? "0" : "-1");
     }});
-    var aviso = document.getElementById("aviso-lacuna-sapl");
-    if (aviso) aviso.hidden = ANO_ATUAL !== 2025;
+    atualizarAvisoLacunaSapl();
   }}
 
   function trocarAno(novoAno) {{
@@ -299,7 +301,24 @@ def main():
     marcador_ui = "  var estadoUI = {\n    secao: \"camara\"\n  };\n"
     if marcador_ui not in html:
         raise RuntimeError("Marcador estadoUI nao encontrado para patch de dados")
-    html = html.replace(marcador_ui, marcador_ui + patch_dados + "\n", 1)
+    estado_materias_decl = """
+  var estadoMaterias = {
+    periodo: "sessao",
+    filtro: "",
+    busca: "",
+    listaVisivel: { sessao: true, mes: true, todo: true }
+  };
+"""
+    html = html.replace(marcador_ui, marcador_ui + patch_dados + estado_materias_decl + "\n", 1)
+
+    patch_vereadores = PATCH_VEREADORES.read_text(encoding="utf-8")
+    ini_pres = html.find("  function renderSecaoPresenca(v) {")
+    ini_pll = html.find("  function renderSecaoPLL(v) {")
+    ini_app = html.find("  function renderApp() {")
+    if ini_pres == -1 or ini_pll == -1 or ini_app == -1 or not (ini_pres < ini_pll < ini_app):
+        raise RuntimeError("Marcadores da aba Vereadores nao encontrados no modelo")
+    bloco_pll = html[ini_pll:ini_app]
+    html = html[:ini_pres] + patch_vereadores + "\n" + bloco_pll + html[ini_app:]
 
     html = html.replace(
         "htmlFaltas = '<p class=\"vazio\" style=\"margin-top:10px\">Nenhuma falta registrada nas 26 sessões ordinárias de 2026.</p>';",
@@ -346,11 +365,96 @@ def main():
         'return "sessões ordinárias de " + ANO_ATUAL + " até " + data;',
     )
     html = re.sub(
-        r"var ultimaData = datasSessao\[datasSessao\.length - 1\] \|\| \"2026-09-08\";",
-        "var ultimaData = datasSessao[datasSessao.length - 1] || null;",
+        r'var DATA_ULTIMA_SESSAO = "[^"]*";',
+        'var DATA_ULTIMA_SESSAO = "";',
         html,
         count=1,
     )
+    html = re.sub(
+        r'  var SAPL_ORIGEM = "https://sapl\.campolargo\.pr\.leg\.br";',
+        "  /* SAPL_ORIGEM: carregarConfig */",
+        html,
+        count=1,
+    )
+    html = re.sub(
+        r'  var PORTAL_OFICIAL = "https://empratoslimposcl\.github\.io/em-pratos-limpos/";',
+        "  /* PORTAL_OFICIAL: carregarConfig */",
+        html,
+        count=1,
+    )
+    html = re.sub(
+        r"var ultimaData = datasSessao\[datasSessao\.length - 1\] \|\| null;",
+        "var ultimaData = datasSessao[datasSessao.length - 1] || null;\n"
+        '    var tituloMes = document.querySelector("#painel-periodo-mes .sessao-titulo");\n'
+        '    var metaElMes = document.querySelector("#painel-periodo-mes .sessao-meta");\n'
+        "    if (!ultimaData) {\n"
+        "      if (tituloMes) tituloMes.textContent = \"\";\n"
+        "      if (metaElMes) metaElMes.textContent = \"\";\n"
+        "      return;\n"
+        "    }",
+        html,
+        count=1,
+    )
+    html = html.replace(
+        "        estado.dados = dados;\n        prepararIndices(dados);",
+        "        estado.dados = dados;\n        aplicarRotulosMeta(dados);\n        prepararIndices(dados);",
+    )
+    html = html.replace(
+        '      "</div></div></section>" +\n      renderSecaoPresenca(v) +',
+        '      "</div></div></section>" +\n      renderNotasParlamentar(v) +\n      renderSecaoPresenca(v) +',
+    )
+    html = html.replace(
+        "        atualizarInterfaceCamara();\n        renderApp();",
+        "        try { atualizarInterfaceCamara(); } catch (errCamara) { console.error(errCamara); }\n        renderApp();",
+    )
+    html = html.replace(
+        "    (dados.projetos_lei_legislativo || []).forEach(function (p) {",
+        "    (dados.projetos_lei || []).forEach(function (p) {\n"
+        "      if (!p || p.id == null) return;\n"
+        "      estado.indiceEmentas[p.id] = p.ementa;\n"
+        "      estado.indiceMaterias[p.id] = p;\n"
+        "    });\n"
+        "    (dados.projetos_lei_legislativo || []).forEach(function (p) {",
+    )
+    html = html.replace(
+        "    var filtroTexto = document.getElementById(\"filtro-texto\");\n"
+        "    filtroTexto.addEventListener(\"input\", function (e) {",
+        "    var filtroTexto = document.getElementById(\"filtro-texto\");\n"
+        "    if (filtroTexto) filtroTexto.addEventListener(\"input\", function (e) {",
+    )
+    html = html.replace(
+        '    document.getElementById("filtro-voto").addEventListener("change", function (e) {',
+        '    var filtroVoto = document.getElementById("filtro-voto");\n'
+        '    if (filtroVoto) filtroVoto.addEventListener("change", function (e) {',
+    )
+    substituicoes_share = [
+        (
+            '"Dados oficiais da Câmara Municipal de Campo Largo reunidos',
+            '"Dados oficiais da " + nomeCamaraMunicipal() + " reunidos',
+        ),
+        ('"O que a Câmara de Campo Largo votou"', '"O que a Câmara de " + nomeCidade() + " votou"'),
+        (
+            '"Fonte oficial: SAPL da Câmara Municipal de Campo Largo."',
+            '"Fonte oficial: " + rotuloSaplCamara() + "."',
+        ),
+        (
+            '"Fonte oficial: SAPL da Câmara Municipal de Campo Largo."',
+            '"Fonte oficial: " + rotuloSaplCamara() + "."',
+        ),
+        ('"Fonte: SAPL da Câmara de Campo Largo"', '"Fonte: SAPL da Câmara de " + nomeCidade()'),
+        (
+            'var votou = "A Câmara Municipal de Campo Largo votou " + m.tipo',
+            "var votou = rotuloCamaraVotou() + m.tipo",
+        ),
+    ]
+    for antigo, novo in substituicoes_share:
+        html = html.replace(antigo, novo)
+
+    pos_painel = html.find("  function atualizarPainelMes() {")
+    pos_vot = html.find("  function atualizarVotacoesMes() {", pos_painel)
+    pos_estado_m = html.find("  var estadoMaterias = {", pos_vot)
+    if pos_vot != -1 and pos_estado_m != -1 and pos_vot < pos_estado_m:
+        html = html[:pos_vot] + html[pos_estado_m:]
     html = html.replace(
         "        renderApp();\n"
         "        atualizarCardVotacoes();\n"

@@ -17,13 +17,23 @@ from config_cidade import anos_recorte, carregar_config  # noqa: E402
 TZ = timezone(timedelta(hours=-3))
 
 
-def normalizar_resultado(resultado_texto: str | None, frase: str | None) -> str:
-    texto = " ".join(filter(None, [resultado_texto, frase])).upper()
+RESULTADO_NAO_MAPEADO = "resultado_nao_mapeado"
+
+
+def normalizar_resultado(resultado_texto: str | None, frase: str | None) -> tuple[str, str | None]:
+    oficial = " ".join(filter(None, [resultado_texto, frase])).strip()
+    texto = oficial.upper()
     if "UNANIM" in texto:
-        return "unanimidade"
+        return "unanimidade", oficial or None
+    if "REJEIT" in texto:
+        return "rejeitado", oficial or None
     if "MAIORIA" in texto or "ABSOLUT" in texto:
-        return "maioria"
-    return "unanimidade"
+        return "maioria", oficial or None
+    if "APROV" in texto and "REJEIT" not in texto:
+        return "maioria", oficial or None
+    if not texto:
+        return RESULTADO_NAO_MAPEADO, oficial or None
+    return RESULTADO_NAO_MAPEADO, oficial or None
 
 
 def placar_resumido(vot: dict) -> str:
@@ -78,13 +88,17 @@ def montar_item(entry: dict, cfg: dict, temas: dict[int, str]) -> dict:
     p = entry["projeto"]
     v = entry["votacao"]
     mid = int(p["id"])
-    tema = tema_display(p.get("tema") or temas.get(mid, "Outros"), cfg)
-    resultado = normalizar_resultado(v.get("resultado_texto_sapl"), v.get("frase_resultado_sapl"))
+    tema_bruto = temas.get(mid) or p.get("tema") or "Outros"
+    tema = tema_display(tema_bruto, cfg)
+    resultado, resultado_oficial = normalizar_resultado(
+        v.get("resultado_texto_sapl"), v.get("frase_resultado_sapl")
+    )
     tipo = f"PLL {p.get('numero')}/{p.get('ano')}"
     return {
         "id": mid,
         "tipo": tipo,
         "resultado": resultado,
+        "resultado_oficial": resultado_oficial,
         "ementa": p.get("ementa") or "",
         "categoria": tema,
         "placar": placar_resumido(v),
@@ -126,12 +140,21 @@ def periodos(lista: list[dict], sessoes: list[dict]) -> tuple[list, list, list]:
 def filtros_de(lista: list[dict]) -> list[dict]:
     total = len(lista)
     uni = sum(1 for m in lista if m["resultado"] == "unanimidade")
-    mai = total - uni
-    return [
+    mai = sum(1 for m in lista if m["resultado"] == "maioria")
+    rej = sum(1 for m in lista if m["resultado"] == "rejeitado")
+    outro = total - uni - mai - rej
+    filtros = [
         {"id": "", "rotulo": "Todos", "qtd": total},
         {"id": "unanimidade", "rotulo": "Unânimes", "qtd": uni},
         {"id": "maioria", "rotulo": "Maioria", "qtd": mai},
     ]
+    if rej:
+        filtros.append({"id": "rejeitado", "rotulo": "Rejeitados", "qtd": rej})
+    if outro:
+        filtros.append(
+            {"id": RESULTADO_NAO_MAPEADO, "rotulo": "Resultado não mapeado", "qtd": outro}
+        )
+    return filtros
 
 
 def gerar_ano(ano: int, cfg: dict) -> None:
