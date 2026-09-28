@@ -45,7 +45,7 @@ JS_HELPERS = """
     let n = el;
     while (n && n !== document.body) {
       const cs = getComputedStyle(n);
-      if (cs.display === 'none' || cs.visibility === 'hidden') return false;
+      if (cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0') return false;
       n = n.parentElement;
     }
     return true;
