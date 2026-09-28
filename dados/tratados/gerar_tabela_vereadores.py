@@ -327,27 +327,16 @@ def caminhos_materias() -> list[Path]:
 
 
 def varrer_autoria(indice: dict[str, int], apelidos: dict) -> list[dict]:
-    caminhos = caminhos_materias()
-    nao_vereador: dict[str, int] = defaultdict(int)
-    for caminho in caminhos:
-        with caminho.open(encoding="utf-8", newline="") as handle:
-            leitor = csv.DictReader(handle, delimiter=";")
-            for linha in leitor:
-                bruto = (linha.get("Autorias") or "").strip()
-                if not bruto:
-                    continue
-                partes = [parte.strip() for parte in bruto.split(",") if parte.strip()]
-                for parte in partes:
-                    chave = normalizar(parte)
-                    id_sapl = indice.get(chave)
-                    if id_sapl is None:
-                        nao_vereador[parte] += 1
-                        continue
-                    registrar_apelido(apelidos, id_sapl, parte, "autoria")
-    return [
-        {"grafia": grafia, "vezes_no_csv": vezes}
-        for grafia, vezes in sorted(nao_vereador.items())
-    ]
+    """Nao le mais a coluna Autorias do CSV de materias.
+
+    Essa coluna e gravada sempre vazia por derivar_insumos.py, por isso
+    nunca gerou apelido nem registro em autorias_que_nao_sao_vereador.
+    A fonte de apelidos de autor e varrer_autores_sapl, que liga o nome
+    do autor parlamentar pelo id oficial no SAPL. Esta funcao so confere
+    que os CSVs existem e devolve lista vazia, para manter a saida igual.
+    """
+    caminhos_materias()
+    return []
 
 
 def nome_curto(cadastro: dict[int, dict], id_sapl: int) -> str:
