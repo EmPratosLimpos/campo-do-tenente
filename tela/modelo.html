@@ -3448,7 +3448,7 @@
         '<div class="cab"><span class="numero">PLL ' + esc(item.numero) + "/" + esc(item.ano) + "</span>" +
         '<span class="selo ' + seloClass + '">' + esc(sitRotulo) + "</span>" + coaut + "</div>" +
         '<p class="ementa">' + esc(item.ementa) + "</p>" +
-        '<p class="meta">Tema: ' + esc(item.categoria) + ". " +
+        \'<p class="meta">\' + (item.tema ? \'Tema: \' + esc(item.tema) + \'. \' : \'\') +
         linkExt(item.link_sapl, "Ver no SAPL") + "</p></article>";
     }).join("");
 
@@ -4027,8 +4027,8 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var catalogo = estado.indiceMaterias && (estado.indiceMaterias[n] || estado.indiceMaterias[id]);
     if (catalogo) {
       return {
-        tag_tipo: tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || "PLL",
-        tag_tema: catalogo.categoria || "Tema não classificado"
+        tag_tipo: catalogo.tag_tipo || "PLL",
+          tag_tema: catalogo.tag_tema || "Tema não classificado"
       };
     }
     return {
