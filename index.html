@@ -2787,7 +2787,7 @@
       <div class="selo-sapl"><span class="ponto-status" aria-hidden="true"></span>Dados oficiais do SAPL</div>
       <p class="subtitulo-site">O que a Câmara de Campo do Tenente vota, e como cada vereador votou</p>
     </div>
-    <div class="aviso-lacuna-sapl" id="aviso-lacuna-sapl" hidden role="status"><p><strong>Aviso:</strong> as sessões ordinárias 1 a 16 de 2025 não existem no SAPL. Os dados de 2025 começam na 17ª sessão ordinária (06/05/2025).</p></div>
+    <div class="aviso-lacuna-sapl" id="aviso-lacuna-sapl" hidden role="status"><p></p></div>
 <div class="sub-camara ativo" id="sub-camara">
       <h2 class="secao-camara-titulo">O que a Câmara votou</h2>
       <div class="seletor-periodo seletor-ano" role="tablist" aria-label="Ano legislativo" id="seletor-ano-wrap">
@@ -3029,6 +3029,11 @@
   var FOTOS_LOCAIS = {};
   var SAPL_ORIGEM = "";
   var PORTAL_OFICIAL = "";
+  var ROTULO_SEM_VOTO_INDIVIDUAL = "voto individual nao registrado no SAPL";
+
+  function nomeCamaraMunicipal() {
+    return "Câmara Municipal de " + nomeCidade();
+  }
   if (window.top !== window.self) {
     document.documentElement.setAttribute("data-moldura-bloqueada", "1");
     document.body.innerHTML = '<main style="padding:24px;font-family:sans-serif;max-width:640px;margin:0 auto">'
@@ -3114,8 +3119,7 @@
       btn.setAttribute("aria-selected", ativo ? "true" : "false");
       btn.setAttribute("tabindex", ativo ? "0" : "-1");
     });
-    var aviso = document.getElementById("aviso-lacuna-sapl");
-    if (aviso) aviso.hidden = ANO_ATUAL !== 2025;
+    atualizarAvisoLacunaSapl();
   }
 
   function trocarAno(novoAno) {
@@ -3290,6 +3294,33 @@
     );
   }
 
+  function contagemResultadosMaterias(lista) {
+    var out = { unanimidade: 0, maioria: 0, rejeitado: 0, outro: 0 };
+    (lista || []).forEach(function (m) {
+      var r = m.resultado || "outro";
+      if (r === "unanimidade") out.unanimidade += 1;
+      else if (r === "maioria") out.maioria += 1;
+      else if (r === "rejeitado") out.rejeitado += 1;
+      else out.outro += 1;
+    });
+    return out;
+  }
+
+  function atualizarAvisoLacunaSapl() {
+    var aviso = document.getElementById("aviso-lacuna-sapl");
+    if (!aviso) return;
+    var meta = estado.dados && estado.dados.meta;
+    var lacuna = meta && meta.lacuna_sessoes_ordinarias;
+    var par = aviso.querySelector("p");
+    if (!lacuna || !lacuna.aviso || !meta || meta.ano !== ANO_ATUAL) {
+      aviso.hidden = true;
+      if (par) par.textContent = "";
+      return;
+    }
+    if (par) par.innerHTML = "<strong>Aviso:</strong> " + esc(lacuna.aviso);
+    aviso.hidden = false;
+  }
+
   function atualizarPresencaUltimaSessao() {
     var s = ultimaSessaoOrdinaria();
     var meta = estado.dados && estado.dados.meta;
@@ -3299,8 +3330,14 @@
     var grade = document.querySelector("#card-presenca-sessao .status-grade");
     if (!s) return;
     var c = contagemPresencaSessao(s);
-    var rotuloBanca = c.banca === 1 ? "1 parlamentar" : c.banca + " parlamentares";
-    if (textoBanca) textoBanca.textContent = rotuloBanca;
+    if (textoBanca) {
+      if (c.banca > 0) {
+        textoBanca.textContent =
+          c.banca === 1 ? "1 parlamentar" : c.banca + " parlamentares";
+      } else {
+        textoBanca.textContent = "";
+      }
+    }
     if (linkMeta) linkMeta.href = urlSegura(s.link_sapl) || "#";
     if (grade) {
       var html =
@@ -3394,8 +3431,11 @@
           '<span class="qtd">' + esc(total) + "</span></div>";
       }
     }
-    var unanimes = lista.filter(function (m) { return m.resultado === "unanimidade"; }).length;
-    var maioria = total - unanimes;
+    var contagem = contagemResultadosMaterias(lista);
+    var unanimes = contagem.unanimidade;
+    var maioria = contagem.maioria;
+    var rejeitadas = contagem.rejeitado;
+    var outro = contagem.outro;
     var legRes = document.getElementById("legenda-resultado-todo");
     if (legRes) {
       legRes.textContent =
@@ -3405,30 +3445,65 @@
     if (barraRes && total > 0) {
       var pctUni = (unanimes / total) * 100;
       var pctMai = (maioria / total) * 100;
+      var pctRej = (rejeitadas / total) * 100;
+      var pctOut = (outro / total) * 100;
       barraRes.setAttribute(
         "aria-label",
-        unanimes + " unanimidade, " + maioria + " maioria absoluta, 0 rejeitado"
+        unanimes +
+          " unanimidade, " +
+          maioria +
+          " maioria, " +
+          rejeitadas +
+          " rejeitado, " +
+          outro +
+          " outro"
       );
-      barraRes.innerHTML =
-        '<div class="segmento segmento-unanimidade" style="width:' + pctUni.toFixed(1) + '%"></div>' +
-        (maioria > 0
-          ? '<div class="segmento segmento-maioria" style="width:' + pctMai.toFixed(1) + '%"></div>'
-          : "");
+      var htmlBarra =
+        '<div class="segmento segmento-unanimidade" style="width:' + pctUni.toFixed(1) + '%"></div>';
+      if (maioria > 0) {
+        htmlBarra +=
+          '<div class="segmento segmento-maioria" style="width:' + pctMai.toFixed(1) + '%"></div>';
+      }
+      if (rejeitadas > 0) {
+        htmlBarra +=
+          '<div class="segmento segmento-rejeitado" style="width:' + pctRej.toFixed(1) + '%"></div>';
+      }
+      if (outro > 0) {
+        htmlBarra +=
+          '<div class="segmento segmento-tramitacao" style="width:' + pctOut.toFixed(1) + '%"></div>';
+      }
+      barraRes.innerHTML = htmlBarra;
     } else if (barraRes) {
       barraRes.innerHTML = "";
       barraRes.removeAttribute("aria-label");
     }
     var cartoes = document.getElementById("cartoes-resultado-todo");
     if (cartoes && total > 0) {
-      var pctUniCard = ((unanimes / total) * 100).toFixed(0);
-      var pctMaiCard = ((maioria / total) * 100).toFixed(0);
-      cartoes.innerHTML =
-        '<div class="status-cartao status-cartao-unanimidade"><span class="indicador" style="background:var(--barra-unanimidade)"></span>' +
-        '<span class="num">' + esc(unanimes) + '</span><span class="pct">' + esc(pctUniCard) + '%</span><span class="rot">Unanimidade</span></div>' +
-        '<div class="status-cartao status-cartao-maioria"><span class="indicador" style="background:var(--barra-maioria)"></span>' +
-        '<span class="num">' + esc(maioria) + '</span><span class="pct">' + esc(pctMaiCard) + '%</span><span class="rot">Maioria</span></div>' +
-        '<div class="status-cartao status-cartao-rejeitado"><span class="indicador" style="background:var(--graf-rejeitado)"></span>' +
-        '<span class="num">0</span><span class="pct">0%</span><span class="rot">Rejeitadas</span></div>';
+      function cartaoResultado(classe, num, rot) {
+        var pctCard = ((num / total) * 100).toFixed(0);
+        return (
+          '<div class="status-cartao status-cartao-' +
+          classe +
+          '"><span class="indicador" style="background:var(--barra-' +
+          classe +
+          ',var(--graf-' +
+          classe +
+          '))"></span><span class="num">' +
+          esc(num) +
+          '</span><span class="pct">' +
+          esc(pctCard) +
+          '%</span><span class="rot">' +
+          esc(rot) +
+          "</span></div>"
+        );
+      }
+      var htmlCartoes = cartaoResultado("unanimidade", unanimes, "Unanimidade");
+      htmlCartoes += cartaoResultado("maioria", maioria, "Maioria");
+      htmlCartoes += cartaoResultado("rejeitado", rejeitadas, "Rejeitadas");
+      if (outro > 0) {
+        htmlCartoes += cartaoResultado("tramitacao", outro, "Outro resultado");
+      }
+      cartoes.innerHTML = htmlCartoes;
     } else if (cartoes) {
       cartoes.innerHTML = "";
     }
@@ -3439,6 +3514,92 @@
     }
     var btnShare = document.querySelector("#painel-periodo-todo .btn-compartilhar-icone");
     if (btnShare) btnShare.setAttribute("aria-label", "Compartilhar vota\u00e7\u00f5es de " + ano);
+  }
+
+  function atualizarVotacoesMes() {
+    var container = document.getElementById("votacoes-mes-conteudo");
+    if (!container) return;
+
+    var lista = MATERIAS_CAMARA.mes || [];
+    var total = lista.length;
+    if (total === 0) {
+      container.innerHTML = "";
+      return;
+    }
+
+    var contagem = contagemResultadosMaterias(lista);
+    var unanimes = contagem.unanimidade;
+    var maioria = contagem.maioria;
+    var rejeitadas = contagem.rejeitado;
+    var outro = contagem.outro;
+    var pctUni = total > 0 ? Math.round((unanimes / total) * 100) : 0;
+    var pctMai = total > 0 ? Math.round((maioria / total) * 100) : 0;
+
+    var rotuloTotal = total === 1 ? "1 projeto votado" : total + " projetos votados";
+
+    container.innerHTML =
+      '<div class="card-header">' +
+      '<div class="card-categoria cat-laranja">' +
+      '<div class="card-icone icone-laranja" aria-hidden="true">' +
+      '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 23c6.075 0 11-4.925 11-11 0-4.04-2.18-7.58-5.46-9.52-.39-.23-.88.11-.8.56.57 3.32-.42 6.64-2.74 8.89-2.07-3.04-2.52-6.85-1.2-10.36.17-.46-.3-.9-.73-.69C8.36 2.65 5.5 6.94 5.5 12c0 1.25.21 2.45.59 3.57-1.34-1.2-2.09-2.93-2.09-4.8 0-.48-.56-.76-.92-.44C1.19 12.01 0 14.86 0 18c0 2.76 1.12 5.26 2.93 7.07C4.74 26.88 7.24 28 10 28c.68 0 1.34-.07 1.98-.2-.33-.67-.53-1.42-.53-2.22 0-2.48 2.02-4.5 4.5-4.5h.05c-.39-1.09-.6-2.27-.6-3.5 0-.75.08-1.48.24-2.18-.75.75-1.74 1.28-2.84 1.5-.47.1-.8-.34-.6-.78 1.1-2.4 1.05-5.22-.15-7.58-.23-.46.24-.96.7-.76 2.4 1.03 4.2 3.12 4.7 5.72z"></path></svg></div>' +
+      '<span id="tit-votacoes-mes">Vota\u00e7\u00f5es do M\u00eas</span></div>' +
+      '<span class="card-meta">' + rotuloTotal + "</span></div>" +
+      '<div class="card-corpo">' +
+      '<div class="metricas-bloco">' +
+      '<div class="metrica-destaque">' +
+      '<span class="metrica-numero">' + total + "</span>" +
+      '<span class="metrica-rotulo">projetos votados</span></div>' +
+      '<div class="metrica-detalhes">' +
+      '<div class="item-detalhe">' +
+      '<span class="det-rotulo det-rotulo-unanimidade">Unanimidade</span>' +
+      '<span class="det-valor">' + unanimes + ' <small style="font-size:11px;font-weight:500">(' + pctUni + "%)</small></span></div>" +
+      '<div class="item-detalhe det-separador">' +
+      '<span class="det-rotulo det-rotulo-maioria">Por Maioria</span>' +
+      '<span class="det-valor">' + maioria + ' <small style="font-size:11px;font-weight:500">(' + pctMai + "%)</small></span></div>" +
+      (rejeitadas > 0
+        ? '<div class="item-detalhe det-separador"><span class="det-rotulo">Rejeitadas</span><span class="det-valor">' +
+          rejeitadas +
+          "</span></div>"
+        : "") +
+      (outro > 0
+        ? '<div class="item-detalhe det-separador"><span class="det-rotulo">Outro resultado</span><span class="det-valor">' +
+          outro +
+          "</span></div>"
+        : "") +
+      "</div></div>" +
+      '<div class="grafico-anel-box" role="img" aria-label="' +
+      total +
+      " projetos: " +
+      unanimes +
+      " unanimidade, " +
+      maioria +
+      " maioria, " +
+      rejeitadas +
+      " rejeitado, " +
+      outro +
+      ' outro">' +
+      '<svg class="anel-svg" viewBox="0 0 58 58" aria-hidden="true">' +
+      '<circle class="anel-fundo" cx="29" cy="29" r="23"></circle>' +
+      '<circle class="anel-progresso-unanimidade" cx="29" cy="29" r="23"></circle>' +
+      '<circle class="anel-progresso-maioria" cx="29" cy="29" r="23"></circle></svg>' +
+      '<span class="anel-porcento">' + pctUni + "%</span></div></div>";
+
+    var circ = 2 * Math.PI * 23;
+    var circUni = container.querySelector(".anel-progresso-unanimidade");
+    var circMai = container.querySelector(".anel-progresso-maioria");
+    if (circUni) {
+      circUni.style.strokeDasharray = (pctUni / 100 * circ) + " " + circ;
+      circUni.style.strokeDashoffset = "0";
+    }
+    if (circMai) {
+      if (pctMai === 0) {
+        circMai.style.display = "none";
+      } else {
+        circMai.style.display = "";
+        circMai.style.strokeDasharray = (pctMai / 100 * circ) + " " + circ;
+        circMai.style.strokeDashoffset = -(pctUni / 100 * circ);
+      }
+    }
   }
 
   function nomeMesAnteriorUltimaSessao() {
@@ -3458,6 +3619,7 @@
 
   function atualizarInterfaceCamara() {
     dataUltimaSessaoFmt();
+    atualizarAvisoLacunaSapl();
     atualizarCabecalhoUltimaSessao();
     atualizarPresencaUltimaSessao();
     atualizarRodapesColeta();
@@ -3474,8 +3636,15 @@
     ajustarPainelUltimaSessaoSemPll();
   }
 
+  var estadoMaterias = {
+    periodo: "sessao",
+    filtro: "",
+    busca: "",
+    listaVisivel: { sessao: true, mes: true, todo: true }
+  };
 
-  var DATA_ULTIMA_SESSAO = "08/09/2026";
+
+  var DATA_ULTIMA_SESSAO = "";
 
   var MAPA_TIPO_SIGLA = {
     PLL: "PLL",
@@ -3535,7 +3704,7 @@
   }
 
   /* SAPL_ORIGEM */ var SAPL_ORIGEM_LEGACY = "";
-  var PORTAL_OFICIAL = "https://empratoslimposcl.github.io/em-pratos-limpos/";
+  /* PORTAL_OFICIAL: carregarConfig */
   var WHATSAPP_COMPARTILHAR = "https://api.whatsapp.com/send?text=";
 
   function esc(texto) {
@@ -3706,27 +3875,116 @@
     return rotuloVotoNominal(n);
   }
 
+
+  function aplicarRotulosMeta(dados) {
+    var meta = dados && dados.meta;
+    if (!meta) return;
+    if (meta.rotulos_estados) {
+      Object.keys(meta.rotulos_estados).forEach(function (chave) {
+        ROTULOS_VOTO[chave] = meta.rotulos_estados[chave];
+      });
+    }
+    if (meta.rotulo_sem_voto_individual) {
+      ROTULO_SEM_VOTO_INDIVIDUAL = meta.rotulo_sem_voto_individual;
+    }
+  }
+
+  function contagemVotoResumo(vo, chave) {
+    if (!vo) return 0;
+    return vo[chave] != null ? vo[chave] : 0;
+  }
+
+  function cardsResumoVotos(vo) {
+    var rot = (vo && vo.rotulos) || {};
+    var defs = [
+      ["sim", rot.sim || "Sim"],
+      ["nao", rot.nao || "N\u00e3o"],
+      ["abstencao", rot.abstencao || "Absten\u00e7\u00e3o"],
+      ["nao_votou", rot.nao_votou || "N\u00e3o votou"],
+      ["presidente_que_nao_votou", rot.presidente_que_nao_votou || "Presidente que n\u00e3o votou"],
+      ["ausente_com_justificativa", rot.ausente_com_justificativa || "Ausente com justificativa"],
+      ["ausente_sem_justificativa", rot.ausente_sem_justificativa || "Ausente sem justificativa"],
+      ["fora_do_mandato", rot.fora_do_mandato || "Fora do mandato naquela data"],
+      [
+        "presente_sem_voto_individual_registrado",
+        rot.presente_sem_voto_individual_registrado || "Presente sem voto individual registrado"
+      ],
+      ["licenca_tratamento_saude", rot.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade"]
+    ];
+    return defs.map(function (par) {
+      return { num: contagemVotoResumo(vo, par[0]), rot: par[1], id: par[0] };
+    });
+  }
+
+  function renderNotasParlamentar(v) {
+    var html = "";
+    if (v.nota_factual) {
+      html += '<p class="nota-factual">' + esc(v.nota_factual) + "</p>";
+    }
+    var afast = v.afastamentos || [];
+    if (afast.length) {
+      html += '<div class="faltas-lista"><h3>Afastamentos registrados</h3><ul>';
+      afast.forEach(function (a) {
+        var rot = a.rotulo || a.tipo || "Afastamento";
+        var periodo = "";
+        if (a.data_inicio) periodo = formatarData(a.data_inicio);
+        if (a.data_fim) periodo += (periodo ? " a " : "") + formatarData(a.data_fim);
+        html += "<li><strong>" + esc(rot) + "</strong>";
+        if (periodo) html += " (" + esc(periodo) + ")";
+        if (a.motivo) html += ". " + esc(a.motivo);
+        html += "</li>";
+      });
+      html += "</ul></div>";
+    }
+    return html;
+  }
+
   function renderSecaoPresenca(v) {
     var p = v.presenca;
+    var rotMeta = rotulosVotoMeta();
     var partes = [
       { valor: p.presencas, cor: "var(--graf-presenca)", rotulo: "Presente" },
       { valor: p.faltas_com_justificativa, cor: "var(--graf-falta-just)", rotulo: "Falta com justificativa" },
       { valor: p.faltas_sem_justificativa, cor: "var(--graf-falta-sem)", rotulo: "Falta sem justificativa" }
     ];
-    var faltasJust = p.por_sessao.filter(function (s) {
-      return s.situacao === "falta_com_justificativa";
-    });
-    var faltasSem = p.por_sessao.filter(function (s) {
-      return s.situacao === "falta_sem_justificativa";
-    });
+    if (p.sessoes_licenca > 0) {
+      partes.push({
+        valor: p.sessoes_licenca,
+        cor: "var(--graf-falta-just)",
+        rotulo: rotMeta.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade"
+      });
+    }
+    if (p.sessoes_fora_do_mandato > 0) {
+      partes.push({
+        valor: p.sessoes_fora_do_mandato,
+        cor: "var(--graf-falta-sem)",
+        rotulo: rotMeta.fora_do_mandato || "Fora do mandato naquela data"
+      });
+    }
+
+    function sessoesPorSituacao(situacao) {
+      return (p.por_sessao || []).filter(function (s) {
+        return s.situacao === situacao;
+      });
+    }
+
+    var faltasJust = sessoesPorSituacao("falta_com_justificativa");
+    var faltasSem = sessoesPorSituacao("falta_sem_justificativa");
+    var licencas = sessoesPorSituacao("licenca_tratamento_saude");
+    var foraMandato = sessoesPorSituacao("fora_do_mandato");
 
     var htmlFaltas = "";
-    if (p.faltas_com_justificativa > 0 || p.faltas_sem_justificativa > 0) {
+    if (
+      p.faltas_com_justificativa > 0 ||
+      p.faltas_sem_justificativa > 0 ||
+      licencas.length ||
+      foraMandato.length
+    ) {
       htmlFaltas += '<div class="faltas-lista">';
       if (p.faltas_com_justificativa > 0) {
         htmlFaltas += "<h3>Faltas com justificativa oficial (" + esc(p.faltas_com_justificativa) + ")</h3><ul>";
         faltasJust.forEach(function (s) {
-          htmlFaltas += "<li><strong>Sessão " + esc(s.sessao_id) + "</strong>, " +
+          htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
             linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
         });
@@ -3735,37 +3993,256 @@
       if (p.faltas_sem_justificativa > 0) {
         htmlFaltas += "<h3>Faltas sem justificativa (" + esc(p.faltas_sem_justificativa) + ")</h3><ul>";
         faltasSem.forEach(function (s) {
-          htmlFaltas += "<li><strong>Sessão " + esc(s.sessao_id) + "</strong>, " +
+          htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
             linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
         });
         htmlFaltas += "</ul>";
-      } else if (p.faltas_com_justificativa > 0) {
-        htmlFaltas += '<p class="vazio">Faltas sem justificativa: 0</p>';
+      }
+      if (licencas.length) {
+        var rotLic = rotMeta.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade";
+        htmlFaltas += "<h3>" + esc(rotLic) + " (" + esc(licencas.length) + ")</h3><ul>";
+        licencas.forEach(function (s) {
+          htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
+            esc(formatarData(s.data_sessao)) + ". " +
+            esc(s.rotulo_situacao || rotLic) + ". " +
+            linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
+        });
+        htmlFaltas += "</ul>";
+      }
+      if (foraMandato.length) {
+        var rotFora = rotMeta.fora_do_mandato || "Fora do mandato naquela data";
+        htmlFaltas += "<h3>" + esc(rotFora) + " (" + esc(foraMandato.length) + ")</h3><ul>";
+        foraMandato.forEach(function (s) {
+          htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
+            esc(formatarData(s.data_sessao)) + ". " +
+            esc(s.rotulo_situacao || rotFora);
+          if (s.motivo) htmlFaltas += ". " + esc(s.motivo);
+          htmlFaltas += ". " + linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
+        });
+        htmlFaltas += "</ul>";
       }
       htmlFaltas += "</div>";
     } else {
-      htmlFaltas = '<p class="vazio" style="margin-top:10px">Nenhuma falta registrada nas ' + esc(p.sessoes_ordinarias) + ' sessões ordinárias de ' + ANO_ATUAL + '.</p>';
+      htmlFaltas =
+        '<p class="vazio" style="margin-top:10px">Nenhuma falta registrada nas ' +
+        esc(p.sessoes_ordinarias) +
+        " sess\u00f5es ordin\u00e1rias de " +
+        ANO_ATUAL +
+        ".</p>";
     }
 
-    return '<section class="secao" aria-labelledby="tit-presenca">' +
-      '<h2 id="tit-presenca">Presença nas sessões ordinárias</h2>' +
-      '<p class="legenda">Total de ' + esc(p.sessoes_ordinarias) +
-      ' sessões ordinárias de ' + ANO_ATUAL + '. Taxa de presença: <strong>' +
-      esc(p.taxa_presenca.toFixed(2).replace(".", ",")) + "%</strong>. " +
-      "Percentual de faltas: <strong>" +
-      esc(p.percentual_faltas.toFixed(2).replace(".", ",")) + "%</strong>.</p>" +
+    return (
+      '<section class="secao" aria-labelledby="tit-presenca">' +
+      '<h2 id="tit-presenca">Presen\u00e7a nas sess\u00f5es ordin\u00e1rias</h2>' +
+      '<p class="legenda">Total de ' +
+      esc(p.sessoes_ordinarias) +
+      " sess\u00f5es ordin\u00e1rias de " +
+      ANO_ATUAL +
+      '. Taxa de presen\u00e7a: <strong>' +
+      esc(p.taxa_presenca.toFixed(2).replace(".", ",")) +
+      "%</strong>. Percentual de faltas: <strong>" +
+      esc(p.percentual_faltas.toFixed(2).replace(".", ",")) +
+      "%</strong>.</p>" +
       '<div class="grafico-linha">' +
-      '<div class="rosca-wrap">' + roscaSVG(partes, 120,
+      '<div class="rosca-wrap">' +
+      roscaSVG(
+        partes,
+        120,
         p.taxa_presenca.toFixed(1).replace(".", ",") + "%",
-        "presença",
-        "Taxa de presença: " + p.taxa_presenca.toFixed(2).replace(".", ",") + "%") + "</div>" +
+        "presen\u00e7a",
+        "Taxa de presen\u00e7a: " + p.taxa_presenca.toFixed(2).replace(".", ",") + "%"
+      ) +
+      "</div>" +
       '<div class="rosca-legenda"><dl>' +
-      partes.map(function (pt) {
-        return "<dt><span class=\"indicador\" style=\"background:" + pt.cor + "\"></span>" +
-          esc(pt.rotulo) + "</dt><dd>" + esc(pt.valor) + " sessões</dd>";
-      }).join("") +
-      "</dl></div></div>" + htmlFaltas + "</section>";
+      partes
+        .map(function (pt) {
+          return (
+            '<dt><span class="indicador" style="background:' +
+            pt.cor +
+            '"></span>' +
+            esc(pt.rotulo) +
+            "</dt><dd>" +
+            esc(pt.valor) +
+            " sess\u00f5es</dd>"
+          );
+        })
+        .join("") +
+      "</dl></div></div>" +
+      htmlFaltas +
+      "</section>"
+    );
+  }
+
+  function renderSecaoVotos(v) {
+    var vo = v.votos;
+    var cards = cardsResumoVotos(vo).filter(function (c) {
+      return c.num > 0;
+    });
+
+    var nominais = vo.nominais || [];
+    var filtrados = nominais.filter(function (n) {
+      if (estado.filtroClassificacao && classificacaoNominal(n) !== estado.filtroClassificacao) {
+        return false;
+      }
+      if (estado.filtroTexto) {
+        var busca = normalizarTexto(estado.filtroTexto);
+        var ementa = ementaVotacao(n);
+        var tagsBusca = n.materia_id ? tagsMateria(n.materia_id) : null;
+        var tipoNumeroBusca = tipoNumeroDoVoto(n);
+        var texto =
+          (ementa || "") +
+          " " +
+          (n.materia_id || "") +
+          " " +
+          n.data_sessao +
+          " " +
+          (tipoNumeroBusca || "");
+        if (tagsBusca) texto += " " + tagsBusca.tag_tipo + " " + tagsBusca.tag_tema;
+        if (normalizarTexto(texto).indexOf(busca) === -1) return false;
+      }
+      return true;
+    });
+
+    var totalPag = Math.max(1, Math.ceil(filtrados.length / POR_PAGINA));
+    if (estado.pagina > totalPag) estado.pagina = totalPag;
+    var inicio = (estado.pagina - 1) * POR_PAGINA;
+    var fatia = filtrados.slice(inicio, inicio + POR_PAGINA);
+
+    var opcoesFiltro = Object.keys(ROTULOS_VOTO)
+      .map(function (k) {
+        var sel = estado.filtroClassificacao === k ? " selected" : "";
+        return '<option value="' + esc(k) + '"' + sel + ">" + esc(ROTULOS_VOTO[k]) + "</option>";
+      })
+      .join("");
+
+    var atalhosVoto = cardsResumoVotos(vo)
+      .filter(function (c) {
+        return c.num > 0;
+      })
+      .map(function (c) {
+        return { id: c.id, rot: c.rot };
+      });
+
+    var itens = fatia
+      .map(function (n) {
+        var ementa = ementaVotacao(n);
+        var textoEmenta = ementa
+          ? esc(ementa.length > 180 ? ementa.slice(0, 177) + "..." : ementa)
+          : n.materia_id
+            ? "Mat\u00e9ria " +
+              esc(n.materia_id) +
+              " (" +
+              linkExt(linkMateria(n.materia_id), "ementa no SAPL") +
+              ")"
+            : "Mat\u00e9ria n\u00e3o identificada no registro";
+        var linkSess =
+          estado.linksSessao[n.sessao_id] || SAPL_ORIGEM + "/sessao/" + n.sessao_id;
+        var tagsHtml = n.materia_id ? htmlTagsMateria(n.materia_id) : "";
+        var tipoNumero = tipoNumeroDoVoto(n);
+        return (
+          "<li>" +
+          '<div class="data-voto">' +
+          esc(formatarData(n.data_sessao)) +
+          ", sess\u00e3o " +
+          esc(n.sessao_id) +
+          "</div>" +
+          (tipoNumero ? '<div class="materia-titulo">' + esc(tipoNumero) + "</div>" : "") +
+          (tagsHtml ? tagsHtml : "") +
+          '<span class="voto-selo ' +
+          classeVotoSelo(classificacaoNominal(n)) +
+          '">' +
+          esc(rotuloVotoNominal(n)) +
+          "</span>" +
+          "<span>" +
+          textoEmenta +
+          "</span> " +
+          linkExt(linkSess, "Sess\u00e3o no SAPL") +
+          "</li>"
+        );
+      })
+      .join("");
+
+    var listaAtiva = listaVotosAtiva();
+    var htmlListaVotos = "";
+    if (!listaAtiva) {
+      htmlListaVotos =
+        '<div class="estado-vazio" id="votos-estado-vazio">' +
+        "<p>Escolha um tipo de voto ou busque por ementa para ver a lista detalhada.</p>" +
+        '<div class="atalhos-voto" role="group" aria-label="Filtrar por tipo de voto">' +
+        atalhosVoto
+          .map(function (a) {
+            return (
+              '<button type="button" class="btn-atalho-voto" data-voto="' +
+              esc(a.id) +
+              '">' +
+              esc(a.rot) +
+              "</button>"
+            );
+          })
+          .join("") +
+        "</div></div>";
+    } else {
+      htmlListaVotos =
+        '<ul class="lista-votos" aria-live="polite">' +
+        (itens || '<li class="vazio">Nenhum registro neste filtro.</li>') +
+        "</ul>" +
+        '<div class="paginacao">' +
+        '<button type="button" id="btn-anterior"' +
+        (estado.pagina <= 1 ? " disabled" : "") +
+        ">Anterior</button>" +
+        "<span>P\u00e1gina " +
+        estado.pagina +
+        " de " +
+        totalPag +
+        " (" +
+        filtrados.length +
+        " registros)</span>" +
+        '<button type="button" id="btn-proximo"' +
+        (estado.pagina >= totalPag ? " disabled" : "") +
+        ">Pr\u00f3xima</button>" +
+        "</div>" +
+        '<button type="button" class="btn-secundario" id="btn-limpar-votos" style="margin-top:12px;width:100%">Limpar filtro e ocultar lista</button>';
+    }
+
+    var rotuloSemVoto = ROTULO_SEM_VOTO_INDIVIDUAL || "voto individual nao registrado no SAPL";
+
+    return (
+      '<section class="secao" aria-labelledby="tit-votos">' +
+      '<h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2>' +
+      '<p class="legenda">Voto nominal \u00e9 quando o nome de cada vereador fica registrado publicamente. Total: ' +
+      esc(vo.total_registros) +
+      " vota\u00e7\u00f5es em sess\u00f5es ordin\u00e1rias de " +
+      ANO_ATUAL +
+      ". " +
+      esc(rotuloSemVoto) +
+      ".</p>" +
+      '<div class="votos-resumo">' +
+      cards
+        .map(function (c) {
+          return (
+            '<div class="voto-card"><div class="num">' +
+            esc(c.num) +
+            '</div><div class="rot">' +
+            esc(c.rot) +
+            "</div></div>"
+          );
+        })
+        .join("") +
+      "</div>" +
+      '<div class="filtros-votos">' +
+      '<label for="filtro-texto">Buscar por ementa ou n\u00famero da mat\u00e9ria</label>' +
+      '<input type="search" id="filtro-texto" value="' +
+      esc(estado.filtroTexto) +
+      '" placeholder="Digite parte da ementa ou ID">' +
+      '<label for="filtro-voto">Filtrar por tipo de voto</label>' +
+      '<select id="filtro-voto"><option value="">Todos os tipos de voto</option>' +
+      opcoesFiltro +
+      "</select>" +
+      "</div>" +
+      htmlListaVotos +
+      "</section>"
+    );
   }
 
   function renderSecaoPLL(v) {
@@ -4022,6 +4499,7 @@
         ? '<a class="link-oficial" href="' + esc(urlSegura(v.link_sapl)) + '" target="_blank" rel="noopener noreferrer">Página oficial do parlamentar no SAPL</a>'
         : "") +
       "</div></div></section>" +
+      renderNotasParlamentar(v) +
       renderSecaoPresenca(v) +
       renderSecaoPLL(v) +
       renderSecaoVotos(v) +
@@ -4062,7 +4540,7 @@
     if (btnVerProx) btnVerProx.addEventListener("click", function () { irVereador(1); });
 
     var filtroTexto = document.getElementById("filtro-texto");
-    filtroTexto.addEventListener("input", function (e) {
+    if (filtroTexto) filtroTexto.addEventListener("input", function (e) {
       estado.filtroTexto = e.target.value;
       estado.pagina = 1;
       renderApp();
@@ -4073,7 +4551,8 @@
       }
     });
 
-    document.getElementById("filtro-voto").addEventListener("change", function (e) {
+    var filtroVoto = document.getElementById("filtro-voto");
+    if (filtroVoto) filtroVoto.addEventListener("change", function (e) {
       estado.filtroClassificacao = e.target.value;
       estado.pagina = 1;
       renderApp();
@@ -4139,6 +4618,11 @@
     });
     estado.indiceEmentas = {};
     estado.indiceMaterias = {};
+    (dados.projetos_lei || []).forEach(function (p) {
+      if (!p || p.id == null) return;
+      estado.indiceEmentas[p.id] = p.ementa;
+      estado.indiceMaterias[p.id] = p;
+    });
     (dados.projetos_lei_legislativo || []).forEach(function (p) {
       estado.indiceEmentas[p.id] = p.ementa;
       estado.indiceMaterias[p.id] = p;
@@ -4155,6 +4639,7 @@
       })
       .then(function (dados) {
         estado.dados = dados;
+        aplicarRotulosMeta(dados);
         prepararIndices(dados);
         if (!estado.vereadorId && dados.vereadores.length) {
           estado.vereadorId = dados.vereadores[0].id_sapl;
@@ -4250,7 +4735,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var sessoes = estado.dados.sessoes || [];
 
     var datasSessao = sessoes.map(function(s) { return s.data; }).filter(Boolean).sort();
-    var ultimaData = datasSessao[datasSessao.length - 1] || null;
+    var ultimaData = datasSessao[datasSessao.length - 1] || "2026-09-08";
 
     var partes = ultimaData.split("-");
     var ano = parseInt(partes[0]);
@@ -4277,67 +4762,6 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var btnShare = document.querySelector("#painel-periodo-mes .btn-compartilhar-icone");
     if (btnShare) btnShare.setAttribute("aria-label", "Compartilhar votações de " + nomeMes.toLowerCase());
   }
-
-  function atualizarVotacoesMes() {
-    var container = document.getElementById("votacoes-mes-conteudo");
-    if (!container) return;
-
-    var lista = MATERIAS_CAMARA.mes || [];
-    var total = lista.length;
-    if (total === 0) { container.innerHTML = ""; return; }
-
-    var unanimes = lista.filter(function(m) { return m.resultado === "unanimidade"; }).length;
-    var maioria = total - unanimes;
-    var pctUni = total > 0 ? Math.round((unanimes / total) * 100) : 0;
-    var pctMai = total > 0 ? Math.round((maioria / total) * 100) : 0;
-
-    var rotuloTotal = total === 1 ? "1 projeto votado" : total + " projetos votados";
-
-    container.innerHTML =
-      '<div class="card-header">' +
-      '<div class="card-categoria cat-laranja">' +
-      '<div class="card-icone icone-laranja" aria-hidden="true">' +
-      '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 23c6.075 0 11-4.925 11-11 0-4.04-2.18-7.58-5.46-9.52-.39-.23-.88.11-.8.56.57 3.32-.42 6.64-2.74 8.89-2.07-3.04-2.52-6.85-1.2-10.36.17-.46-.3-.9-.73-.69C8.36 2.65 5.5 6.94 5.5 12c0 1.25.21 2.45.59 3.57-1.34-1.2-2.09-2.93-2.09-4.8 0-.48-.56-.76-.92-.44C1.19 12.01 0 14.86 0 18c0 2.76 1.12 5.26 2.93 7.07C4.74 26.88 7.24 28 10 28c.68 0 1.34-.07 1.98-.2-.33-.67-.53-1.42-.53-2.22 0-2.48 2.02-4.5 4.5-4.5h.05c-.39-1.09-.6-2.27-.6-3.5 0-.75.08-1.48.24-2.18-.75.75-1.74 1.28-2.84 1.5-.47.1-.8-.34-.6-.78 1.1-2.4 1.05-5.22-.15-7.58-.23-.46.24-.96.7-.76 2.4 1.03 4.2 3.12 4.7 5.72z"></path></svg></div>' +
-      '<span id="tit-votacoes-mes">Votações do Mês</span></div>' +
-      '<span class="card-meta">' + rotuloTotal + '</span></div>' +
-      '<div class="card-corpo">' +
-      '<div class="metricas-bloco">' +
-      '<div class="metrica-destaque">' +
-      '<span class="metrica-numero">' + total + '</span>' +
-      '<span class="metrica-rotulo">projetos votados</span></div>' +
-      '<div class="metrica-detalhes">' +
-      '<div class="item-detalhe">' +
-      '<span class="det-rotulo det-rotulo-unanimidade">Unanimidade</span>' +
-      '<span class="det-valor">' + unanimes + ' <small style="font-size:11px;font-weight:500">(' + pctUni + '%)</small></span></div>' +
-      '<div class="item-detalhe det-separador">' +
-      '<span class="det-rotulo det-rotulo-maioria">Por Maioria</span>' +
-      '<span class="det-valor">' + maioria + ' <small style="font-size:11px;font-weight:500">(' + pctMai + '%)</small></span></div></div></div>' +
-      '<div class="grafico-anel-box" role="img" aria-label="' + total + ' projetos votados: ' + unanimes + ' por unanimidade e ' + maioria + ' por maioria">' +
-      '<svg class="anel-svg" viewBox="0 0 58 58" aria-hidden="true">' +
-      '<circle class="anel-fundo" cx="29" cy="29" r="23"></circle>' +
-      '<circle class="anel-progresso-unanimidade" cx="29" cy="29" r="23"></circle>' +
-      '<circle class="anel-progresso-maioria" cx="29" cy="29" r="23"></circle></svg>' +
-      '<span class="anel-porcento">' + pctUni + '%</span></div></div>';
-
-    // Update donut chart
-    var circ = 2 * Math.PI * 23;
-    var circUni = container.querySelector(".anel-progresso-unanimidade");
-    var circMai = container.querySelector(".anel-progresso-maioria");
-    if (circUni) {
-      circUni.style.strokeDasharray = (pctUni / 100 * circ) + " " + circ;
-      circUni.style.strokeDashoffset = "0";
-    }
-    if (circMai) {
-      if (pctMai === 0) {
-        circMai.style.display = "none";
-      } else {
-        circMai.style.display = "";
-        circMai.style.strokeDasharray = (pctMai / 100 * circ) + " " + circ;
-        circMai.style.strokeDashoffset = -(pctUni / 100 * circ);
-      }
-    }
-  }
-
 
   var estadoMaterias = {
     periodo: "sessao",
@@ -4487,7 +4911,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
 
   function textoSharePortal() {
     return "Em Pratos Limpos\n\n" +
-      "Dados oficiais da Câmara Municipal de município reunidos em um portal cívico de transparência.\n\n" +
+      "Dados oficiais da " + nomeCamaraMunicipal() + " reunidos em um portal cívico de transparência.\n\n" +
       "Consulte: " + PORTAL_OFICIAL;
   }
 
@@ -4515,11 +4939,11 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var resultadoLinha = data
       ? "Resultado oficial em " + data + ": " + resultadoOficial(m) + "."
       : "Resultado oficial: " + resultadoOficial(m) + ".";
-    var linhas = ["O que a Câmara de município votou", "", m.tipo];
+    var linhas = ["O que a Câmara de " + nomeCidade() + " votou", "", m.tipo];
     if (tema) linhas.push("Tema: " + tema);
     linhas.push("", m.ementa, "", resultadoLinha);
     if (placar) linhas.push("Placar: " + placar + ".");
-    linhas.push("", "Fonte oficial: SAPL da Câmara Municipal de município.",
+    linhas.push("", "Fonte oficial: " + rotuloSaplCamara() + ".",
       "Consulte a matéria: " + linkSap,
       "Veja os dados reunidos no Em Pratos Limpos: " + PORTAL_OFICIAL,
       "", "#EmPratosLimpos  #CamaraMunicipal #TransparenciaPublica");
@@ -4533,7 +4957,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var linhas = [m.tipo, "", ementa, "", resultadoOficial(m)];
     if (placar) linhas.push(placar);
     if (tema) linhas.push("", "Tema: " + tema);
-    linhas.push("Fonte: SAPL da Câmara de município", "Ver matéria no SAPL", "", "Dados reunidos pelo Em Pratos Limpos");
+    linhas.push("Fonte: SAPL da Câmara de " + nomeCidade(), "Ver matéria no SAPL", "", "Dados reunidos pelo Em Pratos Limpos");
     return juntarLinhasShare(linhas);
   }
 
@@ -4545,21 +4969,21 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var linhas = [m.tipo, resultadoOficial(m)];
     if (placar) linhas.push(placar);
     linhas.push("");
-    var votou = "A Câmara Municipal de município votou " + m.tipo;
+    var votou = rotuloCamaraVotou() + m.tipo;
     if (data) votou += " em " + data;
     linhas.push(votou + ".");
     if (tema) linhas.push("Tema: " + tema + ".");
     linhas.push(m.ementa, "");
     var resultadoLinha = "Resultado oficial: " + resultadoOficial(m) + ".";
     if (placar) resultadoLinha += " Placar: " + placar + ".";
-    linhas.push(resultadoLinha, "", "Fonte oficial: SAPL da Câmara Municipal de município.", linkSap,
+    linhas.push(resultadoLinha, "", "Fonte oficial: " + rotuloSaplCamara() + ".", linkSap,
       "", "#EmPratosLimpos  #CamaraMunicipal #TransparenciaPublica");
     return juntarLinhasShare(linhas);
   }
 
   function textoSharePeriodoWhatsApp(periodo) {
     var lista = MATERIAS_CAMARA[periodo] || [];
-    var linhas = ["Em Pratos Limpos", "", "O que a Câmara de município votou",
+    var linhas = ["Em Pratos Limpos", "", "O que a Câmara de " + nomeCidade() + " votou",
       "Período: " + rotuloPeriodoShare(periodo), ""];
     lista.forEach(function (m) {
       var tema = temaParaShare(m.id);
@@ -4567,14 +4991,14 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       if (tema) linha = m.tipo + ". Tema: " + tema + ". " + resultadoOficial(m) + ".";
       linhas.push(linha);
     });
-    linhas.push("", "Fonte oficial: SAPL da Câmara Municipal de município.",
+    linhas.push("", "Fonte oficial: " + rotuloSaplCamara() + ".",
       "Consulte no portal: " + PORTAL_OFICIAL);
     return juntarLinhasShare(linhas);
   }
 
   function textoSharePeriodoInstagram(periodo) {
     var lista = MATERIAS_CAMARA[periodo] || [];
-    var linhas = ["O que a Câmara de município votou", "",
+    var linhas = ["O que a Câmara de " + nomeCidade() + " votou", "",
       "Período: " + rotuloPeriodoShare(periodo), ""];
     lista.forEach(function (m) {
       var tema = temaParaShare(m.id);
@@ -4582,7 +5006,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       if (tema) linha = m.tipo + ". Tema: " + tema + ". " + resultadoOficial(m) + ".";
       linhas.push(linha);
     });
-    linhas.push("", "Fonte oficial: SAPL da Câmara Municipal de município.",
+    linhas.push("", "Fonte oficial: " + rotuloSaplCamara() + ".",
       "Veja os dados reunidos no Em Pratos Limpos: " + PORTAL_OFICIAL,
       "", "#EmPratosLimpos  #CamaraMunicipal #TransparenciaPublica");
     return juntarLinhasShare(linhas);
@@ -4594,18 +5018,18 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     lista.forEach(function (m) {
       linhas.push(m.tipo + ": " + resultadoOficial(m));
     });
-    linhas.push("", "Fonte: SAPL da Câmara de município", "", "Dados reunidos pelo Em Pratos Limpos");
+    linhas.push("", "Fonte: SAPL da Câmara de " + nomeCidade(), "", "Dados reunidos pelo Em Pratos Limpos");
     return juntarLinhasShare(linhas);
   }
 
   function textoSharePeriodoTikTok(periodo) {
     var lista = MATERIAS_CAMARA[periodo] || [];
-    var linhas = ["O que a Câmara de município votou", rotuloPeriodoShare(periodo), ""];
+    var linhas = ["O que a Câmara de " + nomeCidade() + " votou", rotuloPeriodoShare(periodo), ""];
     lista.forEach(function (m) {
       var tema = temaParaShare(m.id);
       linhas.push(m.tipo + (tema ? " (" + tema + ")" : "") + ": " + resultadoOficial(m) + ".");
     });
-    linhas.push("", "Fonte oficial: SAPL da Câmara Municipal de município.",
+    linhas.push("", "Fonte oficial: " + rotuloSaplCamara() + ".",
       PORTAL_OFICIAL, "", "#EmPratosLimpos  #CamaraMunicipal #TransparenciaPublica");
     return juntarLinhasShare(linhas);
   }
@@ -4673,7 +5097,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "",
       "",
       "",
-      "Fonte oficial: SAPL da Câmara Municipal de município."];
+      "Fonte oficial: " + rotuloSaplCamara() + "."];
     if (d.sapl) linhas.push("Perfil no SAPL: " + d.sapl);
     linhas.push("Dados reunidos no Em Pratos Limpos: " + d.portal,
       "", "#EmPratosLimpos  #CamaraMunicipal #TransparenciaPublica");
@@ -4737,7 +5161,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "",
       "",
       "",
-      "Fonte oficial: SAPL da Câmara Municipal de município.",
+      "Fonte oficial: " + rotuloSaplCamara() + ".",
       d.portal,
       "",
       "#EmPratosLimpos  #CamaraMunicipal #TransparenciaPublica"
