@@ -3580,7 +3580,7 @@
       faltas: faltas,
       fora: fora,
       licenca: licenca,
-      banca: presentes + faltas + fora + licenca
+      banca: presentes + faltas + licenca
     };
   }
 
@@ -3630,13 +3630,6 @@
       var html =
         capsulaPresenca("capsula-verde", "Presentes", c.presentes) +
         capsulaPresenca("capsula-neutro", "Faltas", c.faltas);
-      if (c.fora > 0) {
-        html += capsulaPresenca(
-          "capsula-neutro",
-          rotulos.fora_do_mandato || "Fora do mandato naquela data",
-          c.fora
-        );
-      }
       if (c.licenca > 0) {
         html += capsulaPresenca(
           "capsula-neutro",
