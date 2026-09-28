@@ -24,6 +24,7 @@
       "dados/brutos/lote_20260927_autoria/autoria_p9.json"
     ],
     "autoria_total_entries_api": 900,
+    "autoria_total_linhas_lidas": 900,
     "autoria_ids_distintos": 865,
     "nota_autoria": "A lista materia/autoria repetiu ids entre paginas e o filtro por ano foi ignorado pelo SAPL. Ela so informa o primeiro autor. A ligacao materia e autor vem do campo autores da propria materia.",
     "por_ano": {
