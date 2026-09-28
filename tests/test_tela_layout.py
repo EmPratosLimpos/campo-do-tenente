@@ -58,7 +58,7 @@ PERIODOS = ("sessao", "mes", "todo")
 MARCADORES = {
     "sessao": "Presença dos vereadores",
     "mes": "Quantas votações por tipo?",
-    "todo": "Qual foi o resultado das votacoes?",
+    "todo": "Qual foi o resultado das votações?",
 }
 BLOCOS_CABECALHO = (".titulo-site", ".selo-sapl", ".subtitulo-site")
 BLOCOS_VEREADORES = (
