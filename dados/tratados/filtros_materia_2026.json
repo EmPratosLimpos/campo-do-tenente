@@ -1,0 +1,53 @@
+{
+  "sessao": [
+    {
+      "id": "",
+      "rotulo": "Todos",
+      "qtd": 2
+    },
+    {
+      "id": "unanimidade",
+      "rotulo": "Unânimes",
+      "qtd": 2
+    },
+    {
+      "id": "maioria",
+      "rotulo": "Maioria",
+      "qtd": 0
+    }
+  ],
+  "mes": [
+    {
+      "id": "",
+      "rotulo": "Todos",
+      "qtd": 1
+    },
+    {
+      "id": "unanimidade",
+      "rotulo": "Unânimes",
+      "qtd": 1
+    },
+    {
+      "id": "maioria",
+      "rotulo": "Maioria",
+      "qtd": 0
+    }
+  ],
+  "todo": [
+    {
+      "id": "",
+      "rotulo": "Todos",
+      "qtd": 5
+    },
+    {
+      "id": "unanimidade",
+      "rotulo": "Unânimes",
+      "qtd": 5
+    },
+    {
+      "id": "maioria",
+      "rotulo": "Maioria",
+      "qtd": 0
+    }
+  ]
+}
