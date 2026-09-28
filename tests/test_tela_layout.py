@@ -466,6 +466,8 @@ class TestTelaLayout(unittest.TestCase):
             )
             texto_lateral = page.inner_text("#menu-lateral")
             self.assertIn("Dado coletado em", texto_lateral)
+            texto_corpo = page.inner_text(".pagina-corpo")
+            self.assertNotIn("Dado coletado em", texto_corpo, "rodape duplicado em Camara no desktop")
 
         else:
             self.assertFalse(lateral, "menu lateral nao deve aparecer no celular")
@@ -538,6 +540,12 @@ class TestTelaLayout(unittest.TestCase):
                 topo["ok"],
                 f"primeiros cartoes de vereadores desalinhados: {topo}",
             )
+            
+            # Check rodape duplicado em vereadores
+            texto_lateral = page.inner_text("#menu-lateral")
+            self.assertIn("Dado coletado em", texto_lateral)
+            texto_corpo = page.inner_text(".pagina-corpo")
+            self.assertNotIn("Dado coletado em", texto_corpo, "rodape duplicado em Vereadores no desktop")
         else:
             duas = page.evaluate(JS_DUAS_COLUNAS, "#conteudo-vereadores")
             self.assertFalse(duas, "vereadores deveria ter coluna unica no celular")

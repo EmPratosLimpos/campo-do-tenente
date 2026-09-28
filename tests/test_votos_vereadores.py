@@ -44,6 +44,13 @@ class TestVotosVereadores(unittest.TestCase):
             page.select_option("#sel-vereador", label="Rafael Ventura")
             page.wait_for_timeout(1000)
 
+            abrir_se_fechado("tit-pll")
+            page.click("button[data-filtro-pll='aprovado']")
+            page.wait_for_timeout(500)
+            texto_rafael_aprovados = page.locator(".lista-pll").inner_text()
+            self.assertIn("Tema: Administração e finanças.", texto_rafael_aprovados)
+            self.assertNotIn("Tema: .", texto_rafael_aprovados)
+
             opcoes_rafael = page.locator("#sel-vereador option").all_inner_texts()
             self.assertTrue(all("(Cassado)" not in o for o in opcoes_rafael if "Rafael" in o))
 
