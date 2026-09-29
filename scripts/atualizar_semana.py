@@ -2,8 +2,8 @@
 """Atualiza os dados da semana a partir do SAPL.
 
 Ordem: lote, sessoes ordinarias que ainda nao tem arquivo, autoria,
-derivacao, vereadores, presidencia, autoria tratada, atuacao por ano,
-temas, sanidade e hash.
+tramitacao das materias novas ou em tramitacao, derivacao, vereadores,
+presidencia, autoria tratada, atuacao por ano, temas, sanidade e hash.
 
 Um pedido por vez. Pausa de PAUSA_SAPL_SEGUNDOS (2,5 s). No maximo
 400 pedidos nesta execucao. Anos saem de config_cidade.json. O ano
@@ -321,6 +321,94 @@ def coletar_autoria(coletor: ColetorLote, anos: list[int], simulado: bool) -> No
         continuar_apos_primeira(pagina, prefixo, baixar)
 
 
+def pasta_tramitacao_mais_recente(brutos: Path) -> Path | None:
+    candidatas = [
+        caminho
+        for caminho in brutos.glob("lote_*_tramitacao")
+        if caminho.is_dir() and (caminho / "indice.json").exists()
+    ]
+    if not candidatas:
+        return None
+    return sorted(candidatas)[-1]
+
+
+def fichas_em_tramitacao(pasta_lote: Path) -> dict[int, bool]:
+    """Id da materia para em_tramitacao, lido da ficha no lote mais recente."""
+    mapa: dict[int, bool] = {}
+    for caminho in sorted(pasta_lote.glob("materialegislativa_ano*_p*.json")):
+        dados = ler_json(caminho)
+        if not isinstance(dados, dict):
+            continue
+        for item in dados.get("results") or []:
+            if isinstance(item, dict) and item.get("id") is not None:
+                mapa[int(item["id"])] = bool(item.get("em_tramitacao"))
+    return mapa
+
+
+def coletar_tramitacao(coletor: ColetorLote, pasta_lote: Path, simulado: bool) -> None:
+    """Tramitacao so das materias novas ou com em_tramitacao verdadeiro.
+
+    Mesma pausa e teto da execucao, um pedido por vez. Tipos lidos do
+    config, nunca fixos aqui. Catalogos de status e unidades sao
+    reconferidos pagina a pagina.
+    """
+    from coletar_tramitacao import (
+        carregar_materias_alvo,
+        conferir_tramitacao,
+        tem_proxima_pagina as tem_proxima,
+        numero_da_proxima as numero_proxima,
+    )
+
+    cfg = carregar_config()
+    alvos = carregar_materias_alvo(cfg)
+    fichas = fichas_em_tramitacao(pasta_lote)
+    for materia in alvos:
+        mid = int(materia["id"])
+        arquivo = f"tramitacao_materia{mid}_p1.json"
+        existe = (coletor.pasta / arquivo).is_file()
+        if existe and not fichas.get(mid, False):
+            continue
+        if simulado:
+            print(f"  {arquivo} ausente ou em tramitacao. Modo simulado nao baixa.")
+            continue
+        print(f"tramitacao materia {mid}")
+        try:
+            primeira = coletor.pedir(
+                "/api/materia/tramitacao/",
+                {"materia": mid},
+                arquivo,
+                refrescar=existe,
+            )
+            conferir_tramitacao(primeira, mid, arquivo)
+        except SystemExit as exc:
+            print(f"  Falhou a materia {mid}, sigo: {exc}")
+            continue
+        if not isinstance(primeira, dict):
+            continue
+        pagina = int((primeira.get("pagination") or {}).get("page") or 1)
+        atual = primeira
+        while tem_proxima(atual):
+            pagina = numero_proxima(atual, pagina)
+            proximo = f"tramitacao_materia{mid}_p{pagina}.json"
+            try:
+                atual = coletor.pedir(
+                    "/api/materia/tramitacao/",
+                    {"materia": mid, "page": pagina},
+                    proximo,
+                    refrescar=(coletor.pasta / proximo).is_file(),
+                )
+                conferir_tramitacao(atual, mid, proximo)
+            except SystemExit as exc:
+                print(f"  Falhou {proximo}, sigo: {exc}")
+                break
+    for caminho, prefixo in (
+        ("/api/materia/statustramitacao/", "statustramitacao"),
+        ("/api/materia/unidadetramitacao/", "unidadetramitacao"),
+    ):
+        print(prefixo)
+        atualizar_paginas(coletor, caminho, {}, prefixo, simulado)
+
+
 def rodar(argumentos: list[str]) -> None:
     print(">", " ".join(argumentos))
     resultado = subprocess.run([sys.executable, *argumentos], cwd=RAIZ)
@@ -555,6 +643,28 @@ def main(argv: list[str] | None = None) -> int:
         except OrcamentoEsgotado as exc:
             print(f"PAROU: {exc}")
             return 2
+
+        pasta_tramitacao = pasta_tramitacao_mais_recente(BRUTOS)
+        if pasta_tramitacao is None:
+            if args.simulado:
+                print("Sem pasta de tramitacao. Modo simulado nao baixa.")
+            else:
+                pasta_tramitacao = BRUTOS / f"lote_{hoje.strftime('%Y%m%d')}_tramitacao"
+                coletor_tramitacao = preparar_coletor(cfg, pasta_tramitacao, orcamento, False)
+                coletores.append(coletor_tramitacao)
+                try:
+                    coletar_tramitacao(coletor_tramitacao, pasta_lote, False)
+                except OrcamentoEsgotado as exc:
+                    print(f"PAROU: {exc}")
+                    return 2
+        else:
+            coletor_tramitacao = preparar_coletor(cfg, pasta_tramitacao, orcamento, args.simulado)
+            coletores.append(coletor_tramitacao)
+            try:
+                coletar_tramitacao(coletor_tramitacao, pasta_lote, args.simulado)
+            except OrcamentoEsgotado as exc:
+                print(f"PAROU: {exc}")
+                return 2
     finally:
         coletar_lote.urllib.request.urlopen = original_urlopen
 
