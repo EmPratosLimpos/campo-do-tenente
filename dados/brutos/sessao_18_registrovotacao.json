@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 70,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 19 - Requerimento nº 30 de 2025 em 34ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-09-02T19:31:49.741367-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 192,
+      "ordem": 218,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 71,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 20 - Indicação nº 54 de 2025 em 34ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-09-02T19:37:11.605036-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 194,
+      "ordem": 219,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 2
+}

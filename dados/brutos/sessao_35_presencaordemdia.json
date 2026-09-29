@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 412,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 35,
+      "parlamentar": 3
+    },
+    {
+      "id": 413,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 35,
+      "parlamentar": 9
+    },
+    {
+      "id": 414,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 35,
+      "parlamentar": 6
+    },
+    {
+      "id": 415,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 35,
+      "parlamentar": 7
+    },
+    {
+      "id": 416,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 35,
+      "parlamentar": 4
+    },
+    {
+      "id": 417,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 35,
+      "parlamentar": 5
+    }
+  ],
+  "total": 6
+}

@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 665,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 9 de 2026 em 27ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/665",
+      "metadata": {},
+      "data_ordem": "2026-08-11",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 266,
+      "materia": 704,
+      "tramitacao": null
+    },
+    {
+      "id": 666,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem do Poder Legislativo nº 3 de 2026 em 27ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/666",
+      "metadata": {},
+      "data_ordem": "2026-08-11",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 266,
+      "materia": 698,
+      "tramitacao": null
+    },
+    {
+      "id": 667,
+      "__str__": "Ordem do Dia/Expediente: 3 - Projeto de Resolução nº 7 de 2026 em 27ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/667",
+      "metadata": {},
+      "data_ordem": "2026-08-11",
+      "observacao": "",
+      "numero_ordem": 3,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 266,
+      "materia": 701,
+      "tramitacao": null
+    }
+  ],
+  "total": 3
+}

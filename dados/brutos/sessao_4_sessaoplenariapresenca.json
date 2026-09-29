@@ -1,0 +1,86 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "__str__": "SessaoPlenariaPresenca object (1)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 4,
+      "parlamentar": 8
+    },
+    {
+      "id": 2,
+      "__str__": "SessaoPlenariaPresenca object (2)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 4,
+      "parlamentar": 3
+    },
+    {
+      "id": 3,
+      "__str__": "SessaoPlenariaPresenca object (3)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 4,
+      "parlamentar": 2
+    },
+    {
+      "id": 4,
+      "__str__": "SessaoPlenariaPresenca object (4)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 4,
+      "parlamentar": 9
+    },
+    {
+      "id": 5,
+      "__str__": "SessaoPlenariaPresenca object (5)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 4,
+      "parlamentar": 6
+    },
+    {
+      "id": 6,
+      "__str__": "SessaoPlenariaPresenca object (6)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 4,
+      "parlamentar": 1
+    },
+    {
+      "id": 7,
+      "__str__": "SessaoPlenariaPresenca object (7)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 4,
+      "parlamentar": 7
+    },
+    {
+      "id": 8,
+      "__str__": "SessaoPlenariaPresenca object (8)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 4,
+      "parlamentar": 4
+    },
+    {
+      "id": 9,
+      "__str__": "SessaoPlenariaPresenca object (9)",
+      "link_detail_backend": "",
+      "metadata": {},
+      "data_sessao": null,
+      "sessao_plenaria": 4,
+      "parlamentar": 5
+    }
+  ],
+  "total": 9
+}

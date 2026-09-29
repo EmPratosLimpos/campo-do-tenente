@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 41,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 12 de 2025 em 26ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-07-08T19:26:07.501484-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 32,
+      "ordem": 78,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 42,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 2 - Projeto de Lei Origem Poder Executivo nº 13 de 2025 em 26ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-07-08T19:27:10.371300-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 43,
+      "ordem": 79,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 43,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 13 de 2025 em 26ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-07-08T19:28:03.010956-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 37,
+      "ordem": 80,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 44,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 8 - Requerimento nº 26 de 2025 em 26ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 7,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-07-08T19:34:56.655844-03:00",
+      "tipo_resultado_votacao": 3,
+      "materia": 94,
+      "ordem": 85,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 4
+}

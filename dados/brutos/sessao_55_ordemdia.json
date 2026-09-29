@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 634,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 6 de 2026 em 14ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/634",
+      "metadata": {},
+      "data_ordem": "2026-05-12",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 55,
+      "materia": 290,
+      "tramitacao": 827
+    },
+    {
+      "id": 633,
+      "__str__": "Ordem do Dia/Expediente: 2 - Indicação nº 14 de 2026 em 14ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/633",
+      "metadata": {},
+      "data_ordem": "2026-05-12",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 55,
+      "materia": 353,
+      "tramitacao": null
+    }
+  ],
+  "total": 2
+}

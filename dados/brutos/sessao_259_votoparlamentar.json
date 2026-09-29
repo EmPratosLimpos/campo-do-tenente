@@ -1,0 +1,109 @@
+{
+  "results": [
+    {
+      "id": 800,
+      "__str__": "Votação: Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 21 de 2026 em 20ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-06-23T19:18:36.021443-03:00",
+      "votacao": 223,
+      "parlamentar": 4,
+      "user": 5,
+      "ordem": null,
+      "expediente": 54
+    },
+    {
+      "id": 801,
+      "__str__": "Votação: Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 21 de 2026 em 20ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-06-23T19:18:36.048775-03:00",
+      "votacao": 223,
+      "parlamentar": 100,
+      "user": 5,
+      "ordem": null,
+      "expediente": 54
+    },
+    {
+      "id": 802,
+      "__str__": "Votação: Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 21 de 2026 em 20ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-06-23T19:18:35.984729-03:00",
+      "votacao": 223,
+      "parlamentar": 3,
+      "user": 5,
+      "ordem": null,
+      "expediente": 54
+    },
+    {
+      "id": 803,
+      "__str__": "Votação: Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 21 de 2026 em 20ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-06-23T19:18:36.002052-03:00",
+      "votacao": 223,
+      "parlamentar": 6,
+      "user": 5,
+      "ordem": null,
+      "expediente": 54
+    },
+    {
+      "id": 804,
+      "__str__": "Votação: Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 21 de 2026 em 20ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-06-23T19:18:36.010926-03:00",
+      "votacao": 223,
+      "parlamentar": 7,
+      "user": 5,
+      "ordem": null,
+      "expediente": 54
+    },
+    {
+      "id": 805,
+      "__str__": "Votação: Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 21 de 2026 em 20ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-06-23T19:18:35.974202-03:00",
+      "votacao": 223,
+      "parlamentar": 8,
+      "user": 5,
+      "ordem": null,
+      "expediente": 54
+    },
+    {
+      "id": 806,
+      "__str__": "Votação: Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 21 de 2026 em 20ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-06-23T19:18:35.993518-03:00",
+      "votacao": 223,
+      "parlamentar": 9,
+      "user": 5,
+      "ordem": null,
+      "expediente": 54
+    },
+    {
+      "id": 807,
+      "__str__": "Votação: Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 21 de 2026 em 20ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Não Votou",
+      "data_hora": "2026-06-23T19:18:36.037181-03:00",
+      "votacao": 223,
+      "parlamentar": 5,
+      "user": 5,
+      "ordem": null,
+      "expediente": 54
+    }
+  ],
+  "total": 8
+}

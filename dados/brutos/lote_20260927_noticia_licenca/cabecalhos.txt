@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Date: Sun, 27 Sep 2026 16:53:03 GMT
+Content-Type: text/html;charset=utf-8
+Content-Length: 84459
+Connection: keep-alive
+X-Cache-Operation: plone.app.caching.weakCaching
+Content-Language: pt-br
+Expires: Thu, 29 Sep 2016 16:13:01 GMT
+ETag: "||9518|pt-br|0|Sunburst Theme|0|1745503823.76"
+X-Ua-Compatible: IE=edge,chrome=1
+Cache-Control: max-age=0, must-revalidate, private
+X-Cache-Rule: plone.content.itemView
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Cache-Status: STALE
+

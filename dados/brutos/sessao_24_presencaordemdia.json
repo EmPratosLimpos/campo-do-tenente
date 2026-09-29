@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 298,
+      "__str__": "Sessão: 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 24,
+      "parlamentar": 3
+    },
+    {
+      "id": 299,
+      "__str__": "Sessão: 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 24,
+      "parlamentar": 2
+    },
+    {
+      "id": 300,
+      "__str__": "Sessão: 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 24,
+      "parlamentar": 9
+    },
+    {
+      "id": 301,
+      "__str__": "Sessão: 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 24,
+      "parlamentar": 6
+    },
+    {
+      "id": 302,
+      "__str__": "Sessão: 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Jorge Quege",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 24,
+      "parlamentar": 1
+    },
+    {
+      "id": 303,
+      "__str__": "Sessão: 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 24,
+      "parlamentar": 7
+    },
+    {
+      "id": 304,
+      "__str__": "Sessão: 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 24,
+      "parlamentar": 4
+    },
+    {
+      "id": 305,
+      "__str__": "Sessão: 40ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 24,
+      "parlamentar": 5
+    }
+  ],
+  "total": 8
+}

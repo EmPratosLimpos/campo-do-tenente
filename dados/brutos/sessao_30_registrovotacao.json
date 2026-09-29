@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 99,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 19 - Projeto de Lei Origem do Poder Legislativo nº 18 de 2025 em 45ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-11-18T19:15:54.789923-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 216,
+      "ordem": 412,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 1
+}

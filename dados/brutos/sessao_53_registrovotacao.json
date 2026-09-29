@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 195,
+      "__str__": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 13 de 2026 em 12ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-04-28T19:39:40.173460-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 345,
+      "ordem": null,
+      "expediente": 44,
+      "user": 5
+    },
+    {
+      "id": 196,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 2 - Indicação nº 11 de 2026 em 12ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-04-28T19:43:57.553774-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 304,
+      "ordem": 626,
+      "expediente": null,
+      "user": 5
+    }
+  ],
+  "total": 2
+}

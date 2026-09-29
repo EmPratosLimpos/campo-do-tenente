@@ -1,0 +1,122 @@
+{
+  "results": [
+    {
+      "id": 80,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 31ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-08-12T19:23:51.930962-03:00",
+      "votacao": 64,
+      "parlamentar": 8,
+      "user": 5,
+      "ordem": 153,
+      "expediente": null
+    },
+    {
+      "id": 81,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 31ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Não",
+      "data_hora": "2025-08-12T19:23:51.954790-03:00",
+      "votacao": 64,
+      "parlamentar": 3,
+      "user": 5,
+      "ordem": 153,
+      "expediente": null
+    },
+    {
+      "id": 82,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 31ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-08-12T19:23:51.976565-03:00",
+      "votacao": 64,
+      "parlamentar": 2,
+      "user": 5,
+      "ordem": 153,
+      "expediente": null
+    },
+    {
+      "id": 83,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 31ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-08-12T19:23:51.995999-03:00",
+      "votacao": 64,
+      "parlamentar": 9,
+      "user": 5,
+      "ordem": 153,
+      "expediente": null
+    },
+    {
+      "id": 84,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 31ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-08-12T19:23:52.016667-03:00",
+      "votacao": 64,
+      "parlamentar": 6,
+      "user": 5,
+      "ordem": 153,
+      "expediente": null
+    },
+    {
+      "id": 85,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 31ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Jorge Quege",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-08-12T19:23:52.034829-03:00",
+      "votacao": 64,
+      "parlamentar": 1,
+      "user": 5,
+      "ordem": 153,
+      "expediente": null
+    },
+    {
+      "id": 86,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 31ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-08-12T19:23:52.054224-03:00",
+      "votacao": 64,
+      "parlamentar": 7,
+      "user": 5,
+      "ordem": 153,
+      "expediente": null
+    },
+    {
+      "id": 87,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 31ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-08-12T19:23:52.072529-03:00",
+      "votacao": 64,
+      "parlamentar": 4,
+      "user": 5,
+      "ordem": 153,
+      "expediente": null
+    },
+    {
+      "id": 88,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 15 de 2025 em 31ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade - Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2025-08-12T19:23:52.090483-03:00",
+      "votacao": 64,
+      "parlamentar": 5,
+      "user": 5,
+      "ordem": 153,
+      "expediente": null
+    }
+  ],
+  "total": 9
+}

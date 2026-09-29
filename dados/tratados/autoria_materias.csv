@@ -1,0 +1,578 @@
+materia_id;ano;numero;rotulo_sapl;autor_id;ordem_no_sapl;primeiro_autor;tipo_autor_id;tipo_autor;parlamentar_id_sapl;nome_no_sapl;rotulo;link_sapl
+1;2025;1;Oficio do Poder Executivo nº 1 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1
+2;2025;2;Moção nº 2 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/2
+3;2025;5;Moção nº 5 de 2025;16;1;true;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/3
+3;2025;5;Moção nº 5 de 2025;8;2;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/3
+3;2025;5;Moção nº 5 de 2025;13;3;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/3
+3;2025;5;Moção nº 5 de 2025;9;4;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/3
+3;2025;5;Moção nº 5 de 2025;10;5;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/3
+3;2025;5;Moção nº 5 de 2025;11;6;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/3
+3;2025;5;Moção nº 5 de 2025;12;7;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/3
+3;2025;5;Moção nº 5 de 2025;14;8;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/3
+3;2025;5;Moção nº 5 de 2025;15;9;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/3
+5;2025;3;Moção nº 3 de 2025;16;1;false;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/5
+5;2025;3;Moção nº 3 de 2025;8;2;false;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/5
+5;2025;3;Moção nº 3 de 2025;13;3;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/5
+5;2025;3;Moção nº 3 de 2025;9;4;false;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/5
+5;2025;3;Moção nº 3 de 2025;10;5;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/5
+5;2025;3;Moção nº 3 de 2025;11;6;false;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/5
+5;2025;3;Moção nº 3 de 2025;12;7;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/5
+5;2025;3;Moção nº 3 de 2025;14;8;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/5
+5;2025;3;Moção nº 3 de 2025;15;9;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/5
+6;2025;4;Moção nº 4 de 2025;16;1;false;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/6
+6;2025;4;Moção nº 4 de 2025;8;2;false;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/6
+6;2025;4;Moção nº 4 de 2025;13;3;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/6
+6;2025;4;Moção nº 4 de 2025;9;4;false;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/6
+6;2025;4;Moção nº 4 de 2025;10;5;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/6
+6;2025;4;Moção nº 4 de 2025;11;6;false;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/6
+6;2025;4;Moção nº 4 de 2025;12;7;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/6
+6;2025;4;Moção nº 4 de 2025;14;8;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/6
+6;2025;4;Moção nº 4 de 2025;15;9;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/6
+8;2025;19;Requerimento nº 19 de 2025;13;1;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/8
+8;2025;19;Requerimento nº 19 de 2025;9;2;false;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/8
+8;2025;19;Requerimento nº 19 de 2025;10;3;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/8
+8;2025;19;Requerimento nº 19 de 2025;14;4;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/8
+8;2025;19;Requerimento nº 19 de 2025;15;5;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/8
+9;2025;36;Indicação nº 36 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/9
+10;2025;37;Indicação nº 37 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/10
+10;2025;37;Indicação nº 37 de 2025;15;2;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/10
+11;2025;38;Indicação nº 38 de 2025;11;1;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/11
+12;2025;39;Indicação nº 39 de 2025;11;1;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/12
+13;2025;6;Projeto de Lei Origem do Poder Legislativo nº 6 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/13
+14;2025;10;Projeto de Lei Origem Poder Executivo nº 10 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/14
+15;2025;20;Requerimento nº 20 de 2025;10;1;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/15
+15;2025;20;Requerimento nº 20 de 2025;14;2;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/15
+15;2025;20;Requerimento nº 20 de 2025;15;3;false;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/15
+16;2025;21;Requerimento nº 21 de 2025;13;1;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/16
+16;2025;21;Requerimento nº 21 de 2025;10;2;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/16
+16;2025;21;Requerimento nº 21 de 2025;14;3;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/16
+16;2025;21;Requerimento nº 21 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/16
+17;2025;2;Emenda nº 2 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/17
+18;2025;2;Oficio do Poder Executivo nº 2 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/18
+19;2025;3;Oficio do Poder Executivo nº 3 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/19
+20;2025;40;Indicação nº 40 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/20
+20;2025;40;Indicação nº 40 de 2025;14;2;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/20
+20;2025;40;Indicação nº 40 de 2025;15;3;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/20
+21;2025;41;Indicação nº 41 de 2025;14;1;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/21
+22;2025;9;Projeto de Resolução nº 9 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/22
+22;2025;9;Projeto de Resolução nº 9 de 2025;12;2;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/22
+22;2025;9;Projeto de Resolução nº 9 de 2025;14;3;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/22
+22;2025;9;Projeto de Resolução nº 9 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/22
+23;2025;6;Moção nº 6 de 2025;13;1;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/23
+23;2025;6;Moção nº 6 de 2025;10;2;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/23
+23;2025;6;Moção nº 6 de 2025;14;3;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/23
+23;2025;6;Moção nº 6 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/23
+24;2025;7;Moção nº 7 de 2025;13;1;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/24
+24;2025;7;Moção nº 7 de 2025;10;2;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/24
+24;2025;7;Moção nº 7 de 2025;14;3;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/24
+24;2025;7;Moção nº 7 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/24
+25;2025;12;Projeto de Lei Origem do Poder Legislativo nº 12 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/25
+26;2025;10;Projeto de Lei Origem do Poder Legislativo nº 10 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/26
+27;2025;8;Projeto de Lei Origem do Poder Legislativo nº 8 de 2025;10;1;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/27
+27;2025;8;Projeto de Lei Origem do Poder Legislativo nº 8 de 2025;12;2;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/27
+27;2025;8;Projeto de Lei Origem do Poder Legislativo nº 8 de 2025;14;3;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/27
+27;2025;8;Projeto de Lei Origem do Poder Legislativo nº 8 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/27
+28;2025;9;Projeto de Lei Origem do Poder Legislativo nº 9 de 2025;10;1;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/28
+28;2025;9;Projeto de Lei Origem do Poder Legislativo nº 9 de 2025;12;2;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/28
+28;2025;9;Projeto de Lei Origem do Poder Legislativo nº 9 de 2025;14;3;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/28
+28;2025;9;Projeto de Lei Origem do Poder Legislativo nº 9 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/28
+29;2025;11;Projeto de Lei Origem Poder Executivo nº 11 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/29
+30;2025;42;Indicação nº 42 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/30
+30;2025;42;Indicação nº 42 de 2025;10;2;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/30
+31;2025;11;Projeto de Lei Origem do Poder Legislativo nº 11 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/31
+32;2025;12;Projeto de Lei Origem Poder Executivo nº 12 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/32
+34;2025;4;Oficio do Poder Executivo nº 4 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/34
+35;2025;43;Indicação nº 43 de 2025;13;1;;2;Parlamentar;2;Dr. Marcos Rodrigues;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/35
+36;2025;22;Requerimento nº 22 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/36
+37;2025;13;Projeto de Lei Origem do Poder Legislativo nº 13 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/37
+38;2025;44;Indicação nº 44 de 2025;11;1;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/38
+39;2025;7;Oficio do Poder Executivo nº 7 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/39
+40;2025;5;Oficio do Poder Executivo nº 5 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/40
+41;2025;23;Requerimento nº 23 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/41
+42;2025;6;Oficio do Poder Executivo nº 6 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/42
+43;2025;13;Projeto de Lei Origem Poder Executivo nº 13 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/43
+44;2025;24;Requerimento nº 24 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/44
+45;2025;3;Emenda nº 3 de 2025;16;1;false;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/45
+45;2025;3;Emenda nº 3 de 2025;8;2;false;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/45
+45;2025;3;Emenda nº 3 de 2025;13;3;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/45
+45;2025;3;Emenda nº 3 de 2025;9;4;false;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/45
+45;2025;3;Emenda nº 3 de 2025;10;5;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/45
+45;2025;3;Emenda nº 3 de 2025;11;6;false;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/45
+45;2025;3;Emenda nº 3 de 2025;12;7;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/45
+45;2025;3;Emenda nº 3 de 2025;14;8;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/45
+45;2025;3;Emenda nº 3 de 2025;15;9;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/45
+46;2025;45;Indicação nº 45 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/46
+47;2025;1;Projeto de Lei Origem do Poder Legislativo nº 1 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/47
+47;2025;1;Projeto de Lei Origem do Poder Legislativo nº 1 de 2025;12;2;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/47
+47;2025;1;Projeto de Lei Origem do Poder Legislativo nº 1 de 2025;14;3;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/47
+47;2025;1;Projeto de Lei Origem do Poder Legislativo nº 1 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/47
+49;2025;4;Projeto de Lei Origem do Poder Legislativo nº 4 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/49
+50;2025;5;Projeto de Lei Origem do Poder Legislativo nº 5 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/50
+50;2025;5;Projeto de Lei Origem do Poder Legislativo nº 5 de 2025;15;2;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/50
+51;2025;46;Indicação nº 46 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/51
+52;2025;47;Indicação nº 47 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/52
+53;2025;48;Indicação nº 48 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/53
+54;2025;25;Requerimento nº 25 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/54
+55;2025;2;Projeto de Lei Origem do Poder Legislativo nº 2 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/55
+56;2025;3;Projeto de Lei Origem do Poder Legislativo nº 3 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/56
+57;2025;1;Indicação nº 1 de 2025;16;1;true;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/57
+57;2025;1;Indicação nº 1 de 2025;8;2;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/57
+57;2025;1;Indicação nº 1 de 2025;13;3;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/57
+57;2025;1;Indicação nº 1 de 2025;9;4;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/57
+57;2025;1;Indicação nº 1 de 2025;10;5;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/57
+57;2025;1;Indicação nº 1 de 2025;11;6;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/57
+57;2025;1;Indicação nº 1 de 2025;12;7;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/57
+57;2025;1;Indicação nº 1 de 2025;14;8;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/57
+57;2025;1;Indicação nº 1 de 2025;15;9;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/57
+58;2025;2;Indicação nº 2 de 2025;13;1;;2;Parlamentar;2;Dr. Marcos Rodrigues;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/58
+59;2025;3;Indicação nº 3 de 2025;13;1;;2;Parlamentar;2;Dr. Marcos Rodrigues;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/59
+60;2025;4;Indicação nº 4 de 2025;13;1;;2;Parlamentar;2;Dr. Marcos Rodrigues;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/60
+61;2025;5;Indicação nº 5 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/61
+61;2025;5;Indicação nº 5 de 2025;15;2;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/61
+62;2025;6;Indicação nº 6 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/62
+62;2025;6;Indicação nº 6 de 2025;13;2;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/62
+62;2025;6;Indicação nº 6 de 2025;10;3;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/62
+62;2025;6;Indicação nº 6 de 2025;12;4;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/62
+63;2025;7;Indicação nº 7 de 2025;11;1;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/63
+64;2025;8;Indicação nº 8 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/64
+65;2025;9;Indicação nº 9 de 2025;14;1;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/65
+66;2025;10;Indicação nº 10 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/66
+67;2025;11;Indicação nº 11 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/67
+68;2025;8;Oficio do Poder Executivo nº 8 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/68
+69;2025;12;Indicação nº 12 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/69
+70;2025;13;Indicação nº 13 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/70
+71;2025;14;Indicação nº 14 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/71
+72;2025;15;Indicação nº 15 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/72
+73;2025;16;Indicação nº 16 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/73
+74;2025;17;Indicação nº 17 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/74
+75;2025;18;Indicação nº 18 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/75
+75;2025;18;Indicação nº 18 de 2025;10;2;;2;Parlamentar;6;Gustavo Vizentin;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/75
+75;2025;18;Indicação nº 18 de 2025;12;3;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/75
+76;2025;19;Indicação nº 19 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/76
+77;2025;20;Indicação nº 20 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/77
+77;2025;20;Indicação nº 20 de 2025;12;2;;2;Parlamentar;7;Josemar Veiga;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/77
+78;2025;21;Indicação nº 21 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/78
+79;2025;22;Indicação nº 22 de 2025;16;1;true;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/79
+79;2025;22;Indicação nº 22 de 2025;11;2;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/79
+80;2025;23;Indicação nº 23 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/80
+80;2025;23;Indicação nº 23 de 2025;12;2;;2;Parlamentar;7;Josemar Veiga;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/80
+80;2025;23;Indicação nº 23 de 2025;14;3;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/80
+80;2025;23;Indicação nº 23 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/80
+81;2025;24;Indicação nº 24 de 2025;13;1;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/81
+81;2025;24;Indicação nº 24 de 2025;12;2;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/81
+81;2025;24;Indicação nº 24 de 2025;15;3;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/81
+82;2025;25;Indicação nº 25 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/82
+83;2025;26;Indicação nº 26 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/83
+85;2025;27;Indicação nº 27 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/85
+86;2025;28;Indicação nº 28 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/86
+87;2025;29;Indicação nº 29 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/87
+87;2025;29;Indicação nº 29 de 2025;12;2;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/87
+87;2025;29;Indicação nº 29 de 2025;15;3;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/87
+88;2025;30;Indicação nº 30 de 2025;11;1;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/88
+89;2025;31;Indicação nº 31 de 2025;11;1;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/89
+90;2025;32;Indicação nº 32 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/90
+91;2025;33;Indicação nº 33 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/91
+91;2025;33;Indicação nº 33 de 2025;10;2;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/91
+91;2025;33;Indicação nº 33 de 2025;15;3;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/91
+93;2025;34;Indicação nº 34 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/93
+94;2025;26;Requerimento nº 26 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/94
+95;2025;35;Indicação nº 35 de 2025;16;1;true;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/95
+95;2025;35;Indicação nº 35 de 2025;8;2;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/95
+95;2025;35;Indicação nº 35 de 2025;13;3;;2;Parlamentar;2;Dr. Marcos Rodrigues;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/95
+95;2025;35;Indicação nº 35 de 2025;9;4;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/95
+95;2025;35;Indicação nº 35 de 2025;10;5;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/95
+95;2025;35;Indicação nº 35 de 2025;11;6;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/95
+95;2025;35;Indicação nº 35 de 2025;12;7;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/95
+95;2025;35;Indicação nº 35 de 2025;14;8;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/95
+95;2025;35;Indicação nº 35 de 2025;15;9;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/95
+96;2025;1;Requerimento nº 1 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/96
+97;2025;2;Requerimento nº 2 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/97
+98;2025;3;Requerimento nº 3 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/98
+99;2025;4;Requerimento nº 4 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/99
+99;2025;4;Requerimento nº 4 de 2025;12;2;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/99
+100;2025;5;Requerimento nº 5 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/100
+101;2025;6;Requerimento nº 6 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/101
+102;2025;9;Requerimento nº 9 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/102
+103;2025;10;Requerimento nº 10 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/103
+103;2025;10;Requerimento nº 10 de 2025;15;2;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/103
+104;2025;12;Requerimento nº 12 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/104
+104;2025;12;Requerimento nº 12 de 2025;13;2;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/104
+104;2025;12;Requerimento nº 12 de 2025;10;3;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/104
+106;2025;13;Requerimento nº 13 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/106
+107;2025;14;Requerimento nº 14 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/107
+108;2025;15;Requerimento nº 15 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/108
+109;2025;16;Requerimento nº 16 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/109
+109;2025;16;Requerimento nº 16 de 2025;10;2;;2;Parlamentar;6;Gustavo Vizentin;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/109
+109;2025;16;Requerimento nº 16 de 2025;15;3;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/109
+110;2025;17;Requerimento nº 17 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/110
+111;2025;9;Oficio do Poder Executivo nº 9 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/111
+112;2025;8;Requerimento nº 8 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/112
+113;2025;18;Requerimento nº 18 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/113
+114;2025;10;Oficio do Poder Executivo nº 10 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/114
+115;2025;11;Oficio do Poder Executivo nº 11 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/115
+118;2025;1;Projeto de Lei Complementar Executivo nº 1 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/118
+119;2025;2;Projeto de Lei Complementar Executivo nº 2 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/119
+120;2025;3;Projeto de Lei Complementar Executivo nº 3 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/120
+121;2025;4;Projeto de Lei Complementar Executivo nº 4 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/121
+122;2025;5;Projeto de Lei Complementar Executivo nº 5 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/122
+123;2025;6;Projeto de Lei Complementar Executivo nº 6 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/123
+124;2025;7;Projeto de Lei Complementar Executivo nº 7 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/124
+125;2025;8;Projeto de Lei Complementar Executivo nº 8 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/125
+126;2025;9;Projeto de Lei Complementar Executivo nº 9 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/126
+127;2025;15;Projeto de Lei Origem Poder Executivo nº 15 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/127
+128;2025;2;Projeto de Decreto Legislativo nº 2 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/128
+128;2025;2;Projeto de Decreto Legislativo nº 2 de 2025;12;2;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/128
+128;2025;2;Projeto de Decreto Legislativo nº 2 de 2025;14;3;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/128
+128;2025;2;Projeto de Decreto Legislativo nº 2 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/128
+129;2025;16;Projeto de Lei Origem Poder Executivo nº 16 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/129
+130;2025;17;Projeto de Lei Origem Poder Executivo nº 17 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/130
+133;2025;12;Oficio do Poder Executivo nº 12 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/133
+134;2025;1;Projeto de Decreto Legislativo nº 1 de 2025;16;1;true;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/134
+134;2025;1;Projeto de Decreto Legislativo nº 1 de 2025;8;2;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/134
+134;2025;1;Projeto de Decreto Legislativo nº 1 de 2025;13;3;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/134
+134;2025;1;Projeto de Decreto Legislativo nº 1 de 2025;9;4;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/134
+134;2025;1;Projeto de Decreto Legislativo nº 1 de 2025;10;5;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/134
+134;2025;1;Projeto de Decreto Legislativo nº 1 de 2025;11;6;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/134
+134;2025;1;Projeto de Decreto Legislativo nº 1 de 2025;12;7;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/134
+134;2025;1;Projeto de Decreto Legislativo nº 1 de 2025;14;8;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/134
+134;2025;1;Projeto de Decreto Legislativo nº 1 de 2025;15;9;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/134
+135;2025;13;Oficio do Poder Executivo nº 13 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/135
+136;2025;14;Oficio do Poder Executivo nº 14 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/136
+138;2025;1;Projeto de Lei Origem Poder Executivo nº 1 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/138
+139;2025;15;Oficio do Poder Executivo nº 15 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/139
+140;2025;2;Projeto de Lei Origem Poder Executivo nº 2 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/140
+141;2025;3;Projeto de Lei Origem Poder Executivo nº 3 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/141
+142;2025;8;Projeto de Resolução nº 8 de 2025;10;1;;2;Parlamentar;6;Gustavo Vizentin;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/142
+142;2025;8;Projeto de Resolução nº 8 de 2025;12;2;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/142
+142;2025;8;Projeto de Resolução nº 8 de 2025;14;3;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/142
+142;2025;8;Projeto de Resolução nº 8 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/142
+143;2025;7;Projeto de Resolução nº 7 de 2025;10;1;;2;Parlamentar;6;Gustavo Vizentin;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/143
+143;2025;7;Projeto de Resolução nº 7 de 2025;12;2;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/143
+143;2025;7;Projeto de Resolução nº 7 de 2025;14;3;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/143
+143;2025;7;Projeto de Resolução nº 7 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/143
+144;2025;4;Projeto de Lei Origem Poder Executivo nº 4 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/144
+145;2025;5;Projeto de Lei Origem Poder Executivo nº 5 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/145
+146;2025;6;Projeto de Lei Origem Poder Executivo nº 6 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/146
+147;2025;7;Projeto de Lei Origem Poder Executivo nº 7 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/147
+148;2025;8;Projeto de Lei Origem Poder Executivo nº 8 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/148
+149;2025;9;Projeto de Lei Origem Poder Executivo nº 9 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/149
+150;2025;16;Oficio do Poder Executivo nº 16 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/150
+151;2025;14;Projeto de Lei Origem do Poder Legislativo nº 14 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/151
+152;2025;49;Indicação nº 49 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/152
+153;2025;7;Requerimento nº 7 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/153
+153;2025;7;Requerimento nº 7 de 2025;10;2;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/153
+154;2025;11;Requerimento nº 11 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/154
+155;2025;1;Moção nº 1 de 2025;16;1;true;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/155
+155;2025;1;Moção nº 1 de 2025;8;2;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/155
+155;2025;1;Moção nº 1 de 2025;13;3;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/155
+155;2025;1;Moção nº 1 de 2025;9;4;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/155
+155;2025;1;Moção nº 1 de 2025;10;5;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/155
+155;2025;1;Moção nº 1 de 2025;11;6;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/155
+155;2025;1;Moção nº 1 de 2025;12;7;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/155
+155;2025;1;Moção nº 1 de 2025;14;8;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/155
+155;2025;1;Moção nº 1 de 2025;15;9;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/155
+156;2025;1;Projeto de Resolução nº 1 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/156
+157;2025;2;Projeto de Resolução nº 2 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/157
+158;2025;4;Projeto de Resolução nº 4 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/158
+159;2025;3;Projeto de Resolução nº 3 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/159
+160;2025;5;Projeto de Resolução nº 5 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/160
+161;2025;6;Projeto de Resolução nº 6 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/161
+162;2025;1;Projeto Substitutivo Legislativo nº 1 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/162
+163;2025;15;Projeto de Lei Origem do Poder Legislativo nº 15 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/163
+164;2025;27;Requerimento nº 27 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/164
+165;2025;1;Emenda nº 1 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/165
+165;2025;1;Emenda nº 1 de 2025;10;2;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/165
+166;2025;10;Projeto de Resolução nº 10 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/166
+167;2025;11;Projeto de Resolução nº 11 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/167
+168;2025;12;Projeto de Resolução nº 12 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/168
+169;2025;1;Veto nº 1 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/169
+170;2025;28;Requerimento nº 28 de 2025;11;1;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/170
+171;2025;17;Oficio do Poder Executivo nº 17 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/171
+172;2025;50;Indicação nº 50 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/172
+174;2025;29;Requerimento nº 29 de 2025;10;1;;2;Parlamentar;6;Gustavo Vizentin;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/174
+174;2025;29;Requerimento nº 29 de 2025;14;2;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/174
+176;2025;51;Indicação nº 51 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/176
+180;2025;16;Projeto de Lei Origem do Poder Legislativo nº 16 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/180
+181;2025;52;Indicação nº 52 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/181
+185;2025;53;Indicação nº 53 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/185
+186;2025;18;Oficio do Poder Executivo nº 18 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/186
+187;2025;19;Oficio do Poder Executivo nº 19 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/187
+188;2025;20;Oficio do Poder Executivo nº 20 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/188
+189;2025;18;Projeto de Lei Origem Poder Executivo nº 18 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/189
+190;2025;19;Projeto de Lei Origem Poder Executivo nº 19 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/190
+192;2025;30;Requerimento nº 30 de 2025;10;1;;2;Parlamentar;6;Gustavo Vizentin;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/192
+192;2025;30;Requerimento nº 30 de 2025;14;2;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/192
+193;2025;7;Projeto de Lei Origem do Poder Legislativo nº 7 de 2025;10;1;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/193
+193;2025;7;Projeto de Lei Origem do Poder Legislativo nº 7 de 2025;14;2;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/193
+194;2025;54;Indicação nº 54 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/194
+195;2025;13;Projeto de Resolução nº 13 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/195
+196;2025;55;Indicação nº 55 de 2025;12;1;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/196
+197;2025;14;Projeto de Resolução nº 14 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/197
+198;2025;21;Oficio do Poder Executivo nº 21 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/198
+199;2025;56;Indicação nº 56 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/199
+200;2025;22;Oficio do Poder Executivo nº 22 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/200
+201;2025;23;Oficio do Poder Executivo nº 23 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/201
+202;2025;15;Projeto de Resolução nº 15 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/202
+203;2025;31;Requerimento nº 31 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/203
+204;2025;33;Requerimento nº 33 de 2025;9;1;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/204
+205;2025;16;Projeto de Resolução nº 16 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/205
+206;2025;3;Projeto de Decreto Legislativo nº 3 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/206
+207;2025;4;Projeto de Decreto Legislativo nº 4 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/207
+208;2025;8;Moção nº 8 de 2025;13;1;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/208
+208;2025;8;Moção nº 8 de 2025;10;2;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/208
+208;2025;8;Moção nº 8 de 2025;14;3;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/208
+208;2025;8;Moção nº 8 de 2025;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/208
+209;2025;57;Indicação nº 57 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/209
+210;2025;58;Indicação nº 58 de 2025;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/210
+211;2025;17;Projeto de Lei Origem do Poder Legislativo nº 17 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/211
+212;2025;2;Veto nº 2 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/212
+213;2025;3;Veto nº 3 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/213
+214;2025;24;Oficio do Poder Executivo nº 24 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/214
+215;2025;25;Oficio do Poder Executivo nº 25 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/215
+216;2025;18;Projeto de Lei Origem do Poder Legislativo nº 18 de 2025;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/216
+217;2025;17;Projeto de Resolução nº 17 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/217
+218;2025;10;Projeto de Lei Complementar Executivo nº 10 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/218
+219;2025;20;Projeto de Lei Origem Poder Executivo nº 20 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/219
+220;2025;34;Requerimento nº 34 de 2025;13;1;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/220
+220;2025;34;Requerimento nº 34 de 2025;10;2;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/220
+220;2025;34;Requerimento nº 34 de 2025;15;3;false;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/220
+221;2025;35;Requerimento nº 35 de 2025;11;1;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/221
+222;2025;26;Oficio do Poder Executivo nº 26 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/222
+223;2025;27;Oficio do Poder Executivo nº 27 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/223
+224;2025;24;Projeto de Lei Origem Poder Executivo nº 24 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/224
+225;2025;11;Projeto de Lei Complementar Executivo nº 11 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/225
+226;2025;21;Projeto de Lei Origem Poder Executivo nº 21 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/226
+227;2025;22;Projeto de Lei Origem Poder Executivo nº 22 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/227
+228;2025;23;Projeto de Lei Origem Poder Executivo nº 23 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/228
+229;2025;7;Emenda nº 7 de 2025;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/229
+230;2025;6;Emenda nº 6 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/230
+231;2025;5;Emenda nº 5 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/231
+232;2025;25;Projeto de Lei Origem Poder Executivo nº 25 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/232
+233;2025;59;Indicação nº 59 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/233
+234;2025;36;Requerimento nº 36 de 2025;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/234
+236;2025;26;Projeto de Lei Origem Poder Executivo nº 26 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/236
+237;2025;28;Oficio do Poder Executivo nº 28 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/237
+238;2025;8;Emenda nº 8 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/238
+239;2025;1;Projeto Substitutivo Executivo nº 1 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/239
+240;2025;27;Projeto de Lei Origem Poder Executivo nº 27 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/240
+241;2025;60;Indicação nº 60 de 2025;14;1;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/241
+242;2025;29;Oficio do Poder Executivo nº 29 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/242
+243;2025;30;Oficio do Poder Executivo nº 30 de 2025;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/243
+278;2025;49;Ata Sessão nº 49 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/278
+507;2025;50;Ata Sessão nº 50 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/507
+508;2025;51;Ata Sessão nº 51 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/508
+509;2025;52;Ata Sessão nº 52 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/509
+510;2025;53;Ata Sessão nº 53 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/510
+511;2025;54;Ata Sessão nº 54 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/511
+512;2025;55;Ata Sessão nº 55 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/512
+513;2025;56;Ata Sessão nº 56 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/513
+514;2025;57;Ata Sessão nº 57 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/514
+515;2025;58;Ata Sessão nº 58 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/515
+516;2025;59;Ata Sessão nº 59 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/516
+517;2025;60;Ata Sessão nº 60 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/517
+518;2025;61;Ata Sessão nº 61 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/518
+519;2025;62;Ata Sessão nº 62 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/519
+520;2025;63;Ata Sessão nº 63 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/520
+521;2025;64;Ata Sessão nº 64 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/521
+522;2025;65;Ata Sessão nº 65 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/522
+523;2025;66;Ata Sessão nº 66 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/523
+524;2025;67;Ata Sessão nº 67 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/524
+525;2025;68;Ata Sessão nº 68 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/525
+526;2025;69;Ata Sessão nº 69 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/526
+527;2025;70;Ata Sessão nº 70 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/527
+528;2025;71;Ata Sessão nº 71 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/528
+529;2025;72;Ata Sessão nº 72 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/529
+530;2025;73;Ata Sessão nº 73 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/530
+531;2025;74;Ata Sessão nº 74 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/531
+532;2025;75;Ata Sessão nº 75 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/532
+533;2025;76;Ata Sessão nº 76 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/533
+534;2025;77;Ata Sessão nº 77 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/534
+535;2025;78;Ata Sessão nº 78 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/535
+536;2025;79;Ata Sessão nº 79 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/536
+537;2025;80;Ata Sessão nº 80 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/537
+538;2025;81;Ata Sessão nº 81 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/538
+539;2025;82;Ata Sessão nº 82 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/539
+540;2025;83;Ata Sessão nº 83 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/540
+541;2025;84;Ata Sessão nº 84 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/541
+542;2025;85;Ata Sessão nº 85 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/542
+543;2025;86;Ata Sessão nº 86 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/543
+544;2025;87;Ata Sessão nº 87 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/544
+545;2025;88;Ata Sessão nº 88 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/545
+546;2025;89;Ata Sessão nº 89 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/546
+547;2025;90;Ata Sessão nº 90 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/547
+548;2025;91;Ata Sessão nº 91 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/548
+549;2025;92;Ata Sessão nº 92 de 2025;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/549
+244;2026;1;Projeto de Lei Origem do Poder Legislativo nº 1 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/244
+245;2026;2;Projeto de Lei Origem do Poder Legislativo nº 2 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/245
+246;2026;1;Projeto de Resolução nº 1 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/246
+247;2026;1;Requerimento nº 1 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/247
+248;2026;2;Requerimento nº 2 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/248
+249;2026;1;Indicação nº 1 de 2026;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/249
+250;2026;3;Requerimento nº 3 de 2026;12;1;;2;Parlamentar;7;Josemar Veiga;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/250
+251;2026;4;Requerimento nº 4 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/251
+252;2026;1;Oficio do Poder Executivo nº 1 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/252
+253;2026;5;Requerimento nº 5 de 2026;16;1;true;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/253
+253;2026;5;Requerimento nº 5 de 2026;8;2;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/253
+253;2026;5;Requerimento nº 5 de 2026;13;3;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/253
+253;2026;5;Requerimento nº 5 de 2026;9;4;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/253
+253;2026;5;Requerimento nº 5 de 2026;10;5;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/253
+253;2026;5;Requerimento nº 5 de 2026;11;6;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/253
+253;2026;5;Requerimento nº 5 de 2026;12;7;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/253
+253;2026;5;Requerimento nº 5 de 2026;14;8;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/253
+253;2026;5;Requerimento nº 5 de 2026;15;9;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/253
+254;2026;1;Projeto de Lei Origem Poder Executivo nº 1 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/254
+255;2026;2;Projeto de Lei Origem Poder Executivo nº 2 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/255
+256;2026;5;Projeto de Lei Origem Poder Executivo nº 5 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/256
+257;2026;3;Projeto de Lei Origem Poder Executivo nº 3 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/257
+258;2026;4;Projeto de Lei Origem Poder Executivo nº 4 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/258
+259;2026;2;Projeto de Resolução nº 2 de 2026;10;1;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/259
+259;2026;2;Projeto de Resolução nº 2 de 2026;12;2;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/259
+259;2026;2;Projeto de Resolução nº 2 de 2026;14;3;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/259
+259;2026;2;Projeto de Resolução nº 2 de 2026;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/259
+260;2026;3;Projeto de Resolução nº 3 de 2026;10;1;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/260
+260;2026;3;Projeto de Resolução nº 3 de 2026;12;2;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/260
+260;2026;3;Projeto de Resolução nº 3 de 2026;14;3;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/260
+260;2026;3;Projeto de Resolução nº 3 de 2026;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/260
+261;2026;4;Projeto de Resolução nº 4 de 2026;10;1;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/261
+261;2026;4;Projeto de Resolução nº 4 de 2026;12;2;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/261
+261;2026;4;Projeto de Resolução nº 4 de 2026;14;3;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/261
+261;2026;4;Projeto de Resolução nº 4 de 2026;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/261
+262;2026;2;Oficio do Poder Executivo nº 2 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/262
+263;2026;3;Oficio do Poder Executivo nº 3 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/263
+268;2026;7;Requerimento nº 7 de 2026;11;1;true;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/268
+269;2026;4;Oficio do Poder Executivo nº 4 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/269
+270;2026;6;Requerimento nº 6 de 2026;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/270
+272;2026;3;Indicação nº 3 de 2026;16;1;false;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/272
+272;2026;3;Indicação nº 3 de 2026;8;2;false;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/272
+272;2026;3;Indicação nº 3 de 2026;13;3;;2;Parlamentar;2;Dr. Marcos Rodrigues;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/272
+272;2026;3;Indicação nº 3 de 2026;9;4;false;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/272
+272;2026;3;Indicação nº 3 de 2026;10;5;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/272
+272;2026;3;Indicação nº 3 de 2026;11;6;false;2;Parlamentar;1;Jorge Quege;;https://sapl.campodotenente.pr.leg.br/materia/272
+272;2026;3;Indicação nº 3 de 2026;12;7;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/272
+272;2026;3;Indicação nº 3 de 2026;14;8;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/272
+272;2026;3;Indicação nº 3 de 2026;15;9;false;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/272
+273;2026;5;Oficio do Poder Executivo nº 5 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/273
+274;2026;7;Ata Sessão nº 7 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/274
+275;2026;5;Ata Sessão nº 5 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/275
+276;2026;8;Ata Sessão nº 8 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/276
+277;2026;1;Ata Sessão nº 1 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/277
+279;2026;2;Ata Sessão nº 2 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/279
+280;2026;4;Ata Sessão nº 4 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/280
+281;2026;3;Ata Sessão nº 3 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/281
+282;2026;1;Projeto de Decreto Legislativo nº 1 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/282
+282;2026;1;Projeto de Decreto Legislativo nº 1 de 2026;12;2;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/282
+282;2026;1;Projeto de Decreto Legislativo nº 1 de 2026;14;3;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/282
+282;2026;1;Projeto de Decreto Legislativo nº 1 de 2026;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/282
+283;2026;6;Ata Sessão nº 6 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/283
+284;2026;9;Ata Sessão nº 9 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/284
+285;2026;5;Indicação nº 5 de 2026;13;1;;2;Parlamentar;2;Dr. Marcos Rodrigues;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/285
+286;2026;6;Oficio do Poder Executivo nº 6 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/286
+287;2026;2;Indicação nº 2 de 2026;10;1;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/287
+287;2026;2;Indicação nº 2 de 2026;14;2;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/287
+288;2026;4;Indicação nº 4 de 2026;13;1;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/288
+288;2026;4;Indicação nº 4 de 2026;10;2;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/288
+289;2026;7;Oficio do Poder Executivo nº 7 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/289
+290;2026;6;Projeto de Lei Origem Poder Executivo nº 6 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/290
+291;2026;5;Projeto de Resolução nº 5 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/291
+292;2026;1;Projeto de Lei Complementar Legislativo nº 1 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/292
+293;2026;10;Ata Sessão nº 10 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/293
+295;2026;6;Indicação nº 6 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/295
+296;2026;7;Indicação nº 7 de 2026;24;1;true;2;Parlamentar;100;Rivanildo Cavalheiro;;https://sapl.campodotenente.pr.leg.br/materia/296
+298;2026;8;Indicação nº 8 de 2026;24;1;true;2;Parlamentar;100;Rivanildo Cavalheiro;;https://sapl.campodotenente.pr.leg.br/materia/298
+299;2026;9;Indicação nº 9 de 2026;24;1;true;2;Parlamentar;100;Rivanildo Cavalheiro;;https://sapl.campodotenente.pr.leg.br/materia/299
+300;2026;11;Ata Sessão nº 11 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/300
+302;2026;10;Indicação nº 10 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/302
+303;2026;12;Ata Sessão nº 12 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/303
+304;2026;11;Indicação nº 11 de 2026;9;1;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/304
+345;2026;13;Ata Sessão nº 13 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/345
+346;2026;8;Oficio do Poder Executivo nº 8 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/346
+347;2026;7;Projeto de Lei Origem Poder Executivo nº 7 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/347
+348;2026;14;Ata Sessão nº 14 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/348
+349;2026;8;Requerimento nº 8 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/349
+350;2026;12;Indicação nº 12 de 2026;9;1;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/350
+352;2026;13;Indicação nº 13 de 2026;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/352
+353;2026;14;Indicação nº 14 de 2026;14;1;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/353
+407;2026;9;Oficio do Poder Executivo nº 9 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/407
+458;2026;15;Ata Sessão nº 15 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/458
+596;2026;15;Indicação nº 15 de 2026;9;1;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/596
+597;2026;16;Ata Sessão nº 16 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/597
+598;2026;16;Indicação nº 16 de 2026;9;1;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/598
+599;2026;10;Oficio do Poder Executivo nº 10 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/599
+600;2026;17;Ata Sessão nº 17 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/600
+601;2026;11;Oficio do Poder Executivo nº 11 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/601
+602;2026;17;Indicação nº 17 de 2026;9;1;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/602
+603;2026;6;Projeto de Resolução nº 6 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/603
+604;2026;18;Ata Sessão nº 18 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/604
+605;2026;9;Requerimento nº 9 de 2026;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/605
+606;2026;18;Indicação nº 18 de 2026;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/606
+607;2026;12;Oficio do Poder Executivo nº 12 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/607
+608;2026;1;Emenda nº 1 de 2026;18;1;true;4;Comissão;;LJR - Legislação, Justiça e Redação;;https://sapl.campodotenente.pr.leg.br/materia/608
+609;2026;19;Ata Sessão nº 19 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/609
+618;2026;13;Oficio do Poder Executivo nº 13 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/618
+619;2026;19;Indicação nº 19 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/619
+620;2026;20;Indicação nº 20 de 2026;13;1;;2;Parlamentar;2;Dr. Marcos Rodrigues;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/620
+621;2026;20;Ata Sessão nº 20 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/621
+622;2026;8;Projeto de Lei Origem Poder Executivo nº 8 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/622
+627;2026;21;Ata Sessão nº 21 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/627
+678;2026;14;Oficio do Poder Executivo nº 14 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/678
+684;2026;22;Ata Sessão nº 22 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/684
+685;2026;23;Ata Sessão nº 23 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/685
+689;2026;21;Indicação nº 21 de 2026;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/689
+690;2026;22;Indicação nº 22 de 2026;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/690
+691;2026;2;Emenda nº 2 de 2026;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/691
+691;2026;2;Emenda nº 2 de 2026;14;2;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/691
+691;2026;2;Emenda nº 2 de 2026;24;3;true;2;Parlamentar;100;Rivanildo Cavalheiro;;https://sapl.campodotenente.pr.leg.br/materia/691
+693;2026;23;Indicação nº 23 de 2026;16;1;true;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/693
+694;2026;24;Ata Sessão nº 24 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/694
+695;2026;25;Ata Sessão nº 25 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/695
+696;2026;10;Requerimento nº 10 de 2026;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/696
+697;2026;11;Requerimento nº 11 de 2026;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/697
+697;2026;11;Requerimento nº 11 de 2026;14;2;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/697
+698;2026;3;Projeto de Lei Origem do Poder Legislativo nº 3 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/698
+698;2026;3;Projeto de Lei Origem do Poder Legislativo nº 3 de 2026;14;2;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/698
+699;2026;24;Indicação nº 24 de 2026;24;1;true;2;Parlamentar;100;Rivanildo Cavalheiro;;https://sapl.campodotenente.pr.leg.br/materia/699
+700;2026;12;Requerimento nº 12 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/700
+701;2026;7;Projeto de Resolução nº 7 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/701
+701;2026;7;Projeto de Resolução nº 7 de 2026;12;2;true;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/701
+701;2026;7;Projeto de Resolução nº 7 de 2026;14;3;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/701
+701;2026;7;Projeto de Resolução nº 7 de 2026;15;4;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/701
+702;2026;26;Ata Sessão nº 26 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/702
+704;2026;9;Projeto de Lei Origem Poder Executivo nº 9 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/704
+705;2026;15;Oficio do Poder Executivo nº 15 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/705
+706;2026;25;Indicação nº 25 de 2026;9;1;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/706
+707;2026;27;Ata Sessão nº 27 de 2026;;;;;;;;sem autor registrado no SAPL;https://sapl.campodotenente.pr.leg.br/materia/707
+721;2026;28;Ata Sessão nº 28 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/721
+752;2026;10;Projeto de Lei Origem Poder Executivo nº 10 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/752
+774;2026;1;Parecer Comissão Processante nº 1 de 2026;25;1;true;4;Comissão;;COMPROC - Comissão Processante;;https://sapl.campodotenente.pr.leg.br/materia/774
+774;2026;1;Parecer Comissão Processante nº 1 de 2026;14;2;true;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/774
+783;2026;26;Indicação nº 26 de 2026;10;1;;2;Parlamentar;6;Gustavo Vizentin;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/783
+786;2026;29;Ata Sessão nº 29 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/786
+791;2026;2;Parecer Comissão Processante nº 2 de 2026;25;1;true;4;Comissão;;COMPROC - Comissão Processante;;https://sapl.campodotenente.pr.leg.br/materia/791
+792;2026;2;Projeto de Decreto Legislativo nº 2 de 2026;31;1;true;9;MESA DIRETORA;;Mesa Diretota;;https://sapl.campodotenente.pr.leg.br/materia/792
+793;2026;16;Oficio do Poder Executivo nº 16 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/793
+794;2026;14;Requerimento nº 14 de 2026;10;1;;2;Parlamentar;6;Gustavo Vizentin;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/794
+795;2026;15;Requerimento nº 15 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/795
+796;2026;27;Indicação nº 27 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/796
+797;2026;30;Ata Sessão nº 30 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/797
+798;2026;31;Ata Sessão nº 31 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/798
+799;2026;16;Requerimento nº 16 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/799
+802;2026;30;Indicação nº 30 de 2026;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/802
+804;2026;29;Indicação nº 29 de 2026;9;1;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/804
+805;2026;28;Indicação nº 28 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/805
+806;2026;11;Projeto de Lei Origem Poder Executivo nº 11 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/806
+807;2026;12;Projeto de Lei Origem Poder Executivo nº 12 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/807
+808;2026;13;Projeto de Lei Origem Poder Executivo nº 13 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/808
+809;2026;17;Oficio do Poder Executivo nº 17 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/809
+810;2026;32;Ata Sessão nº 32 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/810
+811;2026;4;Projeto de Lei Origem do Poder Legislativo nº 4 de 2026;13;1;true;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/811
+813;2026;18;Oficio do Poder Executivo nº 18 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/813
+814;2026;31;Indicação nº 31 de 2026;9;1;true;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/814
+815;2026;5;Projeto de Lei Origem do Poder Legislativo nº 5 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/815
+816;2026;32;Indicação nº 32 de 2026;10;1;;2;Parlamentar;6;Gustavo Vizentin;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/816
+820;2026;33;Ata Sessão nº 33 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/820
+848;2026;19;Oficio do Poder Executivo nº 19 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/848
+853;2026;34;Ata Sessão nº 34 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/853
+861;2026;20;Oficio do Poder Executivo nº 20 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/861
+877;2026;21;Oficio do Poder Executivo nº 21 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/877
+880;2026;22;Oficio do Poder Executivo nº 22 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/880
+889;2026;17;Requerimento nº 17 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/889

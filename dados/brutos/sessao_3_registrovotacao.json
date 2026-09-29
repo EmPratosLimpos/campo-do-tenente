@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 12,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 3 - Projeto de Resolução nº 9 de 2025 em 20ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-05-29T15:19:15.768415-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 22,
+      "ordem": 16,
+      "expediente": null,
+      "user": 3
+    },
+    {
+      "id": 13,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 4 - Indicação nº 40 de 2025 em 20ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-05-29T15:19:39.625069-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 20,
+      "ordem": 17,
+      "expediente": null,
+      "user": 3
+    },
+    {
+      "id": 14,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 5 - Indicação nº 41 de 2025 em 20ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2025-05-29T15:19:58.368823-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 21,
+      "ordem": 18,
+      "expediente": null,
+      "user": 3
+    }
+  ],
+  "total": 3
+}

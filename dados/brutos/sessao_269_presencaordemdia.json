@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "id": 740,
+      "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 269,
+      "parlamentar": 8
+    },
+    {
+      "id": 741,
+      "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 269,
+      "parlamentar": 3
+    },
+    {
+      "id": 742,
+      "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 269,
+      "parlamentar": 2
+    },
+    {
+      "id": 743,
+      "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 269,
+      "parlamentar": 9
+    },
+    {
+      "id": 744,
+      "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 269,
+      "parlamentar": 6
+    },
+    {
+      "id": 745,
+      "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 269,
+      "parlamentar": 7
+    },
+    {
+      "id": 746,
+      "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 269,
+      "parlamentar": 4
+    },
+    {
+      "id": 747,
+      "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 269,
+      "parlamentar": 5
+    },
+    {
+      "id": 748,
+      "__str__": "Sessão: 29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 269,
+      "parlamentar": 100
+    }
+  ],
+  "total": 9
+}

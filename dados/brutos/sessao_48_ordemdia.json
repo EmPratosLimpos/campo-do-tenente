@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 607,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Decreto Legislativo nº 1 de 2026 em 7ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/607",
+      "metadata": {},
+      "data_ordem": "2026-03-24",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 48,
+      "materia": 282,
+      "tramitacao": null
+    }
+  ],
+  "total": 1
+}

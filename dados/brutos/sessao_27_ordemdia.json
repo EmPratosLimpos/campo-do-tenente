@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 350,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Resolução nº 17 de 2025 em 42ª Sessão Ordinária da 1ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/350",
+      "metadata": {},
+      "data_ordem": "2025-10-29",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Maioria Absoluta",
+      "tipo_votacao": 1,
+      "votacao_aberta": false,
+      "registro_aberto": false,
+      "sessao_plenaria": 27,
+      "materia": 217,
+      "tramitacao": null
+    }
+  ],
+  "total": 1
+}

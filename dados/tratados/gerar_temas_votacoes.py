@@ -1,0 +1,400 @@
+"""Gera o tema de cada votacao ordinaria dos anos definidos em
+config_cidade.json.
+
+Entradas imutaveis por ano:
+- dados/brutos/contagem_votacoes_ordinarias_<ano>.json
+- dados/brutos/materias-<ano>-resposta-original.csv
+- dados/brutos/sessao_<id>_ordemdia.json e paginas adicionais
+
+Tema de cada materia:
+- dados/tratados/temas_materias.json, um tema principal por materia, lido
+  da ementa oficial. O campo revisada_por_humano diz se o mantenedor ja
+  conferiu a classificacao. Todo tema precisa estar na lista de categorias
+  de config_cidade.json (bloco categorias) ou ser um dos rotulos especiais
+  definidos ali. Nenhuma lista de temas fica fixa neste codigo.
+
+Saida reproduzivel por ano:
+- dados/tratados/tema-votacoes-<ano>.csv
+
+As regras por palavra (REGRAS e classificar) ficam apenas como alternativa
+documentada e desligada (USAR_REGRAS_POR_PALAVRA = False). Continuam
+importaveis porque outro gerador ainda chama classificar().
+"""
+
+import csv
+import json
+import re
+import sys
+import unicodedata
+from collections import Counter
+from pathlib import Path
+
+
+RAIZ = Path(__file__).resolve().parents[2]
+if str(RAIZ / "coletor") not in sys.path:
+    sys.path.insert(0, str(RAIZ / "coletor"))
+
+from config_cidade import (  # noqa: E402
+    anos_recorte,
+    carregar_config,
+    link_materia,
+    nomes_categorias,
+    rotulos_especiais_tema,
+)
+
+BRUTOS = RAIZ / "dados" / "brutos"
+CONFIG = carregar_config()
+ARQUIVO_TEMAS = Path(__file__).with_name("temas_materias.json")
+
+# Alternativa antiga, desligada: classificar pela presenca de palavras na
+# ementa. Ligar apenas se temas_materias.json nao existir para a cidade.
+USAR_REGRAS_POR_PALAVRA = False
+
+CATEGORIAS = nomes_categorias(CONFIG)
+_ROTULOS_ESPECIAIS = rotulos_especiais_tema(CONFIG)
+TEMA_NAO_SE_APLICA = _ROTULOS_ESPECIAIS["nao_se_aplica"]
+TEMA_SEM_EMENTA = _ROTULOS_ESPECIAIS["sem_ementa"]
+TEMAS_ACEITOS = frozenset(CATEGORIAS) | {TEMA_NAO_SE_APLICA, TEMA_SEM_EMENTA}
+RESULTADOS_DE_VOTACAO = {
+    "UNANIMIDADE",
+    "MAIORIA ABSOLUTA",
+    "REJEITADO",
+    "APROVADA POR UNANIMIDADE",
+    "APROVADA POR MAIORIA ABSOLUTA",
+    "REJEITADA",
+}
+
+# Cada expressão recebe um peso. Termos que identificam diretamente um tema
+# pesam mais que palavras que também podem ser apenas endereço ou contexto.
+REGRAS = {
+    "Homenagens, nomes e datas": [
+        (r"\btitulo de (?:cidadao|vulto)|\bhonraria\b|\bhomenage\w*", 6),
+        (r"\bdenomin\w*|denominacao\b|nomeia\w*", 6),
+        (r"\butilidade publica\b", 5),
+        (r"\b(?:dia|semana|mes) municipal\b|\bcalendario oficial\b", 5),
+        (r"\bmocao de (?:aplausos|congratulacoes)\b|\bcongratulacoes\b", 5),
+        (r"\baniversari\w*\b|\bdata comemorativa\b", 3),
+    ],
+    "Defesa Civil": [
+        (r"\bdefesa civil\b|\bpmpdc\b|\bprotecao e defesa civil\b", 6),
+        (
+            r"\brisco de (?:desmoronamento|deslizamento|enxurrada)|"
+            r"desmoronamento|deslizamento(?: de terra)?\b",
+            6,
+        ),
+        (
+            r"\bvistoria\s+tecnica\b.{0,80}"
+            r"(?:risco|desmoron|desliz|barranco|encosta|emergenc)",
+            6,
+        ),
+        (r"\bvistoria\s+tecnica\s+em\s+barranco\b", 6),
+        (r"\b(?:situacao|estado) de (?:emergencia|calamidade)\b|\bcalamidade publica\b", 6),
+        (r"\bplano\s+municipal\s+de\s+reducao\s+de\s+riscos\b|\breducao de riscos\b", 6),
+        (r"\bmapeamento\s+das?\s+areas?\s+de\s+maior\s+risco\b", 6),
+        (r"\balerta\s+sonor\w*.{0,50}(?:risco|enchente|desliz|alagamento)\b", 5),
+        (r"\bareas?\s+de\s+risco\b|\bzona de risco\b", 5),
+    ],
+    "Saúde": [
+        (r"\bsaude\b|\bhospital\b|\bunidade basica\b|\bubs\b|\bupa\b", 5),
+        (r"\bmedic\w*|\benferm\w*|\bodont\w*|\bfarmac\w*|\bneurolog\w*", 4),
+        (r"\bvacina\w*|\bpaciente\w*|\bambulancia\w*|\bfisioterap\w*", 4),
+        (r"\bautismo\b|\btea\b|\bsaude mental\b|\bpsicolog\w*|\btelemedicina\b", 4),
+        (r"\bdengue\b|\bcancer\b|\bdoenca\w*|\bvigilancia sanitari\w*", 4),
+        (r"\bsamu\w*|\bsamuzinho\b|\bpronto atendimento\b", 4),
+    ],
+    "Educação": [
+        (r"\beducacao\b|\bescola\w*|\bcreche\w*|\bcmei\b|\bcolegio\w*", 5),
+        (r"\bensino\b|\baluno\w*|\bprofessor\w*|\bestudante\w*|\bmagisterio\b", 4),
+        (r"\bpedagog\w*|\bmerenda\b|\bmaterial escolar\b", 4),
+        (r"\bcemae\b|\binstituto federal\b|\bifpr\b", 4),
+    ],
+    "Segurança pública": [
+        (r"\bseguranca publica\b|\bguarda municipal\b|\bpolici\w*", 5),
+        (r"\bbombeiro\w*|\bpatrulh\w*", 4),
+        (r"\bvideomonitoramento\b|\bcamera\w* (?:de )?(?:seguranca|monitoramento)\b", 4),
+        (r"\bciosp\b|\bvigilancia eletr[ôo]nica\b|\bpatrulha maria da penha\b", 4),
+        (r"\broubo\w*|\bfurto\w*", 3),
+    ],
+    "Assistência social e direitos": [
+        (r"\bassistencia social\b|\bcras\b|\bvulnerab\w*", 5),
+        (r"\bconselho tutelar\b|\bdireitos humanos\b|\bviolencia domestica\b", 5),
+        (
+            r"\bpesso\w* com deficiencia\b|\bpcd\b|\bcrianc\w* com deficiencia\b"
+            r"|\bacessibilidade\b",
+            4,
+        ),
+        (r"\bidos\w*\b|\bpesso\w* idos\w*\b|\bcrianc\w*\b|\badolescent\w*\b|\bmulher\w*", 3),
+        (r"\binss\b|\bcentro de convivencia\b", 3),
+        (r"\bmorador\w* de rua\b|\bigualdade racial\b|\bcomunidade indigen\w*\b|\bindigen\w*\b", 4),
+    ],
+    "Cultura, esporte e lazer": [
+        (r"\bcultur\w*\b|\bbiblioteca\w*|\bmuseu\w*|\bartesan\w*", 5),
+        (
+            r"\besport\w*|\besportiv[oa]\w*|\bpoliesportiv[ao]\w*|\bquadra\w*"
+            r"|\bfutebol\b|\bginasio\w*",
+            5,
+        ),
+        (r"\bskate\b|\bvolei\b|\bcancha\b|\batletismo\b|\bpesca esportiva\b", 4),
+        (r"\blazer\b|\bparque infantil\b|\bplayground\b|\bparquinho\b", 4),
+        (r"\bacademia ao ar livre\b|\bcalistenia\b", 4),
+        (r"\bevento\w*|\bturismo\b|\bshow\b|\bpnab\b", 3),
+    ],
+    "Meio ambiente e proteção animal": [
+        (r"\bmeio ambiente\b|\bambient\w*\b|\bpoluicao\b", 5),
+        (r"\barboriz\w*|\barvor\w*\b|\bnascente\w*|\bparque natural\b", 4),
+        (r"\brio\b|\bcorrego\w*|\brepresa\w*|\breciclag\w*|\bcoleta seletiva\b", 4),
+        (r"\bresiduo\w*|\bdesassoreamento\b|\balagamento\w*|\benchente\w*", 4),
+        (r"\banim\w*\b|\bveterin\w*|\bcastrac\w*\b|\bprotecao animal\b", 4),
+    ],
+    "Iluminação, serviços urbanos e conectividade": [
+        (r"\biluminacao\b|\blampad\w*\b|\bluminari\w*\b", 5),
+        (r"\benergia eletric[ao]\b|\bred[ea]s? eletric[ao]s?\b", 4),
+        (r"\bsaneamento\b|\besgoto\b|\bagua potavel\b|\brede de agua\b", 5),
+        (r"\bdrenagem\b|\bmanilhamento\b|\bgaleri\w* pluvi\w*", 5),
+        (r"\bbueiro\w*|\bboc\w* de lobo\b", 4),
+        (r"\blimpeza\b|\bcoleta de lixo\b|\blixeir\w*\b|\brocad\w*\b|\bpod\w*\b", 4),
+        (r"\bcemiteri\w*\b", 3),
+    ],
+    "Ruas, trânsito e transporte": [
+        (r"\basfalt\w*\b|\basfaltic\w*|\b(?:re)?paviment\w*|\breperfilamento\b", 5),
+        (r"\bpatrolamento\b|\bensaibramento\b|\bcalcad\w*\b|\bmeio-fio\b", 5),
+        (r"\bponte\w*|\btravessia\w*|\bacesso viari[oa]\b|\bciclovia\w*", 4),
+        (
+            r"\btransito\b|\bsinalizacao(?: viari[ao])?\b|\bpintura viari[ao]\b"
+            r"|\bsemafor\w*\b|\bsistema viari[oa]\b",
+            5,
+        ),
+        (r"\bredutor\w* de velocidade\b|\blombad\w*\b", 5),
+        (r"\bradar\w*|\btachinha\w*|\btach[aoõ]es\b|\btapa-buraco\w*", 5),
+        (r"\bponto\w* de onibus\b|\btransporte coletivo\b|\blinha de onibus\b", 5),
+        (r"\btarifa de onibus\b|\bcirculacao viari[ao]\b|\bvia rural\b", 4),
+        (r"\bestacionamento\b", 4),
+        (r"\binterligacao entre (?:as )?ruas\b|\babertura (?:das? )?ruas\b", 4),
+        (r"\bruas?\b|\bavenid\w*\b|\bestrad\w*\b|\brodovi\w*\b", 1),
+    ],
+    "Desenvolvimento e moradia": [
+        (r"\bhabitacao\b|\bprograma habitacional\b|\bregularizacao fundiaria\b", 5),
+        (
+            r"\bdesenvolvimento economic[oa]\b|\bexploracao economic[ao]\b"
+            r"|\bempreendedor\w*|\bempreg\w*\b",
+            5,
+        ),
+        (r"\btrabalho,? renda e qualificacao\b|\bagencia do trabalhador\b", 5),
+        (r"\bcurso\w* (?:tecnic[ao]\w*|profissionalizante\w*)\b|\bqualificac\w*\b", 4),
+        (r"\bfeira livre\b|\bcomercio\b|\bindustri\w*\b", 3),
+    ],
+    "Agricultura e pecuária": [
+        (r"\bagricultur\w*\b|\bagricol\w*\b|\bprodutor\w* rural\b", 5),
+        (r"\bpecuari\w*\b|\bporteira adentro\b|\bfeira do produtor\b", 5),
+    ],
+    "Administração e finanças": [
+        (r"\borcamento\b|\bcredito adicional\b|\bcredito especial\b", 5),
+        (r"\bfinanceir\w*|\btribut\w*|\bimpost\w*\b|\btax\w*\b", 4),
+        (r"\bservidor\w*|\bcarg\w*\b|\bsalari\w*\b|\bremuneracao\b", 4),
+        (r"\bconcurso publico\b|\bfolha de pagamento\b|\bvantagens funcionais\b", 4),
+        (r"\bestrutura administrativ\w*\b|\bcontratacao\b|\blicitacao\b", 4),
+        (r"\bconvenio\w*|\bsubvencao\b|\bprevidencia\b|\bemenda impositiva\b", 4),
+        (r"\bplano diretor\b|\badministracao publica\b", 4),
+        (r"\baltera dispositivos\b|\brevog\w*\b|\bdesafet\w*\b", 3),
+        (r"\bdoacao de imovel\b|\bcessao de uso\b", 4),
+    ],
+}
+
+
+def normalizar(texto):
+    texto = unicodedata.normalize("NFKD", texto.lower())
+    texto = texto.encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"\s+", " ", texto).strip()
+
+
+def classificar(ementa):
+    texto = normalizar(ementa)
+    pontos = {
+        tema: sum(peso for expressao, peso in regras if re.search(expressao, texto))
+        for tema, regras in REGRAS.items()
+    }
+    maior = max(pontos.values())
+    if maior == 0:
+        return "Outros"
+    # A ordem explícita de REGRAS resolve empates de forma reproduzível.
+    return next(tema for tema in REGRAS if pontos[tema] == maior)
+
+
+def carregar_temas():
+    """Le temas_materias.json e devolve {id da materia: registro}."""
+    if not ARQUIVO_TEMAS.exists():
+        raise SystemExit(
+            f"Arquivo ausente: {ARQUIVO_TEMAS.name}. "
+            "A classificacao por materia precisa existir antes deste gerador."
+        )
+    dados = json.loads(ARQUIVO_TEMAS.read_text(encoding="utf-8"))
+    fora_da_lista = sorted(
+        {item["tema"] for item in dados["materias"] if item["tema"] not in TEMAS_ACEITOS}
+    )
+    if fora_da_lista:
+        raise SystemExit(
+            f"{ARQUIVO_TEMAS.name} usa tema fora de config_cidade.json: "
+            + ", ".join(fora_da_lista)
+        )
+    return {int(item["id"]): item for item in dados["materias"]}
+
+
+def tema_da_materia(materia_id, ementa, temas):
+    """Tema, confianca, autoria da classificacao e revisao de uma materia."""
+    if USAR_REGRAS_POR_PALAVRA:
+        return classificar(ementa), "", "regras por palavra", False
+    registro = temas.get(int(materia_id))
+    if registro is None:
+        return None
+    return (
+        registro["tema"],
+        registro["confianca"],
+        registro["classificado_por"],
+        bool(registro["revisada_por_humano"]),
+    )
+
+
+def carregar_materias(ano: int):
+    caminho = BRUTOS / f"materias-{ano}-resposta-original.csv"
+    if not caminho.exists():
+        raise SystemExit(
+            f"Arquivo ausente: {caminho.name}. "
+            "Este gerador nao cria a planilha de materias. "
+            "A lacuna esta registrada no relatorio C1."
+        )
+    with caminho.open(encoding="utf-8-sig", newline="") as arquivo:
+        return {int(linha["ID"]): linha for linha in csv.DictReader(arquivo, delimiter=";")}
+
+
+def frase_apos_votacao(texto: str | None) -> str:
+    if not texto:
+        return ""
+    if "Votação:" in texto:
+        return texto.split("Votação:", 1)[1].strip()
+    if "Votacao:" in texto:
+        return texto.split("Votacao:", 1)[1].strip()
+    return ""
+
+
+def carregar_votacoes(ano: int):
+    caminho = BRUTOS / f"contagem_votacoes_ordinarias_{ano}.json"
+    if not caminho.exists():
+        raise SystemExit(
+            f"Arquivo ausente: {caminho.name}. "
+            "Este gerador nao cria a lista de sessoes. "
+            "A lacuna esta registrada no relatorio C1."
+        )
+    contagem = json.loads(caminho.read_text(encoding="utf-8"))
+    votacoes = []
+    for sessao in contagem["sessoes"]:
+        caminho_registro = BRUTOS / f"sessao_{sessao['id']}_registrovotacao.json"
+        if caminho_registro.exists():
+            resposta = json.loads(caminho_registro.read_text(encoding="utf-8"))
+            votadas = [
+                {
+                    "id": item.get("ordem") or item.get("id"),
+                    "sessao_plenaria": sessao["id"],
+                    "materia": item.get("materia"),
+                    "resultado": frase_apos_votacao(item.get("__str__")),
+                }
+                for item in (resposta.get("results") or [])
+            ]
+        else:
+            itens = []
+            caminhos = [
+                BRUTOS / f"sessao_{sessao['id']}_ordemdia.json",
+                BRUTOS / f"sessao_{sessao['id']}_ordemdia_pagina_2.json",
+            ]
+            for caminho_ordem in caminhos:
+                if caminho_ordem.exists():
+                    resposta = json.loads(caminho_ordem.read_text(encoding="utf-8"))
+                    itens.extend(resposta["results"])
+
+            votadas = [
+                item
+                for item in itens
+                if item.get("resultado", "").upper() in RESULTADOS_DE_VOTACAO
+            ]
+        # Se a contagem guardada diz zero votacoes, o universo do grafico
+        # segue esse retrato, mesmo que a ordem do dia tenha sido atualizada depois.
+        if sessao["n_votacoes"] == 0:
+            votadas = []
+        if len(votadas) != sessao["n_votacoes"]:
+            raise ValueError(
+                f"Sessão {sessao['id']}: a contagem guardada é "
+                f"{sessao['n_votacoes']}, mas a leitura achou {len(votadas)}."
+            )
+        votacoes.extend(votadas)
+
+    if len(votacoes) != contagem["total_votacoes"]:
+        raise ValueError(
+            f"Esperava {contagem['total_votacoes']} votações, achei {len(votacoes)}."
+        )
+    return votacoes
+
+
+def main():
+    for ano in anos_recorte(CONFIG):
+        gerar_temas_do_ano(ano)
+
+
+def gerar_temas_do_ano(ano: int):
+    materias = carregar_materias(ano)
+    temas = carregar_temas()
+    votacoes = carregar_votacoes(ano)
+    linhas = []
+    sem_ementa = Counter()
+    sem_tema = Counter()
+
+    for item in votacoes:
+        materia = materias.get(item["materia"])
+        if materia is None:
+            sem_ementa[item["materia"]] += 1
+            continue
+        classificacao = tema_da_materia(item["materia"], materia["Ementa"], temas)
+        if classificacao is None:
+            sem_tema[item["materia"]] += 1
+            continue
+        tema, confianca, classificado_por, revisada = classificacao
+
+        linhas.append(
+            {
+                "sessao_id": item["sessao_plenaria"],
+                "item_ordem_id": item["id"],
+                "resultado": item["resultado"],
+                "materia_id": item["materia"],
+                "numero": materia["Número"],
+                "ano": materia["Ano"],
+                "tipo_sigla": materia["Tipo de Matéria Legislativa/Sigla"],
+                "tipo_descricao": materia["Tipo de Matéria Legislativa/Descrição"],
+                "ementa": materia["Ementa"],
+                "tema": tema,
+                "confianca": confianca,
+                "classificado_por": classificado_por,
+                "revisada_por_humano": "sim" if revisada else "não",
+                "fonte_oficial": link_materia(item["materia"], CONFIG),
+            }
+        )
+
+    if not linhas:
+        raise SystemExit(f"{ano}: nenhuma votacao classificada. Nao gravar arquivo vazio inventado.")
+
+    saida = Path(__file__).with_name(f"tema-votacoes-{ano}.csv")
+    campos = list(linhas[0])
+    with saida.open("w", encoding="utf-8", newline="") as arquivo:
+        escritor = csv.DictWriter(arquivo, fieldnames=campos)
+        escritor.writeheader()
+        escritor.writerows(linhas)
+
+    contagens = Counter(linha["tema"] for linha in linhas)
+    print(f"{ano}: {len(votacoes)} votacoes localizadas")
+    print(f"{ano}: {len(linhas)} votacoes classificadas")
+    print(f"{ano}: {sum(sem_ementa.values())} sem ementa no CSV")
+    print(f"{ano}: {sum(sem_tema.values())} sem tema em {ARQUIVO_TEMAS.name}")
+    for tema, quantidade in contagens.most_common():
+        print(f"{tema}: {quantidade}")
+    print(f"  {saida.relative_to(RAIZ).as_posix()}")
+
+
+if __name__ == "__main__":
+    main()

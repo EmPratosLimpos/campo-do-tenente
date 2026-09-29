@@ -1,0 +1,109 @@
+{
+  "cidade": {
+    "nome": "Campo do Tenente",
+    "uf": "PR"
+  },
+  "sapl": {
+    "endereco_base": "https://sapl.campodotenente.pr.leg.br",
+    "id_tipo_sessao_ordinaria": 3,
+    "id_tipo_sessao_ordinaria_nota": "confirmado na sondagem C2: tiposessaoplenaria id 3",
+    "id_legislatura_atual": 1,
+    "legislatura_inicio": 2025,
+    "legislatura_fim": 2028
+  },
+  "painel": {
+    "nome_projeto": "Em Pratos Limpos",
+    "endereco_publico": "https://empratoslimpos.github.io/campo-do-tenente/",
+    "repositorio": "https://github.com/EmPratosLimpos/campo-do-tenente",
+    "site_camara": "https://www.campodotenente.pr.leg.br",
+    "site_camara_nota": "fonte oficial usada so para afastamentos que o SAPL nao registra (D-020)"
+  },
+  "recorte": {
+    "anos": [
+      2025,
+      2026
+    ],
+    "nota": "legislatura inteira"
+  },
+  "vereadores": {
+    "numero_esperado": null
+  },
+  "pisos_sanidade": {
+    "nota": "D-016: um piso por ano. vereadores e exato; sessoes_ordinarias e projetos_lei_legislativo_e_executivo sao minimos. Projetos contam PLEG e PLEX juntos.",
+    "por_ano": {
+      "2025": {
+        "vereadores": 9,
+        "sessoes_ordinarias": 32,
+        "projetos_lei_legislativo_e_executivo": 44
+      },
+      "2026": {
+        "vereadores": 10,
+        "sessoes_ordinarias": 33,
+        "projetos_lei_legislativo_e_executivo": 18
+      }
+    }
+  },
+  "categorias": {
+    "nota": "D-021: categorias proprias da cidade, na ordem de exibicao. Cada materia recebe um tema principal lido da ementa oficial.",
+    "lista": [
+      {
+        "nome": "Administração e finanças",
+        "descricao": "Orçamento, créditos, servidores, impostos, pedidos de informação à Prefeitura, funcionamento da Câmara."
+      },
+      {
+        "nome": "Ruas, trânsito e transporte",
+        "descricao": "Asfalto, pavimentação, estradas rurais, sinalização, ônibus, rodovias."
+      },
+      {
+        "nome": "Iluminação, serviços urbanos e conectividade",
+        "descricao": "Iluminação pública, limpeza, praças, coleta de lixo, energia, internet, Wi-Fi público, sinal de celular e telefonia, serviços digitais da Prefeitura. Poda de árvores por segurança, fiação ou manutenção de via entra aqui."
+      },
+      {
+        "nome": "Desenvolvimento e moradia",
+        "descricao": "Habitação, regularização de terrenos, plano diretor, código de posturas, obras de infraestrutura urbana, emprego, comércio e indústria."
+      },
+      {
+        "nome": "Agricultura e pecuária",
+        "descricao": "Produtor rural, agricultura familiar, pecuária, programas de apoio ao campo (como o Porteira Adentro), máquinas agrícolas, feiras do produtor, assistência técnica rural."
+      },
+      {
+        "nome": "Educação",
+        "descricao": "Escolas, creches, CMEI, transporte escolar."
+      },
+      {
+        "nome": "Cultura, esporte e lazer",
+        "descricao": "Cultura, biblioteca, museu, artesanato, esporte, quadras, eventos."
+      },
+      {
+        "nome": "Homenagens, nomes e datas",
+        "descricao": "Título de cidadão, honrarias, nome de rua ou prédio, datas comemorativas."
+      },
+      {
+        "nome": "Saúde",
+        "descricao": "Unidades de saúde, UBS, hospital, atendimento médico, consórcios de saúde."
+      },
+      {
+        "nome": "Assistência social e direitos",
+        "descricao": "CRAS, famílias em vulnerabilidade, pessoa com deficiência, idosos."
+      },
+      {
+        "nome": "Meio ambiente e proteção animal",
+        "descricao": "Meio ambiente, poluição, preservação de árvores e rios, proteção animal. Poda ou corte ligados a preservação entra aqui."
+      },
+      {
+        "nome": "Segurança pública",
+        "descricao": "Polícia, guarda municipal, segurança."
+      },
+      {
+        "nome": "Defesa Civil",
+        "descricao": "Enchentes, proteção em desastres."
+      }
+    ],
+    "rotulos_especiais": {
+      "nao_se_aplica": "não se aplica",
+      "nao_se_aplica_descricao": "Atas e ofícios do Executivo (ATA e OFEX), que registram a reunião ou encaminham documentos e não tratam de um tema próprio.",
+      "sem_ementa": "sem ementa no SAPL",
+      "sem_ementa_descricao": "Matéria sem ementa registrada no SAPL."
+    }
+  }
+}

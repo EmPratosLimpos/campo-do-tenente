@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "id": 519,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 47,
+      "parlamentar": 8
+    },
+    {
+      "id": 520,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 47,
+      "parlamentar": 2
+    },
+    {
+      "id": 521,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 47,
+      "parlamentar": 9
+    },
+    {
+      "id": 522,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 47,
+      "parlamentar": 7
+    },
+    {
+      "id": 523,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 47,
+      "parlamentar": 5
+    },
+    {
+      "id": 524,
+      "__str__": "Sessão: 1ª Sessão Extraordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 47,
+      "parlamentar": 100
+    }
+  ],
+  "total": 6
+}

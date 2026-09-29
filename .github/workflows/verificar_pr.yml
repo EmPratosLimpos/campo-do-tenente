@@ -1,0 +1,56 @@
+name: Validacao de Sanidade e Seguranca
+
+on:
+  pull_request:
+    branches: [ main, desenvolvimento ]
+  push:
+    branches: [ desenvolvimento ]
+
+jobs:
+  validacao:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout do repositorio
+        # checkout v7 e setup-python v7 rodam em Node 24.
+        # Node 20 nao esta mais disponivel nos executores do GitHub Actions.
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r coletor/requirements.txt
+
+      - name: Executar testes de sanidade dos dados
+        run: |
+          python coletor/testes_sanidade.py
+          python -m unittest discover -s tests
+
+      - name: Validar hash de integridade
+        run: |
+          python -c "import hashlib, json, pathlib, sys; cfg=json.loads(pathlib.Path('config_cidade.json').read_text(encoding='utf-8')); anos=cfg['recorte']['anos']; faltou=False
+          for ano in anos:
+            p=pathlib.Path(f'dados/tratados/atuacao_vereadores_{ano}.json'); h=pathlib.Path(f'dados/tratados/atuacao_vereadores_{ano}.json.sha256')
+            if not p.exists() or not h.exists():
+              print(f'Par JSON/hash ausente em {ano}', file=sys.stderr); faltou=True; continue
+            if b'\r' in p.read_bytes():
+              print(f'JSON de {ano} nao esta em LF', file=sys.stderr); faltou=True
+            calc=hashlib.sha256(p.read_bytes()).hexdigest(); saved=h.read_text(encoding='utf-8').strip(); print(f'Hash {ano}: {calc}');
+            if calc!=saved: faltou=True
+          sys.exit(1 if faltou else 0)"
+
+      - name: Validar regras de OPSEC e Higiene
+        run: |
+          echo "Verificando ausencia de caminhos locais e dados sensiveis..."
+          ! grep -rE "C:\\\\Users\\\\" --exclude-dir=".git" --exclude-dir=".github" --exclude="*.pyc" .
+          echo "Verificando higienizacao de travessoes em documentacoes normativas..."
+          ! grep -rE "[—–]" PROCESSO_DESENVOLVIMENTO_E_GOVERNANCA.md AGENTS.md CLAUDE.md .cursorrules
+
+      - name: Verificar marcas de IA em commits
+        run: |
+          python -c "import pathlib, sys; sys.path.insert(0,'scripts'); from marcas_ia import verificar_commits_marcas_ia; e,a=verificar_commits_marcas_ia(pathlib.Path('.')); [print('AVISO:',x) for x in a]; [print(x) for x in e]; sys.exit(1 if e else 0)"

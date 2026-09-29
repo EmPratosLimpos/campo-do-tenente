@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Remove trailers de ferramentas de IA da mensagem de commit antes de gravar.
+# Ativar no clone: git config core.hooksPath .githooks
+
+set -euo pipefail
+
+msgfile="${1:?caminho do arquivo de mensagem}"
+
+marcas_coautor='cursor|cursoragent|claude|anthropic|commandcode|gemini|antigravity|copilot|opencode|aider|grok'
+
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+
+while IFS= read -r line || [[ -n "$line" ]]; do
+  if printf '%s' "$line" | grep -qi 'generated with'; then
+    pre="$(printf '%s' "$line" | sed 's/[Gg]enerated [Ww]ith.*//')"
+    pre_lc="$(printf '%s' "$pre" | tr '[:upper:]' '[:lower:]')"
+    if ! printf '%s' "$pre_lc" | grep -q '[a-z]'; then
+      continue
+    fi
+  fi
+  lower="$(printf '%s' "$line" | tr '[:upper:]' '[:lower:]')"
+  case "$lower" in
+    claude-session:*)
+      continue
+      ;;
+    co-authored-by:*)
+      if printf '%s' "$lower" | grep -Eq "$marcas_coautor"; then
+        continue
+      fi
+      ;;
+  esac
+  printf '%s\n' "$line" >>"$tmp"
+done <"$msgfile"
+
+# Remove linhas em branco sobrando no fim
+while [[ -s "$tmp" ]] && [[ -z "$(tail -n 1 "$tmp" | tr -d '[:space:]')" ]]; do
+  head -n -1 "$tmp" >"${tmp}.2" && mv "${tmp}.2" "$tmp"
+done
+
+mv "$tmp" "$msgfile"
+trap - EXIT

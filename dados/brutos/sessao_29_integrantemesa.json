@@ -1,0 +1,41 @@
+{
+  "results": [
+    {
+      "id": 108,
+      "__str__": "Presidente - Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 29,
+      "cargo": 1,
+      "parlamentar": 5
+    },
+    {
+      "id": 109,
+      "__str__": "Vice-Presidente - Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 29,
+      "cargo": 2,
+      "parlamentar": 4
+    },
+    {
+      "id": 110,
+      "__str__": "Primeiro-Secretário - Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 29,
+      "cargo": 3,
+      "parlamentar": 6
+    },
+    {
+      "id": 111,
+      "__str__": "Segundo-Secretário - Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 29,
+      "cargo": 4,
+      "parlamentar": 7
+    }
+  ],
+  "total": 4
+}

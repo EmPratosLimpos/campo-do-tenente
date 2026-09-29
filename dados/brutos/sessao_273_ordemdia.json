@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 701,
+      "__str__": "Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 10 de 2026 em 33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/701",
+      "metadata": {},
+      "data_ordem": "2026-09-22",
+      "observacao": "",
+      "numero_ordem": 1,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 273,
+      "materia": 752,
+      "tramitacao": null
+    },
+    {
+      "id": 698,
+      "__str__": "Ordem do Dia/Expediente: 2 - Projeto de Lei Origem do Poder Legislativo nº 4 de 2026 em 33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/698",
+      "metadata": {},
+      "data_ordem": "2026-09-22",
+      "observacao": "",
+      "numero_ordem": 2,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 273,
+      "materia": 811,
+      "tramitacao": null
+    },
+    {
+      "id": 699,
+      "__str__": "Ordem do Dia/Expediente: 3 - Projeto de Lei Origem do Poder Legislativo nº 5 de 2026 em 33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/699",
+      "metadata": {},
+      "data_ordem": "2026-09-22",
+      "observacao": "",
+      "numero_ordem": 3,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 273,
+      "materia": 815,
+      "tramitacao": null
+    },
+    {
+      "id": 700,
+      "__str__": "Ordem do Dia/Expediente: 4 - Requerimento nº 17 de 2026 em 33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/700",
+      "metadata": {},
+      "data_ordem": "2026-09-22",
+      "observacao": "",
+      "numero_ordem": 4,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 273,
+      "materia": 889,
+      "tramitacao": null
+    }
+  ],
+  "total": 4
+}

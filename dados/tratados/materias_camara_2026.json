@@ -1,0 +1,96 @@
+{
+  "sessao": [
+    {
+      "id": 811,
+      "tipo": "PLL 4/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre princípios, critérios gerais e transparência nos programas habitacionais de interesse social que contem com participação do Município de Campo do Tenente e dá outras providências.",
+      "categoria": "Desenvolvimento e moradia",
+      "placar": "8 x 0",
+      "data_sessao": "2026-09-22",
+      "sessao_id": 273
+    },
+    {
+      "id": 815,
+      "tipo": "PLL 5/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Altera a Lei Municipal nº 1.094, de 2022, que institui o “Título Mãe Tenenteana” no Município de Campo do Tenente.",
+      "categoria": "Homenagens, nomes e datas",
+      "placar": "8 x 0",
+      "data_sessao": "2026-09-22",
+      "sessao_id": 273
+    }
+  ],
+  "mes": [
+    {
+      "id": 698,
+      "tipo": "PLL 3/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre a obrigatoriedade de notificação à Companhia de Saneamento do Paraná – Sanepar, quanto da realização de obras de pavimentação.",
+      "categoria": "Ruas, trânsito e transporte",
+      "placar": "8 x 0",
+      "data_sessao": "2026-08-25",
+      "sessao_id": 269
+    }
+  ],
+  "todo": [
+    {
+      "id": 244,
+      "tipo": "PLL 1/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "\"CONCEDE REVISÃO GERAL ANUAL AOS SERVIDORES EFETIVOS E COMISSIONADOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE.\"",
+      "categoria": "Administração e finanças",
+      "placar": "9 x 0",
+      "data_sessao": "2026-02-24",
+      "sessao_id": 39
+    },
+    {
+      "id": 245,
+      "tipo": "PLL 2/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "\"CONCEDE REVISÃO DO VALOR DO AUXÍLIO-ALIMENTAÇÃO DOS SERVIDORES EFETIVOS E COMISSIONADOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE-PR ALTERA O PARÁGRAFO ÚNICO DO ARTIGO 2° DA LEI MUNICIPAL N°1.066/2022.\"",
+      "categoria": "Administração e finanças",
+      "placar": "9 x 0",
+      "data_sessao": "2026-02-24",
+      "sessao_id": 39
+    },
+    {
+      "id": 698,
+      "tipo": "PLL 3/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre a obrigatoriedade de notificação à Companhia de Saneamento do Paraná – Sanepar, quanto da realização de obras de pavimentação.",
+      "categoria": "Ruas, trânsito e transporte",
+      "placar": "8 x 0",
+      "data_sessao": "2026-08-25",
+      "sessao_id": 269
+    },
+    {
+      "id": 811,
+      "tipo": "PLL 4/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Dispõe sobre princípios, critérios gerais e transparência nos programas habitacionais de interesse social que contem com participação do Município de Campo do Tenente e dá outras providências.",
+      "categoria": "Desenvolvimento e moradia",
+      "placar": "8 x 0",
+      "data_sessao": "2026-09-22",
+      "sessao_id": 273
+    },
+    {
+      "id": 815,
+      "tipo": "PLL 5/2026",
+      "resultado": "unanimidade",
+      "resultado_oficial": "UNANIMIDADE",
+      "ementa": "Altera a Lei Municipal nº 1.094, de 2022, que institui o “Título Mãe Tenenteana” no Município de Campo do Tenente.",
+      "categoria": "Homenagens, nomes e datas",
+      "placar": "8 x 0",
+      "data_sessao": "2026-09-22",
+      "sessao_id": 273
+    }
+  ]
+}

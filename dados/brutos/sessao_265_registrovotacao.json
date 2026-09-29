@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": 241,
+      "__str__": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 27 de 2026 em 26ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-08-04T19:17:45.183455-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 707,
+      "ordem": null,
+      "expediente": 65,
+      "user": 3
+    },
+    {
+      "id": 242,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 4 - Indicação nº 25 de 2026 em 26ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-08-04T19:48:11.148207-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 706,
+      "ordem": 664,
+      "expediente": null,
+      "user": 3
+    }
+  ],
+  "total": 2
+}

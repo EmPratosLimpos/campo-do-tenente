@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "id": 691,
+      "__str__": "Sessão: 24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 263,
+      "parlamentar": 8
+    },
+    {
+      "id": 692,
+      "__str__": "Sessão: 24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 263,
+      "parlamentar": 3
+    },
+    {
+      "id": 693,
+      "__str__": "Sessão: 24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 263,
+      "parlamentar": 2
+    },
+    {
+      "id": 694,
+      "__str__": "Sessão: 24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 263,
+      "parlamentar": 9
+    },
+    {
+      "id": 695,
+      "__str__": "Sessão: 24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 263,
+      "parlamentar": 6
+    },
+    {
+      "id": 696,
+      "__str__": "Sessão: 24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 263,
+      "parlamentar": 7
+    },
+    {
+      "id": 697,
+      "__str__": "Sessão: 24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 263,
+      "parlamentar": 4
+    },
+    {
+      "id": 698,
+      "__str__": "Sessão: 24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 263,
+      "parlamentar": 5
+    },
+    {
+      "id": 699,
+      "__str__": "Sessão: 24ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 263,
+      "parlamentar": 100
+    }
+  ],
+  "total": 9
+}

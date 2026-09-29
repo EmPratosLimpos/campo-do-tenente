@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 138,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem do Poder Legislativo nº 1 de 2026 em 3ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 9,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-02-24T19:21:24.522929-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 244,
+      "ordem": 531,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 139,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 2 - Projeto de Lei Origem do Poder Legislativo nº 2 de 2026 em 3ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 9,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-02-24T19:22:53.218509-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 245,
+      "ordem": 532,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 140,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 17 - Requerimento nº 5 de 2026 em 3ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-02-24T19:35:44.599076-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 253,
+      "ordem": 547,
+      "expediente": null,
+      "user": 5
+    },
+    {
+      "id": 174,
+      "__str__": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 3 de 2026 em 3ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-03-24T11:10:00.117008-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 281,
+      "ordem": null,
+      "expediente": 39,
+      "user": 3
+    }
+  ],
+  "total": 4
+}
