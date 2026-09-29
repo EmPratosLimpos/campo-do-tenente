@@ -216,24 +216,37 @@ def conferir_prefixo(pasta: Path, prefixo: str, sid: int, recurso: str) -> dict:
         and paginas_lidas < int(total_paginas_anunciado)
     ):
         paginacao_pendente = True
+    links_proximo = bool(
+        ultima_paginacao.get("next_page")
+        or (ultima_paginacao.get("links") or {}).get("next")
+    )
+    prova_fim = (
+        not links_proximo
+        and total_paginas_anunciado is not None
+        and paginas_lidas >= int(total_paginas_anunciado)
+    )
+    causas = []
+    if total is None:
+        causas.append("sem total_entries")
+        if not prova_fim:
+            causas.append("sem prova de fim de paginacao")
+    if not sem_repeticao:
+        causas.append("id repetido")
+    if paginacao_pendente:
+        causas.append("paginacao pendente")
+    if total is not None and total != distintos:
+        causas.append("total_entries distinto de ids distintos")
     if total is not None:
         bate = total == distintos and sem_repeticao
         motivo = None
-    elif sem_repeticao and not paginacao_pendente:
+    elif prova_fim and sem_repeticao:
         bate = True
-        motivo = "sem total_entries, sem repeticao"
+        motivo = None
     else:
         bate = False
         motivo = None
     if not bate:
-        if total is None and not sem_repeticao:
-            motivo = "id repetido"
-        elif total is None:
-            motivo = "sem total_entries" if motivo is None else motivo
-        elif not sem_repeticao:
-            motivo = "id repetido"
-        else:
-            motivo = "total_entries diferente dos ids distintos"
+        motivo = "; ".join(causas) if causas else "sem total_entries"
     return {
         "sessao_id": sid,
         "recurso": recurso,
