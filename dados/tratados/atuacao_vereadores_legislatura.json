@@ -116,7 +116,44 @@
       2025,
       2026
     ],
-    "escopo": "legislatura"
+    "escopo": "legislatura",
+    "lacuna_sessoes_ordinarias_por_ano": {
+      "2025": {
+        "numeros_ausentes_no_sapl": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "primeira_ordinaria_no_sapl": {
+          "id": 4,
+          "numero": 17,
+          "data_inicio": "2025-05-06"
+        },
+        "aviso": "As sessoes ordinarias 1 a 16 de 2025 nao existem no SAPL."
+      },
+      "2026": {
+        "numeros_ausentes_no_sapl": [],
+        "primeira_ordinaria_no_sapl": {
+          "id": 37,
+          "numero": 1,
+          "data_inicio": "2026-02-10"
+        },
+        "aviso": null
+      }
+    }
   },
   "sessoes": [
     {
@@ -4696,7 +4733,7 @@
         }
       ],
       "presenca": {
-        "sessoes_ordinarias": 65,
+        "sessoes_ordinarias": 37,
         "sessoes_do_ano": 65,
         "sessoes_fora_do_mandato": 5,
         "sessoes_licenca": 23,
@@ -4707,8 +4744,8 @@
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 1,
-        "percentual_faltas": 1.54,
-        "taxa_presenca": 55.38,
+        "percentual_faltas": 2.7,
+        "taxa_presenca": 97.3,
         "por_sessao": [
           {
             "sessao_id": 4,

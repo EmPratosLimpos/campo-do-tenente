@@ -294,15 +294,16 @@ def _recomputar_presenca(por_sessao: list[dict]) -> dict:
     faltas_s = cont["falta_sem_justificativa"]
     licenca = cont["licenca_tratamento_saude"]
     fora = cont["fora_do_mandato"]
-    total_ord = presencas + faltas_j + faltas_s + licenca + fora
-    taxa = round((presencas / total_ord) * 100, 2) if total_ord else 0.0
-    pct_faltas = round(((faltas_j + faltas_s) / total_ord) * 100, 2) if total_ord else 0.0
+    no_mandato = presencas + faltas_j + faltas_s
+    total_sessoes = len(por_sessao)
+    taxa = round((presencas / no_mandato) * 100, 2) if no_mandato else 0.0
+    pct_faltas = round(((faltas_j + faltas_s) / no_mandato) * 100, 2) if no_mandato else 0.0
     por_afast = {}
     if licenca:
         por_afast["licenca_tratamento_saude"] = licenca
     return {
-        "sessoes_ordinarias": total_ord,
-        "sessoes_do_ano": total_ord,
+        "sessoes_ordinarias": no_mandato,
+        "sessoes_do_ano": total_sessoes,
         "sessoes_fora_do_mandato": fora,
         "sessoes_licenca": licenca,
         "sessoes_por_afastamento": por_afast,
@@ -402,20 +403,6 @@ def _mesclar_projetos_lei_raiz(listas: list[list]) -> list[dict]:
             if pid is None:
                 continue
             por_id[int(pid)] = p
-    
-    # Injetar motivos_fora_do_mandato a partir dos afastamentos manuais
-    try:
-        with open(RAIZ / "dados" / "tratados" / "afastamentos_manuais.json", "r", encoding="utf-8") as f:
-            manuais = json.load(f)
-            motivos = manuais.get("motivos_fora_do_mandato") or []
-            for m in motivos:
-                vid_sapl = m.get("parlamentar_id_sapl")
-                if vid_sapl in por_id:
-                    if "motivos_fora_do_mandato" not in por_id[vid_sapl]:
-                        por_id[vid_sapl]["motivos_fora_do_mandato"] = []
-                    por_id[vid_sapl]["motivos_fora_do_mandato"].append(m)
-    except Exception as e:
-        pass
 
     return list(por_id.values())
 
@@ -437,7 +424,15 @@ def mesclar_atuacao_legislatura(dados_por_ano: list[dict], anos: list[int], cfg:
     base_meta.pop("ano", None)
     base_meta["escopo"] = SUFIXO_LEGISLATURA
     base_meta["gerado_por"] = "dados/tratados/gerar_dados_tela.py"
+    lacuna_por_ano: dict[str, dict] = {}
+    for d in dados_por_ano:
+        ano = d["meta"].get("ano")
+        lac = d["meta"].get("lacuna_sessoes_ordinarias")
+        if ano is not None and lac:
+            lacuna_por_ano[str(int(ano))] = copy.deepcopy(lac)
     base_meta.pop("lacuna_sessoes_ordinarias", None)
+    if lacuna_por_ano:
+        base_meta["lacuna_sessoes_ordinarias_por_ano"] = lacuna_por_ano
 
     for chave in CHAVES_META_SOMA:
         base_meta[chave] = sum((d["meta"].get(chave) or 0) for d in dados_por_ano)
