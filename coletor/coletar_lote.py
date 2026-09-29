@@ -174,7 +174,7 @@ class ColetorLote:
         }
         texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
         tmp = self.indice_path.with_suffix(".json.tmp")
-        tmp.write_text(texto, encoding="utf-8")
+        tmp.write_bytes(texto.replace("\r\n", "\n").encode("utf-8"))
         tmp.replace(self.indice_path)
 
     def _ja_baixado(self, arquivo: str):

@@ -43,6 +43,14 @@
       }
     }
   },
+  "tramitacao": {
+    "nota": "C8 e C9: recorte da coleta de tramitacao e piso de decodificacao. Siglas lidas daqui, nunca fixas no codigo.",
+    "tipos_coleta": ["REQ", "MOC", "IND", "PLEX", "VET"],
+    "tipos_proposicoes": ["PLEG", "REQ", "MOC", "IND"],
+    "tipos_executivo": ["PLEX", "VET"],
+    "piso_status_decodificados": 20,
+    "teto_pedidos_execucao": 210
+  },
   "categorias": {
     "nota": "D-021: categorias proprias da cidade, na ordem de exibicao. Cada materia recebe um tema principal lido da ementa oficial.",
     "lista": [
