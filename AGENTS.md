@@ -63,6 +63,10 @@ Qualquer agente que realize alterações deve validar localmente:
    * O rate-limiting de 2.5 segundos entre requisições ao SAPL no coletor Python **nunca** pode ser reduzido, contornado ou paralelizado.
 5. **Execução Local:**
    * Testar sempre via servidor HTTP local (`python -m http.server 8000`), nunca via protocolo `file://`.
+6. **Hooks de commit (marcas de IA):**
+   * Em cada clone novo, execute uma vez: `git config core.hooksPath .githooks`
+   * O hook `commit-msg` remove trailers de ferramentas de IA antes de gravar a mensagem.
+   * Não inclua em commits linhas `Co-authored-by` de assistentes, `Generated with ...` nem `Claude-Session:`.
 
 ---
 

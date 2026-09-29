@@ -16,6 +16,8 @@ if str(ROOT / "coletor") not in sys.path:
 
 from config_cidade import anos_recorte, carregar_config  # noqa: E402
 
+from marcas_ia import verificar_commits_marcas_ia  # noqa: E402
+
 
 def main():
     erros = []
@@ -81,7 +83,17 @@ def main():
             f"Hashes conferidos: {hashes_vistos}. Anos do config: {len(anos)}."
         )
 
-    # 5. Higiene de travessoes em documentacao
+    # 5. Marcas de ferramentas de IA em mensagens de commit
+    print("\nVerificando ausencia de marcas de IA em commits recentes...")
+    erros_marcas, avisos_marcas = verificar_commits_marcas_ia(ROOT)
+    for aviso in avisos_marcas:
+        print(f"AVISO: {aviso}")
+    if erros_marcas:
+        erros.extend(erros_marcas)
+    elif not avisos_marcas:
+        print("OK: Nenhuma marca de IA nas mensagens verificadas.")
+
+    # 6. Higiene de travessoes em documentacao
     print("\nVerificando ausencia de caracteres de travessao proibidos...")
     arquivos_norma = [
         "AGENTS.md",

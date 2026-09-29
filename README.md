@@ -144,6 +144,28 @@ Toda mudança passa por testes automáticos de conferência e só vai ao ar depo
 
 ---
 
+## Contribuição
+
+Quem clona o repositório para enviar alterações deve ativar os hooks versionados **uma vez** no clone local:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+O hook `commit-msg` higieniza a mensagem de commit removendo assinaturas automáticas de ferramentas de IA (por exemplo trailers `Co-authored-by` de assistentes, linhas `Generated with ...` e `Claude-Session:`). Coautores humanos reais não são alterados.
+
+O arquivo `.marcas-ia-desde` define a partir de qual ponto do histórico o CI verifica mensagens de commit. Commits anteriores a esse marco não são reavaliados.
+
+Antes de abrir um pull request, rode localmente:
+
+```bash
+python coletor/testes_sanidade.py
+python -m unittest discover -s tests
+python scripts/verificar_regras.py
+```
+
+---
+
 ## Licença
 
 Código e dados disponibilizados publicamente sob a licença MIT (arquivo `LICENSE`). Os registros de origem são públicos e produzidos pela Câmara Municipal de Campo do Tenente.

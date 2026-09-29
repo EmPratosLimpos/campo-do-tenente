@@ -14,6 +14,8 @@ jobs:
         # checkout v7 e setup-python v7 rodam em Node 24.
         # Node 20 nao esta mais disponivel nos executores do GitHub Actions.
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Configurar Python
         uses: actions/setup-python@v7
@@ -48,3 +50,7 @@ jobs:
           ! grep -rE "C:\\\\Users\\\\" --exclude-dir=".git" --exclude-dir=".github" --exclude="*.pyc" .
           echo "Verificando higienizacao de travessoes em documentacoes normativas..."
           ! grep -rE "[—–]" PROCESSO_DESENVOLVIMENTO_E_GOVERNANCA.md AGENTS.md CLAUDE.md .cursorrules
+
+      - name: Verificar marcas de IA em commits
+        run: |
+          python -c "import pathlib, sys; sys.path.insert(0,'scripts'); from marcas_ia import verificar_commits_marcas_ia; e,a=verificar_commits_marcas_ia(pathlib.Path('.')); [print('AVISO:',x) for x in a]; [print(x) for x in e]; sys.exit(1 if e else 0)"
