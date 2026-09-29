@@ -318,6 +318,41 @@ JS_DUAS_COLUNAS = """(selArea) => {
   return false;
 }"""
 
+JS_TOPO_MEDICAO = """() => {
+  const topo = document.querySelector('.topo-fixo');
+  const sel = document.getElementById('sel-vereador');
+  if (!topo || !sel) return { erro: 'sem-elementos' };
+  const rt = topo.getBoundingClientRect();
+  const rs = sel.getBoundingClientRect();
+  const alvo = document.elementFromPoint(
+    Math.round(rs.left + rs.width / 2),
+    Math.round(rs.top + rs.height / 2)
+  );
+  const lab = document.querySelector('label[for="sel-vereador"]');
+  const share = document.querySelector('#sub-vereadores .btn-abrir-share');
+  const tema = document.querySelector('#btn-tema');
+  let tema_sobrepoe_sel = false;
+  if (tema) {
+    const t = tema.getBoundingClientRect();
+    const ix = Math.min(t.right, rs.right) - Math.max(t.left, rs.left);
+    const iy = Math.min(t.bottom, rs.bottom) - Math.max(t.top, rs.top);
+    tema_sobrepoe_sel = ix > 2 && iy > 2;
+  }
+  return {
+    compacto: topo.classList.contains('compacto'),
+    altura_topo: Math.round(rt.height),
+    topo_topo: Math.round(rt.top),
+    sel_altura: Math.round(rs.height),
+    sel_largura: Math.round(rs.width),
+    sel_no_ponto: alvo === sel,
+    sel_visivel: window.__vis(sel),
+    sel_ativo: !sel.disabled,
+    share_visivel: window.__vis(share),
+    rotulo_assoc: !!lab && lab.textContent.trim().length > 0,
+    tema_sobrepoe_sel: tema_sobrepoe_sel
+  };
+}"""
+
 
 def _sem_scroll_horizontal(page) -> None:
     dims = page.evaluate(
@@ -573,6 +608,96 @@ class TestTelaLayout(unittest.TestCase):
                     self._assert_sem_elementos_proibidos(page)
                     self._caso_camara(page, largura)
                     self._caso_vereadores(page, largura)
+            browser.close()
+
+    def test_topo_compacto_ao_rolar_na_aba_vereadores_celular(self):
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page(viewport={"width": 390, "height": 844})
+            page.goto(self.base, wait_until="networkidle", timeout=120000)
+            page.evaluate(JS_HELPERS)
+            page.wait_for_selector("#sel-vereador", state="attached", timeout=60000)
+            page.wait_for_selector("#bloco-votado-sessao .card-header", timeout=60000)
+            page.click('button[data-secao="vereadores"]')
+            page.wait_for_timeout(500)
+
+            topo = page.evaluate(JS_TOPO_MEDICAO)
+            self.assertFalse(topo.get("erro"), str(topo))
+            self.assertFalse(topo["compacto"], "no topo da pagina o cabecalho deve ser completo")
+            self.assertTrue(page.locator(".titulo-site").is_visible())
+            self.assertGreater(
+                topo["altura_topo"],
+                72,
+                f"sem rolagem o topo deve ser maior que a barra compacta: {topo}",
+            )
+
+            page.evaluate("window.scrollTo(0, 600)")
+            page.wait_for_function(
+                "() => document.querySelector('.topo-fixo').classList.contains('compacto')",
+                timeout=5000,
+            )
+            topo = page.evaluate(JS_TOPO_MEDICAO)
+            self.assertLessEqual(
+                topo["altura_topo"], 72, f"barra compacta mais alta que 72 px: {topo}"
+            )
+            self.assertLessEqual(abs(topo["topo_topo"]), 1, "barra compacta deslocada do topo")
+            self.assertTrue(topo["sel_visivel"], f"seletor sumiu na barra compacta: {topo}")
+            self.assertTrue(topo["sel_no_ponto"], f"seletor coberto por outro elemento: {topo}")
+            self.assertGreaterEqual(topo["sel_altura"], 36, f"seletor alvo de toque pequeno: {topo}")
+            self.assertGreaterEqual(topo["sel_largura"], 120, f"seletor estreito demais: {topo}")
+            self.assertTrue(topo["sel_ativo"], "seletor desabilitado na barra compacta")
+            self.assertTrue(topo["rotulo_assoc"], "seletor sem rotulo associado na barra compacta")
+            self.assertTrue(topo["share_visivel"], "botao de compartilhar deve caber em 390 px")
+            self.assertFalse(
+                topo["tema_sobrepoe_sel"], f"botao de tema sobrepoe o seletor: {topo}"
+            )
+            self.assertFalse(
+                page.locator(".titulo-site").is_visible(),
+                "titulo nao deve aparecer dentro da barra compacta",
+            )
+
+            valor_antes = page.evaluate("() => document.getElementById('sel-vereador').value")
+            nome_antes = page.inner_text(".perfil-nome")
+            rolagem_antes = page.evaluate("() => window.scrollY")
+            page.select_option("#sel-vereador", index=1)
+            page.wait_for_timeout(500)
+            valor_depois = page.evaluate("() => document.getElementById('sel-vereador').value")
+            nome_depois = page.inner_text(".perfil-nome")
+            rolagem_depois = page.evaluate("() => window.scrollY")
+            self.assertNotEqual(
+                valor_antes, valor_depois, "troca de vereador nao funcionou na barra compacta"
+            )
+            self.assertNotEqual(
+                nome_antes, nome_depois, "perfil nao atualizou ao trocar o vereador rolado"
+            )
+            self.assertLessEqual(
+                abs(rolagem_depois - rolagem_antes), 120, "troca de vereador deslocou a pagina"
+            )
+            topo = page.evaluate(JS_TOPO_MEDICAO)
+            self.assertTrue(topo["compacto"], "barra deveria continuar compacta apos a troca")
+            self.assertLessEqual(topo["altura_topo"], 72, f"barra cresceu apos a troca: {topo}")
+
+            page.evaluate("window.scrollTo(0, 0)")
+            page.wait_for_function(
+                "() => !document.querySelector('.topo-fixo').classList.contains('compacto')",
+                timeout=5000,
+            )
+            topo = page.evaluate(JS_TOPO_MEDICAO)
+            self.assertFalse(topo["compacto"], "chegando ao topo a barra deve reabrir")
+            self.assertTrue(
+                page.locator(".titulo-site").is_visible(),
+                "de volta ao topo o titulo deve reaparecer",
+            )
+            self.assertGreater(topo["altura_topo"], 72, f"topo nao reabriu por completo: {topo}")
+
+            page.set_viewport_size({"width": 1440, "height": 900})
+            page.wait_for_timeout(600)
+            page.evaluate("window.scrollTo(0, 600)")
+            page.wait_for_timeout(500)
+            topo = page.evaluate(JS_TOPO_MEDICAO)
+            self.assertFalse(
+                topo["compacto"], "em 1440 px o topo nao deve encolher ao rolar"
+            )
             browser.close()
 
 
