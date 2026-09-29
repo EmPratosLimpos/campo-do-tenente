@@ -3,12 +3,22 @@ import unittest
 import threading
 import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
-from playwright.sync_api import sync_playwright
+
+try:
+    from playwright.sync_api import sync_playwright
+
+    PLAYWRIGHT_OK = True
+    PLAYWRIGHT_MOTIVO = ""
+except ImportError:
+    PLAYWRIGHT_OK = False
+    PLAYWRIGHT_MOTIVO = "playwright nao instalado"
+
 
 class _Handler(SimpleHTTPRequestHandler):
     def log_message(self, format, *args):
         pass
 
+@unittest.skipUnless(PLAYWRIGHT_OK, PLAYWRIGHT_MOTIVO)
 class TestVotosVereadores(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

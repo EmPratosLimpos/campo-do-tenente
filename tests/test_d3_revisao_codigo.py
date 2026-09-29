@@ -8,7 +8,14 @@ import time
 import unittest
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-from playwright.sync_api import sync_playwright
+try:
+    from playwright.sync_api import sync_playwright
+
+    PLAYWRIGHT_OK = True
+    PLAYWRIGHT_MOTIVO = ""
+except ImportError:
+    PLAYWRIGHT_OK = False
+    PLAYWRIGHT_MOTIVO = "playwright nao instalado"
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 TRATADOS = RAIZ / "dados" / "tratados"
@@ -102,6 +109,7 @@ class _Handler(SimpleHTTPRequestHandler):
         pass
 
 
+@unittest.skipUnless(PLAYWRIGHT_OK, PLAYWRIGHT_MOTIVO)
 class TestD3TelaPlaywright(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
