@@ -12,11 +12,15 @@ tmp="$(mktemp)"
 trap 'rm -f "$tmp"' EXIT
 
 while IFS= read -r line || [[ -n "$line" ]]; do
+  if printf '%s' "$line" | grep -qi 'generated with'; then
+    pre="$(printf '%s' "$line" | sed 's/[Gg]enerated [Ww]ith.*//')"
+    pre_lc="$(printf '%s' "$pre" | tr '[:upper:]' '[:lower:]')"
+    if ! printf '%s' "$pre_lc" | grep -q '[a-z]'; then
+      continue
+    fi
+  fi
   lower="$(printf '%s' "$line" | tr '[:upper:]' '[:lower:]')"
   case "$lower" in
-    generated\ with*)
-      continue
-      ;;
     claude-session:*)
       continue
       ;;

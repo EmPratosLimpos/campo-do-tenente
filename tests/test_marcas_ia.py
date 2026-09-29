@@ -75,6 +75,17 @@ class TestMarcasIaLinhas(unittest.TestCase):
         limpa = sanitizar_mensagem_commit(msg)
         self.assertEqual(limpa.strip(), "titulo")
 
+    def test_remove_generated_with_emoji_e_link(self):
+        linha = (
+            "\U0001f916 Generated with [Claude Code]"
+            "(https://claude.com/claude-code)"
+        )
+        self.assertTrue(linha_e_marca_ia(linha))
+        msg = f"titulo\n\n{linha}\n"
+        limpa = sanitizar_mensagem_commit(msg)
+        self.assertEqual(limpa.strip(), "titulo")
+        self.assertTrue(mensagem_tem_marca_ia(msg))
+
     def test_detecta_marca_na_mensagem(self):
         self.assertTrue(mensagem_tem_marca_ia("Co-authored-by: Copilot <x@y>\n"))
 
@@ -87,6 +98,7 @@ class TestHookCommitMsg(unittest.TestCase):
             "Co-authored-by: Cursor <cursoragent@cursor.com>\n"
             "Co-authored-by: Maria Silva <maria@exemplo.org>\n"
             "Generated with Composer\n"
+            "\U0001f916 Generated with [Claude Code](https://claude.com/claude-code)\n"
         )
         with tempfile.TemporaryDirectory() as tmp:
             arq = Path(tmp) / "msg"
@@ -138,6 +150,52 @@ class TestVerificarCommitsMarcasIa(unittest.TestCase):
                     "ok\n\nCo-authored-by: Cursor <c@cursor.com>",
                     "--no-verify",
                 ],
+                cwd=raiz,
+                check=True,
+            )
+
+            erros, avisos = verificar_commits_marcas_ia(raiz)
+            self.assertFalse(avisos)
+            self.assertTrue(erros)
+
+    def test_repo_temporario_generated_com_emoji_falha(self):
+        linha = (
+            "\U0001f916 Generated with [Claude Code]"
+            "(https://claude.com/claude-code)"
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            raiz = Path(tmp)
+            subprocess.run(["git", "init", "-q"], cwd=raiz, check=True)
+            subprocess.run(
+                ["git", "config", "user.email", "teste@exemplo.org"],
+                cwd=raiz,
+                check=True,
+            )
+            subprocess.run(
+                ["git", "config", "user.name", "Teste"],
+                cwd=raiz,
+                check=True,
+            )
+            (raiz / "a.txt").write_text("x\n", encoding="utf-8")
+            subprocess.run(["git", "add", "a.txt"], cwd=raiz, check=True)
+            subprocess.run(
+                ["git", "commit", "-m", "base limpa", "--no-verify"],
+                cwd=raiz,
+                check=True,
+            )
+            base = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=raiz,
+                capture_output=True,
+                text=True,
+                check=True,
+            ).stdout.strip()
+            (raiz / ".marcas-ia-desde").write_text(base + "\n", encoding="utf-8")
+
+            (raiz / "b.txt").write_text("y\n", encoding="utf-8")
+            subprocess.run(["git", "add", "b.txt"], cwd=raiz, check=True)
+            subprocess.run(
+                ["git", "commit", "-m", f"ok\n\n{linha}", "--no-verify"],
                 cwd=raiz,
                 check=True,
             )

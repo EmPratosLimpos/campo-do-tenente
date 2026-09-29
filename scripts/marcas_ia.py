@@ -15,7 +15,8 @@ _MARCAS_COAUTOR = re.compile(
 )
 
 _RE_COAUTHOR = re.compile(r"^\s*co-authored-by:\s*(.+)$", re.IGNORECASE)
-_RE_GENERATED = re.compile(r"^\s*generated with\b", re.IGNORECASE)
+# Prefixo opcional sem letras ASCII (emoji, espacos, simbolos) antes de "Generated with".
+_RE_GENERATED = re.compile(r"^[^a-zA-Z]*generated with\b", re.IGNORECASE)
 _RE_CLAUDE_SESSION = re.compile(r"^\s*claude-session:\s*", re.IGNORECASE)
 
 
