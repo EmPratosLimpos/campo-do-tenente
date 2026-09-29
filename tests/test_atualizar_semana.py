@@ -16,6 +16,7 @@ sys.path.insert(0, str(RAIZ / "scripts"))
 sys.path.insert(0, str(RAIZ / "coletor"))
 
 from atualizar_semana import (  # noqa: E402
+    PREFIXOS_GRANDES_POR_SESSAO,
     TETO_EXECUCAO,
     OrcamentoExecucao,
     ano_corrente_candidato,
@@ -25,8 +26,19 @@ from atualizar_semana import (  # noqa: E402
     inserir_entrada,
     linhas_contagem,
     montar_entrada,
+    plano_sem_listas_grandes,
+    sessao_tem_arquivo,
+    sessoes_alvo_para_coleta,
+    sessoes_novas,
+    ultima_sessao_coletada,
 )
 from coletar_lote import ColetorLote, OrcamentoEsgotado  # noqa: E402
+
+sys.path.insert(0, str(RAIZ / "scripts"))
+from so_dados_mudaram import (  # noqa: E402
+    arquivos_fora_do_permitido,
+    so_dados_mudaram,
+)
 
 CFG_COLETOR = {
     "cidade": {"nome": "Cidade Teste", "uf": "PR"},
@@ -236,19 +248,25 @@ class TestesWorkflow(unittest.TestCase):
         self.assertNotIn("\u2014", novo)
         self.assertNotIn("\u2013", novo)
 
-    def test_atualizacao_semanal_abre_pr_publico_sem_merge(self):
+    def test_atualizacao_semanal_publica_so_dados_na_quarta(self):
         texto = (RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml").read_text(encoding="utf-8")
-        self.assertIn("cron: '0 6 * * 1'", texto)
+        self.assertIn("cron: '0 6 * * 3'", texto)
+        self.assertIn("Quarta-feira as 03:00", texto)
         self.assertIn("workflow_dispatch:", texto)
         self.assertIn("contents: write", texto)
-        self.assertIn("pull-requests: write", texto)
-        self.assertIn("--base desenvolvimento", texto)
-        self.assertIn("atualizacao-dados/", texto)
-        self.assertIn("334360115+EmPratosLimpos@users.noreply.github.com", texto)
-        self.assertIn('user.name "EmPratosLimpos"', texto)
+        self.assertIn("issues: write", texto)
+        self.assertNotIn("pull-requests: write", texto)
+        self.assertIn("ref: main", texto)
+        self.assertIn("fetch-depth: 0", texto)
+        self.assertIn("so_dados_mudaram", texto)
+        self.assertIn("Atualiza dados ate a sessao ordinaria", texto)
+        self.assertIn('user.name "github-actions[bot]"', texto)
+        self.assertIn("Atualizacao de dados falhou em", texto)
+        self.assertIn("gh issue create", texto)
         self.assertNotIn("pr merge", texto)
         self.assertNotIn("push --force", texto)
-        self.assertNotIn("pull_request:", texto)
+        self.assertNotIn("atualizacao-dados/", texto)
+        self.assertNotIn("--base desenvolvimento", texto)
 
     def test_script_nao_fixa_cidade_nem_ano(self):
         texto = (RAIZ / "scripts" / "atualizar_semana.py").read_text(encoding="utf-8")
@@ -258,6 +276,135 @@ class TestesWorkflow(unittest.TestCase):
         self.assertNotIn("[2026", texto)
         self.assertNotIn("\u2014", texto)
         self.assertNotIn("\u2013", texto)
+
+
+class TestesSessoesAlvo(unittest.TestCase):
+    def _sessoes(self):
+        return [
+            {"id": 10, "numero": 1, "data_inicio": "2026-02-10"},
+            {"id": 11, "numero": 2, "data_inicio": "2026-02-17"},
+            {"id": 12, "numero": 3, "data_inicio": "2026-02-24"},
+        ]
+
+    def _pasta_com(self, nome, ids_com_arquivo):
+        from coletar_por_sessao import RECURSOS
+
+        pasta = Path(self.tmp.name) / nome
+        pasta.mkdir(parents=True, exist_ok=True)
+        for sid in ids_com_arquivo:
+            for _caminho, recurso in RECURSOS:
+                (pasta / f"sessao_{sid}_{recurso}_p1.json").write_text(
+                    '{"pagination": {"total_pages": 1}, "results": []}',
+                    encoding="utf-8",
+                )
+        return pasta
+
+    def setUp(self):
+        import tempfile
+
+        self._tmpdir = tempfile.TemporaryDirectory()
+        self.tmp = self._tmpdir
+
+    def tearDown(self):
+        self._tmpdir.cleanup()
+
+    def test_identifica_novas_e_revisao_da_ultima(self):
+        sessoes = self._sessoes()
+        pasta = self._pasta_com("por1", [10, 11])
+        novas = sessoes_novas(pasta, sessoes)
+        self.assertEqual([item["id"] for item in novas], [12])
+        ultima = ultima_sessao_coletada(pasta, sessoes)
+        self.assertEqual(int(ultima["id"]), 11)
+        novas2, alvo = sessoes_alvo_para_coleta(sessoes, pasta)
+        self.assertEqual([item["id"] for item in novas2], [12])
+        self.assertEqual(sorted(item["id"] for item in alvo), [11, 12])
+
+    def test_sem_nova_nao_ha_alvo(self):
+        sessoes = self._sessoes()
+        pasta = self._pasta_com("por2", [10, 11, 12])
+        novas, alvo = sessoes_alvo_para_coleta(sessoes, pasta)
+        self.assertEqual(novas, [])
+        self.assertEqual(alvo, [])
+
+    def test_sem_pasta_tudo_e_novo(self):
+        sessoes = self._sessoes()
+        novas, alvo = sessoes_alvo_para_coleta(sessoes, None)
+        self.assertEqual(len(novas), 3)
+        self.assertEqual(len(alvo), 3)
+
+    def test_sessao_tem_arquivo_exige_os_quatro(self):
+        pasta = Path(self.tmp.name) / "por3"
+        pasta.mkdir()
+        (pasta / "sessao_99_sessaoplenariapresenca_p1.json").write_text("{}", encoding="utf-8")
+        self.assertFalse(sessao_tem_arquivo(pasta, 99))
+
+
+class TestesCaminhoPorSessao(unittest.TestCase):
+    def test_lote_pequeno_pula_listas_grandes(self):
+        indice = {
+            "sessao/sessaoplenaria": {},
+            "sessao/registrovotacao": {},
+        }
+        plano = plano_sem_listas_grandes([2026], indice)
+        prefixos = {item["prefixo"] for item in plano}
+        for grande in PREFIXOS_GRANDES_POR_SESSAO:
+            self.assertNotIn(grande, prefixos)
+        self.assertTrue(any(str(item).startswith("sessaoplenaria_ano") for item in prefixos))
+
+    def test_coleta_nova_usa_caminho_por_sessao(self):
+        import atualizar_semana as modulo
+
+        chamadas = []
+
+        def fake_completa(coletor, sid):
+            chamadas.append(int(sid))
+            return {"sessao_id": int(sid), "n_ordem": 1, "n_registros": 1, "n_votos": 2}
+
+        original = modulo.coletar_sessao_completa
+        modulo.coletar_sessao_completa = fake_completa
+        try:
+            modulo.coletar_sessoes_novas(
+                object(),
+                [{"id": 50, "numero": 9, "data_inicio": "2026-05-01"}],
+            )
+        finally:
+            modulo.coletar_sessao_completa = original
+        self.assertEqual(chamadas, [50])
+
+    def test_por_sessao_tem_mesa_registro_e_voto(self):
+        import coletar_por_sessao as por_sessao
+
+        self.assertTrue(hasattr(por_sessao, "pedir_mesa_por_sessao"))
+        self.assertTrue(hasattr(por_sessao, "pedir_registros_da_sessao"))
+        self.assertTrue(hasattr(por_sessao, "pedir_votos_da_sessao"))
+        self.assertTrue(hasattr(por_sessao, "coletar_sessao_completa"))
+
+
+class TestesSoDados(unittest.TestCase):
+    def test_so_dados_com_brutos_tratados_config_e_changelog(self):
+        self.assertTrue(
+            so_dados_mudaram(
+                [
+                    "dados/brutos/lote_20260926/ordemdia_p1.json",
+                    "dados/tratados/atuacao_vereadores_2026.json",
+                    "config_cidade.json",
+                    "CHANGELOG.md",
+                    "tela/painel.json",
+                ]
+            )
+        )
+
+    def test_codigo_reprova(self):
+        self.assertFalse(so_dados_mudaram(["scripts/atualizar_semana.py"]))
+        self.assertFalse(so_dados_mudaram(["index.html"]))
+        self.assertFalse(so_dados_mudaram(["tela/patch_dados_camara.js"]))
+        self.assertFalse(so_dados_mudaram([".github/workflows/atualizacao_semanal.yml"]))
+        self.assertFalse(so_dados_mudaram(["README.md"]))
+        fora = arquivos_fora_do_permitido(["dados/x.json", "scripts/y.py"])
+        self.assertEqual(fora, ["scripts/y.py"])
+
+    def test_vazio_e_so_dados(self):
+        self.assertTrue(so_dados_mudaram([]))
 
 
 class TesteSimulado(unittest.TestCase):
