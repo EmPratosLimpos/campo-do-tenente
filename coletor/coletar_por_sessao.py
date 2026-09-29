@@ -39,6 +39,13 @@ RECURSOS = (
     ("/api/sessao/justificativaausencia/", "justificativaausencia"),
 )
 
+CAMINHO_MESA = "/api/sessao/integrantemesa/"
+RECURSO_MESA = "integrantemesa"
+CAMINHO_REGISTRO = "/api/sessao/registrovotacao/"
+RECURSO_REGISTRO = "registrovotacao"
+CAMINHO_VOTO = "/api/sessao/votoparlamentar/"
+RECURSO_VOTO = "votoparlamentar"
+
 RAIZ = Path(__file__).resolve().parent.parent
 BRUTOS = RAIZ / "dados" / "brutos"
 
@@ -158,6 +165,175 @@ def pedir_recurso(coletor: ColetorLote, sid: int, caminho: str, recurso: str) ->
 
     continuar_apos_primeira(primeiro, prefixo, baixar)
     return prefixo
+
+
+def pedir_mesa_por_sessao(coletor: ColetorLote, sid: int) -> str:
+    """Mesa da sessao. O filtro sessao_plenaria funciona aqui."""
+    return pedir_recurso(coletor, int(sid), CAMINHO_MESA, RECURSO_MESA)
+
+
+def ler_ids_ordem_da_sessao(pasta: Path, sid: int) -> list[int]:
+    """Ids dos itens da ordem do dia ja coletados para a sessao."""
+    ids: list[int] = []
+    numero = 1
+    while True:
+        caminho = pasta / f"sessao_{int(sid)}_ordemdia_p{numero}.json"
+        if not caminho.is_file():
+            break
+        dados = ler_json(caminho)
+        for item in dados.get("results") or []:
+            if isinstance(item, dict) and item.get("id") is not None:
+                ids.append(int(item["id"]))
+        paginacao = dados.get("pagination") or {}
+        total_paginas = paginacao.get("total_pages")
+        tem_proxima = bool(
+            paginacao.get("next_page") or (paginacao.get("links") or {}).get("next")
+        )
+        if total_paginas is not None and numero >= int(total_paginas):
+            break
+        if not tem_proxima:
+            break
+        numero += 1
+    vistos = set()
+    saida = []
+    for identificador in ids:
+        if identificador not in vistos:
+            vistos.add(identificador)
+            saida.append(identificador)
+    return sorted(saida)
+
+
+def _gravar_consolidado(pasta: Path, prefixo: str, linhas: list) -> None:
+    """Consolidado por sessao no formato de pagina unica para o derivador."""
+    unicas = []
+    vistos = set()
+    sem_id = []
+    for item in linhas:
+        if isinstance(item, dict) and item.get("id") is not None:
+            identificador = int(item["id"])
+            if identificador in vistos:
+                continue
+            vistos.add(identificador)
+            unicas.append(item)
+        else:
+            sem_id.append(item)
+    todas = unicas + sem_id
+    dado = {
+        "pagination": {
+            "total_entries": len(todas),
+            "total_pages": 1,
+            "page": 1,
+            "links": {"next": None, "previous": None},
+            "next_page": None,
+        },
+        "results": todas,
+    }
+    texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
+    caminho = pasta / f"{prefixo}_p1.json"
+    tmp = caminho.with_suffix(".json.tmp")
+    tmp.write_text(texto, encoding="utf-8")
+    tmp.replace(caminho)
+
+
+def _ler_paginas_por_prefixo(pasta: Path, prefixo: str) -> list[dict]:
+    """Le todas as paginas salvas de um prefixo por ordem ou por votacao."""
+    linhas: list[dict] = []
+    numero = 1
+    while True:
+        caminho = pasta / f"{prefixo}_p{numero}.json"
+        if not caminho.is_file():
+            break
+        dados = ler_json(caminho)
+        if not isinstance(dados, dict):
+            raise SystemExit(f"{prefixo}: pagina {numero} sem objeto JSON.")
+        linhas.extend(list(dados.get("results") or []))
+        paginacao = dados.get("pagination") or {}
+        total_paginas = paginacao.get("total_pages")
+        tem_proxima = bool(
+            paginacao.get("next_page") or (paginacao.get("links") or {}).get("next")
+        )
+        if total_paginas is not None and numero >= int(total_paginas):
+            break
+        if not tem_proxima:
+            break
+        numero += 1
+    return linhas
+
+
+def pedir_registros_da_sessao(
+    coletor: ColetorLote, sid: int, ids_ordem: list[int]
+) -> list[dict]:
+    """Registros de votacao pelos itens da ordem. O filtro sessao_plenaria e ignorado pelo SAPL, por isso o caminho usa ordem=<id>."""
+    sid = int(sid)
+    registros: list[dict] = []
+    for oid in sorted({int(item) for item in ids_ordem}):
+        params = {"ordem": int(oid), "page_size": PAGE_SIZE, "page": 1}
+        prefixo_ordem = f"sessao_{sid}_registrovotacao_ordem_{int(oid)}"
+        primeiro = coletor.pedir(CAMINHO_REGISTRO, dict(params), f"{prefixo_ordem}_p1.json")
+        if not isinstance(primeiro, dict):
+            raise SystemExit(f"sessao {sid} registrovotacao ordem {oid}: sem objeto JSON.")
+
+        def baixar(pagina: int, _oid: int = int(oid), _params: dict = params):
+            copia = dict(_params)
+            copia["page"] = pagina
+            return coletor.pedir(
+                CAMINHO_REGISTRO,
+                copia,
+                f"sessao_{sid}_registrovotacao_ordem_{_oid}_p{pagina}.json",
+            )
+
+        continuar_apos_primeira(primeiro, prefixo_ordem, baixar)
+        registros.extend(_ler_paginas_por_prefixo(coletor.pasta, prefixo_ordem))
+    _gravar_consolidado(coletor.pasta, f"sessao_{sid}_{RECURSO_REGISTRO}", registros)
+    return registros
+
+
+def pedir_votos_da_sessao(
+    coletor: ColetorLote, sid: int, ids_registro: list[int]
+) -> list[dict]:
+    """Votos individuais por registro. O caminho usa votacao=<id>."""
+    sid = int(sid)
+    votos: list[dict] = []
+    for vid in sorted({int(item) for item in ids_registro}):
+        params = {"votacao": int(vid), "page_size": PAGE_SIZE, "page": 1}
+        prefixo_voto = f"sessao_{sid}_votoparlamentar_votacao_{int(vid)}"
+        primeiro = coletor.pedir(CAMINHO_VOTO, dict(params), f"{prefixo_voto}_p1.json")
+        if not isinstance(primeiro, dict):
+            raise SystemExit(f"sessao {sid} votoparlamentar votacao {vid}: sem objeto JSON.")
+
+        def baixar(pagina: int, _vid: int = int(vid), _params: dict = params):
+            copia = dict(_params)
+            copia["page"] = pagina
+            return coletor.pedir(
+                CAMINHO_VOTO,
+                copia,
+                f"sessao_{sid}_votoparlamentar_votacao_{_vid}_p{pagina}.json",
+            )
+
+        continuar_apos_primeira(primeiro, prefixo_voto, baixar)
+        votos.extend(_ler_paginas_por_prefixo(coletor.pasta, prefixo_voto))
+    _gravar_consolidado(coletor.pasta, f"sessao_{sid}_{RECURSO_VOTO}", votos)
+    return votos
+
+
+def coletar_sessao_completa(coletor: ColetorLote, sid: int) -> dict:
+    """Coleta por sessao dos 7 pacotes grandes: presencas, ordem, justificativa, mesa, registros e votos."""
+    sid = int(sid)
+    for caminho, recurso in RECURSOS:
+        pedir_recurso(coletor, sid, caminho, recurso)
+    pedir_mesa_por_sessao(coletor, sid)
+    ids_ordem = ler_ids_ordem_da_sessao(coletor.pasta, sid)
+    registros = pedir_registros_da_sessao(coletor, sid, ids_ordem)
+    ids_registro = [
+        int(item["id"]) for item in registros if isinstance(item, dict) and item.get("id") is not None
+    ]
+    votos = pedir_votos_da_sessao(coletor, sid, ids_registro)
+    return {
+        "sessao_id": sid,
+        "n_ordem": len(ids_ordem),
+        "n_registros": len(registros),
+        "n_votos": len(votos),
+    }
 
 
 def conferir_prefixo(pasta: Path, prefixo: str, sid: int, recurso: str) -> dict:
