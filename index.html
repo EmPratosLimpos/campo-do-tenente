@@ -4103,7 +4103,12 @@
     if (!vereadorComCassacao(v)) return "";
     var cassacao = v.motivos_fora_do_mandato.find(function(m) { return m.motivo === "Mandato cassado"; });
     if (!cassacao) return "";
-    var linkCassacao = cassacao.materia_id ? SAPL_ORIGEM + "/materia/" + cassacao.materia_id : "";
+    var linkCassacao = "";
+    if (cassacao.materia_id) {
+      linkCassacao = urlSegura(
+        SAPL_ORIGEM + "/materia/" + encodeURIComponent(String(cassacao.materia_id))
+      );
+    }
     if (linkCassacao) {
       return ' <a href="' + esc(linkCassacao) + '" class="selo selo-coautoria" title="Ato de cassação no SAPL" target="_blank" rel="noopener noreferrer" style="text-decoration:none;vertical-align:middle;margin-left:8px;">Cassado</a>';
     } else {
@@ -5950,6 +5955,28 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       var clonePeriodos = mobilePeriodos.cloneNode(true);
       clonePeriodos.id = "seletor-periodo-lateral";
       clonePeriodos.setAttribute("aria-label", "Per\u00edodo de consulta no menu lateral");
+      (function renomearIdsLateral(raiz) {
+        var comId = raiz.querySelectorAll("[id]");
+        var mapa = {};
+        comId.forEach(function (el) {
+          if (el === raiz) return;
+          var antigo = el.id;
+          var novo = antigo + "-lateral";
+          mapa[antigo] = novo;
+          el.id = novo;
+        });
+        comId.forEach(function (el) {
+          ["aria-controls", "aria-labelledby"].forEach(function (attr) {
+            var val = el.getAttribute(attr);
+            if (!val) return;
+            var partes = val.trim().split(/\s+/);
+            var novas = partes.map(function (p) {
+              return mapa[p] || p;
+            });
+            el.setAttribute(attr, novas.join(" "));
+          });
+        });
+      })(clonePeriodos);
       lateralPeriodos.appendChild(clonePeriodos);
     }
 
