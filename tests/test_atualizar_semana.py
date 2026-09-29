@@ -268,6 +268,22 @@ class TestesWorkflow(unittest.TestCase):
         self.assertNotIn("atualizacao-dados/", texto)
         self.assertNotIn("--base desenvolvimento", texto)
 
+    def test_workflow_auxiliares_fora_do_repositorio(self):
+        texto = (RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml").read_text(encoding="utf-8")
+        self.assertIn("$RUNNER_TEMP/mudanca.txt", texto)
+        self.assertIn("$RUNNER_TEMP/alterados.txt", texto)
+        self.assertIn("$RUNNER_TEMP/atualizacao.log", texto)
+        self.assertIn("$RUNNER_TEMP/sanidade.log", texto)
+        self.assertIn("$RUNNER_TEMP/testes.log", texto)
+        self.assertIn("$RUNNER_TEMP/regras.log", texto)
+        self.assertNotIn("tee atualizacao.log", texto)
+        self.assertNotIn("tee sanidade.log", texto)
+        self.assertNotIn("> mudanca.txt", texto)
+        self.assertNotIn("> alterados.txt", texto)
+        self.assertIn("git diff --name-only", texto)
+        self.assertIn("git ls-files --others --exclude-standard", texto)
+        self.assertNotIn("awk '{print $2}'", texto)
+
     def test_script_nao_fixa_cidade_nem_ano(self):
         texto = (RAIZ / "scripts" / "atualizar_semana.py").read_text(encoding="utf-8")
         self.assertNotIn("campodotenente", texto)
@@ -405,6 +421,23 @@ class TestesSoDados(unittest.TestCase):
 
     def test_vazio_e_so_dados(self):
         self.assertTrue(so_dados_mudaram([]))
+
+    def test_execucao_tipica_so_com_dados_passsa_e_codigo_reprova(self):
+        tipicos = [
+            "dados/brutos/lote_20260927_porsessao/sessao_12_ordemdia_p1.json",
+            "dados/brutos/lote_20260927_porsessao/indice.json",
+            "dados/brutos/resumo_insumos.json",
+            "dados/tratados/atuacao_vereadores_2026.json",
+            "dados/tratados/atuacao_vereadores_2026.json.sha256",
+            "config_cidade.json",
+            "CHANGELOG.md",
+        ]
+        self.assertTrue(so_dados_mudaram(tipicos))
+        self.assertEqual(arquivos_fora_do_permitido(tipicos), [])
+        self.assertFalse(so_dados_mudaram(tipicos + ["scripts/atualizar_semana.py"]))
+        self.assertFalse(
+            so_dados_mudaram(tipicos + [".github/workflows/atualizacao_semanal.yml"])
+        )
 
 
 class TesteSimulado(unittest.TestCase):

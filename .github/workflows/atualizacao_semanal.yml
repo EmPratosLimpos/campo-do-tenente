@@ -38,14 +38,14 @@ jobs:
         id: atualizar
         run: |
           set -o pipefail
-          python scripts/atualizar_semana.py 2>&1 | tee atualizacao.log
+          python scripts/atualizar_semana.py 2>&1 | tee "$RUNNER_TEMP/atualizacao.log"
 
       - name: Ver se houve dado novo
         id: mudanca
         run: |
-          git status --porcelain > mudanca.txt || true
-          cat mudanca.txt
-          if [[ -s mudanca.txt ]]; then
+          git status --porcelain > "$RUNNER_TEMP/mudanca.txt" || true
+          cat "$RUNNER_TEMP/mudanca.txt"
+          if [[ -s "$RUNNER_TEMP/mudanca.txt" ]]; then
             echo "houve=true" >> "$GITHUB_OUTPUT"
           else
             echo "houve=false" >> "$GITHUB_OUTPUT"
@@ -57,9 +57,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git status --porcelain | awk '{print $2}' > alterados.txt || true
-          cat alterados.txt
-          if ! python scripts/so_dados_mudaram.py $(cat alterados.txt); then
+          git diff --name-only > "$RUNNER_TEMP/alterados.txt" || true
+          git ls-files --others --exclude-standard >> "$RUNNER_TEMP/alterados.txt" || true
+          cat "$RUNNER_TEMP/alterados.txt"
+          if ! python scripts/so_dados_mudaram.py "$RUNNER_TEMP/alterados.txt"; then
             data_br=$(TZ=America/Sao_Paulo date +%d/%m/%Y)
             gh issue create \
               --title "Atualizacao de dados com alteracao de codigo em ${data_br}" \
@@ -71,9 +72,9 @@ jobs:
         if: steps.mudanca.outputs.houve == 'true'
         run: |
           set -o pipefail
-          python coletor/testes_sanidade.py 2>&1 | tee sanidade.log
-          python -m unittest discover -s tests 2>&1 | tee testes.log
-          python scripts/verificar_regras.py 2>&1 | tee regras.log
+          python coletor/testes_sanidade.py 2>&1 | tee "$RUNNER_TEMP/sanidade.log"
+          python -m unittest discover -s tests 2>&1 | tee "$RUNNER_TEMP/testes.log"
+          python scripts/verificar_regras.py 2>&1 | tee "$RUNNER_TEMP/regras.log"
 
       - name: Commit na main so com dados
         if: steps.mudanca.outputs.houve == 'true'
@@ -135,7 +136,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           data_br=$(TZ=America/Sao_Paulo date +%d/%m/%Y)
-          trecho=$(tail -n 80 atualizacao.log sanidade.log testes.log regras.log 2>/dev/null | head -n 120 || echo "Sem trecho de log.")
+          trecho=$(tail -n 80 "$RUNNER_TEMP/atualizacao.log" "$RUNNER_TEMP/sanidade.log" "$RUNNER_TEMP/testes.log" "$RUNNER_TEMP/regras.log" 2>/dev/null | head -n 120 || echo "Sem trecho de log.")
           gh issue create \
             --title "Atualizacao de dados falhou em ${data_br}" \
             --body "A atualizacao semanal falhou e nada foi publicado. Trecho do erro: ${trecho}"
