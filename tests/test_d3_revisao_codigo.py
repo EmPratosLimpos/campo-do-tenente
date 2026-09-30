@@ -44,12 +44,30 @@ class TestD3PresencaLegislatura(unittest.TestCase):
     def test_jorge_quege_legislatura(self):
         v = _vereador_por_slug(self.leg, "jorge-quege")
         p = v["presenca"]
-        self.assertEqual(p["sessoes_ordinarias"], 37)
+        self.assertEqual(p["sessoes_ordinarias"], 60)
         self.assertEqual(p["presencas"], 36)
+        self.assertEqual(p["faltas_com_justificativa"], 1)
+        self.assertEqual(p["faltas_sem_justificativa"], 0)
         self.assertEqual(p["faltas_totais"], 1)
-        self.assertAlmostEqual(p["taxa_presenca"], 97.3)
+        self.assertAlmostEqual(p["taxa_presenca"], 60.0)
+        self.assertAlmostEqual(p["percentual_faltas"], round(1 * 100 / 60, 2))
         self.assertEqual(p["sessoes_licenca"], 23)
         self.assertEqual(p["sessoes_fora_do_mandato"], 5)
+        vereadores = json.loads(
+            (TRATADOS / "vereadores.json").read_text(encoding="utf-8")
+        )
+        fim = next(
+            item["data_fim_mandato"]
+            for item in vereadores["vereadores"]
+            if item.get("slug_codigo") == "jorge-quege"
+        )
+        self.assertTrue(p["por_sessao"])
+        for item in p["por_sessao"]:
+            self.assertLessEqual(item["data_sessao"], fim)
+            self.assertNotEqual(item["situacao"], "fora_do_mandato")
+        for nominal in v["votos"]["nominais"]:
+            self.assertLessEqual(nominal["data_sessao"], fim)
+        self.assertEqual(v["votos"]["fora_do_mandato"], 0)
 
     def test_presenca_legislatura_soma_dos_anos(self):
         campos = (
@@ -158,8 +176,13 @@ class TestD3TelaPlaywright(unittest.TestCase):
                 page.locator("#tit-presenca").locator("xpath=ancestor::summary[1]").click()
                 page.wait_for_timeout(400)
             texto = page.inner_text("body")
-            self.assertIn("97,3", texto)
-            self.assertNotIn("55,4", texto)
+            taxa = _carregar("atuacao_vereadores_legislatura.json")
+            jorge = next(
+                v for v in taxa["vereadores"] if v.get("slug_codigo") == "jorge-quege"
+            )
+            esperado = f"{jorge['presenca']['taxa_presenca']:.1f}".replace(".", ",")
+            self.assertIn(esperado, texto)
+            self.assertNotIn("Fora do mandato naquela data", texto)
             browser.close()
 
 

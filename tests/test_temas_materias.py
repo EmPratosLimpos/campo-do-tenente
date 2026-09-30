@@ -26,7 +26,24 @@ from gerar_temas_votacoes import (  # noqa: E402
 
 # A lista vem de config_cidade.json (D-021), nunca de uma lista fixa aqui.
 TEMAS_PERMITIDOS = set(nomes_categorias())
-PASTA_LOTE = RAIZ / "dados" / "brutos" / "lote_20260926"
+
+
+def pasta_lote_materias() -> pathlib.Path:
+    """Pasta do lote com as materias, sem data fixa: a mais recente que tem o arquivo."""
+    candidatas = sorted(
+        caminho
+        for caminho in (RAIZ / "dados" / "brutos").glob("lote_*")
+        if caminho.is_dir()
+        and not caminho.name.endswith("_autoria")
+        and "porsessao" not in caminho.name
+        and next(caminho.glob("materialegislativa_ano*_p*.json"), None) is not None
+    )
+    if not candidatas:
+        raise AssertionError("nenhuma pasta de lote com materias em dados/brutos")
+    return candidatas[-1]
+
+
+PASTA_LOTE = pasta_lote_materias()
 
 
 class TestTemasMaterias(unittest.TestCase):
@@ -54,10 +71,11 @@ class TestTemasMaterias(unittest.TestCase):
         self.assertEqual(set(REGRAS), TEMAS_PERMITIDOS)
         self.assertFalse(USAR_REGRAS_POR_PALAVRA)
 
-    def test_401_materias_sem_repeticao(self):
+    def test_materias_sem_repeticao_e_completas(self):
         ids = [item["id"] for item in self.materias]
-        self.assertEqual(len(ids), 401)
-        self.assertEqual(len(set(ids)), 401)
+        self.assertEqual(len(ids), len(self.brutas))
+        self.assertGreater(len(ids), 0)
+        self.assertEqual(len(set(ids)), len(ids))
 
     def test_cobre_todas_as_materias_do_lote(self):
         self.assertEqual({item["id"] for item in self.materias}, set(self.brutas))
