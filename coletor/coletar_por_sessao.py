@@ -316,18 +316,103 @@ def pedir_votos_da_sessao(
     return votos
 
 
+def gravar_aviso_sessao_recusada(pasta: Path, sid: int, motivo: str, detalhe: dict) -> Path:
+    """Aviso estruturado quando a sessao e recusada por vazio suspeito.
+
+    O arquivo nao entra na derivacao. Serve para o log e para a issue.
+    Nada e publicado a partir de uma sessao recusada.
+    """
+    caminho = pasta / f"sessao_{int(sid)}_recusada.json"
+    dado = {
+        "sessao_id": int(sid),
+        "motivo": motivo,
+        "detalhe": detalhe,
+    }
+    texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
+    tmp = caminho.with_suffix(".json.tmp")
+    tmp.write_text(texto, encoding="utf-8")
+    tmp.replace(caminho)
+    return caminho
+
+
+def recusar_sessao_vazia(
+    pasta: Path,
+    sid: int,
+    motivo: str,
+    detalhe: dict,
+    restaurar: dict[str, bytes | None] | None = None,
+) -> None:
+    """Recusa a sessao com erro explicito. Nada e publicado.
+
+    O argumento restaurar devolve os consolidados ao estado anterior
+    a coleta, para uma revisao de lancamento atrasado nao apagar dado
+    bom quando o SAPL responde vazio. Chave e o nome do arquivo,
+    valor e o conteudo previo ou None quando nao existia.
+    """
+    for nome, conteudo in (restaurar or {}).items():
+        caminho = pasta / nome
+        if conteudo is None:
+            if caminho.is_file():
+                caminho.unlink()
+        else:
+            caminho.write_bytes(conteudo)
+    aviso = gravar_aviso_sessao_recusada(pasta, sid, motivo, detalhe)
+    print(f"sessao {int(sid)} recusada: {motivo} Aviso em {aviso.name}. Nada foi publicado.")
+    raise SystemExit(
+        f"sessao {int(sid)} recusada: {motivo} "
+        f"Aviso em dados/brutos/{pasta.name}/{aviso.name}. Nada foi publicado."
+    )
+
+
 def coletar_sessao_completa(coletor: ColetorLote, sid: int) -> dict:
-    """Coleta por sessao dos 7 pacotes grandes: presencas, ordem, justificativa, mesa, registros e votos."""
+    """Coleta por sessao dos 7 pacotes grandes: presencas, ordem, justificativa, mesa, registros e votos.
+
+    Recusa a sessao quando a ordem tem itens e vieram zero registros,
+    ou quando ha registros e zero votos. Vazio nesse ponto indica
+    filtro mudado no SAPL ou coleta quebrada, por isso nada e publicado.
+    A recusa restaura os consolidados previos e grava um aviso
+    sessao_<id>_recusada.json para o log e para a issue.
+    """
     sid = int(sid)
+    pasta = coletor.pasta
+    aviso_antigo = pasta / f"sessao_{sid}_recusada.json"
+    if aviso_antigo.is_file():
+        aviso_antigo.unlink()
+    previos = {}
+    for recurso in (RECURSO_REGISTRO, RECURSO_VOTO):
+        caminho = pasta / f"sessao_{sid}_{recurso}_p1.json"
+        previos[caminho.name] = caminho.read_bytes() if caminho.is_file() else None
     for caminho, recurso in RECURSOS:
         pedir_recurso(coletor, sid, caminho, recurso)
     pedir_mesa_por_sessao(coletor, sid)
     ids_ordem = ler_ids_ordem_da_sessao(coletor.pasta, sid)
     registros = pedir_registros_da_sessao(coletor, sid, ids_ordem)
+    if ids_ordem and not registros:
+        recusar_sessao_vazia(
+            coletor.pasta,
+            sid,
+            (
+                f"ordem do dia com {len(ids_ordem)} itens e zero registros de votacao. "
+                "O filtro ordem pode ter mudado no SAPL."
+            ),
+            {"n_ordem": len(ids_ordem), "n_registros": 0},
+            restaurar=previos,
+        )
     ids_registro = [
         int(item["id"]) for item in registros if isinstance(item, dict) and item.get("id") is not None
     ]
     votos = pedir_votos_da_sessao(coletor, sid, ids_registro)
+    if ids_registro and not votos:
+        recusar_sessao_vazia(
+            coletor.pasta,
+            sid,
+            (
+                f"{len(ids_registro)} registros de votacao e zero votos parlamentares. "
+                "O filtro votacao pode ter mudado no SAPL."
+            ),
+            {"n_registros": len(ids_registro), "n_votos": 0},
+            restaurar=previos,
+        )
     return {
         "sessao_id": sid,
         "n_ordem": len(ids_ordem),

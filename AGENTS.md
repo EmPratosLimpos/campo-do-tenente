@@ -42,7 +42,7 @@ A norma técnica soberana deste projeto é o documento:
 * **Atualização semanal de dados (quarta 03h de Brasilia):**
   * Roda toda quarta as 03h de Brasilia pelo workflow `.github/workflows/atualizacao_semanal.yml`, a partir da main.
   * Coleta por sessão só das ordinárias novas mais a última já coletada, para pegar lançamento atrasado. Listas grandes não saem mais em lote.
-  * Publica direto só quando todos os arquivos alterados estão em `dados/`, ou são JSON da tela, `config_cidade.json` ou `CHANGELOG.md`, e quando sanidade, testes e `verificar_regras.py` passam. Mensagem em português, autor `github-actions[bot]`, sem marca de ferramenta. Em seguida leva o commit para `desenvolvimento` com merge normal, sem force.
+   * Publica direto só quando todos os arquivos alterados estão em `dados/` (sem código), `config_cidade.json` ou `CHANGELOG.md`, e quando sanidade, testes e `verificar_regras.py` passam. Mensagem em português, autor `github-actions[bot]`, sem marca de ferramenta. Em seguida leva o commit para `desenvolvimento` com merge normal, sem force. Se esse merge falhar, abre issue e a main segue válida como fonte do site.
   * Em caso de falha ou de código alterado junto: não publica e abre issue. Título de falha: "Atualizacao de dados falhou em DD/MM/AAAA", com trecho do erro.
 * **Branch `desenvolvimento` (Staging e Integração):**
   * Ambiente de trabalho contínuo onde modificações são criadas, testadas e validadas localmente.

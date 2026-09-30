@@ -2,8 +2,12 @@
 """Regra so dados mudaram, usada pelo workflow semanal.
 
 Recebe a lista de arquivos alterados e responde se todos sao dados.
-Permite: tudo em dados/, CHANGELOG.md, config_cidade.json e JSON da tela.
-Qualquer codigo (.py, .html, .js, .css, .yml, outro .md) reprova.
+Permite: tudo em dados/ (menos codigo), CHANGELOG.md e config_cidade.json.
+Nenhum gerador grava em tela/, por isso tela/ reprova.
+Qualquer codigo (.py, .html, .js, .css, .yml, .md fora de CHANGELOG.md) reprova.
+
+A regra aceita exatamente o que o workflow leva no commit:
+git add -- dados config_cidade.json CHANGELOG.md.
 
 Uso: python scripts/so_dados_mudaram.py <arquivo...> <arquivo...>
 Saida 0 quando so dados mudaram. Saida 1 caso contrario.
@@ -15,7 +19,7 @@ import sys
 from pathlib import Path
 
 EXATOS_PERMITIDOS = frozenset({"config_cidade.json", "CHANGELOG.md"})
-PREFIXOS_PERMITIDOS = ("dados/", "tela/")
+PREFIXOS_PERMITIDOS = ("dados/",)
 SUFFIXOS_CODIGO = (".py", ".html", ".js", ".css", ".yml", ".yaml", ".md")
 
 
@@ -33,8 +37,6 @@ def e_dado(normalizado: str) -> bool:
         return True
     for prefixo in PREFIXOS_PERMITIDOS:
         if normalizado == prefixo.rstrip("/") or normalizado.startswith(prefixo):
-            if normalizado.startswith("tela/"):
-                return normalizado.lower().endswith(".json")
             return True
     return False
 
@@ -87,6 +89,25 @@ def arquivos_de_git_status(porcelana: str) -> list[str]:
     return saida
 
 
+def planejar_publicacao(arquivos: list[str]) -> dict:
+    """Decide o proximo passo do workflow a partir dos arquivos alterados.
+
+    Devolve um dicionario com decisao e fora:
+    sem_mudanca quando a lista fica vazia,
+    publicar quando so dados mudaram,
+    bloquear quando algum codigo mudou junto.
+    O workflow publica so com publicar e abre uma so issue com bloquear.
+    """
+    limpos = [normalizar(item) for item in arquivos or []]
+    limpos = [item for item in limpos if item]
+    if not limpos:
+        return {"decisao": "sem_mudanca", "fora": [], "total": 0}
+    fora = arquivos_fora_do_permitido(limpos)
+    if not fora:
+        return {"decisao": "publicar", "fora": [], "total": len(limpos)}
+    return {"decisao": "bloquear", "fora": fora, "total": len(limpos)}
+
+
 def main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
     if len(args) == 1 and Path(args[0]).is_file():
@@ -96,12 +117,15 @@ def main(argv: list[str] | None = None) -> int:
                 args = [item for item in texto.split() if item.strip()]
         except OSError:
             pass
-    fora = arquivos_fora_do_permitido(args)
-    if not fora:
+    plano = planejar_publicacao(args)
+    if plano["decisao"] == "sem_mudanca":
+        print("Sem mudanca.")
+        return 0
+    if plano["decisao"] == "publicar":
         print("So dados mudaram.")
         return 0
     print("Codigo fora de dados:")
-    for item in fora:
+    for item in plano["fora"]:
         print(f"  {item}")
     return 1
 

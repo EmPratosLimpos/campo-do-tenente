@@ -22,6 +22,7 @@ from atualizar_semana import (  # noqa: E402
     ano_corrente_candidato,
     anos_da_execucao,
     confirmar_sessao_ordinaria_no_ano,
+    custo_minimo_sessoes,
     incluir_ano_se_confirmado,
     inserir_entrada,
     linhas_contagem,
@@ -37,6 +38,7 @@ from coletar_lote import ColetorLote, OrcamentoEsgotado  # noqa: E402
 sys.path.insert(0, str(RAIZ / "scripts"))
 from so_dados_mudaram import (  # noqa: E402
     arquivos_fora_do_permitido,
+    planejar_publicacao,
     so_dados_mudaram,
 )
 
@@ -262,7 +264,11 @@ class TestesWorkflow(unittest.TestCase):
         self.assertIn("Atualiza dados ate a sessao ordinaria", texto)
         self.assertIn('user.name "github-actions[bot]"', texto)
         self.assertIn("Atualizacao de dados falhou em", texto)
+        self.assertNotIn("com alteracao de codigo em", texto)
         self.assertIn("gh issue create", texto)
+        self.assertIn("issue_ja_aberta", texto)
+        self.assertIn("alteracao de codigo detectada", texto)
+        self.assertIn("Motivo:", texto)
         self.assertNotIn("pr merge", texto)
         self.assertNotIn("push --force", texto)
         self.assertNotIn("atualizacao-dados/", texto)
@@ -282,6 +288,8 @@ class TestesWorkflow(unittest.TestCase):
         self.assertNotIn("> alterados.txt", texto)
         self.assertIn("git diff --name-only", texto)
         self.assertIn("git ls-files --others --exclude-standard", texto)
+        self.assertNotIn("mudanca.txt\" || true", texto)
+        self.assertNotIn("alterados.txt\" || true", texto)
         self.assertNotIn("awk '{print $2}'", texto)
 
     def test_script_nao_fixa_cidade_nem_ano(self):
@@ -335,12 +343,12 @@ class TestesSessoesAlvo(unittest.TestCase):
         self.assertEqual([item["id"] for item in novas2], [12])
         self.assertEqual(sorted(item["id"] for item in alvo), [11, 12])
 
-    def test_sem_nova_nao_ha_alvo(self):
+    def test_sem_nova_ainda_reve_a_ultima_para_lancamento_atrasado(self):
         sessoes = self._sessoes()
         pasta = self._pasta_com("por2", [10, 11, 12])
         novas, alvo = sessoes_alvo_para_coleta(sessoes, pasta)
         self.assertEqual(novas, [])
-        self.assertEqual(alvo, [])
+        self.assertEqual([item["id"] for item in alvo], [12])
 
     def test_sem_pasta_tudo_e_novo(self):
         sessoes = self._sessoes()
@@ -405,7 +413,34 @@ class TestesSoDados(unittest.TestCase):
                     "dados/tratados/atuacao_vereadores_2026.json",
                     "config_cidade.json",
                     "CHANGELOG.md",
+                ]
+            )
+        )
+
+    def test_tela_nao_e_dado_e_reprova(self):
+        self.assertFalse(so_dados_mudaram(["tela/painel.json"]))
+        self.assertFalse(
+            so_dados_mudaram(
+                [
+                    "dados/brutos/lote_20260926/ordemdia_p1.json",
                     "tela/painel.json",
+                ]
+            )
+        )
+        self.assertEqual(
+            arquivos_fora_do_permitido(["tela/painel.json"]),
+            ["tela/painel.json"],
+        )
+
+    def test_codigo_dentro_de_dados_reprova(self):
+        self.assertFalse(so_dados_mudaram(["dados/script.py"]))
+        self.assertFalse(so_dados_mudaram(["dados/relatorio.md"]))
+        self.assertFalse(so_dados_mudaram(["dados/notas.yml"]))
+        self.assertFalse(
+            so_dados_mudaram(
+                [
+                    "dados/brutos/lote_20260926/ordemdia_p1.json",
+                    "dados/relatorio.md",
                 ]
             )
         )
@@ -438,6 +473,172 @@ class TestesSoDados(unittest.TestCase):
         self.assertFalse(
             so_dados_mudaram(tipicos + [".github/workflows/atualizacao_semanal.yml"])
         )
+
+
+class TestesPlanejarPublicacao(unittest.TestCase):
+    def test_sem_mudanca(self):
+        plano = planejar_publicacao([])
+        self.assertEqual(plano["decisao"], "sem_mudanca")
+        self.assertEqual(plano["fora"], [])
+        self.assertEqual(plano["total"], 0)
+
+    def test_publicar_so_com_dados(self):
+        tipicos = [
+            "dados/brutos/lote_20260927_porsessao/sessao_12_ordemdia_p1.json",
+            "dados/tratados/atuacao_vereadores_2026.json",
+            "config_cidade.json",
+            "CHANGELOG.md",
+        ]
+        plano = planejar_publicacao(tipicos)
+        self.assertEqual(plano["decisao"], "publicar")
+        self.assertEqual(plano["fora"], [])
+        self.assertEqual(plano["total"], len(tipicos))
+
+    def test_bloquear_com_codigo(self):
+        plano = planejar_publicacao(["dados/brutos/x.json", "scripts/y.py"])
+        self.assertEqual(plano["decisao"], "bloquear")
+        self.assertEqual(plano["fora"], ["scripts/y.py"])
+
+    def test_bloquear_codigo_dentro_de_dados_e_tela(self):
+        for nome in ("dados/script.py", "dados/relatorio.md", "dados/notas.yml", "tela/painel.json"):
+            plano = planejar_publicacao([nome])
+            self.assertEqual(plano["decisao"], "bloquear", nome)
+            self.assertEqual(plano["fora"], [nome], nome)
+
+
+class TestesCustoMinimo(unittest.TestCase):
+    def test_piso_por_sessao_soma_recursos_mais_mesa(self):
+        import coletar_por_sessao as por_sessao
+
+        piso = len(por_sessao.RECURSOS) + 1
+        self.assertEqual(custo_minimo_sessoes(0), 0)
+        self.assertEqual(custo_minimo_sessoes(1), piso)
+        self.assertEqual(custo_minimo_sessoes(3), 3 * piso)
+
+
+class ColetorFalsoPorSessao:
+    """Simula o SAPL por sessao sem rede, so com arquivos locais."""
+
+    def __init__(self, pasta, registros_por_ordem, votos_por_registro):
+        self.pasta = pasta
+        self.registros_por_ordem = registros_por_ordem
+        self.votos_por_registro = votos_por_registro
+
+    def pedir(self, caminho, params, arquivo, refrescar=False):
+        import coletar_por_sessao as por_sessao
+
+        del refrescar
+        params = dict(params or {})
+        if caminho == por_sessao.CAMINHO_REGISTRO:
+            resultados = list(self.registros_por_ordem.get(int(params.get("ordem")), []))
+        elif caminho == por_sessao.CAMINHO_VOTO:
+            resultados = list(self.votos_por_registro.get(int(params.get("votacao")), []))
+        else:
+            sid = int(params.get("sessao_plenaria"))
+            if "ordemdia" in caminho and "presenca" not in caminho:
+                resultados = [
+                    {"id": 501, "sessao_plenaria": sid},
+                    {"id": 502, "sessao_plenaria": sid},
+                ]
+            else:
+                resultados = [{"id": 900, "sessao_plenaria": sid}]
+        dado = {
+            "pagination": {
+                "total_entries": len(resultados),
+                "total_pages": 1,
+                "page": 1,
+                "links": {"next": None, "previous": None},
+                "next_page": None,
+            },
+            "results": resultados,
+        }
+        (self.pasta / arquivo).write_text(json.dumps(dado), encoding="utf-8")
+        return dado
+
+
+class TestesRecusaSessaoVazia(unittest.TestCase):
+    def _coletor(self, tmp, registros, votos):
+        pasta = Path(tmp) / "porsessao"
+        pasta.mkdir(parents=True, exist_ok=True)
+        return ColetorFalsoPorSessao(pasta, registros, votos)
+
+    def test_ordem_com_itens_e_zero_registros_recusa(self):
+        import coletar_por_sessao as por_sessao
+
+        with tempfile.TemporaryDirectory() as tmp:
+            coletor = self._coletor(tmp, {}, {})
+            with self.assertRaises(SystemExit) as contexto:
+                por_sessao.coletar_sessao_completa(coletor, 77)
+            mensagem = str(contexto.exception)
+            self.assertIn("zero registros", mensagem)
+            self.assertIn("Nada foi publicado", mensagem)
+            aviso = coletor.pasta / "sessao_77_recusada.json"
+            self.assertTrue(aviso.is_file())
+            dado = json.loads(aviso.read_text(encoding="utf-8"))
+            self.assertEqual(dado["sessao_id"], 77)
+            self.assertIn("zero registros", dado["motivo"])
+
+    def test_registros_sem_votos_recusa(self):
+        import coletar_por_sessao as por_sessao
+
+        with tempfile.TemporaryDirectory() as tmp:
+            coletor = self._coletor(tmp, {501: [{"id": 701}]}, {})
+            with self.assertRaises(SystemExit) as contexto:
+                por_sessao.coletar_sessao_completa(coletor, 78)
+            mensagem = str(contexto.exception)
+            self.assertIn("zero votos", mensagem)
+            self.assertIn("Nada foi publicado", mensagem)
+            aviso = coletor.pasta / "sessao_78_recusada.json"
+            self.assertTrue(aviso.is_file())
+
+    def test_recusa_restaura_consolidado_previo(self):
+        import coletar_por_sessao as por_sessao
+
+        with tempfile.TemporaryDirectory() as tmp:
+            coletor = self._coletor(tmp, {}, {})
+            previo_registro = coletor.pasta / "sessao_79_registrovotacao_p1.json"
+            previo_voto = coletor.pasta / "sessao_79_votoparlamentar_p1.json"
+            previo_registro.write_bytes(b"REGISTRO BOM")
+            previo_voto.write_bytes(b"VOTO BOM")
+            with self.assertRaises(SystemExit):
+                por_sessao.coletar_sessao_completa(coletor, 79)
+            self.assertEqual(previo_registro.read_bytes(), b"REGISTRO BOM")
+            self.assertEqual(previo_voto.read_bytes(), b"VOTO BOM")
+
+    def test_caminho_feliz_devolve_contagens_sem_aviso(self):
+        import coletar_por_sessao as por_sessao
+
+        registros = {501: [{"id": 701}], 502: []}
+        votos = {701: [{"id": 801}, {"id": 802}]}
+        with tempfile.TemporaryDirectory() as tmp:
+            coletor = self._coletor(tmp, registros, votos)
+            resumo = por_sessao.coletar_sessao_completa(coletor, 80)
+            self.assertEqual(resumo["n_ordem"], 2)
+            self.assertEqual(resumo["n_registros"], 1)
+            self.assertEqual(resumo["n_votos"], 2)
+            self.assertFalse((coletor.pasta / "sessao_80_recusada.json").exists())
+
+
+class TestesDerivacaoTolerante(unittest.TestCase):
+    def test_sem_consolidado_devolve_vazio_sem_erro(self):
+        from derivar_insumos import ler_consolidados_por_sessao
+
+        with tempfile.TemporaryDirectory() as tmp:
+            linhas, nomes = ler_consolidados_por_sessao(Path(tmp), "registrovotacao")
+        self.assertEqual(linhas, [])
+        self.assertEqual(nomes, [])
+
+    def test_aviso_de_recusa_nao_entra_na_derivacao(self):
+        from derivar_insumos import ler_consolidados_por_sessao
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pasta = Path(tmp)
+            (pasta / "sessao_77_recusada.json").write_text(
+                '{"sessao_id": 77}', encoding="utf-8"
+            )
+            linhas, nomes = ler_consolidados_por_sessao(pasta, "registrovotacao")
+        self.assertEqual(linhas, [])
+        self.assertEqual(nomes, [])
 
 
 class TesteSimulado(unittest.TestCase):

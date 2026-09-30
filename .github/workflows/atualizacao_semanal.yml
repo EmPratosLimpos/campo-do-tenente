@@ -43,7 +43,7 @@ jobs:
       - name: Ver se houve dado novo
         id: mudanca
         run: |
-          git status --porcelain > "$RUNNER_TEMP/mudanca.txt" || true
+          git status --porcelain > "$RUNNER_TEMP/mudanca.txt"
           cat "$RUNNER_TEMP/mudanca.txt"
           if [[ -s "$RUNNER_TEMP/mudanca.txt" ]]; then
             echo "houve=true" >> "$GITHUB_OUTPUT"
@@ -54,17 +54,16 @@ jobs:
 
       - name: Conferir que so dados mudaram
         if: steps.mudanca.outputs.houve == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git diff --name-only > "$RUNNER_TEMP/alterados.txt" || true
-          git ls-files --others --exclude-standard >> "$RUNNER_TEMP/alterados.txt" || true
+          git diff --name-only > "$RUNNER_TEMP/alterados.txt"
+          git ls-files --others --exclude-standard >> "$RUNNER_TEMP/alterados.txt"
           cat "$RUNNER_TEMP/alterados.txt"
-          if ! python scripts/so_dados_mudaram.py "$RUNNER_TEMP/alterados.txt"; then
-            data_br=$(TZ=America/Sao_Paulo date +%d/%m/%Y)
-            gh issue create \
-              --title "Atualizacao de dados com alteracao de codigo em ${data_br}" \
-              --body "A atualizacao encontrou arquivos de codigo alterados e nao publicou. Veja alterados.txt no log da execucao."
+          if ! python scripts/so_dados_mudaram.py "$RUNNER_TEMP/alterados.txt" > "$RUNNER_TEMP/saida_regra.txt" 2>&1; then
+            {
+              echo "alteracao de codigo detectada"
+              cat "$RUNNER_TEMP/saida_regra.txt"
+            } > "$RUNNER_TEMP/motivo_falha.txt"
+            cat "$RUNNER_TEMP/motivo_falha.txt"
             exit 1
           fi
 
@@ -126,6 +125,7 @@ jobs:
             gh issue create \
               --title "Atualizacao de dados falhou em ${data_br}" \
               --body "Conflito ao levar a main para desenvolvimento. Nenhum force foi usado."
+            touch "$RUNNER_TEMP/issue_ja_aberta"
             exit 1
           fi
           git push origin desenvolvimento
@@ -135,9 +135,22 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          if [[ -f "$RUNNER_TEMP/issue_ja_aberta" ]]; then
+            echo "Issue ja aberta em passo anterior. Sem duplicar."
+            exit 0
+          fi
           data_br=$(TZ=America/Sao_Paulo date +%d/%m/%Y)
+          motivo=""
+          if [[ -f "$RUNNER_TEMP/motivo_falha.txt" ]]; then
+            motivo=$(cat "$RUNNER_TEMP/motivo_falha.txt")
+          fi
           trecho=$(tail -n 80 "$RUNNER_TEMP/atualizacao.log" "$RUNNER_TEMP/sanidade.log" "$RUNNER_TEMP/testes.log" "$RUNNER_TEMP/regras.log" 2>/dev/null | head -n 120 || echo "Sem trecho de log.")
+          corpo="A atualizacao semanal falhou e nada foi publicado."
+          if [[ -n "$motivo" ]]; then
+            corpo="${corpo} Motivo: ${motivo}"
+          fi
+          corpo="${corpo} Trecho do erro: ${trecho}"
           gh issue create \
             --title "Atualizacao de dados falhou em ${data_br}" \
-            --body "A atualizacao semanal falhou e nada foi publicado. Trecho do erro: ${trecho}"
+            --body "$corpo"
           echo "::error::A atualizacao semanal falhou. Nada foi publicado."

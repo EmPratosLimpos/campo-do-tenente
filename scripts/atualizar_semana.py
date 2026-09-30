@@ -7,9 +7,11 @@ ano, temas, dados da tela, sanidade, hash, testes e regras.
 
 As listas grandes (presencas, ordem do dia, registrovotacao,
 votoparlamentar, justificativa e mesa) nao sao mais baixadas em lote.
-Elas saem da coleta por sessao, so das ordinarias novas e da ultima ja
-coletada para pegar lancamento atrasado. Listas pequenas que fecham
+Elas saem da coleta por sessao, das ordinarias novas e sempre da ultima
+ja coletada para pegar lancamento atrasado. Listas pequenas que fecham
 (sessaoplenaria do ano, materias do ano, autoria) continuam em lote.
+A primeira coleta completa de muitas sessoes precisa ser feita em partes,
+fora da rotina semanal, por causa do teto de pedidos por execucao.
 
 Um pedido por vez. Pausa de PAUSA_SAPL_SEGUNDOS (2,5 s). No maximo
 400 pedidos nesta execucao. Anos saem de config_cidade.json. O ano
@@ -243,16 +245,27 @@ def ultima_sessao_coletada(
     )[-1]
 
 
+PEDIDOS_MINIMOS_POR_SESSAO = len(RECURSOS) + 1
+
+
+def custo_minimo_sessoes(n_sessoes: int) -> int:
+    """Piso de pedidos da coleta por sessao: 4 recursos mais a mesa.
+
+    Registros por ordem e votos por registro custam a mais e variam
+    por sessao, por isso o retorno e minimo, nunca teto.
+    """
+    return max(0, int(n_sessoes)) * PEDIDOS_MINIMOS_POR_SESSAO
+
+
 def sessoes_alvo_para_coleta(
     sessoes: list[dict], pasta_porsessao: Path | None
 ) -> tuple[list[dict], list[dict]]:
-    """Novas mais a ultima ja coletada para revisao de lancamento atrasado.
+    """Novas mais sempre a ultima ja coletada para revisao de lancamento atrasado.
 
-    Sem sessao nova, o alvo fica vazio e a execucao termina sem mudanca.
+    Mesmo sem sessao nova, a ultima e refeita para pegar lancamento
+    atrasado no SAPL. Sem nenhuma coletada, o alvo sao as novas.
     """
     novas = sessoes_novas(pasta_porsessao, sessoes)
-    if not novas:
-        return novas, []
     ultima = ultima_sessao_coletada(pasta_porsessao, sessoes)
     if ultima is None:
         return novas, list(novas)
@@ -562,8 +575,8 @@ def main(argv: list[str] | None = None) -> int:
     print(
         f"Estimativa de pedidos numa semana sem sessao nova: {estimativa}. "
         "Listas grandes nao saem mais em lote. "
-        f"Cada sessao ordinaria nova soma a coleta por sessao "
-        f"(presencas, ordem, justificativa, mesa, registros por ordem e votos por registro)."
+        f"Cada sessao no alvo custa no minimo {PEDIDOS_MINIMOS_POR_SESSAO} pedidos "
+        f"(presencas, ordem, justificativa, mesa, registros por ordem e votos por registro custam a mais)."
     )
 
     original_urlopen = coletar_lote.urllib.request.urlopen
@@ -593,6 +606,21 @@ def main(argv: list[str] | None = None) -> int:
         if lista_alvo and len(lista_alvo) > len(lista_novas):
             print(f"Sessoes para revisao de lancamento atrasado: {len(lista_alvo) - len(lista_novas)}")
 
+        minimo_sessoes = custo_minimo_sessoes(len(lista_alvo))
+        if lista_alvo and not args.simulado:
+            print(
+                f"Custo minimo da coleta por sessao: {minimo_sessoes} pedidos "
+                f"para {len(lista_alvo)} sessoes no alvo."
+            )
+            if orcamento.pedidos + minimo_sessoes > orcamento.teto:
+                print(
+                    f"PAROU: alvo com {len(lista_alvo)} sessoes precisa de ao menos "
+                    f"{minimo_sessoes} pedidos e o teto e {orcamento.teto}. "
+                    "A primeira coleta completa precisa ser feita em partes, "
+                    "fora da rotina semanal. Nada foi publicado."
+                )
+                return 2
+
         if lista_alvo and args.simulado:
             print("Modo simulado: sessoes sem arquivo nao foram baixadas.")
         elif lista_alvo:
@@ -604,6 +632,10 @@ def main(argv: list[str] | None = None) -> int:
                 coletar_sessoes_novas(coletor_sessao, lista_alvo)
             except OrcamentoEsgotado as exc:
                 print(f"PAROU: {exc}")
+                print(
+                    "A primeira coleta completa precisa ser feita em partes, "
+                    "fora da rotina semanal. Nada foi publicado."
+                )
                 return 2
             divergencias = []
             for sessao in sessoes:
