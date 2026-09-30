@@ -491,9 +491,8 @@ def conferir_partido_e_foto(vereadores: list[dict]) -> None:
 
 
 def escrever_json(payload: dict) -> None:
-    ARQUIVO_JSON.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
+    ARQUIVO_JSON.write_bytes(
+        (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     )
 
 
@@ -735,7 +734,7 @@ def escrever_relatorio(payload: dict) -> None:
             "",
         ]
     )
-    ARQUIVO_RELATORIO.write_text("\n".join(linhas), encoding="utf-8")
+    ARQUIVO_RELATORIO.write_bytes("\n".join(linhas).encode("utf-8"))
 
 
 def main() -> None:

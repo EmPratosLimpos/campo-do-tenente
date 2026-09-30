@@ -209,14 +209,14 @@ def gravar_camara(sufixo: str, sessao: list, mes: list, todo: list, lista: list,
         "mes": filtros_de(mes),
         "todo": filtros_de(todo),
     }
-    (out / f"materias_camara_{sufixo}.json").write_text(
-        json.dumps(camara, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    (out / f"materias_camara_{sufixo}.json").write_bytes(
+        (json.dumps(camara, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     )
-    (out / f"materias_tags_{sufixo}.json").write_text(
-        json.dumps(tags, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    (out / f"materias_tags_{sufixo}.json").write_bytes(
+        (json.dumps(tags, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     )
-    (out / f"filtros_materia_{sufixo}.json").write_text(
-        json.dumps(filtros, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    (out / f"filtros_materia_{sufixo}.json").write_bytes(
+        (json.dumps(filtros, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     )
 
 
@@ -277,30 +277,36 @@ def _mesclar_projetos_lei_vereador(a: dict, b: dict) -> dict:
     return out
 
 
-def _recomputar_presenca(por_sessao: list[dict]) -> dict:
-    cont = {
-        "presente": 0,
-        "falta_com_justificativa": 0,
-        "falta_sem_justificativa": 0,
-        "licenca_tratamento_saude": 0,
-        "fora_do_mandato": 0,
-    }
+def _recomputar_presenca(por_sessao: list[dict], fora: int = 0) -> dict:
+    """Soma da legislatura na mesma regra do ano.
+
+    Sessoes fora da janela do mandato nao estao na lista e chegam como
+    contagem separada. Qualquer situacao que nao seja presenca, falta ou
+    fora conta como licenca: tem rotulo proprio, nunca e falta, mas
+    entra no total da taxa.
+    """
+    presencas = 0
+    faltas_j = 0
+    faltas_s = 0
+    por_afast: dict[str, int] = {}
     for s in por_sessao:
         sit = s.get("situacao") or ""
-        if sit in cont:
-            cont[sit] += 1
-    presencas = cont["presente"]
-    faltas_j = cont["falta_com_justificativa"]
-    faltas_s = cont["falta_sem_justificativa"]
-    licenca = cont["licenca_tratamento_saude"]
-    fora = cont["fora_do_mandato"]
-    no_mandato = presencas + faltas_j + faltas_s
-    total_sessoes = len(por_sessao)
+        if sit == "presente":
+            presencas += 1
+        elif sit == "falta_com_justificativa":
+            faltas_j += 1
+        elif sit == "falta_sem_justificativa":
+            faltas_s += 1
+        elif sit == "fora_do_mandato":
+            raise ValueError("sessao fora do mandato na lista de presenca")
+        elif sit:
+            por_afast[sit] = por_afast.get(sit, 0) + 1
+    licenca = sum(por_afast.values())
+    fora = int(fora)
+    no_mandato = presencas + faltas_j + faltas_s + licenca
+    total_sessoes = len(por_sessao) + fora
     taxa = round((presencas / no_mandato) * 100, 2) if no_mandato else 0.0
     pct_faltas = round(((faltas_j + faltas_s) / no_mandato) * 100, 2) if no_mandato else 0.0
-    por_afast = {}
-    if licenca:
-        por_afast["licenca_tratamento_saude"] = licenca
     return {
         "sessoes_ordinarias": no_mandato,
         "sessoes_do_ano": total_sessoes,
@@ -370,7 +376,10 @@ def _mesclar_vereador(base: dict, extra: dict) -> dict:
         por_sessao.append(s)
         ids_sess.add(s.get("sessao_id"))
     por_sessao.sort(key=lambda x: (x.get("data_sessao") or "", x.get("sessao_id") or 0))
-    out["presenca"] = _recomputar_presenca(por_sessao)
+    fora = (out.get("presenca", {}).get("sessoes_fora_do_mandato") or 0) + (
+        (extra.get("presenca") or {}).get("sessoes_fora_do_mandato") or 0
+    )
+    out["presenca"] = _recomputar_presenca(por_sessao, fora)
     out["votos"] = _mesclar_votos(out.get("votos") or {}, extra.get("votos") or {})
     out["projetos_lei"] = _mesclar_projetos_lei_vereador(
         out.get("projetos_lei") or {}, extra.get("projetos_lei") or {}
@@ -502,7 +511,9 @@ def gerar_legislatura(cfg: dict) -> None:
     consolidado = mesclar_atuacao_legislatura(dados, anos, cfg)
     out = RAIZ / "dados" / "tratados"
     dest = out / f"atuacao_vereadores_{SUFIXO_LEGISLATURA}.json"
-    dest.write_text(json.dumps(consolidado, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    dest.write_bytes(
+        (json.dumps(consolidado, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    )
 
     temas = carregar_temas()
     bruto = pll_votados_no_ano(consolidado)
