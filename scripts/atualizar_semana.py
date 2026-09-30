@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
 """Atualiza os dados da semana a partir do SAPL.
 
-Ordem: lote, sessoes ordinarias que ainda nao tem arquivo, autoria,
-derivacao, vereadores, presidencia, autoria tratada, atuacao por ano,
-temas, sanidade e hash.
+Ordem: lote pequeno, sessoes ordinarias novas mais a ultima ja coletada,
+autoria, derivacao, vereadores, presidencia, autoria tratada, atuacao por
+ano, temas, dados da tela, sanidade, hash, testes e regras.
+
+As listas grandes (presencas, ordem do dia, registrovotacao,
+votoparlamentar, justificativa e mesa) nao sao mais baixadas em lote.
+Elas saem da coleta por sessao, das ordinarias novas e sempre da ultima
+ja coletada para pegar lancamento atrasado. Listas pequenas que fecham
+(sessaoplenaria do ano, materias do ano, autoria) continuam em lote.
+A primeira coleta completa de muitas sessoes precisa ser feita em partes,
+fora da rotina semanal, por causa do teto de pedidos por execucao.
 
 Um pedido por vez. Pausa de PAUSA_SAPL_SEGUNDOS (2,5 s). No maximo
 400 pedidos nesta execucao. Anos saem de config_cidade.json. O ano
@@ -33,17 +41,18 @@ from coletar_lote import (  # noqa: E402
     PAGE_SIZE,
     ColetorLote,
     OrcamentoEsgotado,
-    RECURSOS_ORDEM_ESTAVEL,
-    _total_paginas,
     continuar_apos_primeira,
-    lista_tem_repeticao,
     plano_de_coleta,
 )
 from coletar_por_sessao import (  # noqa: E402
+    CAMINHO_MESA,
+    RECURSO_MESA,
+    RECURSO_REGISTRO,
+    RECURSO_VOTO,
     RECURSOS,
+    coletar_sessao_completa,
     conferir_prefixo,
     gravar_conferencia,
-    pedir_recurso,
     sessoes_ordinarias,
 )
 from config_cidade import (  # noqa: E402
@@ -70,6 +79,19 @@ GERADORES = (
     "dados/tratados/gerar_autoria_materias.py",
     "dados/tratados/gerar_atuacao_vereadores.py",
     "dados/tratados/gerar_temas_votacoes.py",
+    "dados/tratados/gerar_dados_tela.py",
+)
+
+PREFIXOS_GRANDES_POR_SESSAO = frozenset(
+    {
+        "sessaoplenariapresenca",
+        "presencaordemdia",
+        "ordemdia",
+        "registrovotacao",
+        "votoparlamentar",
+        "justificativaausencia",
+        "integrantemesa",
+    }
 )
 
 
@@ -189,6 +211,90 @@ def sessao_tem_arquivo(pasta: Path, sid: int) -> bool:
     )
 
 
+def sessoes_novas(pasta_porsessao: Path | None, sessoes: list[dict]) -> list[dict]:
+    """Ordinarias que ainda nao tem arquivo na pasta por sessao."""
+    if pasta_porsessao is None:
+        return list(sessoes)
+    return [
+        sessao
+        for sessao in sessoes
+        if not sessao_tem_arquivo(pasta_porsessao, int(sessao["id"]))
+    ]
+
+
+def ultima_sessao_coletada(
+    pasta_porsessao: Path | None, sessoes: list[dict]
+) -> dict | None:
+    """Ultima ordinaria ja coletada, para pegar lancamento atrasado no SAPL."""
+    if pasta_porsessao is None:
+        return None
+    coletadas = [
+        sessao
+        for sessao in sessoes
+        if sessao_tem_arquivo(pasta_porsessao, int(sessao["id"]))
+    ]
+    if not coletadas:
+        return None
+    return sorted(
+        coletadas,
+        key=lambda item: (
+            str(item.get("data_inicio") or ""),
+            int(item.get("numero") or 0),
+            int(item["id"]),
+        ),
+    )[-1]
+
+
+PEDIDOS_MINIMOS_POR_SESSAO = len(RECURSOS) + 1
+
+
+def custo_minimo_sessoes(n_sessoes: int) -> int:
+    """Piso de pedidos da coleta por sessao: 4 recursos mais a mesa.
+
+    Registros por ordem e votos por registro custam a mais e variam
+    por sessao, por isso o retorno e minimo, nunca teto.
+    """
+    return max(0, int(n_sessoes)) * PEDIDOS_MINIMOS_POR_SESSAO
+
+
+def sessoes_alvo_para_coleta(
+    sessoes: list[dict], pasta_porsessao: Path | None
+) -> tuple[list[dict], list[dict]]:
+    """Novas mais sempre a ultima ja coletada para revisao de lancamento atrasado.
+
+    Mesmo sem sessao nova, a ultima e refeita para pegar lancamento
+    atrasado no SAPL. Sem nenhuma coletada, o alvo sao as novas.
+    """
+    novas = sessoes_novas(pasta_porsessao, sessoes)
+    ultima = ultima_sessao_coletada(pasta_porsessao, sessoes)
+    if ultima is None:
+        return novas, list(novas)
+    ids_novas = {int(item["id"]) for item in novas}
+    alvo = list(novas)
+    if int(ultima["id"]) not in ids_novas:
+        alvo.append(ultima)
+    alvo = sorted(
+        alvo,
+        key=lambda item: (
+            str(item.get("data_inicio") or ""),
+            int(item.get("numero") or 0),
+            int(item["id"]),
+        ),
+    )
+    return novas, alvo
+
+
+def plano_sem_listas_grandes(anos: list[int], indice: dict) -> list[dict]:
+    """Plano em lote sem as listas grandes que agora saem por sessao."""
+    plano = plano_de_coleta(anos, indice)
+    return [
+        item
+        for item in plano
+        if str(item.get("prefixo") or "") not in PREFIXOS_GRANDES_POR_SESSAO
+        and not str(item.get("prefixo") or "").endswith("_por_id")
+    ]
+
+
 def atualizar_paginas(coletor: ColetorLote, caminho: str, params: dict, prefixo: str, simulado: bool) -> None:
     """Reconfere a primeira pagina. So repete as seguintes se ela mudou ou faltar arquivo."""
     params = dict(params)
@@ -213,73 +319,46 @@ def atualizar_paginas(coletor: ColetorLote, caminho: str, params: dict, prefixo:
 
 
 def estimar_sondas(pasta_lote: Path, anos: list[int]) -> tuple[int, int]:
-    """Pedidos se a primeira pagina nao mudar, e paginas por id que ainda faltam.
+    """Pedidos se a primeira pagina nao mudar. As listas grandes nao entram.
 
-    O primeiro numero e a conferencia das listas ja salvas.
-    O segundo e a leitura ordering=id que ainda nao tem arquivo.
+    O primeiro numero e a conferencia das listas pequenas ja salvas.
+    O segundo e zero, mantido para compatibilidade: nao ha mais leitura
+    ordering=id em lote, pois as listas grandes saem por sessao.
     """
     indice_path = pasta_lote / "api_indice.json"
     if not indice_path.is_file():
         return 0, 0
     indice = json.loads(indice_path.read_text(encoding="utf-8"))
-    plano = plano_de_coleta(anos, indice)
+    plano = plano_sem_listas_grandes(anos, indice)
     conferencia = 1 + len(plano) + len(PLANO) + len(anos)
-    faltantes = 0
-    for _caminho, prefixo in RECURSOS_ORDEM_ESTAVEL:
-        if not lista_tem_repeticao(pasta_lote, prefixo):
-            continue
-        if (pasta_lote / f"{prefixo}_por_id_p1.json").is_file():
-            conferencia += 1
-            continue
-        primeira = pasta_lote / f"{prefixo}_p1.json"
-        if not primeira.is_file():
-            continue
-        dados = json.loads(primeira.read_text(encoding="utf-8"))
-        total = _total_paginas(dados, PAGE_SIZE)
-        if total is None:
-            print(
-                f"AVISO: {prefixo} sem total_pages e sem count. "
-                "A estimativa nao inventa o numero de paginas."
-            )
-            continue
-        faltantes += total
-    return conferencia, faltantes
+    return conferencia, 0
 
 
 def baixar_lote(coletor: ColetorLote, anos: list[int], simulado: bool) -> None:
+    """Lote pequeno: catalogos, sessoes do ano, materias do ano e expediente.
+
+    As listas grandes de presenca, ordem, voto, justificativa e mesa ficam
+    de fora. Elas sao coletadas por sessao, so das novas e da ultima.
+    """
     indice = coletor.pedir("/api/", None, "api_indice.json", refrescar=not simulado)
     if not isinstance(indice, dict):
         raise SystemExit("Indice da API nao e um objeto JSON.")
-    plano = plano_de_coleta(anos, indice)
+    plano = plano_sem_listas_grandes(anos, indice)
     for item in plano:
         print(item["prefixo"])
         atualizar_paginas(coletor, item["caminho"], item["params"], item["prefixo"], simulado)
-    for caminho, prefixo in RECURSOS_ORDEM_ESTAVEL:
-        if not lista_tem_repeticao(coletor.pasta, prefixo):
-            continue
-        destino = f"{prefixo}_por_id"
-        if not (coletor.pasta / f"{destino}_p1.json").is_file():
-            if simulado:
-                print(f"{destino} ausente. Modo simulado nao baixa.")
-                continue
-            print(f"{prefixo} veio com id repetido. Nova leitura com ordering=id.")
-            coletor.pedir_paginas(caminho, {"ordering": "id"}, destino)
-            if lista_tem_repeticao(coletor.pasta, destino):
-                raise SystemExit(
-                    f"{destino} ainda nao fecha com total_entries. "
-                    "Nao vou completar a lista na mao."
-                )
-            continue
-        print(f"{prefixo} com ordering=id")
-        atualizar_paginas(coletor, caminho, {"ordering": "id"}, destino, simulado)
 
 
 def coletar_sessoes_novas(coletor: ColetorLote, sessoes: list[dict]) -> None:
+    """Coleta por sessao dos pacotes grandes, com mesa, registros e votos."""
     for sessao in sessoes:
-        sid = sessao["id"]
+        sid = int(sessao["id"])
         print(f"sessao {sid} numero {sessao.get('numero')} {sessao.get('data_inicio')}")
-        for caminho, recurso in RECURSOS:
-            pedir_recurso(coletor, sid, caminho, recurso)
+        resumo = coletar_sessao_completa(coletor, sid)
+        print(
+            f"  ordem {resumo['n_ordem']}, "
+            f"registros {resumo['n_registros']}, votos {resumo['n_votos']}"
+        )
 
 
 def coletar_autoria(coletor: ColetorLote, anos: list[int], simulado: bool) -> None:
@@ -495,13 +574,13 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Pausa: {PAUSA_SAPL_SEGUNDOS} s. Teto: {TETO_EXECUCAO} pedidos. Um pedido por vez.")
     print(
         f"Estimativa de pedidos numa semana sem sessao nova: {estimativa}. "
-        f"Paginas ordering=id ainda ausentes: {paginas_por_id_ausentes}. "
-        f"Cada sessao ordinaria nova soma mais {len(RECURSOS)} pedidos, "
-        "um por recurso, se couber em uma pagina."
+        "Listas grandes nao saem mais em lote. "
+        f"Cada sessao no alvo custa no minimo {PEDIDOS_MINIMOS_POR_SESSAO} pedidos "
+        f"(presencas, ordem, justificativa, mesa, registros por ordem e votos por registro custam a mais)."
     )
 
     original_urlopen = coletar_lote.urllib.request.urlopen
-    sessoes_novas: list[dict] = []
+    lista_novas: list[dict] = []
     try:
         if args.simulado:
             coletar_lote.urllib.request.urlopen = bloqueio_de_rede
@@ -518,33 +597,60 @@ def main(argv: list[str] | None = None) -> int:
         sessoes = sessoes_ordinarias(pasta_lote, tipo)
         pasta_sessao = pasta_porsessao_mais_recente(BRUTOS)
         if pasta_sessao is None:
-            sessoes_novas = list(sessoes)
+            lista_novas = list(sessoes)
+            lista_alvo = list(sessoes)
         else:
-            sessoes_novas = [
-                sessao for sessao in sessoes if not sessao_tem_arquivo(pasta_sessao, int(sessao["id"]))
-            ]
+            lista_novas, lista_alvo = sessoes_alvo_para_coleta(sessoes, pasta_sessao)
         print(f"Sessoes ordinarias no lote: {len(sessoes)}")
-        print(f"Sessoes ordinarias novas: {len(sessoes_novas)}")
+        print(f"Sessoes ordinarias novas: {len(lista_novas)}")
+        if lista_alvo and len(lista_alvo) > len(lista_novas):
+            print(f"Sessoes para revisao de lancamento atrasado: {len(lista_alvo) - len(lista_novas)}")
 
-        if sessoes_novas and args.simulado:
+        minimo_sessoes = custo_minimo_sessoes(len(lista_alvo))
+        if lista_alvo and not args.simulado:
+            print(
+                f"Custo minimo da coleta por sessao: {minimo_sessoes} pedidos "
+                f"para {len(lista_alvo)} sessoes no alvo."
+            )
+            if orcamento.pedidos + minimo_sessoes > orcamento.teto:
+                print(
+                    f"PAROU: alvo com {len(lista_alvo)} sessoes precisa de ao menos "
+                    f"{minimo_sessoes} pedidos e o teto e {orcamento.teto}. "
+                    "A primeira coleta completa precisa ser feita em partes, "
+                    "fora da rotina semanal. Nada foi publicado."
+                )
+                return 2
+
+        if lista_alvo and args.simulado:
             print("Modo simulado: sessoes sem arquivo nao foram baixadas.")
-        elif sessoes_novas:
+        elif lista_alvo:
             if pasta_sessao is None:
                 pasta_sessao = BRUTOS / f"lote_{hoje.strftime('%Y%m%d')}_porsessao"
             coletor_sessao = preparar_coletor(cfg, pasta_sessao, orcamento, False)
             coletores.append(coletor_sessao)
             try:
-                coletar_sessoes_novas(coletor_sessao, sessoes_novas)
+                coletar_sessoes_novas(coletor_sessao, lista_alvo)
             except OrcamentoEsgotado as exc:
                 print(f"PAROU: {exc}")
+                print(
+                    "A primeira coleta completa precisa ser feita em partes, "
+                    "fora da rotina semanal. Nada foi publicado."
+                )
                 return 2
             divergencias = []
             for sessao in sessoes:
                 sid = int(sessao["id"])
-                for _caminho, recurso in RECURSOS:
-                    conf = conferir_prefixo(pasta_sessao, f"sessao_{sid}_{recurso}", sid, recurso)
+                for _caminho, recurso in list(RECURSOS) + [(CAMINHO_MESA, RECURSO_MESA)]:
+                    prefixo = f"sessao_{sid}_{recurso}"
+                    if not (pasta_sessao / f"{prefixo}_p1.json").is_file():
+                        continue
+                    conf = conferir_prefixo(pasta_sessao, prefixo, sid, recurso)
                     if not conf["bate"]:
                         divergencias.append(conf)
+                for recurso in (RECURSO_REGISTRO, RECURSO_VOTO):
+                    consolidado = pasta_sessao / f"sessao_{sid}_{recurso}_p1.json"
+                    if consolidado.is_file():
+                        continue
             gravar_conferencia(pasta_sessao, sessoes, divergencias)
 
         pasta_autoria = pasta_autoria_mais_recente(BRUTOS)
@@ -571,8 +677,9 @@ def main(argv: list[str] | None = None) -> int:
     for gerador in GERADORES:
         rodar([gerador])
     rodar(["coletor/testes_sanidade.py"])
-    rodar(["-m", "unittest", "tests.test_sanidade_dados"])
+    rodar(["-m", "unittest", "discover", "-s", "tests"])
     rodar(["coletor/gerar_hash_integridade.py"])
+    rodar(["scripts/verificar_regras.py"])
 
     contagens_depois = ler_json(RESUMO_INSUMOS).get("contagens") or {}
     hashes_depois = ler_hashes(anos)
@@ -580,7 +687,7 @@ def main(argv: list[str] | None = None) -> int:
         hoje.isoformat(),
         fonte,
         orcamento.pedidos,
-        sessoes_novas,
+        lista_novas,
         linhas_contagem(contagens_antes, contagens_depois),
         linhas_hash(hashes_antes, hashes_depois),
     )

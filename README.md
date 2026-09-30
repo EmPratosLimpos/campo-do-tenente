@@ -140,7 +140,7 @@ Cada atualização dos dados e da tela fica registrada no arquivo [CHANGELOG.md]
 - `ARCHITECTURE.md`: o caminho dos dados, da coleta até a tela.
 - `PROCESSO_DESENVOLVIMENTO_E_GOVERNANCA.md`: as regras de trabalho, segurança e publicação.
 
-Toda mudança passa por testes automáticos de conferência e só vai ao ar depois da aprovação do mantenedor. Está prevista uma atualização semanal automática: ela vai coletar as sessões novas, conferir os dados e preparar a mudança, mas a publicação continua dependendo da aprovação do mantenedor.
+Toda mudança de código passa por testes automáticos de conferência e só vai ao ar depois da aprovação do mantenedor. A atualização semanal de dados roda toda quarta feira as 03h de Brasilia: ela coleta so as sessões ordinárias novas mais a última já coletada, confere os dados e, quando todas as travas passam e só arquivos de dados mudaram, publica direto na main sem pedido de revisão. Se qualquer trava falhar ou se algum código mudar junto, nada é publicado e uma issue é aberta para o mantenedor ver. Cada execução tem teto de 400 pedidos ao SAPL, incluindo no mínimo 5 pedidos por sessão no alvo. Se o alvo não couber no teto, a execução para sem publicar e avisa que a primeira coleta completa precisa ser feita em partes, fora da rotina semanal. A main é a fonte do site: se o passo que leva o dado para desenvolvimento falhar, uma issue é aberta e a main segue válida.
 
 ---
 

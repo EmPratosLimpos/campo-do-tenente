@@ -236,6 +236,71 @@ def _total_da_primeira_pagina(pasta: Path, prefixo: str):
     return int(paginacao["total_entries"])
 
 
+def ler_consolidados_por_sessao(pasta: Path, recurso: str) -> tuple[list, list[str]]:
+    """Le os consolidados sessao_<id>_<recurso>_p1.json da coleta por sessao.
+
+    Ignora os arquivos de detalhe por ordem ou por votacao
+    (sessao_<id>_<recurso>_ordem_*, sessao_<id>_<recurso>_votacao_*).
+    Quando a pasta nao tem consolidado, devolve listas vazias.
+    """
+    linhas: list = []
+    nomes: list[str] = []
+    for caminho in sorted(pasta.glob(f"sessao_*_{recurso}_p*.json")):
+        nome = caminho.name
+        if "_ordem_" in nome or "_votacao_" in nome:
+            continue
+        try:
+            dados = ler_json(caminho)
+        except (OSError, ValueError):
+            continue
+        if not isinstance(dados, dict) or not isinstance(dados.get("results"), list):
+            continue
+        nomes.append(nome)
+        linhas.extend(dados.get("results") or [])
+    return linhas, nomes
+
+
+def mesclar_por_id(antigas: list, novas: list) -> tuple[list, dict]:
+    """Une por id para registro, voto e mesa vindos da coleta por sessao.
+
+    Id novo entra. Id antigo que nao voltou permanece, sem apagar historia.
+    """
+    novas_por_id = indice_por_id(novas)
+    saida: list = []
+    vistos: set[int] = set()
+    for item in novas:
+        if not isinstance(item, dict) or item.get("id") is None:
+            continue
+        identificador = int(item["id"])
+        if identificador in vistos:
+            continue
+        vistos.add(identificador)
+        saida.append(item)
+    for item in antigas:
+        if not isinstance(item, dict) or item.get("id") is None:
+            saida.append(item)
+            continue
+        identificador = int(item["id"])
+        if identificador in vistos:
+            continue
+        vistos.add(identificador)
+        saida.append(item)
+    antigos_ids = {
+        int(item["id"])
+        for item in antigas
+        if isinstance(item, dict) and item.get("id") is not None
+    }
+    novos_ids = set(novas_por_id)
+    cobertura = {
+        "ids_lote_antigo": len(antigos_ids),
+        "ids_por_sessao": len(novos_ids),
+        "ids_novos": len(novos_ids - antigos_ids),
+        "ids_novos_lista": sorted(novos_ids - antigos_ids),
+        "ids_que_sumiram": sorted(antigos_ids - novos_ids),
+    }
+    return saida, cobertura
+
+
 def ler_recurso_por_sessao(pasta: Path, ids_sessao: set[int], recurso: str):
     """Le as paginas filtradas por sessao. Cada pagina ja veio pronta do SAPL."""
     linhas = []
@@ -566,8 +631,11 @@ def derivar(
             "sessaoplenariapresenca": presencas,
             "presencaordemdia": presencas_ordem,
             "justificativaausencia": justificativas,
+            "integrantemesa": mesa,
         }
         for recurso, antigas in blocos.items():
+            if recurso == "integrantemesa":
+                continue
             mescladas, nomes_novos, cobertura = aplicar_fonte_incompleta(
                 recurso,
                 antigas,
@@ -584,6 +652,26 @@ def derivar(
                 presencas_ordem, nomes_presenca_ordem = mescladas, nomes_novos
             else:
                 justificativas, nomes_justificativa = mescladas, nomes_novos
+        for recurso in ("integrantemesa", "registrovotacao", "votoparlamentar"):
+            novas, nomes_novos = ler_consolidados_por_sessao(pasta_porsessao, recurso)
+            if not nomes_novos:
+                if recurso == "integrantemesa":
+                    cobertura_porsessao["recursos"][recurso] = {
+                        "fonte": "lote",
+                        "motivo": "pasta por sessao sem consolidado de mesa",
+                    }
+                continue
+            if recurso == "integrantemesa":
+                mesa, cobertura = mesclar_por_id(mesa, novas)
+            elif recurso == "registrovotacao":
+                registros, cobertura = mesclar_por_id(registros, novas)
+            else:
+                votos, cobertura = mesclar_por_id(votos, novas)
+            cobertura["fonte"] = "coleta_por_sessao"
+            cobertura["arquivos"] = [
+                f"dados/brutos/{pasta_porsessao.name}/{nome}" for nome in nomes_novos
+            ]
+            cobertura_porsessao["recursos"][recurso] = cobertura
 
     sessao_do_registro = {}
     registros_sem_sessao = []
@@ -881,12 +969,21 @@ def derivar(
         "arquivos_de_origem": {
             "ordemdia": [fonte(pasta_fonte_listas, nome) for nome in nomes_ordem],
             "expedientemateria": [fonte(pasta_lote, nome) for nome in nomes_expediente],
-            "registrovotacao": [fonte(pasta_lote, nome) for nome in nomes_registro],
-            "votoparlamentar": [fonte(pasta_lote, nome) for nome in nomes_voto],
+            "registrovotacao": [fonte(pasta_lote, nome) for nome in nomes_registro]
+            + list(
+                (cobertura_porsessao or {}).get("recursos", {}).get("registrovotacao", {}).get("arquivos", [])
+            ),
+            "votoparlamentar": [fonte(pasta_lote, nome) for nome in nomes_voto]
+            + list(
+                (cobertura_porsessao or {}).get("recursos", {}).get("votoparlamentar", {}).get("arquivos", [])
+            ),
             "sessaoplenariapresenca": [fonte(pasta_fonte_listas, nome) for nome in nomes_presenca],
             "presencaordemdia": [fonte(pasta_fonte_listas, nome) for nome in nomes_presenca_ordem],
             "justificativaausencia": [fonte(pasta_fonte_listas, nome) for nome in nomes_justificativa],
-            "integrantemesa": [fonte(pasta_lote, nome) for nome in nomes_mesa],
+            "integrantemesa": [fonte(pasta_lote, nome) for nome in nomes_mesa]
+            + list(
+                (cobertura_porsessao or {}).get("recursos", {}).get("integrantemesa", {}).get("arquivos", [])
+            ),
             "parlamentar": [fonte(pasta_lote, nome) for nome in nomes_parlamentar],
             "partido": [fonte(pasta_lote, nome) for nome in nomes_partido],
             "filiacao": [fonte(pasta_lote, nome) for nome in nomes_filiacao],
