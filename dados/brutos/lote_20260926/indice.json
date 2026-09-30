@@ -2,11 +2,11 @@
   "fonte": "https://sapl.campodotenente.pr.leg.br",
   "pausa_segundos": 2.5,
   "page_size": 100,
-  "teto_pedidos": 200,
-  "total_pedidos": 75,
+  "teto_pedidos": 475,
+  "total_pedidos": 80,
   "iniciado_em": "2026-09-26T23:58:24-03:00",
-  "atualizado_em": "2026-09-27T00:25:37-03:00",
-  "duracao_segundos": 240.2,
+  "atualizado_em": "2026-09-29T22:48:05-03:00",
+  "duracao_segundos": 390.0,
   "pedidos": [
     {
       "url": "https://sapl.campodotenente.pr.leg.br/api/",
@@ -532,6 +532,41 @@
       "status": 200,
       "arquivo": "ordemdia_id_700.json",
       "n": 75
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/parlamentares/mandato/?page_size=100&page=1",
+      "quando": "2026-09-29T22:45:45-03:00",
+      "status": null,
+      "arquivo": "mandato_p1_t1.json",
+      "n": 76
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenaria/?data_inicio__year=2026&page_size=100&page=1",
+      "quando": "2026-09-29T22:47:26-03:00",
+      "status": 200,
+      "arquivo": "sessaoplenaria_ano2026_p1.json",
+      "n": 77
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/expedientemateria/?page_size=100&page=1",
+      "quando": "2026-09-29T22:47:32-03:00",
+      "status": 200,
+      "arquivo": "expedientemateria_p1.json",
+      "n": 78
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/materialegislativa/?ano=2026&page_size=100&page=1",
+      "quando": "2026-09-29T22:47:42-03:00",
+      "status": 200,
+      "arquivo": "materialegislativa_ano2026_p1.json",
+      "n": 79
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/materialegislativa/?ano=2026&page_size=100&page=2",
+      "quando": "2026-09-29T22:47:49-03:00",
+      "status": 200,
+      "arquivo": "materialegislativa_ano2026_p2.json",
+      "n": 80
     }
   ]
 }

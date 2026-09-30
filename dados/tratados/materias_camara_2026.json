@@ -1,28 +1,5 @@
 {
-  "sessao": [
-    {
-      "id": 811,
-      "tipo": "PLL 4/2026",
-      "resultado": "unanimidade",
-      "resultado_oficial": "UNANIMIDADE",
-      "ementa": "Dispõe sobre princípios, critérios gerais e transparência nos programas habitacionais de interesse social que contem com participação do Município de Campo do Tenente e dá outras providências.",
-      "categoria": "Desenvolvimento e moradia",
-      "placar": "8 x 0",
-      "data_sessao": "2026-09-22",
-      "sessao_id": 273
-    },
-    {
-      "id": 815,
-      "tipo": "PLL 5/2026",
-      "resultado": "unanimidade",
-      "resultado_oficial": "UNANIMIDADE",
-      "ementa": "Altera a Lei Municipal nº 1.094, de 2022, que institui o “Título Mãe Tenenteana” no Município de Campo do Tenente.",
-      "categoria": "Homenagens, nomes e datas",
-      "placar": "8 x 0",
-      "data_sessao": "2026-09-22",
-      "sessao_id": 273
-    }
-  ],
+  "sessao": [],
   "mes": [
     {
       "id": 698,

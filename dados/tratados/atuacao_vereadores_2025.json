@@ -4,8 +4,8 @@
     "cidade": "Campo do Tenente",
     "uf": "PR",
     "ano": 2025,
-    "dado_coletado_em": "2026-09-27T13:53:03-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20260927_noticia_licenca/indice.json campo atualizado_em",
+    "dado_coletado_em": "2026-09-29T22:57:44-03:00",
+    "fonte_data_coleta": "dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em",
     "n_sessoes_ordinarias": 32,
     "piso_sessoes_ordinarias": 32,
     "n_vereadores": 9,
@@ -87,7 +87,7 @@
     },
     "temas_materias_presente": true,
     "fonte_temas": "dados/tratados/temas_materias.json",
-    "revisada_por_humano": true,
+    "revisada_por_humano": false,
     "arquivos_de_origem": [
       "dados/brutos/contagem_votacoes_ordinarias_2025.json",
       "dados/brutos/materias-2025-resposta-original.csv",
@@ -7828,7 +7828,7 @@
       "ano": "2025",
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
-      "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\nPROFESSORES E EDUCADORES INFANTIS",
+      "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\r\nPROFESSORES E EDUCADORES INFANTIS",
       "tema": "Educação",
       "revisada_por_humano": true,
       "autoria": {

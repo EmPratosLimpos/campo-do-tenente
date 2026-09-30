@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "id": 801,
+      "__str__": "Sessão: 34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 274,
+      "parlamentar": 8
+    },
+    {
+      "id": 802,
+      "__str__": "Sessão: 34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 274,
+      "parlamentar": 3
+    },
+    {
+      "id": 803,
+      "__str__": "Sessão: 34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 274,
+      "parlamentar": 2
+    },
+    {
+      "id": 804,
+      "__str__": "Sessão: 34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 274,
+      "parlamentar": 9
+    },
+    {
+      "id": 805,
+      "__str__": "Sessão: 34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 274,
+      "parlamentar": 6
+    },
+    {
+      "id": 806,
+      "__str__": "Sessão: 34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 274,
+      "parlamentar": 7
+    },
+    {
+      "id": 807,
+      "__str__": "Sessão: 34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 274,
+      "parlamentar": 4
+    },
+    {
+      "id": 808,
+      "__str__": "Sessão: 34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 274,
+      "parlamentar": 5
+    },
+    {
+      "id": 809,
+      "__str__": "Sessão: 34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 274,
+      "parlamentar": 100
+    }
+  ],
+  "total": 9
+}

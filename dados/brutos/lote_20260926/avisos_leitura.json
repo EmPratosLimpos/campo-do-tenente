@@ -1,0 +1,20 @@
+[
+  {
+    "prefixo": "ordemdia",
+    "total_entries": 654,
+    "ids_distintos": 632,
+    "faltantes": 22
+  },
+  {
+    "prefixo": "sessaoplenariapresenca",
+    "total_entries": 596,
+    "ids_distintos": 578,
+    "faltantes": 18
+  },
+  {
+    "prefixo": "presencaordemdia",
+    "total_entries": 577,
+    "ids_distintos": 555,
+    "faltantes": 22
+  }
+]

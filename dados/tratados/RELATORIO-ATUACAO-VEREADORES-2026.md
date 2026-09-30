@@ -1,18 +1,18 @@
 # Atuação dos vereadores nas sessões ordinárias de 2026
 
 Cidade: Campo do Tenente (PR)
-Dado coletado em: 2026-09-27T13:53:03-03:00
-Fonte da data: dados/brutos/lote_20260927_noticia_licenca/indice.json campo atualizado_em
+Dado coletado em: 2026-09-29T22:57:44-03:00
+Fonte da data: dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em
 Script: `dados/tratados/gerar_atuacao_vereadores.py`
 Fonte dos fatos: arquivos em `dados/brutos/`, `dados/tratados/vereadores.json`, `dados/tratados/presidencia_sessoes.json` e `dados/tratados/autoria_materias.json`.
 
 ## Em uma frase
 
-Nas 33 sessões ordinárias de 2026 que estão no SAPL, os 10 vereadores com mandato nesse ano tiveram presença, voto e projetos de lei lidos do registro oficial.
+Nas 34 sessões ordinárias de 2026 que estão no SAPL, os 10 vereadores com mandato nesse ano tiveram presença, voto e projetos de lei lidos do registro oficial.
 
 ## O que este recorte cobre
 
-Ano 2026. Só sessão ordinária. O piso de sessões (33) é mínimo: o arquivo traz 33, que é pelo menos esse piso.
+Ano 2026. Só sessão ordinária. O piso de sessões (33) é mínimo: o arquivo traz 34, que é pelo menos esse piso.
 
 Presença e voto nominal só entram quando a data da sessão cai dentro do mandato da pessoa, pelas datas da tabela de vereadores. Sessão fora desse intervalo não aparece na lista da pessoa: a atuação de quem saiu fica congelada na data de saída.
 
@@ -59,7 +59,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/1
 
 Presente em 4 das 28 sessões em que a presença conta (taxa 14,29%).
 
-Faltas com justificativa: 1. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 23. Sessões fora do mandato: 5.
+Faltas com justificativa: 1. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 23. Sessões fora do mandato: 6.
 
 ### Dr. Marcos Rodrigues
 
@@ -67,7 +67,7 @@ Partido: MDB (MOVIMENTO DEMOCRÁTICO BRASILEIRO)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/2
 
-Presente em 31 das 33 sessões em que a presença conta (taxa 93,94%).
+Presente em 32 das 34 sessões em que a presença conta (taxa 94,12%).
 
 Faltas com justificativa: 1. Faltas sem justificativa: 1. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
 
@@ -77,7 +77,7 @@ Partido: PDT (PARTIDO DEMOCRÁTICO TRABALHISTA)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/3
 
-Presente em 32 das 33 sessões em que a presença conta (taxa 96,97%).
+Presente em 33 das 34 sessões em que a presença conta (taxa 97,06%).
 
 Faltas com justificativa: 1. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
 
@@ -87,7 +87,7 @@ Partido: MDB (MOVIMENTO DEMOCRÁTICO BRASILEIRO)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/4
 
-Presente em 31 das 33 sessões em que a presença conta (taxa 93,94%).
+Presente em 32 das 34 sessões em que a presença conta (taxa 94,12%).
 
 Faltas com justificativa: 1. Faltas sem justificativa: 1. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
 
@@ -97,7 +97,7 @@ Partido: PL (PARTIDO LIBERAL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/5
 
-Presente em 33 das 33 sessões em que a presença conta (taxa 100,00%).
+Presente em 34 das 34 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
 
@@ -107,7 +107,7 @@ Partido: UNIÃO (UNIÃO BRASIL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/6
 
-Presente em 33 das 33 sessões em que a presença conta (taxa 100,00%).
+Presente em 34 das 34 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
 
@@ -117,7 +117,7 @@ Partido: PL (PARTIDO LIBERAL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/7
 
-Presente em 33 das 33 sessões em que a presença conta (taxa 100,00%).
+Presente em 34 das 34 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
 
@@ -127,7 +127,7 @@ Partido: PP (PARTIDO PROGRESSISTA)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/8
 
-Presente em 31 das 33 sessões em que a presença conta (taxa 93,94%).
+Presente em 32 das 34 sessões em que a presença conta (taxa 94,12%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 2. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
 
@@ -137,7 +137,7 @@ Partido: UNIÃO (UNIÃO BRASIL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/9
 
-Presente em 31 das 33 sessões em que a presença conta (taxa 93,94%).
+Presente em 32 das 34 sessões em que a presença conta (taxa 94,12%).
 
 Faltas com justificativa: 2. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
 
@@ -147,7 +147,7 @@ Partido: PP (PARTIDO PROGRESSISTA)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/100
 
-Presente em 28 das 28 sessões em que a presença conta (taxa 100,00%).
+Presente em 29 das 29 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 5.
 
@@ -317,7 +317,7 @@ A autoria veio de `autoria_materias.json`. A lista de cada vereador abaixo só i
 
 O tema de cada matéria veio de `temas_materias.json`.
 
-Classificação por tema revisada pelo mantenedor em todas as matérias com tema.
+Nem toda matéria com tema passou pela revisão do mantenedor.
 
 ### Jorge Quege
 
@@ -383,9 +383,9 @@ Nenhum projeto de lei do Legislativo com esta autoria neste ano.
 
 ## Totais
 
-- Sessões ordinárias no SAPL: 33
+- Sessões ordinárias no SAPL: 34
 - Vereadores com mandato no ano: 10
-- Presenças dentro do mandato: 287
+- Presenças dentro do mandato: 296
 - Faltas com justificativa: 6
 - Faltas sem justificativa: 4
 - Afastamentos que não contam como falta: 23

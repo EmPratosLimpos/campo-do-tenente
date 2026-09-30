@@ -2,11 +2,11 @@
   "fonte": "https://sapl.campodotenente.pr.leg.br",
   "pausa_segundos": 2.5,
   "page_size": 100,
-  "teto_pedidos": 40,
-  "total_pedidos": 14,
+  "teto_pedidos": 415,
+  "total_pedidos": 18,
   "iniciado_em": "2026-09-27T11:39:46-03:00",
-  "atualizado_em": "2026-09-27T11:40:56-03:00",
-  "duracao_segundos": 41.8,
+  "atualizado_em": "2026-09-29T22:57:44-03:00",
+  "duracao_segundos": 74.3,
   "pedidos": [
     {
       "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?page_size=100&page=1",
@@ -105,6 +105,34 @@
       "status": 200,
       "arquivo": "autoria_materia_ano2026_p1.json",
       "n": 14
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?page_size=100&page=1",
+      "quando": "2026-09-29T22:55:29-03:00",
+      "status": 200,
+      "arquivo": "autoria_p1.json",
+      "n": 15
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?page_size=100&page=10",
+      "quando": "2026-09-29T22:57:24-03:00",
+      "status": 200,
+      "arquivo": "autoria_p10.json",
+      "n": 16
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?materia__ano=2025&page_size=100&page=1",
+      "quando": "2026-09-29T22:57:39-03:00",
+      "status": 200,
+      "arquivo": "autoria_materia_ano2025_p1.json",
+      "n": 17
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?materia__ano=2026&page_size=100&page=1",
+      "quando": "2026-09-29T22:57:43-03:00",
+      "status": 200,
+      "arquivo": "autoria_materia_ano2026_p1.json",
+      "n": 18
     }
   ]
 }

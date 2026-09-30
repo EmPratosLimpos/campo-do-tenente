@@ -1,5 +1,1137 @@
 {
+  "1": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "2": {
+    "tag_tipo": "MOC",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "3": {
+    "tag_tipo": "MOC",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "5": {
+    "tag_tipo": "MOC",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "6": {
+    "tag_tipo": "MOC",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "8": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Educação"
+  },
+  "9": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "10": {
+    "tag_tipo": "IND",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "11": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "12": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "13": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Administração e finanças"
+  },
+  "14": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "15": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "16": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "17": {
+    "tag_tipo": "EMD",
+    "tag_tema": "Administração e finanças"
+  },
+  "18": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "19": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "20": {
+    "tag_tipo": "IND",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "21": {
+    "tag_tipo": "IND",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "22": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "23": {
+    "tag_tipo": "MOC",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "24": {
+    "tag_tipo": "MOC",
+    "tag_tema": "Educação"
+  },
+  "25": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Assistência social e direitos"
+  },
+  "26": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "27": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Administração e finanças"
+  },
+  "28": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Administração e finanças"
+  },
+  "29": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "30": {
+    "tag_tipo": "IND",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "31": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Administração e finanças"
+  },
+  "32": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Educação"
+  },
+  "34": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "35": {
+    "tag_tipo": "IND",
+    "tag_tema": "Administração e finanças"
+  },
+  "36": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Educação"
+  },
+  "37": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Educação"
+  },
+  "38": {
+    "tag_tipo": "IND",
+    "tag_tema": "Educação"
+  },
+  "39": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "40": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "41": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "42": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "43": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Assistência social e direitos"
+  },
+  "44": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "45": {
+    "tag_tipo": "EMD",
+    "tag_tema": "Administração e finanças"
+  },
+  "46": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "47": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Administração e finanças"
+  },
+  "49": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Agricultura e pecuária"
+  },
+  "50": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Administração e finanças"
+  },
+  "51": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "52": {
+    "tag_tipo": "IND",
+    "tag_tema": "Administração e finanças"
+  },
+  "53": {
+    "tag_tipo": "IND",
+    "tag_tema": "Saúde"
+  },
+  "54": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "55": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Meio ambiente e proteção animal"
+  },
+  "56": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Administração e finanças"
+  },
+  "57": {
+    "tag_tipo": "IND",
+    "tag_tema": "Segurança pública"
+  },
+  "58": {
+    "tag_tipo": "IND",
+    "tag_tema": "Saúde"
+  },
+  "59": {
+    "tag_tipo": "IND",
+    "tag_tema": "Saúde"
+  },
+  "60": {
+    "tag_tipo": "IND",
+    "tag_tema": "Administração e finanças"
+  },
+  "61": {
+    "tag_tipo": "IND",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "62": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "63": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "64": {
+    "tag_tipo": "IND",
+    "tag_tema": "Saúde"
+  },
+  "65": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "66": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "67": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "68": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "69": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "70": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "71": {
+    "tag_tipo": "IND",
+    "tag_tema": "Administração e finanças"
+  },
+  "72": {
+    "tag_tipo": "IND",
+    "tag_tema": "Administração e finanças"
+  },
+  "73": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "74": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "75": {
+    "tag_tipo": "IND",
+    "tag_tema": "Agricultura e pecuária"
+  },
+  "76": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "77": {
+    "tag_tipo": "IND",
+    "tag_tema": "Educação"
+  },
+  "78": {
+    "tag_tipo": "IND",
+    "tag_tema": "Administração e finanças"
+  },
+  "79": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "80": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "81": {
+    "tag_tipo": "IND",
+    "tag_tema": "Administração e finanças"
+  },
+  "82": {
+    "tag_tipo": "IND",
+    "tag_tema": "Educação"
+  },
+  "83": {
+    "tag_tipo": "IND",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "85": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "86": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "87": {
+    "tag_tipo": "IND",
+    "tag_tema": "Assistência social e direitos"
+  },
+  "88": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "89": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "90": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "91": {
+    "tag_tipo": "IND",
+    "tag_tema": "Administração e finanças"
+  },
+  "93": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "94": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Agricultura e pecuária"
+  },
+  "95": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "96": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "97": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Segurança pública"
+  },
+  "98": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "99": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Saúde"
+  },
+  "100": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "101": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "102": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "103": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "104": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "106": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "107": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Assistência social e direitos"
+  },
+  "108": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "109": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Saúde"
+  },
+  "110": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "111": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "112": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "113": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Segurança pública"
+  },
+  "114": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "115": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "118": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "119": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "120": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "121": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "122": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "123": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "124": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "125": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "126": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "127": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "128": {
+    "tag_tipo": "PDL",
+    "tag_tema": "Administração e finanças"
+  },
+  "129": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Meio ambiente e proteção animal"
+  },
+  "130": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "133": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "134": {
+    "tag_tipo": "PDL",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "135": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "136": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "138": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "139": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "140": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Saúde"
+  },
+  "141": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Educação"
+  },
+  "142": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Educação"
+  },
+  "143": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "144": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "145": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "146": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "147": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "148": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Educação"
+  },
+  "149": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "150": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "151": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Administração e finanças"
+  },
+  "152": {
+    "tag_tipo": "IND",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "153": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "154": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Educação"
+  },
+  "155": {
+    "tag_tipo": "MOC",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "156": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "157": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "158": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "159": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "160": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "161": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "162": {
+    "tag_tipo": "PSUB",
+    "tag_tema": "Administração e finanças"
+  },
+  "163": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Assistência social e direitos"
+  },
+  "164": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Assistência social e direitos"
+  },
+  "165": {
+    "tag_tipo": "EMD",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "166": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "167": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "168": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "169": {
+    "tag_tipo": "VET",
+    "tag_tema": "Educação"
+  },
+  "170": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "171": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "172": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "174": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "176": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "180": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "181": {
+    "tag_tipo": "IND",
+    "tag_tema": "Administração e finanças"
+  },
+  "185": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "186": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "187": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "188": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "189": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "190": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "192": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "193": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Agricultura e pecuária"
+  },
+  "194": {
+    "tag_tipo": "IND",
+    "tag_tema": "Educação"
+  },
+  "195": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "196": {
+    "tag_tipo": "IND",
+    "tag_tema": "Saúde"
+  },
+  "197": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "198": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "199": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "200": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "201": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "202": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "203": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "204": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "205": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "206": {
+    "tag_tipo": "PDL",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "207": {
+    "tag_tipo": "PDL",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "208": {
+    "tag_tipo": "MOC",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "209": {
+    "tag_tipo": "IND",
+    "tag_tema": "Educação"
+  },
+  "210": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "211": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "212": {
+    "tag_tipo": "VET",
+    "tag_tema": "Administração e finanças"
+  },
+  "213": {
+    "tag_tipo": "VET",
+    "tag_tema": "Agricultura e pecuária"
+  },
+  "214": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "215": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "216": {
+    "tag_tipo": "PLL",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "217": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "218": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "219": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "220": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "221": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Agricultura e pecuária"
+  },
+  "222": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "223": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "224": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Agricultura e pecuária"
+  },
+  "225": {
+    "tag_tipo": "PLC",
+    "tag_tema": "Administração e finanças"
+  },
+  "226": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "227": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Saúde"
+  },
+  "228": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "229": {
+    "tag_tipo": "EMD",
+    "tag_tema": "Administração e finanças"
+  },
+  "230": {
+    "tag_tipo": "EMD",
+    "tag_tema": "Administração e finanças"
+  },
+  "231": {
+    "tag_tipo": "EMD",
+    "tag_tema": "Administração e finanças"
+  },
+  "232": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "233": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "234": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "236": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "237": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "238": {
+    "tag_tipo": "EMD",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "239": {
+    "tag_tipo": "PSUBE",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "240": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "241": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "242": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "243": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "244": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Administração e finanças"
+  },
+  "245": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Administração e finanças"
+  },
+  "246": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "247": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Defesa Civil"
+  },
+  "248": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "249": {
+    "tag_tipo": "IND",
+    "tag_tema": "Educação"
+  },
+  "250": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "251": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "252": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "253": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "254": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "255": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Saúde"
+  },
+  "256": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "257": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Educação"
+  },
+  "258": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "259": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "260": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "261": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "262": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "263": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "268": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "269": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "270": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "272": {
+    "tag_tipo": "IND",
+    "tag_tema": "Educação"
+  },
+  "273": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "274": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "275": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "276": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "277": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
   "278": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "279": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "280": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "281": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "282": {
+    "tag_tipo": "PDL",
+    "tag_tema": "Administração e finanças"
+  },
+  "283": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "284": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "285": {
+    "tag_tipo": "IND",
+    "tag_tema": "Educação"
+  },
+  "286": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "287": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "288": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "289": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "290": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
+  "291": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
+  "292": {
+    "tag_tipo": "PLCL",
+    "tag_tema": "Administração e finanças"
+  },
+  "293": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "295": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "296": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "298": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "299": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "300": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "302": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "303": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "304": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "345": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "346": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "347": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Educação"
+  },
+  "348": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "349": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "350": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "352": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "353": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "407": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "458": {
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
   },
@@ -175,972 +1307,88 @@
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
   },
-  "165": {
-    "tag_tipo": "EMD",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "17": {
-    "tag_tipo": "EMD",
-    "tag_tema": "Administração e finanças"
-  },
-  "45": {
-    "tag_tipo": "EMD",
-    "tag_tema": "Administração e finanças"
-  },
-  "231": {
-    "tag_tipo": "EMD",
-    "tag_tema": "Administração e finanças"
-  },
-  "230": {
-    "tag_tipo": "EMD",
-    "tag_tema": "Administração e finanças"
-  },
-  "229": {
-    "tag_tipo": "EMD",
-    "tag_tema": "Administração e finanças"
-  },
-  "238": {
-    "tag_tipo": "EMD",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "57": {
-    "tag_tipo": "IND",
-    "tag_tema": "Segurança pública"
-  },
-  "58": {
-    "tag_tipo": "IND",
-    "tag_tema": "Saúde"
-  },
-  "59": {
-    "tag_tipo": "IND",
-    "tag_tema": "Saúde"
-  },
-  "60": {
-    "tag_tipo": "IND",
-    "tag_tema": "Administração e finanças"
-  },
-  "61": {
-    "tag_tipo": "IND",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "62": {
+  "596": {
     "tag_tipo": "IND",
     "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "63": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "64": {
-    "tag_tipo": "IND",
-    "tag_tema": "Saúde"
-  },
-  "65": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "66": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "67": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "69": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "70": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "71": {
-    "tag_tipo": "IND",
-    "tag_tema": "Administração e finanças"
-  },
-  "72": {
-    "tag_tipo": "IND",
-    "tag_tema": "Administração e finanças"
-  },
-  "73": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "74": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "75": {
-    "tag_tipo": "IND",
-    "tag_tema": "Agricultura e pecuária"
-  },
-  "76": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "77": {
-    "tag_tipo": "IND",
-    "tag_tema": "Educação"
-  },
-  "78": {
-    "tag_tipo": "IND",
-    "tag_tema": "Administração e finanças"
-  },
-  "79": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "80": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "81": {
-    "tag_tipo": "IND",
-    "tag_tema": "Administração e finanças"
-  },
-  "82": {
-    "tag_tipo": "IND",
-    "tag_tema": "Educação"
-  },
-  "83": {
-    "tag_tipo": "IND",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "85": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "86": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "87": {
-    "tag_tipo": "IND",
-    "tag_tema": "Assistência social e direitos"
-  },
-  "88": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "89": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "90": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "91": {
-    "tag_tipo": "IND",
-    "tag_tema": "Administração e finanças"
-  },
-  "93": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "95": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "9": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "10": {
-    "tag_tipo": "IND",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "11": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "12": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "20": {
-    "tag_tipo": "IND",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "21": {
-    "tag_tipo": "IND",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "30": {
-    "tag_tipo": "IND",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "35": {
-    "tag_tipo": "IND",
-    "tag_tema": "Administração e finanças"
-  },
-  "38": {
-    "tag_tipo": "IND",
-    "tag_tema": "Educação"
-  },
-  "46": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "51": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "52": {
-    "tag_tipo": "IND",
-    "tag_tema": "Administração e finanças"
-  },
-  "53": {
-    "tag_tipo": "IND",
-    "tag_tema": "Saúde"
-  },
-  "152": {
-    "tag_tipo": "IND",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "172": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "176": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "181": {
-    "tag_tipo": "IND",
-    "tag_tema": "Administração e finanças"
-  },
-  "185": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "194": {
-    "tag_tipo": "IND",
-    "tag_tema": "Educação"
-  },
-  "196": {
-    "tag_tipo": "IND",
-    "tag_tema": "Saúde"
-  },
-  "199": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "209": {
-    "tag_tipo": "IND",
-    "tag_tema": "Educação"
-  },
-  "210": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "233": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "241": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "155": {
-    "tag_tipo": "MOC",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "2": {
-    "tag_tipo": "MOC",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "5": {
-    "tag_tipo": "MOC",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "6": {
-    "tag_tipo": "MOC",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "3": {
-    "tag_tipo": "MOC",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "23": {
-    "tag_tipo": "MOC",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "24": {
-    "tag_tipo": "MOC",
-    "tag_tema": "Educação"
-  },
-  "208": {
-    "tag_tipo": "MOC",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "1": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "18": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "19": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "34": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "40": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "42": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "39": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "68": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "111": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "114": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "115": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "133": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "135": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "136": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "139": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "150": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "171": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "186": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "187": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "188": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "198": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "200": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "201": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "214": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "215": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "222": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "223": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "237": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "242": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "243": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "134": {
-    "tag_tipo": "PDL",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "128": {
-    "tag_tipo": "PDL",
-    "tag_tema": "Administração e finanças"
-  },
-  "206": {
-    "tag_tipo": "PDL",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "207": {
-    "tag_tipo": "PDL",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "118": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "119": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "120": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "121": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "122": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "123": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "124": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "125": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "126": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "218": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "225": {
-    "tag_tipo": "PLC",
-    "tag_tema": "Administração e finanças"
-  },
-  "47": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Administração e finanças"
-  },
-  "55": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Meio ambiente e proteção animal"
-  },
-  "56": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Administração e finanças"
-  },
-  "49": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Agricultura e pecuária"
-  },
-  "50": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Administração e finanças"
-  },
-  "13": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Administração e finanças"
-  },
-  "193": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Agricultura e pecuária"
-  },
-  "27": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Administração e finanças"
-  },
-  "28": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Administração e finanças"
-  },
-  "26": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "31": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Administração e finanças"
-  },
-  "25": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Assistência social e direitos"
-  },
-  "37": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Educação"
-  },
-  "151": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Administração e finanças"
-  },
-  "163": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Assistência social e direitos"
-  },
-  "180": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "211": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "216": {
-    "tag_tipo": "PLL",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "138": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "140": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Saúde"
-  },
-  "141": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Educação"
-  },
-  "144": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "145": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "146": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "147": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "148": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Educação"
-  },
-  "149": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "14": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "29": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "32": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Educação"
-  },
-  "43": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Assistência social e direitos"
-  },
-  "127": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "129": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Meio ambiente e proteção animal"
-  },
-  "130": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "189": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "190": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "219": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "226": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "227": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Saúde"
-  },
-  "228": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "224": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Agricultura e pecuária"
-  },
-  "232": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "236": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "240": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "156": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "157": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "159": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "158": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "160": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "161": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "143": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "142": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Educação"
-  },
-  "22": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "166": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "167": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "168": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "195": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "197": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "202": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "205": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "217": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "162": {
-    "tag_tipo": "PSUB",
-    "tag_tema": "Administração e finanças"
-  },
-  "239": {
-    "tag_tipo": "PSUBE",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "96": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "97": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Segurança pública"
-  },
-  "98": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "99": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Saúde"
-  },
-  "100": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "101": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "153": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "112": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "102": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "103": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "154": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Educação"
-  },
-  "104": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "106": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "107": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Assistência social e direitos"
-  },
-  "108": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "109": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Saúde"
-  },
-  "110": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "113": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Segurança pública"
-  },
-  "8": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Educação"
-  },
-  "15": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "16": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "36": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Educação"
-  },
-  "41": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "44": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "54": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "94": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Agricultura e pecuária"
-  },
-  "164": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Assistência social e direitos"
-  },
-  "170": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "174": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "192": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "203": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "204": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "220": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "221": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Agricultura e pecuária"
-  },
-  "234": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "169": {
-    "tag_tipo": "VET",
-    "tag_tema": "Educação"
-  },
-  "212": {
-    "tag_tipo": "VET",
-    "tag_tema": "Administração e finanças"
-  },
-  "213": {
-    "tag_tipo": "VET",
-    "tag_tema": "Agricultura e pecuária"
-  },
-  "277": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "279": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "281": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "280": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "275": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "283": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "274": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "276": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "284": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "293": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "300": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "303": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "345": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "348": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "458": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
   },
   "597": {
     "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "598": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "599": {
+    "tag_tipo": "OFEX",
     "tag_tema": "não se aplica"
   },
   "600": {
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
   },
+  "601": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "602": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "603": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
   "604": {
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
+  },
+  "605": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "606": {
+    "tag_tipo": "IND",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "607": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "608": {
+    "tag_tipo": "EMD",
+    "tag_tema": "Educação"
   },
   "609": {
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
   },
+  "618": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "619": {
+    "tag_tipo": "IND",
+    "tag_tema": "Assistência social e direitos"
+  },
+  "620": {
+    "tag_tipo": "IND",
+    "tag_tema": "Assistência social e direitos"
+  },
   "621": {
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
   },
+  "622": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
+  },
   "627": {
     "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "678": {
+    "tag_tipo": "OFEX",
     "tag_tema": "não se aplica"
   },
   "684": {
@@ -1151,6 +1399,22 @@
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
   },
+  "689": {
+    "tag_tipo": "IND",
+    "tag_tema": "Administração e finanças"
+  },
+  "690": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "691": {
+    "tag_tipo": "EMD",
+    "tag_tema": "Administração e finanças"
+  },
+  "693": {
+    "tag_tipo": "IND",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
   "694": {
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
@@ -1159,9 +1423,45 @@
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
   },
+  "696": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "697": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "698": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "699": {
+    "tag_tipo": "IND",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
+  "700": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "701": {
+    "tag_tipo": "PRE",
+    "tag_tema": "Administração e finanças"
+  },
   "702": {
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
+  },
+  "704": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "705": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "706": {
+    "tag_tipo": "IND",
+    "tag_tema": "Saúde"
   },
   "707": {
     "tag_tipo": "ATA",
@@ -1171,9 +1471,45 @@
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
   },
+  "752": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Educação"
+  },
+  "774": {
+    "tag_tipo": "COMPR",
+    "tag_tema": "Administração e finanças"
+  },
+  "783": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
   "786": {
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
+  },
+  "791": {
+    "tag_tipo": "COMPR",
+    "tag_tema": "Administração e finanças"
+  },
+  "792": {
+    "tag_tipo": "PDL",
+    "tag_tema": "Administração e finanças"
+  },
+  "793": {
+    "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "794": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Administração e finanças"
+  },
+  "795": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "796": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
   },
   "797": {
     "tag_tipo": "ATA",
@@ -1183,143 +1519,11 @@
     "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
   },
-  "810": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "820": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "853": {
-    "tag_tipo": "ATA",
-    "tag_tema": "não se aplica"
-  },
-  "774": {
-    "tag_tipo": "COMPR",
-    "tag_tema": "Administração e finanças"
-  },
-  "791": {
-    "tag_tipo": "COMPR",
-    "tag_tema": "Administração e finanças"
-  },
-  "608": {
-    "tag_tipo": "EMD",
-    "tag_tema": "Educação"
-  },
-  "691": {
-    "tag_tipo": "EMD",
-    "tag_tema": "Administração e finanças"
-  },
-  "249": {
-    "tag_tipo": "IND",
-    "tag_tema": "Educação"
-  },
-  "287": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "272": {
-    "tag_tipo": "IND",
-    "tag_tema": "Educação"
-  },
-  "288": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "285": {
-    "tag_tipo": "IND",
-    "tag_tema": "Educação"
-  },
-  "295": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "296": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "298": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "299": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "302": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "304": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "350": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "352": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "353": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "596": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "598": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "602": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "606": {
-    "tag_tipo": "IND",
+  "799": {
+    "tag_tipo": "REQ",
     "tag_tema": "Cultura, esporte e lazer"
   },
-  "619": {
-    "tag_tipo": "IND",
-    "tag_tema": "Assistência social e direitos"
-  },
-  "620": {
-    "tag_tipo": "IND",
-    "tag_tema": "Assistência social e direitos"
-  },
-  "689": {
-    "tag_tipo": "IND",
-    "tag_tema": "Administração e finanças"
-  },
-  "690": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "693": {
-    "tag_tipo": "IND",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "699": {
-    "tag_tipo": "IND",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "706": {
-    "tag_tipo": "IND",
-    "tag_tema": "Saúde"
-  },
-  "783": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "796": {
-    "tag_tipo": "IND",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "805": {
+  "802": {
     "tag_tipo": "IND",
     "tag_tema": "Ruas, trânsito e transporte"
   },
@@ -1327,92 +1531,60 @@
     "tag_tipo": "IND",
     "tag_tema": "Desenvolvimento e moradia"
   },
-  "802": {
+  "805": {
     "tag_tipo": "IND",
     "tag_tema": "Ruas, trânsito e transporte"
   },
-  "814": {
-    "tag_tipo": "IND",
-    "tag_tema": "Educação"
+  "806": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
   },
-  "816": {
-    "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  "807": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Assistência social e direitos"
   },
-  "252": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "262": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "263": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "269": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "273": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "286": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "289": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "346": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "407": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "599": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "601": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "607": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "618": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "678": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "705": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
-  },
-  "793": {
-    "tag_tipo": "OFEX",
-    "tag_tema": "não se aplica"
+  "808": {
+    "tag_tipo": "PLEX",
+    "tag_tema": "Administração e finanças"
   },
   "809": {
     "tag_tipo": "OFEX",
     "tag_tema": "não se aplica"
   },
+  "810": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "811": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Desenvolvimento e moradia"
+  },
   "813": {
     "tag_tipo": "OFEX",
     "tag_tema": "não se aplica"
   },
+  "814": {
+    "tag_tipo": "IND",
+    "tag_tema": "Educação"
+  },
+  "815": {
+    "tag_tipo": "PLEG",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "816": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "820": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
   "848": {
     "tag_tipo": "OFEX",
+    "tag_tema": "não se aplica"
+  },
+  "853": {
+    "tag_tipo": "ATA",
     "tag_tema": "não se aplica"
   },
   "861": {
@@ -1427,180 +1599,24 @@
     "tag_tipo": "OFEX",
     "tag_tema": "não se aplica"
   },
-  "282": {
-    "tag_tipo": "PDL",
-    "tag_tema": "Administração e finanças"
-  },
-  "792": {
-    "tag_tipo": "PDL",
-    "tag_tema": "Administração e finanças"
-  },
-  "292": {
-    "tag_tipo": "PLCL",
-    "tag_tema": "Administração e finanças"
-  },
-  "244": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Administração e finanças"
-  },
-  "245": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Administração e finanças"
-  },
-  "698": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "811": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Desenvolvimento e moradia"
-  },
-  "815": {
-    "tag_tipo": "PLEG",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "254": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "255": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Saúde"
-  },
-  "257": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Educação"
-  },
-  "258": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "256": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "290": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "347": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Educação"
-  },
-  "622": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "704": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "752": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Educação"
-  },
-  "806": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "807": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Assistência social e direitos"
-  },
-  "808": {
-    "tag_tipo": "PLEX",
-    "tag_tema": "Administração e finanças"
-  },
-  "246": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "259": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "260": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "261": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "291": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "603": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "701": {
-    "tag_tipo": "PRE",
-    "tag_tema": "Administração e finanças"
-  },
-  "247": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Defesa Civil"
-  },
-  "248": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "250": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "251": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
-  "253": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "270": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Homenagens, nomes e datas"
-  },
-  "268": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "349": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "605": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "696": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "697": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "700": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
-  },
-  "794": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Administração e finanças"
-  },
-  "795": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Ruas, trânsito e transporte"
-  },
-  "799": {
-    "tag_tipo": "REQ",
-    "tag_tema": "Cultura, esporte e lazer"
-  },
   "889": {
     "tag_tipo": "REQ",
     "tag_tema": "Meio ambiente e proteção animal"
+  },
+  "966": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
+  },
+  "967": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "968": {
+    "tag_tipo": "IND",
+    "tag_tema": "Ruas, trânsito e transporte"
+  },
+  "969": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
   }
 }

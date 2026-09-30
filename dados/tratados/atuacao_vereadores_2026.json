@@ -4,9 +4,9 @@
     "cidade": "Campo do Tenente",
     "uf": "PR",
     "ano": 2026,
-    "dado_coletado_em": "2026-09-27T13:53:03-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20260927_noticia_licenca/indice.json campo atualizado_em",
-    "n_sessoes_ordinarias": 33,
+    "dado_coletado_em": "2026-09-29T22:57:44-03:00",
+    "fonte_data_coleta": "dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em",
+    "n_sessoes_ordinarias": 34,
     "piso_sessoes_ordinarias": 33,
     "n_vereadores": 10,
     "piso_vereadores": 10,
@@ -14,10 +14,10 @@
     "n_projetos_lei_executivo": 13,
     "n_projetos_lei_legislativo_e_executivo": 18,
     "piso_projetos_lei_legislativo_e_executivo": 18,
-    "n_presencas": 287,
+    "n_presencas": 296,
     "n_faltas_com_justificativa": 6,
     "n_faltas_sem_justificativa": 4,
-    "n_sessoes_fora_do_mandato": 10,
+    "n_sessoes_fora_do_mandato": 11,
     "n_sessoes_licenca": 23,
     "n_votacoes": 120,
     "n_registros_votacao": 120,
@@ -111,7 +111,7 @@
     },
     "temas_materias_presente": true,
     "fonte_temas": "dados/tratados/temas_materias.json",
-    "revisada_por_humano": true,
+    "revisada_por_humano": false,
     "arquivos_de_origem": [
       "dados/brutos/contagem_votacoes_ordinarias_2026.json",
       "dados/brutos/materias-2026-resposta-original.csv",
@@ -683,6 +683,23 @@
       "n_licenca": 0,
       "n_registros_votacao": 5,
       "n_votacoes_com_voto_individual": 5,
+      "n_votacoes_sem_voto_individual": 0
+    },
+    {
+      "id": 274,
+      "numero": 34,
+      "data": "2026-09-29",
+      "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "n_votacoes_contagem": 0,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/sessao/274",
+      "presidente_id_sapl": 5,
+      "n_presentes": 9,
+      "n_faltas_com_justificativa": 0,
+      "n_faltas_sem_justificativa": 0,
+      "n_fora_do_mandato": 1,
+      "n_licenca": 0,
+      "n_registros_votacao": 0,
+      "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 0
     }
   ],
@@ -14035,260 +14052,6 @@
       "conclusao_do_painel": null
     },
     {
-      "id": 268,
-      "sessao_id": 273,
-      "numero_sessao": 33,
-      "data_sessao": "2026-09-22",
-      "rotulo_sessao": "33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-      "materia_id": 853,
-      "ordem": null,
-      "data_hora": "2026-09-22T19:18:27.975160-03:00",
-      "texto_registro_sapl": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 34 de 2026 em 33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
-      "resultado_texto_sapl": "UNANIMIDADE",
-      "frase_resultado_sapl": "Aprovada por Unanimidade",
-      "situacao_oficial_sapl": "Aprovado",
-      "totais_oficiais": {
-        "numero_votos_sim": 9,
-        "numero_votos_nao": 0,
-        "numero_abstencoes": 0
-      },
-      "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-      "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853",
-      "autoria": {
-        "rotulo": null,
-        "autores": [
-          {
-            "ordem_no_sapl": 1,
-            "autor_id": 7,
-            "tipo_autor": "Órgão",
-            "parlamentar_id_sapl": null,
-            "nome_no_sapl": "Secretária Legislativa - SLEG",
-            "cargo_no_sapl": null,
-            "lacuna": null
-          }
-        ],
-        "autoria_conjunta": false,
-        "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/853"
-      },
-      "presidente_id_sapl": 5,
-      "voto_individual_registrado": true,
-      "rotulo": null,
-      "estados_por_vereador": [
-        {
-          "id_sapl": 1,
-          "nome_parlamentar": "Jorge Quege",
-          "estado": "fora_do_mandato",
-          "rotulo": "Fora do mandato naquela data",
-          "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null,
-          "motivo": "Mandato cassado",
-          "materia_motivo_id": 792,
-          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-          "fonte_oficial_encontrada": true
-        },
-        {
-          "id_sapl": 2,
-          "nome_parlamentar": "Dr. Marcos Rodrigues",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 3,
-          "nome_parlamentar": "Cleiton Costa",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 4,
-          "nome_parlamentar": "Kinho Lazarino",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 5,
-          "nome_parlamentar": "Rafael Ventura",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 6,
-          "nome_parlamentar": "Gustavo Vizentin",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 7,
-          "nome_parlamentar": "Josemar Veiga",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 8,
-          "nome_parlamentar": "Beto Maurer",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 9,
-          "nome_parlamentar": "Gilmar Barbosa",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 100,
-          "nome_parlamentar": "Rivanildo Cavalheiro",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        }
-      ],
-      "conclusao_do_painel": null
-    },
-    {
-      "id": 269,
-      "sessao_id": 273,
-      "numero_sessao": 33,
-      "data_sessao": "2026-09-22",
-      "rotulo_sessao": "33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-      "materia_id": 752,
-      "ordem": 701,
-      "data_hora": "2026-09-22T19:44:15.060001-03:00",
-      "texto_registro_sapl": "Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 10 de 2026 em 33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
-      "resultado_texto_sapl": "UNANIMIDADE",
-      "frase_resultado_sapl": "Aprovada por Unanimidade",
-      "situacao_oficial_sapl": "Aprovado",
-      "totais_oficiais": {
-        "numero_votos_sim": 8,
-        "numero_votos_nao": 0,
-        "numero_abstencoes": 0
-      },
-      "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-      "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752",
-      "autoria": {
-        "rotulo": null,
-        "autores": [
-          {
-            "ordem_no_sapl": 1,
-            "autor_id": 17,
-            "tipo_autor": "Chefe do Poder Executivo Municipal",
-            "parlamentar_id_sapl": null,
-            "nome_no_sapl": "Weverton Willian Vizentin",
-            "cargo_no_sapl": "Prefeito",
-            "lacuna": null
-          }
-        ],
-        "autoria_conjunta": false,
-        "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/752"
-      },
-      "presidente_id_sapl": 5,
-      "voto_individual_registrado": true,
-      "rotulo": null,
-      "estados_por_vereador": [
-        {
-          "id_sapl": 1,
-          "nome_parlamentar": "Jorge Quege",
-          "estado": "fora_do_mandato",
-          "rotulo": "Fora do mandato naquela data",
-          "voto_texto_sapl": null,
-          "voto_texto_sapl_fora_do_mandato": null,
-          "motivo": "Mandato cassado",
-          "materia_motivo_id": 792,
-          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-          "fonte_oficial_encontrada": true
-        },
-        {
-          "id_sapl": 2,
-          "nome_parlamentar": "Dr. Marcos Rodrigues",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 3,
-          "nome_parlamentar": "Cleiton Costa",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 4,
-          "nome_parlamentar": "Kinho Lazarino",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 5,
-          "nome_parlamentar": "Rafael Ventura",
-          "estado": "presidente_que_nao_votou",
-          "rotulo": "Presidente que não votou",
-          "voto_texto_sapl": "Não Votou",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 6,
-          "nome_parlamentar": "Gustavo Vizentin",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 7,
-          "nome_parlamentar": "Josemar Veiga",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 8,
-          "nome_parlamentar": "Beto Maurer",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 9,
-          "nome_parlamentar": "Gilmar Barbosa",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        },
-        {
-          "id_sapl": 100,
-          "nome_parlamentar": "Rivanildo Cavalheiro",
-          "estado": "sim",
-          "rotulo": "Sim",
-          "voto_texto_sapl": "Sim",
-          "voto_texto_sapl_fora_do_mandato": null
-        }
-      ],
-      "conclusao_do_painel": null
-    },
-    {
       "id": 270,
       "sessao_id": 273,
       "numero_sessao": 33,
@@ -14630,6 +14393,260 @@
           "estado": "presidente_que_nao_votou",
           "rotulo": "Presidente que não votou",
           "voto_texto_sapl": "Não Votou",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        }
+      ],
+      "conclusao_do_painel": null
+    },
+    {
+      "id": 269,
+      "sessao_id": 273,
+      "numero_sessao": 33,
+      "data_sessao": "2026-09-22",
+      "rotulo_sessao": "33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "materia_id": 752,
+      "ordem": 701,
+      "data_hora": "2026-09-22T19:44:15.060001-03:00",
+      "texto_registro_sapl": "Ordem: Ordem do Dia/Expediente: 1 - Projeto de Lei Origem Poder Executivo nº 10 de 2026 em 33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "resultado_texto_sapl": "UNANIMIDADE",
+      "frase_resultado_sapl": "Aprovada por Unanimidade",
+      "situacao_oficial_sapl": "Aprovado",
+      "totais_oficiais": {
+        "numero_votos_sim": 8,
+        "numero_votos_nao": 0,
+        "numero_abstencoes": 0
+      },
+      "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+      "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752",
+      "autoria": {
+        "rotulo": null,
+        "autores": [
+          {
+            "ordem_no_sapl": 1,
+            "autor_id": 17,
+            "tipo_autor": "Chefe do Poder Executivo Municipal",
+            "parlamentar_id_sapl": null,
+            "nome_no_sapl": "Weverton Willian Vizentin",
+            "cargo_no_sapl": "Prefeito",
+            "lacuna": null
+          }
+        ],
+        "autoria_conjunta": false,
+        "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/752"
+      },
+      "presidente_id_sapl": 5,
+      "voto_individual_registrado": true,
+      "rotulo": null,
+      "estados_por_vereador": [
+        {
+          "id_sapl": 1,
+          "nome_parlamentar": "Jorge Quege",
+          "estado": "fora_do_mandato",
+          "rotulo": "Fora do mandato naquela data",
+          "voto_texto_sapl": null,
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
+        },
+        {
+          "id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "voto_texto_sapl": "Não Votou",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        }
+      ],
+      "conclusao_do_painel": null
+    },
+    {
+      "id": 268,
+      "sessao_id": 273,
+      "numero_sessao": 33,
+      "data_sessao": "2026-09-22",
+      "rotulo_sessao": "33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "materia_id": 853,
+      "ordem": null,
+      "data_hora": "2026-09-22T19:18:27.975160-03:00",
+      "texto_registro_sapl": "Expediente: Ordem do Dia/Expediente: 1 - Ata Sessão nº 34 de 2026 em 33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "resultado_texto_sapl": "UNANIMIDADE",
+      "frase_resultado_sapl": "Aprovada por Unanimidade",
+      "situacao_oficial_sapl": "Aprovado",
+      "totais_oficiais": {
+        "numero_votos_sim": 9,
+        "numero_votos_nao": 0,
+        "numero_abstencoes": 0
+      },
+      "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+      "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853",
+      "autoria": {
+        "rotulo": null,
+        "autores": [
+          {
+            "ordem_no_sapl": 1,
+            "autor_id": 7,
+            "tipo_autor": "Órgão",
+            "parlamentar_id_sapl": null,
+            "nome_no_sapl": "Secretária Legislativa - SLEG",
+            "cargo_no_sapl": null,
+            "lacuna": null
+          }
+        ],
+        "autoria_conjunta": false,
+        "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/853"
+      },
+      "presidente_id_sapl": 5,
+      "voto_individual_registrado": true,
+      "rotulo": null,
+      "estados_por_vereador": [
+        {
+          "id_sapl": 1,
+          "nome_parlamentar": "Jorge Quege",
+          "estado": "fora_do_mandato",
+          "rotulo": "Fora do mandato naquela data",
+          "voto_texto_sapl": null,
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
+        },
+        {
+          "id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
         {
@@ -15783,8 +15800,8 @@
       ],
       "presenca": {
         "sessoes_ordinarias": 28,
-        "sessoes_do_ano": 33,
-        "sessoes_fora_do_mandato": 5,
+        "sessoes_do_ano": 34,
+        "sessoes_fora_do_mandato": 6,
         "sessoes_licenca": 23,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 23
@@ -17534,19 +17551,19 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 33,
-        "sessoes_do_ano": 33,
+        "sessoes_ordinarias": 34,
+        "sessoes_do_ano": 34,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 0
         },
-        "presencas": 31,
+        "presencas": 32,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 1,
         "faltas_totais": 2,
-        "percentual_faltas": 6.06,
-        "taxa_presenca": 93.94,
+        "percentual_faltas": 5.88,
+        "taxa_presenca": 94.12,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -17943,6 +17960,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -19017,28 +19046,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
-          },
-          {
             "votacao_id": 270,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -19070,6 +19077,28 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+          },
+          {
+            "votacao_id": 269,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 752,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+          },
+          {
+            "votacao_id": 268,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 853,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
           }
         ]
       },
@@ -19120,19 +19149,19 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 33,
-        "sessoes_do_ano": 33,
+        "sessoes_ordinarias": 34,
+        "sessoes_do_ano": 34,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 0
         },
-        "presencas": 32,
+        "presencas": 33,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 1,
-        "percentual_faltas": 3.03,
-        "taxa_presenca": 96.97,
+        "percentual_faltas": 2.94,
+        "taxa_presenca": 97.06,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -19529,6 +19558,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -20603,28 +20644,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
-          },
-          {
             "votacao_id": 270,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -20656,6 +20675,28 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+          },
+          {
+            "votacao_id": 269,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 752,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+          },
+          {
+            "votacao_id": 268,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 853,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
           }
         ]
       },
@@ -20688,19 +20729,19 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 33,
-        "sessoes_do_ano": 33,
+        "sessoes_ordinarias": 34,
+        "sessoes_do_ano": 34,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 0
         },
-        "presencas": 31,
+        "presencas": 32,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 1,
         "faltas_totais": 2,
-        "percentual_faltas": 6.06,
-        "taxa_presenca": 93.94,
+        "percentual_faltas": 5.88,
+        "taxa_presenca": 94.12,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -21097,6 +21138,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -22171,28 +22224,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
-          },
-          {
             "votacao_id": 270,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -22224,6 +22255,28 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+          },
+          {
+            "votacao_id": 269,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 752,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+          },
+          {
+            "votacao_id": 268,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 853,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
           }
         ]
       },
@@ -22274,14 +22327,14 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 33,
-        "sessoes_do_ano": 33,
+        "sessoes_ordinarias": 34,
+        "sessoes_do_ano": 34,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 0
         },
-        "presencas": 33,
+        "presencas": 34,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -22683,6 +22736,18 @@
             "justificativa": false,
             "era_presidente": true,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": true,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -23757,28 +23822,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
-          },
-          {
             "votacao_id": 270,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -23810,6 +23853,28 @@
             "voto_texto_sapl": "Não Votou",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+          },
+          {
+            "votacao_id": 269,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 752,
+            "estado": "presidente_que_nao_votou",
+            "rotulo": "Presidente que não votou",
+            "voto_texto_sapl": "Não Votou",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+          },
+          {
+            "votacao_id": 268,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 853,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
           }
         ]
       },
@@ -23891,14 +23956,14 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 33,
-        "sessoes_do_ano": 33,
+        "sessoes_ordinarias": 34,
+        "sessoes_do_ano": 34,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 0
         },
-        "presencas": 33,
+        "presencas": 34,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -24300,6 +24365,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -25374,28 +25451,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
-          },
-          {
             "votacao_id": 270,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -25427,6 +25482,28 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+          },
+          {
+            "votacao_id": 269,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 752,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+          },
+          {
+            "votacao_id": 268,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 853,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
           }
         ]
       },
@@ -25477,14 +25554,14 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 33,
-        "sessoes_do_ano": 33,
+        "sessoes_ordinarias": 34,
+        "sessoes_do_ano": 34,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 0
         },
-        "presencas": 33,
+        "presencas": 34,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -25886,6 +25963,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -26960,28 +27049,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
-          },
-          {
             "votacao_id": 270,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -27013,6 +27080,28 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+          },
+          {
+            "votacao_id": 269,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 752,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+          },
+          {
+            "votacao_id": 268,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 853,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
           }
         ]
       },
@@ -27045,19 +27134,19 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 33,
-        "sessoes_do_ano": 33,
+        "sessoes_ordinarias": 34,
+        "sessoes_do_ano": 34,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 0
         },
-        "presencas": 31,
+        "presencas": 32,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 2,
         "faltas_totais": 2,
-        "percentual_faltas": 6.06,
-        "taxa_presenca": 93.94,
+        "percentual_faltas": 5.88,
+        "taxa_presenca": 94.12,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -27454,6 +27543,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -28528,28 +28629,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
-          },
-          {
             "votacao_id": 270,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -28581,6 +28660,28 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+          },
+          {
+            "votacao_id": 269,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 752,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+          },
+          {
+            "votacao_id": 268,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 853,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
           }
         ]
       },
@@ -28613,19 +28714,19 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 33,
-        "sessoes_do_ano": 33,
+        "sessoes_ordinarias": 34,
+        "sessoes_do_ano": 34,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 0
         },
-        "presencas": 31,
+        "presencas": 32,
         "faltas_com_justificativa": 2,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 2,
-        "percentual_faltas": 6.06,
-        "taxa_presenca": 93.94,
+        "percentual_faltas": 5.88,
+        "taxa_presenca": 94.12,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -29022,6 +29123,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -30096,28 +30209,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
-          },
-          {
             "votacao_id": 270,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -30149,6 +30240,28 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+          },
+          {
+            "votacao_id": 269,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 752,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+          },
+          {
+            "votacao_id": 268,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 853,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
           }
         ]
       },
@@ -30205,14 +30318,14 @@
       },
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 28,
-        "sessoes_do_ano": 33,
+        "sessoes_ordinarias": 29,
+        "sessoes_do_ano": 34,
         "sessoes_fora_do_mandato": 5,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 0
         },
-        "presencas": 28,
+        "presencas": 29,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -30554,6 +30667,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -31551,28 +31676,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
-          },
-          {
             "votacao_id": 270,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -31604,6 +31707,28 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+          },
+          {
+            "votacao_id": 269,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 752,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+          },
+          {
+            "votacao_id": 268,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 853,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
           }
         ]
       },
