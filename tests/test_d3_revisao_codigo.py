@@ -52,7 +52,6 @@ class TestD3PresencaLegislatura(unittest.TestCase):
         self.assertAlmostEqual(p["taxa_presenca"], 60.0)
         self.assertAlmostEqual(p["percentual_faltas"], round(1 * 100 / 60, 2))
         self.assertEqual(p["sessoes_licenca"], 23)
-        self.assertEqual(p["sessoes_fora_do_mandato"], 5)
         vereadores = json.loads(
             (TRATADOS / "vereadores.json").read_text(encoding="utf-8")
         )
@@ -61,6 +60,13 @@ class TestD3PresencaLegislatura(unittest.TestCase):
             for item in vereadores["vereadores"]
             if item.get("slug_codigo") == "jorge-quege"
         )
+        contagens = []
+        for ano in self.leg["meta"]["anos_recorte"]:
+            contagens.extend(
+                _carregar(f"atuacao_vereadores_{int(ano)}.json").get("sessoes") or []
+            )
+        fora_esperado = sum(1 for s in contagens if (s.get("data") or "") > fim)
+        self.assertEqual(p["sessoes_fora_do_mandato"], fora_esperado)
         self.assertTrue(p["por_sessao"])
         for item in p["por_sessao"]:
             self.assertLessEqual(item["data_sessao"], fim)
