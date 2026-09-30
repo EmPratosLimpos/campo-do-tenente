@@ -14,7 +14,7 @@ Nas 33 sessões ordinárias de 2026 que estão no SAPL, os 10 vereadores com man
 
 Ano 2026. Só sessão ordinária. O piso de sessões (33) é mínimo: o arquivo traz 33, que é pelo menos esse piso.
 
-Presença e voto só entram quando a data da sessão cai dentro do mandato da pessoa, pelas datas da tabela de vereadores. Fora desse intervalo o estado é próprio: fora do mandato.
+Presença e voto nominal só entram quando a data da sessão cai dentro do mandato da pessoa, pelas datas da tabela de vereadores. Sessão fora desse intervalo não aparece na lista da pessoa: a atuação de quem saiu fica congelada na data de saída.
 
 ## Como a presença foi lida
 
@@ -24,7 +24,9 @@ Falta com justificativa: não está em nenhuma das duas listas e está na lista 
 
 Falta sem justificativa: não está na presença e não está na justificativa.
 
-Fora do mandato: a data da sessão é anterior ao início ou posterior ao fim do mandato. Essa sessão não entra na taxa de presença.
+Fora do mandato: a data da sessão é anterior ao início ou posterior ao fim do mandato. Essa sessão não aparece na lista da pessoa e não entra na taxa de presença.
+
+Taxa de presença: presenças divididas pelo total de sessões no mandato, que soma presenças, faltas com e sem justificativa e licenças.
 
 ## Como o voto foi lido
 
@@ -45,7 +47,7 @@ Votação sem nenhum voto individual: voto individual nao registrado no SAPL. Ni
 
 Presidente que não votou só vale quando o texto do SAPL é Não Votou e essa pessoa é o presidente daquela sessão em `presidencia_sessoes.json`.
 
-Afastamento que não conta como falta vem de `afastamentos_manuais.json`. Esse período não entra em falta nem na taxa de presença. Cada ocorrência guarda a fonte.
+Licença ou afastamento que não conta como falta vem de `afastamentos_manuais.json`, tem rótulo próprio e nunca é chamado de falta, mas entra no total de sessões da taxa de presença. Cada ocorrência guarda a fonte.
 
 ## Presença de cada vereador
 
@@ -55,7 +57,7 @@ Partido: PP (PARTIDO PROGRESSISTA)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/1
 
-Presente em 4 das 5 sessões em que a presença conta (taxa 80,00%).
+Presente em 4 das 28 sessões em que a presença conta (taxa 14,29%).
 
 Faltas com justificativa: 1. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 23. Sessões fora do mandato: 5.
 
@@ -166,7 +168,7 @@ Fonte: Projeto de Decreto Legislativo n 2 de 2026. Link: https://sapl.campodoten
 - Presidente que não votou: 0
 - Ausente com justificativa: 0
 - Ausente sem justificativa: 0
-- Fora do mandato naquela data: 21
+- Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
 - Licença para tratamento de saúde: 72
 
@@ -301,7 +303,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Presidente que não votou: 0
 - Ausente com justificativa: 0
 - Ausente sem justificativa: 0
-- Fora do mandato naquela data: 7
+- Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
 - Licença para tratamento de saúde: 0
 

@@ -97,7 +97,7 @@
       "dados/tratados/afastamentos_manuais.json",
       "dados/tratados/temas_materias.json"
     ],
-    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não entra em presença nem em voto. Afastamento do arquivo de afastamentos não conta como falta."
+    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não aparece na lista da pessoa e não entra em presença nem em voto. Licença tem rótulo próprio, não é falta e entra no total da taxa de presença."
   },
   "sessoes": [
     {
