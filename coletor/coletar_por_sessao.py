@@ -39,6 +39,13 @@ RECURSOS = (
     ("/api/sessao/justificativaausencia/", "justificativaausencia"),
 )
 
+CAMINHO_MESA = "/api/sessao/integrantemesa/"
+RECURSO_MESA = "integrantemesa"
+CAMINHO_REGISTRO = "/api/sessao/registrovotacao/"
+RECURSO_REGISTRO = "registrovotacao"
+CAMINHO_VOTO = "/api/sessao/votoparlamentar/"
+RECURSO_VOTO = "votoparlamentar"
+
 RAIZ = Path(__file__).resolve().parent.parent
 BRUTOS = RAIZ / "dados" / "brutos"
 
@@ -160,6 +167,260 @@ def pedir_recurso(coletor: ColetorLote, sid: int, caminho: str, recurso: str) ->
     return prefixo
 
 
+def pedir_mesa_por_sessao(coletor: ColetorLote, sid: int) -> str:
+    """Mesa da sessao. O filtro sessao_plenaria funciona aqui."""
+    return pedir_recurso(coletor, int(sid), CAMINHO_MESA, RECURSO_MESA)
+
+
+def ler_ids_ordem_da_sessao(pasta: Path, sid: int) -> list[int]:
+    """Ids dos itens da ordem do dia ja coletados para a sessao."""
+    ids: list[int] = []
+    numero = 1
+    while True:
+        caminho = pasta / f"sessao_{int(sid)}_ordemdia_p{numero}.json"
+        if not caminho.is_file():
+            break
+        dados = ler_json(caminho)
+        for item in dados.get("results") or []:
+            if isinstance(item, dict) and item.get("id") is not None:
+                ids.append(int(item["id"]))
+        paginacao = dados.get("pagination") or {}
+        total_paginas = paginacao.get("total_pages")
+        tem_proxima = bool(
+            paginacao.get("next_page") or (paginacao.get("links") or {}).get("next")
+        )
+        if total_paginas is not None and numero >= int(total_paginas):
+            break
+        if not tem_proxima:
+            break
+        numero += 1
+    vistos = set()
+    saida = []
+    for identificador in ids:
+        if identificador not in vistos:
+            vistos.add(identificador)
+            saida.append(identificador)
+    return sorted(saida)
+
+
+def _gravar_consolidado(pasta: Path, prefixo: str, linhas: list) -> None:
+    """Consolidado por sessao no formato de pagina unica para o derivador."""
+    unicas = []
+    vistos = set()
+    sem_id = []
+    for item in linhas:
+        if isinstance(item, dict) and item.get("id") is not None:
+            identificador = int(item["id"])
+            if identificador in vistos:
+                continue
+            vistos.add(identificador)
+            unicas.append(item)
+        else:
+            sem_id.append(item)
+    todas = unicas + sem_id
+    dado = {
+        "pagination": {
+            "total_entries": len(todas),
+            "total_pages": 1,
+            "page": 1,
+            "links": {"next": None, "previous": None},
+            "next_page": None,
+        },
+        "results": todas,
+    }
+    texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
+    caminho = pasta / f"{prefixo}_p1.json"
+    tmp = caminho.with_suffix(".json.tmp")
+    tmp.write_text(texto, encoding="utf-8")
+    tmp.replace(caminho)
+
+
+def _ler_paginas_por_prefixo(pasta: Path, prefixo: str) -> list[dict]:
+    """Le todas as paginas salvas de um prefixo por ordem ou por votacao."""
+    linhas: list[dict] = []
+    numero = 1
+    while True:
+        caminho = pasta / f"{prefixo}_p{numero}.json"
+        if not caminho.is_file():
+            break
+        dados = ler_json(caminho)
+        if not isinstance(dados, dict):
+            raise SystemExit(f"{prefixo}: pagina {numero} sem objeto JSON.")
+        linhas.extend(list(dados.get("results") or []))
+        paginacao = dados.get("pagination") or {}
+        total_paginas = paginacao.get("total_pages")
+        tem_proxima = bool(
+            paginacao.get("next_page") or (paginacao.get("links") or {}).get("next")
+        )
+        if total_paginas is not None and numero >= int(total_paginas):
+            break
+        if not tem_proxima:
+            break
+        numero += 1
+    return linhas
+
+
+def pedir_registros_da_sessao(
+    coletor: ColetorLote, sid: int, ids_ordem: list[int]
+) -> list[dict]:
+    """Registros de votacao pelos itens da ordem. O filtro sessao_plenaria e ignorado pelo SAPL, por isso o caminho usa ordem=<id>."""
+    sid = int(sid)
+    registros: list[dict] = []
+    for oid in sorted({int(item) for item in ids_ordem}):
+        params = {"ordem": int(oid), "page_size": PAGE_SIZE, "page": 1}
+        prefixo_ordem = f"sessao_{sid}_registrovotacao_ordem_{int(oid)}"
+        primeiro = coletor.pedir(CAMINHO_REGISTRO, dict(params), f"{prefixo_ordem}_p1.json")
+        if not isinstance(primeiro, dict):
+            raise SystemExit(f"sessao {sid} registrovotacao ordem {oid}: sem objeto JSON.")
+
+        def baixar(pagina: int, _oid: int = int(oid), _params: dict = params):
+            copia = dict(_params)
+            copia["page"] = pagina
+            return coletor.pedir(
+                CAMINHO_REGISTRO,
+                copia,
+                f"sessao_{sid}_registrovotacao_ordem_{_oid}_p{pagina}.json",
+            )
+
+        continuar_apos_primeira(primeiro, prefixo_ordem, baixar)
+        registros.extend(_ler_paginas_por_prefixo(coletor.pasta, prefixo_ordem))
+    _gravar_consolidado(coletor.pasta, f"sessao_{sid}_{RECURSO_REGISTRO}", registros)
+    return registros
+
+
+def pedir_votos_da_sessao(
+    coletor: ColetorLote, sid: int, ids_registro: list[int]
+) -> list[dict]:
+    """Votos individuais por registro. O caminho usa votacao=<id>."""
+    sid = int(sid)
+    votos: list[dict] = []
+    for vid in sorted({int(item) for item in ids_registro}):
+        params = {"votacao": int(vid), "page_size": PAGE_SIZE, "page": 1}
+        prefixo_voto = f"sessao_{sid}_votoparlamentar_votacao_{int(vid)}"
+        primeiro = coletor.pedir(CAMINHO_VOTO, dict(params), f"{prefixo_voto}_p1.json")
+        if not isinstance(primeiro, dict):
+            raise SystemExit(f"sessao {sid} votoparlamentar votacao {vid}: sem objeto JSON.")
+
+        def baixar(pagina: int, _vid: int = int(vid), _params: dict = params):
+            copia = dict(_params)
+            copia["page"] = pagina
+            return coletor.pedir(
+                CAMINHO_VOTO,
+                copia,
+                f"sessao_{sid}_votoparlamentar_votacao_{_vid}_p{pagina}.json",
+            )
+
+        continuar_apos_primeira(primeiro, prefixo_voto, baixar)
+        votos.extend(_ler_paginas_por_prefixo(coletor.pasta, prefixo_voto))
+    _gravar_consolidado(coletor.pasta, f"sessao_{sid}_{RECURSO_VOTO}", votos)
+    return votos
+
+
+def gravar_aviso_sessao_recusada(pasta: Path, sid: int, motivo: str, detalhe: dict) -> Path:
+    """Aviso estruturado quando a sessao e recusada por vazio suspeito.
+
+    O arquivo nao entra na derivacao. Serve para o log e para a issue.
+    Nada e publicado a partir de uma sessao recusada.
+    """
+    caminho = pasta / f"sessao_{int(sid)}_recusada.json"
+    dado = {
+        "sessao_id": int(sid),
+        "motivo": motivo,
+        "detalhe": detalhe,
+    }
+    texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
+    tmp = caminho.with_suffix(".json.tmp")
+    tmp.write_text(texto, encoding="utf-8")
+    tmp.replace(caminho)
+    return caminho
+
+
+def recusar_sessao_vazia(
+    pasta: Path,
+    sid: int,
+    motivo: str,
+    detalhe: dict,
+    restaurar: dict[str, bytes | None] | None = None,
+) -> None:
+    """Recusa a sessao com erro explicito. Nada e publicado.
+
+    O argumento restaurar devolve os consolidados ao estado anterior
+    a coleta, para uma revisao de lancamento atrasado nao apagar dado
+    bom quando o SAPL responde vazio. Chave e o nome do arquivo,
+    valor e o conteudo previo ou None quando nao existia.
+    """
+    for nome, conteudo in (restaurar or {}).items():
+        caminho = pasta / nome
+        if conteudo is None:
+            if caminho.is_file():
+                caminho.unlink()
+        else:
+            caminho.write_bytes(conteudo)
+    aviso = gravar_aviso_sessao_recusada(pasta, sid, motivo, detalhe)
+    print(f"sessao {int(sid)} recusada: {motivo} Aviso em {aviso.name}. Nada foi publicado.")
+    raise SystemExit(
+        f"sessao {int(sid)} recusada: {motivo} "
+        f"Aviso em dados/brutos/{pasta.name}/{aviso.name}. Nada foi publicado."
+    )
+
+
+def coletar_sessao_completa(coletor: ColetorLote, sid: int) -> dict:
+    """Coleta por sessao dos 7 pacotes grandes: presencas, ordem, justificativa, mesa, registros e votos.
+
+    Recusa a sessao quando a ordem tem itens e vieram zero registros,
+    ou quando ha registros e zero votos. Vazio nesse ponto indica
+    filtro mudado no SAPL ou coleta quebrada, por isso nada e publicado.
+    A recusa restaura os consolidados previos e grava um aviso
+    sessao_<id>_recusada.json para o log e para a issue.
+    """
+    sid = int(sid)
+    pasta = coletor.pasta
+    aviso_antigo = pasta / f"sessao_{sid}_recusada.json"
+    if aviso_antigo.is_file():
+        aviso_antigo.unlink()
+    previos = {}
+    for recurso in (RECURSO_REGISTRO, RECURSO_VOTO):
+        caminho = pasta / f"sessao_{sid}_{recurso}_p1.json"
+        previos[caminho.name] = caminho.read_bytes() if caminho.is_file() else None
+    for caminho, recurso in RECURSOS:
+        pedir_recurso(coletor, sid, caminho, recurso)
+    pedir_mesa_por_sessao(coletor, sid)
+    ids_ordem = ler_ids_ordem_da_sessao(coletor.pasta, sid)
+    registros = pedir_registros_da_sessao(coletor, sid, ids_ordem)
+    if ids_ordem and not registros:
+        recusar_sessao_vazia(
+            coletor.pasta,
+            sid,
+            (
+                f"ordem do dia com {len(ids_ordem)} itens e zero registros de votacao. "
+                "O filtro ordem pode ter mudado no SAPL."
+            ),
+            {"n_ordem": len(ids_ordem), "n_registros": 0},
+            restaurar=previos,
+        )
+    ids_registro = [
+        int(item["id"]) for item in registros if isinstance(item, dict) and item.get("id") is not None
+    ]
+    votos = pedir_votos_da_sessao(coletor, sid, ids_registro)
+    if ids_registro and not votos:
+        recusar_sessao_vazia(
+            coletor.pasta,
+            sid,
+            (
+                f"{len(ids_registro)} registros de votacao e zero votos parlamentares. "
+                "O filtro votacao pode ter mudado no SAPL."
+            ),
+            {"n_registros": len(ids_registro), "n_votos": 0},
+            restaurar=previos,
+        )
+    return {
+        "sessao_id": sid,
+        "n_ordem": len(ids_ordem),
+        "n_registros": len(registros),
+        "n_votos": len(votos),
+    }
+
+
 def conferir_prefixo(pasta: Path, prefixo: str, sid: int, recurso: str) -> dict:
     linhas = []
     total = None
@@ -216,24 +477,37 @@ def conferir_prefixo(pasta: Path, prefixo: str, sid: int, recurso: str) -> dict:
         and paginas_lidas < int(total_paginas_anunciado)
     ):
         paginacao_pendente = True
+    links_proximo = bool(
+        ultima_paginacao.get("next_page")
+        or (ultima_paginacao.get("links") or {}).get("next")
+    )
+    prova_fim = (
+        not links_proximo
+        and total_paginas_anunciado is not None
+        and paginas_lidas >= int(total_paginas_anunciado)
+    )
+    causas = []
+    if total is None:
+        causas.append("sem total_entries")
+        if not prova_fim:
+            causas.append("sem prova de fim de paginacao")
+    if not sem_repeticao:
+        causas.append("id repetido")
+    if paginacao_pendente:
+        causas.append("paginacao pendente")
+    if total is not None and total != distintos:
+        causas.append("total_entries distinto de ids distintos")
     if total is not None:
         bate = total == distintos and sem_repeticao
         motivo = None
-    elif sem_repeticao and not paginacao_pendente:
+    elif prova_fim and sem_repeticao:
         bate = True
-        motivo = "sem total_entries, sem repeticao"
+        motivo = None
     else:
         bate = False
         motivo = None
     if not bate:
-        if total is None and not sem_repeticao:
-            motivo = "id repetido"
-        elif total is None:
-            motivo = "sem total_entries" if motivo is None else motivo
-        elif not sem_repeticao:
-            motivo = "id repetido"
-        else:
-            motivo = "total_entries diferente dos ids distintos"
+        motivo = "; ".join(causas) if causas else "sem total_entries"
     return {
         "sessao_id": sid,
         "recurso": recurso,

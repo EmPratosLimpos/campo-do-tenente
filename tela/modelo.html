@@ -192,6 +192,55 @@
     z-index: 20;
     background: var(--fundo);
     padding: 12px 16px 10px;
+    overflow-anchor: none;
+  }
+
+  @media (max-width: 899.98px) {
+    .topo-fixo.compacto {
+      padding: 8px 60px 8px 16px;
+    }
+
+    .topo-fixo.compacto .topo-util,
+    .topo-fixo.compacto .cabecalho-bloco,
+    .topo-fixo.compacto .sub-camara,
+    .topo-fixo.compacto .titulo-vereadores,
+    .topo-fixo.compacto .nav-vereador {
+      display: none;
+    }
+
+    .topo-fixo.compacto .sub-vereadores {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0;
+    }
+
+    .topo-fixo.compacto #seletor-vereador-wrap {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .topo-fixo.compacto .seletor-vereador {
+      position: relative;
+    }
+
+    .topo-fixo.compacto .sessao-titulo-linha {
+      order: 2;
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+
+    .topo-fixo.compacto .seletor-vereador label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
   }
 
   .topo-util {
@@ -4962,6 +5011,23 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var subCamara = document.getElementById("sub-camara");
     var subVereadores = document.getElementById("sub-vereadores");
 
+    var topoFixoEl = document.querySelector(".topo-fixo");
+    var TOPO_COMPACTO_ENTRA = 64;
+    var TOPO_COMPACTO_SAI = 8;
+    function atualizarTopoCompacto() {
+      if (!topoFixoEl) return;
+      var rolagem = window.scrollY || document.documentElement.scrollTop || 0;
+      var permitido = window.innerWidth < 900 && estadoUI.secao === "vereadores";
+      var compacto = topoFixoEl.classList.contains("compacto");
+      if (!permitido) compacto = false;
+      else if (compacto) compacto = rolagem > TOPO_COMPACTO_SAI;
+      else compacto = rolagem > TOPO_COMPACTO_ENTRA;
+      topoFixoEl.classList.toggle("compacto", compacto);
+    }
+    window.addEventListener("scroll", atualizarTopoCompacto, { passive: true });
+    window.addEventListener("resize", atualizarTopoCompacto);
+    atualizarTopoCompacto();
+
     function trocarSecao(secao) {
       estadoUI.secao = secao;
       navBtns.forEach(function (btn) {
@@ -4974,6 +5040,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       subCamara.classList.toggle("ativo", secao === "camara");
       subVereadores.classList.toggle("ativo", secao === "vereadores");
       atualizarRotuloBotaoShare();
+      atualizarTopoCompacto();
     }
 
     navBtns.forEach(function (btn) {

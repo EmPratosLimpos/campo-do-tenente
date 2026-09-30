@@ -2,14 +2,14 @@ name: Atualizacao semanal dos dados
 
 on:
   schedule:
-    # Segunda-feira as 03:00 no horario de Brasilia (UTC-3, sem horario de verao).
+    # Quarta-feira as 03:00 no horario de Brasilia (UTC-3, sem horario de verao).
     # 03:00 em Brasilia equivale a 06:00 UTC.
-    - cron: '0 6 * * 1'
+    - cron: '0 6 * * 3'
   workflow_dispatch:
 
 permissions:
   contents: write
-  pull-requests: write
+  issues: write
 
 concurrency:
   group: atualizacao-semanal
@@ -20,10 +20,11 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
-      - name: Checkout de desenvolvimento
+      - name: Checkout da main
         uses: actions/checkout@v7
         with:
-          ref: desenvolvimento
+          ref: main
+          fetch-depth: 0
 
       - name: Configurar Python
         uses: actions/setup-python@v7
@@ -34,54 +35,122 @@ jobs:
         run: pip install -r coletor/requirements.txt
 
       - name: Atualizar a semana
-        run: python scripts/atualizar_semana.py
+        id: atualizar
+        run: |
+          set -o pipefail
+          python scripts/atualizar_semana.py 2>&1 | tee "$RUNNER_TEMP/atualizacao.log"
 
       - name: Ver se houve dado novo
         id: mudanca
         run: |
-          if [[ -n $(git status --porcelain -- dados config_cidade.json CHANGELOG.md) ]]; then
+          git status --porcelain > "$RUNNER_TEMP/mudanca.txt"
+          cat "$RUNNER_TEMP/mudanca.txt"
+          if [[ -s "$RUNNER_TEMP/mudanca.txt" ]]; then
             echo "houve=true" >> "$GITHUB_OUTPUT"
           else
             echo "houve=false" >> "$GITHUB_OUTPUT"
-            echo "Nada mudou. Nenhum Pull Request."
+            echo "Nada mudou. Sem commit."
           fi
 
-      - name: Abrir Pull Request para desenvolvimento
+      - name: Conferir que so dados mudaram
+        if: steps.mudanca.outputs.houve == 'true'
+        run: |
+          git diff --name-only > "$RUNNER_TEMP/alterados.txt"
+          git ls-files --others --exclude-standard >> "$RUNNER_TEMP/alterados.txt"
+          cat "$RUNNER_TEMP/alterados.txt"
+          if ! python scripts/so_dados_mudaram.py "$RUNNER_TEMP/alterados.txt" > "$RUNNER_TEMP/saida_regra.txt" 2>&1; then
+            {
+              echo "alteracao de codigo detectada"
+              cat "$RUNNER_TEMP/saida_regra.txt"
+            } > "$RUNNER_TEMP/motivo_falha.txt"
+            cat "$RUNNER_TEMP/motivo_falha.txt"
+            exit 1
+          fi
+
+      - name: Sanidade final
+        if: steps.mudanca.outputs.houve == 'true'
+        run: |
+          set -o pipefail
+          python coletor/testes_sanidade.py 2>&1 | tee "$RUNNER_TEMP/sanidade.log"
+          python -m unittest discover -s tests 2>&1 | tee "$RUNNER_TEMP/testes.log"
+          python scripts/verificar_regras.py 2>&1 | tee "$RUNNER_TEMP/regras.log"
+
+      - name: Commit na main so com dados
         if: steps.mudanca.outputs.houve == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name "EmPratosLimpos"
-          git config user.email "334360115+EmPratosLimpos@users.noreply.github.com"
-
-          data_br=$(TZ=America/Sao_Paulo date +%Y-%m-%d)
-          branch="atualizacao-dados/${data_br}"
-          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
-            branch="atualizacao-dados/${data_br}-$(TZ=America/Sao_Paulo date +%H%M)"
-          fi
-
-          git checkout -b "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- dados config_cidade.json CHANGELOG.md
-          git commit -m "Atualizacao semanal: dados novos do SAPL"
-          git push origin "$branch"
+          dados_txt=$(python - << 'PY'
+          import json
+          from pathlib import Path
+          melhor = None
+          for caminho in Path("dados/brutos").glob("contagem_votacoes_ordinarias_*.json"):
+              try:
+                  dados = json.loads(caminho.read_text(encoding="utf-8"))
+              except (OSError, ValueError):
+                  continue
+              for sessao in dados.get("sessoes") or []:
+                  numero = sessao.get("numero")
+                  data = sessao.get("data") or ""
+                  if numero is None or not data:
+                      continue
+                  chave = (str(data), int(numero))
+                  if melhor is None or chave > melhor[0]:
+                      melhor = (chave, int(numero), str(data))
+          if melhor is None:
+              raise SystemExit("Sem sessao ordinaria no consolidado.")
+          _, numero, data = melhor
+          ano, mes, dia = data[:10].split("-")
+          print(f"{numero}|{dia}/{mes}/{ano}")
+          PY
+          )
+          numero=$(echo "$dados_txt" | cut -d'|' -f1)
+          data_br=$(echo "$dados_txt" | cut -d'|' -f2)
+          git commit -m "Atualiza dados ate a sessao ordinaria ${numero} de ${data_br}"
+          git push origin main
 
-          cat > corpo_pr.md << 'EOF'
-          Esta atualização leu o SAPL e gravou o que mudou nos dados.
-
-          O detalhe está no topo do CHANGELOG.md: o que mudou nos números, quantos pedidos foram feitos e o endereço consultado.
-
-          Nada disso entra no painel sozinho. Este pedido fica aberto para o mantenedor revisar e aprovar. A publicação não acontece nesta etapa.
-          EOF
-
-          gh pr create \
-            --base desenvolvimento \
-            --head "$branch" \
-            --title "Atualização semanal dos dados do SAPL" \
-            --body-file corpo_pr.md
-
-      - name: Registrar falha
-        if: failure()
+      - name: Levar para desenvolvimento sem force
+        if: steps.mudanca.outputs.houve == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "::error::A atualizacao semanal falhou. Nenhum Pull Request foi aberto e nada foi publicado."
-          echo "Job: ${{ github.job }}"
-          echo "Run: ${{ github.run_id }} (tentativa ${{ github.run_attempt }})"
+          git fetch origin desenvolvimento:refs/remotes/origin/desenvolvimento || true
+          git checkout desenvolvimento
+          if ! git merge --no-ff origin/main -m "Atualiza desenvolvimento com dados da main"; then
+            data_br=$(TZ=America/Sao_Paulo date +%d/%m/%Y)
+            git merge --abort || true
+            gh issue create \
+              --title "Atualizacao de dados falhou em ${data_br}" \
+              --body "Conflito ao levar a main para desenvolvimento. Nenhum force foi usado."
+            touch "$RUNNER_TEMP/issue_ja_aberta"
+            exit 1
+          fi
+          git push origin desenvolvimento
+
+      - name: Registrar falha com issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ -f "$RUNNER_TEMP/issue_ja_aberta" ]]; then
+            echo "Issue ja aberta em passo anterior. Sem duplicar."
+            exit 0
+          fi
+          data_br=$(TZ=America/Sao_Paulo date +%d/%m/%Y)
+          motivo=""
+          if [[ -f "$RUNNER_TEMP/motivo_falha.txt" ]]; then
+            motivo=$(cat "$RUNNER_TEMP/motivo_falha.txt")
+          fi
+          trecho=$(tail -n 80 "$RUNNER_TEMP/atualizacao.log" "$RUNNER_TEMP/sanidade.log" "$RUNNER_TEMP/testes.log" "$RUNNER_TEMP/regras.log" 2>/dev/null | head -n 120 || echo "Sem trecho de log.")
+          corpo="A atualizacao semanal falhou e nada foi publicado."
+          if [[ -n "$motivo" ]]; then
+            corpo="${corpo} Motivo: ${motivo}"
+          fi
+          corpo="${corpo} Trecho do erro: ${trecho}"
+          gh issue create \
+            --title "Atualizacao de dados falhou em ${data_br}" \
+            --body "$corpo"
+          echo "::error::A atualizacao semanal falhou. Nada foi publicado."
