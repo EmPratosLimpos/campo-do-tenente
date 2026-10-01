@@ -4444,6 +4444,92 @@
       .replace(/[\u0300-\u036f]/g, "");
   }
 
+  var LIMITE_MAIUSCULAS_EMENTA = 0.8;
+  var LETRA_EMENTA = /[A-Za-zÀ-ÖØ-öø-ÿ]/;
+
+  function ementaTemMaisDe80PorCentoDeMaiusculas(texto) {
+    var letras = 0;
+    var maiusculas = 0;
+    for (var i = 0; i < texto.length; i++) {
+      var c = texto.charAt(i);
+      if (!LETRA_EMENTA.test(c)) continue;
+      letras++;
+      if (c === c.toUpperCase() && c !== c.toLowerCase()) maiusculas++;
+    }
+    if (!letras) return false;
+    return maiusculas / letras > LIMITE_MAIUSCULAS_EMENTA;
+  }
+
+  function ementaEscaparRegex(texto) {
+    return String(texto).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  var CACHE_TERMOS_EMENTA = null;
+
+  function ementaListaTermosPreservados() {
+    if (CACHE_TERMOS_EMENTA) return CACHE_TERMOS_EMENTA;
+    var config = typeof CONFIG_CIDADE !== "undefined" ? CONFIG_CIDADE : null;
+    var bloco = (config && config.ementa_termos_preservados) || {};
+    var lista = (Array.isArray(bloco.lista) ? bloco.lista.slice() : []).map(function (termo) {
+      return String(termo == null ? "" : termo).trim().replace(/\s+/g, " ");
+    }).filter(function (grafia) {
+      return !!grafia;
+    });
+    lista.sort(function (a, b) {
+      return b.length - a.length;
+    });
+    CACHE_TERMOS_EMENTA = lista;
+    return lista;
+  }
+
+  function ementaAplicarTermosPreservados(texto) {
+    var saida = String(texto == null ? "" : texto);
+    if (!saida) return "";
+    var lista = ementaListaTermosPreservados();
+    if (!lista.length) return saida;
+    var mapa = {};
+    lista.forEach(function (grafia) {
+      mapa[grafia.toLowerCase()] = grafia;
+    });
+    var alternativas = lista.map(ementaEscaparRegex).join("|");
+    var padrao = new RegExp(
+      "(^|[^0-9A-Za-zÀ-ÖØ-öø-ÿ])(" + alternativas + ")(?![0-9A-Za-zÀ-ÖØ-öø-ÿ])",
+      "gi"
+    );
+    return saida.replace(padrao, function (todo, antes, achado) {
+      return antes + (mapa[String(achado).toLowerCase()] || achado);
+    });
+  }
+
+  function ementaPrimeiraLetraDeFrase(texto) {
+    var saida = String(texto == null ? "" : texto);
+    var i = 0;
+    while (i < saida.length && !LETRA_EMENTA.test(saida.charAt(i))) i++;
+    if (i < saida.length) {
+      saida = saida.slice(0, i) + saida.charAt(i).toUpperCase() + saida.slice(i + 1);
+    }
+    return saida.replace(/(\.\s+)([a-zà-öø-ÿ])/g, function (todo, antes, letra) {
+      return antes + letra.toUpperCase();
+    });
+  }
+
+  function ementaExibicao(texto) {
+    var bruto = String(texto == null ? "" : texto);
+    var limpo = bruto.replace(/\s+/g, " ").trim();
+    if (!limpo) return "";
+    if (!ementaTemMaisDe80PorCentoDeMaiusculas(limpo)) return limpo;
+    var saida = limpo.toLowerCase();
+    saida = ementaPrimeiraLetraDeFrase(saida);
+    saida = ementaAplicarTermosPreservados(saida);
+    return saida;
+  }
+
+  function ementaBusca(texto) {
+    var bruto = String(texto == null ? "" : texto).trim();
+    if (!bruto) return "";
+    return bruto + " " + ementaExibicao(bruto);
+  }
+
   function urlSegura(url) {
     if (url == null) return "";
     var s = String(url).trim();
@@ -4859,7 +4945,7 @@
         '<div class="cab"><span class="numero">' + esc(siglaItem) + " " + esc(item.numero) + "/" + esc(item.ano) + "</span></div>" +
         '<div class="materia-tags">' +
         '<button type="button" class="selo tag-explicavel ' + seloClass + '" data-tag="situacao" data-valor="' + esc(sitRotulo) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(sitRotulo) + "</button>" + coaut + "</div>" +
-        '<p class="ementa">' + esc(item.ementa) + "</p>" +
+        '<p class="ementa">' + esc(ementaExibicao(item.ementa)) + "</p>" +
         '<p class="meta">' + (item.tema ? 'Tema: ' + esc(item.tema) + '. ' : '') +
         linkExt(item.link_sapl, "Ver no SAPL") + "</p></article>";
     }).join("");
@@ -4923,7 +5009,7 @@
         var ementa = ementaVotacao(n);
         var tagsBusca = n.materia_id ? tagsMateria(n.materia_id) : null;
         var tipoNumeroBusca = tipoNumeroDoVoto(n);
-        var texto = (ementa || "") + " " + (n.materia_id || "") + " " + n.data_sessao +
+        var texto = ementaBusca(ementa || "") + " " + (n.materia_id || "") + " " + n.data_sessao +
           " " + (tipoNumeroBusca || "");
         if (tagsBusca) texto += " " + tagsBusca.tag_tipo + " " + tagsBusca.tag_tema;
         if (normalizarTexto(texto).indexOf(busca) === -1) return false;
@@ -4937,12 +5023,16 @@
     var fatia = filtrados.slice(inicio, inicio + POR_PAGINA);
 
     var itens = fatia.map(function (n) {
-      var ementa = ementaVotacao(n);
+      var ementaBruta = ementaVotacao(n);
+      var ementa = ementaBruta ? ementaExibicao(ementaBruta) : "";
       var textoEmenta = ementa
         ? esc(ementa.length > 180 ? ementa.slice(0, 177) + "..." : ementa)
         : (n.materia_id
           ? "Matéria " + esc(n.materia_id) + " (" + linkExt(linkMateria(n.materia_id), "ementa no SAPL") + ")"
           : "Matéria não identificada no registro");
+      var tituloEmenta = ementa
+        ? '<span class="ementa-voto" title="' + esc(ementa) + '">' + textoEmenta + "</span>"
+        : '<span class="ementa-voto">' + textoEmenta + "</span>";
       var linkSess = estado.linksSessao[n.sessao_id] ||
         (SAPL_ORIGEM + "/sessao/" + n.sessao_id);
       var turnoHtml = (n.turno === "1o turno" || n.turno === "2o turno")
@@ -4956,7 +5046,7 @@
         ", sessão " + esc(n.sessao_id) + "</div>" +
         (tipoNumero ? '<div class="materia-titulo">' + esc(tipoNumero) + "</div>" : "") +
         tagsHtml +
-        '<span class="ementa-voto">' + textoEmenta + "</span> " +
+        tituloEmenta + " " +
         linkExt(linkSess, "Sessão no SAPL") + "</li>";
     }).join("");
 
@@ -5612,7 +5702,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       : "Resultado oficial: " + resultadoOficial(m) + ".";
     var linhas = ["Em Pratos Limpos", "", m.tipo];
     if (tema) linhas.push("Tema: " + tema);
-    linhas.push("", m.ementa, "", resultadoLinha);
+    linhas.push("", ementaExibicao(m.ementa), "", resultadoLinha);
     if (placar) linhas.push("Placar: " + placar + ".");
     linhas.push("", "Fonte oficial no SAPL: " + linkSap, "Consulte no portal: " + PORTAL_OFICIAL);
     return juntarLinhasShare(linhas);
@@ -5628,7 +5718,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       : "Resultado oficial: " + resultadoOficial(m) + ".";
     var linhas = ["O que a Câmara de " + nomeCidade() + " votou", "", m.tipo];
     if (tema) linhas.push("Tema: " + tema);
-    linhas.push("", m.ementa, "", resultadoLinha);
+    linhas.push("", ementaExibicao(m.ementa), "", resultadoLinha);
     if (placar) linhas.push("Placar: " + placar + ".");
     linhas.push("", "Fonte oficial: " + rotuloSaplCamara() + ".",
       "Consulte a matéria: " + linkSap,
@@ -5638,7 +5728,8 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   }
 
   function textoShareMateriaStories(m, periodo) {
-    var ementa = m.ementa.length > 180 ? m.ementa.slice(0, 177) + "..." : m.ementa;
+    var ementaCheia = ementaExibicao(m.ementa);
+    var ementa = ementaCheia.length > 180 ? ementaCheia.slice(0, 177) + "..." : ementaCheia;
     var placar = extrairPlacar(m.placar);
     var tema = temaParaShare(m.id);
     var linhas = [m.tipo, "", ementa, "", resultadoOficial(m)];
@@ -5660,7 +5751,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (data) votou += " em " + data;
     linhas.push(votou + ".");
     if (tema) linhas.push("Tema: " + tema + ".");
-    linhas.push(m.ementa, "");
+    linhas.push(ementaExibicao(m.ementa), "");
     var resultadoLinha = "Resultado oficial: " + resultadoOficial(m) + ".";
     if (placar) resultadoLinha += " Placar: " + placar + ".";
     linhas.push(resultadoLinha, "", "Fonte oficial: " + rotuloSaplCamara() + ".", linkSap,
@@ -5884,7 +5975,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       '" aria-haspopup="dialog" aria-controls="resumo-sheet" aria-label="Abrir resumo de ' + esc(m.tipo) + '">' +
       '<div class="materia-info"><span class="materia-titulo">' + esc(m.tipo) +
       '</span>' + tagsHtml +
-      '<span class="materia-ementa">' + esc(m.ementa) + "</span>" +
+      '<span class="materia-ementa">' + esc(ementaExibicao(m.ementa)) + "</span>" +
       (textoDatasVotacao(m)
         ? '<span class="materia-datas">' + esc(textoDatasVotacao(m)) + "</span>"
         : "") +
@@ -5901,7 +5992,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       if (filtro && m.resultado !== filtro) return false;
       if (busca) {
         var tags = tagsMateria(m.id);
-        var texto = m.tipo + " " + m.ementa + " " + m.id;
+        var texto = m.tipo + " " + ementaBusca(m.ementa) + " " + m.id;
         if (tags) texto += " " + String(tags.tag_tipo) + " " + String(tags.tag_tema);
         if (normalizarTexto(texto).indexOf(busca) === -1) return false;
       }
@@ -6123,7 +6214,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     }
     html += '<div class="resumo-campo">' +
       '<p class="resumo-campo-rotulo">Ementa (resumo oficial)</p>' +
-      '<p class="resumo-campo-valor">' + esc(m.ementa) + "</p></div>" +
+      '<p class="resumo-campo-valor">' + esc(ementaExibicao(m.ementa)) + "</p></div>" +
       '<div class="resumo-campo">' +
       '<p class="resumo-campo-rotulo">Resultado da votação</p>' +
       '<p class="resumo-campo-valor">' + esc(resultado) + "</p></div>";
