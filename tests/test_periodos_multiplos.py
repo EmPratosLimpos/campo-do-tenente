@@ -188,7 +188,7 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
                 "Nenhum projeto de lei do legislativo (PLL) foi votado na última sessão",
                 texto,
             )
-            page.locator('#bloco-votado-sessao button[data-materia-id="811"]').click()
+            page.locator('#bloco-votado-sessao [data-materia-id="811"]').click()
             page.wait_for_timeout(600)
             resumo = page.locator("#resumo-sheet-corpo").inner_text()
             self.assertIn("Turno", resumo)

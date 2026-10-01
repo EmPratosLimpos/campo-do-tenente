@@ -76,7 +76,7 @@ class TestVotosVereadores(unittest.TestCase):
             page.wait_for_timeout(1000)
 
             abrir_se_fechado("tit-pll")
-            page.click("button[data-filtro-pll='aprovado']")
+            page.click("button.contagem-item[data-pl-filtro='aprovado']")
             page.wait_for_timeout(500)
             texto_rafael_aprovados = page.locator(".lista-pll").inner_text()
             self.assertIn("Tema: Administração e finanças.", texto_rafael_aprovados)
@@ -95,7 +95,7 @@ class TestVotosVereadores(unittest.TestCase):
                 texto_rafael,
             )
 
-            page.select_option("#filtro-voto", label="Presidente que não votou")
+            page.click("button.voto-card[data-voto-card='presidente_que_nao_votou']")
             page.wait_for_timeout(1000)
             abrir_se_fechado("tit-votos")
             texto_rafael_filtro = page.inner_text("body")
@@ -143,7 +143,7 @@ class TestVotosVereadores(unittest.TestCase):
             )
             self.assertNotIn("Fora do mandato naquela data", texto_jorge)
 
-            page.select_option("#filtro-voto", label="Ausente com justificativa")
+            page.click("button.voto-card[data-voto-card='ausente_com_justificativa']")
             page.wait_for_timeout(1000)
             abrir_se_fechado("tit-votos")
             texto_jorge_filtro = page.inner_text("body")

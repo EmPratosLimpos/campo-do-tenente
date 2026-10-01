@@ -2219,6 +2219,79 @@
     margin: 4px 0 6px;
   }
 
+  button.tag-explicavel {
+    font: inherit;
+    cursor: pointer;
+  }
+  button.tag-explicavel:focus-visible {
+    outline: 2px solid var(--marca);
+    outline-offset: 2px;
+  }
+  .tag-caixa {
+    position: fixed;
+    z-index: 9999;
+    max-width: min(280px, calc(100vw - 24px));
+    background: var(--superficie);
+    color: var(--texto);
+    border: 1px solid var(--linha);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    padding: 10px 12px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .tag-caixa strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  .tag-caixa a {
+    color: var(--link);
+  }
+  button.voto-selo,
+  button.badge-status,
+  button.selo {
+    font: inherit;
+    border: none;
+    cursor: pointer;
+  }
+  button.voto-selo:focus-visible,
+  button.badge-status:focus-visible,
+  button.selo:focus-visible {
+    outline: 2px solid var(--marca);
+    outline-offset: 2px;
+  }
+  button.voto-card {
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+  }
+  button.voto-card:focus-visible {
+    outline: 2px solid var(--marca);
+    outline-offset: 2px;
+  }
+  button.voto-card.ativo {
+    border: 2px solid var(--marca);
+    background: var(--marca-fundo);
+  }
+  button.contagem-item {
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+  }
+  button.contagem-item:focus-visible {
+    outline: 2px solid var(--marca);
+    outline-offset: 2px;
+  }
+  button.contagem-item.ativo {
+    border: 2px solid var(--marca);
+    background: var(--marca-fundo);
+  }
+
   .compartilhar-materia {
     min-width: 44px;
     min-height: 44px;
@@ -3211,6 +3284,172 @@
     return "projetos de lei";
   }
 
+  var TAG_CAIXA_ID = "tag-caixa-explicativa";
+
+  function explicacoesTags() {
+    return (CONFIG_CIDADE && CONFIG_CIDADE.explicacoes_tags) || {};
+  }
+
+  function tituloExplicacaoTag(tipo, valor) {
+    if (tipo === "tipo") return valor || "Tipo de matéria";
+    if (tipo === "categoria") return "Categoria do projeto";
+    if (tipo === "turno") return valor || "Turno de votação";
+    if (tipo === "resultado") return valor || "Resultado da votação";
+    if (tipo === "placar") return "Placar da votação";
+    if (tipo === "cassado") return "Cassado";
+    if (tipo === "situacao") return valor || "Situação da matéria";
+    if (tipo === "coautoria") return "Coautoria";
+    if (tipo === "voto") return valor || "Voto";
+    return valor || "Tag";
+  }
+
+  function textoExplicacaoTag(tipo, valor, extra) {
+    var ex = explicacoesTags();
+    if (tipo === "tipo") {
+      var desc = descricaoTipoSigla(valor);
+      var base = valor || "";
+      if (desc) base += ": " + desc;
+      if (valor === "PLEG") base += " (proposta de vereador)";
+      var fixo = ex.tipo_materia || "";
+      return (base + ". " + fixo).trim();
+    }
+    if (tipo === "categoria") {
+      var total = numeroCategorias();
+      var fixoCat = ex.categoria || "";
+      return "Categoria: " + (valor || "") + ". São " + total + " categorias do projeto. " + fixoCat;
+    }
+    if (tipo === "turno") {
+      if (valor === "1o turno") return ex.turno_1o || valor;
+      if (valor === "2o turno") return ex.turno_2o || valor;
+      return ex.turno_unico || valor;
+    }
+    if (tipo === "resultado") {
+      var v = String(valor || "");
+      if (/unanim/i.test(v)) return ex.resultado_unanimidade || v;
+      if (/maioria/i.test(v)) return ex.resultado_maioria || v;
+      if (/rejeit/i.test(v)) return ex.resultado_rejeitado || v;
+      return ((ex.resultado_sem_deliberacao || "") + " Nome oficial no SAPL: " + v + ".").trim();
+    }
+    if (tipo === "placar") return ex.placar || String(valor || "");
+    if (tipo === "cassado") {
+      var dataFim = (extra && extra.dataFim) || "";
+      var texto = ex.cassado || "";
+      if (dataFim) texto += " Mandato encerrado em " + formatarData(dataFim) + ".";
+      return texto.trim();
+    }
+    if (tipo === "situacao") {
+      var s = String(valor || "");
+      if (/aprov/i.test(s)) return ex.situacao_aprovado || s;
+      if (/rejeit/i.test(s)) return ex.situacao_rejeitado || s;
+      return ex.situacao_tramitacao || s;
+    }
+    if (tipo === "coautoria") return ex.coautoria || "Coautoria";
+    if (tipo === "voto") {
+      var mapa = {
+        sim: ex.voto_sim,
+        nao: ex.voto_nao,
+        abstencao: ex.voto_abstencao,
+        nao_votou: ex.voto_nao_votou,
+        presidente_que_nao_votou: ex.voto_presidente,
+        ausente_com_justificativa: ex.voto_ausente_justificativa,
+        ausente_sem_justificativa: ex.voto_ausente_sem_justificativa,
+        presente_sem_voto_individual_registrado: ex.voto_presente_sem_registro
+      };
+      return mapa[valor] || String((extra && extra.rotulo) || valor || "");
+    }
+    return String(valor || "");
+  }
+
+  function fecharCaixaTag(devolverFoco) {
+    var caixa = document.getElementById(TAG_CAIXA_ID);
+    var abridor = caixa && caixa.getAttribute("data-abridor");
+    if (caixa && caixa.parentNode) caixa.parentNode.removeChild(caixa);
+    document.querySelectorAll(".tag-explicavel[aria-expanded='true']").forEach(function (b) {
+      b.setAttribute("aria-expanded", "false");
+    });
+    if (devolverFoco && abridor) {
+      var btn = document.querySelector("[data-tag-id='" + abridor + "']");
+      if (btn && btn.focus) btn.focus();
+    }
+  }
+
+  function abrirCaixaTag(botao) {
+    var tipo = botao.getAttribute("data-tag");
+    var valor = botao.getAttribute("data-valor");
+    var jaAberta = botao.getAttribute("aria-expanded") === "true" &&
+      document.getElementById(TAG_CAIXA_ID);
+    fecharCaixaTag(false);
+    if (jaAberta) return;
+    var extra = null;
+    if (tipo === "cassado") {
+      extra = {
+        dataFim: botao.getAttribute("data-fim") || "",
+        link: botao.getAttribute("data-link") || ""
+      };
+    }
+    if (tipo === "voto") extra = { rotulo: botao.textContent.trim() };
+    var caixa = document.createElement("div");
+    caixa.id = TAG_CAIXA_ID;
+    caixa.className = "tag-caixa";
+    caixa.setAttribute("role", "tooltip");
+    var titulo = tituloExplicacaoTag(tipo, valor);
+    var texto = textoExplicacaoTag(tipo, valor, extra);
+    var html = "<strong>" + esc(titulo) + "</strong><span>" + esc(texto) + "</span>";
+    if (extra && extra.link) {
+      html += ' <a href="' + esc(urlSegura(extra.link) || extra.link) + '" target="_blank" rel="noopener noreferrer">Ver ato no SAPL</a>';
+    }
+    caixa.innerHTML = html;
+    document.body.appendChild(caixa);
+    if (!botao.getAttribute("data-tag-id")) {
+      botao.setAttribute("data-tag-id", "tag" + Math.random().toString(36).slice(2));
+    }
+    caixa.setAttribute("data-abridor", botao.getAttribute("data-tag-id"));
+    botao.setAttribute("aria-expanded", "true");
+    var r = botao.getBoundingClientRect();
+    var largura = Math.min(280, window.innerWidth - 24);
+    var esquerda = r.left + window.scrollX;
+    if (esquerda + largura > window.innerWidth - 8) esquerda = window.innerWidth - largura - 8;
+    if (esquerda < 8) esquerda = 8;
+    var topo = r.bottom + window.scrollY + 6;
+    caixa.style.left = esquerda + "px";
+    caixa.style.top = topo + "px";
+    window.__tagAbertaEm = Date.now();
+    var alturaCaixa = caixa.offsetHeight || 80;
+    if (topo + alturaCaixa > window.scrollY + window.innerHeight - 8) {
+      topo = r.top + window.scrollY - alturaCaixa - 6;
+      if (topo < window.scrollY + 8) topo = window.scrollY + 8;
+      caixa.style.top = topo + "px";
+    }
+  }
+
+  function tagAbertaExiste() {
+    return !!document.getElementById(TAG_CAIXA_ID);
+  }
+
+  document.addEventListener("click", function (e) {
+    var botao = e.target && e.target.closest ? e.target.closest(".tag-explicavel") : null;
+    if (botao) {
+      if (e.stopPropagation) e.stopPropagation();
+      abrirCaixaTag(botao);
+      return;
+    }
+    var caixa = e.target && e.target.closest ? e.target.closest("#" + TAG_CAIXA_ID) : null;
+    if (!caixa) fecharCaixaTag(false);
+  }, true);
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && tagAbertaExiste()) {
+      e.stopPropagation();
+      fecharCaixaTag(true);
+    }
+  }, true);
+
+  window.addEventListener("scroll", function () {
+    if (Date.now() - (window.__tagAbertaEm || 0) < 500) return;
+    fecharCaixaTag(false);
+  }, true);
+  window.addEventListener("resize", function () { fecharCaixaTag(false); });
+
   function temaInicial() {
     var salvo = localStorage.getItem(STORAGE_TEMA);
     if (salvo === "claro" || salvo === "escuro") return salvo;
@@ -3530,75 +3769,68 @@
         : item.situacao === "Rejeitado" ? "selo-rejeitado" : "selo-tramitacao";
       var sitRotulo = item.situacao === "Em tramitacao" ? "Em tramitação" : item.situacao;
       var coaut = item.autoria_conjunta
-        ? '<span class="selo selo-coautoria">Coautoria</span>' : "";
+        ? '<button type="button" class="selo selo-coautoria tag-explicavel" data-tag="coautoria" data-valor="Coautoria" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">Coautoria</button>' : "";
       return '<article class="item-pll">' +
         '<div class="cab"><span class="numero">' + esc(item.tipo_sigla || "PLEG") + " " + esc(item.numero) + "/" + esc(item.ano) + "</span>" +
-        '<span class="selo ' + seloClass + '">' + esc(sitRotulo) + "</span>" + coaut + "</div>" +
+        '<button type="button" class="selo tag-explicavel ' + seloClass + '" data-tag="situacao" data-valor="' + esc(sitRotulo) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(sitRotulo) + "</button>" + coaut + "</div>" +
         '<p class="ementa">' + esc(item.ementa) + "</p>" +
         '<p class="meta">' + (item.tema ? 'Tema: ' + esc(item.tema) + '. ' : '') +
         linkExt(item.link_sapl, "Ver no SAPL") + "</p></article>";
     }).join("");
 
-    var filtrosPLL = [
-      { id: "aprovado", rotulo: "Aprovados" },
-      { id: "tramitacao", rotulo: "Em tramitação" },
-      { id: "rejeitado", rotulo: "Rejeitados" },
-      { id: "todos", rotulo: "Todos" }
-    ];
-
-    var htmlFiltros = '<div class="filtros-pll" role="group" aria-label="Filtrar projetos por situação">' +
-      filtrosPLL.map(function (f) {
-        var pressed = estado.filtroPLL === f.id ? ' aria-pressed="true"' : ' aria-pressed="false"';
-        return '<button type="button" class="btn-filtro-pll" data-filtro-pll="' + esc(f.id) + '"' + pressed + ">" +
-          esc(f.rotulo) + "</button>";
-      }).join("") + "</div>";
+    var rotuloFiltroPLL = { aprovado: "Aprovados", tramitacao: "Em tramitação", rejeitado: "Rejeitados", todos: "Todos os projetos" };
 
     var htmlListaPLL = "";
     if (!estado.filtroPLL) {
       htmlListaPLL = '<div class="estado-vazio" id="pll-estado-vazio">' +
-        "<p>Selecione um filtro acima para ver os projetos deste vereador.</p></div>";
+        "<p>Toque em um quadro acima para ver os projetos deste vereador.</p></div>";
     } else if (!estado.listaPLLVisivel) {
       htmlListaPLL = '<div class="estado-vazio" id="pll-estado-vazio">' +
-        "<p>Filtro ativo. Toque no mesmo filtro novamente ou use o botão abaixo para ver a lista.</p>" +
+        "<p>Filtro ativo. Toque no quadro ativo novamente para ver a lista.</p>" +
         '<button type="button" class="btn-secundario" id="btn-mostrar-pll">Mostrar lista</button></div>';
     } else if (!lista) {
       htmlListaPLL = '<div class="estado-vazio"><p>Nenhum projeto neste filtro.</p>' +
         '<button type="button" class="btn-secundario" id="btn-ocultar-pll">Ocultar lista</button></div>';
     } else {
-      var tituloLista = estado.filtroPLL === "todos" ? "Todos os projetos"
-        : filtrosPLL.find(function (f) { return f.id === estado.filtroPLL; }).rotulo;
+      var tituloLista = rotuloFiltroPLL[estado.filtroPLL] || "Todos os projetos";
       htmlListaPLL = '<div class="lista-pll-cab"><h3>' + esc(tituloLista) +
         " (" + itensFiltrados.length + ")</h3>" +
         '<button type="button" class="btn-secundario" id="btn-ocultar-pll">Ocultar lista</button></div>' +
         '<div class="lista-pll">' + lista + "</div>";
     }
 
+    function quadroProjetos(id, num, rot) {
+      var ativo = estado.filtroPLL === id && estado.listaPLLVisivel;
+      return '<button type="button" class="contagem-item' + (ativo ? " ativo" : "") + '" data-pl-filtro="' + esc(id) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
+        '<div class="num">' + esc(num) + '</div><div class="rot">' + esc(rot) + "</div></button>";
+    }
+
     return '<section class="secao" aria-labelledby="tit-pll">' +
       '<h2 id="tit-pll">Projetos de lei propostos (PLEG)</h2>' +
       '<p class="legenda">' + esc(legendaSiglaTipo("PLEG")) + ".</p>" +
-      '<div class="contagens-pll">' +
-      '<div class="contagem-item"><div class="num">' + esc(pl.total_propostos) + '</div><div class="rot">Propostos</div></div>' +
-      '<div class="contagem-item"><div class="num">' + esc(pl.aprovados) + '</div><div class="rot">Aprovados</div></div>' +
-      '<div class="contagem-item"><div class="num">' + esc(pl.em_tramitacao) + '</div><div class="rot">Em tramitação</div></div>' +
-      '<div class="contagem-item"><div class="num">' + esc(pl.rejeitados) + '</div><div class="rot">Rejeitados</div></div>' +
+      '<div class="contagens-pll" role="group" aria-label="Filtrar projetos por situação">' +
+      quadroProjetos("todos", pl.total_propostos, "Propostos") +
+      quadroProjetos("aprovado", pl.aprovados, "Aprovados") +
+      quadroProjetos("tramitacao", pl.em_tramitacao, "Em tramitação") +
+      quadroProjetos("rejeitado", pl.rejeitados, "Rejeitados") +
       "</div>" +
       '<div class="barra-status-pll">' + barraStatusPLL(partesStatus, totalStatus) + "</div>" +
       cartoesStatusPLL(partesStatus, totalStatus) +
       '<h3 style="font-size:14px;margin:14px 0 8px">Por tema (' + esc(numeroCategorias()) + " categorias)</h3>" +
       '<div class="barra-temas">' + barras + "</div>" +
-      htmlFiltros + htmlListaPLL +
+      htmlListaPLL +
       "</section>";
   }
 
   function renderSecaoVotos(v) {
     var vo = v.votos;
     var cards = [
-      { num: vo.sim, rot: "Sim" },
-      { num: vo.nao, rot: "Não" },
-      { num: vo.abstencao, rot: "Abstenção" },
-      { num: vo.presidente_nao_votou, rot: "Presidente que não votou" },
-      { num: vo.nao_votou_nao_era_presidente, rot: "Não votou (não era presidente)" },
-      { num: vo.ausente, rot: "Ausente na votação" }
+      { id: "sim", num: vo.sim, rot: "Sim" },
+      { id: "nao", num: vo.nao, rot: "Não" },
+      { id: "abstencao", num: vo.abstencao, rot: "Abstenção" },
+      { id: "presidente_nao_votou", num: vo.presidente_nao_votou, rot: "Presidente que não votou" },
+      { id: "nao_votou_nao_era_presidente", num: vo.nao_votou_nao_era_presidente, rot: "Não votou (não era presidente)" },
+      { id: "ausente", num: vo.ausente, rot: "Ausente na votação" }
     ];
 
     var nominais = vo.nominais || [];
@@ -3622,19 +3854,6 @@
     var inicio = (estado.pagina - 1) * POR_PAGINA;
     var fatia = filtrados.slice(inicio, inicio + POR_PAGINA);
 
-    var opcoesFiltro = Object.keys(ROTULOS_VOTO).map(function (k) {
-      var sel = estado.filtroClassificacao === k ? " selected" : "";
-      return '<option value="' + esc(k) + '"' + sel + ">" + esc(ROTULOS_VOTO[k]) + "</option>";
-    }).join("");
-
-    var atalhosVoto = [
-      { id: "sim", rot: "Sim" },
-      { id: "nao", rot: "Não" },
-      { id: "presidente_nao_votou", rot: "Presidente que não votou" },
-      { id: "nao_votou_nao_era_presidente", rot: "Não votou" },
-      { id: "ausente", rot: "Ausente" }
-    ];
-
     var itens = fatia.map(function (n) {
       var ementa = ementaVotacao(n);
       var textoEmenta = ementa
@@ -3651,8 +3870,8 @@
         ", sessão " + esc(n.sessao_id) + "</div>" +
         (tipoNumero ? '<div class="materia-titulo">' + esc(tipoNumero) + "</div>" : "") +
         (tagsHtml ? tagsHtml : "") +
-        '<span class="voto-selo ' + classeVotoSelo(n.classificacao) + '">' +
-        esc(rotuloVoto(n)) + "</span>" +
+        '<button type="button" class="voto-selo tag-explicavel ' + classeVotoSelo(n.classificacao) + '" data-tag="voto" data-valor="' + esc(n.classificacao) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' +
+        esc(rotuloVoto(n)) + "</button>" +
         "<span>" + textoEmenta + "</span> " +
         linkExt(linkSess, "Sessão no SAPL") + "</li>";
     }).join("");
@@ -3661,13 +3880,8 @@
     var htmlListaVotos = "";
     if (!listaAtiva) {
       htmlListaVotos = '<div class="estado-vazio" id="votos-estado-vazio">' +
-        "<p>Escolha um tipo de voto ou busque por ementa para ver a lista detalhada.</p>" +
-        '<div class="atalhos-voto" role="group" aria-label="Filtrar por tipo de voto">' +
-        atalhosVoto.map(function (a) {
-          return '<button type="button" class="btn-atalho-voto" data-voto="' + esc(a.id) + '">' +
-            esc(a.rot) + "</button>";
-        }).join("") +
-        "</div></div>";
+        "<p>Toque em um quadro acima ou busque por ementa para ver a lista detalhada.</p>" +
+        "</div>";
     } else {
       htmlListaVotos =
         '<ul class="lista-votos" aria-live="polite">' +
@@ -3685,18 +3899,18 @@
       '<h2 id="tit-votos">Histórico de votos nominais</h2>' +
       '<p class="legenda">A votação simbólica é a regra geral (art. 202 do Regimento Interno): conta-se o resultado sem registrar o nome de cada vereador. Na votação nominal o voto de cada vereador fica registrado (art. 201); ela é obrigatória quando a matéria exige maioria absoluta ou dois terços (art. 203). Total: ' +
       esc(vo.total_registros) + " votações em sessões ordinárias de 2026.</p>" +
-      '<div class="votos-resumo">' +
+      '<div class="votos-resumo" role="group" aria-label="Filtrar por tipo de voto">' +
       cards.map(function (c) {
-        return '<div class="voto-card"><div class="num">' + esc(c.num) +
-          '</div><div class="rot">' + esc(c.rot) + "</div></div>";
+        var ativo = estado.filtroClassificacao === c.id;
+        return '<button type="button" class="voto-card' + (ativo ? " ativo" : "") + '" data-voto-card="' + esc(c.id) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
+          '<div class="num">' + esc(c.num) +
+          '</div><div class="rot">' + esc(c.rot) + "</div></button>";
       }).join("") +
       "</div>" +
       '<div class="filtros-votos">' +
       '<label for="filtro-texto">Buscar por ementa ou número da matéria</label>' +
       '<input type="search" id="filtro-texto" value="' + esc(estado.filtroTexto) +
       '" placeholder="Digite parte da ementa ou ID">' +
-      '<label for="filtro-voto">Filtrar por tipo de voto</label>' +
-      '<select id="filtro-voto"><option value="">Todos os tipos de voto</option>' + opcoesFiltro + "</select>" +
       "</div>" +
       htmlListaVotos +
       "</section>";
@@ -3736,6 +3950,7 @@
   function renderApp() {
     var v = vereadorAtual();
     if (!v || !estado.dados) return;
+    fecharCaixaTag(false);
 
     var meta = estado.dados.meta;
     var conteudo = document.getElementById("conteudo-vereadores");
@@ -3827,10 +4042,13 @@
       }
     });
 
-    document.getElementById("filtro-voto").addEventListener("change", function (e) {
-      estado.filtroClassificacao = e.target.value;
-      estado.pagina = 1;
-      renderApp();
+    document.querySelectorAll(".voto-card[data-voto-card]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-voto-card");
+        estado.filtroClassificacao = (estado.filtroClassificacao === id) ? "" : id;
+        estado.pagina = 1;
+        renderApp();
+      });
     });
 
     var btnAnt = document.getElementById("btn-anterior");
@@ -3842,11 +4060,12 @@
       estado.pagina++; renderApp();
     });
 
-    document.querySelectorAll(".btn-filtro-pll").forEach(function (btn) {
+    document.querySelectorAll(".contagem-item[data-pl-filtro]").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        var f = btn.getAttribute("data-filtro-pll");
-        if (estado.filtroPLL === f && !estado.listaPLLVisivel) {
-          estado.listaPLLVisivel = true;
+        var f = btn.getAttribute("data-pl-filtro");
+        if (estado.filtroPLL === f && estado.listaPLLVisivel) {
+          estado.filtroPLL = "";
+          estado.listaPLLVisivel = false;
         } else {
           estado.filtroPLL = f;
           estado.listaPLLVisivel = true;
@@ -3865,14 +4084,6 @@
     if (btnMostrarPLL) btnMostrarPLL.addEventListener("click", function () {
       estado.listaPLLVisivel = true;
       renderApp();
-    });
-
-    document.querySelectorAll(".btn-atalho-voto").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        estado.filtroClassificacao = btn.getAttribute("data-voto");
-        estado.pagina = 1;
-        renderApp();
-      });
     });
 
     var btnLimparVotos = document.getElementById("btn-limpar-votos");
@@ -4154,8 +4365,8 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var tags = tagsMateria(id);
     if (!tags) return "";
     return '<div class="materia-tags">' +
-      '<span class="tag-tipo">' + esc(tags.tag_tipo) + "</span>" +
-      '<span class="tag-categoria">' + esc(tags.tag_tema) + "</span></div>";
+      '<button type="button" class="tag-tipo tag-explicavel" data-tag="tipo" data-valor="' + esc(tags.tag_tipo) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(tags.tag_tipo) + "</button>" +
+      '<button type="button" class="tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(tags.tag_tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(tags.tag_tema) + "</button></div>";
   }
 
   function tipoNumeroMateriaCamara(id) {
@@ -4515,7 +4726,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var placar = placarResumido(m.placar);
     var tagsHtml = htmlTagsMateria(m.id);
     // Insert badge after tags if both exist
-    var badgeHtml = placar ? '<span class="badge-status ' + badgeClass + '">' + esc(placar) + '</span>' : '';
+    var badgeHtml = placar ? '<button type="button" class="badge-status tag-explicavel ' + badgeClass + '" data-tag="placar" data-valor="' + esc(placar) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(placar) + '</button>' : '';
     if (tagsHtml && badgeHtml) {
       // Insert badge before closing </div> of materia-tags
       tagsHtml = tagsHtml.replace('</div>', badgeHtml + '</div>');
@@ -4523,9 +4734,9 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       tagsHtml = '<div class="materia-tags">' + badgeHtml + '</div>';
     }
     var turnoHtml = m.turno
-      ? '<span class="tag-turno">' + esc(m.turno) + '</span>'
+      ? '<button type="button" class="tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(m.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.turno) + '</button>'
       : (m.tipo_resultado
-        ? '<span class="tag-turno">' + esc(m.tipo_resultado) + "</span>"
+        ? '<button type="button" class="tag-turno tag-explicavel" data-tag="resultado" data-valor="' + esc(m.tipo_resultado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.tipo_resultado) + "</button>"
         : "");
     if (tagsHtml && turnoHtml) {
       tagsHtml = tagsHtml.replace('</div>', turnoHtml + '</div>');
@@ -4533,7 +4744,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       tagsHtml = '<div class="materia-tags">' + turnoHtml + '</div>';
     }
     return '<article class="item-votado materia" data-resultado="' + esc(m.resultado) + '">' +
-      '<button type="button" class="materia-link" data-materia-id="' + esc(m.id) +
+      '<div class="materia-link" role="button" tabindex="0" data-materia-id="' + esc(m.id) +
       '" data-resultado="' + esc(m.resultado) +
       '" aria-haspopup="dialog" aria-controls="resumo-sheet" aria-label="Abrir resumo de ' + esc(m.tipo) + '">' +
       '<div class="materia-info"><span class="materia-titulo">' + esc(m.tipo) +
@@ -4544,7 +4755,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
         : "") +
       "</div>" +
       htmlResultadoPopular(m.id) +
-      "</button></article>";
+      "</div></article>";
   }
 
   function materiasFiltradas(periodo) {
@@ -4581,6 +4792,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   function renderBlocoVotadoPeriodo(periodo) {
     var bloco = document.getElementById("bloco-votado-" + periodo);
     if (!bloco) return;
+    fecharCaixaTag(false);
 
     var filtros = FILTROS_MATERIA[periodo];
     var mostrarBusca = periodo !== "sessao";
@@ -4692,6 +4904,14 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
         var materia = (MATERIAS_CAMARA[periodo] || []).find(function (m) { return m.id === id; });
         if (materia) abrirResumoSheet(materia, periodo);
       });
+      btn.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          var id = parseInt(btn.getAttribute("data-materia-id"), 10);
+          var materia = (MATERIAS_CAMARA[periodo] || []).find(function (m) { return m.id === id; });
+          if (materia) abrirResumoSheet(materia, periodo);
+        }
+      });
     });
 
     bloco.querySelectorAll(".btn-pagina").forEach(function (btn) {
@@ -4782,10 +5002,12 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       '<p class="resumo-campo-rotulo">Resultado da votação</p>' +
       '<p class="resumo-campo-valor">' + esc(resultado) + "</p></div>";
     if (m.turno || m.tipo_resultado) {
+      var turnoValorResumo = m.turno || m.tipo_resultado;
+      var turnoTipoResumo = m.turno ? "turno" : "resultado";
       html += '<div class="resumo-campo">' +
         '<p class="resumo-campo-rotulo">Turno</p>' +
-        '<p class="resumo-campo-valor"><span class="tag-turno">' +
-        esc(m.turno || m.tipo_resultado) + "</span></p></div>";
+        '<p class="resumo-campo-valor"><button type="button" class="tag-turno tag-explicavel" data-tag="' + turnoTipoResumo + '" data-valor="' + esc(turnoValorResumo) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' +
+        esc(turnoValorResumo) + "</button></p></div>";
     }
     if (textoDatasVotacao(m)) {
       html += '<div class="resumo-campo">' +
@@ -4795,7 +5017,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (m.categoria) {
       html += '<div class="resumo-campo">' +
         '<p class="resumo-campo-rotulo">Categoria</p>' +
-        '<p class="resumo-campo-valor"><span class="tag-categoria">' + esc(m.categoria) + "</span></p></div>";
+        '<p class="resumo-campo-valor"><button type="button" class="tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(m.categoria) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.categoria) + "</button></p></div>";
     }
     var popular = htmlResultadoPopular(m.id);
     if (popular) {
@@ -4816,6 +5038,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var corpo = document.getElementById("resumo-sheet-corpo");
     var btnShare = document.getElementById("btn-share-resumo");
     if (!backdrop || !materia) return;
+    fecharCaixaTag(false);
     resumoContexto = { dados: materia, periodo: periodo || estadoMaterias.periodo || "sessao" };
     resumoGatilhoAnterior = document.activeElement;
     if (titulo) titulo.textContent = materia.tipo || "Resumo da matéria";
