@@ -2226,7 +2226,23 @@
   }
 
   button.tag-explicavel {
-    font: inherit;
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    margin: 0;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    appearance: none;
+    -webkit-appearance: none;
     cursor: pointer;
   }
   button.tag-explicavel:focus-visible {
@@ -2257,9 +2273,22 @@
   button.voto-selo,
   button.badge-status,
   button.selo {
-    font: inherit;
+    margin: 0;
+    font-family: inherit;
+    text-align: left;
+    appearance: none;
+    -webkit-appearance: none;
     border: none;
     cursor: pointer;
+  }
+  button.voto-selo {
+    font-size: 11px;
+    font-weight: 800;
+  }
+  button.badge-status,
+  button.selo {
+    font-size: 11px;
+    font-weight: 700;
   }
   button.voto-selo:focus-visible,
   button.badge-status:focus-visible,
@@ -3534,7 +3563,7 @@
   var FOTOS_LOCAIS = {};
   var SAPL_ORIGEM = "";
   var PORTAL_OFICIAL = "";
-  var ROTULO_SEM_VOTO_INDIVIDUAL = "voto individual nao registrado no SAPL (votacao simbolica ou sem registro nominal no SAPL)";
+  var ROTULO_SEM_VOTO_INDIVIDUAL = "voto individual nao registrado no SAPL (votação simbólica ou sem registro nominal no SAPL)";
 
   function nomeCamaraMunicipal() {
     return "Câmara Municipal de " + nomeCidade();
@@ -4147,6 +4176,13 @@
     return "projetos de lei";
   }
 
+  function textoTurnoExibicao(valor) {
+    if (valor === "1o turno") return "1º turno";
+    if (valor === "2o turno") return "2º turno";
+    if (valor === "turno unico") return "turno único";
+    return valor;
+  }
+
   var TAG_CAIXA_ID = "tag-caixa-explicativa";
 
   function explicacoesTags() {
@@ -4156,7 +4192,7 @@
   function tituloExplicacaoTag(tipo, valor) {
     if (tipo === "tipo") return valor || "Tipo de matéria";
     if (tipo === "categoria") return "Categoria do projeto";
-    if (tipo === "turno") return valor || "Turno de votação";
+    if (tipo === "turno") return textoTurnoExibicao(valor) || "Turno de votação";
     if (tipo === "resultado") return valor || "Resultado da votação";
     if (tipo === "placar") return "Placar da votação";
     if (tipo === "cassado") return "Cassado";
@@ -4575,8 +4611,8 @@
     }
     if (meta.rotulo_sem_voto_individual) {
       var base = String(meta.rotulo_sem_voto_individual);
-      var complemento = " (votacao simbolica ou sem registro nominal no SAPL)";
-      ROTULO_SEM_VOTO_INDIVIDUAL = base.indexOf("votacao simbolica") !== -1 ? base : base + complemento;
+      var complemento = " (votação simbólica ou sem registro nominal no SAPL)";
+      ROTULO_SEM_VOTO_INDIVIDUAL = base.indexOf("votação simbólica") !== -1 ? base : base + complemento;
     }
   }
 
@@ -4714,7 +4750,7 @@
       "%</strong>.</p>" +
       '<p class="legenda">Presente na lista da sess\u00e3o em ' + esc(nPlenaria) +
       " sess\u00f5es e na lista da Ordem do Dia em " + esc(nOrdemDia) + " sess\u00f5es.</p>" +
-      '<p class="legenda">O Regimento Interno (art. 100, par. 1o) considera presente quem assina a presen\u00e7a e participa das vota\u00e7\u00f5es. O painel conta presente quem aparece em pelo menos uma das duas listas do SAPL.</p>' +
+      '<p class="legenda">O Regimento Interno (art. 100, § 1º) considera presente quem assina a presen\u00e7a e participa das vota\u00e7\u00f5es. O painel conta presente quem aparece em pelo menos uma das duas listas do SAPL.</p>' +
       '<div class="grafico-linha">' +
       '<div class="rosca-wrap">' +
       roscaSVG(
@@ -4889,9 +4925,9 @@
         '<button type="button" class="voto-selo tag-explicavel ' + classeVotoSelo(n.estado) + '" data-tag="voto" data-valor="' + esc(n.estado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' +
         esc(rotuloVoto(n)) + "</button>" +
         (n.turno === "1o turno" || n.turno === "2o turno"
-          ? ' <button type="button" class="tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(n.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(n.turno) + "</button>"
+          ? ' <button type="button" class="tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(n.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(n.turno)) + "</button>"
           : "") +
-        "<span>" + textoEmenta + "</span> " +
+        " <span>" + textoEmenta + "</span> " +
         linkExt(linkSess, "Sessão no SAPL") + "</li>";
     }).join("");
 
@@ -5325,7 +5361,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var prefixo = m.resultado === "maioria"
       ? "Aprovado por maioria"
       : "Aprovado por unanimidade";
-    if (m.resultado === "primeiro_turno") prefixo = "1o turno";
+    if (m.resultado === "primeiro_turno") prefixo = "1º turno";
     if (m.resultado === "turno_nao_identificado") prefixo = "Turno não identificado";
     if (m.resultado === "rejeitado") prefixo = "Rejeitado";
     if (m.resultado && m.resultado.indexOf("nao_deliberativo:") === 0) {
@@ -5735,7 +5771,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       tagsHtml = '<div class="materia-tags">' + badgeHtml + '</div>';
     }
     var turnoHtml = m.turno
-      ? '<button type="button" class="tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(m.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.turno) + '</button>'
+      ? '<button type="button" class="tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(m.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(m.turno)) + '</button>'
       : (m.tipo_resultado
         ? '<button type="button" class="tag-turno tag-explicavel" data-tag="resultado" data-valor="' + esc(m.tipo_resultado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.tipo_resultado) + "</button>"
         : "");
@@ -5777,7 +5813,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
 
   function legendaVotado(periodo) {
     var regra = " Matéria votada em mais de uma sessão aparece uma vez por período, com todas as datas.";
-    var regraContagem = " A contagem de resultado considera só o 2o turno ou o turno único. Votação sem deliberação aparece com o nome oficial e não entra na contagem.";
+    var regraContagem = " A contagem de resultado considera só o 2º turno ou o turno único. Votação sem deliberação aparece com o nome oficial e não entra na contagem.";
     if (periodo === "sessao") {
       return "Lista com ementa (resumo oficial) e placar. Toque abre a página oficial no SAPL (Sistema de Apoio ao Processo Legislativo)." + regra + regraContagem;
     }
@@ -5820,7 +5856,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
         var cls = ativo ? "btn-filtro btn-filtro-materia ativo" : "btn-filtro btn-filtro-materia";
         return '<button type="button" class="' + cls + '" data-periodo="' + esc(periodo) +
           '" data-filtro="' + esc(f.id) + '"' + pressed + ">" +
-          esc(f.rotulo) + " (" + esc(f.qtd) + ")</button>";
+          esc(textoTurnoExibicao(f.rotulo)) + " (" + esc(f.qtd) + ")</button>";
       }).join("") + "</div>";
 
     var htmlBusca = "";
@@ -5998,8 +6034,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       var turnoTipo = m.turno ? "turno" : "resultado";
       html += '<div class="resumo-campo">' +
         '<p class="resumo-campo-rotulo">Turno</p>' +
-        '<p class="resumo-campo-valor"><button type="button" class="tag-turno tag-explicavel" data-tag="' + turnoTipo + '" data-valor="' + esc(turnoValor) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' +
-        esc(turnoValor) + "</button></p></div>";
+        '<p class="resumo-campo-valor"><button type="button" class="tag-turno tag-explicavel" data-tag="' + turnoTipo + '" data-valor="' + esc(turnoValor) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.turno ? textoTurnoExibicao(turnoValor) : turnoValor) + "</button></p></div>";
     }
     if (textoDatasVotacao(m)) {
       html += '<div class="resumo-campo">' +

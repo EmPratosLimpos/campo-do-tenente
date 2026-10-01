@@ -183,7 +183,7 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
             texto = page.inner_text("body")
             self.assertIn("PLEG 4/2026", texto)
             self.assertIn("Votada em 22/09/2026 e 29/09/2026", texto)
-            self.assertIn("2o turno", texto)
+            self.assertIn("2º turno", texto)
             self.assertNotIn(
                 "Nenhum projeto de lei do legislativo (PLL) foi votado na última sessão",
                 texto,
@@ -192,7 +192,7 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
             page.wait_for_timeout(600)
             resumo = page.locator("#resumo-sheet-corpo").inner_text()
             self.assertIn("Turno", resumo)
-            self.assertIn("2o turno", resumo)
+            self.assertIn("2º turno", resumo)
             browser.close()
 
     def test_ultimo_mes_mostra_projetos_do_mes(self):

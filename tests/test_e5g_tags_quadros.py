@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import pathlib
+import re
 import threading
 import time
 import unittest
@@ -61,6 +62,8 @@ class TestConfigExplicacoes(unittest.TestCase):
         juntos = " ".join(str(bloco[k]) for k in CHAVES_EXPLICACOES)
         for proibido in ("Campo do Tenente", "Campo Largo", "\u2014", "\u2013"):
             self.assertNotIn(proibido, juntos)
+        for esperado in ("votação", "matéria", "sessão", "prevê"):
+            self.assertIn(esperado, juntos)
 
 
 class _Handler(SimpleHTTPRequestHandler):
@@ -146,7 +149,7 @@ class TestTagsCaixa(unittest.TestCase):
                 self.assertEqual(caixa.get_attribute("role"), "tooltip")
                 texto = caixa.inner_text()
                 self.assertIn(texto_tag, texto)
-                self.assertIn("Sigla oficial do tipo de materia no SAPL", texto)
+                self.assertIn("Sigla oficial do tipo de matéria no SAPL", texto)
                 self.assertEqual(tag.get_attribute("aria-expanded"), "true")
                 self.assertEqual(
                     tag.get_attribute("aria-controls"), "tag-caixa-explicativa"
@@ -358,6 +361,146 @@ class TestTagsCaixa(unittest.TestCase):
                     for literal in ("esc(", "' +", "+ '", "undefined", "NaN"):
                         self.assertNotIn(literal, corpo)
                     self.assertEqual(erros, [])
+
+
+PALAVRAS_SEM_ACENTO = (
+    "votacao",
+    "materia",
+    "sessao",
+    "camara",
+    "tercos",
+    "preve",
+    "numero",
+    "decisao",
+    "reuniao",
+    "eleicao",
+)
+
+
+@unittest.skipUnless(PLAYWRIGHT_OK, PLAYWRIGHT_MOTIVO)
+class TestE5hAcabamento(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.servidor = ThreadingHTTPServer(("127.0.0.1", 8800), _Handler)
+        thread = threading.Thread(target=cls.servidor.serve_forever, daemon=True)
+        thread.start()
+        cls.base = "http://127.0.0.1:8800/index.html"
+        time.sleep(0.4)
+
+    @classmethod
+    def tearDownClass(cls):
+        try:
+            cls.servidor.shutdown()
+        finally:
+            cls.servidor.server_close()
+
+    def _abrir_vereador(self, page, slug_id="2"):
+        page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
+        page.wait_for_selector(
+            "button[data-secao-lateral='vereadores'], button[data-secao='vereadores']",
+            state="attached",
+            timeout=60000,
+        )
+        try:
+            page.click("button[data-secao-lateral='vereadores']", timeout=5000)
+        except Exception:
+            page.click('button[data-secao="vereadores"]', timeout=15000)
+        page.wait_for_selector("#sel-vereador", state="visible", timeout=30000)
+        page.select_option("#sel-vereador", slug_id)
+        page.wait_for_timeout(400)
+
+    def test_tag_com_visual_antigo_10px(self):
+        with sync_playwright() as p:
+            for largura in (390, 1440):
+                with _navegador(p) as browser:
+                    page = browser.new_page(viewport={"width": largura, "height": 900})
+                    self._abrir_vereador(page, "2")
+                    page.locator("#tit-votos").locator(
+                        "xpath=ancestor::details[1]"
+                    ).evaluate("n => { n.open = true; }")
+                    page.wait_for_timeout(300)
+                    page.click("button.voto-card[data-voto-card='sim']")
+                    page.wait_for_timeout(500)
+                    tag = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
+                    estilo = tag.evaluate(
+                        "n => { var c = getComputedStyle(n); "
+                        "return n.tagName + '|' + c.fontSize + '|' + c.paddingTop "
+                        "+ ' ' + c.paddingRight + ' ' + c.paddingBottom + ' ' + c.paddingLeft; }"
+                    )
+                    with self.subTest(largura=largura):
+                        self.assertEqual(estilo, "BUTTON|10px|2px 8px 2px 8px")
+
+    def test_sem_palavra_sem_acento_nas_abas(self):
+        with sync_playwright() as p:
+            for largura in (390, 1440):
+                with _navegador(p) as browser:
+                    page = browser.new_page(viewport={"width": largura, "height": 900})
+                    page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
+                    page.wait_for_selector(
+                        "#bloco-votado-sessao .item-votado", timeout=60000
+                    )
+                    page.wait_for_timeout(500)
+                    texto_camara = page.inner_text("body").lower()
+                    for palavra in PALAVRAS_SEM_ACENTO:
+                        with self.subTest(largura=largura, aba="camara", palavra=palavra):
+                            padrao = r"\b" + palavra + r"\b"
+                            self.assertIsNone(
+                                re.search(padrao, texto_camara),
+                                msg=f"{palavra} visivel na aba Camara",
+                            )
+                    self._abrir_vereador(page, "2")
+                    for titulo in ("tit-presenca", "tit-pll", "tit-votos"):
+                        page.locator("#" + titulo).locator(
+                            "xpath=ancestor::details[1]"
+                        ).evaluate("n => { n.open = true; }")
+                    page.wait_for_timeout(400)
+                    page.click("button.voto-card[data-voto-card='sim']")
+                    page.wait_for_timeout(500)
+                    texto_ver = page.inner_text("body").lower()
+                    for palavra in PALAVRAS_SEM_ACENTO:
+                        with self.subTest(
+                            largura=largura, aba="vereadores", palavra=palavra
+                        ):
+                            self.assertIsNone(
+                                re.search(r"\b" + palavra + r"\b", texto_ver),
+                                msg=f"{palavra} visivel na aba Vereadores",
+                            )
+
+    def test_ordinais_com_simbolo_de_ordinal(self):
+        with sync_playwright() as p:
+            for largura in (390, 1440):
+                with _navegador(p) as browser:
+                    page = browser.new_page(viewport={"width": largura, "height": 900})
+                    self._abrir_vereador(page, "2")
+                    for titulo in ("tit-presenca", "tit-votos"):
+                        page.locator("#" + titulo).locator(
+                            "xpath=ancestor::details[1]"
+                        ).evaluate("n => { n.open = true; }")
+                    page.wait_for_timeout(400)
+                    page.click("button.voto-card[data-voto-card='sim']")
+                    page.wait_for_timeout(500)
+                    texto = page.locator("#conteudo-vereadores").inner_text()
+                    with self.subTest(largura=largura):
+                        self.assertIn("2º turno", texto)
+                        self.assertIn("§ 1º", texto)
+                        self.assertNotIn("1o turno", texto)
+                        self.assertNotIn("2o turno", texto)
+                        self.assertNotIn("par. 1o", texto)
+
+    def test_tag_e_ementa_separadas(self):
+        with sync_playwright() as p:
+            with _navegador(p) as browser:
+                page = browser.new_page(viewport={"width": 390, "height": 900})
+                self._abrir_vereador(page, "2")
+                page.locator("#tit-votos").locator(
+                    "xpath=ancestor::details[1]"
+                ).evaluate("n => { n.open = true; }")
+                page.wait_for_timeout(300)
+                page.click("button.voto-card[data-voto-card='sim']")
+                page.wait_for_timeout(500)
+                primeiro = page.locator(".lista-votos li").first.inner_text()
+                self.assertIsNotNone(re.search(r"º turno \S", primeiro))
+                self.assertIsNone(re.search(r"turno[A-Za-zÀ-ú]", primeiro))
 
 
 if __name__ == "__main__":
