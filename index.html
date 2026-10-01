@@ -4646,9 +4646,7 @@
         esc(rotuloVoto(n)) + "</span>" +
         (n.turno === "1o turno" || n.turno === "2o turno"
           ? ' <span class="tag-turno">' + esc(n.turno) + "</span>"
-          : (n.tipo_resultado
-            ? ' <span class="tag-turno">' + esc(n.tipo_resultado) + "</span>"
-            : "")) +
+          : "") +
         "<span>" + textoEmenta + "</span> " +
         linkExt(linkSess, "Sessão no SAPL") + "</li>";
     }).join("");
@@ -4726,6 +4724,37 @@
     });
   }
 
+  function fimDoRecorte() {
+    if (!ANOS_RECORTE || !ANOS_RECORTE.length) return "";
+    return String(Math.max.apply(null, ANOS_RECORTE)) + "-12-31";
+  }
+
+  function mandatoEncerrado(v) {
+    if (!v) return false;
+    if (v.motivos_fora_do_mandato && v.motivos_fora_do_mandato.length) return true;
+    var fim = v.data_fim_mandato || "";
+    var limite = fimDoRecorte();
+    return !!fim && !!limite && fim < limite;
+  }
+
+  function vereadoresOrdenados() {
+    var lista = (estado.dados && estado.dados.vereadores) || [];
+    var ativos = [];
+    var encerrados = [];
+    lista.forEach(function (ver) {
+      if (mandatoEncerrado(ver)) encerrados.push(ver);
+      else ativos.push(ver);
+    });
+    function porNome(a, b) {
+      return String(a.nome_parlamentar || "").localeCompare(
+        String(b.nome_parlamentar || ""), "pt-BR"
+      );
+    }
+    ativos.sort(porNome);
+    encerrados.sort(porNome);
+    return ativos.concat(encerrados);
+  }
+
   function renderApp() {
     var v = vereadorAtual();
     if (!v || !estado.dados) return;
@@ -4738,14 +4767,15 @@
     var meta = estado.dados.meta;
     var conteudo = document.getElementById("conteudo-vereadores");
     var seletorWrap = document.getElementById("seletor-vereador-wrap");
+    var listaVereadores = vereadoresOrdenados();
 
-    var opcoes = estado.dados.vereadores.map(function (ver) {
+    var opcoes = listaVereadores.map(function (ver) {
       var sel = String(ver.id_sapl) === String(estado.vereadorId) ? " selected" : "";
       return '<option value="' + esc(ver.id_sapl) + '"' + sel + ">" +
         esc(rotuloOpcaoVereador(ver)) + "</option>";
     }).join("");
 
-    var idxAtual = estado.dados.vereadores.findIndex(function (ver) {
+    var idxAtual = listaVereadores.findIndex(function (ver) {
       return String(ver.id_sapl) === String(estado.vereadorId);
     });
 
@@ -4755,7 +4785,7 @@
       '<select id="sel-vereador">' + opcoes + "</select>" +
       '<div class="nav-vereador">' +
       '<button type="button" id="btn-ver-anterior"' + (idxAtual <= 0 ? " disabled" : "") + ">Vereador anterior</button>" +
-      '<button type="button" id="btn-ver-proximo"' + (idxAtual >= estado.dados.vereadores.length - 1 ? " disabled" : "") + ">Próximo vereador</button>" +
+      '<button type="button" id="btn-ver-proximo"' + (idxAtual >= listaVereadores.length - 1 ? " disabled" : "") + ">Próximo vereador</button>" +
       "</div></div>";
 
     conteudo.innerHTML =
@@ -4795,7 +4825,7 @@
     });
 
     function irVereador(delta) {
-      var lista = estado.dados.vereadores;
+      var lista = vereadoresOrdenados();
       var idx = lista.findIndex(function (ver) {
         return String(ver.id_sapl) === String(estado.vereadorId);
       });
@@ -4916,7 +4946,8 @@
         aplicarRotulosMeta(dados);
         prepararIndices(dados);
         if (!estado.vereadorId && dados.vereadores.length) {
-          estado.vereadorId = dados.vereadores[0].id_sapl;
+          var primeiros = vereadoresOrdenados();
+          if (primeiros.length) estado.vereadorId = primeiros[0].id_sapl;
         }
         atualizarInterfaceCamara();
         renderApp();
