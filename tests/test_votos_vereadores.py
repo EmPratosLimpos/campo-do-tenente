@@ -30,6 +30,11 @@ def votos_da_legislatura(slug: str) -> dict:
     raise AssertionError(f"vereador {slug} ausente")
 
 
+def nominais_por_estado(slug: str, estado: str) -> int:
+    votos = votos_da_legislatura(slug)
+    return sum(1 for n in votos.get("nominais") or [] if n.get("estado") == estado)
+
+
 class _Handler(SimpleHTTPRequestHandler):
     def log_message(self, format, *args):
         pass
@@ -94,7 +99,10 @@ class TestVotosVereadores(unittest.TestCase):
             page.wait_for_timeout(1000)
             abrir_se_fechado("tit-votos")
             texto_rafael_filtro = page.inner_text("body")
-            self.assertIn(f"{votos_rafael['presidente_que_nao_votou']} registros", texto_rafael_filtro)
+            self.assertIn(
+                f"{nominais_por_estado('rafael-ventura', 'presidente_que_nao_votou')} registros",
+                texto_rafael_filtro,
+            )
 
             abrir_se_fechado("tit-pll")
             abrir_se_fechado("tit-votos")
@@ -138,7 +146,10 @@ class TestVotosVereadores(unittest.TestCase):
             page.wait_for_timeout(1000)
             abrir_se_fechado("tit-votos")
             texto_jorge_filtro = page.inner_text("body")
-            self.assertIn(f"{votos_jorge['licenca_tratamento_saude']} registros", texto_jorge_filtro)
+            self.assertIn(
+                f"{nominais_por_estado('jorge-quege', 'licenca_tratamento_saude')} registros",
+                texto_jorge_filtro,
+            )
 
             presenca_card = page.locator("#tit-presenca").locator("xpath=ancestor::details[1]")
             if not presenca_card.evaluate("node => node.open"):
