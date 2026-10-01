@@ -19,6 +19,10 @@ TZ = timezone(timedelta(hours=-3))
 SUFIXO_LEGISLATURA = "legislatura"
 
 RESULTADO_NAO_MAPEADO = "resultado_nao_mapeado"
+RESULTADO_PRIMEIRO_TURNO = "primeiro_turno"
+RESULTADO_TURNO_NAO_IDENTIFICADO = "turno_nao_identificado"
+TURNO_PRIMEIRO = "1o turno"
+TURNO_NAO_IDENTIFICADO = "turno nao identificado"
 
 CHAVES_CONTAGEM_VOTO = (
     "sim",
@@ -95,56 +99,90 @@ def carregar_temas() -> dict[int, str]:
 
 
 def pll_votados_no_ano(atuacao: dict) -> list[dict]:
+    """Um item por materia, com TODAS as votacoes com resultado.
+
+    Materia votada em mais de uma sessao aparece uma vez por periodo,
+    mostrando a votacao daquele periodo e a lista de todas as datas.
+    """
     itens = []
     for p in atuacao.get("projetos_lei", []):
         if p.get("tipo_sigla") != "PLEG":
             continue
-        votos = p.get("votacoes_ordinarias") or []
+        votos = [
+            v
+            for v in (p.get("votacoes_ordinarias") or [])
+            if v.get("situacao_oficial_sapl") or v.get("resultado_texto_sapl")
+        ]
         if not votos:
             continue
-        ultima = max(votos, key=lambda v: v.get("data_sessao") or "")
-        if not ultima.get("situacao_oficial_sapl") and not ultima.get("resultado_texto_sapl"):
-            continue
+        votos = sorted(
+            votos,
+            key=lambda v: (v.get("data_sessao") or "", v.get("sessao_id") or 0),
+        )
         itens.append(
             {
                 "projeto": p,
-                "votacao": ultima,
+                "votacoes": votos,
             }
         )
     return itens
 
 
-def montar_item(entry: dict, cfg: dict, temas: dict[int, str]) -> dict:
-    p = entry["projeto"]
-    v = entry["votacao"]
-    mid = int(p["id"])
-    tema_bruto = temas.get(mid) or p.get("tema") or "Outros"
+def montar_item(
+    projeto: dict, voto_mostrado: dict, votacoes: list[dict], cfg: dict, temas: dict[int, str]
+) -> dict:
+    mid = int(projeto["id"])
+    tema_bruto = temas.get(mid) or projeto.get("tema") or "Outros"
     tema = tema_display(tema_bruto, cfg)
+    turno = voto_mostrado.get("turno") or "turno unico"
     resultado, resultado_oficial = normalizar_resultado(
-        v.get("resultado_texto_sapl"), v.get("frase_resultado_sapl")
+        voto_mostrado.get("resultado_texto_sapl"),
+        voto_mostrado.get("frase_resultado_sapl"),
     )
-    tipo = f"PLL {p.get('numero')}/{p.get('ano')}"
+    if turno == TURNO_PRIMEIRO:
+        resultado = RESULTADO_PRIMEIRO_TURNO
+    elif turno == TURNO_NAO_IDENTIFICADO:
+        resultado = RESULTADO_TURNO_NAO_IDENTIFICADO
+    tipo = f"PLL {projeto.get('numero')}/{projeto.get('ano')}"
     return {
         "id": mid,
         "tipo": tipo,
         "resultado": resultado,
         "resultado_oficial": resultado_oficial,
-        "ementa": p.get("ementa") or "",
+        "turno": turno,
+        "ementa": projeto.get("ementa") or "",
         "categoria": tema,
-        "placar": placar_resumido(v),
-        "data_sessao": v.get("data_sessao"),
-        "sessao_id": v.get("sessao_id"),
+        "placar": placar_resumido(voto_mostrado),
+        "data_sessao": voto_mostrado.get("data_sessao"),
+        "sessao_id": voto_mostrado.get("sessao_id"),
+        "votacoes": [
+            {
+                "data_sessao": v.get("data_sessao"),
+                "sessao_id": v.get("sessao_id"),
+                "turno": v.get("turno") or "turno unico",
+            }
+            for v in votacoes
+        ],
     }
 
 
-def periodos(lista: list[dict], sessoes: list[dict]) -> tuple[list, list, list]:
-    if not lista:
+def _voto_mais_recente(votos: list[dict]) -> dict | None:
+    if not votos:
+        return None
+    return max(
+        votos,
+        key=lambda v: (v.get("data_sessao") or "", v.get("sessao_id") or 0),
+    )
+
+
+def periodos(
+    materias: list[dict], sessoes: list[dict], cfg: dict, temas: dict[int, str]
+) -> tuple[list, list, list]:
+    if not materias:
         return [], [], []
     datas = sorted({s["data"] for s in sessoes if s.get("data")})
     ultima_data = datas[-1] if datas else None
     sessao_ids_ultima = {s["id"] for s in sessoes if s.get("data") == ultima_data}
-
-    sessao = [m for m in lista if m.get("sessao_id") in sessao_ids_ultima]
 
     if ultima_data:
         y, mo, _ = map(int, ultima_data.split("-"))
@@ -156,23 +194,43 @@ def periodos(lista: list[dict], sessoes: list[dict]) -> tuple[list, list, list]:
     else:
         ano_ant, mes_ant = 0, 0
 
-    mes = [
-        m
-        for m in lista
-        if m.get("data_sessao")
-        and int(m["data_sessao"].split("-")[0]) == ano_ant
-        and int(m["data_sessao"].split("-")[1]) == mes_ant
-    ]
-    todo = list(lista)
+    def no_mes_anterior(voto: dict) -> bool:
+        data = voto.get("data_sessao") or ""
+        partes = data.split("-")
+        return (
+            len(partes) == 3
+            and partes[0] == str(ano_ant)
+            and int(partes[1]) == mes_ant
+        )
+
+    sessao, mes, todo = [], [], []
+    for entry in materias:
+        projeto = entry["projeto"]
+        votos = entry["votacoes"]
+        voto_sessao = _voto_mais_recente(
+            [v for v in votos if v.get("sessao_id") in sessao_ids_ultima]
+        )
+        voto_mes = _voto_mais_recente([v for v in votos if no_mes_anterior(v)])
+        voto_todo = _voto_mais_recente(votos)
+        if voto_sessao is not None:
+            sessao.append(montar_item(projeto, voto_sessao, votos, cfg, temas))
+        if voto_mes is not None:
+            mes.append(montar_item(projeto, voto_mes, votos, cfg, temas))
+        if voto_todo is not None:
+            todo.append(montar_item(projeto, voto_todo, votos, cfg, temas))
     return sessao, mes, todo
 
 
 def filtros_de(lista: list[dict]) -> list[dict]:
+    """Contagens por resultado: 1o turno e turno nao identificado tem
+    lista propria e nao entram na contagem de aprovados."""
     total = len(lista)
     uni = sum(1 for m in lista if m["resultado"] == "unanimidade")
     mai = sum(1 for m in lista if m["resultado"] == "maioria")
     rej = sum(1 for m in lista if m["resultado"] == "rejeitado")
-    outro = total - uni - mai - rej
+    pri = sum(1 for m in lista if m["resultado"] == RESULTADO_PRIMEIRO_TURNO)
+    nao_id = sum(1 for m in lista if m["resultado"] == RESULTADO_TURNO_NAO_IDENTIFICADO)
+    outro = total - uni - mai - rej - pri - nao_id
     filtros = [
         {"id": "", "rotulo": "Todos", "qtd": total},
         {"id": "unanimidade", "rotulo": "Unânimes", "qtd": uni},
@@ -180,6 +238,16 @@ def filtros_de(lista: list[dict]) -> list[dict]:
     ]
     if rej:
         filtros.append({"id": "rejeitado", "rotulo": "Rejeitados", "qtd": rej})
+    if pri:
+        filtros.append({"id": RESULTADO_PRIMEIRO_TURNO, "rotulo": "1o turno", "qtd": pri})
+    if nao_id:
+        filtros.append(
+            {
+                "id": RESULTADO_TURNO_NAO_IDENTIFICADO,
+                "rotulo": "Turno não identificado",
+                "qtd": nao_id,
+            }
+        )
     if outro:
         filtros.append(
             {"id": RESULTADO_NAO_MAPEADO, "rotulo": "Resultado não mapeado", "qtd": outro}
@@ -225,10 +293,9 @@ def gerar_ano(ano: int, cfg: dict) -> None:
     atuacao = json.loads(path.read_text(encoding="utf-8"))
     temas = carregar_temas()
     bruto = pll_votados_no_ano(atuacao)
-    lista = [montar_item(e, cfg, temas) for e in bruto]
-    sessao, mes, todo = periodos(lista, atuacao.get("sessoes") or [])
+    sessao, mes, todo = periodos(bruto, atuacao.get("sessoes") or [], cfg, temas)
     out = RAIZ / "dados" / "tratados"
-    gravar_camara(str(ano), sessao, mes, todo, lista, out)
+    gravar_camara(str(ano), sessao, mes, todo, todo, out)
     print(f"Ano {ano}: sessao={len(sessao)} mes={len(mes)} todo={len(todo)} PLL")
 
 
@@ -327,6 +394,8 @@ def _mesclar_votos(a: dict, b: dict) -> dict:
     out = copy.deepcopy(a or {})
     bb = b or {}
     for chave in CHAVES_CONTAGEM_VOTO:
+        out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0)
+    for chave in ("primeiro_turno_registros", "turno_nao_identificado_registros"):
         out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0)
     if bb.get("rotulos"):
         out["rotulos"] = bb["rotulos"]
@@ -517,9 +586,8 @@ def gerar_legislatura(cfg: dict) -> None:
 
     temas = carregar_temas()
     bruto = pll_votados_no_ano(consolidado)
-    lista = [montar_item(e, cfg, temas) for e in bruto]
-    sessao, mes, todo = periodos(lista, consolidado.get("sessoes") or [])
-    gravar_camara(SUFIXO_LEGISLATURA, sessao, mes, todo, lista, out)
+    sessao, mes, todo = periodos(bruto, consolidado.get("sessoes") or [], cfg, temas)
+    gravar_camara(SUFIXO_LEGISLATURA, sessao, mes, todo, todo, out)
     print(
         f"Legislatura {anos}: sessao={len(sessao)} mes={len(mes)} todo={len(todo)} PLL, "
         f"{len(consolidado['vereadores'])} vereadores"
