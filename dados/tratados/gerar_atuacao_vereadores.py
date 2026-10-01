@@ -1197,39 +1197,33 @@ def consolidar_presenca(lista: list[dict], nome: str, sessoes_fora: int = 0) -> 
 
 
 def consolidar_votos(lista: list[dict], n_contado: int, nome: str) -> dict:
-    """Nominais dentro do mandato. A contagem so soma 2o turno e turno unico.
+    """Historico so com o voto valido: 2o turno ou turno unico.
 
-    O 1o turno e o turno nao identificado aparecem na lista com o turno
-    marcado, mas nao entram na contagem de votos. n_contado e a quantidade
-    esperada de nominais contados nessa janela.
+    O 1o turno, o turno nao identificado e o voto sem deliberacao nao
+    viram item nem entram na contagem. Os contadores abaixo guardam
+    quantos ficaram de fora, para auditoria.
     """
-    contados = [item for item in lista if item.get("turno") in TURNOS_CONTADOS]
-    primeiro = sum(1 for item in lista if item.get("turno") == TURNO_PRIMEIRO)
+    validos = [item for item in lista if item.get("turno") in TURNOS_CONTADOS]
+    fora = [item for item in lista if item.get("turno") not in TURNOS_CONTADOS]
+    primeiro = sum(1 for item in fora if item.get("turno") == TURNO_PRIMEIRO)
     nao_identificado = sum(
-        1 for item in lista if item.get("turno") == TURNO_NAO_IDENTIFICADO
+        1 for item in fora if item.get("turno") == TURNO_NAO_IDENTIFICADO
     )
-    nao_deliberativo = sum(1 for item in lista if item.get("turno") is None)
-    contagem = Counter(item["estado"] for item in contados)
+    nao_deliberativo = len(fora) - primeiro - nao_identificado
+    contagem = Counter(item["estado"] for item in validos)
     resultado = {chave: contagem.get(chave, 0) for chave in ORDEM_ESTADOS}
     resultado["rotulos"] = {chave: ROTULOS_ESTADO[chave] for chave in ORDEM_ESTADOS}
-    resultado["total_registros"] = len(lista)
+    resultado["total_registros"] = len(validos)
     resultado["primeiro_turno_registros"] = primeiro
     resultado["turno_nao_identificado_registros"] = nao_identificado
     resultado["nao_deliberativo_registros"] = nao_deliberativo
-    resultado["nominais"] = lista
-    if (
-        sum(resultado[chave] for chave in ORDEM_ESTADOS)
-        + primeiro
-        + nao_identificado
-        + nao_deliberativo
-        != len(lista)
-    ):
+    resultado["nominais"] = validos
+    if sum(resultado[chave] for chave in ORDEM_ESTADOS) != len(validos):
         raise SystemExit(f"{nome}: a soma dos estados de voto nao fecha.")
-    if sum(resultado[chave] for chave in ORDEM_ESTADOS) != n_contado:
+    if len(validos) != n_contado:
         raise SystemExit(
-            f"{nome}: {sum(resultado[chave] for chave in ORDEM_ESTADOS)} votos "
-            f"contados para {n_contado} votacoes de 2o turno ou turno unico "
-            "dentro do mandato."
+            f"{nome}: {len(validos)} votos validos para {n_contado} votacoes "
+            "de 2o turno ou turno unico dentro do mandato."
         )
     return resultado
 
