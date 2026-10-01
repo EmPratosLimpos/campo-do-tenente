@@ -103,6 +103,7 @@ class TestVotosVereadores(unittest.TestCase):
                 f"{nominais_por_estado('rafael-ventura', 'presidente_que_nao_votou')} registros",
                 texto_rafael_filtro,
             )
+            self.assertIn("Pedido de Vistas", texto_rafael_filtro)
 
             abrir_se_fechado("tit-pll")
             abrir_se_fechado("tit-votos")

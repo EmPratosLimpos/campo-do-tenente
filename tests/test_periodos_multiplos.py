@@ -102,8 +102,17 @@ class TestMultiplaVotacaoFixture(unittest.TestCase):
         item = montar_item(projeto, voto, [voto], CFG_FALSA, {})
         self.assertEqual(
             item["votacoes"],
-            [{"data_sessao": "2026-09-22", "sessao_id": 101, "turno": "turno unico"}],
+            [
+                {
+                    "data_sessao": "2026-09-22",
+                    "sessao_id": 101,
+                    "turno": None,
+                    "tipo_resultado": None,
+                }
+            ],
         )
+        self.assertIsNone(item["turno"])
+        self.assertIsNone(item["tipo_resultado"])
 
 
 class TestPleg4Real(unittest.TestCase):
