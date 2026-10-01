@@ -19584,7 +19584,7 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 79,
+        "total_registros": 66,
         "primeiro_turno_registros": 11,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 2,
@@ -19614,89 +19614,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/245"
-          },
-          {
-            "votacao_id": 155,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
-          {
-            "votacao_id": 156,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 255,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
-          },
-          {
-            "votacao_id": 157,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 257,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
-          },
-          {
-            "votacao_id": 158,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 258,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
-          },
-          {
-            "votacao_id": 159,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 256,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
-          },
-          {
-            "votacao_id": 161,
-            "sessao_id": 45,
-            "data_sessao": "2026-03-17",
-            "materia_id": 254,
-            "estado": "licenca_tratamento_saude",
-            "rotulo": "Licença para tratamento de saúde",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254",
-            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
-            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
-            "fonte_oficial_encontrada": true,
-            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
-            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
             "votacao_id": 162,
@@ -19951,24 +19868,6 @@
             "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
-            "votacao_id": 189,
-            "sessao_id": 51,
-            "data_sessao": "2026-04-14",
-            "materia_id": 292,
-            "estado": "licenca_tratamento_saude",
-            "rotulo": "Licença para tratamento de saúde",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292",
-            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
-            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
-            "fonte_oficial_encontrada": true,
-            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
-            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
-          },
-          {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
@@ -20124,24 +20023,6 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349",
-            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
-            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
-            "fonte_oficial_encontrada": true,
-            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
-            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
-          },
-          {
-            "votacao_id": 200,
-            "sessao_id": 54,
-            "data_sessao": "2026-05-05",
-            "materia_id": 290,
-            "estado": "licenca_tratamento_saude",
-            "rotulo": "Licença para tratamento de saúde",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290",
             "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
             "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
             "fonte_oficial_encontrada": true,
@@ -20311,24 +20192,6 @@
             "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
-            "votacao_id": 210,
-            "sessao_id": 81,
-            "data_sessao": "2026-06-02",
-            "materia_id": 604,
-            "estado": "licenca_tratamento_saude",
-            "rotulo": "Licença para tratamento de saúde",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604",
-            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
-            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
-            "fonte_oficial_encontrada": true,
-            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
-            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
-          },
-          {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
@@ -20448,24 +20311,6 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608",
-            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
-            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
-            "fonte_oficial_encontrada": true,
-            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
-            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
-          },
-          {
-            "votacao_id": 218,
-            "sessao_id": 257,
-            "data_sessao": "2026-06-09",
-            "materia_id": 347,
-            "estado": "licenca_tratamento_saude",
-            "rotulo": "Licença para tratamento de saúde",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347",
             "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
             "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
             "fonte_oficial_encontrada": true,
@@ -20671,24 +20516,6 @@
             "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
           },
           {
-            "votacao_id": 232,
-            "sessao_id": 262,
-            "data_sessao": "2026-07-14",
-            "materia_id": 622,
-            "estado": "licenca_tratamento_saude",
-            "rotulo": "Licença para tratamento de saúde",
-            "turno": "1o turno",
-            "tipo_resultado": "Rejeitada",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622",
-            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
-            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
-            "fonte_oficial_encontrada": true,
-            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
-            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
-          },
-          {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
@@ -20862,42 +20689,6 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721",
-            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
-            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
-            "fonte_oficial_encontrada": true,
-            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
-            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
-          },
-          {
-            "votacao_id": 244,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 704,
-            "estado": "licenca_tratamento_saude",
-            "rotulo": "Licença para tratamento de saúde",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704",
-            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
-            "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
-            "fonte_oficial_encontrada": true,
-            "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
-            "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
-          },
-          {
-            "votacao_id": 245,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 698,
-            "estado": "licenca_tratamento_saude",
-            "rotulo": "Licença para tratamento de saúde",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698",
             "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
             "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
             "fonte_oficial_encontrada": true,
@@ -21454,7 +21245,7 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 106,
+        "total_registros": 89,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -21484,84 +21275,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/245"
-          },
-          {
-            "votacao_id": 155,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
-          {
-            "votacao_id": 156,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 255,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
-          },
-          {
-            "votacao_id": 157,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 257,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
-          },
-          {
-            "votacao_id": 158,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 258,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
-          },
-          {
-            "votacao_id": 159,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 256,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
-          },
-          {
-            "votacao_id": 161,
-            "sessao_id": 45,
-            "data_sessao": "2026-03-17",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
           },
           {
             "votacao_id": 162,
@@ -21746,19 +21459,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291"
           },
           {
-            "votacao_id": 189,
-            "sessao_id": 51,
-            "data_sessao": "2026-04-14",
-            "materia_id": 292,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292"
-          },
-          {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
@@ -21874,19 +21574,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349"
-          },
-          {
-            "votacao_id": 200,
-            "sessao_id": 54,
-            "data_sessao": "2026-05-05",
-            "materia_id": 290,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
           },
           {
             "votacao_id": 201,
@@ -22006,19 +21693,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600"
           },
           {
-            "votacao_id": 210,
-            "sessao_id": 81,
-            "data_sessao": "2026-06-02",
-            "materia_id": 604,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
-          },
-          {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
@@ -22108,19 +21782,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608"
-          },
-          {
-            "votacao_id": 218,
-            "sessao_id": 257,
-            "data_sessao": "2026-06-09",
-            "materia_id": 347,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
           },
           {
             "votacao_id": 219,
@@ -22266,19 +21927,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691"
           },
           {
-            "votacao_id": 232,
-            "sessao_id": 262,
-            "data_sessao": "2026-07-14",
-            "materia_id": 622,
-            "estado": "nao",
-            "rotulo": "Não",
-            "turno": "1o turno",
-            "tipo_resultado": "Rejeitada",
-            "voto_texto_sapl": "Não",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622"
-          },
-          {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
@@ -22409,32 +22057,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721"
           },
           {
-            "votacao_id": 244,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
-          },
-          {
-            "votacao_id": 245,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 698,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
-          },
-          {
             "votacao_id": 246,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
@@ -22498,19 +22120,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797"
-          },
-          {
-            "votacao_id": 252,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
           },
           {
             "votacao_id": 253,
@@ -22695,32 +22304,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 270,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 811,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811"
-          },
-          {
-            "votacao_id": 271,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 815,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815"
-          },
-          {
             "votacao_id": 272,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -22732,19 +22315,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
           },
           {
             "votacao_id": 268,
@@ -23334,7 +22904,7 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 106,
+        "total_registros": 89,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -23364,84 +22934,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/245"
-          },
-          {
-            "votacao_id": 155,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
-          {
-            "votacao_id": 156,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 255,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
-          },
-          {
-            "votacao_id": 157,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 257,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
-          },
-          {
-            "votacao_id": 158,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 258,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
-          },
-          {
-            "votacao_id": 159,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 256,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
-          },
-          {
-            "votacao_id": 161,
-            "sessao_id": 45,
-            "data_sessao": "2026-03-17",
-            "materia_id": 254,
-            "estado": "ausente_com_justificativa",
-            "rotulo": "Ausente com justificativa",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
           },
           {
             "votacao_id": 162,
@@ -23626,19 +23118,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291"
           },
           {
-            "votacao_id": 189,
-            "sessao_id": 51,
-            "data_sessao": "2026-04-14",
-            "materia_id": 292,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292"
-          },
-          {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
@@ -23754,19 +23233,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349"
-          },
-          {
-            "votacao_id": 200,
-            "sessao_id": 54,
-            "data_sessao": "2026-05-05",
-            "materia_id": 290,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
           },
           {
             "votacao_id": 201,
@@ -23886,19 +23352,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600"
           },
           {
-            "votacao_id": 210,
-            "sessao_id": 81,
-            "data_sessao": "2026-06-02",
-            "materia_id": 604,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
-          },
-          {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
@@ -23988,19 +23441,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608"
-          },
-          {
-            "votacao_id": 218,
-            "sessao_id": 257,
-            "data_sessao": "2026-06-09",
-            "materia_id": 347,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
           },
           {
             "votacao_id": 219,
@@ -24146,19 +23586,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691"
           },
           {
-            "votacao_id": 232,
-            "sessao_id": 262,
-            "data_sessao": "2026-07-14",
-            "materia_id": 622,
-            "estado": "nao",
-            "rotulo": "Não",
-            "turno": "1o turno",
-            "tipo_resultado": "Rejeitada",
-            "voto_texto_sapl": "Não",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622"
-          },
-          {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
@@ -24289,32 +23716,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721"
           },
           {
-            "votacao_id": 244,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
-          },
-          {
-            "votacao_id": 245,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 698,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
-          },
-          {
             "votacao_id": 246,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
@@ -24378,19 +23779,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797"
-          },
-          {
-            "votacao_id": 252,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
           },
           {
             "votacao_id": 253,
@@ -24575,32 +23963,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 270,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 811,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811"
-          },
-          {
-            "votacao_id": 271,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 815,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815"
-          },
-          {
             "votacao_id": 272,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -24612,19 +23974,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
           },
           {
             "votacao_id": 268,
@@ -25195,7 +24544,7 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 106,
+        "total_registros": 89,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -25225,84 +24574,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/245"
-          },
-          {
-            "votacao_id": 155,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
-          {
-            "votacao_id": 156,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 255,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
-          },
-          {
-            "votacao_id": 157,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 257,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
-          },
-          {
-            "votacao_id": 158,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 258,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
-          },
-          {
-            "votacao_id": 159,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 256,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
-          },
-          {
-            "votacao_id": 161,
-            "sessao_id": 45,
-            "data_sessao": "2026-03-17",
-            "materia_id": 254,
-            "estado": "ausente_com_justificativa",
-            "rotulo": "Ausente com justificativa",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
           },
           {
             "votacao_id": 162,
@@ -25487,19 +24758,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291"
           },
           {
-            "votacao_id": 189,
-            "sessao_id": 51,
-            "data_sessao": "2026-04-14",
-            "materia_id": 292,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292"
-          },
-          {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
@@ -25615,19 +24873,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349"
-          },
-          {
-            "votacao_id": 200,
-            "sessao_id": 54,
-            "data_sessao": "2026-05-05",
-            "materia_id": 290,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
           },
           {
             "votacao_id": 201,
@@ -25747,19 +24992,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600"
           },
           {
-            "votacao_id": 210,
-            "sessao_id": 81,
-            "data_sessao": "2026-06-02",
-            "materia_id": 604,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
-          },
-          {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
@@ -25849,19 +25081,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608"
-          },
-          {
-            "votacao_id": 218,
-            "sessao_id": 257,
-            "data_sessao": "2026-06-09",
-            "materia_id": 347,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
           },
           {
             "votacao_id": 219,
@@ -26007,19 +25226,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691"
           },
           {
-            "votacao_id": 232,
-            "sessao_id": 262,
-            "data_sessao": "2026-07-14",
-            "materia_id": 622,
-            "estado": "nao",
-            "rotulo": "Não",
-            "turno": "1o turno",
-            "tipo_resultado": "Rejeitada",
-            "voto_texto_sapl": "Não",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622"
-          },
-          {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
@@ -26150,32 +25356,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721"
           },
           {
-            "votacao_id": 244,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
-          },
-          {
-            "votacao_id": 245,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 698,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
-          },
-          {
             "votacao_id": 246,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
@@ -26239,19 +25419,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797"
-          },
-          {
-            "votacao_id": 252,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
           },
           {
             "votacao_id": 253,
@@ -26436,32 +25603,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 270,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 811,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811"
-          },
-          {
-            "votacao_id": 271,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 815,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815"
-          },
-          {
             "votacao_id": 272,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -26473,19 +25614,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
           },
           {
             "votacao_id": 268,
@@ -27075,7 +26203,7 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 106,
+        "total_registros": 89,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -27105,84 +26233,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/245"
-          },
-          {
-            "votacao_id": 155,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 254,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
-          {
-            "votacao_id": 156,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 255,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
-          },
-          {
-            "votacao_id": 157,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 257,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
-          },
-          {
-            "votacao_id": 158,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 258,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
-          },
-          {
-            "votacao_id": 159,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 256,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
-          },
-          {
-            "votacao_id": 161,
-            "sessao_id": 45,
-            "data_sessao": "2026-03-17",
-            "materia_id": 254,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
           },
           {
             "votacao_id": 162,
@@ -27367,19 +26417,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291"
           },
           {
-            "votacao_id": 189,
-            "sessao_id": 51,
-            "data_sessao": "2026-04-14",
-            "materia_id": 292,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292"
-          },
-          {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
@@ -27495,19 +26532,6 @@
             "voto_texto_sapl": "Não Votou",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349"
-          },
-          {
-            "votacao_id": 200,
-            "sessao_id": 54,
-            "data_sessao": "2026-05-05",
-            "materia_id": 290,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
           },
           {
             "votacao_id": 201,
@@ -27627,19 +26651,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600"
           },
           {
-            "votacao_id": 210,
-            "sessao_id": 81,
-            "data_sessao": "2026-06-02",
-            "materia_id": 604,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
-          },
-          {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
@@ -27729,19 +26740,6 @@
             "voto_texto_sapl": "Não Votou",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608"
-          },
-          {
-            "votacao_id": 218,
-            "sessao_id": 257,
-            "data_sessao": "2026-06-09",
-            "materia_id": 347,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
           },
           {
             "votacao_id": 219,
@@ -27887,19 +26885,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691"
           },
           {
-            "votacao_id": 232,
-            "sessao_id": 262,
-            "data_sessao": "2026-07-14",
-            "materia_id": 622,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Rejeitada",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622"
-          },
-          {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
@@ -28030,32 +27015,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721"
           },
           {
-            "votacao_id": 244,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 704,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
-          },
-          {
-            "votacao_id": 245,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 698,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
-          },
-          {
             "votacao_id": 246,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
@@ -28119,19 +27078,6 @@
             "voto_texto_sapl": "Não Votou",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797"
-          },
-          {
-            "votacao_id": 252,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 704,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
           },
           {
             "votacao_id": 253,
@@ -28316,32 +27262,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 270,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 811,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811"
-          },
-          {
-            "votacao_id": 271,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 815,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815"
-          },
-          {
             "votacao_id": 272,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -28353,19 +27273,6 @@
             "voto_texto_sapl": "Não Votou",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "presidente_que_nao_votou",
-            "rotulo": "Presidente que não votou",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não Votou",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
           },
           {
             "votacao_id": 268,
@@ -28988,7 +27895,7 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 106,
+        "total_registros": 89,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -29018,84 +27925,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/245"
-          },
-          {
-            "votacao_id": 155,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
-          {
-            "votacao_id": 156,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 255,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
-          },
-          {
-            "votacao_id": 157,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 257,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
-          },
-          {
-            "votacao_id": 158,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 258,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
-          },
-          {
-            "votacao_id": 159,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 256,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
-          },
-          {
-            "votacao_id": 161,
-            "sessao_id": 45,
-            "data_sessao": "2026-03-17",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
           },
           {
             "votacao_id": 162,
@@ -29280,19 +28109,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291"
           },
           {
-            "votacao_id": 189,
-            "sessao_id": 51,
-            "data_sessao": "2026-04-14",
-            "materia_id": 292,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292"
-          },
-          {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
@@ -29408,19 +28224,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349"
-          },
-          {
-            "votacao_id": 200,
-            "sessao_id": 54,
-            "data_sessao": "2026-05-05",
-            "materia_id": 290,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
           },
           {
             "votacao_id": 201,
@@ -29540,19 +28343,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600"
           },
           {
-            "votacao_id": 210,
-            "sessao_id": 81,
-            "data_sessao": "2026-06-02",
-            "materia_id": 604,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
-          },
-          {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
@@ -29642,19 +28432,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608"
-          },
-          {
-            "votacao_id": 218,
-            "sessao_id": 257,
-            "data_sessao": "2026-06-09",
-            "materia_id": 347,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
           },
           {
             "votacao_id": 219,
@@ -29800,19 +28577,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691"
           },
           {
-            "votacao_id": 232,
-            "sessao_id": 262,
-            "data_sessao": "2026-07-14",
-            "materia_id": 622,
-            "estado": "nao",
-            "rotulo": "Não",
-            "turno": "1o turno",
-            "tipo_resultado": "Rejeitada",
-            "voto_texto_sapl": "Não",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622"
-          },
-          {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
@@ -29943,32 +28707,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721"
           },
           {
-            "votacao_id": 244,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
-          },
-          {
-            "votacao_id": 245,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 698,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
-          },
-          {
             "votacao_id": 246,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
@@ -30032,19 +28770,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797"
-          },
-          {
-            "votacao_id": 252,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
           },
           {
             "votacao_id": 253,
@@ -30229,32 +28954,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 270,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 811,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811"
-          },
-          {
-            "votacao_id": 271,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 815,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815"
-          },
-          {
             "votacao_id": 272,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -30266,19 +28965,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
           },
           {
             "votacao_id": 268,
@@ -30868,7 +29554,7 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 106,
+        "total_registros": 89,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -30898,84 +29584,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/245"
-          },
-          {
-            "votacao_id": 155,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
-          {
-            "votacao_id": 156,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 255,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
-          },
-          {
-            "votacao_id": 157,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 257,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
-          },
-          {
-            "votacao_id": 158,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 258,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
-          },
-          {
-            "votacao_id": 159,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 256,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
-          },
-          {
-            "votacao_id": 161,
-            "sessao_id": 45,
-            "data_sessao": "2026-03-17",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
           },
           {
             "votacao_id": 162,
@@ -31160,19 +29768,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291"
           },
           {
-            "votacao_id": 189,
-            "sessao_id": 51,
-            "data_sessao": "2026-04-14",
-            "materia_id": 292,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292"
-          },
-          {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
@@ -31288,19 +29883,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349"
-          },
-          {
-            "votacao_id": 200,
-            "sessao_id": 54,
-            "data_sessao": "2026-05-05",
-            "materia_id": 290,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
           },
           {
             "votacao_id": 201,
@@ -31420,19 +30002,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600"
           },
           {
-            "votacao_id": 210,
-            "sessao_id": 81,
-            "data_sessao": "2026-06-02",
-            "materia_id": 604,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
-          },
-          {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
@@ -31522,19 +30091,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608"
-          },
-          {
-            "votacao_id": 218,
-            "sessao_id": 257,
-            "data_sessao": "2026-06-09",
-            "materia_id": 347,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
           },
           {
             "votacao_id": 219,
@@ -31680,19 +30236,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691"
           },
           {
-            "votacao_id": 232,
-            "sessao_id": 262,
-            "data_sessao": "2026-07-14",
-            "materia_id": 622,
-            "estado": "nao",
-            "rotulo": "Não",
-            "turno": "1o turno",
-            "tipo_resultado": "Rejeitada",
-            "voto_texto_sapl": "Não",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622"
-          },
-          {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
@@ -31823,32 +30366,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721"
           },
           {
-            "votacao_id": 244,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
-          },
-          {
-            "votacao_id": 245,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 698,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
-          },
-          {
             "votacao_id": 246,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
@@ -31912,19 +30429,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797"
-          },
-          {
-            "votacao_id": 252,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
           },
           {
             "votacao_id": 253,
@@ -32109,32 +30613,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 270,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 811,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811"
-          },
-          {
-            "votacao_id": 271,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 815,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815"
-          },
-          {
             "votacao_id": 272,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -32146,19 +30624,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
           },
           {
             "votacao_id": 268,
@@ -32729,7 +31194,7 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 106,
+        "total_registros": 89,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -32759,84 +31224,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/245"
-          },
-          {
-            "votacao_id": 155,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
-          {
-            "votacao_id": 156,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 255,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
-          },
-          {
-            "votacao_id": 157,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 257,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
-          },
-          {
-            "votacao_id": 158,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 258,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
-          },
-          {
-            "votacao_id": 159,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 256,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
-          },
-          {
-            "votacao_id": 161,
-            "sessao_id": 45,
-            "data_sessao": "2026-03-17",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
           },
           {
             "votacao_id": 162,
@@ -33021,19 +31408,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291"
           },
           {
-            "votacao_id": 189,
-            "sessao_id": 51,
-            "data_sessao": "2026-04-14",
-            "materia_id": 292,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292"
-          },
-          {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
@@ -33149,19 +31523,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349"
-          },
-          {
-            "votacao_id": 200,
-            "sessao_id": 54,
-            "data_sessao": "2026-05-05",
-            "materia_id": 290,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
           },
           {
             "votacao_id": 201,
@@ -33281,19 +31642,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600"
           },
           {
-            "votacao_id": 210,
-            "sessao_id": 81,
-            "data_sessao": "2026-06-02",
-            "materia_id": 604,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
-          },
-          {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
@@ -33383,19 +31731,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608"
-          },
-          {
-            "votacao_id": 218,
-            "sessao_id": 257,
-            "data_sessao": "2026-06-09",
-            "materia_id": 347,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
           },
           {
             "votacao_id": 219,
@@ -33541,19 +31876,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691"
           },
           {
-            "votacao_id": 232,
-            "sessao_id": 262,
-            "data_sessao": "2026-07-14",
-            "materia_id": 622,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
-            "turno": "1o turno",
-            "tipo_resultado": "Rejeitada",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622"
-          },
-          {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
@@ -33684,32 +32006,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721"
           },
           {
-            "votacao_id": 244,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
-          },
-          {
-            "votacao_id": 245,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 698,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
-          },
-          {
             "votacao_id": 246,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
@@ -33773,19 +32069,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797"
-          },
-          {
-            "votacao_id": 252,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
           },
           {
             "votacao_id": 253,
@@ -33970,32 +32253,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 270,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 811,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811"
-          },
-          {
-            "votacao_id": 271,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 815,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815"
-          },
-          {
             "votacao_id": 272,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -34007,19 +32264,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
           },
           {
             "votacao_id": 268,
@@ -34590,7 +32834,7 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 106,
+        "total_registros": 89,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -34620,84 +32864,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/245"
-          },
-          {
-            "votacao_id": 155,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
-          {
-            "votacao_id": 156,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 255,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
-          },
-          {
-            "votacao_id": 157,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 257,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
-          },
-          {
-            "votacao_id": 158,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 258,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
-          },
-          {
-            "votacao_id": 159,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 256,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
-          },
-          {
-            "votacao_id": 161,
-            "sessao_id": 45,
-            "data_sessao": "2026-03-17",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
           },
           {
             "votacao_id": 162,
@@ -34882,19 +33048,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291"
           },
           {
-            "votacao_id": 189,
-            "sessao_id": 51,
-            "data_sessao": "2026-04-14",
-            "materia_id": 292,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292"
-          },
-          {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
@@ -35010,19 +33163,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349"
-          },
-          {
-            "votacao_id": 200,
-            "sessao_id": 54,
-            "data_sessao": "2026-05-05",
-            "materia_id": 290,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
           },
           {
             "votacao_id": 201,
@@ -35142,19 +33282,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600"
           },
           {
-            "votacao_id": 210,
-            "sessao_id": 81,
-            "data_sessao": "2026-06-02",
-            "materia_id": 604,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
-          },
-          {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
@@ -35244,19 +33371,6 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608"
-          },
-          {
-            "votacao_id": 218,
-            "sessao_id": 257,
-            "data_sessao": "2026-06-09",
-            "materia_id": 347,
-            "estado": "ausente_com_justificativa",
-            "rotulo": "Ausente com justificativa",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
           },
           {
             "votacao_id": 219,
@@ -35402,19 +33516,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691"
           },
           {
-            "votacao_id": 232,
-            "sessao_id": 262,
-            "data_sessao": "2026-07-14",
-            "materia_id": 622,
-            "estado": "nao",
-            "rotulo": "Não",
-            "turno": "1o turno",
-            "tipo_resultado": "Rejeitada",
-            "voto_texto_sapl": "Não",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622"
-          },
-          {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
@@ -35545,32 +33646,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721"
           },
           {
-            "votacao_id": 244,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
-          },
-          {
-            "votacao_id": 245,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 698,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
-          },
-          {
             "votacao_id": 246,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
@@ -35634,19 +33709,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797"
-          },
-          {
-            "votacao_id": 252,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
           },
           {
             "votacao_id": 253,
@@ -35831,32 +33893,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 270,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 811,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811"
-          },
-          {
-            "votacao_id": 271,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 815,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815"
-          },
-          {
             "votacao_id": 272,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -35868,19 +33904,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
           },
           {
             "votacao_id": 268,
@@ -36415,24 +34438,11 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 99,
+        "total_registros": 87,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 2,
         "nominais": [
-          {
-            "votacao_id": 161,
-            "sessao_id": 45,
-            "data_sessao": "2026-03-17",
-            "materia_id": 254,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/45",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
           {
             "votacao_id": 162,
             "sessao_id": 45,
@@ -36616,19 +34626,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/291"
           },
           {
-            "votacao_id": 189,
-            "sessao_id": 51,
-            "data_sessao": "2026-04-14",
-            "materia_id": 292,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/51",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/292"
-          },
-          {
             "votacao_id": 190,
             "sessao_id": 51,
             "data_sessao": "2026-04-14",
@@ -36744,19 +34741,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/349"
-          },
-          {
-            "votacao_id": 200,
-            "sessao_id": 54,
-            "data_sessao": "2026-05-05",
-            "materia_id": 290,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/54",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/290"
           },
           {
             "votacao_id": 201,
@@ -36876,19 +34860,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/600"
           },
           {
-            "votacao_id": 210,
-            "sessao_id": 81,
-            "data_sessao": "2026-06-02",
-            "materia_id": 604,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/81",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/604"
-          },
-          {
             "votacao_id": 211,
             "sessao_id": 81,
             "data_sessao": "2026-06-02",
@@ -36978,19 +34949,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/608"
-          },
-          {
-            "votacao_id": 218,
-            "sessao_id": 257,
-            "data_sessao": "2026-06-09",
-            "materia_id": 347,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/257",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/347"
           },
           {
             "votacao_id": 219,
@@ -37136,19 +35094,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/691"
           },
           {
-            "votacao_id": 232,
-            "sessao_id": 262,
-            "data_sessao": "2026-07-14",
-            "materia_id": 622,
-            "estado": "nao",
-            "rotulo": "Não",
-            "turno": "1o turno",
-            "tipo_resultado": "Rejeitada",
-            "voto_texto_sapl": "Não",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/262",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/622"
-          },
-          {
             "votacao_id": 233,
             "sessao_id": 263,
             "data_sessao": "2026-07-21",
@@ -37279,32 +35224,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/721"
           },
           {
-            "votacao_id": 244,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
-          },
-          {
-            "votacao_id": 245,
-            "sessao_id": 266,
-            "data_sessao": "2026-08-11",
-            "materia_id": 698,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/266",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698"
-          },
-          {
             "votacao_id": 246,
             "sessao_id": 266,
             "data_sessao": "2026-08-11",
@@ -37368,19 +35287,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797"
-          },
-          {
-            "votacao_id": 252,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 704,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": null,
-            "tipo_resultado": "Pedido de Vistas",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704"
           },
           {
             "votacao_id": 253,
@@ -37565,32 +35471,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 270,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 811,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811"
-          },
-          {
-            "votacao_id": 271,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 815,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815"
-          },
-          {
             "votacao_id": 272,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -37602,19 +35482,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
           },
           {
             "votacao_id": 268,

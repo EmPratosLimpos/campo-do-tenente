@@ -11373,37 +11373,11 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 19,
+        "total_registros": 9,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 0,
         "nominais": [
-          {
-            "votacao_id": 20,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 29,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
-          },
-          {
-            "votacao_id": 25,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 14,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
-          },
           {
             "votacao_id": 28,
             "sessao_id": 8,
@@ -11444,32 +11418,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
           },
           {
-            "votacao_id": 49,
-            "sessao_id": 13,
-            "data_sessao": "2025-07-29",
-            "materia_id": 151,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
-          },
-          {
-            "votacao_id": 63,
-            "sessao_id": 14,
-            "data_sessao": "2025-08-05",
-            "materia_id": 163,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
             "votacao_id": 64,
             "sessao_id": 15,
             "data_sessao": "2025-08-12",
@@ -11481,19 +11429,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
-            "votacao_id": 77,
-            "sessao_id": 21,
-            "data_sessao": "2025-09-23",
-            "materia_id": 27,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
             "votacao_id": 80,
@@ -11509,19 +11444,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
-            "votacao_id": 101,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 189,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
-          },
-          {
             "votacao_id": 102,
             "sessao_id": 31,
             "data_sessao": "2025-11-26",
@@ -11533,32 +11455,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
-          },
-          {
-            "votacao_id": 105,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 190,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
-          },
-          {
-            "votacao_id": 106,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 219,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
           },
           {
             "votacao_id": 109,
@@ -11598,32 +11494,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
-          },
-          {
-            "votacao_id": 112,
-            "sessao_id": 33,
-            "data_sessao": "2025-12-02",
-            "materia_id": 218,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
-          },
-          {
-            "votacao_id": 121,
-            "sessao_id": 34,
-            "data_sessao": "2025-12-09",
-            "materia_id": 240,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
           }
         ]
       },
@@ -12079,37 +11949,11 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 19,
+        "total_registros": 9,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 0,
         "nominais": [
-          {
-            "votacao_id": 20,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 29,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
-          },
-          {
-            "votacao_id": 25,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 14,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
-          },
           {
             "votacao_id": 28,
             "sessao_id": 8,
@@ -12150,32 +11994,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
           },
           {
-            "votacao_id": 49,
-            "sessao_id": 13,
-            "data_sessao": "2025-07-29",
-            "materia_id": 151,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
-          },
-          {
-            "votacao_id": 63,
-            "sessao_id": 14,
-            "data_sessao": "2025-08-05",
-            "materia_id": 163,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
             "votacao_id": 64,
             "sessao_id": 15,
             "data_sessao": "2025-08-12",
@@ -12187,19 +12005,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
-            "votacao_id": 77,
-            "sessao_id": 21,
-            "data_sessao": "2025-09-23",
-            "materia_id": 27,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
             "votacao_id": 80,
@@ -12215,19 +12020,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
-            "votacao_id": 101,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 189,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
-          },
-          {
             "votacao_id": 102,
             "sessao_id": 31,
             "data_sessao": "2025-11-26",
@@ -12239,32 +12031,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
-          },
-          {
-            "votacao_id": 105,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 190,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
-          },
-          {
-            "votacao_id": 106,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 219,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
           },
           {
             "votacao_id": 109,
@@ -12304,32 +12070,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
-          },
-          {
-            "votacao_id": 112,
-            "sessao_id": 33,
-            "data_sessao": "2025-12-02",
-            "materia_id": 218,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
-          },
-          {
-            "votacao_id": 121,
-            "sessao_id": 34,
-            "data_sessao": "2025-12-09",
-            "materia_id": 240,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
           }
         ]
       },
@@ -12888,37 +12628,11 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 19,
+        "total_registros": 9,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 0,
         "nominais": [
-          {
-            "votacao_id": 20,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 29,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
-          },
-          {
-            "votacao_id": 25,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 14,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
-          },
           {
             "votacao_id": 28,
             "sessao_id": 8,
@@ -12959,32 +12673,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
           },
           {
-            "votacao_id": 49,
-            "sessao_id": 13,
-            "data_sessao": "2025-07-29",
-            "materia_id": 151,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
-          },
-          {
-            "votacao_id": 63,
-            "sessao_id": 14,
-            "data_sessao": "2025-08-05",
-            "materia_id": 163,
-            "estado": "nao",
-            "rotulo": "Não",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Não",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
             "votacao_id": 64,
             "sessao_id": 15,
             "data_sessao": "2025-08-12",
@@ -12996,19 +12684,6 @@
             "voto_texto_sapl": "Não",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
-            "votacao_id": 77,
-            "sessao_id": 21,
-            "data_sessao": "2025-09-23",
-            "materia_id": 27,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
             "votacao_id": 80,
@@ -13024,19 +12699,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
-            "votacao_id": 101,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 189,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
-          },
-          {
             "votacao_id": 102,
             "sessao_id": 31,
             "data_sessao": "2025-11-26",
@@ -13048,32 +12710,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
-          },
-          {
-            "votacao_id": 105,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 190,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
-          },
-          {
-            "votacao_id": 106,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 219,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
           },
           {
             "votacao_id": 109,
@@ -13113,32 +12749,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
-          },
-          {
-            "votacao_id": 112,
-            "sessao_id": 33,
-            "data_sessao": "2025-12-02",
-            "materia_id": 218,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
-          },
-          {
-            "votacao_id": 121,
-            "sessao_id": 34,
-            "data_sessao": "2025-12-09",
-            "materia_id": 240,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
           }
         ]
       },
@@ -13629,37 +13239,11 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 19,
+        "total_registros": 9,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 0,
         "nominais": [
-          {
-            "votacao_id": 20,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 29,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
-          },
-          {
-            "votacao_id": 25,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 14,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
-          },
           {
             "votacao_id": 28,
             "sessao_id": 8,
@@ -13700,32 +13284,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
           },
           {
-            "votacao_id": 49,
-            "sessao_id": 13,
-            "data_sessao": "2025-07-29",
-            "materia_id": 151,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
-          },
-          {
-            "votacao_id": 63,
-            "sessao_id": 14,
-            "data_sessao": "2025-08-05",
-            "materia_id": 163,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
             "votacao_id": 64,
             "sessao_id": 15,
             "data_sessao": "2025-08-12",
@@ -13737,19 +13295,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
-            "votacao_id": 77,
-            "sessao_id": 21,
-            "data_sessao": "2025-09-23",
-            "materia_id": 27,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
             "votacao_id": 80,
@@ -13765,19 +13310,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
-            "votacao_id": 101,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 189,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
-          },
-          {
             "votacao_id": 102,
             "sessao_id": 31,
             "data_sessao": "2025-11-26",
@@ -13789,32 +13321,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
-          },
-          {
-            "votacao_id": 105,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 190,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
-          },
-          {
-            "votacao_id": 106,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 219,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
           },
           {
             "votacao_id": 109,
@@ -13854,32 +13360,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
-          },
-          {
-            "votacao_id": 112,
-            "sessao_id": 33,
-            "data_sessao": "2025-12-02",
-            "materia_id": 218,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
-          },
-          {
-            "votacao_id": 121,
-            "sessao_id": 34,
-            "data_sessao": "2025-12-09",
-            "materia_id": 240,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
           }
         ]
       },
@@ -14403,37 +13883,11 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 19,
+        "total_registros": 9,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 0,
         "nominais": [
-          {
-            "votacao_id": 20,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 29,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
-          },
-          {
-            "votacao_id": 25,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 14,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
-          },
           {
             "votacao_id": 28,
             "sessao_id": 8,
@@ -14474,32 +13928,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
           },
           {
-            "votacao_id": 49,
-            "sessao_id": 13,
-            "data_sessao": "2025-07-29",
-            "materia_id": 151,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
-          },
-          {
-            "votacao_id": 63,
-            "sessao_id": 14,
-            "data_sessao": "2025-08-05",
-            "materia_id": 163,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
             "votacao_id": 64,
             "sessao_id": 15,
             "data_sessao": "2025-08-12",
@@ -14511,19 +13939,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
-            "votacao_id": 77,
-            "sessao_id": 21,
-            "data_sessao": "2025-09-23",
-            "materia_id": 27,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
             "votacao_id": 80,
@@ -14539,19 +13954,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
-            "votacao_id": 101,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 189,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
-          },
-          {
             "votacao_id": 102,
             "sessao_id": 31,
             "data_sessao": "2025-11-26",
@@ -14563,32 +13965,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
-          },
-          {
-            "votacao_id": 105,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 190,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
-          },
-          {
-            "votacao_id": 106,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 219,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
           },
           {
             "votacao_id": 109,
@@ -14628,32 +14004,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
-          },
-          {
-            "votacao_id": 112,
-            "sessao_id": 33,
-            "data_sessao": "2025-12-02",
-            "materia_id": 218,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
-          },
-          {
-            "votacao_id": 121,
-            "sessao_id": 34,
-            "data_sessao": "2025-12-09",
-            "materia_id": 240,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
           }
         ]
       },
@@ -15275,37 +14625,11 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 19,
+        "total_registros": 9,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 0,
         "nominais": [
-          {
-            "votacao_id": 20,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 29,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
-          },
-          {
-            "votacao_id": 25,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 14,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
-          },
           {
             "votacao_id": 28,
             "sessao_id": 8,
@@ -15346,32 +14670,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
           },
           {
-            "votacao_id": 49,
-            "sessao_id": 13,
-            "data_sessao": "2025-07-29",
-            "materia_id": 151,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
-          },
-          {
-            "votacao_id": 63,
-            "sessao_id": 14,
-            "data_sessao": "2025-08-05",
-            "materia_id": 163,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
             "votacao_id": 64,
             "sessao_id": 15,
             "data_sessao": "2025-08-12",
@@ -15383,19 +14681,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
-            "votacao_id": 77,
-            "sessao_id": 21,
-            "data_sessao": "2025-09-23",
-            "materia_id": 27,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
             "votacao_id": 80,
@@ -15411,19 +14696,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
-            "votacao_id": 101,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 189,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
-          },
-          {
             "votacao_id": 102,
             "sessao_id": 31,
             "data_sessao": "2025-11-26",
@@ -15435,32 +14707,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
-          },
-          {
-            "votacao_id": 105,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 190,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
-          },
-          {
-            "votacao_id": 106,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 219,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
           },
           {
             "votacao_id": 109,
@@ -15500,32 +14746,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
-          },
-          {
-            "votacao_id": 112,
-            "sessao_id": 33,
-            "data_sessao": "2025-12-02",
-            "materia_id": 218,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
-          },
-          {
-            "votacao_id": 121,
-            "sessao_id": 34,
-            "data_sessao": "2025-12-09",
-            "materia_id": 240,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
           }
         ]
       },
@@ -16049,37 +15269,11 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 19,
+        "total_registros": 9,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 0,
         "nominais": [
-          {
-            "votacao_id": 20,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 29,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
-          },
-          {
-            "votacao_id": 25,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 14,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
-          },
           {
             "votacao_id": 28,
             "sessao_id": 8,
@@ -16120,32 +15314,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
           },
           {
-            "votacao_id": 49,
-            "sessao_id": 13,
-            "data_sessao": "2025-07-29",
-            "materia_id": 151,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
-          },
-          {
-            "votacao_id": 63,
-            "sessao_id": 14,
-            "data_sessao": "2025-08-05",
-            "materia_id": 163,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
             "votacao_id": 64,
             "sessao_id": 15,
             "data_sessao": "2025-08-12",
@@ -16157,19 +15325,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
-            "votacao_id": 77,
-            "sessao_id": 21,
-            "data_sessao": "2025-09-23",
-            "materia_id": 27,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
             "votacao_id": 80,
@@ -16185,19 +15340,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
-            "votacao_id": 101,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 189,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
-          },
-          {
             "votacao_id": 102,
             "sessao_id": 31,
             "data_sessao": "2025-11-26",
@@ -16209,32 +15351,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
-          },
-          {
-            "votacao_id": 105,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 190,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
-          },
-          {
-            "votacao_id": 106,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 219,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
           },
           {
             "votacao_id": 109,
@@ -16274,32 +15390,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
-          },
-          {
-            "votacao_id": 112,
-            "sessao_id": 33,
-            "data_sessao": "2025-12-02",
-            "materia_id": 218,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
-          },
-          {
-            "votacao_id": 121,
-            "sessao_id": 34,
-            "data_sessao": "2025-12-09",
-            "materia_id": 240,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
           }
         ]
       },
@@ -16806,37 +15896,11 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 19,
+        "total_registros": 9,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 0,
         "nominais": [
-          {
-            "votacao_id": 20,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 29,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
-          },
-          {
-            "votacao_id": 25,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 14,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
-          },
           {
             "votacao_id": 28,
             "sessao_id": 8,
@@ -16877,32 +15941,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
           },
           {
-            "votacao_id": 49,
-            "sessao_id": 13,
-            "data_sessao": "2025-07-29",
-            "materia_id": 151,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
-          },
-          {
-            "votacao_id": 63,
-            "sessao_id": 14,
-            "data_sessao": "2025-08-05",
-            "materia_id": 163,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
             "votacao_id": 64,
             "sessao_id": 15,
             "data_sessao": "2025-08-12",
@@ -16914,19 +15952,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
-            "votacao_id": 77,
-            "sessao_id": 21,
-            "data_sessao": "2025-09-23",
-            "materia_id": 27,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
             "votacao_id": 80,
@@ -16942,19 +15967,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
-            "votacao_id": 101,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 189,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
-          },
-          {
             "votacao_id": 102,
             "sessao_id": 31,
             "data_sessao": "2025-11-26",
@@ -16966,32 +15978,6 @@
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
-          },
-          {
-            "votacao_id": 105,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 190,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
-          },
-          {
-            "votacao_id": 106,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 219,
-            "estado": "ausente_sem_justificativa",
-            "rotulo": "Ausente sem justificativa",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
           },
           {
             "votacao_id": 109,
@@ -17031,32 +16017,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
-          },
-          {
-            "votacao_id": 112,
-            "sessao_id": 33,
-            "data_sessao": "2025-12-02",
-            "materia_id": 218,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
-          },
-          {
-            "votacao_id": 121,
-            "sessao_id": 34,
-            "data_sessao": "2025-12-09",
-            "materia_id": 240,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
           }
         ]
       },
@@ -17512,37 +16472,11 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 19,
+        "total_registros": 9,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 0,
         "nominais": [
-          {
-            "votacao_id": 20,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 29,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
-          },
-          {
-            "votacao_id": 25,
-            "sessao_id": 7,
-            "data_sessao": "2025-06-17",
-            "materia_id": 14,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
-          },
           {
             "votacao_id": 28,
             "sessao_id": 8,
@@ -17583,32 +16517,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
           },
           {
-            "votacao_id": 49,
-            "sessao_id": 13,
-            "data_sessao": "2025-07-29",
-            "materia_id": 151,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
-          },
-          {
-            "votacao_id": 63,
-            "sessao_id": 14,
-            "data_sessao": "2025-08-05",
-            "materia_id": 163,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
             "votacao_id": 64,
             "sessao_id": 15,
             "data_sessao": "2025-08-12",
@@ -17620,19 +16528,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
-          },
-          {
-            "votacao_id": 77,
-            "sessao_id": 21,
-            "data_sessao": "2025-09-23",
-            "materia_id": 27,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
             "votacao_id": 80,
@@ -17648,19 +16543,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
           },
           {
-            "votacao_id": 101,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 189,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
-          },
-          {
             "votacao_id": 102,
             "sessao_id": 31,
             "data_sessao": "2025-11-26",
@@ -17672,32 +16554,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
-          },
-          {
-            "votacao_id": 105,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 190,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
-          },
-          {
-            "votacao_id": 106,
-            "sessao_id": 31,
-            "data_sessao": "2025-11-26",
-            "materia_id": 219,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Maioria Absoluta",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
           },
           {
             "votacao_id": 109,
@@ -17737,32 +16593,6 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
-          },
-          {
-            "votacao_id": 112,
-            "sessao_id": 33,
-            "data_sessao": "2025-12-02",
-            "materia_id": 218,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
-          },
-          {
-            "votacao_id": 121,
-            "sessao_id": 34,
-            "data_sessao": "2025-12-09",
-            "materia_id": 240,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "turno": "1o turno",
-            "tipo_resultado": "Aprovada por Unanimidade",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
           }
         ]
       },
