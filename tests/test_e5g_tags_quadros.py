@@ -498,9 +498,19 @@ class TestE5hAcabamento(unittest.TestCase):
                 page.wait_for_timeout(300)
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(500)
-                primeiro = page.locator(".lista-votos li").first.inner_text()
-                self.assertIsNotNone(re.search(r"º turno \S", primeiro))
-                self.assertIsNone(re.search(r"turno[A-Za-zÀ-ú]", primeiro))
+                item = page.locator(".lista-votos li").first
+                primeiro = item.inner_text()
+                self.assertIsNotNone(re.search(r"º turno", primeiro))
+                fora = item.evaluate(
+                    "n => Array.from(n.querySelectorAll('.tag-explicavel'))"
+                    ".filter(e => !e.closest('.materia-tags')).length"
+                )
+                self.assertEqual(fora, 0)
+                ementa = item.locator(".ementa-voto").first
+                self.assertEqual(ementa.count(), 1)
+                self.assertEqual(
+                    ementa.evaluate("n => getComputedStyle(n).display"), "block"
+                )
 
 
 if __name__ == "__main__":
