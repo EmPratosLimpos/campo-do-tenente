@@ -105,5 +105,9 @@
       "sem_ementa": "sem ementa no SAPL",
       "sem_ementa_descricao": "Matéria sem ementa registrada no SAPL."
     }
+  },
+  "turnos_votacao": {
+    "nota": "D-049: siglas com votacao em dois turnos. As demais siglas seguem turno unico.",
+    "dois_turnos": ["PLEG", "PLEX", "PLC", "PLCL", "PELOM", "PSUB", "PSUBE"]
   }
 }

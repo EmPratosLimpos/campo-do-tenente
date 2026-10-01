@@ -165,6 +165,23 @@ def user_agent_http(cfg: dict | None = None) -> str:
     return f"painel-camara-{slug}/0.1 (projeto de transparencia)"
 
 
+def tipos_dois_turnos(cfg: dict | None = None) -> set[str]:
+    """Siglas com votacao em dois turnos (D-049). O resto e turno unico."""
+    cfg = cfg if cfg is not None else carregar_config()
+    lista = (cfg.get("turnos_votacao") or {}).get("dois_turnos")
+    if not isinstance(lista, list) or not lista:
+        raise SystemExit("config_cidade.json: turnos_votacao.dois_turnos deve ser uma lista com ao menos uma sigla.")
+    saida = set()
+    for sigla in lista:
+        texto = str(sigla or "").strip()
+        if not texto:
+            raise SystemExit("config_cidade.json: sigla vazia em turnos_votacao.dois_turnos.")
+        if texto in saida:
+            raise SystemExit(f"config_cidade.json: sigla repetida em turnos_votacao.dois_turnos: {texto}.")
+        saida.add(texto)
+    return saida
+
+
 def garantir_path_coletor() -> Path:
     pasta = Path(__file__).resolve().parent
     if str(pasta) not in sys.path:
