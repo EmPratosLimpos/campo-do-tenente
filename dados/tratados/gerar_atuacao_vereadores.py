@@ -216,6 +216,39 @@ def aplicar_aviso_na_votacao(
     return resto
 
 
+def situacao_por_nome(nome) -> str | None:
+    """Situacao oficial pelo nome da tabela de tipos do SAPL."""
+    texto = str(nome or "").strip()
+    if texto.startswith("Aprovada"):
+        return "Aprovado"
+    if texto.startswith("Rejeit"):
+        return "Rejeitado"
+    return None
+
+
+def deliberativa_nome(nome) -> bool:
+    return situacao_por_nome(nome) is not None
+
+
+def carregar_tipos_resultado() -> dict[int, str]:
+    """Nome oficial de cada tipo de resultado, lido da tabela ja baixada."""
+    achados = []
+    for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
+        if not pasta.is_dir():
+            continue
+        for caminho in sorted(pasta.glob("tiporesultadovotacao_p*.json")):
+            achados.append(caminho)
+    if not achados:
+        raise SystemExit("Tabela tiporesultadovotacao nao encontrada em dados/brutos.")
+    caminho = achados[-1]
+    dados = carregar_json(caminho)
+    saida = {}
+    for item in dados.get("results") or []:
+        if isinstance(item, dict) and item.get("id") is not None:
+            saida[int(item["id"])] = str(item.get("nome") or "").strip()
+    return saida
+
+
 def resultado_rejeitado(voto: dict) -> bool:
     if str(voto.get("situacao_oficial_sapl") or "").strip() == "Rejeitado":
         return True
@@ -733,7 +766,7 @@ def carregar_votos_da_sessao(sessao_id: int, registros: dict[int, dict]) -> dict
     return por_votacao
 
 
-def carregar_registros(sessao: dict) -> dict[int, dict]:
+def carregar_registros(sessao: dict, tipos_resultado: dict[int, str]) -> dict[int, dict]:
     caminho = arquivo_sessao(sessao["id"], "registrovotacao")
     dados = carregar_json(caminho)
     conferir_total(caminho, dados)
@@ -745,6 +778,12 @@ def carregar_registros(sessao: dict) -> dict[int, dict]:
         texto = linha.get("__str__") or ""
         resultado = extrair_resultado(texto)
         frase = frase_apos_votacao(texto)
+        tipo_id = linha.get("tipo_resultado_votacao")
+        tipo_id = int(tipo_id) if tipo_id is not None else None
+        tipo_nome = tipos_resultado.get(tipo_id) if tipo_id is not None else None
+        oficial = situacao_por_nome(tipo_nome)
+        if oficial is None:
+            oficial = situacao_oficial(resultado)
         item = {
             "id": registro_id,
             "sessao_id": sessao["id"],
@@ -756,7 +795,14 @@ def carregar_registros(sessao: dict) -> dict[int, dict]:
             "texto_registro_sapl": texto,
             "resultado_texto_sapl": resultado,
             "frase_resultado_sapl": frase,
-            "situacao_oficial_sapl": situacao_oficial(resultado),
+            "situacao_oficial_sapl": oficial,
+            "tipo_resultado_votacao_id": tipo_id,
+            "tipo_resultado_nome": tipo_nome,
+            "deliberativa": (
+                deliberativa_nome(tipo_nome)
+                if tipo_nome
+                else oficial is not None
+            ),
             "numero_votos_sim": inteiro_ou_nulo(linha.get("numero_votos_sim")),
             "numero_votos_nao": inteiro_ou_nulo(linha.get("numero_votos_nao")),
             "numero_abstencoes": inteiro_ou_nulo(linha.get("numero_abstencoes")),
@@ -807,6 +853,7 @@ def processar_sessoes(
     afastamentos: list[dict],
     motivos_fora: list[dict],
     tipos_materia: dict[int, str | None],
+    tipos_resultado: dict[int, str],
 ) -> dict:
     ids_banca = {int(item["id_sapl"]) for item in banca}
     por_banca = {int(item["id_sapl"]): item for item in banca}
@@ -824,16 +871,21 @@ def processar_sessoes(
     registros_por_sessao_id: dict[int, dict[int, dict]] = {}
     grupos_por_materia: dict[int | None, list[dict]] = defaultdict(list)
     for sessao in sessoes:
-        pacote = carregar_registros(sessao)
+        pacote = carregar_registros(sessao, tipos_resultado)
         registros_por_sessao_id[int(sessao["id"])] = pacote
         for registro in pacote.values():
             materia = registro.get("materia_id")
             grupos_por_materia[materia].append(registro)
-    turnos_por_registro: dict[tuple, str] = {}
+    turnos_por_registro: dict[tuple, str | None] = {}
     for materia_id, lista in grupos_por_materia.items():
         tipo = tipos_materia.get(int(materia_id)) if materia_id is not None else None
-        for registro, turno in zip(lista, atribuir_turnos(tipo, lista, DOIS_TURNOS)):
+        deliberativos = [r for r in lista if r.get("deliberativa")]
+        turnos = atribuir_turnos(tipo, deliberativos, DOIS_TURNOS)
+        for registro, turno in zip(deliberativos, turnos):
             turnos_por_registro[(materia_id, int(registro["id"]))] = turno
+        for registro in lista:
+            if not registro.get("deliberativa"):
+                turnos_por_registro[(materia_id, int(registro["id"]))] = None
 
     for sessao in sessoes:
         for sufixo in PACOTE_SESSAO:
@@ -933,7 +985,12 @@ def processar_sessoes(
                     f"voto de parlamentar fora da banca de {ano}: {fora}."
                 )
             autoria = autores_da_materia(materia_id, indice_autoria, por_id)
-            turno = turnos_por_registro.get((materia_id, int(registro["id"])), TURNO_UNICO)
+            turno = turnos_por_registro.get((materia_id, int(registro["id"])))
+            if turno is None and registro.get("deliberativa"):
+                raise SystemExit(
+                    f"Sessao {sessao['id']}, votacao {registro['id']}: "
+                    "votacao deliberativa sem turno."
+                )
             base = {
                 "id": registro["id"],
                 "sessao_id": sessao["id"],
@@ -948,6 +1005,7 @@ def processar_sessoes(
                 "frase_resultado_sapl": registro["frase_resultado_sapl"],
                 "situacao_oficial_sapl": registro["situacao_oficial_sapl"],
                 "turno": turno,
+                "tipo_resultado_nome": registro.get("tipo_resultado_nome"),
                 "totais_oficiais": {
                     "numero_votos_sim": registro["numero_votos_sim"],
                     "numero_votos_nao": registro["numero_votos_nao"],
@@ -1002,6 +1060,7 @@ def processar_sessoes(
                     "estado": estado,
                     "rotulo": ROTULOS_ESTADO[estado],
                     "turno": turno,
+                    "tipo_resultado": registro.get("tipo_resultado_nome"),
                     "voto_texto_sapl": texto_contado if estado != "fora_do_mandato" else None,
                     "voto_texto_sapl_fora_do_mandato": (
                         texto if estado == "fora_do_mandato" else None
@@ -1019,6 +1078,7 @@ def processar_sessoes(
                     "estado": estado,
                     "rotulo": ROTULOS_ESTADO[estado],
                     "turno": turno,
+                    "tipo_resultado": registro.get("tipo_resultado_nome"),
                     "voto_texto_sapl": linha_estado["voto_texto_sapl"],
                     "link_sessao": registro["link_sessao"],
                     "link_materia": registro["link_materia"],
@@ -1148,17 +1208,20 @@ def consolidar_votos(lista: list[dict], n_contado: int, nome: str) -> dict:
     nao_identificado = sum(
         1 for item in lista if item.get("turno") == TURNO_NAO_IDENTIFICADO
     )
+    nao_deliberativo = sum(1 for item in lista if item.get("turno") is None)
     contagem = Counter(item["estado"] for item in contados)
     resultado = {chave: contagem.get(chave, 0) for chave in ORDEM_ESTADOS}
     resultado["rotulos"] = {chave: ROTULOS_ESTADO[chave] for chave in ORDEM_ESTADOS}
     resultado["total_registros"] = len(lista)
     resultado["primeiro_turno_registros"] = primeiro
     resultado["turno_nao_identificado_registros"] = nao_identificado
+    resultado["nao_deliberativo_registros"] = nao_deliberativo
     resultado["nominais"] = lista
     if (
         sum(resultado[chave] for chave in ORDEM_ESTADOS)
         + primeiro
         + nao_identificado
+        + nao_deliberativo
         != len(lista)
     ):
         raise SystemExit(f"{nome}: a soma dos estados de voto nao fecha.")
@@ -1272,9 +1335,19 @@ def carregar_projetos(
                     item.get("id") or 0,
                 ),
             )
-            turnos = atribuir_turnos(sigla, ordenados, DOIS_TURNOS)
+            turnos = atribuir_turnos(
+                sigla,
+                [r for r in ordenados if r.get("deliberativa")],
+                DOIS_TURNOS,
+            )
+            posicao = 0
             votacoes = []
-            for registro, turno in zip(ordenados, turnos):
+            for registro in ordenados:
+                if registro.get("deliberativa"):
+                    turno = turnos[posicao]
+                    posicao += 1
+                else:
+                    turno = None
                 votacoes.append(
                     {
                         "sessao_id": registro["sessao_id"],
@@ -1283,6 +1356,8 @@ def carregar_projetos(
                         "resultado_texto_sapl": registro["resultado_texto_sapl"],
                         "situacao_oficial_sapl": registro["situacao_oficial_sapl"],
                         "turno": turno,
+                        "deliberativa": bool(registro.get("deliberativa")),
+                        "tipo_resultado_nome": registro.get("tipo_resultado_nome"),
                         "totais_oficiais": {
                             "numero_votos_sim": registro["numero_votos_sim"],
                             "numero_votos_nao": registro["numero_votos_nao"],
@@ -1315,40 +1390,40 @@ def carregar_projetos(
                 projeto["resultado_texto_sapl"] = None
                 projeto["frase_resultado_sapl"] = None
                 projeto["sessao_id"] = None
-            elif sigla in DOIS_TURNOS:
-                por_registro = {int(r["id"]): r for r in registros}
-                pares = []
-                for votacao in votacoes:
-                    registro = por_registro.get(int(votacao["registro_votacao_id"]))
-                    if registro is None:
-                        continue
-                    pares.append((registro, votacao["turno"]))
+                projeto["nome_oficial_ultimo_registro"] = None
+                projetos.append(projeto)
+                continue
+            por_registro = {int(r["id"]): r for r in registros}
+            pares = []
+            for votacao in votacoes:
+                if not votacao.get("deliberativa"):
+                    continue
+                registro = por_registro.get(int(votacao["registro_votacao_id"]))
+                if registro is None:
+                    continue
+                pares.append((registro, votacao["turno"]))
+            ultimo = ordenados[-1]
+            nome_ultimo = ultimo.get("tipo_resultado_nome")
+            projeto["nome_oficial_ultimo_registro"] = nome_ultimo
+            if sigla in DOIS_TURNOS:
                 escolhida, em_tram = escolher_por_turno(pares)
-                if escolhida is None:
-                    projeto["situacao"] = "Em tramitacao"
-                    projeto["data_sessao"] = None
-                    projeto["resultado_texto_sapl"] = None
-                    projeto["frase_resultado_sapl"] = None
-                    projeto["sessao_id"] = None
-                elif em_tram:
-                    projeto["situacao"] = "Em tramitacao"
-                    projeto["data_sessao"] = escolhida["data_sessao"]
-                    projeto["resultado_texto_sapl"] = escolhida["resultado_texto_sapl"]
-                    projeto["frase_resultado_sapl"] = escolhida["frase_resultado_sapl"]
-                    projeto["sessao_id"] = escolhida["sessao_id"]
-                else:
-                    try:
-                        projeto["situacao"] = situacao_da_votacao_escolhida(escolhida)
-                    except SystemExit as exc:
-                        raise SystemExit(
-                            f"Materia {materia_id}: {exc}"
-                        ) from exc
-                    projeto["data_sessao"] = escolhida["data_sessao"]
-                    projeto["resultado_texto_sapl"] = escolhida["resultado_texto_sapl"]
-                    projeto["frase_resultado_sapl"] = escolhida["frase_resultado_sapl"]
-                    projeto["sessao_id"] = escolhida["sessao_id"]
             else:
-                escolhida = escolher_votacao(registros)
+                deliberativos = [registro for registro, _turno in pares]
+                escolhida = escolher_votacao(deliberativos) if deliberativos else None
+                em_tram = False
+            if escolhida is None:
+                projeto["situacao"] = "Em tramitacao"
+                projeto["data_sessao"] = ultimo["data_sessao"]
+                projeto["resultado_texto_sapl"] = ultimo["resultado_texto_sapl"]
+                projeto["frase_resultado_sapl"] = ultimo["frase_resultado_sapl"]
+                projeto["sessao_id"] = ultimo["sessao_id"]
+            elif em_tram:
+                projeto["situacao"] = "Em tramitacao"
+                projeto["data_sessao"] = escolhida["data_sessao"]
+                projeto["resultado_texto_sapl"] = escolhida["resultado_texto_sapl"]
+                projeto["frase_resultado_sapl"] = escolhida["frase_resultado_sapl"]
+                projeto["sessao_id"] = escolhida["sessao_id"]
+            else:
                 try:
                     projeto["situacao"] = situacao_da_votacao_escolhida(escolhida)
                 except SystemExit as exc:
@@ -1392,6 +1467,7 @@ def projetos_do_vereador(id_sapl: int, projetos: list[dict]) -> dict:
                 "tema": projeto["tema"],
                 "revisada_por_humano": projeto["revisada_por_humano"],
                 "situacao": projeto["situacao"],
+                "nome_oficial_ultimo_registro": projeto.get("nome_oficial_ultimo_registro"),
                 "data_sessao": projeto["data_sessao"],
                 "resultado_texto_sapl": projeto["resultado_texto_sapl"],
                 "frase_resultado_sapl": projeto["frase_resultado_sapl"],
@@ -1474,6 +1550,7 @@ def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
         "votos_total_registros",
         "votos_primeiro_turno",
         "votos_turno_nao_identificado",
+        "votos_nao_deliberativo",
         "projetos_lei_legislativo",
         "projetos_aprovados",
         "projetos_rejeitados",
@@ -1524,6 +1601,7 @@ def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
                 "votos_total_registros": votos["total_registros"],
                 "votos_primeiro_turno": votos["primeiro_turno_registros"],
                 "votos_turno_nao_identificado": votos["turno_nao_identificado_registros"],
+                "votos_nao_deliberativo": votos["nao_deliberativo_registros"],
                 "projetos_lei_legislativo": projetos["total_propostos"],
                 "projetos_aprovados": projetos["aprovados"],
                 "projetos_rejeitados": projetos["rejeitados"],
@@ -1648,7 +1726,9 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
                 "vereador considera só o 2o turno e o turno único. O 1o turno "
                 "aparece na lista com a tag, sem entrar na contagem. Projeto "
                 "aprovado só no 1o turno continua em tramitação; rejeitado no "
-                "1o turno segue rejeitado."
+                "1o turno segue rejeitado. Votação sem deliberação (adiada, "
+                "pedido de vistas, retirada de pauta) aparece com o nome "
+                "oficial do SAPL e não entra em nenhuma contagem de voto."
             ),
             "",
         ]
@@ -1854,6 +1934,7 @@ def gerar_do_ano(ano: int) -> None:
     manuais = carregar_afastamentos()
     registrar_tipos_afastamento(manuais["afastamentos"])
     tipos_materia = carregar_tipos_materia(ano)
+    tipos_resultado = carregar_tipos_resultado()
     bruto = processar_sessoes(
         ano,
         banca,
@@ -1865,6 +1946,7 @@ def gerar_do_ano(ano: int) -> None:
         manuais["afastamentos"],
         manuais["motivos_fora_do_mandato"],
         tipos_materia,
+        tipos_resultado,
     )
     notas = notas_publicas(manuais["notas"])
     n_votacoes = len(bruto["votacoes"])
@@ -1972,11 +2054,13 @@ def gerar_do_ano(ano: int) -> None:
     contagem_estados = {chave: 0 for chave in ORDEM_ESTADOS}
     n_primeiro_turno = 0
     n_turno_nao_identificado = 0
+    n_nao_deliberativo = 0
     for item in vereadores:
         for chave in ORDEM_ESTADOS:
             contagem_estados[chave] += item["votos"][chave]
         n_primeiro_turno += item["votos"]["primeiro_turno_registros"]
         n_turno_nao_identificado += item["votos"]["turno_nao_identificado_registros"]
+        n_nao_deliberativo += item["votos"]["nao_deliberativo_registros"]
     votacoes_turno_nao_identificado = sorted(
         {
             (votacao["sessao_id"], votacao["id"])
@@ -2016,6 +2100,7 @@ def gerar_do_ano(ano: int) -> None:
             "n_votacoes_sem_voto_individual": bruto["n_votacoes_sem_voto_individual"],
             "n_nominais_primeiro_turno": n_primeiro_turno,
             "n_nominais_turno_nao_identificado": n_turno_nao_identificado,
+            "n_nominais_nao_deliberativo": n_nao_deliberativo,
             "votacoes_turno_nao_identificado": [
                 {"sessao_id": sessao_id, "votacao_id": votacao_id}
                 for sessao_id, votacao_id in votacoes_turno_nao_identificado
@@ -2050,7 +2135,9 @@ def gerar_do_ano(ano: int) -> None:
                 "falta e entra no total da taxa de presença. Projeto de lei "
                 "tem dois turnos: a contagem de votos considera só o 2o "
                 "turno ou o turno único; o 1o turno aparece na lista com a "
-                "tag, sem entrar na contagem."
+                "tag, sem entrar na contagem. Votação adiada, com pedido de "
+                "vistas ou retirada de pauta aparece com o nome oficial e "
+                "também não entra nas contagens."
             ),
         },
         "sessoes": bruto["sessoes"],
