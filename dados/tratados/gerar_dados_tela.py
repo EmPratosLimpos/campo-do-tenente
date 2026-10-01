@@ -24,6 +24,14 @@ RESULTADO_TURNO_NAO_IDENTIFICADO = "turno_nao_identificado"
 TURNO_PRIMEIRO = "1o turno"
 TURNO_NAO_IDENTIFICADO = "turno nao identificado"
 
+
+def resultado_nao_deliberativo(nome_oficial: str | None) -> str | None:
+    """Balde proprio para voto sem deliberacao, com o nome oficial."""
+    texto = str(nome_oficial or "").strip()
+    if not texto:
+        return None
+    return "nao_deliberativo:" + texto
+
 CHAVES_CONTAGEM_VOTO = (
     "sim",
     "nao",
@@ -101,8 +109,10 @@ def carregar_temas() -> dict[int, str]:
 def pll_votados_no_ano(atuacao: dict) -> list[dict]:
     """Um item por materia, com TODAS as votacoes com resultado.
 
-    Materia votada em mais de uma sessao aparece uma vez por periodo,
-    mostrando a votacao daquele periodo e a lista de todas as datas.
+    Vale voto deliberativo com resultado e voto com nome oficial
+    (adiada, vistas, retirada). Materia votada em mais de uma sessao
+    aparece uma vez por periodo, mostrando a votacao daquele periodo
+    e a lista de todas as datas.
     """
     itens = []
     for p in atuacao.get("projetos_lei", []):
@@ -111,7 +121,9 @@ def pll_votados_no_ano(atuacao: dict) -> list[dict]:
         votos = [
             v
             for v in (p.get("votacoes_ordinarias") or [])
-            if v.get("situacao_oficial_sapl") or v.get("resultado_texto_sapl")
+            if v.get("situacao_oficial_sapl")
+            or v.get("resultado_texto_sapl")
+            or (v.get("tipo_resultado_nome") or "").strip()
         ]
         if not votos:
             continue
@@ -134,15 +146,20 @@ def montar_item(
     mid = int(projeto["id"])
     tema_bruto = temas.get(mid) or projeto.get("tema") or "Outros"
     tema = tema_display(tema_bruto, cfg)
-    turno = voto_mostrado.get("turno") or "turno unico"
-    resultado, resultado_oficial = normalizar_resultado(
-        voto_mostrado.get("resultado_texto_sapl"),
-        voto_mostrado.get("frase_resultado_sapl"),
-    )
-    if turno == TURNO_PRIMEIRO:
-        resultado = RESULTADO_PRIMEIRO_TURNO
-    elif turno == TURNO_NAO_IDENTIFICADO:
-        resultado = RESULTADO_TURNO_NAO_IDENTIFICADO
+    turno = voto_mostrado.get("turno")
+    tipo_nome = (voto_mostrado.get("tipo_resultado_nome") or "").strip() or None
+    if turno is None and tipo_nome:
+        resultado = resultado_nao_deliberativo(tipo_nome)
+        resultado_oficial = tipo_nome
+    else:
+        resultado, resultado_oficial = normalizar_resultado(
+            voto_mostrado.get("resultado_texto_sapl"),
+            voto_mostrado.get("frase_resultado_sapl"),
+        )
+        if turno == TURNO_PRIMEIRO:
+            resultado = RESULTADO_PRIMEIRO_TURNO
+        elif turno == TURNO_NAO_IDENTIFICADO:
+            resultado = RESULTADO_TURNO_NAO_IDENTIFICADO
     tipo = f"PLL {projeto.get('numero')}/{projeto.get('ano')}"
     return {
         "id": mid,
@@ -150,6 +167,7 @@ def montar_item(
         "resultado": resultado,
         "resultado_oficial": resultado_oficial,
         "turno": turno,
+        "tipo_resultado": tipo_nome,
         "ementa": projeto.get("ementa") or "",
         "categoria": tema,
         "placar": placar_resumido(voto_mostrado),
@@ -159,7 +177,8 @@ def montar_item(
             {
                 "data_sessao": v.get("data_sessao"),
                 "sessao_id": v.get("sessao_id"),
-                "turno": v.get("turno") or "turno unico",
+                "turno": v.get("turno"),
+                "tipo_resultado": (v.get("tipo_resultado_nome") or "").strip() or None,
             }
             for v in votacoes
         ],
@@ -222,15 +241,20 @@ def periodos(
 
 
 def filtros_de(lista: list[dict]) -> list[dict]:
-    """Contagens por resultado: 1o turno e turno nao identificado tem
-    lista propria e nao entram na contagem de aprovados."""
+    """Contagens por resultado: 1o turno, turno nao identificado e voto
+    sem deliberacao tem lista propria e nao entram na contagem."""
     total = len(lista)
     uni = sum(1 for m in lista if m["resultado"] == "unanimidade")
     mai = sum(1 for m in lista if m["resultado"] == "maioria")
     rej = sum(1 for m in lista if m["resultado"] == "rejeitado")
     pri = sum(1 for m in lista if m["resultado"] == RESULTADO_PRIMEIRO_TURNO)
     nao_id = sum(1 for m in lista if m["resultado"] == RESULTADO_TURNO_NAO_IDENTIFICADO)
-    outro = total - uni - mai - rej - pri - nao_id
+    nao_delib: dict[str, int] = {}
+    for m in lista:
+        resultado = m["resultado"] or ""
+        if resultado.startswith("nao_deliberativo:"):
+            nao_delib[resultado] = nao_delib.get(resultado, 0) + 1
+    outro = total - uni - mai - rej - pri - nao_id - sum(nao_delib.values())
     filtros = [
         {"id": "", "rotulo": "Todos", "qtd": total},
         {"id": "unanimidade", "rotulo": "Unânimes", "qtd": uni},
@@ -240,6 +264,9 @@ def filtros_de(lista: list[dict]) -> list[dict]:
         filtros.append({"id": "rejeitado", "rotulo": "Rejeitados", "qtd": rej})
     if pri:
         filtros.append({"id": RESULTADO_PRIMEIRO_TURNO, "rotulo": "1o turno", "qtd": pri})
+    for bucket in sorted(nao_delib):
+        nome = bucket.split(":", 1)[1] if ":" in bucket else bucket
+        filtros.append({"id": bucket, "rotulo": nome.strip() or bucket, "qtd": nao_delib[bucket]})
     if nao_id:
         filtros.append(
             {
@@ -396,6 +423,8 @@ def _mesclar_votos(a: dict, b: dict) -> dict:
     for chave in CHAVES_CONTAGEM_VOTO:
         out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0)
     for chave in ("primeiro_turno_registros", "turno_nao_identificado_registros"):
+        out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0)
+    for chave in ("nao_deliberativo_registros",):
         out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0)
     if bb.get("rotulos"):
         out["rotulos"] = bb["rotulos"]
