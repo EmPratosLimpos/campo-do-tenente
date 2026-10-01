@@ -673,6 +673,10 @@ def derivar(
             ]
             cobertura_porsessao["recursos"][recurso] = cobertura
 
+    # A fusao com a coleta por sessao troca ordem_linhas. O indice precisa
+    # nascer de novo aqui, senao a ordem nova nao liga o registro a sessao.
+    ordem = indice_por_id(ordem_linhas)
+
     sessao_do_registro = {}
     registros_sem_sessao = []
     for registro in registros:
