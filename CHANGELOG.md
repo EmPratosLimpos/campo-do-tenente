@@ -24,6 +24,26 @@ Está prevista uma atualização semanal automática. Cada vez que ela trouxer s
 
 ---
 
+## 2026-10-01: 34a sessão ordinária e nova regra de presença
+
+**O que mudou nos dados**
+- Sessão ordinária 34 incluída: 29/09/2026 (registro 274 no SAPL), com 6 itens de ordem, 6 registros de votação e 54 votos nominais.
+- 2026 passou a 34 sessões ordinárias; 2025 segue com 32. Presidente da sessão 34: Rafael Ventura, sem lacuna de presidência.
+- Regra de presença D-046: contam só as sessões dentro do mandato; licença entra no total com rótulo próprio e nunca como falta; quem saiu tem a atuação congelada na data de saída. Jorge Quege na legislatura: 36 presenças em 60 sessões no mandato, taxa 60,0%.
+- Matérias novas 966 a 969 com tema revisado pelo mantenedor.
+- Hash SHA-256 novo de atuacao_vereadores_2025.json: e20e29463bf23096fb69aba46559b26b07df57562185a7a61cd6d5751b80b3df.
+- Hash SHA-256 novo de atuacao_vereadores_2026.json: 976e28bd2ceaa73b722728fe61285eb0dc93e5667d51254a8e13810f60289fd0.
+
+**O que mudou na tela**
+- Legenda de presença mostra o total no mandato; a lista de fora do mandato saiu da tela.
+- Última sessão na tela: 34a, 29/09/2026.
+
+**De onde veio**
+- SAPL da Câmara Municipal de Campo do Tenente, https://sapl.campodotenente.pr.leg.br. Coleta em 29/09/2026, consolidação em 01/10/2026.
+- Decisão D-046 do mantenedor sobre a regra de presença.
+
+---
+
 ## 2026-09-27: ajuste nas regras de imparcialidade
 
 **O que mudou nos dados**
