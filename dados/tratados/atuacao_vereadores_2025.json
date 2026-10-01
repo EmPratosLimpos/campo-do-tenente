@@ -23,15 +23,18 @@
     "n_registros_votacao": 115,
     "n_votacoes_com_voto_individual": 19,
     "n_votacoes_sem_voto_individual": 96,
+    "n_nominais_primeiro_turno": 90,
+    "n_nominais_turno_nao_identificado": 0,
+    "votacoes_turno_nao_identificado": [],
     "rotulo_sem_voto_individual": "voto individual nao registrado no SAPL",
     "contagem_estados": {
-      "sim": 163,
-      "nao": 2,
+      "sim": 79,
+      "nao": 1,
       "abstencao": 0,
       "nao_votou": 0,
       "presidente_que_nao_votou": 0,
       "ausente_com_justificativa": 0,
-      "ausente_sem_justificativa": 6,
+      "ausente_sem_justificativa": 1,
       "fora_do_mandato": 0,
       "presente_sem_voto_individual_registrado": 0,
       "licenca_tratamento_saude": 0
@@ -97,7 +100,7 @@
       "dados/tratados/afastamentos_manuais.json",
       "dados/tratados/temas_materias.json"
     ],
-    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não aparece na lista da pessoa e não entra em presença nem em voto. Licença tem rótulo próprio, não é falta e entra no total da taxa de presença."
+    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não aparece na lista da pessoa e não entra em presença nem em voto. Licença tem rótulo próprio, não é falta e entra no total da taxa de presença. Projeto de lei tem dois turnos: a contagem de votos considera só o 2o turno ou o turno único; o 1o turno aparece na lista com a tag, sem entrar na contagem."
   },
   "sessoes": [
     {
@@ -659,6 +662,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -703,6 +707,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -758,6 +763,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -802,6 +808,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -846,6 +853,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -934,6 +942,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -978,6 +987,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -1110,6 +1120,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -1242,6 +1253,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -1374,6 +1386,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -1451,6 +1464,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -1517,6 +1531,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -1561,6 +1576,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -1616,6 +1632,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -1693,6 +1710,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -1770,6 +1788,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -1814,6 +1833,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -1846,6 +1866,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -1854,6 +1875,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -1862,6 +1884,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -1870,6 +1893,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -1878,6 +1902,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -1886,6 +1911,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -1894,6 +1920,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -1902,6 +1929,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "ausente_sem_justificativa",
           "rotulo": "Ausente sem justificativa",
+          "turno": "1o turno",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -1910,6 +1938,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -1929,6 +1958,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -1973,6 +2003,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -2017,6 +2048,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -2061,6 +2093,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -2105,6 +2138,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2137,6 +2171,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2145,6 +2180,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2153,6 +2189,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2161,6 +2198,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2169,6 +2207,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2177,6 +2216,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2185,6 +2225,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2193,6 +2234,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "ausente_sem_justificativa",
           "rotulo": "Ausente sem justificativa",
+          "turno": "1o turno",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2201,6 +2243,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -2220,6 +2263,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -2264,6 +2308,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -2308,6 +2353,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -2340,6 +2386,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2348,6 +2395,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2356,6 +2404,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2364,6 +2413,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2372,6 +2422,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2380,6 +2431,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2388,6 +2440,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2396,6 +2449,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2404,6 +2458,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -2423,6 +2478,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -2455,6 +2511,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2463,6 +2520,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2471,6 +2529,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2479,6 +2538,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2487,6 +2547,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2495,6 +2556,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2503,6 +2565,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2511,6 +2574,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -2519,6 +2583,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -2538,6 +2603,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2582,6 +2648,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2626,6 +2693,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2670,6 +2738,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2714,6 +2783,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2756,6 +2826,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2798,6 +2869,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2842,6 +2914,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2886,6 +2959,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2930,6 +3004,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -2974,6 +3049,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -3018,6 +3094,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -3060,6 +3137,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -3102,6 +3180,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -3146,6 +3225,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -3190,6 +3270,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -3257,6 +3338,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3265,6 +3347,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3273,6 +3356,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3281,6 +3365,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3289,6 +3374,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3297,6 +3383,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3305,6 +3392,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3313,6 +3401,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3321,6 +3410,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -3340,6 +3430,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -3384,6 +3475,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -3461,6 +3553,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -3505,6 +3598,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -3539,6 +3633,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3547,6 +3642,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3555,6 +3651,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3563,6 +3660,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3571,6 +3669,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3579,6 +3678,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3587,6 +3687,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3595,6 +3696,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -3603,6 +3705,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -3622,6 +3725,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -3666,6 +3770,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -3710,6 +3815,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -3787,6 +3893,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -3831,6 +3938,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -3875,6 +3983,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -3919,6 +4028,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -3963,6 +4073,7 @@
       "resultado_texto_sapl": "REJEITADO",
       "frase_resultado_sapl": "Rejeitada",
       "situacao_oficial_sapl": "Rejeitado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 0,
         "numero_votos_nao": 8,
@@ -4005,6 +4116,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4049,6 +4161,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4093,6 +4206,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 1,
@@ -4127,6 +4241,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4135,6 +4250,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4143,6 +4259,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "nao",
           "rotulo": "Não",
+          "turno": "1o turno",
           "voto_texto_sapl": "Não",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4151,6 +4268,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4159,6 +4277,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4167,6 +4286,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4175,6 +4295,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4183,6 +4304,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4191,6 +4313,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -4210,6 +4333,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 1,
@@ -4244,6 +4368,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4252,6 +4377,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4260,6 +4386,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "nao",
           "rotulo": "Não",
+          "turno": "2o turno",
           "voto_texto_sapl": "Não",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4268,6 +4395,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4276,6 +4404,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4284,6 +4413,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4292,6 +4422,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4300,6 +4431,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4308,6 +4440,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -4327,6 +4460,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4371,6 +4505,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4426,6 +4561,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4470,6 +4606,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4514,6 +4651,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4558,6 +4696,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4613,6 +4752,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4657,6 +4797,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4701,6 +4842,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4745,6 +4887,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -4789,6 +4932,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4833,6 +4977,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -4888,6 +5033,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -4955,6 +5101,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4963,6 +5110,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4971,6 +5119,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4979,6 +5128,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4987,6 +5137,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -4995,6 +5146,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5003,6 +5155,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5011,6 +5164,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5019,6 +5173,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -5038,6 +5193,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -5082,6 +5238,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -5137,6 +5294,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -5204,6 +5362,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5212,6 +5371,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5220,6 +5380,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5228,6 +5389,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5236,6 +5398,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5244,6 +5407,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5252,6 +5416,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5260,6 +5425,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -5268,6 +5434,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -5287,6 +5454,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -5331,6 +5499,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -5375,6 +5544,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -5419,6 +5589,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 6,
         "numero_votos_nao": 0,
@@ -5463,6 +5634,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -5507,6 +5679,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -5584,6 +5757,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -5628,6 +5802,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -5672,6 +5847,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -5716,6 +5892,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -5760,6 +5937,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -5826,6 +6004,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -5870,6 +6049,7 @@
       "resultado_texto_sapl": "REJEITADO",
       "frase_resultado_sapl": "Rejeitada",
       "situacao_oficial_sapl": "Rejeitado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 0,
         "numero_votos_nao": 8,
@@ -5912,6 +6092,7 @@
       "resultado_texto_sapl": "REJEITADO",
       "frase_resultado_sapl": "Rejeitada",
       "situacao_oficial_sapl": "Rejeitado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 0,
         "numero_votos_nao": 8,
@@ -5954,6 +6135,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -5998,6 +6180,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -6042,6 +6225,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -6086,6 +6270,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -6118,6 +6303,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6126,6 +6312,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6134,6 +6321,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6142,6 +6330,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6150,6 +6339,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6158,6 +6348,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6166,6 +6357,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6174,6 +6366,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "ausente_sem_justificativa",
           "rotulo": "Ausente sem justificativa",
+          "turno": "1o turno",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6182,6 +6375,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -6201,6 +6395,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -6235,6 +6430,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6243,6 +6439,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6251,6 +6448,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6259,6 +6457,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6267,6 +6466,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6275,6 +6475,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6283,6 +6484,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6291,6 +6493,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "ausente_sem_justificativa",
           "rotulo": "Ausente sem justificativa",
+          "turno": "turno unico",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6299,6 +6502,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "turno unico",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -6318,6 +6522,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -6362,6 +6567,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -6406,6 +6612,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -6438,6 +6645,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6446,6 +6654,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6454,6 +6663,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6462,6 +6672,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6470,6 +6681,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6478,6 +6690,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6486,6 +6699,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6494,6 +6708,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "ausente_sem_justificativa",
           "rotulo": "Ausente sem justificativa",
+          "turno": "1o turno",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6502,6 +6717,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -6521,6 +6737,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -6553,6 +6770,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6561,6 +6779,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6569,6 +6788,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6577,6 +6797,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6585,6 +6806,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6593,6 +6815,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6601,6 +6824,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6609,6 +6833,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "ausente_sem_justificativa",
           "rotulo": "Ausente sem justificativa",
+          "turno": "1o turno",
           "voto_texto_sapl": null,
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6617,6 +6842,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -6636,6 +6862,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -6680,6 +6907,7 @@
       "resultado_texto_sapl": "MAIORIA ABSOLUTA",
       "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 7,
         "numero_votos_nao": 0,
@@ -6724,6 +6952,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -6756,6 +6985,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6764,6 +6994,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6772,6 +7003,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6780,6 +7012,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6788,6 +7021,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6796,6 +7030,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6804,6 +7039,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6812,6 +7048,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6820,6 +7057,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -6839,6 +7077,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -6871,6 +7110,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6879,6 +7119,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6887,6 +7128,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6895,6 +7137,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6903,6 +7146,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6911,6 +7155,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6919,6 +7164,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6927,6 +7173,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6935,6 +7182,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -6954,6 +7202,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -6986,6 +7235,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -6994,6 +7244,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7002,6 +7253,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7010,6 +7262,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7018,6 +7271,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7026,6 +7280,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7034,6 +7289,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7042,6 +7298,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7050,6 +7307,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "2o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -7069,6 +7327,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -7101,6 +7360,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7109,6 +7369,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7117,6 +7378,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7125,6 +7387,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7133,6 +7396,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7141,6 +7405,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7149,6 +7414,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7157,6 +7423,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7165,6 +7432,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -7184,6 +7452,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -7226,6 +7495,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -7268,6 +7538,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -7310,6 +7581,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -7352,6 +7624,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -7394,6 +7667,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -7436,6 +7710,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -7478,6 +7753,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "2o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -7520,6 +7796,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 9,
         "numero_votos_nao": 0,
@@ -7552,6 +7829,7 @@
           "nome_parlamentar": "Jorge Quege",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7560,6 +7838,7 @@
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7568,6 +7847,7 @@
           "nome_parlamentar": "Cleiton Costa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7576,6 +7856,7 @@
           "nome_parlamentar": "Kinho Lazarino",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7584,6 +7865,7 @@
           "nome_parlamentar": "Rafael Ventura",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7592,6 +7874,7 @@
           "nome_parlamentar": "Gustavo Vizentin",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7600,6 +7883,7 @@
           "nome_parlamentar": "Josemar Veiga",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7608,6 +7892,7 @@
           "nome_parlamentar": "Beto Maurer",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         },
@@ -7616,6 +7901,7 @@
           "nome_parlamentar": "Gilmar Barbosa",
           "estado": "sim",
           "rotulo": "Sim",
+          "turno": "1o turno",
           "voto_texto_sapl": "Sim",
           "voto_texto_sapl_fora_do_mandato": null
         }
@@ -7635,6 +7921,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -7677,6 +7964,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "1o turno",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -7719,6 +8007,7 @@
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
       "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
       "totais_oficiais": {
         "numero_votos_sim": 8,
         "numero_votos_nao": 0,
@@ -8102,6 +8391,7 @@
           "registro_votacao_id": 25,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8116,6 +8406,7 @@
           "registro_votacao_id": 28,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 9,
             "numero_votos_nao": 0,
@@ -8166,6 +8457,7 @@
           "registro_votacao_id": 20,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8180,6 +8472,7 @@
           "registro_votacao_id": 29,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 9,
             "numero_votos_nao": 0,
@@ -8230,6 +8523,7 @@
           "registro_votacao_id": 34,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8244,6 +8538,7 @@
           "registro_votacao_id": 41,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 7,
             "numero_votos_nao": 0,
@@ -8294,6 +8589,7 @@
           "registro_votacao_id": 35,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8308,6 +8604,7 @@
           "registro_votacao_id": 42,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 7,
             "numero_votos_nao": 0,
@@ -8463,6 +8760,7 @@
           "registro_votacao_id": 101,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8477,6 +8775,7 @@
           "registro_votacao_id": 109,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 9,
             "numero_votos_nao": 0,
@@ -8527,6 +8826,7 @@
           "registro_votacao_id": 105,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8541,6 +8841,7 @@
           "registro_votacao_id": 110,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 9,
             "numero_votos_nao": 0,
@@ -8591,6 +8892,7 @@
           "registro_votacao_id": 106,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8605,6 +8907,7 @@
           "registro_votacao_id": 111,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 9,
             "numero_votos_nao": 0,
@@ -8690,6 +8993,7 @@
           "registro_votacao_id": 116,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8704,6 +9008,7 @@
           "registro_votacao_id": 118,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8754,6 +9059,7 @@
           "registro_votacao_id": 113,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8763,7 +9069,7 @@
           "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/228"
         }
       ],
-      "situacao": "Aprovado",
+      "situacao": "Em tramitacao",
       "data_sessao": "2025-12-02",
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
@@ -8804,6 +9110,7 @@
           "registro_votacao_id": 114,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8818,6 +9125,7 @@
           "registro_votacao_id": 119,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8868,6 +9176,7 @@
           "registro_votacao_id": 115,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8882,6 +9191,7 @@
           "registro_votacao_id": 120,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8932,6 +9242,7 @@
           "registro_votacao_id": 123,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -8941,7 +9252,7 @@
           "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/236"
         }
       ],
-      "situacao": "Aprovado",
+      "situacao": "Em tramitacao",
       "data_sessao": "2025-12-09",
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
@@ -8982,6 +9293,7 @@
           "registro_votacao_id": 121,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 9,
             "numero_votos_nao": 0,
@@ -8991,7 +9303,7 @@
           "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
         }
       ],
-      "situacao": "Aprovado",
+      "situacao": "Em tramitacao",
       "data_sessao": "2025-12-09",
       "resultado_texto_sapl": "UNANIMIDADE",
       "frase_resultado_sapl": "Aprovada por Unanimidade",
@@ -9311,6 +9623,7 @@
           "registro_votacao_id": 76,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -9325,6 +9638,7 @@
           "registro_votacao_id": 79,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -9410,6 +9724,7 @@
           "registro_votacao_id": 77,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 9,
             "numero_votos_nao": 0,
@@ -9424,6 +9739,7 @@
           "registro_votacao_id": 80,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 9,
             "numero_votos_nao": 0,
@@ -9509,6 +9825,7 @@
           "registro_votacao_id": 47,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -9523,6 +9840,7 @@
           "registro_votacao_id": 52,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 9,
             "numero_votos_nao": 0,
@@ -9575,6 +9893,7 @@
           "registro_votacao_id": 22,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 7,
             "numero_votos_nao": 0,
@@ -9589,6 +9908,7 @@
           "registro_votacao_id": 23,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 7,
             "numero_votos_nao": 0,
@@ -9603,6 +9923,7 @@
           "registro_votacao_id": 30,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -9655,6 +9976,7 @@
           "registro_votacao_id": 48,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -9669,6 +9991,7 @@
           "registro_votacao_id": 53,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -9721,6 +10044,7 @@
           "registro_votacao_id": 21,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 7,
             "numero_votos_nao": 0,
@@ -9735,6 +10059,7 @@
           "registro_votacao_id": 31,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -9787,6 +10112,7 @@
           "registro_votacao_id": 36,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -9801,6 +10127,7 @@
           "registro_votacao_id": 43,
           "resultado_texto_sapl": "MAIORIA ABSOLUTA",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 7,
             "numero_votos_nao": 0,
@@ -9853,6 +10180,7 @@
           "registro_votacao_id": 49,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 9,
             "numero_votos_nao": 0,
@@ -9867,6 +10195,7 @@
           "registro_votacao_id": 62,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -9919,6 +10248,7 @@
           "registro_votacao_id": 63,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 1,
@@ -9933,6 +10263,7 @@
           "registro_votacao_id": 64,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 1,
@@ -10022,6 +10353,7 @@
           "registro_votacao_id": 91,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -10036,6 +10368,7 @@
           "registro_votacao_id": 97,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -10088,6 +10421,7 @@
           "registro_votacao_id": 98,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "1o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -10102,6 +10436,7 @@
           "registro_votacao_id": 99,
           "resultado_texto_sapl": "UNANIMIDADE",
           "situacao_oficial_sapl": "Aprovado",
+          "turno": "2o turno",
           "totais_oficiais": {
             "numero_votos_sim": 8,
             "numero_votos_nao": 0,
@@ -10593,7 +10928,7 @@
         ]
       },
       "votos": {
-        "sim": 19,
+        "sim": 9,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -10616,6 +10951,8 @@
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
+        "primeiro_turno_registros": 10,
+        "turno_nao_identificado_registros": 0,
         "nominais": [
           {
             "votacao_id": 20,
@@ -10624,6 +10961,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -10635,6 +10973,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -10646,6 +10985,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -10657,6 +10997,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -10668,6 +11009,7 @@
             "materia_id": 128,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/11",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
@@ -10679,6 +11021,7 @@
             "materia_id": 151,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
@@ -10690,6 +11033,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -10701,6 +11045,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -10712,6 +11057,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -10723,6 +11069,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/22",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -10734,6 +11081,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -10745,6 +11093,7 @@
             "materia_id": 231,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
@@ -10756,6 +11105,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -10767,6 +11117,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -10778,6 +11129,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -10789,6 +11141,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -10800,6 +11153,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -10811,6 +11165,7 @@
             "materia_id": 218,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
@@ -10822,6 +11177,7 @@
             "materia_id": 240,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
@@ -11258,7 +11614,7 @@
         ]
       },
       "votos": {
-        "sim": 19,
+        "sim": 9,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -11281,6 +11637,8 @@
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
+        "primeiro_turno_registros": 10,
+        "turno_nao_identificado_registros": 0,
         "nominais": [
           {
             "votacao_id": 20,
@@ -11289,6 +11647,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -11300,6 +11659,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -11311,6 +11671,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -11322,6 +11683,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -11333,6 +11695,7 @@
             "materia_id": 128,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/11",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
@@ -11344,6 +11707,7 @@
             "materia_id": 151,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
@@ -11355,6 +11719,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -11366,6 +11731,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -11377,6 +11743,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -11388,6 +11755,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/22",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -11399,6 +11767,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -11410,6 +11779,7 @@
             "materia_id": 231,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
@@ -11421,6 +11791,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -11432,6 +11803,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -11443,6 +11815,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -11454,6 +11827,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -11465,6 +11839,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -11476,6 +11851,7 @@
             "materia_id": 218,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
@@ -11487,6 +11863,7 @@
             "materia_id": 240,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
@@ -12020,8 +12397,8 @@
         ]
       },
       "votos": {
-        "sim": 17,
-        "nao": 2,
+        "sim": 8,
+        "nao": 1,
         "abstencao": 0,
         "nao_votou": 0,
         "presidente_que_nao_votou": 0,
@@ -12043,6 +12420,8 @@
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
+        "primeiro_turno_registros": 10,
+        "turno_nao_identificado_registros": 0,
         "nominais": [
           {
             "votacao_id": 20,
@@ -12051,6 +12430,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -12062,6 +12442,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -12073,6 +12454,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -12084,6 +12466,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -12095,6 +12478,7 @@
             "materia_id": 128,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/11",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
@@ -12106,6 +12490,7 @@
             "materia_id": 151,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
@@ -12117,6 +12502,7 @@
             "materia_id": 163,
             "estado": "nao",
             "rotulo": "Não",
+            "turno": "1o turno",
             "voto_texto_sapl": "Não",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -12128,6 +12514,7 @@
             "materia_id": 163,
             "estado": "nao",
             "rotulo": "Não",
+            "turno": "2o turno",
             "voto_texto_sapl": "Não",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -12139,6 +12526,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -12150,6 +12538,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/22",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -12161,6 +12550,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -12172,6 +12562,7 @@
             "materia_id": 231,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
@@ -12183,6 +12574,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -12194,6 +12586,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -12205,6 +12598,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -12216,6 +12610,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -12227,6 +12622,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -12238,6 +12634,7 @@
             "materia_id": 218,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
@@ -12249,6 +12646,7 @@
             "materia_id": 240,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
@@ -12718,7 +13116,7 @@
         ]
       },
       "votos": {
-        "sim": 19,
+        "sim": 9,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -12741,6 +13139,8 @@
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
+        "primeiro_turno_registros": 10,
+        "turno_nao_identificado_registros": 0,
         "nominais": [
           {
             "votacao_id": 20,
@@ -12749,6 +13149,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -12760,6 +13161,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -12771,6 +13173,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -12782,6 +13185,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -12793,6 +13197,7 @@
             "materia_id": 128,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/11",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
@@ -12804,6 +13209,7 @@
             "materia_id": 151,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
@@ -12815,6 +13221,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -12826,6 +13233,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -12837,6 +13245,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -12848,6 +13257,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/22",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -12859,6 +13269,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -12870,6 +13281,7 @@
             "materia_id": 231,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
@@ -12881,6 +13293,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -12892,6 +13305,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -12903,6 +13317,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -12914,6 +13329,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -12925,6 +13341,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -12936,6 +13353,7 @@
             "materia_id": 218,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
@@ -12947,6 +13365,7 @@
             "materia_id": 240,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
@@ -13447,7 +13866,7 @@
         ]
       },
       "votos": {
-        "sim": 19,
+        "sim": 9,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -13470,6 +13889,8 @@
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
+        "primeiro_turno_registros": 10,
+        "turno_nao_identificado_registros": 0,
         "nominais": [
           {
             "votacao_id": 20,
@@ -13478,6 +13899,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -13489,6 +13911,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -13500,6 +13923,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -13511,6 +13935,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -13522,6 +13947,7 @@
             "materia_id": 128,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/11",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
@@ -13533,6 +13959,7 @@
             "materia_id": 151,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
@@ -13544,6 +13971,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -13555,6 +13983,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -13566,6 +13995,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -13577,6 +14007,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/22",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -13588,6 +14019,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -13599,6 +14031,7 @@
             "materia_id": 231,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
@@ -13610,6 +14043,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -13621,6 +14055,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -13632,6 +14067,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -13643,6 +14079,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -13654,6 +14091,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -13665,6 +14103,7 @@
             "materia_id": 218,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
@@ -13676,6 +14115,7 @@
             "materia_id": 240,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
@@ -14268,7 +14708,7 @@
         ]
       },
       "votos": {
-        "sim": 19,
+        "sim": 9,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -14291,6 +14731,8 @@
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
+        "primeiro_turno_registros": 10,
+        "turno_nao_identificado_registros": 0,
         "nominais": [
           {
             "votacao_id": 20,
@@ -14299,6 +14741,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -14310,6 +14753,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -14321,6 +14765,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -14332,6 +14777,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -14343,6 +14789,7 @@
             "materia_id": 128,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/11",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
@@ -14354,6 +14801,7 @@
             "materia_id": 151,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
@@ -14365,6 +14813,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -14376,6 +14825,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -14387,6 +14837,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -14398,6 +14849,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/22",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -14409,6 +14861,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -14420,6 +14873,7 @@
             "materia_id": 231,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
@@ -14431,6 +14885,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -14442,6 +14897,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -14453,6 +14909,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -14464,6 +14921,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -14475,6 +14933,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -14486,6 +14945,7 @@
             "materia_id": 218,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
@@ -14497,6 +14957,7 @@
             "materia_id": 240,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
@@ -14997,7 +15458,7 @@
         ]
       },
       "votos": {
-        "sim": 19,
+        "sim": 9,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -15020,6 +15481,8 @@
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
+        "primeiro_turno_registros": 10,
+        "turno_nao_identificado_registros": 0,
         "nominais": [
           {
             "votacao_id": 20,
@@ -15028,6 +15491,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -15039,6 +15503,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -15050,6 +15515,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -15061,6 +15527,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -15072,6 +15539,7 @@
             "materia_id": 128,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/11",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
@@ -15083,6 +15551,7 @@
             "materia_id": 151,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
@@ -15094,6 +15563,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -15105,6 +15575,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -15116,6 +15587,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -15127,6 +15599,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/22",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -15138,6 +15611,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -15149,6 +15623,7 @@
             "materia_id": 231,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
@@ -15160,6 +15635,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -15171,6 +15647,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -15182,6 +15659,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -15193,6 +15671,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -15204,6 +15683,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -15215,6 +15695,7 @@
             "materia_id": 218,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
@@ -15226,6 +15707,7 @@
             "materia_id": 240,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
@@ -15710,13 +16192,13 @@
         ]
       },
       "votos": {
-        "sim": 13,
+        "sim": 8,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
         "presidente_que_nao_votou": 0,
         "ausente_com_justificativa": 0,
-        "ausente_sem_justificativa": 6,
+        "ausente_sem_justificativa": 1,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
         "licenca_tratamento_saude": 0,
@@ -15733,6 +16215,8 @@
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
+        "primeiro_turno_registros": 10,
+        "turno_nao_identificado_registros": 0,
         "nominais": [
           {
             "votacao_id": 20,
@@ -15741,6 +16225,7 @@
             "materia_id": 29,
             "estado": "ausente_sem_justificativa",
             "rotulo": "Ausente sem justificativa",
+            "turno": "1o turno",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -15752,6 +16237,7 @@
             "materia_id": 14,
             "estado": "ausente_sem_justificativa",
             "rotulo": "Ausente sem justificativa",
+            "turno": "1o turno",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -15763,6 +16249,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -15774,6 +16261,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -15785,6 +16273,7 @@
             "materia_id": 128,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/11",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
@@ -15796,6 +16285,7 @@
             "materia_id": 151,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
@@ -15807,6 +16297,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -15818,6 +16309,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -15829,6 +16321,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -15840,6 +16333,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/22",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -15851,6 +16345,7 @@
             "materia_id": 189,
             "estado": "ausente_sem_justificativa",
             "rotulo": "Ausente sem justificativa",
+            "turno": "1o turno",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -15862,6 +16357,7 @@
             "materia_id": 231,
             "estado": "ausente_sem_justificativa",
             "rotulo": "Ausente sem justificativa",
+            "turno": "turno unico",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
@@ -15873,6 +16369,7 @@
             "materia_id": 190,
             "estado": "ausente_sem_justificativa",
             "rotulo": "Ausente sem justificativa",
+            "turno": "1o turno",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -15884,6 +16381,7 @@
             "materia_id": 219,
             "estado": "ausente_sem_justificativa",
             "rotulo": "Ausente sem justificativa",
+            "turno": "1o turno",
             "voto_texto_sapl": null,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -15895,6 +16393,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -15906,6 +16405,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -15917,6 +16417,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -15928,6 +16429,7 @@
             "materia_id": 218,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
@@ -15939,6 +16441,7 @@
             "materia_id": 240,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"
@@ -16375,7 +16878,7 @@
         ]
       },
       "votos": {
-        "sim": 19,
+        "sim": 9,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -16398,6 +16901,8 @@
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
         "total_registros": 19,
+        "primeiro_turno_registros": 10,
+        "turno_nao_identificado_registros": 0,
         "nominais": [
           {
             "votacao_id": 20,
@@ -16406,6 +16911,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -16417,6 +16923,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/7",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -16428,6 +16935,7 @@
             "materia_id": 14,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/14"
@@ -16439,6 +16947,7 @@
             "materia_id": 29,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/8",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/29"
@@ -16450,6 +16959,7 @@
             "materia_id": 128,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/11",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/128"
@@ -16461,6 +16971,7 @@
             "materia_id": 151,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/13",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/151"
@@ -16472,6 +16983,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/14",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -16483,6 +16995,7 @@
             "materia_id": 163,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/15",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/163"
@@ -16494,6 +17007,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/21",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -16505,6 +17019,7 @@
             "materia_id": 27,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/22",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/27"
@@ -16516,6 +17031,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -16527,6 +17043,7 @@
             "materia_id": 231,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "turno unico",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/231"
@@ -16538,6 +17055,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -16549,6 +17067,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/31",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -16560,6 +17079,7 @@
             "materia_id": 189,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/189"
@@ -16571,6 +17091,7 @@
             "materia_id": 190,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/190"
@@ -16582,6 +17103,7 @@
             "materia_id": 219,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "2o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/219"
@@ -16593,6 +17115,7 @@
             "materia_id": 218,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/33",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/218"
@@ -16604,6 +17127,7 @@
             "materia_id": 240,
             "estado": "sim",
             "rotulo": "Sim",
+            "turno": "1o turno",
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/34",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/240"

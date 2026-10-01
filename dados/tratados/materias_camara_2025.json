@@ -6,22 +6,48 @@
       "tipo": "PLL 17/2025",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
       "ementa": "DISPÕE SOBRE OS CRITÉRIOS PARA  A DENOMINAÇÃO DE PRÉDIOS E EQUIPAMENTOS PÚBLICOS MUNICIPAIS NO ÂMBITO DO MUNICÍPIO DE CAMPO DO TENENTE, E DÁ OUTRAS PROVIDÊNCIAS.",
       "categoria": "Homenagens, nomes e datas",
       "placar": "8 x 0",
       "data_sessao": "2025-11-11",
-      "sessao_id": 29
+      "sessao_id": 29,
+      "votacoes": [
+        {
+          "data_sessao": "2025-11-04",
+          "sessao_id": 28,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-11-11",
+          "sessao_id": 29,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 216,
       "tipo": "PLL 18/2025",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
       "ementa": "Dispõe sobre a prática esportiva e recreativa de manobras com motocicletas, conhecida como “grau” ou “wheeling”, no âmbito do Município de Campo do Tenente, e dá outras providências.",
       "categoria": "Cultura, esporte e lazer",
       "placar": "8 x 0",
       "data_sessao": "2025-11-18",
-      "sessao_id": 30
+      "sessao_id": 30,
+      "votacoes": [
+        {
+          "data_sessao": "2025-11-11",
+          "sessao_id": 29,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-11-18",
+          "sessao_id": 30,
+          "turno": "2o turno"
+        }
+      ]
     }
   ],
   "todo": [
@@ -30,121 +56,269 @@
       "tipo": "PLL 7/2025",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
       "ementa": "DISPÕE SOBRE A DIVULGAÇÃO DE INFORMAÇÕES SOBRE OS SERVIÇOS DE SANEAMENTO BÁSICO E DO PROGRAMA PORTEIRA ADENTRO DO MUNICÍPIO NO SITE OFICIAL DA PREFEITURA DE CAMPO DO TENENTE - PR.",
       "categoria": "Agricultura e pecuária",
       "placar": "8 x 0",
       "data_sessao": "2025-09-30",
-      "sessao_id": 22
+      "sessao_id": 22,
+      "votacoes": [
+        {
+          "data_sessao": "2025-09-23",
+          "sessao_id": 21,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-09-30",
+          "sessao_id": 22,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 27,
       "tipo": "PLL 8/2025",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
       "ementa": "Dispõe sobre o piso salarial ético instituído pela OAB-PR para o cargo de Advogado da Câmara Municipal de Campo do Tenente e dá outras providências.",
       "categoria": "Administração e finanças",
       "placar": "9 x 0",
       "data_sessao": "2025-09-30",
-      "sessao_id": 22
+      "sessao_id": 22,
+      "votacoes": [
+        {
+          "data_sessao": "2025-09-23",
+          "sessao_id": 21,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-09-30",
+          "sessao_id": 22,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 28,
       "tipo": "PLL 9/2025",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
       "ementa": "Dispõe sobre a possibilidade de alteração temporária da carga horária dos servidores da Câmara Municipal de Campo do Tenente, com ajuste proporcional da remuneração, mediante concordância expressa, e dá outras providências.",
       "categoria": "Administração e finanças",
       "placar": "9 x 0",
       "data_sessao": "2025-08-05",
-      "sessao_id": 14
+      "sessao_id": 14,
+      "votacoes": [
+        {
+          "data_sessao": "2025-07-29",
+          "sessao_id": 13,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-08-05",
+          "sessao_id": 14,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 26,
       "tipo": "PLL 10/2025",
       "resultado": "maioria",
       "resultado_oficial": "MAIORIA ABSOLUTA",
+      "turno": "2o turno",
       "ementa": "INSTITUI O TÍTULO DE \"EMBAIXADOR(A) HONORÁRIO(A) DE CAMPO DO TENENTE\" E DÁ OUTRAS PROVIDÊNCIAS.",
       "categoria": "Homenagens, nomes e datas",
       "placar": "8 x 0",
       "data_sessao": "2025-06-24",
-      "sessao_id": 8
+      "sessao_id": 8,
+      "votacoes": [
+        {
+          "data_sessao": "2025-06-17",
+          "sessao_id": 7,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-06-17",
+          "sessao_id": 7,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-06-24",
+          "sessao_id": 8,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 31,
       "tipo": "PLL 11/2025",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
       "ementa": "REGULAMENTA A LEI FEDERAL Nº 12.527/2011- LEI DE ACESSO À INFORMAÇÃO - LAI, NO ÂMBITO DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE – PR.",
       "categoria": "Administração e finanças",
       "placar": "8 x 0",
       "data_sessao": "2025-08-05",
-      "sessao_id": 14
+      "sessao_id": 14,
+      "votacoes": [
+        {
+          "data_sessao": "2025-07-29",
+          "sessao_id": 13,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-08-05",
+          "sessao_id": 14,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 25,
       "tipo": "PLL 12/2025",
       "resultado": "maioria",
       "resultado_oficial": "MAIORIA ABSOLUTA",
+      "turno": "2o turno",
       "ementa": "INSTITUI O PARLAMENTO MUNICIPAL DA PESSOA COM DEFICIÊNCIA NO MUNICÍPIO DE CAMPO DO TENENTE, DESTINADO A ESTUDANTES DA APAE, COM FINS EDUCATIVOS E DE CIDADANIA, E DÁ OUTRAS PROVIDÊNCIAS.",
       "categoria": "Assistência social e direitos",
       "placar": "8 x 0",
       "data_sessao": "2025-06-24",
-      "sessao_id": 8
+      "sessao_id": 8,
+      "votacoes": [
+        {
+          "data_sessao": "2025-06-17",
+          "sessao_id": 7,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-06-24",
+          "sessao_id": 8,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 37,
       "tipo": "PLL 13/2025",
       "resultado": "maioria",
       "resultado_oficial": "MAIORIA ABSOLUTA",
+      "turno": "2o turno",
       "ementa": "INSTITUI O SELO \"EMPRESA AMIGA DA JUVENTUDE\"",
       "categoria": "Educação",
       "placar": "7 x 0",
       "data_sessao": "2025-07-08",
-      "sessao_id": 10
+      "sessao_id": 10,
+      "votacoes": [
+        {
+          "data_sessao": "2025-07-01",
+          "sessao_id": 9,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-07-08",
+          "sessao_id": 10,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 151,
       "tipo": "PLL 14/2025",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
       "ementa": "DISPÕE ACERCA DA IMPLANTAÇÃO DE CÓDIGO QR EM TODAS AS PLACAS DE OBRAS PÚBLICAS MUNICIPAIS PARA LEITURA E FISCALIZAÇÃO ELETRÔNICA.",
       "categoria": "Administração e finanças",
       "placar": "8 x 0",
       "data_sessao": "2025-08-05",
-      "sessao_id": 14
+      "sessao_id": 14,
+      "votacoes": [
+        {
+          "data_sessao": "2025-07-29",
+          "sessao_id": 13,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-08-05",
+          "sessao_id": 14,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 163,
       "tipo": "PLL 15/2025",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
       "ementa": "DISPÕE SOBRE A RESERVA DE VAGAS PARA NEGROS E PARDOS EM CONCURSOS PÚBLICOS E PROCESSOS SELETIVOS SIMPLIFICADOSNO ÂMBITO DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE E DÁ OUTRAS PROVIDÊNCIAS.",
       "categoria": "Assistência social e direitos",
       "placar": "8 x 1",
       "data_sessao": "2025-08-12",
-      "sessao_id": 15
+      "sessao_id": 15,
+      "votacoes": [
+        {
+          "data_sessao": "2025-08-05",
+          "sessao_id": 14,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-08-12",
+          "sessao_id": 15,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 211,
       "tipo": "PLL 17/2025",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
       "ementa": "DISPÕE SOBRE OS CRITÉRIOS PARA  A DENOMINAÇÃO DE PRÉDIOS E EQUIPAMENTOS PÚBLICOS MUNICIPAIS NO ÂMBITO DO MUNICÍPIO DE CAMPO DO TENENTE, E DÁ OUTRAS PROVIDÊNCIAS.",
       "categoria": "Homenagens, nomes e datas",
       "placar": "8 x 0",
       "data_sessao": "2025-11-11",
-      "sessao_id": 29
+      "sessao_id": 29,
+      "votacoes": [
+        {
+          "data_sessao": "2025-11-04",
+          "sessao_id": 28,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-11-11",
+          "sessao_id": 29,
+          "turno": "2o turno"
+        }
+      ]
     },
     {
       "id": 216,
       "tipo": "PLL 18/2025",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
       "ementa": "Dispõe sobre a prática esportiva e recreativa de manobras com motocicletas, conhecida como “grau” ou “wheeling”, no âmbito do Município de Campo do Tenente, e dá outras providências.",
       "categoria": "Cultura, esporte e lazer",
       "placar": "8 x 0",
       "data_sessao": "2025-11-18",
-      "sessao_id": 30
+      "sessao_id": 30,
+      "votacoes": [
+        {
+          "data_sessao": "2025-11-11",
+          "sessao_id": 29,
+          "turno": "1o turno"
+        },
+        {
+          "data_sessao": "2025-11-18",
+          "sessao_id": 30,
+          "turno": "2o turno"
+        }
+      ]
     }
   ]
 }

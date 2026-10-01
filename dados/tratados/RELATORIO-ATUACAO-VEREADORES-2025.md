@@ -38,6 +38,8 @@ Taxa de presença: presenças divididas pelo total de sessões no mandato, que s
 
 Cada votação com voto individual recebe um estado para cada vereador da banca do ano. Os rótulos não se misturam.
 
+Cada votação de projeto de lei tem um turno: a primeira data é o 1o turno e a seguinte em outra sessão é o 2o turno; os demais tipos seguem turno único. A contagem de votos de cada vereador considera só o 2o turno e o turno único. O 1o turno aparece na lista com a tag, sem entrar na contagem. Projeto aprovado só no 1o turno continua em tramitação; rejeitado no 1o turno segue rejeitado.
+
 - Sim
 - Não
 - Abstenção
@@ -151,7 +153,7 @@ Faltas com justificativa: 1. Faltas sem justificativa: 2. Afastamentos que não 
 
 ### Jorge Quege
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -166,7 +168,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Dr. Marcos Rodrigues
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -181,8 +183,8 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Cleiton Costa
 
-- Sim: 17
-- Não: 2
+- Sim: 8
+- Não: 1
 - Abstenção: 0
 - Não votou: 0
 - Presidente que não votou: 0
@@ -196,7 +198,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Kinho Lazarino
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -211,7 +213,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Rafael Ventura
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -226,7 +228,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Gustavo Vizentin
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -241,7 +243,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Josemar Veiga
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -256,13 +258,13 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Beto Maurer
 
-- Sim: 13
+- Sim: 8
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
 - Presidente que não votou: 0
 - Ausente com justificativa: 0
-- Ausente sem justificativa: 6
+- Ausente sem justificativa: 1
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
 - Licença para tratamento de saúde: 0
@@ -271,7 +273,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Gilmar Barbosa
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0

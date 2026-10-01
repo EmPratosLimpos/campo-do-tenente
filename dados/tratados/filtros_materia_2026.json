@@ -3,12 +3,12 @@
     {
       "id": "",
       "rotulo": "Todos",
-      "qtd": 0
+      "qtd": 2
     },
     {
       "id": "unanimidade",
       "rotulo": "Unânimes",
-      "qtd": 0
+      "qtd": 2
     },
     {
       "id": "maioria",
