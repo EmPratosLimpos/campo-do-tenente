@@ -317,7 +317,7 @@ A autoria veio de `autoria_materias.json`. A lista de cada vereador abaixo só i
 
 O tema de cada matéria veio de `temas_materias.json`.
 
-Nem toda matéria com tema passou pela revisão do mantenedor.
+Classificação por tema revisada pelo mantenedor em todas as matérias com tema.
 
 ### Jorge Quege
 

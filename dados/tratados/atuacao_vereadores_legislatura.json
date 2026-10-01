@@ -101,7 +101,7 @@
     },
     "temas_materias_presente": true,
     "fonte_temas": "dados/tratados/temas_materias.json",
-    "revisada_por_humano": false,
+    "revisada_por_humano": true,
     "arquivos_de_origem": [
       "dados/brutos/contagem_votacoes_ordinarias_2026.json",
       "dados/brutos/materias-2026-resposta-original.csv",
