@@ -32,7 +32,7 @@ Taxa de presença: presenças divididas pelo total de sessões no mandato, que s
 
 Cada votação com voto individual recebe um estado para cada vereador da banca do ano. Os rótulos não se misturam.
 
-Cada votação de projeto de lei tem um turno: a primeira data é o 1o turno e a seguinte em outra sessão é o 2o turno; os demais tipos seguem turno único. A contagem de votos de cada vereador considera só o 2o turno e o turno único. O 1o turno aparece na lista com a tag, sem entrar na contagem. Projeto aprovado só no 1o turno continua em tramitação; rejeitado no 1o turno segue rejeitado.
+Cada votação de projeto de lei tem um turno: a primeira data é o 1o turno e a seguinte em outra sessão é o 2o turno; os demais tipos seguem turno único. A contagem de votos de cada vereador considera só o 2o turno e o turno único. O 1o turno aparece na lista com a tag, sem entrar na contagem. Projeto aprovado só no 1o turno continua em tramitação; rejeitado no 1o turno segue rejeitado. Votação sem deliberação (adiada, pedido de vistas, retirada de pauta) aparece com o nome oficial do SAPL e não entra em nenhuma contagem de voto.
 
 - Sim
 - Não
@@ -172,13 +172,13 @@ Fonte: Projeto de Decreto Legislativo n 2 de 2026. Link: https://sapl.campodoten
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licença para tratamento de saúde: 66
+- Licença para tratamento de saúde: 64
 
 Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Dr. Marcos Rodrigues
 
-- Sim: 86
+- Sim: 83
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -193,12 +193,12 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Cleiton Costa
 
-- Sim: 87
+- Sim: 85
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
 - Presidente que não votou: 0
-- Ausente com justificativa: 5
+- Ausente com justificativa: 4
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
@@ -208,12 +208,12 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Kinho Lazarino
 
-- Sim: 84
+- Sim: 82
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
 - Presidente que não votou: 0
-- Ausente com justificativa: 5
+- Ausente com justificativa: 4
 - Ausente sem justificativa: 3
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
@@ -223,11 +223,11 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Rafael Ventura
 
-- Sim: 7
+- Sim: 6
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
-- Presidente que não votou: 85
+- Presidente que não votou: 83
 - Ausente com justificativa: 0
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
@@ -238,7 +238,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Gustavo Vizentin
 
-- Sim: 92
+- Sim: 89
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -253,7 +253,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Josemar Veiga
 
-- Sim: 90
+- Sim: 87
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -268,7 +268,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Beto Maurer
 
-- Sim: 83
+- Sim: 80
 - Não: 2
 - Abstenção: 0
 - Não votou: 0
@@ -283,7 +283,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Gilmar Barbosa
 
-- Sim: 85
+- Sim: 82
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -298,7 +298,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Rivanildo Cavalheiro
 
-- Sim: 88
+- Sim: 85
 - Não: 0
 - Abstenção: 2
 - Não votou: 0

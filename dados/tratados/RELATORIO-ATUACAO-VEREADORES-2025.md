@@ -38,7 +38,7 @@ Taxa de presença: presenças divididas pelo total de sessões no mandato, que s
 
 Cada votação com voto individual recebe um estado para cada vereador da banca do ano. Os rótulos não se misturam.
 
-Cada votação de projeto de lei tem um turno: a primeira data é o 1o turno e a seguinte em outra sessão é o 2o turno; os demais tipos seguem turno único. A contagem de votos de cada vereador considera só o 2o turno e o turno único. O 1o turno aparece na lista com a tag, sem entrar na contagem. Projeto aprovado só no 1o turno continua em tramitação; rejeitado no 1o turno segue rejeitado.
+Cada votação de projeto de lei tem um turno: a primeira data é o 1o turno e a seguinte em outra sessão é o 2o turno; os demais tipos seguem turno único. A contagem de votos de cada vereador considera só o 2o turno e o turno único. O 1o turno aparece na lista com a tag, sem entrar na contagem. Projeto aprovado só no 1o turno continua em tramitação; rejeitado no 1o turno segue rejeitado. Votação sem deliberação (adiada, pedido de vistas, retirada de pauta) aparece com o nome oficial do SAPL e não entra em nenhuma contagem de voto.
 
 - Sim
 - Não
