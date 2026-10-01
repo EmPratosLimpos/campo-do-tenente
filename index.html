@@ -3716,7 +3716,11 @@
       if (r === "unanimidade") out.unanimidade += 1;
       else if (r === "maioria") out.maioria += 1;
       else if (r === "rejeitado") out.rejeitado += 1;
-      else if (r === "primeiro_turno" || r === "turno_nao_identificado") return;
+      else if (
+        r === "primeiro_turno" ||
+        r === "turno_nao_identificado" ||
+        (r.indexOf("nao_deliberativo:") === 0)
+      ) return;
       else out.outro += 1;
     });
     return out;
@@ -4642,7 +4646,9 @@
         esc(rotuloVoto(n)) + "</span>" +
         (n.turno === "1o turno" || n.turno === "2o turno"
           ? ' <span class="tag-turno">' + esc(n.turno) + "</span>"
-          : "") +
+          : (n.tipo_resultado
+            ? ' <span class="tag-turno">' + esc(n.tipo_resultado) + "</span>"
+            : "")) +
         "<span>" + textoEmenta + "</span> " +
         linkExt(linkSess, "Sessão no SAPL") + "</li>";
     }).join("");
@@ -5056,6 +5062,9 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (m.resultado === "primeiro_turno") prefixo = "1o turno";
     if (m.resultado === "turno_nao_identificado") prefixo = "Turno não identificado";
     if (m.resultado === "rejeitado") prefixo = "Rejeitado";
+    if (m.resultado && m.resultado.indexOf("nao_deliberativo:") === 0) {
+      prefixo = m.tipo_resultado || "Sem deliberação";
+    }
     var match = m.placar.match(/(\d+)\s*a favor,\s*(\d+)\s*contra/);
     if (!match) return prefixo + ".";
     var resultado = prefixo + ": " + match[1] + " a favor";
@@ -5469,7 +5478,11 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     } else if (badgeHtml) {
       tagsHtml = '<div class="materia-tags">' + badgeHtml + '</div>';
     }
-    var turnoHtml = m.turno ? '<span class="tag-turno">' + esc(m.turno) + '</span>' : '';
+    var turnoHtml = m.turno
+      ? '<span class="tag-turno">' + esc(m.turno) + '</span>'
+      : (m.tipo_resultado
+        ? '<span class="tag-turno">' + esc(m.tipo_resultado) + "</span>"
+        : "");
     if (tagsHtml && turnoHtml) {
       tagsHtml = tagsHtml.replace('</div>', turnoHtml + '</div>');
     } else if (turnoHtml) {
@@ -5508,7 +5521,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
 
   function legendaVotado(periodo) {
     var regra = " Matéria votada em mais de uma sessão aparece uma vez por período, com todas as datas.";
-    var regraContagem = " A contagem de resultado considera só o 2o turno ou o turno único.";
+    var regraContagem = " A contagem de resultado considera só o 2o turno ou o turno único. Votação sem deliberação aparece com o nome oficial e não entra na contagem.";
     if (periodo === "sessao") {
       return "Lista com ementa (resumo oficial) e placar. Toque abre a página oficial no SAPL (Sistema de Apoio ao Processo Legislativo)." + regra + regraContagem;
     }
@@ -5715,10 +5728,11 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       '<div class="resumo-campo">' +
       '<p class="resumo-campo-rotulo">Resultado da votação</p>' +
       '<p class="resumo-campo-valor">' + esc(resultado) + "</p></div>";
-    if (m.turno) {
+    if (m.turno || m.tipo_resultado) {
       html += '<div class="resumo-campo">' +
         '<p class="resumo-campo-rotulo">Turno</p>' +
-        '<p class="resumo-campo-valor"><span class="tag-turno">' + esc(m.turno) + "</span></p></div>";
+        '<p class="resumo-campo-valor"><span class="tag-turno">' +
+        esc(m.turno || m.tipo_resultado) + "</span></p></div>";
     }
     if (textoDatasVotacao(m)) {
       html += '<div class="resumo-campo">' +

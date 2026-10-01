@@ -113,7 +113,11 @@
       if (r === "unanimidade") out.unanimidade += 1;
       else if (r === "maioria") out.maioria += 1;
       else if (r === "rejeitado") out.rejeitado += 1;
-      else if (r === "primeiro_turno" || r === "turno_nao_identificado") return;
+      else if (
+        r === "primeiro_turno" ||
+        r === "turno_nao_identificado" ||
+        (r.indexOf("nao_deliberativo:") === 0)
+      ) return;
       else out.outro += 1;
     });
     return out;
