@@ -79,6 +79,7 @@ ROTULOS_ESTADO = {
     ),
 }
 LICENCA_TIPOS: list[str] = []
+TIPOS_JUSTIFICATIVA_SAPL: dict[int, str] = {}
 VOTOS_SIM = {"Sim"}
 VOTOS_NAO = {"Não", "Nao"}
 VOTOS_ABSTENCAO = {"Abstenção", "Abstencao"}
@@ -246,6 +247,99 @@ def carregar_tipos_resultado() -> dict[int, str]:
     for item in dados.get("results") or []:
         if isinstance(item, dict) and item.get("id") is not None:
             saida[int(item["id"])] = str(item.get("nome") or "").strip()
+    return saida
+
+
+def carregar_catalogo_tipos_materia() -> tuple[dict[str, str], str]:
+    """Sigla e descricao oficiais de cada tipo de materia, lidas do SAPL.
+
+    Fonte: dados/brutos/lote_*/tipomaterialegislativa_p*.json (tabela
+    tipomaterialegislativa do SAPL). Sem dicionario fixo no codigo.
+    """
+    achados = []
+    for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
+        if not pasta.is_dir():
+            continue
+        for caminho in sorted(pasta.glob("tipomaterialegislativa_p*.json")):
+            achados.append(caminho)
+    if not achados:
+        raise SystemExit("Tabela tipomaterialegislativa nao encontrada em dados/brutos.")
+    caminho = achados[-1]
+    dados = carregar_json(caminho)
+    saida: dict[str, str] = {}
+    for item in dados.get("results") or []:
+        if not isinstance(item, dict):
+            continue
+        sigla = str(item.get("sigla") or "").strip()
+        descricao = str(item.get("descricao") or "").strip()
+        if not sigla or not descricao:
+            continue
+        if sigla in saida and saida[sigla] != descricao:
+            raise SystemExit(f"Tipo {sigla} com descricoes diferentes no SAPL.")
+        saida[sigla] = descricao
+    if not saida:
+        raise SystemExit("Tabela tipomaterialegislativa sem sigla e descricao.")
+    return saida, rel(caminho)
+
+
+def carregar_tipos_justificativa() -> tuple[dict[int, str], str]:
+    """Descricao oficial de cada tipo de justificativa de ausencia do SAPL."""
+    achados = []
+    for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
+        if not pasta.is_dir():
+            continue
+        for caminho in sorted(pasta.glob("tipojustificativa_p*.json")):
+            achados.append(caminho)
+    if not achados:
+        return {}, ""
+    caminho = achados[-1]
+    dados = carregar_json(caminho)
+    saida: dict[int, str] = {}
+    for item in dados.get("results") or []:
+        if isinstance(item, dict) and item.get("id") is not None:
+            descricao = str(item.get("descricao") or item.get("__str__") or "").strip()
+            if descricao:
+                saida[int(item["id"])] = descricao
+    return saida, rel(caminho)
+
+
+def carregar_justificativas_detalhe() -> dict[tuple[int, int], list[dict]]:
+    """Detalhe de cada justificativa por (sessao_id, parlamentar_id).
+
+    Guarda tipo_ausencia, descricao oficial, observacao e anexo, para
+    mostrar o motivo na lista de faltas com justificativa.
+    """
+    tipos, _fonte_tipos = carregar_tipos_justificativa()
+    global TIPOS_JUSTIFICATIVA_SAPL
+    TIPOS_JUSTIFICATIVA_SAPL = tipos
+    saida: dict[tuple[int, int], list[dict]] = {}
+    for caminho in sorted(DIR_BRUTOS.glob("sessao_*_justificativaausencia.json")):
+        try:
+            dados = carregar_json(caminho)
+        except (OSError, ValueError):
+            continue
+        for linha in resultados_de_lista(dados):
+            if not isinstance(linha, dict):
+                continue
+            sessao = linha.get("sessao_plenaria")
+            parlamentar = linha.get("parlamentar")
+            if sessao is None or parlamentar is None:
+                continue
+            tipo_id = linha.get("tipo_ausencia")
+            tipo_id_int = int(tipo_id) if tipo_id is not None else None
+            descricao = tipos.get(tipo_id_int) if tipo_id_int is not None else None
+            if not descricao:
+                descricao = str(linha.get("__str__") or "").strip() or None
+            chave = (int(sessao), int(parlamentar))
+            saida.setdefault(chave, []).append(
+                {
+                    "tipo_ausencia": tipo_id_int,
+                    "descricao": descricao,
+                    "observacao": str(linha.get("observacao") or "").strip() or None,
+                    "upload_anexo": linha.get("upload_anexo"),
+                    "justificativa_id": linha.get("id"),
+                }
+            )
     return saida
 
 
@@ -572,22 +666,20 @@ def carregar_afastamentos() -> dict:
 
 
 def registrar_tipos_afastamento(afastamentos: list[dict]) -> None:
-    global ORDEM_ESTADOS
+    """Valida afastamentos manuais. D-050: licenca conta como falta com justificativa.
+
+    Nao cria estado proprio. A licenca entra na contagem de faltas com
+    justificativa, com o motivo guardado na sessao. A formula da taxa
+    (D-046) nao muda: presente dividido pelo total no mandato.
+    """
     for item in afastamentos:
         if item.get("conta_como_falta"):
-            raise SystemExit(
-                "Afastamento com conta_como_falta verdadeiro ainda nao tem regra. "
-                "Nao vou soma-lo como falta comum."
-            )
+            continue
         tipo = str(item["tipo"])
         rotulo = str(item["rotulo"])
-        if tipo in ROTULOS_ESTADO and ROTULOS_ESTADO[tipo] != rotulo:
-            raise SystemExit(f"Tipo {tipo} com rotulos diferentes.")
-        if tipo not in ORDEM_ESTADOS:
-            ORDEM_ESTADOS = ORDEM_ESTADOS + (tipo,)
-            ROTULOS_ESTADO[tipo] = rotulo
-        if tipo not in LICENCA_TIPOS:
-            LICENCA_TIPOS.append(tipo)
+        if not tipo.strip() or not rotulo.strip():
+            raise SystemExit("Afastamento sem tipo ou rotulo.")
+    LICENCA_TIPOS.clear()
 
 
 def afastamento_na_data(afastamentos: list[dict], parlamentar_id: int, data: str):
@@ -815,6 +907,36 @@ def carregar_registros(sessao: dict, tipos_resultado: dict[int, str]) -> dict[in
     return registros
 
 
+def motivo_afastamento_manual(afastamento: dict | None) -> dict | None:
+    if not afastamento:
+        return None
+    fonte = fonte_da_ocorrencia(afastamento)
+    return {
+        "origem": "afastamento_manual",
+        "tipo": afastamento.get("tipo"),
+        "motivo": str(afastamento.get("rotulo") or "").strip(),
+        "fonte": fonte.get("fonte") or "",
+        "link_fonte": fonte.get("link_fonte"),
+        "fonte_oficial_encontrada": bool(fonte.get("fonte_oficial_encontrada")),
+    }
+
+
+def motivo_justificativa_sapl(
+    detalhe: dict | None, link_sessao: str | None
+) -> dict | None:
+    if not detalhe:
+        return None
+    motivo = str(detalhe.get("descricao") or "").strip() or "Justificativa registrada no SAPL"
+    return {
+        "origem": "sapl_justificativaausencia",
+        "tipo_ausencia": detalhe.get("tipo_ausencia"),
+        "motivo": motivo,
+        "observacao": detalhe.get("observacao"),
+        "upload_anexo": detalhe.get("upload_anexo"),
+        "link_sessao": link_sessao,
+    }
+
+
 def estado_na_votacao(
     vereador: dict,
     data: str,
@@ -826,7 +948,7 @@ def estado_na_votacao(
     motivo: dict | None,
 ) -> tuple[str, str | None, dict]:
     if afastamento is not None and voto_texto is None:
-        return str(afastamento["tipo"]), None, fonte_da_ocorrencia(afastamento)
+        return "ausente_com_justificativa", None, fonte_da_ocorrencia(afastamento)
     if not dentro_do_mandato(vereador, data):
         return "fora_do_mandato", voto_texto, complemento_fora(motivo)
     if voto_texto is not None:
@@ -854,6 +976,7 @@ def processar_sessoes(
     motivos_fora: list[dict],
     tipos_materia: dict[int, str | None],
     tipos_resultado: dict[int, str],
+    justificativas_detalhe: dict | None = None,
 ) -> dict:
     ids_banca = {int(item["id_sapl"]) for item in banca}
     por_banca = {int(item["id_sapl"]): item for item in banca}
@@ -936,8 +1059,12 @@ def processar_sessoes(
                 situacoes[id_sapl] = "fora_do_mandato"
                 continue
             afastamento = afastamento_na_data(afastamentos, id_sapl, sessao["data"])
+            detalhe_just = None
+            if justificativas_detalhe is not None:
+                lista_just = justificativas_detalhe.get((int(sessao["id"]), id_sapl)) or []
+                detalhe_just = lista_just[0] if lista_just else None
             if afastamento is not None:
-                situacao = str(afastamento["tipo"])
+                situacao = "falta_com_justificativa"
             elif id_sapl in presentes:
                 situacao = "presente"
             elif id_sapl in justificados:
@@ -962,6 +1089,11 @@ def processar_sessoes(
             }
             if afastamento is not None:
                 registro.update(fonte_da_ocorrencia(afastamento))
+                registro["motivo_ausencia"] = motivo_afastamento_manual(afastamento)
+            elif situacao == "falta_com_justificativa":
+                motivo_sapl = motivo_justificativa_sapl(detalhe_just, sessao["link_sapl"])
+                if motivo_sapl is not None:
+                    registro["motivo_ausencia"] = motivo_sapl
             presenca[id_sapl].append(registro)
             situacoes[id_sapl] = situacao
 
@@ -1156,18 +1288,25 @@ def processar_sessoes(
 def consolidar_presenca(lista: list[dict], nome: str, sessoes_fora: int = 0) -> dict:
     """Presenca dentro do mandato. Sessoes fora da janela nao aparecem na lista.
 
-    O total da taxa soma presencas, faltas com e sem justificativa e
-    licencas. Licenca tem rotulo proprio, nunca e chamada de falta,
-    mas entra no total. Fora do mandato chega como contagem separada,
-    para a grade fechar, sem entrar na lista nem na taxa.
+    D-050: so duas categorias de falta. Licenca para tratamento de saude
+    e ausencia por licenca medica do SAPL contam como falta com
+    justificativa, com o motivo guardado em motivo_ausencia. A formula da
+    taxa (D-046) nao muda: presencas divididas pelo total no mandato.
     """
     contagem = Counter(item["situacao"] for item in lista)
     presencas = contagem.get("presente", 0)
     faltas_just = contagem.get("falta_com_justificativa", 0)
     faltas_sem = contagem.get("falta_sem_justificativa", 0)
     fora = int(sessoes_fora)
-    por_afastamento = {tipo: contagem.get(tipo, 0) for tipo in LICENCA_TIPOS}
-    licenca = sum(por_afastamento.values())
+    por_afastamento: dict[str, int] = {}
+    licenca = 0
+    desconhecidas = {
+        situacao: total
+        for situacao, total in contagem.items()
+        if situacao not in ("presente", "falta_com_justificativa", "falta_sem_justificativa")
+    }
+    if desconhecidas:
+        raise SystemExit(f"{nome}: situacao de presenca desconhecida: {sorted(desconhecidas)}.")
     if contagem.get("fora_do_mandato", 0):
         raise SystemExit(
             f"{nome}: sessao fora do mandato na lista de presenca."
@@ -1457,6 +1596,8 @@ def projetos_do_vereador(id_sapl: int, projetos: list[dict]) -> dict:
                 "id": projeto["id"],
                 "numero": projeto["numero"],
                 "ano": projeto["ano"],
+                "tipo_sigla": projeto.get("tipo_sigla"),
+                "tipo_descricao": projeto.get("tipo_descricao"),
                 "ementa": projeto["ementa"],
                 "tema": projeto["tema"],
                 "revisada_por_humano": projeto["revisada_por_humano"],
@@ -1686,7 +1827,10 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
             "",
             (
                 "Falta com justificativa: não está em nenhuma das duas listas "
-                "e está na lista de justificativa de ausência."
+                "e está na lista de justificativa de ausência, ou está em "
+                "licença para tratamento de saúde (afastamento manual) ou em "
+                "ausência por licença médica do SAPL. Cada sessão guarda o "
+                "motivo como está na fonte."
             ),
             "",
             (
@@ -1702,8 +1846,8 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
             "",
             (
                 "Taxa de presença: presenças divididas pelo total de sessões "
-                "no mandato, que soma presenças, faltas com e sem "
-                "justificativa e licenças."
+                "no mandato, que soma presenças e faltas com e sem "
+                "justificativa."
             ),
             "",
             "## Como o voto foi lido",
@@ -1746,10 +1890,11 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
                 ),
                 "",
                 (
-                    "Licença ou afastamento que não conta como falta vem de "
-                    "`afastamentos_manuais.json`, tem rótulo próprio e nunca "
-                    "é chamado de falta, mas entra no total de sessões da "
-                    "taxa de presença. Cada ocorrência guarda a fonte."
+                    "Licença para tratamento de saúde (`afastamentos_manuais.json`) "
+                    "e ausência por licença médica do SAPL contam como falta "
+                    "com justificativa, com o motivo e a fonte guardados na "
+                    "sessão. No histórico de votos, valem como ausente com "
+                    "justificativa."
                 ),
                 "",
                 "## Presença de cada vereador",
@@ -1775,7 +1920,6 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
                 (
                     f"Faltas com justificativa: {presenca['faltas_com_justificativa']}. "
                     f"Faltas sem justificativa: {presenca['faltas_sem_justificativa']}. "
-                    f"Afastamentos que não contam como falta: {presenca['sessoes_licenca']}. "
                     f"Sessões fora do mandato: {presenca['sessoes_fora_do_mandato']}."
                 ),
                 "",
@@ -1929,6 +2073,8 @@ def gerar_do_ano(ano: int) -> None:
     registrar_tipos_afastamento(manuais["afastamentos"])
     tipos_materia = carregar_tipos_materia(ano)
     tipos_resultado = carregar_tipos_resultado()
+    catalogo_tipos, fonte_catalogo = carregar_catalogo_tipos_materia()
+    justificativas_detalhe = carregar_justificativas_detalhe()
     bruto = processar_sessoes(
         ano,
         banca,
@@ -1941,6 +2087,7 @@ def gerar_do_ano(ano: int) -> None:
         manuais["motivos_fora_do_mandato"],
         tipos_materia,
         tipos_resultado,
+        justificativas_detalhe,
     )
     notas = notas_publicas(manuais["notas"])
     n_votacoes = len(bruto["votacoes"])
@@ -2102,6 +2249,8 @@ def gerar_do_ano(ano: int) -> None:
             "rotulo_sem_voto_individual": rotulo_sem.strip(),
             "contagem_estados": contagem_estados,
             "rotulos_estados": {chave: ROTULOS_ESTADO[chave] for chave in ORDEM_ESTADOS},
+            "catalogo_tipos_materia": catalogo_tipos,
+            "fonte_catalogo_tipos_materia": fonte_catalogo,
             "lacuna_sessoes_ordinarias": lacuna,
             "sessoes_com_presenca_divergente": bruto["divergencias_presenca"],
             "presentes_com_justificativa_na_mesma_sessao": bruto[
@@ -2125,8 +2274,9 @@ def gerar_do_ano(ano: int) -> None:
                 "unânime. Presidente que não votou só conta quando o SAPL "
                 "registrou Não Votou e a pessoa presidia aquela sessão. "
                 "Fora do mandato não aparece na lista da pessoa e não entra "
-                "em presença nem em voto. Licença tem rótulo próprio, não é "
-                "falta e entra no total da taxa de presença. Projeto de lei "
+                "em presença nem em voto. Licença para tratamento de saúde "
+                "e ausência por licença médica do SAPL contam como falta "
+                "com justificativa, com o motivo guardado na sessão. Projeto de lei "
                 "tem dois turnos: a contagem de votos considera só o 2o "
                 "turno ou o turno único; o 1o turno aparece na lista com a "
                 "tag, sem entrar na contagem. Votação adiada, com pedido de "

@@ -2,7 +2,10 @@
   "sessao": [
     {
       "id": 811,
-      "tipo": "PLL 4/2026",
+      "tipo": "PLEG 4/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 4 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
       "turno": "2o turno",
@@ -29,7 +32,10 @@
     },
     {
       "id": 815,
-      "tipo": "PLL 5/2026",
+      "tipo": "PLEG 5/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 5 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
       "turno": "2o turno",
@@ -58,7 +64,10 @@
   "mes": [
     {
       "id": 698,
-      "tipo": "PLL 3/2026",
+      "tipo": "PLEG 3/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 3 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
       "turno": "2o turno",
@@ -87,7 +96,10 @@
   "todo": [
     {
       "id": 244,
-      "tipo": "PLL 1/2026",
+      "tipo": "PLEG 1/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 1 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
       "turno": "2o turno",
@@ -114,7 +126,10 @@
     },
     {
       "id": 245,
-      "tipo": "PLL 2/2026",
+      "tipo": "PLEG 2/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 2 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
       "turno": "2o turno",
@@ -141,7 +156,10 @@
     },
     {
       "id": 698,
-      "tipo": "PLL 3/2026",
+      "tipo": "PLEG 3/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 3 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
       "turno": "2o turno",
@@ -168,7 +186,10 @@
     },
     {
       "id": 811,
-      "tipo": "PLL 4/2026",
+      "tipo": "PLEG 4/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 4 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
       "turno": "2o turno",
@@ -195,7 +216,10 @@
     },
     {
       "id": 815,
-      "tipo": "PLL 5/2026",
+      "tipo": "PLEG 5/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 5 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
       "turno": "2o turno",

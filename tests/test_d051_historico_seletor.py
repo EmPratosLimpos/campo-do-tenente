@@ -33,7 +33,6 @@ ESTADOS = (
     "ausente_sem_justificativa",
     "fora_do_mandato",
     "presente_sem_voto_individual_registrado",
-    "licenca_tratamento_saude",
 )
 TURNOS_VALIDOS = ("2o turno", "turno unico")
 

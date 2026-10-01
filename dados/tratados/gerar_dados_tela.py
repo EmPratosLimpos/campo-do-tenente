@@ -42,7 +42,6 @@ CHAVES_CONTAGEM_VOTO = (
     "ausente_sem_justificativa",
     "fora_do_mandato",
     "presente_sem_voto_individual_registrado",
-    "licenca_tratamento_saude",
 )
 
 CHAVES_META_SOMA = (
@@ -160,10 +159,20 @@ def montar_item(
             resultado = RESULTADO_PRIMEIRO_TURNO
         elif turno == TURNO_NAO_IDENTIFICADO:
             resultado = RESULTADO_TURNO_NAO_IDENTIFICADO
-    tipo = f"PLL {projeto.get('numero')}/{projeto.get('ano')}"
+    sigla = str(projeto.get("tipo_sigla") or "").strip()
+    descricao = str(projeto.get("tipo_descricao") or "").strip()
+    numero = projeto.get("numero")
+    ano = projeto.get("ano")
+    tipo = f"{sigla} {numero}/{ano}".strip() if sigla else f"{numero}/{ano}"
+    nome_extenso = None
+    if descricao and numero and ano:
+        nome_extenso = f"{descricao} nº {numero} de {ano}"
     return {
         "id": mid,
         "tipo": tipo,
+        "tipo_sigla": sigla or None,
+        "tipo_descricao": descricao or None,
+        "nome_extenso": nome_extenso,
         "resultado": resultado,
         "resultado_oficial": resultado_oficial,
         "turno": turno,
@@ -290,15 +299,17 @@ def gravar_camara(sufixo: str, sessao: list, mes: list, todo: list, lista: list,
         with open(RAIZ / "dados" / "tratados" / "temas_materias.json", "r", encoding="utf-8") as f_temas:
             todas = json.load(f_temas)
             for mat in todas.get("materias", []):
+                sigla = str(mat.get("sigla") or "").strip() or "Outros"
                 tags[str(mat["id"])] = {
-                    "tag_tipo": mat.get("sigla", "Outros"),
+                    "tag_tipo": sigla,
                     "tag_tema": mat.get("tema", "Outros")
                 }
     except Exception:
         pass
-    # Sobrepõe com a lista atual caso necessário
+    # Sobrepõe com a lista atual: sigla oficial vinda dos dados, sem mapa fixo
     for m in lista:
-        tags[str(m["id"])] = {"tag_tipo": "PLL", "tag_tema": m["categoria"]}
+        sigla = str(m.get("tipo_sigla") or "").strip() or "Outros"
+        tags[str(m["id"])] = {"tag_tipo": sigla, "tag_tema": m["categoria"]}
     filtros = {
         "sessao": filtros_de(sessao),
         "mes": filtros_de(mes),
@@ -374,10 +385,8 @@ def _mesclar_projetos_lei_vereador(a: dict, b: dict) -> dict:
 def _recomputar_presenca(por_sessao: list[dict], fora: int = 0) -> dict:
     """Soma da legislatura na mesma regra do ano.
 
-    Sessoes fora da janela do mandato nao estao na lista e chegam como
-    contagem separada. Qualquer situacao que nao seja presenca, falta ou
-    fora conta como licenca: tem rotulo proprio, nunca e falta, mas
-    entra no total da taxa.
+    D-050: so duas categorias de falta. Licenca antiga (situacao herdada)
+    conta como falta com justificativa. A formula da taxa nao muda.
     """
     presencas = 0
     faltas_j = 0
@@ -393,9 +402,11 @@ def _recomputar_presenca(por_sessao: list[dict], fora: int = 0) -> dict:
             faltas_s += 1
         elif sit == "fora_do_mandato":
             raise ValueError("sessao fora do mandato na lista de presenca")
+        elif sit == "licenca_tratamento_saude":
+            faltas_j += 1
         elif sit:
-            por_afast[sit] = por_afast.get(sit, 0) + 1
-    licenca = sum(por_afast.values())
+            raise ValueError(f"situacao de presenca desconhecida: {sit}")
+    licenca = 0
     fora = int(fora)
     no_mandato = presencas + faltas_j + faltas_s + licenca
     total_sessoes = len(por_sessao) + fora
@@ -421,22 +432,37 @@ def _mesclar_votos(a: dict, b: dict) -> dict:
     out = copy.deepcopy(a or {})
     bb = b or {}
     for chave in CHAVES_CONTAGEM_VOTO:
-        out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0)
+        soma_antiga = 0
+        if chave == "ausente_com_justificativa":
+            soma_antiga = (out.get("licenca_tratamento_saude") or 0) + (
+                bb.get("licenca_tratamento_saude") or 0
+            )
+        out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0) + soma_antiga
+    out.pop("licenca_tratamento_saude", None)
     for chave in ("primeiro_turno_registros", "turno_nao_identificado_registros"):
         out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0)
     for chave in ("nao_deliberativo_registros",):
         out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0)
     if bb.get("rotulos"):
         out["rotulos"] = bb["rotulos"]
-    nominais = list(out.get("nominais") or [])
+    if isinstance(out.get("rotulos"), dict):
+        out["rotulos"].pop("licenca_tratamento_saude", None)
+    def _normalizar_nominal(n: dict) -> dict:
+        copia = dict(n or {})
+        if copia.get("estado") == "licenca_tratamento_saude":
+            copia["estado"] = "ausente_com_justificativa"
+            copia["rotulo"] = "Ausente com justificativa"
+        return copia
+    nominais = [_normalizar_nominal(n) for n in (out.get("nominais") or [])]
     chaves = {
         (n.get("votacao_id"), n.get("sessao_id"), n.get("materia_id")) for n in nominais
     }
     for n in bb.get("nominais") or []:
-        chave = (n.get("votacao_id"), n.get("sessao_id"), n.get("materia_id"))
+        normalizado = _normalizar_nominal(n)
+        chave = (normalizado.get("votacao_id"), normalizado.get("sessao_id"), normalizado.get("materia_id"))
         if chave in chaves:
             continue
-        nominais.append(n)
+        nominais.append(normalizado)
         chaves.add(chave)
     nominais.sort(key=lambda x: (x.get("data_sessao") or "", x.get("votacao_id") or 0))
     out["nominais"] = nominais

@@ -138,17 +138,17 @@ class TestVotosVereadores(unittest.TestCase):
             votos_jorge = votos_da_legislatura("jorge-quege")
             self.assertIn(f"{votos_jorge['sim']}\nSim", texto_jorge)
             self.assertIn(
-                f"{votos_jorge['licenca_tratamento_saude']}\nLicença para tratamento de saúde",
+                f"{votos_jorge['ausente_com_justificativa']}\nAusente com justificativa",
                 texto_jorge,
             )
             self.assertNotIn("Fora do mandato naquela data", texto_jorge)
 
-            page.select_option("#filtro-voto", label="Licença para tratamento de saúde")
+            page.select_option("#filtro-voto", label="Ausente com justificativa")
             page.wait_for_timeout(1000)
             abrir_se_fechado("tit-votos")
             texto_jorge_filtro = page.inner_text("body")
             self.assertIn(
-                f"{nominais_por_estado('jorge-quege', 'licenca_tratamento_saude')} registros",
+                f"{nominais_por_estado('jorge-quege', 'ausente_com_justificativa')} registros",
                 texto_jorge_filtro,
             )
 
@@ -161,7 +161,6 @@ class TestVotosVereadores(unittest.TestCase):
             self.assertGreater(inner_acs.count(), 0)
 
             ac_1 = inner_acs.nth(0)
-            ac_2 = inner_acs.nth(1)
 
             def texto_visivel_sem_literais_js():
                 if not presenca_card.evaluate("node => node.open"):
@@ -175,10 +174,13 @@ class TestVotosVereadores(unittest.TestCase):
                     self.assertNotIn(bad, texto)
 
             ac_1.evaluate("n => { n.open = true; }")
-            ac_2.evaluate("n => { n.open = true; }")
             page.wait_for_timeout(300)
             self.assertTrue(ac_1.evaluate("node => node.open"))
-            self.assertTrue(ac_2.evaluate("node => node.open"))
+            if inner_acs.count() > 1:
+                ac_2 = inner_acs.nth(1)
+                ac_2.evaluate("n => { n.open = true; }")
+                page.wait_for_timeout(300)
+                self.assertTrue(ac_2.evaluate("node => node.open"))
 
             for i in range(min(3, inner_acs.count())):
                 cab = inner_acs.nth(i).locator("summary").inner_text()

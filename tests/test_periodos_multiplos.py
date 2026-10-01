@@ -129,7 +129,7 @@ class TestPleg4Real(unittest.TestCase):
         achados = [m for m in bloco if int(m["id"]) == 811]
         self.assertEqual(len(achados), 1)
         item = achados[0]
-        self.assertEqual(item["tipo"], "PLL 4/2026")
+        self.assertEqual(item["tipo"], "PLEG 4/2026")
         self.assertEqual(item["data_sessao"], "2026-09-29")
         self.assertEqual(item["sessao_id"], 274)
         self.assertEqual(item["resultado"], "unanimidade")
@@ -181,7 +181,7 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
             page.click('button[data-periodo="sessao"]')
             page.wait_for_timeout(600)
             texto = page.inner_text("body")
-            self.assertIn("PLL 4/2026", texto)
+            self.assertIn("PLEG 4/2026", texto)
             self.assertIn("Votada em 22/09/2026 e 29/09/2026", texto)
             self.assertIn("2o turno", texto)
             self.assertNotIn(

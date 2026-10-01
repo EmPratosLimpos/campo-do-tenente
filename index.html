@@ -3461,7 +3461,7 @@
   var FOTOS_LOCAIS = {};
   var SAPL_ORIGEM = "";
   var PORTAL_OFICIAL = "";
-  var ROTULO_SEM_VOTO_INDIVIDUAL = "voto individual nao registrado no SAPL";
+  var ROTULO_SEM_VOTO_INDIVIDUAL = "voto individual nao registrado no SAPL (votacao simbolica ou sem registro nominal no SAPL)";
 
   function nomeCamaraMunicipal() {
     return "Câmara Municipal de " + nomeCidade();
@@ -3767,7 +3767,7 @@
     var us = ultimaSessaoOrdinaria();
     var dataFmt = us && us.data ? formatarData(us.data) : "";
     var texto =
-      "Nenhum projeto de lei do legislativo (PLL) foi votado na última sessão ordinária";
+      "Nenhum projeto de lei foi votado na última sessão ordinária";
     if (dataFmt) texto += " (" + dataFmt + ")";
     texto += ".";
     var vazio = bloco.querySelector(".estado-vazio");
@@ -3796,7 +3796,7 @@
       return;
     }
     container.innerHTML =
-      '<div class="barra-tema"><span class="nome">Projeto de Lei do Legislativo</span>' +
+      '<div class="barra-tema"><span class="nome">Projetos de lei</span>' +
       '<div class="trilho"><div class="preenchido" style="width:100%;background:var(--barra-pl)"></div></div>' +
       '<span class="qtd">' + esc(total) + "</span></div>";
   }
@@ -3810,12 +3810,12 @@
     if (titulo) titulo.textContent = "Todo o per\u00edodo";
     var metaEl = document.getElementById("meta-periodo-todo");
     if (metaEl) {
-      metaEl.textContent = nSessoes + " sess\u00f5es ordin\u00e1rias " + rotuloAnosRecorte() + ", " + total + " PLLs votados.";
+      metaEl.textContent = nSessoes + " sess\u00f5es ordin\u00e1rias " + rotuloAnosRecorte() + ", " + total + " projetos de lei votados.";
     }
     var legTipos = document.getElementById("legenda-tipos-todo");
     if (legTipos) {
       legTipos.textContent =
-        "Projetos de Lei do Legislativo (PLL) votados em " + rotuloPeriodoLegislatura() + ".";
+        "Projetos de lei votados em " + rotuloPeriodoLegislatura() + ".";
     }
     var barraTipos = document.getElementById("barra-tipos-todo");
     if (barraTipos) {
@@ -3823,7 +3823,7 @@
         barraTipos.innerHTML = "";
       } else {
         barraTipos.innerHTML =
-          '<div class="barra-tema"><span class="nome">Projeto de Lei do Legislativo</span>' +
+          '<div class="barra-tema"><span class="nome">Projetos de lei</span>' +
           '<div class="trilho"><div class="preenchido" style="width:100%;background:var(--barra-pl)"></div></div>' +
           '<span class="qtd">' + esc(total) + "</span></div>";
       }
@@ -3836,7 +3836,7 @@
     var legRes = document.getElementById("legenda-resultado-todo");
     if (legRes) {
       legRes.textContent =
-        "Resultado dos " + total + " PLLs votados em " + rotuloPeriodoLegislatura() + ".";
+        "Resultado dos " + total + " projetos de lei votados em " + rotuloPeriodoLegislatura() + ".";
     }
     var barraRes = document.getElementById("barra-resultado-todo");
     if (barraRes && total > 0) {
@@ -3907,7 +3907,7 @@
     var nota = document.getElementById("nota-resultado-todo");
     if (nota) {
       nota.textContent =
-        "Total: " + total + " PLLs votados em " + rotuloPeriodoLegislatura() + ".";
+        "Total: " + total + " projetos de lei votados em " + rotuloPeriodoLegislatura() + ".";
     }
     var btnShare = document.querySelector("#painel-periodo-todo .btn-compartilhar-icone");
     if (btnShare) btnShare.setAttribute("aria-label", "Compartilhar vota\u00e7\u00f5es " + rotuloAnosRecorte());
@@ -4044,20 +4044,35 @@
 
   var DATA_ULTIMA_SESSAO = "";
 
-  var MAPA_TIPO_SIGLA = {
-    PLL: "PLL",
-    PLE: "PLE",
-    PR: "PR",
-    PDL: "PDL",
-    PELO: "PELO",
-    MOC: "Moção",
-    REQ: "Requerimento",
-    IND: "Indicação",
-    EMENTA: "Emenda",
-    SUBST: "Substitutivo",
-    VETO: "Veto",
-    PC: "Prestação de Contas"
-  };
+  function numeroCategorias() {
+    if (CONFIG_CIDADE && CONFIG_CIDADE.categorias && CONFIG_CIDADE.categorias.lista) {
+      return CONFIG_CIDADE.categorias.lista.length;
+    }
+    return 13;
+  }
+
+  function catalogoTiposMateria() {
+    var meta = estado.dados && estado.dados.meta;
+    if (meta && meta.catalogo_tipos_materia) return meta.catalogo_tipos_materia;
+    return {};
+  }
+
+  function descricaoTipoSigla(sigla) {
+    var cat = catalogoTiposMateria();
+    if (sigla && cat[sigla]) return cat[sigla];
+    return "";
+  }
+
+  function legendaSiglaTipo(sigla) {
+    var desc = descricaoTipoSigla(sigla);
+    if (sigla && desc) {
+      if (sigla === "PLEG") return sigla + ": " + desc + " (proposta de vereador)";
+      return sigla + ": " + desc;
+    }
+    if (sigla) return sigla;
+    if (desc) return desc;
+    return "projetos de lei";
+  }
 
   function temaInicial() {
     var salvo = localStorage.getItem(STORAGE_TEMA);
@@ -4320,7 +4335,9 @@
       });
     }
     if (meta.rotulo_sem_voto_individual) {
-      ROTULO_SEM_VOTO_INDIVIDUAL = meta.rotulo_sem_voto_individual;
+      var base = String(meta.rotulo_sem_voto_individual);
+      var complemento = " (votacao simbolica ou sem registro nominal no SAPL)";
+      ROTULO_SEM_VOTO_INDIVIDUAL = base.indexOf("votacao simbolica") !== -1 ? base : base + complemento;
     }
   }
 
@@ -4343,8 +4360,7 @@
       [
         "presente_sem_voto_individual_registrado",
         rot.presente_sem_voto_individual_registrado || "Presente sem voto individual registrado"
-      ],
-      ["licenca_tratamento_saude", rot.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade"]
+      ]
     ];
     return defs.map(function (par) {
       return { num: contagemVotoResumo(vo, par[0]), rot: par[1], id: par[0] };
@@ -4376,19 +4392,11 @@
 
   function renderSecaoPresenca(v) {
     var p = v.presenca;
-    var rotMeta = rotulosVotoMeta();
     var partes = [
       { valor: p.presencas, cor: "var(--graf-presenca)", rotulo: "Presente" },
       { valor: p.faltas_com_justificativa, cor: "var(--graf-falta-just)", rotulo: "Falta com justificativa" },
       { valor: p.faltas_sem_justificativa, cor: "var(--graf-falta-sem)", rotulo: "Falta sem justificativa" }
     ];
-    if (p.sessoes_licenca > 0) {
-      partes.push({
-        valor: p.sessoes_licenca,
-        cor: "var(--graf-falta-just)",
-        rotulo: rotMeta.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade"
-      });
-    }
 
     function sessoesPorSituacao(situacao) {
       return (p.por_sessao || []).filter(function (s) {
@@ -4396,23 +4404,41 @@
       });
     }
 
+    function textoMotivoFalta(s) {
+      var motivo = s.motivo_ausencia;
+      if (!motivo) return "";
+      var texto = motivo.motivo || "";
+      if (motivo.observacao) texto += (texto ? " (" + motivo.observacao + ")" : motivo.observacao);
+      return texto;
+    }
+
+    function linkMotivoFalta(s) {
+      var motivo = s.motivo_ausencia;
+      if (motivo && motivo.link_fonte) return linkExt(motivo.link_fonte, "Fonte oficial");
+      if (motivo && motivo.upload_anexo) return linkExt(motivo.upload_anexo, "Anexo no SAPL");
+      return linkExt(s.link_sessao, "Ver no SAPL");
+    }
+
     var faltasJust = sessoesPorSituacao("falta_com_justificativa");
     var faltasSem = sessoesPorSituacao("falta_sem_justificativa");
-    var licencas = sessoesPorSituacao("licenca_tratamento_saude");
+
+    var nPlenaria = (p.por_sessao || []).filter(function (s) { return s.presente_sessao_plenaria; }).length;
+    var nOrdemDia = (p.por_sessao || []).filter(function (s) { return s.presente_ordem_dia; }).length;
 
     var htmlFaltas = "";
     if (
       p.faltas_com_justificativa > 0 ||
-      p.faltas_sem_justificativa > 0 ||
-      licencas.length
+      p.faltas_sem_justificativa > 0
     ) {
       htmlFaltas += '<div class="faltas-lista">';
       if (p.faltas_com_justificativa > 0) {
         htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">Faltas com justificativa oficial' + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(p.faltas_com_justificativa) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
         faltasJust.forEach(function (s) {
+          var motivoTexto = textoMotivoFalta(s);
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
-            linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
+            (motivoTexto ? esc(motivoTexto) + ". " : "") +
+            linkMotivoFalta(s) + "</li>";
         });
         htmlFaltas += "</ul></div></details>";
       }
@@ -4421,17 +4447,6 @@
         faltasSem.forEach(function (s) {
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
-            linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
-        });
-        htmlFaltas += "</ul></div></details>";
-      }
-      if (licencas.length) {
-        var rotLic = rotMeta.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade";
-        htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">' + esc(rotLic) + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(licencas.length) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
-        licencas.forEach(function (s) {
-          htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
-            esc(formatarData(s.data_sessao)) + ". " +
-            esc(s.rotulo_situacao || rotLic) + ". " +
             linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
         });
         htmlFaltas += "</ul></div></details>";
@@ -4458,6 +4473,9 @@
       "%</strong>. Percentual de faltas: <strong>" +
       esc(p.percentual_faltas.toFixed(2).replace(".", ",")) +
       "%</strong>.</p>" +
+      '<p class="legenda">Presente na lista da sess\u00e3o em ' + esc(nPlenaria) +
+      " sess\u00f5es e na lista da Ordem do Dia em " + esc(nOrdemDia) + " sess\u00f5es.</p>" +
+      '<p class="legenda">O Regimento Interno (art. 100, par. 1o) considera presente quem assina a presen\u00e7a e participa das vota\u00e7\u00f5es. O painel conta presente quem aparece em pelo menos uma das duas listas do SAPL.</p>' +
       '<div class="grafico-linha">' +
       '<div class="rosca-wrap">' +
       roscaSVG(
@@ -4532,8 +4550,9 @@
       var sitRotulo = item.situacao === "Em tramitacao" ? "Em tramitação" : item.situacao;
       var coaut = item.autoria_conjunta
         ? '<span class="selo selo-coautoria">Coautoria</span>' : "";
+      var siglaItem = item.tipo_sigla || "PLEG";
       return '<article class="item-pll">' +
-        '<div class="cab"><span class="numero">PLL ' + esc(item.numero) + "/" + esc(item.ano) + "</span>" +
+        '<div class="cab"><span class="numero">' + esc(siglaItem) + " " + esc(item.numero) + "/" + esc(item.ano) + "</span>" +
         '<span class="selo ' + seloClass + '">' + esc(sitRotulo) + "</span>" + coaut + "</div>" +
         '<p class="ementa">' + esc(item.ementa) + "</p>" +
         '<p class="meta">' + (item.tema ? 'Tema: ' + esc(item.tema) + '. ' : '') +
@@ -4575,8 +4594,8 @@
     }
 
     return '<details class="secao ac-cartao">' +
-      '<summary class="ac-cabecalho" aria-expanded="false"><h2 id="tit-pll">Projetos de lei propostos (PLL)</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
-      '<p class="legenda">PLL significa Projeto de Lei do Legislativo, proposta escrita por vereador.</p>' +
+      '<summary class="ac-cabecalho" aria-expanded="false"><h2 id="tit-pll">Projetos de lei propostos (PLEG)</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
+      '<p class="legenda">' + esc(legendaSiglaTipo("PLEG")) + ".</p>" +
       '<div class="contagens-pll">' +
       '<div class="contagem-item"><div class="num">' + esc(pl.total_propostos) + '</div><div class="rot">Propostos</div></div>' +
       '<div class="contagem-item"><div class="num">' + esc(pl.aprovados) + '</div><div class="rot">Aprovados</div></div>' +
@@ -4585,7 +4604,7 @@
       "</div>" +
       '<div class="barra-status-pll">' + barraStatusPLL(partesStatus, totalStatus) + "</div>" +
       cartoesStatusPLL(partesStatus, totalStatus) +
-      '<h3 style="font-size:14px;margin:14px 0 8px">Por tema (13 categorias oficiais)</h3>' +
+      '<h3 style="font-size:14px;margin:14px 0 8px">Por tema (' + esc(numeroCategorias()) + " categorias)</h3>" +
       '<div class="barra-temas">' + barras + "</div>" +
       htmlFiltros + htmlListaPLL +
       "</div></details>";
@@ -4677,7 +4696,7 @@
 
     return '<details class="secao ac-cartao">' +
       '<summary class="ac-cabecalho" aria-expanded="false"><h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
-      '<p class="legenda">Voto nominal é quando o nome de cada vereador fica registrado publicamente. Total: ' +
+      '<p class="legenda">A vota\u00e7\u00e3o simb\u00f3lica \u00e9 a regra geral (art. 202 do Regimento Interno): conta-se o resultado sem registrar o nome de cada vereador. Na vota\u00e7\u00e3o nominal o voto de cada vereador fica registrado (art. 201); ela \u00e9 obrigat\u00f3ria quando a mat\u00e9ria exige maioria absoluta ou dois ter\u00e7os (art. 203). Total: ' +
       esc(vo.total_registros) + " vota\u00e7\u00f5es em " + rotuloPeriodoLegislatura() + ".</p>" +
       '<div class="votos-resumo">' +
       cards.map(function (c) {
@@ -5104,18 +5123,8 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   }
 
   function tagTipoDeSigla(sigla, descricao) {
-    if (sigla) {
-      var chave = String(sigla).toUpperCase();
-      if (MAPA_TIPO_SIGLA[chave]) return MAPA_TIPO_SIGLA[chave];
-    }
-    var fonte = String(descricao || "").toLowerCase();
-    if (fonte.indexOf("projeto de lei do legislativo") !== -1) return "PLL";
-    if (fonte.indexOf("projeto de lei do executivo") !== -1) return "PLE";
-    if (fonte.indexOf("projeto de resolução") !== -1 || fonte.indexOf("projeto de resolucao") !== -1) return "PR";
-    if (fonte.indexOf("moção") !== -1 || fonte.indexOf("mocao") !== -1) return "Moção";
-    if (fonte.indexOf("requerimento") !== -1) return "Requerimento";
-    if (fonte.indexOf("indicação") !== -1 || fonte.indexOf("indicacao") !== -1) return "Indicação";
-    if (descricao) return "Outros";
+    if (sigla) return String(sigla).trim();
+    if (descricao) return String(descricao).trim();
     return "";
   }
 
@@ -5127,7 +5136,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var catalogo = estado.indiceMaterias && (estado.indiceMaterias[n] || estado.indiceMaterias[id]);
     if (catalogo) {
       return {
-        tag_tipo: tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || "PLL",
+        tag_tipo: tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || "Outros",
         tag_tema: catalogo.categoria || "Tema não classificado"
       };
     }
@@ -5163,7 +5172,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (daCamara) return daCamara;
     var catalogo = estado.indiceMaterias && estado.indiceMaterias[n.materia_id];
     if (catalogo && catalogo.numero && catalogo.ano) {
-      var tipo = tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || catalogo.tipo_sigla || "PLL";
+      var tipo = tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || catalogo.tipo_sigla || "Outros";
       return tipo + " " + catalogo.numero + "/" + catalogo.ano;
     }
     return "";
@@ -5388,11 +5397,11 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença: " + d.presencas + " de " + d.total + " sessões.",
       rotuloFalta(d.faltasJust, true),
       rotuloFalta(d.faltasSem, false),
-      "PLLs de autoria ou coautoria: " + d.plls + ".",
+      "Projetos de lei de autoria ou coautoria: " + d.plls + ".",
       "Votos nominais registrados: " + d.sim + " Sim, " + d.nao + " Não e " + d.abstencao + " abstenções.",
       "Registros como presidente que não votou: " + d.presNaoVotou + ".",
       "",
-      "Ausência não é voto. O presidente pode não votar conforme a regra da sessão.",
+      "Ausência não é voto. Pelo art. 47 do Regimento Interno, o presidente da Câmara só vota na eleição da Mesa, quando a matéria exige maioria absoluta ou dois terços, e em caso de empate.",
       ""];
     if (d.sapl) linhas.push("Perfil oficial no SAPL: " + d.sapl);
     linhas.push("Consulte os dados: " + d.portal);
@@ -5407,7 +5416,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença: " + d.presencas + " de " + d.total + " sessões.",
       rotuloFalta(d.faltasJust, true),
       rotuloFalta(d.faltasSem, false),
-      "PLLs de autoria ou coautoria: " + d.plls + ".",
+      "Projetos de lei de autoria ou coautoria: " + d.plls + ".",
       "Votos nominais: " + d.sim + " Sim, " + d.nao + " Não e " + d.abstencao + " abstenções.",
       "Como presidente, não votou em " + d.presNaoVotou + " registros.",
       "",
@@ -5434,7 +5443,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Faltas sem justificativa: " + d.faltasSem,
       "",
       "Registros legislativos",
-      "PLLs de autoria ou coautoria: " + d.plls,
+      "Projetos de lei de autoria ou coautoria: " + d.plls,
       "Votos Sim: " + d.sim,
       "Votos Não: " + d.nao,
       "Abstenções: " + d.abstencao,
@@ -5457,7 +5466,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença",
       d.presencas + " de " + d.total + " sessões",
       "",
-      "PLLs de autoria ou coautoria",
+      "Projetos de lei de autoria ou coautoria",
       String(d.plls),
       "",
       "Votos nominais",
@@ -5472,7 +5481,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença: " + d.presencas + " de " + d.total + " sessões.",
       rotuloFalta(d.faltasJust, true),
       rotuloFalta(d.faltasSem, false),
-      "PLLs de autoria ou coautoria: " + d.plls + ".",
+      "Projetos de lei de autoria ou coautoria: " + d.plls + ".",
       "Votos nominais: " + d.sim + " Sim, " + d.nao + " Não e " + d.abstencao + " abstenções.",
       "",
       "",
@@ -5559,10 +5568,10 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (periodo === "mes") {
       var mesVotado = nomeMesAnteriorUltimaSessao().toLowerCase();
       return (mesVotado
-        ? "PLLs votados em " + mesVotado + ". Toque abre a página oficial no SAPL."
-        : "PLLs votados no último mês. Toque abre a página oficial no SAPL.") + regra + regraContagem;
+        ? "Projetos de lei votados em " + mesVotado + ". Toque abre a página oficial no SAPL."
+        : "Projetos de lei votados no último mês. Toque abre a página oficial no SAPL.") + regra + regraContagem;
     }
-    return ("Todas as PLLs votadas em " + rotuloPeriodoLegislatura() + ". Toque abre a página oficial no SAPL.") + regra + regraContagem;
+    return ("Todos os projetos de lei votados em " + rotuloPeriodoLegislatura() + ". Toque abre a página oficial no SAPL.") + regra + regraContagem;
   }
 
   var estadoVotadoPagina = { sessao: 1, mes: 1, todo: 1 };

@@ -3182,20 +3182,34 @@
 
   var DATA_ULTIMA_SESSAO = "08/09/2026";
 
-  var MAPA_TIPO_SIGLA = {
-    PLL: "PLL",
-    PLE: "PLE",
-    PR: "PR",
-    PDL: "PDL",
-    PELO: "PELO",
-    MOC: "Moção",
-    REQ: "Requerimento",
-    IND: "Indicação",
-    EMENTA: "Emenda",
-    SUBST: "Substitutivo",
-    VETO: "Veto",
-    PC: "Prestação de Contas"
-  };
+  function numeroCategorias() {
+    if (typeof CONFIG_CIDADE !== "undefined" && CONFIG_CIDADE && CONFIG_CIDADE.categorias && CONFIG_CIDADE.categorias.lista) {
+      return CONFIG_CIDADE.categorias.lista.length;
+    }
+    return 13;
+  }
+
+  function catalogoTiposMateria() {
+    if (typeof estado !== "undefined" && estado.dados && estado.dados.meta && estado.dados.meta.catalogo_tipos_materia) return estado.dados.meta.catalogo_tipos_materia;
+    return {};
+  }
+
+  function descricaoTipoSigla(sigla) {
+    var cat = catalogoTiposMateria();
+    if (sigla && cat[sigla]) return cat[sigla];
+    return "";
+  }
+
+  function legendaSiglaTipo(sigla) {
+    var desc = descricaoTipoSigla(sigla);
+    if (sigla && desc) {
+      if (sigla === "PLEG") return sigla + ": " + desc + " (proposta de vereador)";
+      return sigla + ": " + desc;
+    }
+    if (sigla) return sigla;
+    if (desc) return desc;
+    return "projetos de lei";
+  }
 
   function temaInicial() {
     var salvo = localStorage.getItem(STORAGE_TEMA);
@@ -3518,7 +3532,7 @@
       var coaut = item.autoria_conjunta
         ? '<span class="selo selo-coautoria">Coautoria</span>' : "";
       return '<article class="item-pll">' +
-        '<div class="cab"><span class="numero">PLL ' + esc(item.numero) + "/" + esc(item.ano) + "</span>" +
+        '<div class="cab"><span class="numero">' + esc(item.tipo_sigla || "PLEG") + " " + esc(item.numero) + "/" + esc(item.ano) + "</span>" +
         '<span class="selo ' + seloClass + '">' + esc(sitRotulo) + "</span>" + coaut + "</div>" +
         '<p class="ementa">' + esc(item.ementa) + "</p>" +
         '<p class="meta">' + (item.tema ? 'Tema: ' + esc(item.tema) + '. ' : '') +
@@ -3560,8 +3574,8 @@
     }
 
     return '<section class="secao" aria-labelledby="tit-pll">' +
-      '<h2 id="tit-pll">Projetos de lei propostos (PLL)</h2>' +
-      '<p class="legenda">PLL significa Projeto de Lei do Legislativo, proposta escrita por vereador.</p>' +
+      '<h2 id="tit-pll">Projetos de lei propostos (PLEG)</h2>' +
+      '<p class="legenda">' + esc(legendaSiglaTipo("PLEG")) + ".</p>" +
       '<div class="contagens-pll">' +
       '<div class="contagem-item"><div class="num">' + esc(pl.total_propostos) + '</div><div class="rot">Propostos</div></div>' +
       '<div class="contagem-item"><div class="num">' + esc(pl.aprovados) + '</div><div class="rot">Aprovados</div></div>' +
@@ -3570,7 +3584,7 @@
       "</div>" +
       '<div class="barra-status-pll">' + barraStatusPLL(partesStatus, totalStatus) + "</div>" +
       cartoesStatusPLL(partesStatus, totalStatus) +
-      '<h3 style="font-size:14px;margin:14px 0 8px">Por tema (13 categorias oficiais)</h3>' +
+      '<h3 style="font-size:14px;margin:14px 0 8px">Por tema (' + esc(numeroCategorias()) + " categorias)</h3>" +
       '<div class="barra-temas">' + barras + "</div>" +
       htmlFiltros + htmlListaPLL +
       "</section>";
@@ -3669,7 +3683,7 @@
 
     return '<section class="secao" aria-labelledby="tit-votos">' +
       '<h2 id="tit-votos">Histórico de votos nominais</h2>' +
-      '<p class="legenda">Voto nominal é quando o nome de cada vereador fica registrado publicamente. Total: ' +
+      '<p class="legenda">A votação simbólica é a regra geral (art. 202 do Regimento Interno): conta-se o resultado sem registrar o nome de cada vereador. Na votação nominal o voto de cada vereador fica registrado (art. 201); ela é obrigatória quando a matéria exige maioria absoluta ou dois terços (art. 203). Total: ' +
       esc(vo.total_registros) + " votações em sessões ordinárias de 2026.</p>" +
       '<div class="votos-resumo">' +
       cards.map(function (c) {
@@ -4113,18 +4127,8 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   }
 
   function tagTipoDeSigla(sigla, descricao) {
-    if (sigla) {
-      var chave = String(sigla).toUpperCase();
-      if (MAPA_TIPO_SIGLA[chave]) return MAPA_TIPO_SIGLA[chave];
-    }
-    var fonte = String(descricao || "").toLowerCase();
-    if (fonte.indexOf("projeto de lei do legislativo") !== -1) return "PLL";
-    if (fonte.indexOf("projeto de lei do executivo") !== -1) return "PLE";
-    if (fonte.indexOf("projeto de resolução") !== -1 || fonte.indexOf("projeto de resolucao") !== -1) return "PR";
-    if (fonte.indexOf("moção") !== -1 || fonte.indexOf("mocao") !== -1) return "Moção";
-    if (fonte.indexOf("requerimento") !== -1) return "Requerimento";
-    if (fonte.indexOf("indicação") !== -1 || fonte.indexOf("indicacao") !== -1) return "Indicação";
-    if (descricao) return "Outros";
+    if (sigla) return String(sigla).trim();
+    if (descricao) return String(descricao).trim();
     return "";
   }
 
@@ -4136,7 +4140,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var catalogo = estado.indiceMaterias && (estado.indiceMaterias[n] || estado.indiceMaterias[id]);
     if (catalogo) {
       return {
-        tag_tipo: catalogo.tag_tipo || "PLL",
+        tag_tipo: catalogo.tag_tipo || "Outros",
           tag_tema: catalogo.tag_tema || "Tema não classificado"
       };
     }
@@ -4172,7 +4176,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (daCamara) return daCamara;
     var catalogo = estado.indiceMaterias && estado.indiceMaterias[n.materia_id];
     if (catalogo && catalogo.numero && catalogo.ano) {
-      var tipo = tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || catalogo.tipo_sigla || "PLL";
+      var tipo = tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || catalogo.tipo_sigla || "Outros";
       return tipo + " " + catalogo.numero + "/" + catalogo.ano;
     }
     return "";
@@ -4397,11 +4401,11 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença: " + d.presencas + " de " + d.total + " sessões.",
       rotuloFalta(d.faltasJust, true),
       rotuloFalta(d.faltasSem, false),
-      "PLLs de autoria ou coautoria: " + d.plls + ".",
+      "Projetos de lei de autoria ou coautoria: " + d.plls + ".",
       "Votos nominais registrados: " + d.sim + " Sim, " + d.nao + " Não e " + d.abstencao + " abstenções.",
       "Registros como presidente que não votou: " + d.presNaoVotou + ".",
       "",
-      "Ausência não é voto. O presidente pode não votar conforme a regra da sessão.",
+      "Ausência não é voto. Pelo art. 47 do Regimento Interno, o presidente da Câmara só vota na eleição da Mesa, quando a matéria exige maioria absoluta ou dois terços, e em caso de empate.",
       ""];
     if (d.sapl) linhas.push("Perfil oficial no SAPL: " + d.sapl);
     linhas.push("Consulte os dados: " + d.portal);
@@ -4416,7 +4420,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença: " + d.presencas + " de " + d.total + " sessões.",
       rotuloFalta(d.faltasJust, true),
       rotuloFalta(d.faltasSem, false),
-      "PLLs de autoria ou coautoria: " + d.plls + ".",
+      "Projetos de lei de autoria ou coautoria: " + d.plls + ".",
       "Votos nominais: " + d.sim + " Sim, " + d.nao + " Não e " + d.abstencao + " abstenções.",
       "Como presidente, não votou em " + d.presNaoVotou + " registros.",
       "",
@@ -4443,7 +4447,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Faltas sem justificativa: " + d.faltasSem,
       "",
       "Registros legislativos",
-      "PLLs de autoria ou coautoria: " + d.plls,
+      "Projetos de lei de autoria ou coautoria: " + d.plls,
       "Votos Sim: " + d.sim,
       "Votos Não: " + d.nao,
       "Abstenções: " + d.abstencao,
@@ -4466,7 +4470,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença",
       d.presencas + " de " + d.total + " sessões",
       "",
-      "PLLs de autoria ou coautoria",
+      "Projetos de lei de autoria ou coautoria",
       String(d.plls),
       "",
       "Votos nominais",
@@ -4481,7 +4485,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença: " + d.presencas + " de " + d.total + " sessões.",
       rotuloFalta(d.faltasJust, true),
       rotuloFalta(d.faltasSem, false),
-      "PLLs de autoria ou coautoria: " + d.plls + ".",
+      "Projetos de lei de autoria ou coautoria: " + d.plls + ".",
       "Votos nominais: " + d.sim + " Sim, " + d.nao + " Não e " + d.abstencao + " abstenções.",
       "",
       "Os números descrevem registros oficiais. Não são nota nem ranking. Ausência não é voto.",
@@ -4566,9 +4570,9 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       return "Lista com ementa (resumo oficial) e placar. Toque abre a página oficial no SAPL (Sistema de Apoio ao Processo Legislativo)." + regra + regraContagem;
     }
     if (periodo === "mes") {
-      return "PLLs votados em agosto de 2026. Toque abre a página oficial no SAPL." + regra + regraContagem;
+      return "Projetos de lei votados em agosto de 2026. Toque abre a página oficial no SAPL." + regra + regraContagem;
     }
-    return "Todas as PLLs votadas em 2026. Toque abre a página oficial no SAPL." + regra + regraContagem;
+    return "Todos os projetos de lei votados em 2026. Toque abre a página oficial no SAPL." + regra + regraContagem;
   }
 
   var estadoVotadoPagina = { sessao: 1, mes: 1, todo: 1 };

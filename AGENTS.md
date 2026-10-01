@@ -58,7 +58,7 @@ Qualquer agente que realize alterações deve validar localmente:
 1. **Testes de Sanidade (100% de Aprovação):**
    * `python coletor/testes_sanidade.py`
    * `python -m unittest tests/test_sanidade_dados.py`
-   * Pisos mínimos obrigatórios: contagem de sessões ordinárias >= 26, PLLs >= 100, exatamente 15 vereadores cadastrados e registros de votação consistentes.
+   * Pisos mínimos obrigatórios vindos de config_cidade.json: contagem de sessões ordinárias, projetos de lei (PLEG e PLEX somados) e número exato de vereadores por ano, além de registros de votação consistentes.
 2. **Integridade Criptográfica:**
    * Executar `python coletor/gerar_hash_integridade.py` sempre que a base consolidada de atuação dos vereadores for alterada.
 3. **Segurança Web (AppSec):**

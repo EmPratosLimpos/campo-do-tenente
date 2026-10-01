@@ -95,21 +95,26 @@ class TestJanelaDoMandato(BaseD046):
 
 
 class TestLicencaNoTotal(BaseD046):
-    def test_licenca_tem_rotulo_proprio_e_entra_no_total(self):
+    def test_licenca_conta_como_falta_com_justificativa(self):
         lista = (
             [sessao_falsa(i, "2026-04-01", "presente") for i in range(6)]
             + [sessao_falsa(7, "2026-04-08", "falta_com_justificativa")]
-            + [sessao_falsa(i, "2026-05-01", TIPO_LICENCA) for i in (8, 9, 10)]
+            + [sessao_falsa(i, "2026-05-01", "falta_com_justificativa") for i in (8, 9, 10)]
         )
         p = atuacao.consolidar_presenca(lista, "Ficticia")
         self.assertEqual(p["presencas"], 6)
-        self.assertEqual(p["faltas_totais"], 1)
-        self.assertEqual(p["sessoes_licenca"], 3)
+        self.assertEqual(p["faltas_com_justificativa"], 4)
+        self.assertEqual(p["faltas_totais"], 4)
+        self.assertEqual(p["sessoes_licenca"], 0)
         self.assertEqual(p["sessoes_ordinarias"], 10)
         self.assertAlmostEqual(p["taxa_presenca"], 60.0)
-        self.assertAlmostEqual(p["percentual_faltas"], 10.0)
-        self.assertNotIn("falta", TIPO_LICENCA)
-        self.assertEqual(p["sessoes_por_afastamento"], {TIPO_LICENCA: 3})
+        self.assertAlmostEqual(p["percentual_faltas"], 40.0)
+        self.assertEqual(p["sessoes_por_afastamento"], {})
+
+    def test_situacao_licenca_antiga_e_rejeitada(self):
+        lista = [sessao_falsa(8, "2026-05-01", TIPO_LICENCA)]
+        with self.assertRaises(SystemExit):
+            atuacao.consolidar_presenca(lista, "Ficticia")
 
     def test_sem_licenca_a_taxa_nao_muda(self):
         lista = [sessao_falsa(i, "2026-04-01", "presente") for i in range(9)] + [
@@ -133,14 +138,24 @@ class TestLicencaNoTotal(BaseD046):
         lista = (
             [sessao_falsa(i, "2026-04-01", "presente") for i in range(6)]
             + [sessao_falsa(7, "2026-04-08", "falta_com_justificativa")]
-            + [sessao_falsa(i, "2026-05-01", TIPO_LICENCA) for i in (8, 9, 10)]
+            + [sessao_falsa(i, "2026-05-01", "falta_com_justificativa") for i in (8, 9, 10)]
         )
         p = tela._recomputar_presenca(copy.deepcopy(lista), 2)
         self.assertEqual(p["sessoes_ordinarias"], 10)
         self.assertEqual(p["sessoes_do_ano"], 12)
         self.assertEqual(p["sessoes_fora_do_mandato"], 2)
         self.assertAlmostEqual(p["taxa_presenca"], 60.0)
-        self.assertAlmostEqual(p["percentual_faltas"], 10.0)
+        self.assertAlmostEqual(p["percentual_faltas"], 40.0)
+
+    def test_recomputar_converte_licenca_antiga_em_falta_justificada(self):
+        lista = (
+            [sessao_falsa(i, "2026-04-01", "presente") for i in range(6)]
+            + [sessao_falsa(i, "2026-05-01", TIPO_LICENCA) for i in (8, 9, 10)]
+        )
+        p = tela._recomputar_presenca(copy.deepcopy(lista), 0)
+        self.assertEqual(p["faltas_com_justificativa"], 3)
+        self.assertEqual(p["sessoes_licenca"], 0)
+        self.assertAlmostEqual(p["taxa_presenca"], 66.67)
 
 
 class TestCodigoGenerico(unittest.TestCase):

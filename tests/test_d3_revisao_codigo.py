@@ -46,12 +46,12 @@ class TestD3PresencaLegislatura(unittest.TestCase):
         p = v["presenca"]
         self.assertEqual(p["sessoes_ordinarias"], 60)
         self.assertEqual(p["presencas"], 36)
-        self.assertEqual(p["faltas_com_justificativa"], 1)
+        self.assertEqual(p["faltas_com_justificativa"], 24)
         self.assertEqual(p["faltas_sem_justificativa"], 0)
-        self.assertEqual(p["faltas_totais"], 1)
+        self.assertEqual(p["faltas_totais"], 24)
         self.assertAlmostEqual(p["taxa_presenca"], 60.0)
-        self.assertAlmostEqual(p["percentual_faltas"], round(1 * 100 / 60, 2))
-        self.assertEqual(p["sessoes_licenca"], 23)
+        self.assertAlmostEqual(p["percentual_faltas"], round(24 * 100 / 60, 2))
+        self.assertEqual(p["sessoes_licenca"], 0)
         vereadores = json.loads(
             (TRATADOS / "vereadores.json").read_text(encoding="utf-8")
         )
