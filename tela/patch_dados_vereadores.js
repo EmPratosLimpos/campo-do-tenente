@@ -258,9 +258,7 @@
           "</span>" +
           (n.turno === "1o turno" || n.turno === "2o turno"
             ? ' <span class="tag-turno">' + esc(n.turno) + "</span>"
-            : (n.tipo_resultado
-              ? ' <span class="tag-turno">' + esc(n.tipo_resultado) + "</span>"
-              : "")) +
+            : "") +
           "<span>" +
           textoEmenta +
           "</span> " +
