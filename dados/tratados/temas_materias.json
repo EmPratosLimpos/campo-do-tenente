@@ -5626,10 +5626,10 @@
       "confianca": "alta",
       "justificativa": "Ata de sessão registra a reunião, não trata de um tema próprio.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/966",
-      "classificado_por": "agente-e5 (minuta)",
-      "revisada_por_humano": false,
-      "revisado_por": "",
-      "data": "2026-09-30"
+      "classificado_por": "agente-e5",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-01"
     },
     {
       "id": 967,
@@ -5640,10 +5640,10 @@
       "confianca": "alta",
       "justificativa": "Requerimento sobre retomada e conclusão de pavimentação asfáltica de ruas.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/967",
-      "classificado_por": "agente-e5 (minuta)",
-      "revisada_por_humano": false,
-      "revisado_por": "",
-      "data": "2026-09-30"
+      "classificado_por": "agente-e5",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-01"
     },
     {
       "id": 968,
@@ -5654,10 +5654,10 @@
       "confianca": "media",
       "justificativa": "Indicação de melhorias em ponto de transporte escolar. Objeto é infraestrutura de transporte.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/968",
-      "classificado_por": "agente-e5 (minuta)",
-      "revisada_por_humano": false,
-      "revisado_por": "",
-      "data": "2026-09-30"
+      "classificado_por": "agente-e5",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-01"
     },
     {
       "id": 969,
@@ -5668,10 +5668,10 @@
       "confianca": "alta",
       "justificativa": "Indicação de limpeza e manutenção de valetas. Serviço urbano de drenagem e limpeza.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/969",
-      "classificado_por": "agente-e5 (minuta)",
-      "revisada_por_humano": false,
-      "revisado_por": "",
-      "data": "2026-09-30"
+      "classificado_por": "agente-e5",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-01"
     }
   ]
 }

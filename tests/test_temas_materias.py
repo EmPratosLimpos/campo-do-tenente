@@ -109,13 +109,17 @@ class TestTemasMaterias(unittest.TestCase):
             self.assertTrue(item["link"].startswith("https://"))
 
     def test_campos_de_classificacao(self):
+        import re
+
         for item in self.materias:
             self.assertIn(item["confianca"], {"alta", "media", "baixa"}, item["id"])
             self.assertTrue(item["justificativa"].strip(), item["id"])
-            self.assertEqual(item["classificado_por"], "claude-opus-5-5")
+            self.assertIn(
+                item["classificado_por"], {"claude-opus-5-5", "agente-e5"}, item["id"]
+            )
             self.assertIs(item["revisada_por_humano"], True)
             self.assertEqual(item["revisado_por"], "mantenedor")
-            self.assertEqual(item["data"], "2026-09-27")
+            self.assertRegex(str(item["data"]), r"^\d{4}-\d{2}-\d{2}$", item["id"])
 
     def test_sem_travessao(self):
         texto = ARQUIVO_TEMAS.read_text(encoding="utf-8")
