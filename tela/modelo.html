@@ -2173,6 +2173,30 @@
     border: 1px solid rgba(0, 122, 255, 0.25);
   }
 
+  .tag-turno {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: var(--marca-fundo);
+    color: #004494;
+    border: 1px solid rgba(0, 122, 255, 0.25);
+  }
+
+  [data-tema="escuro"] .tag-turno {
+    background: #1a3055;
+    color: #a0d4ff;
+    border-color: rgba(10, 132, 255, 0.35);
+  }
+
   .tag-categoria {
     background: var(--neutro-fundo);
     color: var(--texto-suave);
@@ -4045,6 +4069,9 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var prefixo = m.resultado === "maioria"
       ? "Aprovado por maioria"
       : "Aprovado por unanimidade";
+    if (m.resultado === "primeiro_turno") prefixo = "1o turno";
+    if (m.resultado === "turno_nao_identificado") prefixo = "Turno não identificado";
+    if (m.resultado === "rejeitado") prefixo = "Rejeitado";
     var match = m.placar.match(/(\d+)\s*a favor,\s*(\d+)\s*contra/);
     if (!match) return prefixo + ".";
     var resultado = prefixo + ": " + match[1] + " a favor";
@@ -4434,6 +4461,18 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     return juntarLinhasShare(linhas);
   }
 
+  function textoDatasVotacao(m) {
+    var votos = (m && m.votacoes) || [];
+    var datas = [];
+    votos.forEach(function (v) {
+      if (v && v.data_sessao && datas.indexOf(v.data_sessao) === -1) {
+        datas.push(v.data_sessao);
+      }
+    });
+    if (datas.length < 2) return "";
+    return "Votada em " + datas.map(formatarData).join(" e ");
+  }
+
   function renderCardMateria(m) {
     var badgeClass = m.resultado === "maioria" ? "badge-maioria" : "badge-unanimidade";
     var placar = placarResumido(m.placar);
@@ -4446,13 +4485,23 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     } else if (badgeHtml) {
       tagsHtml = '<div class="materia-tags">' + badgeHtml + '</div>';
     }
+    var turnoHtml = m.turno ? '<span class="tag-turno">' + esc(m.turno) + '</span>' : '';
+    if (tagsHtml && turnoHtml) {
+      tagsHtml = tagsHtml.replace('</div>', turnoHtml + '</div>');
+    } else if (turnoHtml) {
+      tagsHtml = '<div class="materia-tags">' + turnoHtml + '</div>';
+    }
     return '<article class="item-votado materia" data-resultado="' + esc(m.resultado) + '">' +
       '<button type="button" class="materia-link" data-materia-id="' + esc(m.id) +
       '" data-resultado="' + esc(m.resultado) +
       '" aria-haspopup="dialog" aria-controls="resumo-sheet" aria-label="Abrir resumo de ' + esc(m.tipo) + '">' +
       '<div class="materia-info"><span class="materia-titulo">' + esc(m.tipo) +
       '</span>' + tagsHtml +
-      '<span class="materia-ementa">' + esc(m.ementa) + "</span></div>" +
+      '<span class="materia-ementa">' + esc(m.ementa) + "</span>" +
+      (textoDatasVotacao(m)
+        ? '<span class="materia-datas">' + esc(textoDatasVotacao(m)) + "</span>"
+        : "") +
+      "</div>" +
       htmlResultadoPopular(m.id) +
       "</button></article>";
   }
@@ -4474,13 +4523,15 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   }
 
   function legendaVotado(periodo) {
+    var regra = " Matéria votada em mais de uma sessão aparece uma vez por período, com todas as datas.";
+    var regraContagem = " A contagem de resultado considera só o 2o turno ou o turno único.";
     if (periodo === "sessao") {
-      return "Lista com ementa (resumo oficial) e placar. Toque abre a página oficial no SAPL (Sistema de Apoio ao Processo Legislativo).";
+      return "Lista com ementa (resumo oficial) e placar. Toque abre a página oficial no SAPL (Sistema de Apoio ao Processo Legislativo)." + regra + regraContagem;
     }
     if (periodo === "mes") {
-      return "PLLs votados em agosto de 2026. Toque abre a página oficial no SAPL.";
+      return "PLLs votados em agosto de 2026. Toque abre a página oficial no SAPL." + regra + regraContagem;
     }
-    return "Todas as PLLs votadas em 2026. Toque abre a página oficial no SAPL.";
+    return "Todas as PLLs votadas em 2026. Toque abre a página oficial no SAPL." + regra + regraContagem;
   }
 
   var estadoVotadoPagina = { sessao: 1, mes: 1, todo: 1 };
@@ -4689,6 +4740,16 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       '<div class="resumo-campo">' +
       '<p class="resumo-campo-rotulo">Resultado da votação</p>' +
       '<p class="resumo-campo-valor">' + esc(resultado) + "</p></div>";
+    if (m.turno) {
+      html += '<div class="resumo-campo">' +
+        '<p class="resumo-campo-rotulo">Turno</p>' +
+        '<p class="resumo-campo-valor"><span class="tag-turno">' + esc(m.turno) + "</span></p></div>";
+    }
+    if (textoDatasVotacao(m)) {
+      html += '<div class="resumo-campo">' +
+        '<p class="resumo-campo-rotulo">Votações</p>' +
+        '<p class="resumo-campo-valor">' + esc(textoDatasVotacao(m)) + "</p></div>";
+    }
     if (m.categoria) {
       html += '<div class="resumo-campo">' +
         '<p class="resumo-campo-rotulo">Categoria</p>' +

@@ -256,6 +256,9 @@
           '">' +
           esc(rotuloVotoNominal(n)) +
           "</span>" +
+          (n.turno === "1o turno" || n.turno === "2o turno"
+            ? ' <span class="tag-turno">' + esc(n.turno) + "</span>"
+            : "") +
           "<span>" +
           textoEmenta +
           "</span> " +
