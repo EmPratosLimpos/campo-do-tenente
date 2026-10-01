@@ -132,9 +132,11 @@ class TestPresidenciaPorSessao(unittest.TestCase):
 
     def test_todas_as_ordinarias_tem_presidente_ou_lacuna(self):
         total = 0
+        esperado = 0
         for ano in anos_recorte(self.cfg):
             contagem = ler(DIR_BRUTOS / f"contagem_votacoes_ordinarias_{ano}.json")
             esperadas = {int(s["id"]) for s in contagem["sessoes"]}
+            esperado += len(esperadas)
             bloco = self.dados["por_ano"][str(ano)]
             achadas = {s["sessao_id"] for s in bloco["sessoes"]}
             self.assertEqual(esperadas, achadas)
@@ -147,7 +149,8 @@ class TestPresidenciaPorSessao(unittest.TestCase):
                     else:
                         self.assertIsNone(s["lacuna"])
                         self.assertIn(s["presidente_id_sapl"], self.ids_tabela)
-        self.assertEqual(total, 65)
+        self.assertEqual(total, esperado)
+        self.assertGreaterEqual(total, 1)
 
     def test_presidente_confere_com_a_mesa_da_sessao(self):
         for bloco in self.dados["por_ano"].values():

@@ -1,3 +1,5 @@
+import json
+import pathlib
 import re
 import unittest
 import threading
@@ -12,6 +14,20 @@ try:
 except ImportError:
     PLAYWRIGHT_OK = False
     PLAYWRIGHT_MOTIVO = "playwright nao instalado"
+
+RAIZ = pathlib.Path(__file__).resolve().parent.parent
+
+
+def votos_da_legislatura(slug: str) -> dict:
+    dados = json.loads(
+        (RAIZ / "dados" / "tratados" / "atuacao_vereadores_legislatura.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    for v in dados.get("vereadores") or []:
+        if v.get("slug_codigo") == slug:
+            return v["votos"]
+    raise AssertionError(f"vereador {slug} ausente")
 
 
 class _Handler(SimpleHTTPRequestHandler):
@@ -67,14 +83,18 @@ class TestVotosVereadores(unittest.TestCase):
             page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
             page.wait_for_timeout(500)
             texto_rafael = page.inner_text("body")
-            self.assertIn("26\nSim", texto_rafael)
-            self.assertIn("93\nPresidente que não votou", texto_rafael)
+            votos_rafael = votos_da_legislatura("rafael-ventura")
+            self.assertIn(f"{votos_rafael['sim']}\nSim", texto_rafael)
+            self.assertIn(
+                f"{votos_rafael['presidente_que_nao_votou']}\nPresidente que não votou",
+                texto_rafael,
+            )
 
             page.select_option("#filtro-voto", label="Presidente que não votou")
             page.wait_for_timeout(1000)
             abrir_se_fechado("tit-votos")
             texto_rafael_filtro = page.inner_text("body")
-            self.assertIn("93 registros", texto_rafael_filtro)
+            self.assertIn(f"{votos_rafael['presidente_que_nao_votou']} registros", texto_rafael_filtro)
 
             abrir_se_fechado("tit-pll")
             abrir_se_fechado("tit-votos")
@@ -106,15 +126,19 @@ class TestVotosVereadores(unittest.TestCase):
             abrir_se_fechado("tit-votos")
 
             texto_jorge = page.inner_text("body")
-            self.assertIn("26\nSim", texto_jorge)
-            self.assertIn("72\nLicença para tratamento de saúde", texto_jorge)
-            self.assertIn("21\nFora do mandato naquela data", texto_jorge)
+            votos_jorge = votos_da_legislatura("jorge-quege")
+            self.assertIn(f"{votos_jorge['sim']}\nSim", texto_jorge)
+            self.assertIn(
+                f"{votos_jorge['licenca_tratamento_saude']}\nLicença para tratamento de saúde",
+                texto_jorge,
+            )
+            self.assertNotIn("Fora do mandato naquela data", texto_jorge)
 
             page.select_option("#filtro-voto", label="Licença para tratamento de saúde")
             page.wait_for_timeout(1000)
             abrir_se_fechado("tit-votos")
             texto_jorge_filtro = page.inner_text("body")
-            self.assertIn("72 registros", texto_jorge_filtro)
+            self.assertIn(f"{votos_jorge['licenca_tratamento_saude']} registros", texto_jorge_filtro)
 
             presenca_card = page.locator("#tit-presenca").locator("xpath=ancestor::details[1]")
             if not presenca_card.evaluate("node => node.open"):

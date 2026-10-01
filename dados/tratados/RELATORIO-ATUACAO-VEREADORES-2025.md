@@ -1,8 +1,8 @@
 # Atuação dos vereadores nas sessões ordinárias de 2025
 
 Cidade: Campo do Tenente (PR)
-Dado coletado em: 2026-09-27T13:53:03-03:00
-Fonte da data: dados/brutos/lote_20260927_noticia_licenca/indice.json campo atualizado_em
+Dado coletado em: 2026-09-29T22:57:44-03:00
+Fonte da data: dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em
 Script: `dados/tratados/gerar_atuacao_vereadores.py`
 Fonte dos fatos: arquivos em `dados/brutos/`, `dados/tratados/vereadores.json`, `dados/tratados/presidencia_sessoes.json` e `dados/tratados/autoria_materias.json`.
 
@@ -14,7 +14,7 @@ Nas 32 sessões ordinárias de 2025 que estão no SAPL, os 9 vereadores com mand
 
 Ano 2025. Só sessão ordinária. O piso de sessões (32) é mínimo: o arquivo traz 32, que é pelo menos esse piso.
 
-Presença e voto só entram quando a data da sessão cai dentro do mandato da pessoa, pelas datas da tabela de vereadores. Fora desse intervalo o estado é próprio: fora do mandato.
+Presença e voto nominal só entram quando a data da sessão cai dentro do mandato da pessoa, pelas datas da tabela de vereadores. Sessão fora desse intervalo não aparece na lista da pessoa: a atuação de quem saiu fica congelada na data de saída.
 
 ## Lacuna no SAPL
 
@@ -30,7 +30,9 @@ Falta com justificativa: não está em nenhuma das duas listas e está na lista 
 
 Falta sem justificativa: não está na presença e não está na justificativa.
 
-Fora do mandato: a data da sessão é anterior ao início ou posterior ao fim do mandato. Essa sessão não entra na taxa de presença.
+Fora do mandato: a data da sessão é anterior ao início ou posterior ao fim do mandato. Essa sessão não aparece na lista da pessoa e não entra na taxa de presença.
+
+Taxa de presença: presenças divididas pelo total de sessões no mandato, que soma presenças, faltas com e sem justificativa e licenças.
 
 ## Como o voto foi lido
 
@@ -51,7 +53,7 @@ Votação sem nenhum voto individual: voto individual nao registrado no SAPL. Ni
 
 Presidente que não votou só vale quando o texto do SAPL é Não Votou e essa pessoa é o presidente daquela sessão em `presidencia_sessoes.json`.
 
-Afastamento que não conta como falta vem de `afastamentos_manuais.json`. Esse período não entra em falta nem na taxa de presença. Cada ocorrência guarda a fonte.
+Licença ou afastamento que não conta como falta vem de `afastamentos_manuais.json`, tem rótulo próprio e nunca é chamado de falta, mas entra no total de sessões da taxa de presença. Cada ocorrência guarda a fonte.
 
 ## Presença de cada vereador
 

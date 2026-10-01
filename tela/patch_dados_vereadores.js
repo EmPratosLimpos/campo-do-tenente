@@ -77,13 +77,6 @@
         rotulo: rotMeta.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade"
       });
     }
-    if (p.sessoes_fora_do_mandato > 0) {
-      partes.push({
-        valor: p.sessoes_fora_do_mandato,
-        cor: "var(--graf-falta-sem)",
-        rotulo: rotMeta.fora_do_mandato || "Fora do mandato naquela data"
-      });
-    }
 
     function sessoesPorSituacao(situacao) {
       return (p.por_sessao || []).filter(function (s) {
@@ -94,14 +87,12 @@
     var faltasJust = sessoesPorSituacao("falta_com_justificativa");
     var faltasSem = sessoesPorSituacao("falta_sem_justificativa");
     var licencas = sessoesPorSituacao("licenca_tratamento_saude");
-    var foraMandato = sessoesPorSituacao("fora_do_mandato");
 
     var htmlFaltas = "";
     if (
       p.faltas_com_justificativa > 0 ||
       p.faltas_sem_justificativa > 0 ||
-      licencas.length ||
-      foraMandato.length
+      licencas.length
     ) {
       htmlFaltas += '<div class="faltas-lista">';
       if (p.faltas_com_justificativa > 0) {
@@ -133,18 +124,6 @@
         });
         htmlFaltas += "</ul>";
       }
-      if (foraMandato.length) {
-        var rotFora = rotMeta.fora_do_mandato || "Fora do mandato naquela data";
-        htmlFaltas += "<h3>" + esc(rotFora) + " (" + esc(foraMandato.length) + ")</h3><ul>";
-        foraMandato.forEach(function (s) {
-          htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
-            esc(formatarData(s.data_sessao)) + ". " +
-            esc(s.rotulo_situacao || rotFora);
-          if (s.motivo) htmlFaltas += ". " + esc(s.motivo);
-          htmlFaltas += ". " + linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
-        });
-        htmlFaltas += "</ul>";
-      }
       htmlFaltas += "</div>";
     } else {
       htmlFaltas =
@@ -162,7 +141,7 @@
       esc(p.sessoes_ordinarias) +
       " sess\u00f5es ordin\u00e1rias de " +
       ANO_ATUAL +
-      '. Taxa de presen\u00e7a: <strong>' +
+      ' no mandato. Taxa de presen\u00e7a: <strong>' +
       esc(p.taxa_presenca.toFixed(2).replace(".", ",")) +
       "%</strong>. Percentual de faltas: <strong>" +
       esc(p.percentual_faltas.toFixed(2).replace(".", ",")) +

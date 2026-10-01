@@ -4,8 +4,8 @@
     "cidade": "Campo do Tenente",
     "uf": "PR",
     "ano": 2025,
-    "dado_coletado_em": "2026-09-27T13:53:03-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20260927_noticia_licenca/indice.json campo atualizado_em",
+    "dado_coletado_em": "2026-09-29T22:57:44-03:00",
+    "fonte_data_coleta": "dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em",
     "n_sessoes_ordinarias": 32,
     "piso_sessoes_ordinarias": 32,
     "n_vereadores": 9,
@@ -97,7 +97,7 @@
       "dados/tratados/afastamentos_manuais.json",
       "dados/tratados/temas_materias.json"
     ],
-    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não entra em presença nem em voto. Afastamento do arquivo de afastamentos não conta como falta."
+    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não aparece na lista da pessoa e não entra em presença nem em voto. Licença tem rótulo próprio, não é falta e entra no total da taxa de presença."
   },
   "sessoes": [
     {
@@ -7828,7 +7828,7 @@
       "ano": "2025",
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
-      "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\nPROFESSORES E EDUCADORES INFANTIS",
+      "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\r\nPROFESSORES E EDUCADORES INFANTIS",
       "tema": "Educação",
       "revisada_por_humano": true,
       "autoria": {

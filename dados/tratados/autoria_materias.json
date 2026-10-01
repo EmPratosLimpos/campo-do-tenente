@@ -21,10 +21,11 @@
       "dados/brutos/lote_20260927_autoria/autoria_p6.json",
       "dados/brutos/lote_20260927_autoria/autoria_p7.json",
       "dados/brutos/lote_20260927_autoria/autoria_p8.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p9.json"
+      "dados/brutos/lote_20260927_autoria/autoria_p9.json",
+      "dados/brutos/lote_20260927_autoria/autoria_p10.json"
     ],
-    "autoria_total_entries_api": 900,
-    "autoria_total_linhas_lidas": 900,
+    "autoria_total_entries_api": 906,
+    "autoria_total_linhas_lidas": 906,
     "autoria_ids_distintos": 865,
     "nota_autoria": "A lista materia/autoria repetiu ids entre paginas e o filtro por ano foi ignorado pelo SAPL. Ela so informa o primeiro autor. A ligacao materia e autor vem do campo autores da propria materia.",
     "por_ano": {
@@ -44,16 +45,16 @@
         ]
       },
       "2026": {
-        "n_materias": 136,
-        "total_entries_api": 136,
-        "n_pares_materia_autor": 155,
+        "n_materias": 140,
+        "total_entries_api": 140,
+        "n_pares_materia_autor": 159,
         "materias_por_tipo_de_autor": {
           "Chefe do Poder Executivo Municipal": 35,
           "Comissão": 3,
           "MESA DIRETORA": 1,
-          "Parlamentar": 65,
+          "Parlamentar": 68,
           "sem autor registrado no SAPL": 19,
-          "Órgão": 14
+          "Órgão": 15
         },
         "arquivos_materias": [
           "dados/brutos/lote_20260926/materialegislativa_ano2026_p1.json",
@@ -10479,6 +10480,98 @@
           "autor_id": 15,
           "primeiro_autor": true,
           "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 966,
+      "ano": 2026,
+      "numero": 35,
+      "tipo_materia_id": 19,
+      "rotulo_sapl": "Ata Sessão nº 35 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/966",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 7,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "tipo_autor_id": 5,
+          "tipo_autor": "Órgão",
+          "parlamentar_id_sapl": null,
+          "nome_no_sapl": "Secretária Legislativa - SLEG",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 967,
+      "ano": 2026,
+      "numero": 18,
+      "tipo_materia_id": 14,
+      "rotulo_sapl": "Requerimento nº 18 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/967",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 15,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 968,
+      "ano": 2026,
+      "numero": 33,
+      "tipo_materia_id": 9,
+      "rotulo_sapl": "Indicação nº 33 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/968",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 15,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 969,
+      "ano": 2026,
+      "numero": 34,
+      "tipo_materia_id": 9,
+      "rotulo_sapl": "Indicação nº 34 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/969",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 15,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 5,

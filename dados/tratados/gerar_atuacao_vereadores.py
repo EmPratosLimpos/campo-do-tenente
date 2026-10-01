@@ -724,6 +724,7 @@ def processar_sessoes(
     ids_banca = {int(item["id_sapl"]) for item in banca}
     por_banca = {int(item["id_sapl"]): item for item in banca}
     presenca = {id_sapl: [] for id_sapl in ids_banca}
+    fora_mandato = {id_sapl: 0 for id_sapl in ids_banca}
     nominais = {id_sapl: [] for id_sapl in ids_banca}
     registros_por_materia: dict[int, list[dict]] = defaultdict(list)
     sessoes_saida = []
@@ -777,12 +778,13 @@ def processar_sessoes(
         for vereador in banca:
             id_sapl = int(vereador["id_sapl"])
             no_mandato = dentro_do_mandato(vereador, sessao["data"])
+            if not no_mandato:
+                fora_mandato[id_sapl] += 1
+                situacoes[id_sapl] = "fora_do_mandato"
+                continue
             afastamento = afastamento_na_data(afastamentos, id_sapl, sessao["data"])
-            motivo = motivo_fora_na_data(motivos_fora, id_sapl, sessao["data"])
             if afastamento is not None:
                 situacao = str(afastamento["tipo"])
-            elif not no_mandato:
-                situacao = "fora_do_mandato"
             elif id_sapl in presentes:
                 situacao = "presente"
             elif id_sapl in justificados:
@@ -807,8 +809,6 @@ def processar_sessoes(
             }
             if afastamento is not None:
                 registro.update(fonte_da_ocorrencia(afastamento))
-            elif situacao == "fora_do_mandato":
-                registro.update(complemento_fora(motivo))
             presenca[id_sapl].append(registro)
             situacoes[id_sapl] = situacao
 
@@ -873,6 +873,7 @@ def processar_sessoes(
             for vereador in banca:
                 id_sapl = int(vereador["id_sapl"])
                 texto = linhas.get(id_sapl)
+                no_mandato = dentro_do_mandato(vereador, sessao["data"])
                 afastamento = afastamento_na_data(
                     afastamentos, id_sapl, sessao["data"]
                 )
@@ -904,6 +905,8 @@ def processar_sessoes(
                 }
                 linha_estado.update(extra_estado)
                 estados.append(linha_estado)
+                if not no_mandato:
+                    continue
                 nominal = {
                     "votacao_id": registro["id"],
                     "sessao_id": sessao["id"],
@@ -974,6 +977,7 @@ def processar_sessoes(
         "sessoes": sessoes_saida,
         "votacoes": votacoes,
         "presenca": presenca,
+        "fora_mandato": fora_mandato,
         "nominais": nominais,
         "registros_por_materia": registros_por_materia,
         "divergencias_presenca": divergencias,
@@ -984,17 +988,28 @@ def processar_sessoes(
     }
 
 
-def consolidar_presenca(lista: list[dict], nome: str) -> dict:
+def consolidar_presenca(lista: list[dict], nome: str, sessoes_fora: int = 0) -> dict:
+    """Presenca dentro do mandato. Sessoes fora da janela nao aparecem na lista.
+
+    O total da taxa soma presencas, faltas com e sem justificativa e
+    licencas. Licenca tem rotulo proprio, nunca e chamada de falta,
+    mas entra no total. Fora do mandato chega como contagem separada,
+    para a grade fechar, sem entrar na lista nem na taxa.
+    """
     contagem = Counter(item["situacao"] for item in lista)
     presencas = contagem.get("presente", 0)
     faltas_just = contagem.get("falta_com_justificativa", 0)
     faltas_sem = contagem.get("falta_sem_justificativa", 0)
-    fora = contagem.get("fora_do_mandato", 0)
+    fora = int(sessoes_fora)
     por_afastamento = {tipo: contagem.get(tipo, 0) for tipo in LICENCA_TIPOS}
     licenca = sum(por_afastamento.values())
-    if presencas + faltas_just + faltas_sem + fora + licenca != len(lista):
+    if contagem.get("fora_do_mandato", 0):
+        raise SystemExit(
+            f"{nome}: sessao fora do mandato na lista de presenca."
+        )
+    if presencas + faltas_just + faltas_sem + licenca != len(lista):
         raise SystemExit(f"{nome}: presenca nao fecha o numero de sessoes.")
-    no_mandato = presencas + faltas_just + faltas_sem
+    no_mandato = presencas + faltas_just + faltas_sem + licenca
     if no_mandato == 0:
         raise SystemExit(
             f"{nome}: nenhuma sessao dentro do mandato. Nada sera estimado."
@@ -1002,7 +1017,7 @@ def consolidar_presenca(lista: list[dict], nome: str) -> dict:
     faltas_totais = faltas_just + faltas_sem
     return {
         "sessoes_ordinarias": no_mandato,
-        "sessoes_do_ano": len(lista),
+        "sessoes_do_ano": len(lista) + fora,
         "sessoes_fora_do_mandato": fora,
         "sessoes_licenca": licenca,
         "sessoes_por_afastamento": por_afastamento,
@@ -1017,6 +1032,7 @@ def consolidar_presenca(lista: list[dict], nome: str) -> dict:
 
 
 def consolidar_votos(lista: list[dict], n_com_voto: int, nome: str) -> dict:
+    """Nominais dentro do mandato. n_com_voto e o esperado nessa janela."""
     contagem = Counter(item["estado"] for item in lista)
     resultado = {chave: contagem.get(chave, 0) for chave in ORDEM_ESTADOS}
     resultado["rotulos"] = {chave: ROTULOS_ESTADO[chave] for chave in ORDEM_ESTADOS}
@@ -1027,7 +1043,7 @@ def consolidar_votos(lista: list[dict], n_com_voto: int, nome: str) -> dict:
     if len(lista) != n_com_voto:
         raise SystemExit(
             f"{nome}: {len(lista)} estados para {n_com_voto} votacoes "
-            "com voto individual."
+            "com voto individual dentro do mandato."
         )
     return resultado
 
@@ -1397,9 +1413,10 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
         ),
         "",
         (
-            "Presença e voto só entram quando a data da sessão cai dentro "
-            "do mandato da pessoa, pelas datas da tabela de vereadores. "
-            "Fora desse intervalo o estado é próprio: fora do mandato."
+            "Presença e voto nominal só entram quando a data da sessão cai "
+            "dentro do mandato da pessoa, pelas datas da tabela de vereadores. "
+            "Sessão fora desse intervalo não aparece na lista da pessoa: "
+            "a atuação de quem saiu fica congelada na data de saída."
         ),
         "",
     ]
@@ -1445,8 +1462,14 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
             "",
             (
                 "Fora do mandato: a data da sessão é anterior ao início ou "
-                "posterior ao fim do mandato. Essa sessão não entra na taxa "
-                "de presença."
+                "posterior ao fim do mandato. Essa sessão não aparece na "
+                "lista da pessoa e não entra na taxa de presença."
+            ),
+            "",
+            (
+                "Taxa de presença: presenças divididas pelo total de sessões "
+                "no mandato, que soma presenças, faltas com e sem "
+                "justificativa e licenças."
             ),
             "",
             "## Como o voto foi lido",
@@ -1477,9 +1500,10 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
                 ),
                 "",
                 (
-                    "Afastamento que não conta como falta vem de "
-                    "`afastamentos_manuais.json`. Esse período não entra em "
-                    "falta nem na taxa de presença. Cada ocorrência guarda a fonte."
+                    "Licença ou afastamento que não conta como falta vem de "
+                    "`afastamentos_manuais.json`, tem rótulo próprio e nunca "
+                    "é chamado de falta, mas entra no total de sessões da "
+                    "taxa de presença. Cada ocorrência guarda a fonte."
                 ),
                 "",
                 "## Presença de cada vereador",
@@ -1706,11 +1730,19 @@ def gerar_do_ano(ano: int) -> None:
         id_sapl = int(base["id_sapl"])
         partido_sigla, partido_nome, foto_url = conferir_partido_e_foto(base)
         presenca = consolidar_presenca(
-            bruto["presenca"][id_sapl], base["nome_parlamentar"]
+            bruto["presenca"][id_sapl],
+            base["nome_parlamentar"],
+            bruto["fora_mandato"][id_sapl],
+        )
+        n_com_na_janela = sum(
+            1
+            for votacao in bruto["votacoes"]
+            if votacao.get("voto_individual_registrado")
+            and dentro_do_mandato(base, votacao.get("data_sessao") or "")
         )
         votos = consolidar_votos(
             bruto["nominais"][id_sapl],
-            bruto["n_votacoes_com_voto_individual"],
+            n_com_na_janela,
             base["nome_parlamentar"],
         )
         projetos_lei = projetos_do_vereador(id_sapl, projetos)
@@ -1761,12 +1793,12 @@ def gerar_do_ano(ano: int) -> None:
         raise SystemExit(f"{ano}: a grade de presenca nao fecha.")
 
     contagem_estados = {chave: 0 for chave in ORDEM_ESTADOS}
+    total_nominais_na_janela = 0
     for item in vereadores:
         for chave in ORDEM_ESTADOS:
             contagem_estados[chave] += item["votos"][chave]
-    if sum(contagem_estados.values()) != (
-        bruto["n_votacoes_com_voto_individual"] * len(vereadores)
-    ):
+        total_nominais_na_janela += item["votos"]["total_registros"]
+    if sum(contagem_estados.values()) != total_nominais_na_janela:
         raise SystemExit(f"{ano}: a grade de estados de voto nao fecha.")
 
     dado_coletado_em, fonte_data = data_da_coleta(ano)
@@ -1820,8 +1852,9 @@ def gerar_do_ano(ano: int) -> None:
                 "Ausência não é voto. Votação sem voto individual não é "
                 "unânime. Presidente que não votou só conta quando o SAPL "
                 "registrou Não Votou e a pessoa presidia aquela sessão. "
-                "Fora do mandato não entra em presença nem em voto. "
-                "Afastamento do arquivo de afastamentos não conta como falta."
+                "Fora do mandato não aparece na lista da pessoa e não entra "
+                "em presença nem em voto. Licença tem rótulo próprio, não é "
+                "falta e entra no total da taxa de presença."
             ),
         },
         "sessoes": bruto["sessoes"],

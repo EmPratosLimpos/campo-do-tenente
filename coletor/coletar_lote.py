@@ -56,6 +56,17 @@ def montar_url(base: str, caminho: str, params: dict | None) -> str:
     return url + "?" + query
 
 
+def corpo_e_json_valido(corpo: bytes) -> bool:
+    """Resposta vazia ou ilegivel nunca pode substituir um arquivo bom."""
+    if not corpo or not corpo.strip():
+        return False
+    try:
+        json.loads(corpo.decode("utf-8"))
+    except (UnicodeDecodeError, ValueError):
+        return False
+    return True
+
+
 def indice_tem(indice_api: dict | None, chave: str) -> bool:
     return isinstance(indice_api, dict) and chave in indice_api
 
@@ -174,7 +185,7 @@ class ColetorLote:
         }
         texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
         tmp = self.indice_path.with_suffix(".json.tmp")
-        tmp.write_text(texto, encoding="utf-8")
+        tmp.write_bytes(texto.encode("utf-8"))
         tmp.replace(self.indice_path)
 
     def _ja_baixado(self, arquivo: str):
@@ -308,9 +319,17 @@ class ColetorLote:
                 except (UnicodeDecodeError, ValueError) as exc:
                     raise SystemExit(f"Resposta nao e JSON: {arquivo}") from exc
 
-            nome_gravado = arquivo if status == 200 else nome_falha
-            (self.pasta / nome_gravado).write_bytes(corpo)
-            self.gravou = True
+            valido = status == 200 and corpo_e_json_valido(corpo)
+            if status == 200 and not valido:
+                erro = "resposta vazia ou ilegivel"
+            nome_gravado = arquivo if valido else nome_falha
+            if valido:
+                tmp = destino.with_suffix(destino.suffix + ".tmp")
+                tmp.write_bytes(corpo)
+                tmp.replace(destino)
+                self.gravou = True
+            else:
+                (self.pasta / nome_gravado).write_bytes(corpo)
             self._registrar(
                 {
                     "url": url,
@@ -323,6 +342,7 @@ class ColetorLote:
 
             recusar = status in (429, 500, 502, 503) or erro in (
                 "tempo esgotado",
+                "resposta vazia ou ilegivel",
             ) or (isinstance(erro, str) and erro.startswith("rede:"))
             if recusar and tentativas_extra < MAX_REPETICOES:
                 tentativas_extra += 1
@@ -331,6 +351,8 @@ class ColetorLote:
                 time.sleep(espera)
                 continue
 
+            if not valido:
+                raise SystemExit(f"Resposta nao e JSON: {arquivo}")
             if status != 200:
                 raise SystemExit(f"Pedido falhou: {url} ({erro or status})")
             try:

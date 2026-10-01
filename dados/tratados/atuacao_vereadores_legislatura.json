@@ -3,9 +3,9 @@
     "gerado_por": "dados/tratados/gerar_dados_tela.py",
     "cidade": "Campo do Tenente",
     "uf": "PR",
-    "dado_coletado_em": "2026-09-27T13:53:03-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20260927_noticia_licenca/indice.json campo atualizado_em",
-    "n_sessoes_ordinarias": 65,
+    "dado_coletado_em": "2026-09-29T22:57:44-03:00",
+    "fonte_data_coleta": "dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em",
+    "n_sessoes_ordinarias": 66,
     "piso_sessoes_ordinarias": 33,
     "n_vereadores": 10,
     "piso_vereadores": 10,
@@ -13,10 +13,10 @@
     "n_projetos_lei_executivo": 39,
     "n_projetos_lei_legislativo_e_executivo": 62,
     "piso_projetos_lei_legislativo_e_executivo": 18,
-    "n_presencas": 566,
+    "n_presencas": 575,
     "n_faltas_com_justificativa": 8,
     "n_faltas_sem_justificativa": 11,
-    "n_sessoes_fora_do_mandato": 10,
+    "n_sessoes_fora_do_mandato": 11,
     "n_sessoes_licenca": 23,
     "n_votacoes": 235,
     "n_registros_votacao": 235,
@@ -31,7 +31,7 @@
       "presidente_que_nao_votou": 93,
       "ausente_com_justificativa": 23,
       "ausente_sem_justificativa": 18,
-      "fora_do_mandato": 28,
+      "fora_do_mandato": 0,
       "presente_sem_voto_individual_registrado": 2,
       "licenca_tratamento_saude": 72
     },
@@ -111,7 +111,7 @@
       "dados/tratados/afastamentos_manuais.json",
       "dados/tratados/temas_materias.json"
     ],
-    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não entra em presença nem em voto. Afastamento do arquivo de afastamentos não conta como falta.",
+    "observacao": "Ausência não é voto. Votação sem voto individual não é unânime. Presidente que não votou só conta quando o SAPL registrou Não Votou e a pessoa presidia aquela sessão. Fora do mandato não aparece na lista da pessoa e não entra em presença nem em voto. Licença tem rótulo próprio, não é falta e entra no total da taxa de presença.",
     "anos_recorte": [
       2025,
       2026
@@ -1260,6 +1260,23 @@
       "n_registros_votacao": 5,
       "n_votacoes_com_voto_individual": 5,
       "n_votacoes_sem_voto_individual": 0
+    },
+    {
+      "id": 274,
+      "numero": 34,
+      "data": "2026-09-29",
+      "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "n_votacoes_contagem": 0,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/sessao/274",
+      "presidente_id_sapl": 5,
+      "n_presentes": 9,
+      "n_faltas_com_justificativa": 0,
+      "n_faltas_sem_justificativa": 0,
+      "n_fora_do_mandato": 1,
+      "n_licenca": 0,
+      "n_registros_votacao": 0,
+      "n_votacoes_com_voto_individual": 0,
+      "n_votacoes_sem_voto_individual": 0
     }
   ],
   "projetos_lei": [
@@ -1339,7 +1356,7 @@
       "ano": "2025",
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
-      "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\nPROFESSORES E EDUCADORES INFANTIS",
+      "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\r\nPROFESSORES E EDUCADORES INFANTIS",
       "tema": "Educação",
       "revisada_por_humano": true,
       "autoria": {
@@ -4733,9 +4750,9 @@
         }
       ],
       "presenca": {
-        "sessoes_ordinarias": 37,
-        "sessoes_do_ano": 65,
-        "sessoes_fora_do_mandato": 5,
+        "sessoes_ordinarias": 60,
+        "sessoes_do_ano": 66,
+        "sessoes_fora_do_mandato": 6,
         "sessoes_licenca": 23,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 23
@@ -4744,8 +4761,8 @@
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 1,
-        "percentual_faltas": 2.7,
-        "taxa_presenca": 97.3,
+        "percentual_faltas": 1.67,
+        "taxa_presenca": 60.0,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -5581,86 +5598,6 @@
             "fonte_oficial_encontrada": true,
             "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
             "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
-          },
-          {
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "rotulo": "29ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "fora_do_mandato",
-            "rotulo_situacao": "Fora do mandato naquela data",
-            "presente_sessao_plenaria": false,
-            "presente_ordem_dia": false,
-            "justificativa": false,
-            "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "sessao_id": 270,
-            "data_sessao": "2026-09-01",
-            "rotulo": "30ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "fora_do_mandato",
-            "rotulo_situacao": "Fora do mandato naquela data",
-            "presente_sessao_plenaria": false,
-            "presente_ordem_dia": false,
-            "justificativa": false,
-            "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "sessao_id": 271,
-            "data_sessao": "2026-09-08",
-            "rotulo": "31ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "fora_do_mandato",
-            "rotulo_situacao": "Fora do mandato naquela data",
-            "presente_sessao_plenaria": false,
-            "presente_ordem_dia": false,
-            "justificativa": false,
-            "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/271",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "sessao_id": 272,
-            "data_sessao": "2026-09-15",
-            "rotulo": "32ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "fora_do_mandato",
-            "rotulo_situacao": "Fora do mandato naquela data",
-            "presente_sessao_plenaria": false,
-            "presente_ordem_dia": false,
-            "justificativa": false,
-            "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/272",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "rotulo": "33ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "fora_do_mandato",
-            "rotulo_situacao": "Fora do mandato naquela data",
-            "presente_sessao_plenaria": false,
-            "presente_ordem_dia": false,
-            "justificativa": false,
-            "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
           }
         ]
       },
@@ -5672,7 +5609,7 @@
         "presidente_que_nao_votou": 0,
         "ausente_com_justificativa": 0,
         "ausente_sem_justificativa": 0,
-        "fora_do_mandato": 21,
+        "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
         "licenca_tratamento_saude": 72,
         "rotulos": {
@@ -5687,7 +5624,7 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 119,
+        "total_registros": 98,
         "nominais": [
           {
             "votacao_id": 20,
@@ -7126,321 +7063,6 @@
             "fonte_oficial_encontrada": true,
             "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde.",
             "arquivo": "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
-          },
-          {
-            "votacao_id": 251,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 797,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/797",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 252,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 704,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/704",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 253,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 698,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/698",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 254,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 783,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/783",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 255,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 794,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/794",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 257,
-            "sessao_id": 269,
-            "data_sessao": "2026-08-25",
-            "materia_id": 795,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/269",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/795",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 258,
-            "sessao_id": 270,
-            "data_sessao": "2026-09-01",
-            "materia_id": 798,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/798",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 259,
-            "sessao_id": 270,
-            "data_sessao": "2026-09-01",
-            "materia_id": 796,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/796",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 260,
-            "sessao_id": 270,
-            "data_sessao": "2026-09-01",
-            "materia_id": 805,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/805",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 261,
-            "sessao_id": 270,
-            "data_sessao": "2026-09-01",
-            "materia_id": 804,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/804",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 262,
-            "sessao_id": 270,
-            "data_sessao": "2026-09-01",
-            "materia_id": 802,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/802",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 263,
-            "sessao_id": 270,
-            "data_sessao": "2026-09-01",
-            "materia_id": 799,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/270",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/799",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 264,
-            "sessao_id": 271,
-            "data_sessao": "2026-09-08",
-            "materia_id": 810,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/271",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/810",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 265,
-            "sessao_id": 272,
-            "data_sessao": "2026-09-15",
-            "materia_id": 820,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/272",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/820",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 266,
-            "sessao_id": 272,
-            "data_sessao": "2026-09-15",
-            "materia_id": 814,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/272",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/814",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 267,
-            "sessao_id": 272,
-            "data_sessao": "2026-09-15",
-            "materia_id": 816,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/272",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 270,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 811,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/811",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 271,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 815,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/815",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
-          },
-          {
-            "votacao_id": 272,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 889,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889",
-            "motivo": "Mandato cassado",
-            "materia_motivo_id": 792,
-            "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
-            "fonte_oficial_encontrada": true
           }
         ]
       },
@@ -7482,17 +7104,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 65,
-        "sessoes_do_ano": 65,
+        "sessoes_ordinarias": 66,
+        "sessoes_do_ano": 66,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 61,
+        "presencas": 62,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 3,
         "faltas_totais": 4,
-        "percentual_faltas": 6.15,
-        "taxa_presenca": 93.85,
+        "percentual_faltas": 6.06,
+        "taxa_presenca": 93.94,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -8273,6 +7895,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -9754,17 +9388,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 65,
-        "sessoes_do_ano": 65,
+        "sessoes_ordinarias": 66,
+        "sessoes_do_ano": 66,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 64,
+        "presencas": 65,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 1,
-        "percentual_faltas": 1.54,
-        "taxa_presenca": 98.46,
+        "percentual_faltas": 1.52,
+        "taxa_presenca": 98.48,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -10545,6 +10179,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -11946,17 +11592,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 65,
-        "sessoes_do_ano": 65,
+        "sessoes_ordinarias": 66,
+        "sessoes_do_ano": 66,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 62,
+        "presencas": 63,
         "faltas_com_justificativa": 2,
         "faltas_sem_justificativa": 1,
         "faltas_totais": 3,
-        "percentual_faltas": 4.62,
-        "taxa_presenca": 95.38,
+        "percentual_faltas": 4.55,
+        "taxa_presenca": 95.45,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -12737,6 +12383,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -14185,12 +13843,12 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 65,
-        "sessoes_do_ano": 65,
+        "sessoes_ordinarias": 66,
+        "sessoes_do_ano": 66,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 65,
+        "presencas": 66,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -14976,6 +14634,18 @@
             "justificativa": false,
             "era_presidente": true,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": true,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -16545,12 +16215,12 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 65,
-        "sessoes_do_ano": 65,
+        "sessoes_ordinarias": 66,
+        "sessoes_do_ano": 66,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 65,
+        "presencas": 66,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -17336,6 +17006,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -18784,12 +18466,12 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 65,
-        "sessoes_do_ano": 65,
+        "sessoes_ordinarias": 66,
+        "sessoes_do_ano": 66,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 65,
+        "presencas": 66,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -19575,6 +19257,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -20991,17 +20685,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 65,
-        "sessoes_do_ano": 65,
+        "sessoes_ordinarias": 66,
+        "sessoes_do_ano": 66,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 60,
+        "presencas": 61,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 5,
         "faltas_totais": 5,
-        "percentual_faltas": 7.69,
-        "taxa_presenca": 92.31,
+        "percentual_faltas": 7.58,
+        "taxa_presenca": 92.42,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -21782,6 +21476,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -23150,17 +22856,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 65,
-        "sessoes_do_ano": 65,
+        "sessoes_ordinarias": 66,
+        "sessoes_do_ano": 66,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 60,
+        "presencas": 61,
         "faltas_com_justificativa": 3,
         "faltas_sem_justificativa": 2,
         "faltas_totais": 5,
-        "percentual_faltas": 7.69,
-        "taxa_presenca": 92.31,
+        "percentual_faltas": 7.58,
+        "taxa_presenca": 92.42,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -23941,6 +23647,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -25333,80 +25051,20 @@
       },
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 28,
-        "sessoes_do_ano": 33,
+        "sessoes_ordinarias": 29,
+        "sessoes_do_ano": 34,
         "sessoes_fora_do_mandato": 5,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {
           "licenca_tratamento_saude": 0
         },
-        "presencas": 28,
+        "presencas": 29,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
         "percentual_faltas": 0.0,
         "taxa_presenca": 100.0,
         "por_sessao": [
-          {
-            "sessao_id": 37,
-            "data_sessao": "2026-02-10",
-            "rotulo": "1ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "fora_do_mandato",
-            "rotulo_situacao": "Fora do mandato naquela data",
-            "presente_sessao_plenaria": false,
-            "presente_ordem_dia": false,
-            "justificativa": false,
-            "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/37"
-          },
-          {
-            "sessao_id": 38,
-            "data_sessao": "2026-02-19",
-            "rotulo": "2ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "fora_do_mandato",
-            "rotulo_situacao": "Fora do mandato naquela data",
-            "presente_sessao_plenaria": false,
-            "presente_ordem_dia": false,
-            "justificativa": false,
-            "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/38"
-          },
-          {
-            "sessao_id": 39,
-            "data_sessao": "2026-02-24",
-            "rotulo": "3ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "fora_do_mandato",
-            "rotulo_situacao": "Fora do mandato naquela data",
-            "presente_sessao_plenaria": false,
-            "presente_ordem_dia": false,
-            "justificativa": false,
-            "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39"
-          },
-          {
-            "sessao_id": 41,
-            "data_sessao": "2026-03-03",
-            "rotulo": "4ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "fora_do_mandato",
-            "rotulo_situacao": "Fora do mandato naquela data",
-            "presente_sessao_plenaria": false,
-            "presente_ordem_dia": false,
-            "justificativa": false,
-            "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/41"
-          },
-          {
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "rotulo": "5ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
-            "situacao": "fora_do_mandato",
-            "rotulo_situacao": "Fora do mandato naquela data",
-            "presente_sessao_plenaria": false,
-            "presente_ordem_dia": false,
-            "justificativa": false,
-            "era_presidente": false,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42"
-          },
           {
             "sessao_id": 45,
             "data_sessao": "2026-03-17",
@@ -25742,6 +25400,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273"
+          },
+          {
+            "sessao_id": 274,
+            "data_sessao": "2026-09-29",
+            "rotulo": "34ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/274"
           }
         ]
       },
@@ -25753,7 +25423,7 @@
         "presidente_que_nao_votou": 0,
         "ausente_com_justificativa": 0,
         "ausente_sem_justificativa": 0,
-        "fora_do_mandato": 7,
+        "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
         "licenca_tratamento_saude": 0,
         "rotulos": {
@@ -25768,85 +25438,8 @@
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado",
           "licenca_tratamento_saude": "Licença para tratamento de saúde"
         },
-        "total_registros": 100,
+        "total_registros": 93,
         "nominais": [
-          {
-            "votacao_id": 138,
-            "sessao_id": 39,
-            "data_sessao": "2026-02-24",
-            "materia_id": 244,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/244"
-          },
-          {
-            "votacao_id": 139,
-            "sessao_id": 39,
-            "data_sessao": "2026-02-24",
-            "materia_id": 245,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/39",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/245"
-          },
-          {
-            "votacao_id": 155,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 254,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/254"
-          },
-          {
-            "votacao_id": 156,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 255,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/255"
-          },
-          {
-            "votacao_id": 157,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 257,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/257"
-          },
-          {
-            "votacao_id": 158,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 258,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/258"
-          },
-          {
-            "votacao_id": 159,
-            "sessao_id": 42,
-            "data_sessao": "2026-03-10",
-            "materia_id": 256,
-            "estado": "fora_do_mandato",
-            "rotulo": "Fora do mandato naquela data",
-            "voto_texto_sapl": null,
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/42",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/256"
-          },
           {
             "votacao_id": 161,
             "sessao_id": 45,
@@ -26816,28 +26409,6 @@
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
-            "votacao_id": 268,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 853,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
-          },
-          {
-            "votacao_id": 269,
-            "sessao_id": 273,
-            "data_sessao": "2026-09-22",
-            "materia_id": 752,
-            "estado": "sim",
-            "rotulo": "Sim",
-            "voto_texto_sapl": "Sim",
-            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
-            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
-          },
-          {
             "votacao_id": 270,
             "sessao_id": 273,
             "data_sessao": "2026-09-22",
@@ -26869,6 +26440,28 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/889"
+          },
+          {
+            "votacao_id": 269,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 752,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/752"
+          },
+          {
+            "votacao_id": 268,
+            "sessao_id": 273,
+            "data_sessao": "2026-09-22",
+            "materia_id": 853,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/273",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/853"
           }
         ]
       },
