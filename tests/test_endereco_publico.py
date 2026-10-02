@@ -18,7 +18,10 @@ RAIZ = Path(__file__).resolve().parent.parent
 
 DOMINIO_PROPRIO = "empratoslimpos.com"
 ENDERECO_PUBLICO = f"https://{DOMINIO_PROPRIO}/"
-ENDERECO_ANTIGO = "empratoslimpos.github.io/campo-do-tenente"
+# Montado em partes: assim o endereco antigo nao fica escrito neste arquivo e
+# a varredura do repositorio inteiro nao acha a si mesma.
+HOST_ANTIGO = "empratoslimpos" + ".github.io"
+ENDERECO_ANTIGO = HOST_ANTIGO + "/campo-do-tenente"
 
 # Documentos de historico: registram o que foi publicado no passado e nao
 # descrevem o endereco de hoje.
@@ -98,7 +101,7 @@ class TestEnderecoNaTela(unittest.TestCase):
         cls.index = (RAIZ / "index.html").read_text(encoding="utf-8")
 
     def test_index_nao_guarda_o_endereco_antigo(self):
-        self.assertNotIn("empratoslimpos.github.io", self.index)
+        self.assertNotIn(HOST_ANTIGO, self.index)
 
     def test_cabecalho_impresso_mostra_o_dominio_proprio(self):
         self.assertIn(f'<a href="{ENDERECO_PUBLICO}">{ENDERECO_PUBLICO}</a>', self.index)
