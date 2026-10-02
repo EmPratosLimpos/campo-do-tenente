@@ -70,6 +70,65 @@ SAIDA_MAIUSCULAS = (
 )
 
 
+# E5k: pares (texto do SAPL, texto na tela) dos nomes proprios de plano, programa,
+# sistema e regime que o SAPL gravou em maiusculas e que a tela mostra com a
+# grafia oficial. Cada palavra principal com inicial maiuscula, preposicao e
+# artigo em minusculo, no mesmo modelo do Plano Municipal de Educacao.
+TERMOS_E5K = (
+    "Plano Municipal de Cultura",
+    "Sistema Municipal de Cultura",
+    "Plano Plurianual",
+    "Programa Porteira Adentro",
+    "Programa Auxílio-Alimentação",
+    "Regime Próprio de Previdência Social",
+)
+
+EMENTAS_E5K = {
+    "plano_cultura": (
+        '"APROVA O PLANO MUNICIPAL DE CULTURA DO MUNICÍPIO DE CAMPO DO TENENTE/PR".',
+        '"Aprova o Plano Municipal de Cultura do município de Campo do Tenente/PR".',
+    ),
+    "programa_auxilio": (
+        "ALTERA A REDAÇÃO DO ART. 2º DA LEI Nº 1.059/2022, QUE INSTITUI O PROGRAMA "
+        "AUXÍLIO-ALIMENTAÇÃO PARA OS SERVIDORES DO MUNICÍPIO DE CAMPO DO TENENTE/PR, "
+        "E DÁ OUTRAS PROVIDÊNCIAS.",
+        "Altera a redação do art. 2º da Lei nº 1.059/2022, que institui o Programa "
+        "Auxílio-Alimentação para os servidores do município de Campo do Tenente/PR, "
+        "e dá outras providências.",
+    ),
+    "programa_porteira": (
+        "DISPÕE SOBRE A DIVULGAÇÃO DE INFORMAÇÕES SOBRE OS SERVIÇOS DE SANEAMENTO "
+        "BÁSICO E DO PROGRAMA PORTEIRA ADENTRO DO MUNICÍPIO NO SITE OFICIAL DA "
+        "PREFEITURA DE CAMPO DO TENENTE - PR.",
+        "Dispõe sobre a divulgação de informações sobre os serviços de saneamento "
+        "básico e do Programa Porteira Adentro do município no site oficial da "
+        "Prefeitura de Campo do Tenente - PR.",
+    ),
+    "plano_plurianual": (
+        "DISPÕE SOBRE O PLANO PLURIANUAL DE GOVERNO DO MUNICÍPIO, PARA O PERÍODO DE "
+        "2026 A 2029, E DÁ OUTRAS PROVIDÊNCIAS.",
+        "Dispõe sobre o Plano Plurianual de governo do município, para o período de "
+        "2026 a 2029, e dá outras providências.",
+    ),
+    "sistema_cultura": (
+        "DISPÕE SOBRE O SISTEMA MUNICIPAL DE  CULTURA DO MUNICÍPIO DE CAMPO DO  "
+        "TENENTE/PR , E DÁ OUTRAS PROVIDÊNCIAS.",
+        "Dispõe sobre o Sistema Municipal de Cultura do município de Campo do Tenente/PR , "
+        "e dá outras providências.",
+    ),
+    "regime_previdencia": (
+        "DISPÕE SOBRE O PARCELAMENTO E REPARCELAMENTO DE DÉBITOS DO MUNICÍPIO DE CAMPO "
+        "DO TENENTE/PR COM SEU REGIME PRÓPRIO DE PREVIDÊNCIA SOCIAL - RPPS, DE QUE TRATAM "
+        "OS ARTS. 115 E 117 DO ATO DAS DISPOSIÇÕES CONSTITUCIONAIS TRANSITÓRIAS - ADCT, "
+        "COM A REDAÇÃO CONFERIDA PELA EMENDA CONSTITUCIONAL Nº 136, DE 9 DE SETEMBRO DE 2025.",
+        "Dispõe sobre o parcelamento e reparcelamento de débitos do município de Campo do "
+        "Tenente/PR com seu Regime Próprio de Previdência Social - RPPS, de que tratam os "
+        "arts. 115 e 117 do Ato das Disposições Constitucionais Transitórias - ADCT, com a "
+        "redação conferida pela Emenda Constitucional nº 136, de 9 de setembro de 2025.",
+    ),
+}
+
+
 def ler_html(nome: str) -> str:
     return (RAIZ / nome).read_text(encoding="utf-8")
 
@@ -226,6 +285,31 @@ class TestEmentaExibicaoUnidade(unittest.TestCase):
         for termo in ("PR", "REFIS", "APAE", "Campo do Tenente", "Lei", "I", "II"):
             self.assertIn(termo, lista)
 
+    def test_nomes_de_planos_programas_e_sistemas_ficam_com_inicial_maiuscula(self):
+        """E5k: cada termo novo sai com a grafia oficial e o resto da ementa em
+        minusculo, sem estourar o limite de 80 por cento de letras maiusculas."""
+        for chave, (sapl, esperado) in EMENTAS_E5K.items():
+            with self.subTest(termo=chave):
+                saida = self._exibicao("e5k_" + chave)
+                self.assertEqual(saida, esperado)
+                self.assertLessEqual(proporcao_maiusculas(saida), 0.8, saida)
+                for termo in TERMOS_E5K:
+                    if termo in sapl.upper().replace("  ", " "):
+                        with self.subTest(termo_preservado=termo):
+                            self.assertIn(termo, saida)
+
+    def test_termos_novos_estao_no_config_e_nao_no_codigo(self):
+        lista = self.config["ementa_termos_preservados"]["lista"]
+        for termo in TERMOS_E5K:
+            with self.subTest(termo=termo):
+                self.assertIn(termo, lista)
+        for nome in ("index.html", "tela/modelo.html"):
+            with self.subTest(arquivo=nome):
+                bloco = bloco_ementa(ler_html(nome))
+                for termo in TERMOS_E5K:
+                    with self.subTest(termo=termo):
+                        self.assertNotIn('"' + termo + '"', bloco)
+
 
 def _casos_unidade() -> dict:
     casos = {
@@ -238,6 +322,8 @@ def _casos_unidade() -> dict:
     }
     for indice, ementa in enumerate(EMENTAS_MAIUSCULAS):
         casos["real_" + str(indice)] = ementa
+    for chave, (sapl, _esperado) in EMENTAS_E5K.items():
+        casos["e5k_" + chave] = sapl
     return casos
 
 
@@ -456,6 +542,93 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 self.assertEqual(caixa.count(), 1)
                 self.assertTrue(caixa.inner_text().strip())
                 self.assertEqual(erros, [])
+                page.close()
+
+    def test_programa_porteira_adentro_aparece_com_nome_proprio_na_tela_1440(self):
+        """E5k: o nome do programa aparece na aba Camara com inicial maiuscula."""
+        with sync_playwright() as p:
+            with _navegador(p) as browser:
+                page = browser.new_page()
+                erros = self._erros(page)
+                self._abrir_camara(page, "1440", "claro")
+                achou = False
+                for periodo in PERIODOS:
+                    self._clicar_periodo(page, periodo)
+                    textos = page.eval_on_selector_all(
+                        "#bloco-votado-" + periodo + " .materia-ementa",
+                        "els => els.map(e => e.textContent.trim())",
+                    )
+                    for texto in textos:
+                        if "Porteira Adentro" in texto:
+                            achou = True
+                            self.assertIn(
+                                "do Programa Porteira Adentro do município",
+                                texto,
+                            )
+                            self.assertNotIn("porteira adentro", texto.lower().replace(
+                                "programa porteira adentro", ""
+                            ))
+                            self.assertLessEqual(proporcao_maiusculas(texto), 0.8, texto)
+                self.assertTrue(achou, "nenhuma ementa com o Programa Porteira Adentro na tela")
+                self.assertEqual(erros, [], msg=str(erros))
+                page.close()
+
+    def test_plano_plurianual_aparece_com_nome_proprio_no_historico_de_votos_1440(self):
+        """E5k: o nome do plano aparece no historico de votos do vereador.
+
+        Observacao de dado: das ementas com nome proprio novo, o Plano Municipal
+        de Cultura (PLEX 26/2025) e o Sistema Municipal de Cultura (PLEX 23/2025)
+        nao chegam a ser exibidos hoje, porque a materia de origem do Executivo
+        nao tem votos nominais registrados e nao esta na lista de materias
+        votadas da aba Camara. A grafia delas fica conferida no teste de unidade,
+        que roda a funcao real do index.html com a ementa do SAPL.
+        """
+        with sync_playwright() as p:
+            with _navegador(p) as browser:
+                page = browser.new_page()
+                erros = self._erros(page)
+                page.set_viewport_size({"width": 1440, "height": 900})
+                page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
+                page.wait_for_selector("#sel-vereador", state="attached", timeout=60000)
+                try:
+                    page.click("button[data-secao-lateral='vereadores']", timeout=5000)
+                except Exception:
+                    page.click('button[data-secao="vereadores"]', timeout=15000)
+                page.wait_for_selector("#sel-vereador", state="visible", timeout=30000)
+                page.select_option("#sel-vereador", VEREADOR_HISTORICO)
+                page.wait_for_timeout(600)
+                bloco = page.locator("#tit-votos").locator("xpath=ancestor::details[1]")
+                if not bloco.evaluate("n => n.open"):
+                    page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
+                    page.wait_for_timeout(400)
+                page.click("button.voto-card[data-voto-card='sim']")
+                page.wait_for_timeout(700)
+                visiveis = page.eval_on_selector_all(
+                    ".lista-votos .ementa-voto",
+                    "els => els.map(e => e.textContent.trim())",
+                )
+                completas = page.eval_on_selector_all(
+                    ".lista-votos .ementa-voto",
+                    "els => els.map(e => (e.getAttribute('title') || '').trim())",
+                )
+                alvo = "Plano Plurianual"
+                self.assertTrue(
+                    any(alvo in t for t in visiveis),
+                    "Plano Plurianual nao apareceu no texto visivel: " + str(visiveis),
+                )
+                achou = [t for t in completas if alvo in t]
+                self.assertTrue(achou, "Plano Plurianual nao apareceu no historico: " + str(completas))
+                for texto in achou:
+                    self.assertIn(
+                        "Dispõe sobre o Plano Plurianual de governo do município",
+                        texto,
+                    )
+                    self.assertNotIn("plano plurianual", texto.lower().replace(
+                        "Plano Plurianual".lower(), ""
+                    ))
+                    self.assertLessEqual(proporcao_maiusculas(texto), 0.8, texto)
+                self.assertEqual(erros, [], msg=str(erros))
+                self.assertLessEqual(self._rolagem_lateral(page), 1)
                 page.close()
 
 

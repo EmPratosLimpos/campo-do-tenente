@@ -111,7 +111,7 @@
     "dois_turnos": ["PLEG", "PLEX", "PLC", "PLCL", "PELOM", "PSUB", "PSUBE"]
   },
   "ementa_termos_preservados": {
-    "nota": "D-055: termos que a ementa em maiusculas do SAPL mantem com a grafia oficial quando a tela mostra a ementa em texto normal. A funcao ementaExibicao() le esta lista depois de converter a ementa, por palavra inteira e sem diferenciar maiuscula. Nao ha lista fixa no codigo. Termos com mais palavras entram depois dos termos curtos na aplicacao.",
+    "nota": "D-055: termos que a ementa em maiusculas do SAPL mantem com a grafia oficial quando a tela mostra a ementa em texto normal. A funcao ementaExibicao() le esta lista depois de converter a ementa, por palavra inteira e sem diferenciar maiuscula. Nao ha lista fixa no codigo. Termos com mais palavras entram depois dos termos curtos na aplicacao. E5k: entram aqui tambem os nomes proprios de planos, programas, politicas, fundos, conselhos e regimes citados nas ementas, com inicial maiuscula em cada palavra principal e preposicao e artigo em minusculo.",
     "lista": [
       "PR",
       "I",
@@ -147,6 +147,9 @@
       "Câmara Municipal",
       "Prefeitura de Campo do Tenente",
       "Plano Municipal de Educação",
+      "Plano Municipal de Cultura",
+      "Plano Plurianual",
+      "Sistema Municipal de Cultura",
       "Fundo Municipal de Esportes",
       "Conselho Municipal de Educação",
       "Conselho Municipal de Esportes",
@@ -156,10 +159,13 @@
       "Parlamento Municipal da Pessoa com Deficiência",
       "Política Municipal de Alfabetização",
       "Programa de Recuperação Fiscal",
+      "Programa Porteira Adentro",
+      "Programa Auxílio-Alimentação",
       "Empresa Amiga da Juventude",
       "Embaixador(a) Honorário(a)",
       "Consórcio Intermunicipal Multifinalitário",
       "Instituto de Desenvolvimento Rural do Paraná",
+      "Regime Próprio de Previdência Social",
       "Anita Margarida Comitti Stahlke"
     ]
   },
