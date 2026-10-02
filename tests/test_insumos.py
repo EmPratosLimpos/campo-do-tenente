@@ -646,5 +646,60 @@ class TestInsumos(unittest.TestCase):
         self.assertEqual(sorted(item["id"] for item in pacote["results"]), [1, 99])
 
 
+    def test_ordem_nova_so_na_porsessao_liga_o_registro_novo(self):
+        pasta = Path(self.tmp.name) / "porsessao_ordem_nova"
+        self._montar_porsessao(
+            pasta,
+            [{"id": 1, "sessao_plenaria": 4, "parlamentar": 8}],
+        )
+        self._pagina_por_sessao(
+            pasta,
+            37,
+            "ordemdia",
+            [
+                {
+                    "id": 11,
+                    "sessao_plenaria": 37,
+                    "materia": 244,
+                    "resultado": "Aprovada por Unanimidade",
+                    "numero_ordem": 1,
+                },
+                {
+                    "id": 99,
+                    "sessao_plenaria": 37,
+                    "materia": 300,
+                    "resultado": "Aprovada por Unanimidade",
+                    "numero_ordem": 2,
+                },
+            ],
+        )
+        self._pagina_por_sessao(
+            pasta,
+            37,
+            "registrovotacao",
+            [
+                {
+                    "id": 300,
+                    "ordem": 99,
+                    "expediente": None,
+                    "materia": 300,
+                    "numero_votos_sim": 8,
+                    "numero_votos_nao": 0,
+                    "numero_abstencoes": 0,
+                    "tipo_resultado_votacao": 2,
+                    "__str__": "Ordem exemplo - Votação: Aprovada por Unanimidade",
+                },
+            ],
+        )
+        saida = Path(self.tmp.name) / "saida_ordem_nova"
+        resumo = derivar(self.lote, saida, [2025, 2026], 3, 1, pasta_porsessao=pasta)
+        self.assertNotIn(300, resumo["registros_sem_ligacao_de_sessao"])
+        self.assertEqual(resumo["contagens"]["2026"]["votacoes"], 3)
+        pacote = json.loads(
+            (saida / "sessao_37_registrovotacao.json").read_text(encoding="utf-8")
+        )
+        self.assertIn(300, [item["id"] for item in pacote["results"]])
+
+
 if __name__ == "__main__":
     unittest.main()

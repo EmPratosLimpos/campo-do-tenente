@@ -231,7 +231,7 @@ def _gravar_consolidado(pasta: Path, prefixo: str, linhas: list) -> None:
     texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
     caminho = pasta / f"{prefixo}_p1.json"
     tmp = caminho.with_suffix(".json.tmp")
-    tmp.write_text(texto, encoding="utf-8")
+    tmp.write_bytes(texto.encode("utf-8"))
     tmp.replace(caminho)
 
 
@@ -330,7 +330,7 @@ def gravar_aviso_sessao_recusada(pasta: Path, sid: int, motivo: str, detalhe: di
     }
     texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
     tmp = caminho.with_suffix(".json.tmp")
-    tmp.write_text(texto, encoding="utf-8")
+    tmp.write_bytes(texto.encode("utf-8"))
     tmp.replace(caminho)
     return caminho
 
@@ -537,7 +537,7 @@ def gravar_conferencia(pasta: Path, sessoes: list[dict], divergencias: list[dict
     texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
     caminho = pasta / "conferencia.json"
     tmp = caminho.with_suffix(".json.tmp")
-    tmp.write_text(texto, encoding="utf-8")
+    tmp.write_bytes(texto.encode("utf-8"))
     tmp.replace(caminho)
 
 

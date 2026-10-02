@@ -197,16 +197,13 @@ class TestSanidadeDados(unittest.TestCase):
                     int(meta["n_sessoes_ordinarias"]) * int(meta["n_vereadores"]),
                 )
 
-    def test_afastamento_manual_nao_conta_como_falta(self):
+    def test_afastamento_manual_conta_como_falta_com_justificativa(self):
         caminho = self.dir_tratados / "afastamentos_manuais.json"
         self.assertTrue(caminho.exists(), "afastamentos_manuais.json ausente")
         manuais = json.loads(caminho.read_text(encoding="utf-8"))
         por_ano = {ano: self._carregar(arquivo) for ano, arquivo in self.datasets}
         for afastamento in manuais.get("afastamentos") or []:
-            if afastamento.get("conta_como_falta"):
-                continue
             parlamentar_id = int(afastamento["parlamentar_id_sapl"])
-            tipo = afastamento["tipo"]
             inicio = afastamento["data_inicio"]
             fim = afastamento["data_fim"]
             for ano, dados in por_ano.items():
@@ -231,20 +228,22 @@ class TestSanidadeDados(unittest.TestCase):
                     ]
                     self.assertTrue(no_intervalo)
                     for item in no_intervalo:
-                        self.assertEqual(item["situacao"], tipo)
+                        self.assertEqual(item["situacao"], "falta_com_justificativa")
                         self.assertEqual(item["fonte"], afastamento["fonte"])
                         self.assertEqual(
                             item["fonte_oficial_encontrada"],
                             afastamento["fonte_oficial_encontrada"],
                         )
-                    faltas = pessoa["presenca"]["faltas_sem_justificativa"]
+                        motivo = item.get("motivo_ausencia") or {}
+                        self.assertEqual(
+                            motivo.get("motivo"), afastamento["rotulo"]
+                        )
                     faltas_no_intervalo = [
                         item
                         for item in no_intervalo
                         if item["situacao"] == "falta_sem_justificativa"
                     ]
                     self.assertEqual(faltas_no_intervalo, [])
-                    self.assertGreaterEqual(faltas, 0)
                     votos_no_intervalo = [
                         item
                         for item in pessoa["votos"]["nominais"]
@@ -252,11 +251,35 @@ class TestSanidadeDados(unittest.TestCase):
                         and item.get("voto_texto_sapl") is None
                     ]
                     for item in votos_no_intervalo:
-                        self.assertEqual(item["estado"], tipo)
+                        self.assertEqual(item["estado"], "ausente_com_justificativa")
                         self.assertEqual(
                             item["fonte_oficial_encontrada"],
                             afastamento["fonte_oficial_encontrada"],
                         )
+
+
+    def test_catalogo_tipos_materia_vem_do_sapl(self):
+        lote = sorted((self.dir_brutos / ".").glob("lote_*/tipomaterialegislativa_p1.json"))
+        self.assertTrue(lote, "tabela tipomaterialegislativa ausente em dados/brutos")
+        tabela = json.loads(lote[-1].read_text(encoding="utf-8"))
+        esperado = {}
+        for item in tabela.get("results") or []:
+            sigla = str(item.get("sigla") or "").strip()
+            descricao = str(item.get("descricao") or "").strip()
+            if sigla and descricao:
+                esperado[sigla] = descricao
+        self.assertIn("PLEG", esperado)
+        self.assertIn("PLEX", esperado)
+        for ano, caminho in self.datasets:
+            with self.subTest(ano=ano):
+                dados = self._carregar(caminho)
+                catalogo = (dados.get("meta") or {}).get("catalogo_tipos_materia") or {}
+                for sigla in ("PLEG", "PLEX"):
+                    self.assertEqual(catalogo.get(sigla), esperado.get(sigla))
+                for projeto in dados.get("projetos_lei") or []:
+                    sigla = projeto.get("tipo_sigla")
+                    self.assertIn(sigla, ("PLEG", "PLEX"))
+                    self.assertEqual(projeto.get("tipo_descricao"), esperado.get(sigla))
 
 
 if __name__ == "__main__":

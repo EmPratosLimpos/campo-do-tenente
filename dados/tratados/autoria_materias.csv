@@ -576,3 +576,7 @@ materia_id;ano;numero;rotulo_sapl;autor_id;ordem_no_sapl;primeiro_autor;tipo_aut
 877;2026;21;Oficio do Poder Executivo nº 21 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/877
 880;2026;22;Oficio do Poder Executivo nº 22 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/880
 889;2026;17;Requerimento nº 17 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/889
+966;2026;35;Ata Sessão nº 35 de 2026;7;1;;5;Órgão;;Secretária Legislativa - SLEG;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/966
+967;2026;18;Requerimento nº 18 de 2026;15;1;;2;Parlamentar;5;Rafael Ventura;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/967
+968;2026;33;Indicação nº 33 de 2026;15;1;;2;Parlamentar;5;Rafael Ventura;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/968
+969;2026;34;Indicação nº 34 de 2026;15;1;;2;Parlamentar;5;Rafael Ventura;primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par;https://sapl.campodotenente.pr.leg.br/materia/969

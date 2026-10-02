@@ -35,9 +35,16 @@ from config_cidade import (  # noqa: E402
     link_sessao,
     nome_cidade,
     pisos_sanidade,
+    tipos_dois_turnos,
     uf_cidade,
 )
 CONFIG = carregar_config()
+DOIS_TURNOS = tipos_dois_turnos(CONFIG)
+TURNO_PRIMEIRO = "1o turno"
+TURNO_SEGUNDO = "2o turno"
+TURNO_UNICO = "turno unico"
+TURNO_NAO_IDENTIFICADO = "turno nao identificado"
+TURNOS_CONTADOS = (TURNO_SEGUNDO, TURNO_UNICO)
 SCRIPT_REL = "dados/tratados/gerar_atuacao_vereadores.py"
 ARQUIVO_VEREADORES = DIR_SCRIPT / "vereadores.json"
 ARQUIVO_PRESIDENCIA = DIR_SCRIPT / "presidencia_sessoes.json"
@@ -72,6 +79,7 @@ ROTULOS_ESTADO = {
     ),
 }
 LICENCA_TIPOS: list[str] = []
+TIPOS_JUSTIFICATIVA_SAPL: dict[int, str] = {}
 VOTOS_SIM = {"Sim"}
 VOTOS_NAO = {"Não", "Nao"}
 VOTOS_ABSTENCAO = {"Abstenção", "Abstencao"}
@@ -207,6 +215,197 @@ def aplicar_aviso_na_votacao(
             }
         )
     return resto
+
+
+def situacao_por_nome(nome) -> str | None:
+    """Situacao oficial pelo nome da tabela de tipos do SAPL."""
+    texto = str(nome or "").strip()
+    if texto.startswith("Aprovada"):
+        return "Aprovado"
+    if texto.startswith("Rejeit"):
+        return "Rejeitado"
+    return None
+
+
+def deliberativa_nome(nome) -> bool:
+    return situacao_por_nome(nome) is not None
+
+
+def carregar_tipos_resultado() -> dict[int, str]:
+    """Nome oficial de cada tipo de resultado, lido da tabela ja baixada."""
+    achados = []
+    for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
+        if not pasta.is_dir():
+            continue
+        for caminho in sorted(pasta.glob("tiporesultadovotacao_p*.json")):
+            achados.append(caminho)
+    if not achados:
+        raise SystemExit("Tabela tiporesultadovotacao nao encontrada em dados/brutos.")
+    caminho = achados[-1]
+    dados = carregar_json(caminho)
+    saida = {}
+    for item in dados.get("results") or []:
+        if isinstance(item, dict) and item.get("id") is not None:
+            saida[int(item["id"])] = str(item.get("nome") or "").strip()
+    return saida
+
+
+def carregar_catalogo_tipos_materia() -> tuple[dict[str, str], str]:
+    """Sigla e descricao oficiais de cada tipo de materia, lidas do SAPL.
+
+    Fonte: dados/brutos/lote_*/tipomaterialegislativa_p*.json (tabela
+    tipomaterialegislativa do SAPL). Sem dicionario fixo no codigo.
+    """
+    achados = []
+    for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
+        if not pasta.is_dir():
+            continue
+        for caminho in sorted(pasta.glob("tipomaterialegislativa_p*.json")):
+            achados.append(caminho)
+    if not achados:
+        raise SystemExit("Tabela tipomaterialegislativa nao encontrada em dados/brutos.")
+    caminho = achados[-1]
+    dados = carregar_json(caminho)
+    saida: dict[str, str] = {}
+    for item in dados.get("results") or []:
+        if not isinstance(item, dict):
+            continue
+        sigla = str(item.get("sigla") or "").strip()
+        descricao = str(item.get("descricao") or "").strip()
+        if not sigla or not descricao:
+            continue
+        if sigla in saida and saida[sigla] != descricao:
+            raise SystemExit(f"Tipo {sigla} com descricoes diferentes no SAPL.")
+        saida[sigla] = descricao
+    if not saida:
+        raise SystemExit("Tabela tipomaterialegislativa sem sigla e descricao.")
+    return saida, rel(caminho)
+
+
+def carregar_tipos_justificativa() -> tuple[dict[int, str], str]:
+    """Descricao oficial de cada tipo de justificativa de ausencia do SAPL."""
+    achados = []
+    for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
+        if not pasta.is_dir():
+            continue
+        for caminho in sorted(pasta.glob("tipojustificativa_p*.json")):
+            achados.append(caminho)
+    if not achados:
+        return {}, ""
+    caminho = achados[-1]
+    dados = carregar_json(caminho)
+    saida: dict[int, str] = {}
+    for item in dados.get("results") or []:
+        if isinstance(item, dict) and item.get("id") is not None:
+            descricao = str(item.get("descricao") or item.get("__str__") or "").strip()
+            if descricao:
+                saida[int(item["id"])] = descricao
+    return saida, rel(caminho)
+
+
+def carregar_justificativas_detalhe() -> dict[tuple[int, int], list[dict]]:
+    """Detalhe de cada justificativa por (sessao_id, parlamentar_id).
+
+    Guarda tipo_ausencia, descricao oficial, observacao e anexo, para
+    mostrar o motivo na lista de faltas com justificativa.
+    """
+    tipos, _fonte_tipos = carregar_tipos_justificativa()
+    global TIPOS_JUSTIFICATIVA_SAPL
+    TIPOS_JUSTIFICATIVA_SAPL = tipos
+    saida: dict[tuple[int, int], list[dict]] = {}
+    for caminho in sorted(DIR_BRUTOS.glob("sessao_*_justificativaausencia.json")):
+        try:
+            dados = carregar_json(caminho)
+        except (OSError, ValueError):
+            continue
+        for linha in resultados_de_lista(dados):
+            if not isinstance(linha, dict):
+                continue
+            sessao = linha.get("sessao_plenaria")
+            parlamentar = linha.get("parlamentar")
+            if sessao is None or parlamentar is None:
+                continue
+            tipo_id = linha.get("tipo_ausencia")
+            tipo_id_int = int(tipo_id) if tipo_id is not None else None
+            descricao = tipos.get(tipo_id_int) if tipo_id_int is not None else None
+            if not descricao:
+                descricao = str(linha.get("__str__") or "").strip() or None
+            chave = (int(sessao), int(parlamentar))
+            saida.setdefault(chave, []).append(
+                {
+                    "tipo_ausencia": tipo_id_int,
+                    "descricao": descricao,
+                    "observacao": str(linha.get("observacao") or "").strip() or None,
+                    "upload_anexo": linha.get("upload_anexo"),
+                    "justificativa_id": linha.get("id"),
+                }
+            )
+    return saida
+
+
+def resultado_rejeitado(voto: dict) -> bool:
+    if str(voto.get("situacao_oficial_sapl") or "").strip() == "Rejeitado":
+        return True
+    return (str(voto.get("resultado_texto_sapl") or "").strip().upper().startswith("REJEIT"))
+
+
+def atribuir_turnos(tipo_sigla, votos: list[dict], dois_turnos: set) -> list[str]:
+    """Turno de cada votacao, na mesma ordem da lista.
+
+    Tipo fora dos dois turnos segue turno unico. Nos dois turnos, o grupo
+    da primeira data e o 1o turno e o da segunda data e o 2o turno. Data
+    repetida no mesmo dia segue o turno do dia. Terceira data em diante,
+    e voto depois de rejeicao no 1o turno, ficam como turno nao
+    identificado. Tipo ausente tambem segue turno unico.
+    """
+    if tipo_sigla not in dois_turnos:
+        return [TURNO_UNICO] * len(votos)
+    if not votos:
+        return []
+    ordem = sorted(
+        range(len(votos)),
+        key=lambda i: (
+            votos[i].get("data_sessao") or "",
+            votos[i].get("sessao_id") or 0,
+            votos[i].get("id") or votos[i].get("registro_votacao_id") or 0,
+        ),
+    )
+    grupos: dict[str, list[int]] = {}
+    for i in ordem:
+        chave = votos[i].get("data_sessao") or f"sessao:{votos[i].get('sessao_id') or 0}"
+        grupos.setdefault(chave, []).append(i)
+    datas = [grupos[chave] for chave in sorted(grupos)]
+    turnos = [TURNO_NAO_IDENTIFICADO] * len(votos)
+    for i in datas[0]:
+        turnos[i] = TURNO_PRIMEIRO
+    if len(datas) >= 2:
+        rejeitado_no_primeiro = any(resultado_rejeitado(votos[i]) for i in datas[0])
+        for i in datas[1]:
+            turnos[i] = TURNO_SEGUNDO if not rejeitado_no_primeiro else TURNO_NAO_IDENTIFICADO
+    return turnos
+
+
+def escolher_por_turno(pares: list) -> tuple:
+    """Escolhe o registro que define a situacao nos dois turnos.
+
+    pares: [(registro, turno)] em ordem cronologica. Retorna
+    (registro, em_tramitacao). Rejeitado no 1o encerra como rejeitado.
+    Com 2o turno, o 2o decide. So com 1o aprovado, segue em tramitacao.
+    """
+    rejeitados = [
+        registro
+        for registro, turno in pares
+        if turno == TURNO_PRIMEIRO and resultado_rejeitado(registro)
+    ]
+    if rejeitados:
+        return rejeitados[0], False
+    segundos = [registro for registro, turno in pares if turno == TURNO_SEGUNDO]
+    if segundos:
+        return escolher_votacao(segundos), False
+    primeiros = [registro for registro, turno in pares if turno == TURNO_PRIMEIRO]
+    if primeiros:
+        return escolher_votacao(primeiros), True
+    return None, True
 
 
 def frase_apos_votacao(texto: str | None) -> str | None:
@@ -365,6 +564,20 @@ def carregar_autoria() -> dict[int, dict]:
     return indice
 
 
+def carregar_tipos_materia(ano: int) -> dict[int, str | None]:
+    """Sigla do tipo de cada materia do ano, para a regra de turnos."""
+    caminho = DIR_BRUTOS / f"materias-{ano}-resposta-original.csv"
+    if not caminho.exists():
+        raise SystemExit(f"Arquivo nao encontrado: {rel(caminho)}")
+    tipos: dict[int, str | None] = {}
+    with caminho.open(encoding="utf-8-sig", newline="") as handle:
+        leitor = csv.DictReader(handle, delimiter=";")
+        for linha in leitor:
+            sigla = (linha.get("Tipo de Matéria Legislativa/Sigla") or "").strip() or None
+            tipos[int(linha["ID"])] = sigla
+    return tipos
+
+
 def autores_da_materia(materia_id, indice: dict[int, dict], por_id: dict[int, dict]):
     if materia_id is None:
         return None
@@ -453,22 +666,20 @@ def carregar_afastamentos() -> dict:
 
 
 def registrar_tipos_afastamento(afastamentos: list[dict]) -> None:
-    global ORDEM_ESTADOS
+    """Valida afastamentos manuais. D-050: licenca conta como falta com justificativa.
+
+    Nao cria estado proprio. A licenca entra na contagem de faltas com
+    justificativa, com o motivo guardado na sessao. A formula da taxa
+    (D-046) nao muda: presente dividido pelo total no mandato.
+    """
     for item in afastamentos:
         if item.get("conta_como_falta"):
-            raise SystemExit(
-                "Afastamento com conta_como_falta verdadeiro ainda nao tem regra. "
-                "Nao vou soma-lo como falta comum."
-            )
+            continue
         tipo = str(item["tipo"])
         rotulo = str(item["rotulo"])
-        if tipo in ROTULOS_ESTADO and ROTULOS_ESTADO[tipo] != rotulo:
-            raise SystemExit(f"Tipo {tipo} com rotulos diferentes.")
-        if tipo not in ORDEM_ESTADOS:
-            ORDEM_ESTADOS = ORDEM_ESTADOS + (tipo,)
-            ROTULOS_ESTADO[tipo] = rotulo
-        if tipo not in LICENCA_TIPOS:
-            LICENCA_TIPOS.append(tipo)
+        if not tipo.strip() or not rotulo.strip():
+            raise SystemExit("Afastamento sem tipo ou rotulo.")
+    LICENCA_TIPOS.clear()
 
 
 def afastamento_na_data(afastamentos: list[dict], parlamentar_id: int, data: str):
@@ -647,7 +858,7 @@ def carregar_votos_da_sessao(sessao_id: int, registros: dict[int, dict]) -> dict
     return por_votacao
 
 
-def carregar_registros(sessao: dict) -> dict[int, dict]:
+def carregar_registros(sessao: dict, tipos_resultado: dict[int, str]) -> dict[int, dict]:
     caminho = arquivo_sessao(sessao["id"], "registrovotacao")
     dados = carregar_json(caminho)
     conferir_total(caminho, dados)
@@ -659,6 +870,12 @@ def carregar_registros(sessao: dict) -> dict[int, dict]:
         texto = linha.get("__str__") or ""
         resultado = extrair_resultado(texto)
         frase = frase_apos_votacao(texto)
+        tipo_id = linha.get("tipo_resultado_votacao")
+        tipo_id = int(tipo_id) if tipo_id is not None else None
+        tipo_nome = tipos_resultado.get(tipo_id) if tipo_id is not None else None
+        oficial = situacao_por_nome(tipo_nome)
+        if oficial is None:
+            oficial = situacao_oficial(resultado)
         item = {
             "id": registro_id,
             "sessao_id": sessao["id"],
@@ -670,7 +887,14 @@ def carregar_registros(sessao: dict) -> dict[int, dict]:
             "texto_registro_sapl": texto,
             "resultado_texto_sapl": resultado,
             "frase_resultado_sapl": frase,
-            "situacao_oficial_sapl": situacao_oficial(resultado),
+            "situacao_oficial_sapl": oficial,
+            "tipo_resultado_votacao_id": tipo_id,
+            "tipo_resultado_nome": tipo_nome,
+            "deliberativa": (
+                deliberativa_nome(tipo_nome)
+                if tipo_nome
+                else oficial is not None
+            ),
             "numero_votos_sim": inteiro_ou_nulo(linha.get("numero_votos_sim")),
             "numero_votos_nao": inteiro_ou_nulo(linha.get("numero_votos_nao")),
             "numero_abstencoes": inteiro_ou_nulo(linha.get("numero_abstencoes")),
@@ -681,6 +905,36 @@ def carregar_registros(sessao: dict) -> dict[int, dict]:
         }
         registros[registro_id] = item
     return registros
+
+
+def motivo_afastamento_manual(afastamento: dict | None) -> dict | None:
+    if not afastamento:
+        return None
+    fonte = fonte_da_ocorrencia(afastamento)
+    return {
+        "origem": "afastamento_manual",
+        "tipo": afastamento.get("tipo"),
+        "motivo": str(afastamento.get("rotulo") or "").strip(),
+        "fonte": fonte.get("fonte") or "",
+        "link_fonte": fonte.get("link_fonte"),
+        "fonte_oficial_encontrada": bool(fonte.get("fonte_oficial_encontrada")),
+    }
+
+
+def motivo_justificativa_sapl(
+    detalhe: dict | None, link_sessao: str | None
+) -> dict | None:
+    if not detalhe:
+        return None
+    motivo = str(detalhe.get("descricao") or "").strip() or "Justificativa registrada no SAPL"
+    return {
+        "origem": "sapl_justificativaausencia",
+        "tipo_ausencia": detalhe.get("tipo_ausencia"),
+        "motivo": motivo,
+        "observacao": detalhe.get("observacao"),
+        "upload_anexo": detalhe.get("upload_anexo"),
+        "link_sessao": link_sessao,
+    }
 
 
 def estado_na_votacao(
@@ -694,7 +948,7 @@ def estado_na_votacao(
     motivo: dict | None,
 ) -> tuple[str, str | None, dict]:
     if afastamento is not None and voto_texto is None:
-        return str(afastamento["tipo"]), None, fonte_da_ocorrencia(afastamento)
+        return "ausente_com_justificativa", None, fonte_da_ocorrencia(afastamento)
     if not dentro_do_mandato(vereador, data):
         return "fora_do_mandato", voto_texto, complemento_fora(motivo)
     if voto_texto is not None:
@@ -720,10 +974,14 @@ def processar_sessoes(
     rotulo_sem_voto: str,
     afastamentos: list[dict],
     motivos_fora: list[dict],
+    tipos_materia: dict[int, str | None],
+    tipos_resultado: dict[int, str],
+    justificativas_detalhe: dict | None = None,
 ) -> dict:
     ids_banca = {int(item["id_sapl"]) for item in banca}
     por_banca = {int(item["id_sapl"]): item for item in banca}
     presenca = {id_sapl: [] for id_sapl in ids_banca}
+    fora_mandato = {id_sapl: 0 for id_sapl in ids_banca}
     nominais = {id_sapl: [] for id_sapl in ids_banca}
     registros_por_materia: dict[int, list[dict]] = defaultdict(list)
     sessoes_saida = []
@@ -732,6 +990,25 @@ def processar_sessoes(
     presentes_e_justificados = []
     n_com = 0
     n_sem = 0
+
+    registros_por_sessao_id: dict[int, dict[int, dict]] = {}
+    grupos_por_materia: dict[int | None, list[dict]] = defaultdict(list)
+    for sessao in sessoes:
+        pacote = carregar_registros(sessao, tipos_resultado)
+        registros_por_sessao_id[int(sessao["id"])] = pacote
+        for registro in pacote.values():
+            materia = registro.get("materia_id")
+            grupos_por_materia[materia].append(registro)
+    turnos_por_registro: dict[tuple, str | None] = {}
+    for materia_id, lista in grupos_por_materia.items():
+        tipo = tipos_materia.get(int(materia_id)) if materia_id is not None else None
+        deliberativos = [r for r in lista if r.get("deliberativa")]
+        turnos = atribuir_turnos(tipo, deliberativos, DOIS_TURNOS)
+        for registro, turno in zip(deliberativos, turnos):
+            turnos_por_registro[(materia_id, int(registro["id"]))] = turno
+        for registro in lista:
+            if not registro.get("deliberativa"):
+                turnos_por_registro[(materia_id, int(registro["id"]))] = None
 
     for sessao in sessoes:
         for sufixo in PACOTE_SESSAO:
@@ -777,12 +1054,17 @@ def processar_sessoes(
         for vereador in banca:
             id_sapl = int(vereador["id_sapl"])
             no_mandato = dentro_do_mandato(vereador, sessao["data"])
+            if not no_mandato:
+                fora_mandato[id_sapl] += 1
+                situacoes[id_sapl] = "fora_do_mandato"
+                continue
             afastamento = afastamento_na_data(afastamentos, id_sapl, sessao["data"])
-            motivo = motivo_fora_na_data(motivos_fora, id_sapl, sessao["data"])
+            detalhe_just = None
+            if justificativas_detalhe is not None:
+                lista_just = justificativas_detalhe.get((int(sessao["id"]), id_sapl)) or []
+                detalhe_just = lista_just[0] if lista_just else None
             if afastamento is not None:
-                situacao = str(afastamento["tipo"])
-            elif not no_mandato:
-                situacao = "fora_do_mandato"
+                situacao = "falta_com_justificativa"
             elif id_sapl in presentes:
                 situacao = "presente"
             elif id_sapl in justificados:
@@ -807,12 +1089,15 @@ def processar_sessoes(
             }
             if afastamento is not None:
                 registro.update(fonte_da_ocorrencia(afastamento))
-            elif situacao == "fora_do_mandato":
-                registro.update(complemento_fora(motivo))
+                registro["motivo_ausencia"] = motivo_afastamento_manual(afastamento)
+            elif situacao == "falta_com_justificativa":
+                motivo_sapl = motivo_justificativa_sapl(detalhe_just, sessao["link_sapl"])
+                if motivo_sapl is not None:
+                    registro["motivo_ausencia"] = motivo_sapl
             presenca[id_sapl].append(registro)
             situacoes[id_sapl] = situacao
 
-        registros = carregar_registros(sessao)
+        registros = registros_por_sessao_id[int(sessao["id"])]
         if len(registros) != sessao["n_votacoes_contagem"]:
             raise SystemExit(
                 f"Sessao {sessao['id']}: a contagem diz "
@@ -832,6 +1117,12 @@ def processar_sessoes(
                     f"voto de parlamentar fora da banca de {ano}: {fora}."
                 )
             autoria = autores_da_materia(materia_id, indice_autoria, por_id)
+            turno = turnos_por_registro.get((materia_id, int(registro["id"])))
+            if turno is None and registro.get("deliberativa"):
+                raise SystemExit(
+                    f"Sessao {sessao['id']}, votacao {registro['id']}: "
+                    "votacao deliberativa sem turno."
+                )
             base = {
                 "id": registro["id"],
                 "sessao_id": sessao["id"],
@@ -845,6 +1136,8 @@ def processar_sessoes(
                 "resultado_texto_sapl": registro["resultado_texto_sapl"],
                 "frase_resultado_sapl": registro["frase_resultado_sapl"],
                 "situacao_oficial_sapl": registro["situacao_oficial_sapl"],
+                "turno": turno,
+                "tipo_resultado_nome": registro.get("tipo_resultado_nome"),
                 "totais_oficiais": {
                     "numero_votos_sim": registro["numero_votos_sim"],
                     "numero_votos_nao": registro["numero_votos_nao"],
@@ -873,6 +1166,7 @@ def processar_sessoes(
             for vereador in banca:
                 id_sapl = int(vereador["id_sapl"])
                 texto = linhas.get(id_sapl)
+                no_mandato = dentro_do_mandato(vereador, sessao["data"])
                 afastamento = afastamento_na_data(
                     afastamentos, id_sapl, sessao["data"]
                 )
@@ -897,6 +1191,8 @@ def processar_sessoes(
                     "nome_parlamentar": vereador["nome_parlamentar"],
                     "estado": estado,
                     "rotulo": ROTULOS_ESTADO[estado],
+                    "turno": turno,
+                    "tipo_resultado": registro.get("tipo_resultado_nome"),
                     "voto_texto_sapl": texto_contado if estado != "fora_do_mandato" else None,
                     "voto_texto_sapl_fora_do_mandato": (
                         texto if estado == "fora_do_mandato" else None
@@ -904,6 +1200,8 @@ def processar_sessoes(
                 }
                 linha_estado.update(extra_estado)
                 estados.append(linha_estado)
+                if not no_mandato:
+                    continue
                 nominal = {
                     "votacao_id": registro["id"],
                     "sessao_id": sessao["id"],
@@ -911,6 +1209,8 @@ def processar_sessoes(
                     "materia_id": materia_id,
                     "estado": estado,
                     "rotulo": ROTULOS_ESTADO[estado],
+                    "turno": turno,
+                    "tipo_resultado": registro.get("tipo_resultado_nome"),
                     "voto_texto_sapl": linha_estado["voto_texto_sapl"],
                     "link_sessao": registro["link_sessao"],
                     "link_materia": registro["link_materia"],
@@ -974,6 +1274,7 @@ def processar_sessoes(
         "sessoes": sessoes_saida,
         "votacoes": votacoes,
         "presenca": presenca,
+        "fora_mandato": fora_mandato,
         "nominais": nominais,
         "registros_por_materia": registros_por_materia,
         "divergencias_presenca": divergencias,
@@ -984,17 +1285,35 @@ def processar_sessoes(
     }
 
 
-def consolidar_presenca(lista: list[dict], nome: str) -> dict:
+def consolidar_presenca(lista: list[dict], nome: str, sessoes_fora: int = 0) -> dict:
+    """Presenca dentro do mandato. Sessoes fora da janela nao aparecem na lista.
+
+    D-050: so duas categorias de falta. Licenca para tratamento de saude
+    e ausencia por licenca medica do SAPL contam como falta com
+    justificativa, com o motivo guardado em motivo_ausencia. A formula da
+    taxa (D-046) nao muda: presencas divididas pelo total no mandato.
+    """
     contagem = Counter(item["situacao"] for item in lista)
     presencas = contagem.get("presente", 0)
     faltas_just = contagem.get("falta_com_justificativa", 0)
     faltas_sem = contagem.get("falta_sem_justificativa", 0)
-    fora = contagem.get("fora_do_mandato", 0)
-    por_afastamento = {tipo: contagem.get(tipo, 0) for tipo in LICENCA_TIPOS}
-    licenca = sum(por_afastamento.values())
-    if presencas + faltas_just + faltas_sem + fora + licenca != len(lista):
+    fora = int(sessoes_fora)
+    por_afastamento: dict[str, int] = {}
+    licenca = 0
+    desconhecidas = {
+        situacao: total
+        for situacao, total in contagem.items()
+        if situacao not in ("presente", "falta_com_justificativa", "falta_sem_justificativa")
+    }
+    if desconhecidas:
+        raise SystemExit(f"{nome}: situacao de presenca desconhecida: {sorted(desconhecidas)}.")
+    if contagem.get("fora_do_mandato", 0):
+        raise SystemExit(
+            f"{nome}: sessao fora do mandato na lista de presenca."
+        )
+    if presencas + faltas_just + faltas_sem + licenca != len(lista):
         raise SystemExit(f"{nome}: presenca nao fecha o numero de sessoes.")
-    no_mandato = presencas + faltas_just + faltas_sem
+    no_mandato = presencas + faltas_just + faltas_sem + licenca
     if no_mandato == 0:
         raise SystemExit(
             f"{nome}: nenhuma sessao dentro do mandato. Nada sera estimado."
@@ -1002,7 +1321,7 @@ def consolidar_presenca(lista: list[dict], nome: str) -> dict:
     faltas_totais = faltas_just + faltas_sem
     return {
         "sessoes_ordinarias": no_mandato,
-        "sessoes_do_ano": len(lista),
+        "sessoes_do_ano": len(lista) + fora,
         "sessoes_fora_do_mandato": fora,
         "sessoes_licenca": licenca,
         "sessoes_por_afastamento": por_afastamento,
@@ -1016,18 +1335,34 @@ def consolidar_presenca(lista: list[dict], nome: str) -> dict:
     }
 
 
-def consolidar_votos(lista: list[dict], n_com_voto: int, nome: str) -> dict:
-    contagem = Counter(item["estado"] for item in lista)
+def consolidar_votos(lista: list[dict], n_contado: int, nome: str) -> dict:
+    """Historico so com o voto valido: 2o turno ou turno unico.
+
+    O 1o turno, o turno nao identificado e o voto sem deliberacao nao
+    viram item nem entram na contagem. Os contadores abaixo guardam
+    quantos ficaram de fora, para auditoria.
+    """
+    validos = [item for item in lista if item.get("turno") in TURNOS_CONTADOS]
+    fora = [item for item in lista if item.get("turno") not in TURNOS_CONTADOS]
+    primeiro = sum(1 for item in fora if item.get("turno") == TURNO_PRIMEIRO)
+    nao_identificado = sum(
+        1 for item in fora if item.get("turno") == TURNO_NAO_IDENTIFICADO
+    )
+    nao_deliberativo = len(fora) - primeiro - nao_identificado
+    contagem = Counter(item["estado"] for item in validos)
     resultado = {chave: contagem.get(chave, 0) for chave in ORDEM_ESTADOS}
     resultado["rotulos"] = {chave: ROTULOS_ESTADO[chave] for chave in ORDEM_ESTADOS}
-    resultado["total_registros"] = len(lista)
-    resultado["nominais"] = lista
-    if sum(resultado[chave] for chave in ORDEM_ESTADOS) != len(lista):
+    resultado["total_registros"] = len(validos)
+    resultado["primeiro_turno_registros"] = primeiro
+    resultado["turno_nao_identificado_registros"] = nao_identificado
+    resultado["nao_deliberativo_registros"] = nao_deliberativo
+    resultado["nominais"] = validos
+    if sum(resultado[chave] for chave in ORDEM_ESTADOS) != len(validos):
         raise SystemExit(f"{nome}: a soma dos estados de voto nao fecha.")
-    if len(lista) != n_com_voto:
+    if len(validos) != n_contado:
         raise SystemExit(
-            f"{nome}: {len(lista)} estados para {n_com_voto} votacoes "
-            "com voto individual."
+            f"{nome}: {len(validos)} votos validos para {n_contado} votacoes "
+            "de 2o turno ou turno unico dentro do mandato."
         )
     return resultado
 
@@ -1125,15 +1460,27 @@ def carregar_projetos(
             ementa = linha.get("Ementa") or ""
             tema, revisada = tema_da_materia(materia_id, indice_temas)
             registros = registros_por_materia.get(materia_id, [])
-            votacoes = []
-            for registro in sorted(
+            ordenados = sorted(
                 registros,
                 key=lambda item: (
                     item.get("data_sessao") or "",
                     item.get("data_hora") or "",
                     item.get("id") or 0,
                 ),
-            ):
+            )
+            turnos = atribuir_turnos(
+                sigla,
+                [r for r in ordenados if r.get("deliberativa")],
+                DOIS_TURNOS,
+            )
+            posicao = 0
+            votacoes = []
+            for registro in ordenados:
+                if registro.get("deliberativa"):
+                    turno = turnos[posicao]
+                    posicao += 1
+                else:
+                    turno = None
                 votacoes.append(
                     {
                         "sessao_id": registro["sessao_id"],
@@ -1141,6 +1488,9 @@ def carregar_projetos(
                         "registro_votacao_id": registro["id"],
                         "resultado_texto_sapl": registro["resultado_texto_sapl"],
                         "situacao_oficial_sapl": registro["situacao_oficial_sapl"],
+                        "turno": turno,
+                        "deliberativa": bool(registro.get("deliberativa")),
+                        "tipo_resultado_nome": registro.get("tipo_resultado_nome"),
                         "totais_oficiais": {
                             "numero_votos_sim": registro["numero_votos_sim"],
                             "numero_votos_nao": registro["numero_votos_nao"],
@@ -1173,8 +1523,40 @@ def carregar_projetos(
                 projeto["resultado_texto_sapl"] = None
                 projeto["frase_resultado_sapl"] = None
                 projeto["sessao_id"] = None
+                projeto["nome_oficial_ultimo_registro"] = None
+                projetos.append(projeto)
+                continue
+            por_registro = {int(r["id"]): r for r in registros}
+            pares = []
+            for votacao in votacoes:
+                if not votacao.get("deliberativa"):
+                    continue
+                registro = por_registro.get(int(votacao["registro_votacao_id"]))
+                if registro is None:
+                    continue
+                pares.append((registro, votacao["turno"]))
+            ultimo = ordenados[-1]
+            nome_ultimo = ultimo.get("tipo_resultado_nome")
+            projeto["nome_oficial_ultimo_registro"] = nome_ultimo
+            if sigla in DOIS_TURNOS:
+                escolhida, em_tram = escolher_por_turno(pares)
             else:
-                escolhida = escolher_votacao(registros)
+                deliberativos = [registro for registro, _turno in pares]
+                escolhida = escolher_votacao(deliberativos) if deliberativos else None
+                em_tram = False
+            if escolhida is None:
+                projeto["situacao"] = "Em tramitacao"
+                projeto["data_sessao"] = ultimo["data_sessao"]
+                projeto["resultado_texto_sapl"] = ultimo["resultado_texto_sapl"]
+                projeto["frase_resultado_sapl"] = ultimo["frase_resultado_sapl"]
+                projeto["sessao_id"] = ultimo["sessao_id"]
+            elif em_tram:
+                projeto["situacao"] = "Em tramitacao"
+                projeto["data_sessao"] = escolhida["data_sessao"]
+                projeto["resultado_texto_sapl"] = escolhida["resultado_texto_sapl"]
+                projeto["frase_resultado_sapl"] = escolhida["frase_resultado_sapl"]
+                projeto["sessao_id"] = escolhida["sessao_id"]
+            else:
                 try:
                     projeto["situacao"] = situacao_da_votacao_escolhida(escolhida)
                 except SystemExit as exc:
@@ -1214,10 +1596,13 @@ def projetos_do_vereador(id_sapl: int, projetos: list[dict]) -> dict:
                 "id": projeto["id"],
                 "numero": projeto["numero"],
                 "ano": projeto["ano"],
+                "tipo_sigla": projeto.get("tipo_sigla"),
+                "tipo_descricao": projeto.get("tipo_descricao"),
                 "ementa": projeto["ementa"],
                 "tema": projeto["tema"],
                 "revisada_por_humano": projeto["revisada_por_humano"],
                 "situacao": projeto["situacao"],
+                "nome_oficial_ultimo_registro": projeto.get("nome_oficial_ultimo_registro"),
                 "data_sessao": projeto["data_sessao"],
                 "resultado_texto_sapl": projeto["resultado_texto_sapl"],
                 "frase_resultado_sapl": projeto["frase_resultado_sapl"],
@@ -1298,6 +1683,9 @@ def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
         "presente_sem_voto_individual_registrado",
         *LICENCA_TIPOS,
         "votos_total_registros",
+        "votos_primeiro_turno",
+        "votos_turno_nao_identificado",
+        "votos_nao_deliberativo",
         "projetos_lei_legislativo",
         "projetos_aprovados",
         "projetos_rejeitados",
@@ -1346,6 +1734,9 @@ def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
                 ],
                 **{tipo: votos[tipo] for tipo in LICENCA_TIPOS},
                 "votos_total_registros": votos["total_registros"],
+                "votos_primeiro_turno": votos["primeiro_turno_registros"],
+                "votos_turno_nao_identificado": votos["turno_nao_identificado_registros"],
+                "votos_nao_deliberativo": votos["nao_deliberativo_registros"],
                 "projetos_lei_legislativo": projetos["total_propostos"],
                 "projetos_aprovados": projetos["aprovados"],
                 "projetos_rejeitados": projetos["rejeitados"],
@@ -1397,9 +1788,10 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
         ),
         "",
         (
-            "Presença e voto só entram quando a data da sessão cai dentro "
-            "do mandato da pessoa, pelas datas da tabela de vereadores. "
-            "Fora desse intervalo o estado é próprio: fora do mandato."
+            "Presença e voto nominal só entram quando a data da sessão cai "
+            "dentro do mandato da pessoa, pelas datas da tabela de vereadores. "
+            "Sessão fora desse intervalo não aparece na lista da pessoa: "
+            "a atuação de quem saiu fica congelada na data de saída."
         ),
         "",
     ]
@@ -1435,7 +1827,10 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
             "",
             (
                 "Falta com justificativa: não está em nenhuma das duas listas "
-                "e está na lista de justificativa de ausência."
+                "e está na lista de justificativa de ausência, ou está em "
+                "licença para tratamento de saúde (afastamento manual) ou em "
+                "ausência por licença médica do SAPL. Cada sessão guarda o "
+                "motivo como está na fonte."
             ),
             "",
             (
@@ -1445,8 +1840,14 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
             "",
             (
                 "Fora do mandato: a data da sessão é anterior ao início ou "
-                "posterior ao fim do mandato. Essa sessão não entra na taxa "
-                "de presença."
+                "posterior ao fim do mandato. Essa sessão não aparece na "
+                "lista da pessoa e não entra na taxa de presença."
+            ),
+            "",
+            (
+                "Taxa de presença: presenças divididas pelo total de sessões "
+                "no mandato, que soma presenças e faltas com e sem "
+                "justificativa."
             ),
             "",
             "## Como o voto foi lido",
@@ -1454,6 +1855,18 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
             (
                 "Cada votação com voto individual recebe um estado para cada "
                 "vereador da banca do ano. Os rótulos não se misturam."
+            ),
+            "",
+            (
+                "Cada votação de projeto de lei tem um turno: a primeira data "
+                "é o 1o turno e a seguinte em outra sessão é o 2o turno; os "
+                "demais tipos seguem turno único. A contagem de votos de cada "
+                "vereador considera só o 2o turno e o turno único. O 1o turno "
+                "aparece na lista com a tag, sem entrar na contagem. Projeto "
+                "aprovado só no 1o turno continua em tramitação; rejeitado no "
+                "1o turno segue rejeitado. Votação sem deliberação (adiada, "
+                "pedido de vistas, retirada de pauta) aparece com o nome "
+                "oficial do SAPL e não entra em nenhuma contagem de voto."
             ),
             "",
         ]
@@ -1477,9 +1890,11 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
                 ),
                 "",
                 (
-                    "Afastamento que não conta como falta vem de "
-                    "`afastamentos_manuais.json`. Esse período não entra em "
-                    "falta nem na taxa de presença. Cada ocorrência guarda a fonte."
+                    "Licença para tratamento de saúde (`afastamentos_manuais.json`) "
+                    "e ausência por licença médica do SAPL contam como falta "
+                    "com justificativa, com o motivo e a fonte guardados na "
+                    "sessão. No histórico de votos, valem como ausente com "
+                    "justificativa."
                 ),
                 "",
                 "## Presença de cada vereador",
@@ -1505,7 +1920,6 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
                 (
                     f"Faltas com justificativa: {presenca['faltas_com_justificativa']}. "
                     f"Faltas sem justificativa: {presenca['faltas_sem_justificativa']}. "
-                    f"Afastamentos que não contam como falta: {presenca['sessoes_licenca']}. "
                     f"Sessões fora do mandato: {presenca['sessoes_fora_do_mandato']}."
                 ),
                 "",
@@ -1657,6 +2071,10 @@ def gerar_do_ano(ano: int) -> None:
         )
     manuais = carregar_afastamentos()
     registrar_tipos_afastamento(manuais["afastamentos"])
+    tipos_materia = carregar_tipos_materia(ano)
+    tipos_resultado = carregar_tipos_resultado()
+    catalogo_tipos, fonte_catalogo = carregar_catalogo_tipos_materia()
+    justificativas_detalhe = carregar_justificativas_detalhe()
     bruto = processar_sessoes(
         ano,
         banca,
@@ -1667,6 +2085,9 @@ def gerar_do_ano(ano: int) -> None:
         rotulo_sem.strip(),
         manuais["afastamentos"],
         manuais["motivos_fora_do_mandato"],
+        tipos_materia,
+        tipos_resultado,
+        justificativas_detalhe,
     )
     notas = notas_publicas(manuais["notas"])
     n_votacoes = len(bruto["votacoes"])
@@ -1702,15 +2123,26 @@ def gerar_do_ano(ano: int) -> None:
         indice_temas,
     )
     vereadores = []
+    total_esperado_contado = 0
     for base in banca:
         id_sapl = int(base["id_sapl"])
         partido_sigla, partido_nome, foto_url = conferir_partido_e_foto(base)
         presenca = consolidar_presenca(
-            bruto["presenca"][id_sapl], base["nome_parlamentar"]
+            bruto["presenca"][id_sapl],
+            base["nome_parlamentar"],
+            bruto["fora_mandato"][id_sapl],
         )
+        n_contado_na_janela = sum(
+            1
+            for votacao in bruto["votacoes"]
+            if votacao.get("voto_individual_registrado")
+            and votacao.get("turno") in TURNOS_CONTADOS
+            and dentro_do_mandato(base, votacao.get("data_sessao") or "")
+        )
+        total_esperado_contado += n_contado_na_janela
         votos = consolidar_votos(
             bruto["nominais"][id_sapl],
-            bruto["n_votacoes_com_voto_individual"],
+            n_contado_na_janela,
             base["nome_parlamentar"],
         )
         projetos_lei = projetos_do_vereador(id_sapl, projetos)
@@ -1761,12 +2193,24 @@ def gerar_do_ano(ano: int) -> None:
         raise SystemExit(f"{ano}: a grade de presenca nao fecha.")
 
     contagem_estados = {chave: 0 for chave in ORDEM_ESTADOS}
+    n_primeiro_turno = 0
+    n_turno_nao_identificado = 0
+    n_nao_deliberativo = 0
     for item in vereadores:
         for chave in ORDEM_ESTADOS:
             contagem_estados[chave] += item["votos"][chave]
-    if sum(contagem_estados.values()) != (
-        bruto["n_votacoes_com_voto_individual"] * len(vereadores)
-    ):
+        n_primeiro_turno += item["votos"]["primeiro_turno_registros"]
+        n_turno_nao_identificado += item["votos"]["turno_nao_identificado_registros"]
+        n_nao_deliberativo += item["votos"]["nao_deliberativo_registros"]
+    votacoes_turno_nao_identificado = sorted(
+        {
+            (votacao["sessao_id"], votacao["id"])
+            for votacao in bruto["votacoes"]
+            if votacao.get("voto_individual_registrado")
+            and votacao.get("turno") == TURNO_NAO_IDENTIFICADO
+        }
+    )
+    if sum(contagem_estados.values()) != total_esperado_contado:
         raise SystemExit(f"{ano}: a grade de estados de voto nao fecha.")
 
     dado_coletado_em, fonte_data = data_da_coleta(ano)
@@ -1795,9 +2239,18 @@ def gerar_do_ano(ano: int) -> None:
             "n_registros_votacao": n_votacoes,
             "n_votacoes_com_voto_individual": bruto["n_votacoes_com_voto_individual"],
             "n_votacoes_sem_voto_individual": bruto["n_votacoes_sem_voto_individual"],
+            "n_nominais_primeiro_turno": n_primeiro_turno,
+            "n_nominais_turno_nao_identificado": n_turno_nao_identificado,
+            "n_nominais_nao_deliberativo": n_nao_deliberativo,
+            "votacoes_turno_nao_identificado": [
+                {"sessao_id": sessao_id, "votacao_id": votacao_id}
+                for sessao_id, votacao_id in votacoes_turno_nao_identificado
+            ],
             "rotulo_sem_voto_individual": rotulo_sem.strip(),
             "contagem_estados": contagem_estados,
             "rotulos_estados": {chave: ROTULOS_ESTADO[chave] for chave in ORDEM_ESTADOS},
+            "catalogo_tipos_materia": catalogo_tipos,
+            "fonte_catalogo_tipos_materia": fonte_catalogo,
             "lacuna_sessoes_ordinarias": lacuna,
             "sessoes_com_presenca_divergente": bruto["divergencias_presenca"],
             "presentes_com_justificativa_na_mesma_sessao": bruto[
@@ -1820,8 +2273,15 @@ def gerar_do_ano(ano: int) -> None:
                 "Ausência não é voto. Votação sem voto individual não é "
                 "unânime. Presidente que não votou só conta quando o SAPL "
                 "registrou Não Votou e a pessoa presidia aquela sessão. "
-                "Fora do mandato não entra em presença nem em voto. "
-                "Afastamento do arquivo de afastamentos não conta como falta."
+                "Fora do mandato não aparece na lista da pessoa e não entra "
+                "em presença nem em voto. Licença para tratamento de saúde "
+                "e ausência por licença médica do SAPL contam como falta "
+                "com justificativa, com o motivo guardado na sessão. Projeto de lei "
+                "tem dois turnos: a contagem de votos considera só o 2o "
+                "turno ou o turno único; o 1o turno aparece na lista com a "
+                "tag, sem entrar na contagem. Votação adiada, com pedido de "
+                "vistas ou retirada de pauta aparece com o nome oficial e "
+                "também não entra nas contagens."
             ),
         },
         "sessoes": bruto["sessoes"],

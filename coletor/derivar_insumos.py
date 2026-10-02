@@ -90,7 +90,7 @@ def gravar_json(caminho: Path, dado) -> None:
     caminho.parent.mkdir(parents=True, exist_ok=True)
     texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
     tmp = caminho.with_suffix(caminho.suffix + ".tmp")
-    tmp.write_text(texto, encoding="utf-8")
+    tmp.write_bytes(texto.encode("utf-8"))
     tmp.replace(caminho)
 
 
@@ -672,6 +672,10 @@ def derivar(
                 f"dados/brutos/{pasta_porsessao.name}/{nome}" for nome in nomes_novos
             ]
             cobertura_porsessao["recursos"][recurso] = cobertura
+
+    # A fusao com a coleta por sessao troca ordem_linhas. O indice precisa
+    # nascer de novo aqui, senao a ordem nova nao liga o registro a sessao.
+    ordem = indice_por_id(ordem_linhas)
 
     sessao_do_registro = {}
     registros_sem_sessao = []

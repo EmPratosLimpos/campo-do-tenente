@@ -1,7 +1,7 @@
 {
   "descricao": "Tema principal de cada materia do recorte, lido da ementa oficial no SAPL.",
   "fonte": "dados/brutos/lote_20260926/materialegislativa_ano*_p*.json",
-  "total": 401,
+  "total": 405,
   "materias": [
     {
       "id": 278,
@@ -5616,6 +5616,62 @@
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
       "data": "2026-09-27"
+    },
+    {
+      "id": 966,
+      "ano": 2026,
+      "sigla": "ATA",
+      "numero": 35,
+      "tema": "não se aplica",
+      "confianca": "alta",
+      "justificativa": "Ata de sessão registra a reunião, não trata de um tema próprio.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/966",
+      "classificado_por": "agente-e5",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-01"
+    },
+    {
+      "id": 967,
+      "ano": 2026,
+      "sigla": "REQ",
+      "numero": 18,
+      "tema": "Ruas, trânsito e transporte",
+      "confianca": "alta",
+      "justificativa": "Requerimento sobre retomada e conclusão de pavimentação asfáltica de ruas.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/967",
+      "classificado_por": "agente-e5",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-01"
+    },
+    {
+      "id": 968,
+      "ano": 2026,
+      "sigla": "IND",
+      "numero": 33,
+      "tema": "Ruas, trânsito e transporte",
+      "confianca": "media",
+      "justificativa": "Indicação de melhorias em ponto de transporte escolar. Objeto é infraestrutura de transporte.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/968",
+      "classificado_por": "agente-e5",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-01"
+    },
+    {
+      "id": 969,
+      "ano": 2026,
+      "sigla": "IND",
+      "numero": 34,
+      "tema": "Iluminação, serviços urbanos e conectividade",
+      "confianca": "alta",
+      "justificativa": "Indicação de limpeza e manutenção de valetas. Serviço urbano de drenagem e limpeza.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/969",
+      "classificado_por": "agente-e5",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-01"
     }
   ]
 }

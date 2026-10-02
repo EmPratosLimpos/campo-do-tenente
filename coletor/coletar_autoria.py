@@ -60,8 +60,8 @@ def gravar_aviso_filtro_ignorado(
         "conduta": "só a primeira página ficou gravada como prova; as demais não foram pedidas",
         "registrado_em": datetime.now().astimezone().isoformat(timespec="seconds"),
     }
-    (coletor.pasta / nome).write_text(
-        json.dumps(aviso, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    (coletor.pasta / nome).write_bytes(
+        (json.dumps(aviso, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     )
     return nome
 

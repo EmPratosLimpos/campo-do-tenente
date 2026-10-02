@@ -208,6 +208,35 @@ class TestesOrcamento(unittest.TestCase):
             self.assertEqual((pasta / "um.json").read_bytes(), CORPO)
 
 
+class TestesRespostaVazia(unittest.TestCase):
+    def test_corpo_vazio_gera_falha_e_preserva_o_arquivo_bom(self):
+        bom = b'{"pagination": {"total_pages": 1}, "results": [{"id": 1}]}'
+
+        class RespostaVazia:
+            status = 200
+
+            def read(self) -> bytes:
+                return b""
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pasta = Path(tmp)
+            (pasta / "lista_p1.json").write_bytes(bom)
+            coletor = ColetorLote(CFG_COLETOR, pasta, teto=10)
+            with mock.patch(
+                "coletar_lote.urllib.request.urlopen", lambda *a, **k: RespostaVazia()
+            ), mock.patch("coletar_lote.time.sleep", lambda *a: None):
+                with self.assertRaises(SystemExit):
+                    coletor.pedir("/api/um/", None, "lista_p1.json", refrescar=True)
+            self.assertEqual((pasta / "lista_p1.json").read_bytes(), bom)
+            self.assertFalse(coletor.gravou)
+
+
 class TestesChangelog(unittest.TestCase):
     def test_entrada_usa_os_numeros_recebidos(self):
         entrada = montar_entrada(

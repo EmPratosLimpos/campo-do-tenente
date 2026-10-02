@@ -19,6 +19,18 @@ TZ = timezone(timedelta(hours=-3))
 SUFIXO_LEGISLATURA = "legislatura"
 
 RESULTADO_NAO_MAPEADO = "resultado_nao_mapeado"
+RESULTADO_PRIMEIRO_TURNO = "primeiro_turno"
+RESULTADO_TURNO_NAO_IDENTIFICADO = "turno_nao_identificado"
+TURNO_PRIMEIRO = "1o turno"
+TURNO_NAO_IDENTIFICADO = "turno nao identificado"
+
+
+def resultado_nao_deliberativo(nome_oficial: str | None) -> str | None:
+    """Balde proprio para voto sem deliberacao, com o nome oficial."""
+    texto = str(nome_oficial or "").strip()
+    if not texto:
+        return None
+    return "nao_deliberativo:" + texto
 
 CHAVES_CONTAGEM_VOTO = (
     "sim",
@@ -30,7 +42,6 @@ CHAVES_CONTAGEM_VOTO = (
     "ausente_sem_justificativa",
     "fora_do_mandato",
     "presente_sem_voto_individual_registrado",
-    "licenca_tratamento_saude",
 )
 
 CHAVES_META_SOMA = (
@@ -95,56 +106,111 @@ def carregar_temas() -> dict[int, str]:
 
 
 def pll_votados_no_ano(atuacao: dict) -> list[dict]:
+    """Um item por materia, com TODAS as votacoes com resultado.
+
+    Vale voto deliberativo com resultado e voto com nome oficial
+    (adiada, vistas, retirada). Materia votada em mais de uma sessao
+    aparece uma vez por periodo, mostrando a votacao daquele periodo
+    e a lista de todas as datas.
+    """
     itens = []
     for p in atuacao.get("projetos_lei", []):
         if p.get("tipo_sigla") != "PLEG":
             continue
-        votos = p.get("votacoes_ordinarias") or []
+        votos = [
+            v
+            for v in (p.get("votacoes_ordinarias") or [])
+            if v.get("situacao_oficial_sapl")
+            or v.get("resultado_texto_sapl")
+            or (v.get("tipo_resultado_nome") or "").strip()
+        ]
         if not votos:
             continue
-        ultima = max(votos, key=lambda v: v.get("data_sessao") or "")
-        if not ultima.get("situacao_oficial_sapl") and not ultima.get("resultado_texto_sapl"):
-            continue
+        votos = sorted(
+            votos,
+            key=lambda v: (v.get("data_sessao") or "", v.get("sessao_id") or 0),
+        )
         itens.append(
             {
                 "projeto": p,
-                "votacao": ultima,
+                "votacoes": votos,
             }
         )
     return itens
 
 
-def montar_item(entry: dict, cfg: dict, temas: dict[int, str]) -> dict:
-    p = entry["projeto"]
-    v = entry["votacao"]
-    mid = int(p["id"])
-    tema_bruto = temas.get(mid) or p.get("tema") or "Outros"
+def montar_item(
+    projeto: dict, voto_mostrado: dict, votacoes: list[dict], cfg: dict, temas: dict[int, str]
+) -> dict:
+    mid = int(projeto["id"])
+    tema_bruto = temas.get(mid) or projeto.get("tema") or "Outros"
     tema = tema_display(tema_bruto, cfg)
-    resultado, resultado_oficial = normalizar_resultado(
-        v.get("resultado_texto_sapl"), v.get("frase_resultado_sapl")
-    )
-    tipo = f"PLL {p.get('numero')}/{p.get('ano')}"
+    turno = voto_mostrado.get("turno")
+    tipo_nome = (voto_mostrado.get("tipo_resultado_nome") or "").strip() or None
+    if turno is None and tipo_nome:
+        resultado = resultado_nao_deliberativo(tipo_nome)
+        resultado_oficial = tipo_nome
+    else:
+        resultado, resultado_oficial = normalizar_resultado(
+            voto_mostrado.get("resultado_texto_sapl"),
+            voto_mostrado.get("frase_resultado_sapl"),
+        )
+        if turno == TURNO_PRIMEIRO:
+            resultado = RESULTADO_PRIMEIRO_TURNO
+        elif turno == TURNO_NAO_IDENTIFICADO:
+            resultado = RESULTADO_TURNO_NAO_IDENTIFICADO
+    sigla = str(projeto.get("tipo_sigla") or "").strip()
+    descricao = str(projeto.get("tipo_descricao") or "").strip()
+    numero = projeto.get("numero")
+    ano = projeto.get("ano")
+    tipo = f"{sigla} {numero}/{ano}".strip() if sigla else f"{numero}/{ano}"
+    nome_extenso = None
+    if descricao and numero and ano:
+        nome_extenso = f"{descricao} nº {numero} de {ano}"
     return {
         "id": mid,
         "tipo": tipo,
+        "tipo_sigla": sigla or None,
+        "tipo_descricao": descricao or None,
+        "nome_extenso": nome_extenso,
         "resultado": resultado,
         "resultado_oficial": resultado_oficial,
-        "ementa": p.get("ementa") or "",
+        "turno": turno,
+        "tipo_resultado": tipo_nome,
+        "ementa": projeto.get("ementa") or "",
         "categoria": tema,
-        "placar": placar_resumido(v),
-        "data_sessao": v.get("data_sessao"),
-        "sessao_id": v.get("sessao_id"),
+        "placar": placar_resumido(voto_mostrado),
+        "data_sessao": voto_mostrado.get("data_sessao"),
+        "sessao_id": voto_mostrado.get("sessao_id"),
+        "votacoes": [
+            {
+                "data_sessao": v.get("data_sessao"),
+                "sessao_id": v.get("sessao_id"),
+                "turno": v.get("turno"),
+                "tipo_resultado": (v.get("tipo_resultado_nome") or "").strip() or None,
+            }
+            for v in votacoes
+        ],
     }
 
 
-def periodos(lista: list[dict], sessoes: list[dict]) -> tuple[list, list, list]:
-    if not lista:
+def _voto_mais_recente(votos: list[dict]) -> dict | None:
+    if not votos:
+        return None
+    return max(
+        votos,
+        key=lambda v: (v.get("data_sessao") or "", v.get("sessao_id") or 0),
+    )
+
+
+def periodos(
+    materias: list[dict], sessoes: list[dict], cfg: dict, temas: dict[int, str]
+) -> tuple[list, list, list]:
+    if not materias:
         return [], [], []
     datas = sorted({s["data"] for s in sessoes if s.get("data")})
     ultima_data = datas[-1] if datas else None
     sessao_ids_ultima = {s["id"] for s in sessoes if s.get("data") == ultima_data}
-
-    sessao = [m for m in lista if m.get("sessao_id") in sessao_ids_ultima]
 
     if ultima_data:
         y, mo, _ = map(int, ultima_data.split("-"))
@@ -156,23 +222,48 @@ def periodos(lista: list[dict], sessoes: list[dict]) -> tuple[list, list, list]:
     else:
         ano_ant, mes_ant = 0, 0
 
-    mes = [
-        m
-        for m in lista
-        if m.get("data_sessao")
-        and int(m["data_sessao"].split("-")[0]) == ano_ant
-        and int(m["data_sessao"].split("-")[1]) == mes_ant
-    ]
-    todo = list(lista)
+    def no_mes_anterior(voto: dict) -> bool:
+        data = voto.get("data_sessao") or ""
+        partes = data.split("-")
+        return (
+            len(partes) == 3
+            and partes[0] == str(ano_ant)
+            and int(partes[1]) == mes_ant
+        )
+
+    sessao, mes, todo = [], [], []
+    for entry in materias:
+        projeto = entry["projeto"]
+        votos = entry["votacoes"]
+        voto_sessao = _voto_mais_recente(
+            [v for v in votos if v.get("sessao_id") in sessao_ids_ultima]
+        )
+        voto_mes = _voto_mais_recente([v for v in votos if no_mes_anterior(v)])
+        voto_todo = _voto_mais_recente(votos)
+        if voto_sessao is not None:
+            sessao.append(montar_item(projeto, voto_sessao, votos, cfg, temas))
+        if voto_mes is not None:
+            mes.append(montar_item(projeto, voto_mes, votos, cfg, temas))
+        if voto_todo is not None:
+            todo.append(montar_item(projeto, voto_todo, votos, cfg, temas))
     return sessao, mes, todo
 
 
 def filtros_de(lista: list[dict]) -> list[dict]:
+    """Contagens por resultado: 1o turno, turno nao identificado e voto
+    sem deliberacao tem lista propria e nao entram na contagem."""
     total = len(lista)
     uni = sum(1 for m in lista if m["resultado"] == "unanimidade")
     mai = sum(1 for m in lista if m["resultado"] == "maioria")
     rej = sum(1 for m in lista if m["resultado"] == "rejeitado")
-    outro = total - uni - mai - rej
+    pri = sum(1 for m in lista if m["resultado"] == RESULTADO_PRIMEIRO_TURNO)
+    nao_id = sum(1 for m in lista if m["resultado"] == RESULTADO_TURNO_NAO_IDENTIFICADO)
+    nao_delib: dict[str, int] = {}
+    for m in lista:
+        resultado = m["resultado"] or ""
+        if resultado.startswith("nao_deliberativo:"):
+            nao_delib[resultado] = nao_delib.get(resultado, 0) + 1
+    outro = total - uni - mai - rej - pri - nao_id - sum(nao_delib.values())
     filtros = [
         {"id": "", "rotulo": "Todos", "qtd": total},
         {"id": "unanimidade", "rotulo": "Unânimes", "qtd": uni},
@@ -180,6 +271,19 @@ def filtros_de(lista: list[dict]) -> list[dict]:
     ]
     if rej:
         filtros.append({"id": "rejeitado", "rotulo": "Rejeitados", "qtd": rej})
+    if pri:
+        filtros.append({"id": RESULTADO_PRIMEIRO_TURNO, "rotulo": "1o turno", "qtd": pri})
+    for bucket in sorted(nao_delib):
+        nome = bucket.split(":", 1)[1] if ":" in bucket else bucket
+        filtros.append({"id": bucket, "rotulo": nome.strip() or bucket, "qtd": nao_delib[bucket]})
+    if nao_id:
+        filtros.append(
+            {
+                "id": RESULTADO_TURNO_NAO_IDENTIFICADO,
+                "rotulo": "Turno não identificado",
+                "qtd": nao_id,
+            }
+        )
     if outro:
         filtros.append(
             {"id": RESULTADO_NAO_MAPEADO, "rotulo": "Resultado não mapeado", "qtd": outro}
@@ -195,28 +299,30 @@ def gravar_camara(sufixo: str, sessao: list, mes: list, todo: list, lista: list,
         with open(RAIZ / "dados" / "tratados" / "temas_materias.json", "r", encoding="utf-8") as f_temas:
             todas = json.load(f_temas)
             for mat in todas.get("materias", []):
+                sigla = str(mat.get("sigla") or "").strip() or "Outros"
                 tags[str(mat["id"])] = {
-                    "tag_tipo": mat.get("sigla", "Outros"),
+                    "tag_tipo": sigla,
                     "tag_tema": mat.get("tema", "Outros")
                 }
     except Exception:
         pass
-    # Sobrepõe com a lista atual caso necessário
+    # Sobrepõe com a lista atual: sigla oficial vinda dos dados, sem mapa fixo
     for m in lista:
-        tags[str(m["id"])] = {"tag_tipo": "PLL", "tag_tema": m["categoria"]}
+        sigla = str(m.get("tipo_sigla") or "").strip() or "Outros"
+        tags[str(m["id"])] = {"tag_tipo": sigla, "tag_tema": m["categoria"]}
     filtros = {
         "sessao": filtros_de(sessao),
         "mes": filtros_de(mes),
         "todo": filtros_de(todo),
     }
-    (out / f"materias_camara_{sufixo}.json").write_text(
-        json.dumps(camara, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    (out / f"materias_camara_{sufixo}.json").write_bytes(
+        (json.dumps(camara, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     )
-    (out / f"materias_tags_{sufixo}.json").write_text(
-        json.dumps(tags, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    (out / f"materias_tags_{sufixo}.json").write_bytes(
+        (json.dumps(tags, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     )
-    (out / f"filtros_materia_{sufixo}.json").write_text(
-        json.dumps(filtros, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    (out / f"filtros_materia_{sufixo}.json").write_bytes(
+        (json.dumps(filtros, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     )
 
 
@@ -225,10 +331,9 @@ def gerar_ano(ano: int, cfg: dict) -> None:
     atuacao = json.loads(path.read_text(encoding="utf-8"))
     temas = carregar_temas()
     bruto = pll_votados_no_ano(atuacao)
-    lista = [montar_item(e, cfg, temas) for e in bruto]
-    sessao, mes, todo = periodos(lista, atuacao.get("sessoes") or [])
+    sessao, mes, todo = periodos(bruto, atuacao.get("sessoes") or [], cfg, temas)
     out = RAIZ / "dados" / "tratados"
-    gravar_camara(str(ano), sessao, mes, todo, lista, out)
+    gravar_camara(str(ano), sessao, mes, todo, todo, out)
     print(f"Ano {ano}: sessao={len(sessao)} mes={len(mes)} todo={len(todo)} PLL")
 
 
@@ -277,30 +382,36 @@ def _mesclar_projetos_lei_vereador(a: dict, b: dict) -> dict:
     return out
 
 
-def _recomputar_presenca(por_sessao: list[dict]) -> dict:
-    cont = {
-        "presente": 0,
-        "falta_com_justificativa": 0,
-        "falta_sem_justificativa": 0,
-        "licenca_tratamento_saude": 0,
-        "fora_do_mandato": 0,
-    }
+def _recomputar_presenca(por_sessao: list[dict], fora: int = 0) -> dict:
+    """Soma da legislatura na mesma regra do ano.
+
+    D-050: so duas categorias de falta. Licenca antiga (situacao herdada)
+    conta como falta com justificativa. A formula da taxa nao muda.
+    """
+    presencas = 0
+    faltas_j = 0
+    faltas_s = 0
+    por_afast: dict[str, int] = {}
     for s in por_sessao:
         sit = s.get("situacao") or ""
-        if sit in cont:
-            cont[sit] += 1
-    presencas = cont["presente"]
-    faltas_j = cont["falta_com_justificativa"]
-    faltas_s = cont["falta_sem_justificativa"]
-    licenca = cont["licenca_tratamento_saude"]
-    fora = cont["fora_do_mandato"]
-    no_mandato = presencas + faltas_j + faltas_s
-    total_sessoes = len(por_sessao)
+        if sit == "presente":
+            presencas += 1
+        elif sit == "falta_com_justificativa":
+            faltas_j += 1
+        elif sit == "falta_sem_justificativa":
+            faltas_s += 1
+        elif sit == "fora_do_mandato":
+            raise ValueError("sessao fora do mandato na lista de presenca")
+        elif sit == "licenca_tratamento_saude":
+            faltas_j += 1
+        elif sit:
+            raise ValueError(f"situacao de presenca desconhecida: {sit}")
+    licenca = 0
+    fora = int(fora)
+    no_mandato = presencas + faltas_j + faltas_s + licenca
+    total_sessoes = len(por_sessao) + fora
     taxa = round((presencas / no_mandato) * 100, 2) if no_mandato else 0.0
     pct_faltas = round(((faltas_j + faltas_s) / no_mandato) * 100, 2) if no_mandato else 0.0
-    por_afast = {}
-    if licenca:
-        por_afast["licenca_tratamento_saude"] = licenca
     return {
         "sessoes_ordinarias": no_mandato,
         "sessoes_do_ano": total_sessoes,
@@ -321,18 +432,37 @@ def _mesclar_votos(a: dict, b: dict) -> dict:
     out = copy.deepcopy(a or {})
     bb = b or {}
     for chave in CHAVES_CONTAGEM_VOTO:
+        soma_antiga = 0
+        if chave == "ausente_com_justificativa":
+            soma_antiga = (out.get("licenca_tratamento_saude") or 0) + (
+                bb.get("licenca_tratamento_saude") or 0
+            )
+        out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0) + soma_antiga
+    out.pop("licenca_tratamento_saude", None)
+    for chave in ("primeiro_turno_registros", "turno_nao_identificado_registros"):
+        out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0)
+    for chave in ("nao_deliberativo_registros",):
         out[chave] = (out.get(chave) or 0) + (bb.get(chave) or 0)
     if bb.get("rotulos"):
         out["rotulos"] = bb["rotulos"]
-    nominais = list(out.get("nominais") or [])
+    if isinstance(out.get("rotulos"), dict):
+        out["rotulos"].pop("licenca_tratamento_saude", None)
+    def _normalizar_nominal(n: dict) -> dict:
+        copia = dict(n or {})
+        if copia.get("estado") == "licenca_tratamento_saude":
+            copia["estado"] = "ausente_com_justificativa"
+            copia["rotulo"] = "Ausente com justificativa"
+        return copia
+    nominais = [_normalizar_nominal(n) for n in (out.get("nominais") or [])]
     chaves = {
         (n.get("votacao_id"), n.get("sessao_id"), n.get("materia_id")) for n in nominais
     }
     for n in bb.get("nominais") or []:
-        chave = (n.get("votacao_id"), n.get("sessao_id"), n.get("materia_id"))
+        normalizado = _normalizar_nominal(n)
+        chave = (normalizado.get("votacao_id"), normalizado.get("sessao_id"), normalizado.get("materia_id"))
         if chave in chaves:
             continue
-        nominais.append(n)
+        nominais.append(normalizado)
         chaves.add(chave)
     nominais.sort(key=lambda x: (x.get("data_sessao") or "", x.get("votacao_id") or 0))
     out["nominais"] = nominais
@@ -370,7 +500,10 @@ def _mesclar_vereador(base: dict, extra: dict) -> dict:
         por_sessao.append(s)
         ids_sess.add(s.get("sessao_id"))
     por_sessao.sort(key=lambda x: (x.get("data_sessao") or "", x.get("sessao_id") or 0))
-    out["presenca"] = _recomputar_presenca(por_sessao)
+    fora = (out.get("presenca", {}).get("sessoes_fora_do_mandato") or 0) + (
+        (extra.get("presenca") or {}).get("sessoes_fora_do_mandato") or 0
+    )
+    out["presenca"] = _recomputar_presenca(por_sessao, fora)
     out["votos"] = _mesclar_votos(out.get("votos") or {}, extra.get("votos") or {})
     out["projetos_lei"] = _mesclar_projetos_lei_vereador(
         out.get("projetos_lei") or {}, extra.get("projetos_lei") or {}
@@ -502,13 +635,14 @@ def gerar_legislatura(cfg: dict) -> None:
     consolidado = mesclar_atuacao_legislatura(dados, anos, cfg)
     out = RAIZ / "dados" / "tratados"
     dest = out / f"atuacao_vereadores_{SUFIXO_LEGISLATURA}.json"
-    dest.write_text(json.dumps(consolidado, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    dest.write_bytes(
+        (json.dumps(consolidado, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    )
 
     temas = carregar_temas()
     bruto = pll_votados_no_ano(consolidado)
-    lista = [montar_item(e, cfg, temas) for e in bruto]
-    sessao, mes, todo = periodos(lista, consolidado.get("sessoes") or [])
-    gravar_camara(SUFIXO_LEGISLATURA, sessao, mes, todo, lista, out)
+    sessao, mes, todo = periodos(bruto, consolidado.get("sessoes") or [], cfg, temas)
+    gravar_camara(SUFIXO_LEGISLATURA, sessao, mes, todo, todo, out)
     print(
         f"Legislatura {anos}: sessao={len(sessao)} mes={len(mes)} todo={len(todo)} PLL, "
         f"{len(consolidado['vereadores'])} vereadores"

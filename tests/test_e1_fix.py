@@ -400,7 +400,7 @@ class TesteConflitoAfastamento(unittest.TestCase):
             self._afastamento(),
             None,
         )
-        self.assertEqual(estado, "licenca")
+        self.assertEqual(estado, "ausente_com_justificativa")
         self.assertIsNone(texto)
         self.assertNotIn("aviso", extra)
 

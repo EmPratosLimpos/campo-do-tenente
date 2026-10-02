@@ -2,95 +2,247 @@
   "sessao": [
     {
       "id": 811,
-      "tipo": "PLL 4/2026",
+      "tipo": "PLEG 4/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 4 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
+      "tipo_resultado": "Aprovada por Unanimidade",
       "ementa": "Dispõe sobre princípios, critérios gerais e transparência nos programas habitacionais de interesse social que contem com participação do Município de Campo do Tenente e dá outras providências.",
       "categoria": "Desenvolvimento e moradia",
       "placar": "8 x 0",
-      "data_sessao": "2026-09-22",
-      "sessao_id": 273
+      "data_sessao": "2026-09-29",
+      "sessao_id": 274,
+      "votacoes": [
+        {
+          "data_sessao": "2026-09-22",
+          "sessao_id": 273,
+          "turno": "1o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        },
+        {
+          "data_sessao": "2026-09-29",
+          "sessao_id": 274,
+          "turno": "2o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        }
+      ]
     },
     {
       "id": 815,
-      "tipo": "PLL 5/2026",
+      "tipo": "PLEG 5/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 5 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
+      "tipo_resultado": "Aprovada por Unanimidade",
       "ementa": "Altera a Lei Municipal nº 1.094, de 2022, que institui o “Título Mãe Tenenteana” no Município de Campo do Tenente.",
       "categoria": "Homenagens, nomes e datas",
       "placar": "8 x 0",
-      "data_sessao": "2026-09-22",
-      "sessao_id": 273
+      "data_sessao": "2026-09-29",
+      "sessao_id": 274,
+      "votacoes": [
+        {
+          "data_sessao": "2026-09-22",
+          "sessao_id": 273,
+          "turno": "1o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        },
+        {
+          "data_sessao": "2026-09-29",
+          "sessao_id": 274,
+          "turno": "2o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        }
+      ]
     }
   ],
   "mes": [
     {
       "id": 698,
-      "tipo": "PLL 3/2026",
+      "tipo": "PLEG 3/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 3 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
+      "tipo_resultado": "Aprovada por Unanimidade",
       "ementa": "Dispõe sobre a obrigatoriedade de notificação à Companhia de Saneamento do Paraná – Sanepar, quanto da realização de obras de pavimentação.",
       "categoria": "Ruas, trânsito e transporte",
       "placar": "8 x 0",
       "data_sessao": "2026-08-25",
-      "sessao_id": 269
+      "sessao_id": 269,
+      "votacoes": [
+        {
+          "data_sessao": "2026-08-11",
+          "sessao_id": 266,
+          "turno": "1o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        },
+        {
+          "data_sessao": "2026-08-25",
+          "sessao_id": 269,
+          "turno": "2o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        }
+      ]
     }
   ],
   "todo": [
     {
       "id": 244,
-      "tipo": "PLL 1/2026",
+      "tipo": "PLEG 1/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 1 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
+      "tipo_resultado": "Aprovada por Unanimidade",
       "ementa": "\"CONCEDE REVISÃO GERAL ANUAL AOS SERVIDORES EFETIVOS E COMISSIONADOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE.\"",
       "categoria": "Administração e finanças",
       "placar": "9 x 0",
       "data_sessao": "2026-02-24",
-      "sessao_id": 39
+      "sessao_id": 39,
+      "votacoes": [
+        {
+          "data_sessao": "2026-02-19",
+          "sessao_id": 38,
+          "turno": "1o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        },
+        {
+          "data_sessao": "2026-02-24",
+          "sessao_id": 39,
+          "turno": "2o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        }
+      ]
     },
     {
       "id": 245,
-      "tipo": "PLL 2/2026",
+      "tipo": "PLEG 2/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 2 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
+      "tipo_resultado": "Aprovada por Unanimidade",
       "ementa": "\"CONCEDE REVISÃO DO VALOR DO AUXÍLIO-ALIMENTAÇÃO DOS SERVIDORES EFETIVOS E COMISSIONADOS DA CÂMARA MUNICIPAL DE CAMPO DO TENENTE-PR ALTERA O PARÁGRAFO ÚNICO DO ARTIGO 2° DA LEI MUNICIPAL N°1.066/2022.\"",
       "categoria": "Administração e finanças",
       "placar": "9 x 0",
       "data_sessao": "2026-02-24",
-      "sessao_id": 39
+      "sessao_id": 39,
+      "votacoes": [
+        {
+          "data_sessao": "2026-02-19",
+          "sessao_id": 38,
+          "turno": "1o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        },
+        {
+          "data_sessao": "2026-02-24",
+          "sessao_id": 39,
+          "turno": "2o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        }
+      ]
     },
     {
       "id": 698,
-      "tipo": "PLL 3/2026",
+      "tipo": "PLEG 3/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 3 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
+      "tipo_resultado": "Aprovada por Unanimidade",
       "ementa": "Dispõe sobre a obrigatoriedade de notificação à Companhia de Saneamento do Paraná – Sanepar, quanto da realização de obras de pavimentação.",
       "categoria": "Ruas, trânsito e transporte",
       "placar": "8 x 0",
       "data_sessao": "2026-08-25",
-      "sessao_id": 269
+      "sessao_id": 269,
+      "votacoes": [
+        {
+          "data_sessao": "2026-08-11",
+          "sessao_id": 266,
+          "turno": "1o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        },
+        {
+          "data_sessao": "2026-08-25",
+          "sessao_id": 269,
+          "turno": "2o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        }
+      ]
     },
     {
       "id": 811,
-      "tipo": "PLL 4/2026",
+      "tipo": "PLEG 4/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 4 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
+      "tipo_resultado": "Aprovada por Unanimidade",
       "ementa": "Dispõe sobre princípios, critérios gerais e transparência nos programas habitacionais de interesse social que contem com participação do Município de Campo do Tenente e dá outras providências.",
       "categoria": "Desenvolvimento e moradia",
       "placar": "8 x 0",
-      "data_sessao": "2026-09-22",
-      "sessao_id": 273
+      "data_sessao": "2026-09-29",
+      "sessao_id": 274,
+      "votacoes": [
+        {
+          "data_sessao": "2026-09-22",
+          "sessao_id": 273,
+          "turno": "1o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        },
+        {
+          "data_sessao": "2026-09-29",
+          "sessao_id": 274,
+          "turno": "2o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        }
+      ]
     },
     {
       "id": 815,
-      "tipo": "PLL 5/2026",
+      "tipo": "PLEG 5/2026",
+      "tipo_sigla": "PLEG",
+      "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
+      "nome_extenso": "Projeto de Lei Origem do Poder Legislativo nº 5 de 2026",
       "resultado": "unanimidade",
       "resultado_oficial": "UNANIMIDADE",
+      "turno": "2o turno",
+      "tipo_resultado": "Aprovada por Unanimidade",
       "ementa": "Altera a Lei Municipal nº 1.094, de 2022, que institui o “Título Mãe Tenenteana” no Município de Campo do Tenente.",
       "categoria": "Homenagens, nomes e datas",
       "placar": "8 x 0",
-      "data_sessao": "2026-09-22",
-      "sessao_id": 273
+      "data_sessao": "2026-09-29",
+      "sessao_id": 274,
+      "votacoes": [
+        {
+          "data_sessao": "2026-09-22",
+          "sessao_id": 273,
+          "turno": "1o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        },
+        {
+          "data_sessao": "2026-09-29",
+          "sessao_id": 274,
+          "turno": "2o turno",
+          "tipo_resultado": "Aprovada por Unanimidade"
+        }
+      ]
     }
   ]
 }

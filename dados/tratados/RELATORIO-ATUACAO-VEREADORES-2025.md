@@ -1,8 +1,8 @@
 # Atuação dos vereadores nas sessões ordinárias de 2025
 
 Cidade: Campo do Tenente (PR)
-Dado coletado em: 2026-09-27T13:53:03-03:00
-Fonte da data: dados/brutos/lote_20260927_noticia_licenca/indice.json campo atualizado_em
+Dado coletado em: 2026-09-29T22:57:44-03:00
+Fonte da data: dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em
 Script: `dados/tratados/gerar_atuacao_vereadores.py`
 Fonte dos fatos: arquivos em `dados/brutos/`, `dados/tratados/vereadores.json`, `dados/tratados/presidencia_sessoes.json` e `dados/tratados/autoria_materias.json`.
 
@@ -14,7 +14,7 @@ Nas 32 sessões ordinárias de 2025 que estão no SAPL, os 9 vereadores com mand
 
 Ano 2025. Só sessão ordinária. O piso de sessões (32) é mínimo: o arquivo traz 32, que é pelo menos esse piso.
 
-Presença e voto só entram quando a data da sessão cai dentro do mandato da pessoa, pelas datas da tabela de vereadores. Fora desse intervalo o estado é próprio: fora do mandato.
+Presença e voto nominal só entram quando a data da sessão cai dentro do mandato da pessoa, pelas datas da tabela de vereadores. Sessão fora desse intervalo não aparece na lista da pessoa: a atuação de quem saiu fica congelada na data de saída.
 
 ## Lacuna no SAPL
 
@@ -26,15 +26,19 @@ Números de sessão ordinária ausentes no SAPL: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
 
 Presente: o vereador está na lista de presença da sessão ou na lista de presença da ordem do dia, e a data está dentro do mandato.
 
-Falta com justificativa: não está em nenhuma das duas listas e está na lista de justificativa de ausência.
+Falta com justificativa: não está em nenhuma das duas listas e está na lista de justificativa de ausência, ou está em licença para tratamento de saúde (afastamento manual) ou em ausência por licença médica do SAPL. Cada sessão guarda o motivo como está na fonte.
 
 Falta sem justificativa: não está na presença e não está na justificativa.
 
-Fora do mandato: a data da sessão é anterior ao início ou posterior ao fim do mandato. Essa sessão não entra na taxa de presença.
+Fora do mandato: a data da sessão é anterior ao início ou posterior ao fim do mandato. Essa sessão não aparece na lista da pessoa e não entra na taxa de presença.
+
+Taxa de presença: presenças divididas pelo total de sessões no mandato, que soma presenças e faltas com e sem justificativa.
 
 ## Como o voto foi lido
 
 Cada votação com voto individual recebe um estado para cada vereador da banca do ano. Os rótulos não se misturam.
+
+Cada votação de projeto de lei tem um turno: a primeira data é o 1o turno e a seguinte em outra sessão é o 2o turno; os demais tipos seguem turno único. A contagem de votos de cada vereador considera só o 2o turno e o turno único. O 1o turno aparece na lista com a tag, sem entrar na contagem. Projeto aprovado só no 1o turno continua em tramitação; rejeitado no 1o turno segue rejeitado. Votação sem deliberação (adiada, pedido de vistas, retirada de pauta) aparece com o nome oficial do SAPL e não entra em nenhuma contagem de voto.
 
 - Sim
 - Não
@@ -45,13 +49,12 @@ Cada votação com voto individual recebe um estado para cada vereador da banca 
 - Ausente sem justificativa
 - Fora do mandato naquela data
 - Presente na sessão sem voto individual registrado
-- Licença para tratamento de saúde
 
 Votação sem nenhum voto individual: voto individual nao registrado no SAPL. Ninguém recebe estado de voto. O arquivo mostra só os totais oficiais (sim, não e abstenção) e o link da sessão e da matéria. Isso não é lido como voto unânime.
 
 Presidente que não votou só vale quando o texto do SAPL é Não Votou e essa pessoa é o presidente daquela sessão em `presidencia_sessoes.json`.
 
-Afastamento que não conta como falta vem de `afastamentos_manuais.json`. Esse período não entra em falta nem na taxa de presença. Cada ocorrência guarda a fonte.
+Licença para tratamento de saúde (`afastamentos_manuais.json`) e ausência por licença médica do SAPL contam como falta com justificativa, com o motivo e a fonte guardados na sessão. No histórico de votos, valem como ausente com justificativa.
 
 ## Presença de cada vereador
 
@@ -63,7 +66,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/1
 
 Presente em 32 das 32 sessões em que a presença conta (taxa 100,00%).
 
-Faltas com justificativa: 0. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
+Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
 ### Dr. Marcos Rodrigues
 
@@ -73,7 +76,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/2
 
 Presente em 30 das 32 sessões em que a presença conta (taxa 93,75%).
 
-Faltas com justificativa: 0. Faltas sem justificativa: 2. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
+Faltas com justificativa: 0. Faltas sem justificativa: 2. Sessões fora do mandato: 0.
 
 ### Cleiton Costa
 
@@ -83,7 +86,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/3
 
 Presente em 32 das 32 sessões em que a presença conta (taxa 100,00%).
 
-Faltas com justificativa: 0. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
+Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
 ### Kinho Lazarino
 
@@ -93,7 +96,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/4
 
 Presente em 31 das 32 sessões em que a presença conta (taxa 96,88%).
 
-Faltas com justificativa: 1. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
+Faltas com justificativa: 1. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
 ### Rafael Ventura
 
@@ -103,7 +106,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/5
 
 Presente em 32 das 32 sessões em que a presença conta (taxa 100,00%).
 
-Faltas com justificativa: 0. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
+Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
 ### Gustavo Vizentin
 
@@ -113,7 +116,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/6
 
 Presente em 32 das 32 sessões em que a presença conta (taxa 100,00%).
 
-Faltas com justificativa: 0. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
+Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
 ### Josemar Veiga
 
@@ -123,7 +126,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/7
 
 Presente em 32 das 32 sessões em que a presença conta (taxa 100,00%).
 
-Faltas com justificativa: 0. Faltas sem justificativa: 0. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
+Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
 ### Beto Maurer
 
@@ -133,7 +136,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/8
 
 Presente em 29 das 32 sessões em que a presença conta (taxa 90,62%).
 
-Faltas com justificativa: 0. Faltas sem justificativa: 3. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
+Faltas com justificativa: 0. Faltas sem justificativa: 3. Sessões fora do mandato: 0.
 
 ### Gilmar Barbosa
 
@@ -143,13 +146,13 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/9
 
 Presente em 29 das 32 sessões em que a presença conta (taxa 90,62%).
 
-Faltas com justificativa: 1. Faltas sem justificativa: 2. Afastamentos que não contam como falta: 0. Sessões fora do mandato: 0.
+Faltas com justificativa: 1. Faltas sem justificativa: 2. Sessões fora do mandato: 0.
 
 ## Estados de voto de cada vereador
 
 ### Jorge Quege
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -158,13 +161,12 @@ Faltas com justificativa: 1. Faltas sem justificativa: 2. Afastamentos que não 
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Dr. Marcos Rodrigues
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -173,14 +175,13 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Cleiton Costa
 
-- Sim: 17
-- Não: 2
+- Sim: 8
+- Não: 1
 - Abstenção: 0
 - Não votou: 0
 - Presidente que não votou: 0
@@ -188,13 +189,12 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Kinho Lazarino
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -203,13 +203,12 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Rafael Ventura
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -218,13 +217,12 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Gustavo Vizentin
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -233,13 +231,12 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Josemar Veiga
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -248,28 +245,26 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Beto Maurer
 
-- Sim: 13
+- Sim: 8
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
 - Presidente que não votou: 0
 - Ausente com justificativa: 0
-- Ausente sem justificativa: 6
+- Ausente sem justificativa: 1
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 
 ### Gilmar Barbosa
 
-- Sim: 19
+- Sim: 9
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -278,7 +273,6 @@ Votações sem voto individual não entram nesta lista. No ano foram 96.
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
 - Presente na sessão sem voto individual registrado: 0
-- Licença para tratamento de saúde: 0
 
 Votações sem voto individual não entram nesta lista. No ano foram 96.
 

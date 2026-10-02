@@ -20,7 +20,7 @@
 
 ### 0.1 Propósito
 
-O projeto "Em Pratos Limpos" é um portal cívico de transparência que consolida, organiza e apresenta a atuação parlamentar dos 15 vereadores oficiais da Câmara Municipal de Campo do Tenente, Paraná. Diferente de um software comercial, o produto aqui entregue é **confiança pública**. Um dado errado, uma contagem inflada ou uma sessão faltante não gera apenas um bug: gera desinformação cívica e destrói a credibilidade do projeto perante a comunidade.
+O projeto "Em Pratos Limpos" é um portal cívico de transparência que consolida, organiza e apresenta a atuação parlamentar dos vereadores oficiais da Câmara Municipal de Campo do Tenente, Paraná (número exato por ano definido em config_cidade.json). Diferente de um software comercial, o produto aqui entregue é **confiança pública**. Um dado errado, uma contagem inflada ou uma sessão faltante não gera apenas um bug: gera desinformação cívica e destrói a credibilidade do projeto perante a comunidade.
 
 Este documento estabelece, em caráter normativo e obrigatório, o processo completo que vai da escrita da primeira linha de código até a homologação do dado publicado ao vivo.
 
@@ -173,7 +173,7 @@ Este checklist deve ser executado integralmente antes de qualquer Pull Request q
 #### 1.6.3 Filtros e interatividade
 
 - [ ] Filtro por vereador retorna exatamente os registros do parlamentar selecionado.
-- [ ] Filtro por tipo de proposição (PLL e demais) apresenta contagens coerentes com o dataset.
+- [ ] Filtro por tipo de proposição (PLEG, PLEX e demais siglas oficiais do SAPL) apresenta contagens coerentes com o dataset.
 - [ ] Filtro por período (mês e ano) oculta corretamente os painéis não selecionados.
 - [ ] Combinação de múltiplos filtros produz interseção correta, não união.
 - [ ] Limpar filtros restaura o estado inicial completo.
@@ -185,7 +185,7 @@ Este checklist deve ser executado integralmente antes de qualquer Pull Request q
 
 - [ ] A contagem de vereadores exibida é exatamente 15.
 - [ ] O total de sessões exibido é maior ou igual a 26.
-- [ ] O total de PLLs exibido é maior ou igual a 100.
+- [ ] O total de projetos de lei (PLEG e PLEX somados) exibido respeita o piso mínimo do ano definido em config_cidade.json.
 - [ ] Nenhum campo exibe `undefined`, `null`, `NaN` ou string vazia não tratada.
 - [ ] Datas aparecem no formato brasileiro (DD/MM/AAAA).
 - [ ] Nomes de parlamentares aparecem com grafia oficial, sem abreviação inventada.
@@ -504,7 +504,7 @@ Formato: `<Verbo no presente> <objeto direto> <complemento de contexto>`.
 
 | Boa mensagem | Má mensagem |
 | :--- | :--- |
-| `Corrige contagem de PLLs duplicados na agregacao por vereador` | `fix` |
+| `Corrige contagem de projetos de lei duplicados na agregacao por vereador` | `fix` |
 | `Reforca CSP com form-action none e base-uri none` | `ajustes` |
 | `Atualiza dataset da semana 38 com hash SHA-256 regenerado` | `update dados` |
 
@@ -593,9 +593,9 @@ Nenhum Pull Request para `main` pode ser aprovado sem que **todos** os critério
 | :---: | :--- | :--- | :---: |
 | 1 | `coletor/testes_sanidade.py` com 100% de sucesso | Execução local e no CI | Sim |
 | 2 | `tests/test_sanidade_dados.py` com 100% de sucesso | `pytest -v` local e no CI | Sim |
-| 3 | Exatamente 15 vereadores oficiais no dataset | Asserção automatizada | Sim |
-| 4 | Sessões maior ou igual a 26 | Asserção automatizada de piso | Sim |
-| 5 | PLLs maior ou igual a 100 | Asserção automatizada de piso | Sim |
+| 3 | Número exato de vereadores oficiais do ano (config_cidade.json) no dataset | Asserção automatizada | Sim |
+| 4 | Sessões respeitam o piso mínimo do ano (config_cidade.json) | Asserção automatizada de piso | Sim |
+| 5 | Projetos de lei (PLEG e PLEX somados) respeitam o piso mínimo do ano (config_cidade.json) | Asserção automatizada de piso | Sim |
 | 6 | Hash SHA-256 regenerado e coerente com o JSON | Verificação do `.sha256` | Sim |
 | 7 | CSP não enfraquecida no diff | Revisão manual do diff de `index.html` | Sim |
 | 8 | Toda renderização de dado externo com `esc()` | Revisão manual | Sim |
@@ -612,16 +612,16 @@ Os valores de sanidade são **pisos**, expressos com o operador maior ou igual (
 
 | Métrica | Piso | Razão do piso |
 | :--- | :---: | :--- |
-| Vereadores oficiais | Exatamente 15 | A composição da Câmara é fixa. Qualquer desvio indica erro de coleta ou duplicação. |
-| Sessões | 26 ou mais | A base cresce naturalmente a cada nova sessão realizada. O piso detecta perda de dado, não limita crescimento. |
-| PLLs | 100 ou mais | Mesma lógica: protege contra coleta truncada sem travar a evolução legítima da base. |
+| Vereadores oficiais | Número exato do ano em config_cidade.json | A composição da Câmara por ano está no config. Qualquer desvio indica erro de coleta ou duplicação. |
+| Sessões | Piso mínimo do ano em config_cidade.json | A base cresce naturalmente a cada nova sessão realizada. O piso detecta perda de dado, não limita crescimento. |
+| Projetos de lei (PLEG e PLEX) | Piso mínimo do ano em config_cidade.json | Mesma lógica: protege contra coleta truncada sem travar a evolução legítima da base. |
 
 Interpretação das falhas:
 
 | Sintoma | Diagnóstico provável | Ação |
 | :--- | :--- | :--- |
 | Valor abaixo do piso | Coleta truncada, falha de rede, mudança de layout do SAPL | **Bloquear merge.** Investigar o coletor. |
-| Vereadores diferente de 15 | Duplicação, parsing incorreto de nome, registro órfão | **Bloquear merge.** Corrigir a normalização. |
+| Vereadores diferente do número exato do ano em config_cidade.json | Duplicação, parsing incorreto de nome, registro órfão | **Bloquear merge.** Corrigir a normalização. |
 | Salto anômalo para cima | Possível duplicação de registros | **Bloquear merge.** Auditar unicidade de identificadores. |
 | Hash divergente | Dataset alterado fora do fluxo | **Bloquear merge.** Tratar como incidente de integridade. |
 
@@ -677,9 +677,9 @@ Descrição clara do que muda e por que muda.
 ## Evidência de testes de sanidade
 - [ ] coletor/testes_sanidade.py: 100% de sucesso
 - [ ] tests/test_sanidade_dados.py: 100% de sucesso
-- Vereadores encontrados: ___ (esperado: exatamente 15)
-- Sessões encontradas: ___ (piso: 26)
-- PLLs encontradas: ___ (piso: 100)
+- Vereadores encontrados: ___ (esperado: número exato do ano em config_cidade.json)
+- Sessões encontradas: ___ (piso do ano em config_cidade.json)
+- Projetos de lei (PLEG e PLEX somados): ___ (piso do ano em config_cidade.json)
 
 ## Integridade
 - [ ] atuacao_vereadores_2026.json.sha256 regenerado
@@ -793,9 +793,9 @@ curl -sI https://empratoslimpos.github.io/campo-do-tenente/dados/tratados/atuaca
 - [ ] Download do JSON e do `.sha256` diretamente de produção.
 - [ ] Cálculo local do SHA-256 do JSON baixado.
 - [ ] Comparação: o hash calculado é **idêntico** ao hash publicado.
-- [ ] Contagem ao vivo: exatamente 15 vereadores.
-- [ ] Contagem ao vivo: sessões maior ou igual a 26.
-- [ ] Contagem ao vivo: PLLs maior ou igual a 100.
+- [ ] Contagem ao vivo: número exato de vereadores do ano (config_cidade.json).
+- [ ] Contagem ao vivo: sessões respeitam o piso mínimo do ano (config_cidade.json).
+- [ ] Contagem ao vivo: projetos de lei (PLEG e PLEX) respeitam o piso mínimo do ano (config_cidade.json).
 
 ```bash
 curl -sO https://empratoslimpos.github.io/campo-do-tenente/dados/tratados/atuacao_vereadores_2026.json
@@ -960,7 +960,7 @@ DESENVOLVIMENTO
 TESTES LOCAIS
 [ ] coletor/testes_sanidade.py: 100%
 [ ] tests/test_sanidade_dados.py: 100%
-[ ] 15 vereadores, sessoes >= 26, PLLs >= 100
+[ ] vereadores, sessões e projetos de lei (PLEG e PLEX) dentro dos pisos do ano em config_cidade.json
 [ ] Hash SHA-256 regenerado
 [ ] Checklist de interface (temas, responsividade, filtros) concluído
 [ ] Console limpo, sem violação de CSP
@@ -1009,7 +1009,8 @@ HOMOLOGAÇÃO
 | AppSec | Segurança de aplicação, disciplina voltada a prevenir defeitos exploráveis no software |
 | CSP | Content Security Policy, política do navegador que restringe origens e comportamentos permitidos |
 | Gatekeeping | Controle de passagem que impede a promoção de mudanças que não atendam aos critérios de qualidade |
-| PLL | Projeto de Lei do Legislativo |
+| PLEG | Projeto de Lei Origem do Poder Legislativo (sigla oficial do SAPL; descrição completa em catalogo_tipos_materia no JSON tratado) |
+| PLEX | Projeto de Lei Origem Poder Executivo (sigla oficial do SAPL, como escrita na fonte) |
 | Piso mínimo | Valor limite inferior aceitável em teste de sanidade, expresso com maior ou igual |
 | Rate-limiting | Limitação deliberada da frequência de requisições a um serviço externo |
 | SAPL | Sistema de Apoio ao Processo Legislativo, fonte oficial dos dados |

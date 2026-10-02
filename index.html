@@ -1226,6 +1226,9 @@
   .item-pll {
     padding: 10px 0;
     border-top: 1px solid var(--linha);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
 
   .item-pll:first-child { border-top: none; padding-top: 0; }
@@ -1235,7 +1238,11 @@
     flex-wrap: wrap;
     gap: 6px;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: 0;
+  }
+
+  .item-pll .materia-tags {
+    margin: 0;
   }
 
   .item-pll .numero {
@@ -1260,7 +1267,7 @@
   .item-pll .ementa {
     font-size: 13px;
     color: var(--texto);
-    margin: 0 0 4px;
+    margin: 0;
   }
 
   .item-pll .meta {
@@ -1329,20 +1336,34 @@
     padding: 10px 0;
     border-bottom: 1px solid var(--linha);
     font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
 
   .lista-votos .data-voto {
     font-weight: 700;
     font-size: 12px;
     color: var(--texto-suave);
-    margin-bottom: 2px;
   }
 
   .lista-votos .materia-titulo {
     font-size: 13px;
     font-weight: 700;
     color: var(--texto);
-    margin: 2px 0 0;
+    margin: 0;
+  }
+
+  .lista-votos .materia-tags {
+    margin: 0;
+  }
+
+  .lista-votos .ementa-voto {
+    display: block;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--texto);
   }
 
   .lista-votos .voto-selo {
@@ -1351,7 +1372,7 @@
     font-size: 11px;
     padding: 2px 8px;
     border-radius: 6px;
-    margin-right: 6px;
+    margin-right: 0;
   }
 
   .voto-sim { background: var(--ok-fundo); color: var(--ok); }
@@ -2137,6 +2158,14 @@
     margin: 0;
     font-weight: 400;
   }
+  .materia-datas {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--texto-suave);
+  }
   .badge-status {
     padding: 4px 8px;
     border-radius: 8px;
@@ -2179,6 +2208,30 @@
     border: 1px solid rgba(0, 122, 255, 0.25);
   }
 
+  .tag-turno {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: var(--marca-fundo);
+    color: #004494;
+    border: 1px solid rgba(0, 122, 255, 0.25);
+  }
+
+  [data-tema="escuro"] .tag-turno {
+    background: #1a3055;
+    color: #a0d4ff;
+    border-color: rgba(10, 132, 255, 0.35);
+  }
+
   .tag-categoria {
     background: var(--neutro-fundo);
     color: var(--texto-suave);
@@ -2198,7 +2251,109 @@
   }
 
   .lista-votos .materia-tags {
-    margin: 4px 0 6px;
+    margin: 0;
+  }
+
+  button.tag-explicavel {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    margin: 0;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+  button.tag-explicavel:focus-visible {
+    outline: 2px solid var(--marca);
+    outline-offset: 2px;
+  }
+  .tag-caixa {
+    position: fixed;
+    z-index: 9999;
+    max-width: min(280px, calc(100vw - 24px));
+    background: var(--superficie);
+    color: var(--texto);
+    border: 1px solid var(--linha);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    padding: 10px 12px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .tag-caixa strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  .tag-caixa a {
+    color: var(--link);
+  }
+  button.voto-selo,
+  button.badge-status,
+  button.selo {
+    margin: 0;
+    font-family: inherit;
+    text-align: left;
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    cursor: pointer;
+  }
+  button.voto-selo {
+    font-size: 11px;
+    font-weight: 800;
+  }
+  button.badge-status,
+  button.selo {
+    font-size: 11px;
+    font-weight: 700;
+  }
+  button.voto-selo:focus-visible,
+  button.badge-status:focus-visible,
+  button.selo:focus-visible {
+    outline: 2px solid var(--marca);
+    outline-offset: 2px;
+  }
+  button.voto-card {
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+  }
+  button.voto-card:focus-visible {
+    outline: 2px solid var(--marca);
+    outline-offset: 2px;
+  }
+  button.voto-card.ativo {
+    border: 2px solid var(--marca);
+    background: var(--marca-fundo);
+  }
+  button.contagem-item {
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+  }
+  button.contagem-item:focus-visible {
+    outline: 2px solid var(--marca);
+    outline-offset: 2px;
+  }
+  button.contagem-item.ativo {
+    border: 2px solid var(--marca);
+    background: var(--marca-fundo);
   }
 
   .compartilhar-materia {
@@ -3437,7 +3592,7 @@
   var FOTOS_LOCAIS = {};
   var SAPL_ORIGEM = "";
   var PORTAL_OFICIAL = "";
-  var ROTULO_SEM_VOTO_INDIVIDUAL = "voto individual nao registrado no SAPL";
+  var ROTULO_SEM_VOTO_INDIVIDUAL = "voto individual nao registrado no SAPL (votação simbólica ou sem registro nominal no SAPL)";
 
   function nomeCamaraMunicipal() {
     return "Câmara Municipal de " + nomeCidade();
@@ -3692,6 +3847,11 @@
       if (r === "unanimidade") out.unanimidade += 1;
       else if (r === "maioria") out.maioria += 1;
       else if (r === "rejeitado") out.rejeitado += 1;
+      else if (
+        r === "primeiro_turno" ||
+        r === "turno_nao_identificado" ||
+        (r.indexOf("nao_deliberativo:") === 0)
+      ) return;
       else out.outro += 1;
     });
     return out;
@@ -3738,7 +3898,7 @@
     var us = ultimaSessaoOrdinaria();
     var dataFmt = us && us.data ? formatarData(us.data) : "";
     var texto =
-      "Nenhum projeto de lei do legislativo (PLL) foi votado na última sessão ordinária";
+      "Nenhum projeto de lei foi votado na última sessão ordinária";
     if (dataFmt) texto += " (" + dataFmt + ")";
     texto += ".";
     var vazio = bloco.querySelector(".estado-vazio");
@@ -3767,7 +3927,7 @@
       return;
     }
     container.innerHTML =
-      '<div class="barra-tema"><span class="nome">Projeto de Lei do Legislativo</span>' +
+      '<div class="barra-tema"><span class="nome">Projetos de lei</span>' +
       '<div class="trilho"><div class="preenchido" style="width:100%;background:var(--barra-pl)"></div></div>' +
       '<span class="qtd">' + esc(total) + "</span></div>";
   }
@@ -3781,12 +3941,12 @@
     if (titulo) titulo.textContent = "Todo o per\u00edodo";
     var metaEl = document.getElementById("meta-periodo-todo");
     if (metaEl) {
-      metaEl.textContent = nSessoes + " sess\u00f5es ordin\u00e1rias " + rotuloAnosRecorte() + ", " + total + " PLLs votados.";
+      metaEl.textContent = nSessoes + " sess\u00f5es ordin\u00e1rias " + rotuloAnosRecorte() + ", " + total + " projetos de lei votados.";
     }
     var legTipos = document.getElementById("legenda-tipos-todo");
     if (legTipos) {
       legTipos.textContent =
-        "Projetos de Lei do Legislativo (PLL) votados em " + rotuloPeriodoLegislatura() + ".";
+        "Projetos de lei votados em " + rotuloPeriodoLegislatura() + ".";
     }
     var barraTipos = document.getElementById("barra-tipos-todo");
     if (barraTipos) {
@@ -3794,7 +3954,7 @@
         barraTipos.innerHTML = "";
       } else {
         barraTipos.innerHTML =
-          '<div class="barra-tema"><span class="nome">Projeto de Lei do Legislativo</span>' +
+          '<div class="barra-tema"><span class="nome">Projetos de lei</span>' +
           '<div class="trilho"><div class="preenchido" style="width:100%;background:var(--barra-pl)"></div></div>' +
           '<span class="qtd">' + esc(total) + "</span></div>";
       }
@@ -3807,7 +3967,7 @@
     var legRes = document.getElementById("legenda-resultado-todo");
     if (legRes) {
       legRes.textContent =
-        "Resultado dos " + total + " PLLs votados em " + rotuloPeriodoLegislatura() + ".";
+        "Resultado dos " + total + " projetos de lei votados em " + rotuloPeriodoLegislatura() + ".";
     }
     var barraRes = document.getElementById("barra-resultado-todo");
     if (barraRes && total > 0) {
@@ -3878,7 +4038,7 @@
     var nota = document.getElementById("nota-resultado-todo");
     if (nota) {
       nota.textContent =
-        "Total: " + total + " PLLs votados em " + rotuloPeriodoLegislatura() + ".";
+        "Total: " + total + " projetos de lei votados em " + rotuloPeriodoLegislatura() + ".";
     }
     var btnShare = document.querySelector("#painel-periodo-todo .btn-compartilhar-icone");
     if (btnShare) btnShare.setAttribute("aria-label", "Compartilhar vota\u00e7\u00f5es " + rotuloAnosRecorte());
@@ -4015,20 +4175,208 @@
 
   var DATA_ULTIMA_SESSAO = "";
 
-  var MAPA_TIPO_SIGLA = {
-    PLL: "PLL",
-    PLE: "PLE",
-    PR: "PR",
-    PDL: "PDL",
-    PELO: "PELO",
-    MOC: "Moção",
-    REQ: "Requerimento",
-    IND: "Indicação",
-    EMENTA: "Emenda",
-    SUBST: "Substitutivo",
-    VETO: "Veto",
-    PC: "Prestação de Contas"
-  };
+  function numeroCategorias() {
+    if (CONFIG_CIDADE && CONFIG_CIDADE.categorias && CONFIG_CIDADE.categorias.lista) {
+      return CONFIG_CIDADE.categorias.lista.length;
+    }
+    return 13;
+  }
+
+  function catalogoTiposMateria() {
+    var meta = estado.dados && estado.dados.meta;
+    if (meta && meta.catalogo_tipos_materia) return meta.catalogo_tipos_materia;
+    return {};
+  }
+
+  function descricaoTipoSigla(sigla) {
+    var cat = catalogoTiposMateria();
+    if (sigla && cat[sigla]) return cat[sigla];
+    return "";
+  }
+
+  function legendaSiglaTipo(sigla) {
+    var desc = descricaoTipoSigla(sigla);
+    if (sigla && desc) {
+      if (sigla === "PLEG") return sigla + ": " + desc + " (proposta de vereador)";
+      return sigla + ": " + desc;
+    }
+    if (sigla) return sigla;
+    if (desc) return desc;
+    return "projetos de lei";
+  }
+
+  function textoTurnoExibicao(valor) {
+    if (valor === "1o turno") return "1º turno";
+    if (valor === "2o turno") return "2º turno";
+    if (valor === "turno unico") return "turno único";
+    return valor;
+  }
+
+  var TAG_CAIXA_ID = "tag-caixa-explicativa";
+
+  function explicacoesTags() {
+    return (CONFIG_CIDADE && CONFIG_CIDADE.explicacoes_tags) || {};
+  }
+
+  function tituloExplicacaoTag(tipo, valor) {
+    if (tipo === "tipo") return valor || "Tipo de matéria";
+    if (tipo === "categoria") return "Categoria do projeto";
+    if (tipo === "turno") return textoTurnoExibicao(valor) || "Turno de votação";
+    if (tipo === "resultado") return valor || "Resultado da votação";
+    if (tipo === "placar") return "Placar da votação";
+    if (tipo === "cassado") return "Cassado";
+    if (tipo === "situacao") return valor || "Situação da matéria";
+    if (tipo === "coautoria") return "Coautoria";
+    if (tipo === "voto") return valor || "Voto";
+    return valor || "Tag";
+  }
+
+  function textoExplicacaoTag(tipo, valor, extra) {
+    var ex = explicacoesTags();
+    if (tipo === "tipo") {
+      var desc = descricaoTipoSigla(valor);
+      var base = valor || "";
+      if (desc) base += ": " + desc;
+      if (valor === "PLEG") base += " (proposta de vereador)";
+      var fixo = ex.tipo_materia || "";
+      return (base + ". " + fixo).trim();
+    }
+    if (tipo === "categoria") {
+      var total = numeroCategorias();
+      var fixoCat = ex.categoria || "";
+      return "Categoria: " + (valor || "") + ". São " + total + " categorias do projeto. " + fixoCat;
+    }
+    if (tipo === "turno") {
+      if (valor === "1o turno") return ex.turno_1o || valor;
+      if (valor === "2o turno") return ex.turno_2o || valor;
+      return ex.turno_unico || valor;
+    }
+    if (tipo === "resultado") {
+      var v = String(valor || "");
+      if (/unanim/i.test(v)) return ex.resultado_unanimidade || v;
+      if (/maioria/i.test(v)) return ex.resultado_maioria || v;
+      if (/rejeit/i.test(v)) return ex.resultado_rejeitado || v;
+      return ((ex.resultado_sem_deliberacao || "") + " Nome oficial no SAPL: " + v + ".").trim();
+    }
+    if (tipo === "placar") return ex.placar || String(valor || "");
+    if (tipo === "cassado") {
+      var dataFim = (extra && extra.dataFim) || "";
+      var texto = ex.cassado || "";
+      if (dataFim) texto += " Mandato encerrado em " + formatarData(dataFim) + ".";
+      return texto.trim();
+    }
+    if (tipo === "situacao") {
+      var s = String(valor || "");
+      if (/aprov/i.test(s)) return ex.situacao_aprovado || s;
+      if (/rejeit/i.test(s)) return ex.situacao_rejeitado || s;
+      return ex.situacao_tramitacao || s;
+    }
+    if (tipo === "coautoria") return ex.coautoria || "Coautoria";
+    if (tipo === "voto") {
+      var mapa = {
+        sim: ex.voto_sim,
+        nao: ex.voto_nao,
+        abstencao: ex.voto_abstencao,
+        nao_votou: ex.voto_nao_votou,
+        presidente_que_nao_votou: ex.voto_presidente,
+        ausente_com_justificativa: ex.voto_ausente_justificativa,
+        ausente_sem_justificativa: ex.voto_ausente_sem_justificativa,
+        presente_sem_voto_individual_registrado: ex.voto_presente_sem_registro
+      };
+      return mapa[valor] || String((extra && extra.rotulo) || valor || "");
+    }
+    return String(valor || "");
+  }
+
+  function fecharCaixaTag(devolverFoco) {
+    var caixa = document.getElementById(TAG_CAIXA_ID);
+    var abridor = caixa && caixa.getAttribute("data-abridor");
+    if (caixa && caixa.parentNode) caixa.parentNode.removeChild(caixa);
+    document.querySelectorAll(".tag-explicavel[aria-expanded='true']").forEach(function (b) {
+      b.setAttribute("aria-expanded", "false");
+    });
+    if (devolverFoco && abridor) {
+      var btn = document.querySelector("[data-tag-id='" + abridor + "']");
+      if (btn && btn.focus) btn.focus();
+    }
+  }
+
+  function abrirCaixaTag(botao) {
+    var tipo = botao.getAttribute("data-tag");
+    var valor = botao.getAttribute("data-valor");
+    var jaAberta = botao.getAttribute("aria-expanded") === "true" &&
+      document.getElementById(TAG_CAIXA_ID);
+    fecharCaixaTag(false);
+    if (jaAberta) return;
+    var extra = null;
+    if (tipo === "cassado") {
+      extra = {
+        dataFim: botao.getAttribute("data-fim") || "",
+        link: botao.getAttribute("data-link") || ""
+      };
+    }
+    if (tipo === "voto") extra = { rotulo: botao.textContent.trim() };
+    var caixa = document.createElement("div");
+    caixa.id = TAG_CAIXA_ID;
+    caixa.className = "tag-caixa";
+    caixa.setAttribute("role", "tooltip");
+    var titulo = tituloExplicacaoTag(tipo, valor);
+    var texto = textoExplicacaoTag(tipo, valor, extra);
+    var html = "<strong>" + esc(titulo) + "</strong><span>" + esc(texto) + "</span>";
+    if (extra && extra.link) {
+      html += ' <a href="' + esc(urlSegura(extra.link) || extra.link) + '" target="_blank" rel="noopener noreferrer">Ver ato no SAPL</a>';
+    }
+    caixa.innerHTML = html;
+    document.body.appendChild(caixa);
+    if (!botao.getAttribute("data-tag-id")) {
+      botao.setAttribute("data-tag-id", "tag" + Math.random().toString(36).slice(2));
+    }
+    caixa.setAttribute("data-abridor", botao.getAttribute("data-tag-id"));
+    botao.setAttribute("aria-expanded", "true");
+    var r = botao.getBoundingClientRect();
+    var largura = Math.min(280, window.innerWidth - 24);
+    var esquerda = r.left + window.scrollX;
+    if (esquerda + largura > window.innerWidth - 8) esquerda = window.innerWidth - largura - 8;
+    if (esquerda < 8) esquerda = 8;
+    var topo = r.bottom + window.scrollY + 6;
+    caixa.style.left = esquerda + "px";
+    caixa.style.top = topo + "px";
+    window.__tagAbertaEm = Date.now();
+    var alturaCaixa = caixa.offsetHeight || 80;
+    if (topo + alturaCaixa > window.scrollY + window.innerHeight - 8) {
+      topo = r.top + window.scrollY - alturaCaixa - 6;
+      if (topo < window.scrollY + 8) topo = window.scrollY + 8;
+      caixa.style.top = topo + "px";
+    }
+  }
+
+  function tagAbertaExiste() {
+    return !!document.getElementById(TAG_CAIXA_ID);
+  }
+
+  document.addEventListener("click", function (e) {
+    var botao = e.target && e.target.closest ? e.target.closest(".tag-explicavel") : null;
+    if (botao) {
+      if (e.stopPropagation) e.stopPropagation();
+      abrirCaixaTag(botao);
+      return;
+    }
+    var caixa = e.target && e.target.closest ? e.target.closest("#" + TAG_CAIXA_ID) : null;
+    if (!caixa) fecharCaixaTag(false);
+  }, true);
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && tagAbertaExiste()) {
+      e.stopPropagation();
+      fecharCaixaTag(true);
+    }
+  }, true);
+
+  window.addEventListener("scroll", function () {
+    if (Date.now() - (window.__tagAbertaEm || 0) < 500) return;
+    fecharCaixaTag(false);
+  }, true);
+  window.addEventListener("resize", function () { fecharCaixaTag(false); });
 
   function temaInicial() {
     var salvo = localStorage.getItem(STORAGE_TEMA);
@@ -4096,6 +4444,92 @@
       .replace(/[\u0300-\u036f]/g, "");
   }
 
+  var LIMITE_MAIUSCULAS_EMENTA = 0.8;
+  var LETRA_EMENTA = /[A-Za-zÀ-ÖØ-öø-ÿ]/;
+
+  function ementaTemMaisDe80PorCentoDeMaiusculas(texto) {
+    var letras = 0;
+    var maiusculas = 0;
+    for (var i = 0; i < texto.length; i++) {
+      var c = texto.charAt(i);
+      if (!LETRA_EMENTA.test(c)) continue;
+      letras++;
+      if (c === c.toUpperCase() && c !== c.toLowerCase()) maiusculas++;
+    }
+    if (!letras) return false;
+    return maiusculas / letras > LIMITE_MAIUSCULAS_EMENTA;
+  }
+
+  function ementaEscaparRegex(texto) {
+    return String(texto).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  var CACHE_TERMOS_EMENTA = null;
+
+  function ementaListaTermosPreservados() {
+    if (CACHE_TERMOS_EMENTA) return CACHE_TERMOS_EMENTA;
+    var config = typeof CONFIG_CIDADE !== "undefined" ? CONFIG_CIDADE : null;
+    var bloco = (config && config.ementa_termos_preservados) || {};
+    var lista = (Array.isArray(bloco.lista) ? bloco.lista.slice() : []).map(function (termo) {
+      return String(termo == null ? "" : termo).trim().replace(/\s+/g, " ");
+    }).filter(function (grafia) {
+      return !!grafia;
+    });
+    lista.sort(function (a, b) {
+      return b.length - a.length;
+    });
+    CACHE_TERMOS_EMENTA = lista;
+    return lista;
+  }
+
+  function ementaAplicarTermosPreservados(texto) {
+    var saida = String(texto == null ? "" : texto);
+    if (!saida) return "";
+    var lista = ementaListaTermosPreservados();
+    if (!lista.length) return saida;
+    var mapa = {};
+    lista.forEach(function (grafia) {
+      mapa[grafia.toLowerCase()] = grafia;
+    });
+    var alternativas = lista.map(ementaEscaparRegex).join("|");
+    var padrao = new RegExp(
+      "(^|[^0-9A-Za-zÀ-ÖØ-öø-ÿ])(" + alternativas + ")(?![0-9A-Za-zÀ-ÖØ-öø-ÿ])",
+      "gi"
+    );
+    return saida.replace(padrao, function (todo, antes, achado) {
+      return antes + (mapa[String(achado).toLowerCase()] || achado);
+    });
+  }
+
+  function ementaPrimeiraLetraDeFrase(texto) {
+    var saida = String(texto == null ? "" : texto);
+    var i = 0;
+    while (i < saida.length && !LETRA_EMENTA.test(saida.charAt(i))) i++;
+    if (i < saida.length) {
+      saida = saida.slice(0, i) + saida.charAt(i).toUpperCase() + saida.slice(i + 1);
+    }
+    return saida.replace(/(\.\s+)([a-zà-öø-ÿ])/g, function (todo, antes, letra) {
+      return antes + letra.toUpperCase();
+    });
+  }
+
+  function ementaExibicao(texto) {
+    var bruto = String(texto == null ? "" : texto);
+    var limpo = bruto.replace(/\s+/g, " ").trim();
+    if (!limpo) return "";
+    if (!ementaTemMaisDe80PorCentoDeMaiusculas(limpo)) return limpo;
+    var saida = limpo.toLowerCase();
+    saida = ementaPrimeiraLetraDeFrase(saida);
+    saida = ementaAplicarTermosPreservados(saida);
+    return saida;
+  }
+
+  function ementaBusca(texto) {
+    var bruto = String(texto == null ? "" : texto).trim();
+    if (!bruto) return "";
+    return bruto + " " + ementaExibicao(bruto);
+  }
+
   function urlSegura(url) {
     if (url == null) return "";
     var s = String(url).trim();
@@ -4158,11 +4592,11 @@
         SAPL_ORIGEM + "/materia/" + encodeURIComponent(String(cassacao.materia_id))
       );
     }
-    if (linkCassacao) {
-      return ' <a href="' + esc(linkCassacao) + '" class="selo selo-coautoria" title="Ato de cassação no SAPL" target="_blank" rel="noopener noreferrer" style="text-decoration:none;vertical-align:middle;margin-left:8px;">Cassado</a>';
-    } else {
-      return ' <span class="selo selo-coautoria" style="vertical-align:middle;margin-left:8px;">Cassado</span>';
-    }
+    var dataFim = (v && v.data_fim_mandato) || "";
+    return ' <button type="button" class="selo selo-coautoria tag-explicavel" data-tag="cassado" data-valor="Cassado"' +
+      (dataFim ? ' data-fim="' + esc(dataFim) + '"' : "") +
+      (linkCassacao ? ' data-link="' + esc(linkCassacao) + '"' : "") +
+      ' aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '" style="vertical-align:middle;margin-left:8px;">Cassado</button>';
   }
 
   function renderBadgePartido(v) {
@@ -4291,7 +4725,9 @@
       });
     }
     if (meta.rotulo_sem_voto_individual) {
-      ROTULO_SEM_VOTO_INDIVIDUAL = meta.rotulo_sem_voto_individual;
+      var base = String(meta.rotulo_sem_voto_individual);
+      var complemento = " (votação simbólica ou sem registro nominal no SAPL)";
+      ROTULO_SEM_VOTO_INDIVIDUAL = base.indexOf("votação simbólica") !== -1 ? base : base + complemento;
     }
   }
 
@@ -4314,8 +4750,7 @@
       [
         "presente_sem_voto_individual_registrado",
         rot.presente_sem_voto_individual_registrado || "Presente sem voto individual registrado"
-      ],
-      ["licenca_tratamento_saude", rot.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade"]
+      ]
     ];
     return defs.map(function (par) {
       return { num: contagemVotoResumo(vo, par[0]), rot: par[1], id: par[0] };
@@ -4347,26 +4782,11 @@
 
   function renderSecaoPresenca(v) {
     var p = v.presenca;
-    var rotMeta = rotulosVotoMeta();
     var partes = [
       { valor: p.presencas, cor: "var(--graf-presenca)", rotulo: "Presente" },
       { valor: p.faltas_com_justificativa, cor: "var(--graf-falta-just)", rotulo: "Falta com justificativa" },
       { valor: p.faltas_sem_justificativa, cor: "var(--graf-falta-sem)", rotulo: "Falta sem justificativa" }
     ];
-    if (p.sessoes_licenca > 0) {
-      partes.push({
-        valor: p.sessoes_licenca,
-        cor: "var(--graf-falta-just)",
-        rotulo: rotMeta.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade"
-      });
-    }
-    if (p.sessoes_fora_do_mandato > 0) {
-      partes.push({
-        valor: p.sessoes_fora_do_mandato,
-        cor: "var(--graf-falta-sem)",
-        rotulo: rotMeta.fora_do_mandato || "Fora do mandato naquela data"
-      });
-    }
 
     function sessoesPorSituacao(situacao) {
       return (p.por_sessao || []).filter(function (s) {
@@ -4374,25 +4794,41 @@
       });
     }
 
+    function textoMotivoFalta(s) {
+      var motivo = s.motivo_ausencia;
+      if (!motivo) return "";
+      var texto = motivo.motivo || "";
+      if (motivo.observacao) texto += (texto ? " (" + motivo.observacao + ")" : motivo.observacao);
+      return texto;
+    }
+
+    function linkMotivoFalta(s) {
+      var motivo = s.motivo_ausencia;
+      if (motivo && motivo.link_fonte) return linkExt(motivo.link_fonte, "Fonte oficial");
+      if (motivo && motivo.upload_anexo) return linkExt(motivo.upload_anexo, "Anexo no SAPL");
+      return linkExt(s.link_sessao, "Ver no SAPL");
+    }
+
     var faltasJust = sessoesPorSituacao("falta_com_justificativa");
     var faltasSem = sessoesPorSituacao("falta_sem_justificativa");
-    var licencas = sessoesPorSituacao("licenca_tratamento_saude");
-    var foraMandato = sessoesPorSituacao("fora_do_mandato");
+
+    var nPlenaria = (p.por_sessao || []).filter(function (s) { return s.presente_sessao_plenaria; }).length;
+    var nOrdemDia = (p.por_sessao || []).filter(function (s) { return s.presente_ordem_dia; }).length;
 
     var htmlFaltas = "";
     if (
       p.faltas_com_justificativa > 0 ||
-      p.faltas_sem_justificativa > 0 ||
-      licencas.length ||
-      foraMandato.length
+      p.faltas_sem_justificativa > 0
     ) {
       htmlFaltas += '<div class="faltas-lista">';
       if (p.faltas_com_justificativa > 0) {
         htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">Faltas com justificativa oficial' + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(p.faltas_com_justificativa) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
         faltasJust.forEach(function (s) {
+          var motivoTexto = textoMotivoFalta(s);
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
-            linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
+            (motivoTexto ? esc(motivoTexto) + ". " : "") +
+            linkMotivoFalta(s) + "</li>";
         });
         htmlFaltas += "</ul></div></details>";
       }
@@ -4402,29 +4838,6 @@
           htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
             esc(formatarData(s.data_sessao)) + ". " +
             linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
-        });
-        htmlFaltas += "</ul></div></details>";
-      }
-      if (licencas.length) {
-        var rotLic = rotMeta.licenca_tratamento_saude || "Licen\u00e7a para tratamento de sa\u00fade";
-        htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">' + esc(rotLic) + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(licencas.length) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
-        licencas.forEach(function (s) {
-          htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
-            esc(formatarData(s.data_sessao)) + ". " +
-            esc(s.rotulo_situacao || rotLic) + ". " +
-            linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
-        });
-        htmlFaltas += "</ul></div></details>";
-      }
-      if (foraMandato.length) {
-        var rotFora = rotMeta.fora_do_mandato || "Fora do mandato naquela data";
-        htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">' + esc(rotFora) + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(foraMandato.length) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
-        foraMandato.forEach(function (s) {
-          htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
-            esc(formatarData(s.data_sessao)) + ". " +
-            esc(s.rotulo_situacao || rotFora);
-          if (s.motivo) htmlFaltas += ". " + esc(s.motivo);
-          htmlFaltas += ". " + linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
         });
         htmlFaltas += "</ul></div></details>";
       }
@@ -4445,11 +4858,14 @@
       esc(p.sessoes_ordinarias) +
       " " +
       rotuloPeriodoLegislatura() +
-      '. Taxa de presen\u00e7a: <strong>' +
+      ' no mandato. Taxa de presen\u00e7a: <strong>' +
       esc(p.taxa_presenca.toFixed(2).replace(".", ",")) +
       "%</strong>. Percentual de faltas: <strong>" +
       esc(p.percentual_faltas.toFixed(2).replace(".", ",")) +
       "%</strong>.</p>" +
+      '<p class="legenda">Presente na lista da sess\u00e3o em ' + esc(nPlenaria) +
+      " sess\u00f5es e na lista da Ordem do Dia em " + esc(nOrdemDia) + " sess\u00f5es.</p>" +
+      '<p class="legenda">O Regimento Interno (art. 100, § 1º) considera presente quem assina a presen\u00e7a e participa das vota\u00e7\u00f5es. O painel conta presente quem aparece em pelo menos uma das duas listas do SAPL.</p>' +
       '<div class="grafico-linha">' +
       '<div class="rosca-wrap">' +
       roscaSVG(
@@ -4523,63 +4939,58 @@
         : item.situacao === "Rejeitado" ? "selo-rejeitado" : "selo-tramitacao";
       var sitRotulo = item.situacao === "Em tramitacao" ? "Em tramitação" : item.situacao;
       var coaut = item.autoria_conjunta
-        ? '<span class="selo selo-coautoria">Coautoria</span>' : "";
+        ? '<button type="button" class="selo selo-coautoria tag-explicavel" data-tag="coautoria" data-valor="Coautoria" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">Coautoria</button>' : "";
+      var siglaItem = item.tipo_sigla || "PLEG";
       return '<article class="item-pll">' +
-        '<div class="cab"><span class="numero">PLL ' + esc(item.numero) + "/" + esc(item.ano) + "</span>" +
-        '<span class="selo ' + seloClass + '">' + esc(sitRotulo) + "</span>" + coaut + "</div>" +
-        '<p class="ementa">' + esc(item.ementa) + "</p>" +
+        '<div class="cab"><span class="numero">' + esc(siglaItem) + " " + esc(item.numero) + "/" + esc(item.ano) + "</span></div>" +
+        '<div class="materia-tags">' +
+        '<button type="button" class="selo tag-explicavel ' + seloClass + '" data-tag="situacao" data-valor="' + esc(sitRotulo) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(sitRotulo) + "</button>" + coaut + "</div>" +
+        '<p class="ementa">' + esc(ementaExibicao(item.ementa)) + "</p>" +
         '<p class="meta">' + (item.tema ? 'Tema: ' + esc(item.tema) + '. ' : '') +
         linkExt(item.link_sapl, "Ver no SAPL") + "</p></article>";
     }).join("");
 
-    var filtrosPLL = [
-      { id: "aprovado", rotulo: "Aprovados" },
-      { id: "tramitacao", rotulo: "Em tramitação" },
-      { id: "rejeitado", rotulo: "Rejeitados" },
-      { id: "todos", rotulo: "Todos" }
-    ];
-
-    var htmlFiltros = '<div class="filtros-pll" role="group" aria-label="Filtrar projetos por situação">' +
-      filtrosPLL.map(function (f) {
-        var pressed = estado.filtroPLL === f.id ? ' aria-pressed="true"' : ' aria-pressed="false"';
-        return '<button type="button" class="btn-filtro-pll" data-filtro-pll="' + esc(f.id) + '"' + pressed + ">" +
-          esc(f.rotulo) + "</button>";
-      }).join("") + "</div>";
+    var rotuloFiltroPLL = { aprovado: "Aprovados", tramitacao: "Em tramitação", rejeitado: "Rejeitados", todos: "Todos os projetos" };
 
     var htmlListaPLL = "";
     if (!estado.filtroPLL) {
       htmlListaPLL = '<div class="estado-vazio" id="pll-estado-vazio">' +
-        "<p>Selecione um filtro acima para ver os projetos deste vereador.</p></div>";
+        "<p>Toque em um quadro acima para ver os projetos deste vereador.</p></div>";
     } else if (!estado.listaPLLVisivel) {
       htmlListaPLL = '<div class="estado-vazio" id="pll-estado-vazio">' +
-        "<p>Filtro ativo. Toque no mesmo filtro novamente ou use o botão abaixo para ver a lista.</p>" +
+        "<p>Filtro ativo. Toque no quadro ativo novamente para ver a lista.</p>" +
         '<button type="button" class="btn-secundario" id="btn-mostrar-pll">Mostrar lista</button></div>';
     } else if (!lista) {
       htmlListaPLL = '<div class="estado-vazio"><p>Nenhum projeto neste filtro.</p>' +
         '<button type="button" class="btn-secundario" id="btn-ocultar-pll">Ocultar lista</button></div>';
     } else {
-      var tituloLista = estado.filtroPLL === "todos" ? "Todos os projetos"
-        : filtrosPLL.find(function (f) { return f.id === estado.filtroPLL; }).rotulo;
+      var tituloLista = rotuloFiltroPLL[estado.filtroPLL] || "Todos os projetos";
       htmlListaPLL = '<div class="lista-pll-cab"><h3>' + esc(tituloLista) +
         " (" + itensFiltrados.length + ")</h3>" +
         '<button type="button" class="btn-secundario" id="btn-ocultar-pll">Ocultar lista</button></div>' +
         '<div class="lista-pll">' + lista + "</div>";
     }
 
+    function quadroProjetos(id, num, rot) {
+      var ativo = estado.filtroPLL === id && estado.listaPLLVisivel;
+      return '<button type="button" class="contagem-item' + (ativo ? " ativo" : "") + '" data-pl-filtro="' + esc(id) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
+        '<div class="num">' + esc(num) + '</div><div class="rot">' + esc(rot) + "</div></button>";
+    }
+
     return '<details class="secao ac-cartao">' +
-      '<summary class="ac-cabecalho" aria-expanded="false"><h2 id="tit-pll">Projetos de lei propostos (PLL)</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
-      '<p class="legenda">PLL significa Projeto de Lei do Legislativo, proposta escrita por vereador.</p>' +
-      '<div class="contagens-pll">' +
-      '<div class="contagem-item"><div class="num">' + esc(pl.total_propostos) + '</div><div class="rot">Propostos</div></div>' +
-      '<div class="contagem-item"><div class="num">' + esc(pl.aprovados) + '</div><div class="rot">Aprovados</div></div>' +
-      '<div class="contagem-item"><div class="num">' + esc(pl.em_tramitacao) + '</div><div class="rot">Em tramitação</div></div>' +
-      '<div class="contagem-item"><div class="num">' + esc(pl.rejeitados) + '</div><div class="rot">Rejeitados</div></div>' +
+      '<summary class="ac-cabecalho" aria-expanded="false"><h2 id="tit-pll">Projetos de lei propostos (PLEG)</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
+      '<p class="legenda">' + esc(legendaSiglaTipo("PLEG")) + ".</p>" +
+      '<div class="contagens-pll" role="group" aria-label="Filtrar projetos por situação">' +
+      quadroProjetos("todos", pl.total_propostos, "Propostos") +
+      quadroProjetos("aprovado", pl.aprovados, "Aprovados") +
+      quadroProjetos("tramitacao", pl.em_tramitacao, "Em tramitação") +
+      quadroProjetos("rejeitado", pl.rejeitados, "Rejeitados") +
       "</div>" +
       '<div class="barra-status-pll">' + barraStatusPLL(partesStatus, totalStatus) + "</div>" +
       cartoesStatusPLL(partesStatus, totalStatus) +
-      '<h3 style="font-size:14px;margin:14px 0 8px">Por tema (13 categorias oficiais)</h3>' +
+      '<h3 style="font-size:14px;margin:14px 0 8px">Por tema (' + esc(numeroCategorias()) + " categorias)</h3>" +
       '<div class="barra-temas">' + barras + "</div>" +
-      htmlFiltros + htmlListaPLL +
+      htmlListaPLL +
       "</div></details>";
   }
 
@@ -4598,7 +5009,7 @@
         var ementa = ementaVotacao(n);
         var tagsBusca = n.materia_id ? tagsMateria(n.materia_id) : null;
         var tipoNumeroBusca = tipoNumeroDoVoto(n);
-        var texto = (ementa || "") + " " + (n.materia_id || "") + " " + n.data_sessao +
+        var texto = ementaBusca(ementa || "") + " " + (n.materia_id || "") + " " + n.data_sessao +
           " " + (tipoNumeroBusca || "");
         if (tagsBusca) texto += " " + tagsBusca.tag_tipo + " " + tagsBusca.tag_tema;
         if (normalizarTexto(texto).indexOf(busca) === -1) return false;
@@ -4611,32 +5022,31 @@
     var inicio = (estado.pagina - 1) * POR_PAGINA;
     var fatia = filtrados.slice(inicio, inicio + POR_PAGINA);
 
-    var opcoesFiltro = todosCards.filter(function(c) { return c.num > 0; }).map(function (c) {
-      var sel = estado.filtroClassificacao === c.id ? " selected" : "";
-      return '<option value="' + esc(c.id) + '"' + sel + ">" + esc(c.rot) + "</option>";
-    }).join("");
-
-    var atalhosVoto = todosCards.filter(function(c) { return c.num > 0; });
-
     var itens = fatia.map(function (n) {
-      var ementa = ementaVotacao(n);
+      var ementaBruta = ementaVotacao(n);
+      var ementa = ementaBruta ? ementaExibicao(ementaBruta) : "";
       var textoEmenta = ementa
         ? esc(ementa.length > 180 ? ementa.slice(0, 177) + "..." : ementa)
         : (n.materia_id
           ? "Matéria " + esc(n.materia_id) + " (" + linkExt(linkMateria(n.materia_id), "ementa no SAPL") + ")"
           : "Matéria não identificada no registro");
+      var tituloEmenta = ementa
+        ? '<span class="ementa-voto" title="' + esc(ementa) + '">' + textoEmenta + "</span>"
+        : '<span class="ementa-voto">' + textoEmenta + "</span>";
       var linkSess = estado.linksSessao[n.sessao_id] ||
         (SAPL_ORIGEM + "/sessao/" + n.sessao_id);
-      var tagsHtml = n.materia_id ? htmlTagsMateria(n.materia_id) : "";
+      var turnoHtml = (n.turno === "1o turno" || n.turno === "2o turno")
+        ? '<button type="button" class="tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(n.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(n.turno)) + "</button>"
+        : "";
+      var votoHtml = '<button type="button" class="voto-selo tag-explicavel ' + classeVotoSelo(n.estado) + '" data-tag="voto" data-valor="' + esc(n.estado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(rotuloVoto(n)) + "</button>";
+      var tagsHtml = htmlTagsMateria(n.materia_id, turnoHtml, votoHtml);
       var tipoNumero = tipoNumeroDoVoto(n);
       return "<li>" +
         '<div class="data-voto">' + esc(formatarData(n.data_sessao)) +
         ", sessão " + esc(n.sessao_id) + "</div>" +
         (tipoNumero ? '<div class="materia-titulo">' + esc(tipoNumero) + "</div>" : "") +
-        (tagsHtml ? tagsHtml : "") +
-        '<span class="voto-selo ' + classeVotoSelo(n.estado) + '">' +
-        esc(rotuloVoto(n)) + "</span>" +
-        "<span>" + textoEmenta + "</span> " +
+        tagsHtml +
+        tituloEmenta + " " +
         linkExt(linkSess, "Sessão no SAPL") + "</li>";
     }).join("");
 
@@ -4644,13 +5054,8 @@
     var htmlListaVotos = "";
     if (!listaAtiva) {
       htmlListaVotos = '<div class="estado-vazio" id="votos-estado-vazio">' +
-        "<p>Escolha um tipo de voto ou busque por ementa para ver a lista detalhada.</p>" +
-        '<div class="atalhos-voto" role="group" aria-label="Filtrar por tipo de voto">' +
-        atalhosVoto.map(function (a) {
-          return '<button type="button" class="btn-atalho-voto" data-voto="' + esc(a.id) + '">' +
-            esc(a.rot) + "</button>";
-        }).join("") +
-        "</div></div>";
+        "<p>Toque em um quadro acima ou busque por ementa para ver a lista detalhada.</p>" +
+        "</div>";
     } else {
       htmlListaVotos =
         '<ul class="lista-votos" aria-live="polite">' +
@@ -4666,20 +5071,20 @@
 
     return '<details class="secao ac-cartao">' +
       '<summary class="ac-cabecalho" aria-expanded="false"><h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
-      '<p class="legenda">Voto nominal é quando o nome de cada vereador fica registrado publicamente. Total: ' +
+      '<p class="legenda">A vota\u00e7\u00e3o simb\u00f3lica \u00e9 a regra geral (art. 202 do Regimento Interno): conta-se o resultado sem registrar o nome de cada vereador. Na vota\u00e7\u00e3o nominal o voto de cada vereador fica registrado (art. 201); ela \u00e9 obrigat\u00f3ria quando a mat\u00e9ria exige maioria absoluta ou dois ter\u00e7os (art. 203). Total: ' +
       esc(vo.total_registros) + " vota\u00e7\u00f5es em " + rotuloPeriodoLegislatura() + ".</p>" +
-      '<div class="votos-resumo">' +
+      '<div class="votos-resumo" role="group" aria-label="Filtrar por tipo de voto">' +
       cards.map(function (c) {
-        return '<div class="voto-card"><div class="num">' + esc(c.num) +
-          '</div><div class="rot">' + esc(c.rot) + "</div></div>";
+        var ativo = estado.filtroClassificacao === c.id;
+        return '<button type="button" class="voto-card' + (ativo ? " ativo" : "") + '" data-voto-card="' + esc(c.id) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
+          '<div class="num">' + esc(c.num) +
+          '</div><div class="rot">' + esc(c.rot) + "</div></button>";
       }).join("") +
       "</div>" +
       '<div class="filtros-votos">' +
       '<label for="filtro-texto">Buscar por ementa ou número da matéria</label>' +
       '<input type="search" id="filtro-texto" value="' + esc(estado.filtroTexto) +
       '" placeholder="Digite parte da ementa ou ID">' +
-      '<label for="filtro-voto">Filtrar por tipo de voto</label>' +
-      '<select id="filtro-voto"><option value="">Todos os tipos de voto</option>' + opcoesFiltro + "</select>" +
       "</div>" +
       htmlListaVotos +
       "</div></details>";
@@ -4713,9 +5118,41 @@
     });
   }
 
+  function fimDoRecorte() {
+    if (!ANOS_RECORTE || !ANOS_RECORTE.length) return "";
+    return String(Math.max.apply(null, ANOS_RECORTE)) + "-12-31";
+  }
+
+  function mandatoEncerrado(v) {
+    if (!v) return false;
+    if (v.motivos_fora_do_mandato && v.motivos_fora_do_mandato.length) return true;
+    var fim = v.data_fim_mandato || "";
+    var limite = fimDoRecorte();
+    return !!fim && !!limite && fim < limite;
+  }
+
+  function vereadoresOrdenados() {
+    var lista = (estado.dados && estado.dados.vereadores) || [];
+    var ativos = [];
+    var encerrados = [];
+    lista.forEach(function (ver) {
+      if (mandatoEncerrado(ver)) encerrados.push(ver);
+      else ativos.push(ver);
+    });
+    function porNome(a, b) {
+      return String(a.nome_parlamentar || "").localeCompare(
+        String(b.nome_parlamentar || ""), "pt-BR"
+      );
+    }
+    ativos.sort(porNome);
+    encerrados.sort(porNome);
+    return ativos.concat(encerrados);
+  }
+
   function renderApp() {
     var v = vereadorAtual();
     if (!v || !estado.dados) return;
+    fecharCaixaTag(false);
 
     if (estado.ultimoVereadorRenderizado !== estado.vereadorId) {
       estado.sanfonasAbertas = {};
@@ -4725,14 +5162,15 @@
     var meta = estado.dados.meta;
     var conteudo = document.getElementById("conteudo-vereadores");
     var seletorWrap = document.getElementById("seletor-vereador-wrap");
+    var listaVereadores = vereadoresOrdenados();
 
-    var opcoes = estado.dados.vereadores.map(function (ver) {
+    var opcoes = listaVereadores.map(function (ver) {
       var sel = String(ver.id_sapl) === String(estado.vereadorId) ? " selected" : "";
       return '<option value="' + esc(ver.id_sapl) + '"' + sel + ">" +
         esc(rotuloOpcaoVereador(ver)) + "</option>";
     }).join("");
 
-    var idxAtual = estado.dados.vereadores.findIndex(function (ver) {
+    var idxAtual = listaVereadores.findIndex(function (ver) {
       return String(ver.id_sapl) === String(estado.vereadorId);
     });
 
@@ -4742,7 +5180,7 @@
       '<select id="sel-vereador">' + opcoes + "</select>" +
       '<div class="nav-vereador">' +
       '<button type="button" id="btn-ver-anterior"' + (idxAtual <= 0 ? " disabled" : "") + ">Vereador anterior</button>" +
-      '<button type="button" id="btn-ver-proximo"' + (idxAtual >= estado.dados.vereadores.length - 1 ? " disabled" : "") + ">Próximo vereador</button>" +
+      '<button type="button" id="btn-ver-proximo"' + (idxAtual >= listaVereadores.length - 1 ? " disabled" : "") + ">Próximo vereador</button>" +
       "</div></div>";
 
     conteudo.innerHTML =
@@ -4782,7 +5220,7 @@
     });
 
     function irVereador(delta) {
-      var lista = estado.dados.vereadores;
+      var lista = vereadoresOrdenados();
       var idx = lista.findIndex(function (ver) {
         return String(ver.id_sapl) === String(estado.vereadorId);
       });
@@ -4815,11 +5253,13 @@
       }
     });
 
-    var filtroVoto = document.getElementById("filtro-voto");
-    if (filtroVoto) filtroVoto.addEventListener("change", function (e) {
-      estado.filtroClassificacao = e.target.value;
-      estado.pagina = 1;
-      renderApp();
+    document.querySelectorAll(".voto-card[data-voto-card]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-voto-card");
+        estado.filtroClassificacao = (estado.filtroClassificacao === id) ? "" : id;
+        estado.pagina = 1;
+        renderApp();
+      });
     });
 
     var btnAnt = document.getElementById("btn-anterior");
@@ -4831,11 +5271,12 @@
       estado.pagina++; renderApp();
     });
 
-    document.querySelectorAll(".btn-filtro-pll").forEach(function (btn) {
+    document.querySelectorAll(".contagem-item[data-pl-filtro]").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        var f = btn.getAttribute("data-filtro-pll");
-        if (estado.filtroPLL === f && !estado.listaPLLVisivel) {
-          estado.listaPLLVisivel = true;
+        var f = btn.getAttribute("data-pl-filtro");
+        if (estado.filtroPLL === f && estado.listaPLLVisivel) {
+          estado.filtroPLL = "";
+          estado.listaPLLVisivel = false;
         } else {
           estado.filtroPLL = f;
           estado.listaPLLVisivel = true;
@@ -4854,14 +5295,6 @@
     if (btnMostrarPLL) btnMostrarPLL.addEventListener("click", function () {
       estado.listaPLLVisivel = true;
       renderApp();
-    });
-
-    document.querySelectorAll(".btn-atalho-voto").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        estado.filtroClassificacao = btn.getAttribute("data-voto");
-        estado.pagina = 1;
-        renderApp();
-      });
     });
 
     var btnLimparVotos = document.getElementById("btn-limpar-votos");
@@ -4903,7 +5336,8 @@
         aplicarRotulosMeta(dados);
         prepararIndices(dados);
         if (!estado.vereadorId && dados.vereadores.length) {
-          estado.vereadorId = dados.vereadores[0].id_sapl;
+          var primeiros = vereadoresOrdenados();
+          if (primeiros.length) estado.vereadorId = primeiros[0].id_sapl;
         }
         atualizarInterfaceCamara();
         renderApp();
@@ -4939,10 +5373,12 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       MATERIAS_CAMARA = results[0];
       MATERIAS_TAGS = results[1];
       FILTROS_MATERIA = results[2];
+      MAPA_CORES_TEMAS = null;
     }).catch(function () {
       MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       MATERIAS_TAGS = {};
       FILTROS_MATERIA = { sessao: [], mes: [], todo: [] };
+      MAPA_CORES_TEMAS = null;
     });
   }
 
@@ -5046,6 +5482,12 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var prefixo = m.resultado === "maioria"
       ? "Aprovado por maioria"
       : "Aprovado por unanimidade";
+    if (m.resultado === "primeiro_turno") prefixo = "1º turno";
+    if (m.resultado === "turno_nao_identificado") prefixo = "Turno não identificado";
+    if (m.resultado === "rejeitado") prefixo = "Rejeitado";
+    if (m.resultado && m.resultado.indexOf("nao_deliberativo:") === 0) {
+      prefixo = m.tipo_resultado || "Sem deliberação";
+    }
     var match = m.placar.match(/(\d+)\s*a favor,\s*(\d+)\s*contra/);
     if (!match) return prefixo + ".";
     var resultado = prefixo + ": " + match[1] + " a favor";
@@ -5054,18 +5496,8 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   }
 
   function tagTipoDeSigla(sigla, descricao) {
-    if (sigla) {
-      var chave = String(sigla).toUpperCase();
-      if (MAPA_TIPO_SIGLA[chave]) return MAPA_TIPO_SIGLA[chave];
-    }
-    var fonte = String(descricao || "").toLowerCase();
-    if (fonte.indexOf("projeto de lei do legislativo") !== -1) return "PLL";
-    if (fonte.indexOf("projeto de lei do executivo") !== -1) return "PLE";
-    if (fonte.indexOf("projeto de resolução") !== -1 || fonte.indexOf("projeto de resolucao") !== -1) return "PR";
-    if (fonte.indexOf("moção") !== -1 || fonte.indexOf("mocao") !== -1) return "Moção";
-    if (fonte.indexOf("requerimento") !== -1) return "Requerimento";
-    if (fonte.indexOf("indicação") !== -1 || fonte.indexOf("indicacao") !== -1) return "Indicação";
-    if (descricao) return "Outros";
+    if (sigla) return String(sigla).trim();
+    if (descricao) return String(descricao).trim();
     return "";
   }
 
@@ -5077,7 +5509,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var catalogo = estado.indiceMaterias && (estado.indiceMaterias[n] || estado.indiceMaterias[id]);
     if (catalogo) {
       return {
-        tag_tipo: tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || "PLL",
+        tag_tipo: tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || "Outros",
         tag_tema: catalogo.categoria || "Tema não classificado"
       };
     }
@@ -5087,12 +5519,91 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     };
   }
 
-  function htmlTagsMateria(id) {
+  var MAPA_CORES_TEMAS = null;
+
+  function temasConhecidos() {
+    var vistos = {};
+    var ordem = [];
+    Object.keys(MATERIAS_TAGS).forEach(function (chave) {
+      var t = MATERIAS_TAGS[chave] && MATERIAS_TAGS[chave].tag_tema;
+      if (t && !vistos[t]) {
+        vistos[t] = true;
+        ordem.push(t);
+      }
+    });
+    ["sessao", "mes", "todo"].forEach(function (p) {
+      (MATERIAS_CAMARA[p] || []).forEach(function (m) {
+        var tags = tagsMateria(m.id);
+        var t = tags && tags.tag_tema;
+        if (t && !vistos[t]) {
+          vistos[t] = true;
+          ordem.push(t);
+        }
+      });
+    });
+    ordem.sort();
+    return ordem;
+  }
+
+  function corDoTema(tema) {
+    if (!MAPA_CORES_TEMAS) {
+      MAPA_CORES_TEMAS = {};
+      temasConhecidos().forEach(function (nome, i) {
+        MAPA_CORES_TEMAS[nome] = CORES_TEMAS[i % CORES_TEMAS.length];
+      });
+    }
+    var chave = String(tema == null ? "" : tema);
+    return MAPA_CORES_TEMAS[chave] || CORES_TEMAS[0];
+  }
+
+  function luminanciaCor(cor) {
+    var hex = String(cor || "").replace("#", "");
+    if (hex.length === 3) {
+      hex = hex.charAt(0) + hex.charAt(0) + hex.charAt(1) + hex.charAt(1) + hex.charAt(2) + hex.charAt(2);
+    }
+    if (hex.length < 6) return 0;
+    function canal(v) {
+      var c = parseInt(v, 16) / 255;
+      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    }
+    var r = canal(hex.slice(0, 2));
+    var g = canal(hex.slice(2, 4));
+    var b = canal(hex.slice(4, 6));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+
+  function razaoContraste(corA, corB) {
+    var la = luminanciaCor(corA);
+    var lb = luminanciaCor(corB);
+    var mais = Math.max(la, lb);
+    var menos = Math.min(la, lb);
+    return (mais + 0.05) / (menos + 0.05);
+  }
+
+  function corTextoContraste(cor) {
+    return razaoContraste(cor, "#ffffff") >= razaoContraste(cor, "#000000")
+      ? "#ffffff"
+      : "#000000";
+  }
+
+  function estiloCorTema(tema) {
+    var cor = corDoTema(tema);
+    return ' style="background:' + cor + ";color:" + corTextoContraste(cor) + ";border-color:" + cor + '"';
+  }
+
+  function htmlTagsMateria(id, aposTipo, aposTema) {
     var tags = tagsMateria(id);
-    if (!tags) return "";
+    var meio = aposTipo || "";
+    var fim = aposTema || "";
+    if (!tags) {
+      if (!meio && !fim) return "";
+      return '<div class="materia-tags">' + meio + fim + "</div>";
+    }
     return '<div class="materia-tags">' +
-      '<span class="tag-tipo">' + esc(tags.tag_tipo) + "</span>" +
-      '<span class="tag-categoria">' + esc(tags.tag_tema) + "</span></div>";
+      '<button type="button" class="tag-tipo tag-explicavel" data-tag="tipo" data-valor="' + esc(tags.tag_tipo) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(tags.tag_tipo) + "</button>" +
+      meio +
+      '<button type="button" class="tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(tags.tag_tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(tags.tag_tema) + '>' + esc(tags.tag_tema) + "</button>" +
+      fim + "</div>";
   }
 
   function tipoNumeroMateriaCamara(id) {
@@ -5113,7 +5624,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (daCamara) return daCamara;
     var catalogo = estado.indiceMaterias && estado.indiceMaterias[n.materia_id];
     if (catalogo && catalogo.numero && catalogo.ano) {
-      var tipo = tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || catalogo.tipo_sigla || "PLL";
+      var tipo = tagTipoDeSigla(catalogo.tipo_sigla, catalogo.tipo_descricao) || catalogo.tipo_sigla || "Outros";
       return tipo + " " + catalogo.numero + "/" + catalogo.ano;
     }
     return "";
@@ -5191,7 +5702,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       : "Resultado oficial: " + resultadoOficial(m) + ".";
     var linhas = ["Em Pratos Limpos", "", m.tipo];
     if (tema) linhas.push("Tema: " + tema);
-    linhas.push("", m.ementa, "", resultadoLinha);
+    linhas.push("", ementaExibicao(m.ementa), "", resultadoLinha);
     if (placar) linhas.push("Placar: " + placar + ".");
     linhas.push("", "Fonte oficial no SAPL: " + linkSap, "Consulte no portal: " + PORTAL_OFICIAL);
     return juntarLinhasShare(linhas);
@@ -5207,7 +5718,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       : "Resultado oficial: " + resultadoOficial(m) + ".";
     var linhas = ["O que a Câmara de " + nomeCidade() + " votou", "", m.tipo];
     if (tema) linhas.push("Tema: " + tema);
-    linhas.push("", m.ementa, "", resultadoLinha);
+    linhas.push("", ementaExibicao(m.ementa), "", resultadoLinha);
     if (placar) linhas.push("Placar: " + placar + ".");
     linhas.push("", "Fonte oficial: " + rotuloSaplCamara() + ".",
       "Consulte a matéria: " + linkSap,
@@ -5217,7 +5728,8 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   }
 
   function textoShareMateriaStories(m, periodo) {
-    var ementa = m.ementa.length > 180 ? m.ementa.slice(0, 177) + "..." : m.ementa;
+    var ementaCheia = ementaExibicao(m.ementa);
+    var ementa = ementaCheia.length > 180 ? ementaCheia.slice(0, 177) + "..." : ementaCheia;
     var placar = extrairPlacar(m.placar);
     var tema = temaParaShare(m.id);
     var linhas = [m.tipo, "", ementa, "", resultadoOficial(m)];
@@ -5239,7 +5751,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (data) votou += " em " + data;
     linhas.push(votou + ".");
     if (tema) linhas.push("Tema: " + tema + ".");
-    linhas.push(m.ementa, "");
+    linhas.push(ementaExibicao(m.ementa), "");
     var resultadoLinha = "Resultado oficial: " + resultadoOficial(m) + ".";
     if (placar) resultadoLinha += " Placar: " + placar + ".";
     linhas.push(resultadoLinha, "", "Fonte oficial: " + rotuloSaplCamara() + ".", linkSap,
@@ -5338,11 +5850,11 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença: " + d.presencas + " de " + d.total + " sessões.",
       rotuloFalta(d.faltasJust, true),
       rotuloFalta(d.faltasSem, false),
-      "PLLs de autoria ou coautoria: " + d.plls + ".",
+      "Projetos de lei de autoria ou coautoria: " + d.plls + ".",
       "Votos nominais registrados: " + d.sim + " Sim, " + d.nao + " Não e " + d.abstencao + " abstenções.",
       "Registros como presidente que não votou: " + d.presNaoVotou + ".",
       "",
-      "Ausência não é voto. O presidente pode não votar conforme a regra da sessão.",
+      "Ausência não é voto. Pelo art. 47 do Regimento Interno, o presidente da Câmara só vota na eleição da Mesa, quando a matéria exige maioria absoluta ou dois terços, e em caso de empate.",
       ""];
     if (d.sapl) linhas.push("Perfil oficial no SAPL: " + d.sapl);
     linhas.push("Consulte os dados: " + d.portal);
@@ -5357,7 +5869,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença: " + d.presencas + " de " + d.total + " sessões.",
       rotuloFalta(d.faltasJust, true),
       rotuloFalta(d.faltasSem, false),
-      "PLLs de autoria ou coautoria: " + d.plls + ".",
+      "Projetos de lei de autoria ou coautoria: " + d.plls + ".",
       "Votos nominais: " + d.sim + " Sim, " + d.nao + " Não e " + d.abstencao + " abstenções.",
       "Como presidente, não votou em " + d.presNaoVotou + " registros.",
       "",
@@ -5384,7 +5896,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Faltas sem justificativa: " + d.faltasSem,
       "",
       "Registros legislativos",
-      "PLLs de autoria ou coautoria: " + d.plls,
+      "Projetos de lei de autoria ou coautoria: " + d.plls,
       "Votos Sim: " + d.sim,
       "Votos Não: " + d.nao,
       "Abstenções: " + d.abstencao,
@@ -5407,7 +5919,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença",
       d.presencas + " de " + d.total + " sessões",
       "",
-      "PLLs de autoria ou coautoria",
+      "Projetos de lei de autoria ou coautoria",
       String(d.plls),
       "",
       "Votos nominais",
@@ -5422,7 +5934,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       "Presença: " + d.presencas + " de " + d.total + " sessões.",
       rotuloFalta(d.faltasJust, true),
       rotuloFalta(d.faltasSem, false),
-      "PLLs de autoria ou coautoria: " + d.plls + ".",
+      "Projetos de lei de autoria ou coautoria: " + d.plls + ".",
       "Votos nominais: " + d.sim + " Sim, " + d.nao + " Não e " + d.abstencao + " abstenções.",
       "",
       "",
@@ -5435,27 +5947,41 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     return juntarLinhasShare(linhas);
   }
 
+  function textoDatasVotacao(m) {
+    var votos = (m && m.votacoes) || [];
+    var datas = [];
+    votos.forEach(function (v) {
+      if (v && v.data_sessao && datas.indexOf(v.data_sessao) === -1) {
+        datas.push(v.data_sessao);
+      }
+    });
+    if (datas.length < 2) return "";
+    return "Votada em " + datas.map(formatarData).join(" e ");
+  }
+
   function renderCardMateria(m) {
     var badgeClass = m.resultado === "maioria" ? "badge-maioria" : "badge-unanimidade";
     var placar = placarResumido(m.placar);
-    var tagsHtml = htmlTagsMateria(m.id);
-    // Insert badge after tags if both exist
-    var badgeHtml = placar ? '<span class="badge-status ' + badgeClass + '">' + esc(placar) + '</span>' : '';
-    if (tagsHtml && badgeHtml) {
-      // Insert badge before closing </div> of materia-tags
-      tagsHtml = tagsHtml.replace('</div>', badgeHtml + '</div>');
-    } else if (badgeHtml) {
-      tagsHtml = '<div class="materia-tags">' + badgeHtml + '</div>';
-    }
+    var badgeHtml = placar ? '<button type="button" class="badge-status tag-explicavel ' + badgeClass + '" data-tag="placar" data-valor="' + esc(placar) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(placar) + '</button>' : '';
+    var turnoHtml = m.turno
+      ? '<button type="button" class="tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(m.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(m.turno)) + '</button>'
+      : (m.tipo_resultado
+        ? '<button type="button" class="tag-turno tag-explicavel" data-tag="resultado" data-valor="' + esc(m.tipo_resultado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.tipo_resultado) + "</button>"
+        : "");
+    var tagsHtml = htmlTagsMateria(m.id, turnoHtml, badgeHtml);
     return '<article class="item-votado materia" data-resultado="' + esc(m.resultado) + '">' +
-      '<button type="button" class="materia-link" data-materia-id="' + esc(m.id) +
+      '<div class="materia-link" role="button" tabindex="0" data-materia-id="' + esc(m.id) +
       '" data-resultado="' + esc(m.resultado) +
       '" aria-haspopup="dialog" aria-controls="resumo-sheet" aria-label="Abrir resumo de ' + esc(m.tipo) + '">' +
       '<div class="materia-info"><span class="materia-titulo">' + esc(m.tipo) +
       '</span>' + tagsHtml +
-      '<span class="materia-ementa">' + esc(m.ementa) + "</span></div>" +
+      '<span class="materia-ementa">' + esc(ementaExibicao(m.ementa)) + "</span>" +
+      (textoDatasVotacao(m)
+        ? '<span class="materia-datas">' + esc(textoDatasVotacao(m)) + "</span>"
+        : "") +
+      "</div>" +
       htmlResultadoPopular(m.id) +
-      "</button></article>";
+      "</div></article>";
   }
 
   function materiasFiltradas(periodo) {
@@ -5466,7 +5992,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       if (filtro && m.resultado !== filtro) return false;
       if (busca) {
         var tags = tagsMateria(m.id);
-        var texto = m.tipo + " " + m.ementa + " " + m.id;
+        var texto = m.tipo + " " + ementaBusca(m.ementa) + " " + m.id;
         if (tags) texto += " " + String(tags.tag_tipo) + " " + String(tags.tag_tema);
         if (normalizarTexto(texto).indexOf(busca) === -1) return false;
       }
@@ -5475,16 +6001,18 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   }
 
   function legendaVotado(periodo) {
+    var regra = " Matéria votada em mais de uma sessão aparece uma vez por período, com todas as datas.";
+    var regraContagem = " A contagem de resultado considera só o 2º turno ou o turno único. Votação sem deliberação aparece com o nome oficial e não entra na contagem.";
     if (periodo === "sessao") {
-      return "Lista com ementa (resumo oficial) e placar. Toque abre a página oficial no SAPL (Sistema de Apoio ao Processo Legislativo).";
+      return "Lista com ementa (resumo oficial) e placar. Toque abre a página oficial no SAPL (Sistema de Apoio ao Processo Legislativo)." + regra + regraContagem;
     }
     if (periodo === "mes") {
       var mesVotado = nomeMesAnteriorUltimaSessao().toLowerCase();
-      return mesVotado
-        ? "PLLs votados em " + mesVotado + ". Toque abre a página oficial no SAPL."
-        : "PLLs votados no último mês. Toque abre a página oficial no SAPL.";
+      return (mesVotado
+        ? "Projetos de lei votados em " + mesVotado + ". Toque abre a página oficial no SAPL."
+        : "Projetos de lei votados no último mês. Toque abre a página oficial no SAPL.") + regra + regraContagem;
     }
-    return "Todas as PLLs votadas em " + rotuloPeriodoLegislatura() + ". Toque abre a página oficial no SAPL.";
+    return ("Todos os projetos de lei votados em " + rotuloPeriodoLegislatura() + ". Toque abre a página oficial no SAPL.") + regra + regraContagem;
   }
 
   var estadoVotadoPagina = { sessao: 1, mes: 1, todo: 1 };
@@ -5493,6 +6021,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   function renderBlocoVotadoPeriodo(periodo) {
     var bloco = document.getElementById("bloco-votado-" + periodo);
     if (!bloco) return;
+    fecharCaixaTag(false);
 
     var filtros = FILTROS_MATERIA[periodo];
     var mostrarBusca = periodo !== "sessao";
@@ -5516,7 +6045,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
         var cls = ativo ? "btn-filtro btn-filtro-materia ativo" : "btn-filtro btn-filtro-materia";
         return '<button type="button" class="' + cls + '" data-periodo="' + esc(periodo) +
           '" data-filtro="' + esc(f.id) + '"' + pressed + ">" +
-          esc(f.rotulo) + " (" + esc(f.qtd) + ")</button>";
+          esc(textoTurnoExibicao(f.rotulo)) + " (" + esc(f.qtd) + ")</button>";
       }).join("") + "</div>";
 
     var htmlBusca = "";
@@ -5605,6 +6134,14 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
         var materia = (MATERIAS_CAMARA[periodo] || []).find(function (m) { return m.id === id; });
         if (materia) abrirResumoSheet(materia, periodo);
       });
+      btn.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          var id = parseInt(btn.getAttribute("data-materia-id"), 10);
+          var materia = (MATERIAS_CAMARA[periodo] || []).find(function (m) { return m.id === id; });
+          if (materia) abrirResumoSheet(materia, periodo);
+        }
+      });
     });
 
     bloco.querySelectorAll(".btn-pagina").forEach(function (btn) {
@@ -5677,14 +6214,26 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     }
     html += '<div class="resumo-campo">' +
       '<p class="resumo-campo-rotulo">Ementa (resumo oficial)</p>' +
-      '<p class="resumo-campo-valor">' + esc(m.ementa) + "</p></div>" +
+      '<p class="resumo-campo-valor">' + esc(ementaExibicao(m.ementa)) + "</p></div>" +
       '<div class="resumo-campo">' +
       '<p class="resumo-campo-rotulo">Resultado da votação</p>' +
       '<p class="resumo-campo-valor">' + esc(resultado) + "</p></div>";
+    if (m.turno || m.tipo_resultado) {
+      var turnoValor = m.turno || m.tipo_resultado;
+      var turnoTipo = m.turno ? "turno" : "resultado";
+      html += '<div class="resumo-campo">' +
+        '<p class="resumo-campo-rotulo">Turno</p>' +
+        '<p class="resumo-campo-valor"><button type="button" class="tag-turno tag-explicavel" data-tag="' + turnoTipo + '" data-valor="' + esc(turnoValor) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.turno ? textoTurnoExibicao(turnoValor) : turnoValor) + "</button></p></div>";
+    }
+    if (textoDatasVotacao(m)) {
+      html += '<div class="resumo-campo">' +
+        '<p class="resumo-campo-rotulo">Votações</p>' +
+        '<p class="resumo-campo-valor">' + esc(textoDatasVotacao(m)) + "</p></div>";
+    }
     if (m.categoria) {
       html += '<div class="resumo-campo">' +
         '<p class="resumo-campo-rotulo">Categoria</p>' +
-        '<p class="resumo-campo-valor"><span class="tag-categoria">' + esc(m.categoria) + "</span></p></div>";
+        '<p class="resumo-campo-valor"><button type="button" class="tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(m.categoria) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(m.categoria) + '>' + esc(m.categoria) + "</button></p></div>";
     }
     html += '<a class="resumo-link-sapl" href="' + esc(linkSap) +
       '" target="_blank" rel="noopener noreferrer">' +
@@ -5699,6 +6248,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var corpo = document.getElementById("resumo-sheet-corpo");
     var btnShare = document.getElementById("btn-share-resumo");
     if (!backdrop || !materia) return;
+    fecharCaixaTag(false);
     resumoContexto = { dados: materia, periodo: periodo || estadoMaterias.periodo || "sessao" };
     resumoGatilhoAnterior = document.activeElement;
     if (titulo) titulo.textContent = materia.tipo || "Resumo da matéria";
@@ -5941,11 +6491,11 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     var ordenado = Object.keys(contagem).sort(function (a, b) { return contagem[b] - contagem[a]; });
     var max = contagem[ordenado[0]] || 1;
 
-    var htmlBarras = ordenado.map(function (tema, i) {
+    var htmlBarras = ordenado.map(function (tema) {
       var qtd = contagem[tema];
       var pct = Math.round((qtd / max) * 100);
       var pctTotal = Math.round((qtd / total) * 100).toFixed(1).replace(".", ",");
-      var cor = CORES_TEMAS[i % CORES_TEMAS.length];
+      var cor = corDoTema(tema);
       var rotulo = qtd === 1 ? "1 projeto" : qtd + " projetos";
       return '<div class="barra-tema-linha">' +
         '<span class="nome">' + esc(tema) + '</span>' +

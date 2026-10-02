@@ -122,7 +122,7 @@ class TestTelaVereadores(unittest.TestCase):
                         )
             browser.close()
 
-    def test_jorge_quege_licenca_2026(self):
+    def test_jorge_quege_falta_justificada_2026(self):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page(viewport={"width": 390, "height": 900})
@@ -130,7 +130,9 @@ class TestTelaVereadores(unittest.TestCase):
             page.select_option("#sel-vereador", "1")
             page.wait_for_timeout(200)
             texto = page.locator("#conteudo-vereadores").inner_text()
+            self.assertIn("Falta com justificativa", texto)
             self.assertIn("Licença para tratamento de saúde", texto)
+            self.assertNotIn("PLL", texto)
             browser.close()
 
 

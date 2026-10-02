@@ -143,7 +143,6 @@ class TestTelaSemDadoFixo(unittest.TestCase):
             browser = p.chromium.launch()
             page = browser.new_page()
             meta = meta_legislatura()
-            banca = meta["n_vereadores"]
             data_coleta = data_coleta_exibida(meta)
             datas_ok: set[str] = set()
             for ano in (2025, 2026):
@@ -166,7 +165,20 @@ class TestTelaSemDadoFixo(unittest.TestCase):
 
             texto = page.inner_text("body")
             if "parlamentar" in texto:
-                self.assertIn(str(banca), texto, "banca da legislatura")
+                leg = json.loads(
+                    (RAIZ / "dados" / "tratados" / "atuacao_vereadores_legislatura.json").read_text(
+                        encoding="utf-8"
+                    )
+                )
+                sessoes = [s for s in (leg.get("sessoes") or []) if s.get("data")]
+                ultima = max(sessoes, key=lambda s: (s.get("data") or "", s.get("id") or 0))
+                banca_sessao = (
+                    int(ultima.get("n_presentes") or 0)
+                    + int(ultima.get("n_faltas_com_justificativa") or 0)
+                    + int(ultima.get("n_faltas_sem_justificativa") or 0)
+                    + int(ultima.get("n_licenca") or 0)
+                )
+                self.assertIn(str(banca_sessao), texto, "banca da ultima sessao")
 
             for href in self._links_sapl(page):
                 m_sess = re.search(r"/sessao/(\d+)", href)
