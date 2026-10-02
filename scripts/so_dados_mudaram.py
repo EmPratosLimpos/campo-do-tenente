@@ -2,9 +2,11 @@
 """Regra so dados mudaram, usada pelo workflow semanal.
 
 Recebe a lista de arquivos alterados e responde se todos sao dados.
-Permite: tudo em dados/ (menos codigo), CHANGELOG.md e config_cidade.json.
+Permite: dentro de dados/ apenas .json, .sha256, .csv e .txt, mais
+CHANGELOG.md e config_cidade.json na raiz.
+A lista e de extensoes permitidas, nao de extensoes proibidas: qualquer
+arquivo de dados/ fora dessa lista reprova, mesmo com extensao nova.
 Nenhum gerador grava em tela/, por isso tela/ reprova.
-Qualquer codigo (.py, .html, .js, .css, .yml, .md fora de CHANGELOG.md) reprova.
 
 A regra aceita exatamente o que o workflow leva no commit:
 git add -- dados config_cidade.json CHANGELOG.md.
@@ -20,7 +22,7 @@ from pathlib import Path
 
 EXATOS_PERMITIDOS = frozenset({"config_cidade.json", "CHANGELOG.md"})
 PREFIXOS_PERMITIDOS = ("dados/",)
-SUFFIXOS_CODIGO = (".py", ".html", ".js", ".css", ".yml", ".yaml", ".md")
+EXTENSOES_PERMITIDAS_DADOS = frozenset({".json", ".sha256", ".csv", ".txt"})
 
 
 def normalizar(caminho: str) -> str:
@@ -41,6 +43,11 @@ def e_dado(normalizado: str) -> bool:
     return False
 
 
+def extensao_permitida(normalizado: str) -> bool:
+    """Dentro de dados/ so passam as extensoes da lista permitida."""
+    return Path(normalizado).suffix.lower() in EXTENSOES_PERMITIDAS_DADOS
+
+
 def arquivos_fora_do_permitido(arquivos: list[str]) -> list[str]:
     fora = []
     for item in arquivos or []:
@@ -50,13 +57,10 @@ def arquivos_fora_do_permitido(arquivos: list[str]) -> list[str]:
         if not e_dado(normal):
             fora.append(normal)
             continue
-        base = normal.lower()
         if normal in EXATOS_PERMITIDOS:
             continue
-        for sufixo in SUFFIXOS_CODIGO:
-            if base.endswith(sufixo):
-                fora.append(normal)
-                break
+        if not extensao_permitida(normal):
+            fora.append(normal)
     vistos = set()
     saida = []
     for item in fora:
@@ -124,7 +128,7 @@ def main(argv: list[str] | None = None) -> int:
     if plano["decisao"] == "publicar":
         print("So dados mudaram.")
         return 0
-    print("Codigo fora de dados:")
+    print("Arquivo fora do permitido so para dados:")
     for item in plano["fora"]:
         print(f"  {item}")
     return 1

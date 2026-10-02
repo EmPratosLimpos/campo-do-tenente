@@ -509,6 +509,32 @@ class TestesSoDados(unittest.TestCase):
             )
         )
 
+    def test_dentro_de_dados_somente_extensoes_permitidas(self):
+        permitidos = [
+            "dados/brutos/lote_20260926/ordemdia_p1.json",
+            "dados/brutos/resumo_insumos.json",
+            "dados/brutos/materias-2026-resposta-original.csv",
+            "dados/tratados/LEIA-ME.txt",
+            "dados/tratados/atuacao_vereadores_2026.json.sha256",
+        ]
+        self.assertTrue(so_dados_mudaram(permitidos))
+        self.assertEqual(arquivos_fora_do_permitido(permitidos), [])
+        reprovados = [
+            "dados/pagina.html",
+            "dados/brutos/fotos_vereadores/1.jpg",
+            "dados/brutos/lote_20260927_atas/materia_274_texto_original.pdf",
+            "dados/icones.svg",
+            "dados/arquivo",
+            "dados/brutos/lote_20260927_noticia_licenca/noticia.xhtml",
+            "dados/brutos/lote_20260927_noticia_licenca/pagina.htm",
+        ]
+        for nome in reprovados:
+            self.assertFalse(so_dados_mudaram([nome]), nome)
+            self.assertEqual(arquivos_fora_do_permitido([nome]), [nome], nome)
+        self.assertFalse(
+            so_dados_mudaram(permitidos + ["dados/brutos/fotos_vereadores/1.jpg"])
+        )
+
     def test_codigo_reprova(self):
         self.assertFalse(so_dados_mudaram(["scripts/atualizar_semana.py"]))
         self.assertFalse(so_dados_mudaram(["index.html"]))
@@ -566,6 +592,16 @@ class TestesPlanejarPublicacao(unittest.TestCase):
     def test_bloquear_codigo_dentro_de_dados_e_tela(self):
         for nome in ("dados/script.py", "dados/relatorio.md", "dados/notas.yml", "tela/painel.json"):
             plano = planejar_publicacao([nome])
+            self.assertEqual(plano["decisao"], "bloquear", nome)
+            self.assertEqual(plano["fora"], [nome], nome)
+
+    def test_bloquear_extensao_fora_da_lista_permitida_em_dados(self):
+        for nome in (
+            "dados/brutos/fotos_vereadores/1.jpg",
+            "dados/pagina.html",
+            "dados/arquivo",
+        ):
+            plano = planejar_publicacao(["dados/tratados/vereadores.json", nome])
             self.assertEqual(plano["decisao"], "bloquear", nome)
             self.assertEqual(plano["fora"], [nome], nome)
 
