@@ -4632,13 +4632,19 @@
 
   function textoExplicacaoTag(tipo, valor, extra) {
     var ex = explicacoesTags();
-    if (ex[tipo]) return ex[tipo];
-    if (ex[valor]) return ex[valor];
     if (tipo === "categoria") {
       var total = numeroCategorias();
       var fixoCat = ex.categoria || "";
       return "Categoria: " + (valor || "") + ". São " + total + " categorias do projeto. " + fixoCat;
     }
+    if (tipo === "cassado") {
+      var dataFimCas = (extra && extra.dataFim) || "";
+      var textoCas = ex.cassado || "";
+      if (dataFimCas) textoCas += " Mandato encerrado em " + formatarData(dataFimCas) + ".";
+      return textoCas.trim();
+    }
+    if (ex[tipo]) return ex[tipo];
+    if (ex[valor]) return ex[valor];
     if (tipo === "turno") {
       if (valor === "1o turno") return ex.turno_1o || valor;
       if (valor === "2o turno") return ex.turno_2o || valor;
@@ -4652,12 +4658,6 @@
       return ((ex.resultado_sem_deliberacao || "") + " Nome oficial no SAPL: " + v + ".").trim();
     }
     if (tipo === "placar") return ex.placar || String(valor || "");
-    if (tipo === "cassado") {
-      var dataFim = (extra && extra.dataFim) || "";
-      var texto = ex.cassado || "";
-      if (dataFim) texto += " Mandato encerrado em " + formatarData(dataFim) + ".";
-      return texto.trim();
-    }
     if (tipo === "situacao") {
       var s = String(valor || "");
       if (/aprov/i.test(s)) return ex.situacao_aprovado || s;
@@ -4717,6 +4717,9 @@
     backdrop.classList.add("ativo");
     backdrop.setAttribute("aria-hidden", "false");
     atualizarOverflowFolhas();
+    if (gatilho && gatilho.setAttribute) {
+      gatilho.setAttribute("aria-expanded", "true");
+    }
     var fechar = document.getElementById("btn-fechar-folha-generica");
     if (fechar) fechar.focus();
   }
@@ -5728,6 +5731,15 @@
     atualizarRotuloBotaoShare();
   }
 
+  function atualizarRotuloBotaoShare() {
+    var btn = document.querySelector('.btn-abrir-share[data-share="vereador"]');
+    if (!btn) return;
+    var v = vereadorAtual();
+    btn.setAttribute("aria-label", v
+      ? "Compartilhar perfil de " + v.nome_parlamentar
+      : "Compartilhar perfil parlamentar");
+  }
+
   function prepararIndices(dados) {
     estado.linksSessao = {};
     (dados.sessoes || []).forEach(function (s) {
@@ -6434,6 +6446,11 @@ var MAPA_VAR_CATEGORIA = {
     }
   }
 
+
+  function folhaShareAberta() {
+    var el = document.getElementById("share-sheet-backdrop");
+    return !!(el && el.classList.contains("ativo"));
+  }
 
   function folhaResumoAberta() {
     var el = document.getElementById("resumo-sheet-backdrop");

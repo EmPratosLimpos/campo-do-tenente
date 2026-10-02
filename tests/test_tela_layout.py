@@ -369,7 +369,7 @@ class TestTelaLayout(unittest.TestCase):
         page.goto(self.base, wait_until="networkidle", timeout=120000)
         page.evaluate(JS_HELPERS)
         page.wait_for_selector("#sel-vereador", state="attached", timeout=60000)
-        page.wait_for_selector("#bloco-votado-sessao .card-header", timeout=60000)
+        page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
         page.wait_for_timeout(400)
 
     def _ir_aba(self, page, secao: str) -> None:
@@ -603,7 +603,7 @@ class TestTelaLayout(unittest.TestCase):
             page.goto(self.base, wait_until="networkidle", timeout=120000)
             page.evaluate(JS_HELPERS)
             page.wait_for_selector("#sel-vereador", state="attached", timeout=60000)
-            page.wait_for_selector("#bloco-votado-sessao .card-header", timeout=60000)
+            page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
             page.click('button[data-secao="vereadores"]')
             page.wait_for_timeout(500)
 

@@ -146,10 +146,11 @@ class TestTagsCaixa(unittest.TestCase):
                 page.wait_for_timeout(300)
                 caixa = page.locator("#folha-generica-backdrop.ativo")
                 self.assertEqual(caixa.count(), 1)
-                self.assertEqual(caixa.get_attribute("role"), "dialog")
+                dialogo = page.locator("#folha-generica")
+                self.assertEqual(dialogo.get_attribute("role"), "dialog")
                 texto = caixa.inner_text()
-                self.assertIn(texto_tag, texto)
                 self.assertIn("categorias do projeto", texto)
+                self.assertIn(texto_tag, texto)
                 self.assertEqual(tag.get_attribute("aria-expanded"), "true")
                 self.assertEqual(
                     tag.get_attribute("aria-controls"), "folha-generica"
@@ -177,6 +178,8 @@ class TestTagsCaixa(unittest.TestCase):
                 page.keyboard.press("Enter")
                 page.wait_for_timeout(300)
                 self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 1)
+                page.keyboard.press("Escape")
+                page.wait_for_timeout(300)
                 tag_cat = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                 texto_cat = tag_cat.inner_text()
                 tag_cat.click()
