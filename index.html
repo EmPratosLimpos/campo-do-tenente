@@ -9,6 +9,10 @@
 <title>Em Pratos Limpos: o que a Câmara de Campo do Tenente vota</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="marca/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="marca/icone-app-180.png">
+<meta name="theme-color" content="#1E7A4C">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -193,6 +197,57 @@
   }
 
   * { box-sizing: border-box; }
+
+  .topo-marca-linha {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 44px;
+  }
+  .site-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--texto);
+    min-height: 44px;
+    min-width: 0;
+    flex: 1;
+  }
+  .site-logo span { font-weight: 400; font-size: 17px; letter-spacing: -0.01em; }
+  .site-logo b { font-weight: 800; font-size: 17px; letter-spacing: -0.01em; }
+  .topo-icones { display: flex; gap: 4px; flex-shrink: 0; }
+  .btn-icone-topo {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border: none;
+    border-radius: 14px;
+    background: transparent;
+    color: var(--texto);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+  .btn-icone-topo:hover { background: var(--superficie-2); }
+  .topo-tagline {
+    margin: 0 0 8px;
+    font-size: var(--t-apoio);
+    color: var(--texto-suave);
+    line-height: 1.4;
+  }
+  .menu-lateral-logo { margin-bottom: 4px; }
+  .menu-lateral-tagline {
+    font-size: var(--t-apoio);
+    color: var(--texto-suave);
+    margin: 0 0 12px;
+    line-height: 1.4;
+  }
+
 
   body {
     margin: 0;
@@ -441,30 +496,26 @@
   }
 
   .alternar-tema {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    z-index: 10000;
+    position: static;
+    top: auto;
+    right: auto;
+    z-index: auto;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: 14px;
+    color: var(--texto);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    min-height: 36px;
-    padding: 0;
-    border: none;
-    background: var(--superficie);
-    border-radius: 12px;
-    color: var(--texto);
-    flex-shrink: 0;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    box-shadow: none;
   }
-
-  .alternar-tema:hover {
-    background: var(--superficie-2);
-  }
+  .alternar-tema:hover { background: var(--superficie-2); }
 
   .share-sheet-backdrop {
     position: fixed;
@@ -3362,19 +3413,12 @@
 </style>
 </head>
 <body>
-  <button type="button" class="alternar-tema" id="btn-tema" aria-pressed="false" aria-label="Alternar para modo escuro">
-          <svg class="icone-lua" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          <svg class="icone-sol" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </button>
 <a class="pular-conteudo" href="#conteudo-principal">Pular para conteúdo</a>
 <div class="pagina">
   <aside class="menu-lateral" id="menu-lateral" aria-label="Menu do painel">
     <div class="menu-lateral-cabeca">
-      <div class="menu-lateral-titulo-linha">
-        <p class="menu-lateral-titulo">Em Pratos Limpos</p>
-        
-      </div>
-      <div class="selo-sapl menu-lateral-selo"><span class="ponto-status" aria-hidden="true"></span>Dados oficiais do SAPL</div>
+      <div class="menu-lateral-logo"><a class="site-logo" href="https://www.empratoslimpos.com" rel="noopener"><svg class="logo-simbolo" width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="21" fill="none" stroke="var(--marca)" stroke-width="4" opacity=".35"/><path d="M32 11A21 21 0 1 1 11.8 37.6" fill="none" stroke="var(--marca)" stroke-width="7" stroke-linecap="round"/><circle cx="32" cy="32" r="9" fill="var(--marca)"/></svg><span>Em</span><b>Pratos Limpos</b></a></div>
+      <p class="menu-lateral-tagline" id="menu-lateral-tagline"></p>
     </div>
     <nav class="menu-lateral-nav" id="menu-lateral-nav" aria-label="Seções do painel">
       <button type="button" class="ativo" data-secao-lateral="camara">Câmara</button>
@@ -3390,14 +3434,11 @@
     <p>Consulte o painel oficial: <a href="https://empratoslimpos.github.io/campo-do-tenente/">https://empratoslimpos.github.io/campo-do-tenente/</a></p>
   </section>
   <header class="topo-fixo">
-    <div class="topo-util">
-      <div class="topo-acoes">
-        
-      </div>
+    <div class="topo-marca-linha">
+      <a class="site-logo" href="https://www.empratoslimpos.com" rel="noopener"><svg class="logo-simbolo" width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="21" fill="none" stroke="var(--marca)" stroke-width="4" opacity=".35"/><path d="M32 11A21 21 0 1 1 11.8 37.6" fill="none" stroke="var(--marca)" stroke-width="7" stroke-linecap="round"/><circle cx="32" cy="32" r="9" fill="var(--marca)"/></svg><span>Em</span><b>Pratos Limpos</b></a>
+      <div class="topo-icones"><button type="button" class="btn-icone-topo btn-abrir-share btn-compartilhar-topo" data-share="site" aria-label="Compartilhar" aria-haspopup="dialog" aria-controls="share-sheet"><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-compartilhar"/></svg></button><button type="button" class="alternar-tema btn-icone-topo" id="btn-tema" aria-pressed="false" aria-label="Alternar para modo escuro"><svg class="icone-lua ic" width="22" height="22" aria-hidden="true"><use href="#ic-tema-escuro"/></svg><svg class="icone-sol ic" width="22" height="22" aria-hidden="true"><use href="#ic-tema-claro"/></svg></button></div>
     </div>
-    <div class="cabecalho-bloco">
-      <h1 class="titulo-site">Em Pratos Limpos</h1>
-      <div class="selo-sapl"><span class="ponto-status" aria-hidden="true"></span>Dados oficiais do SAPL</div>
+    <p class="topo-tagline" id="topo-tagline"></p>
       <p class="subtitulo-site">O que a Câmara de Campo do Tenente vota, e como cada vereador votou</p>
     </div>
 <div class="sub-camara ativo" id="sub-camara">
@@ -3704,6 +3745,14 @@
       ? CONFIG_CIDADE.cidade.nome : "município";
   }
 
+  function atualizarTaglines() {
+    var linha = "Painel independente sobre a Câmara de " + nomeCidade();
+    ["topo-tagline", "menu-lateral-tagline"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = linha;
+    });
+  }
+
   function rotuloCidadeCamara() {
     return "O que a Câmara de " + nomeCidade();
   }
@@ -3738,6 +3787,7 @@
       return r.json();
     }).then(function (cfg) {
       CONFIG_CIDADE = cfg;
+      atualizarTaglines();
       ANOS_RECORTE = (cfg.recorte && cfg.recorte.anos) ? cfg.recorte.anos.slice() : ANOS_RECORTE;
       SAPL_ORIGEM = cfg.sapl.endereco_base.replace(/\/$/, "");
       PORTAL_OFICIAL = cfg.painel.endereco_publico.replace(/\/$/, "");
@@ -3839,7 +3889,8 @@
         var painel = footer.closest(".painel-camara-interno");
         comLink = painel && painel.id === "painel-periodo-sessao" && linkSessao;
       }
-      var html = "<p>Dado coletado em <strong>" + esc(data) + "</strong>. Fonte: ";
+      var prefixo = "<p>Projeto independente e apartidário, sem ligação com a Câmara ou a Prefeitura. Os dados são públicos e vêm do SAPL.</p>";
+      var html = prefixo + "<p>Dado coletado em <strong>" + esc(data) + "</strong>. Fonte: ";
       if (comLink) {
         html += '<a href="' + esc(linkSessao) + '" target="_blank" rel="noopener noreferrer">' + esc(fonte) + "</a>";
       } else {
@@ -6659,36 +6710,6 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     }
 
     
-    function ajustarPosicaoVereadores() {
-      var subVer = document.getElementById("sub-vereadores");
-      var cabecalho = document.querySelector(".cabecalho-bloco");
-      var painelVer = document.getElementById("painel-vereadores");
-      var topoFixo = document.querySelector(".topo-fixo");
-      var subCamara = document.getElementById("sub-camara");
-      
-      if (estadoUI.secao === "vereadores") {
-        if (window.innerWidth >= 900) {
-          if (cabecalho.parentElement !== painelVer) {
-            painelVer.insertBefore(subVer, painelVer.firstChild);
-            painelVer.insertBefore(cabecalho, subVer);
-          }
-        } else {
-          if (cabecalho.parentElement !== topoFixo) {
-            topoFixo.insertBefore(cabecalho, subCamara);
-            topoFixo.appendChild(subVer);
-          }
-        }
-      } else {
-        if (cabecalho.parentElement !== topoFixo) {
-          topoFixo.insertBefore(cabecalho, subCamara);
-          topoFixo.appendChild(subVer);
-        }
-      }
-    }
-    
-    window.addEventListener("resize", function() {
-      if (estadoUI.secao === "vereadores") ajustarPosicaoVereadores();
-    });
 
     function trocarSecao(secao) {
       estadoUI.secao = secao;
@@ -6709,7 +6730,6 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       subCamara.classList.toggle("ativo", secao === "camara");
       subVereadores.classList.toggle("ativo", secao === "vereadores");
       atualizarRotuloBotaoShare();
-      ajustarPosicaoVereadores();
       atualizarTopoCompacto();
     }
 
@@ -6784,7 +6804,6 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       trocarSecao("vereadores");
     } else {
       atualizarRotuloBotaoShare();
-      ajustarPosicaoVereadores();
     }
   }
 
