@@ -7,7 +7,7 @@
 | Versão | 1.0 (documento definitivo) |
 | Data de vigência | 16 de setembro de 2026 |
 | Repositório | `EmPratosLimpos/campo-do-tenente` |
-| Ambiente de produção | `https://empratoslimpos.github.io/campo-do-tenente/` (GitHub Pages) |
+| Ambiente de produção | `https://empratoslimpos.com/` (GitHub Pages com domínio próprio) |
 | Branch de produção | `main` (protegida) |
 | Branch de integração | `desenvolvimento` |
 | Classificação | Público (o projeto é cívico e auditável por qualquer cidadão) |
@@ -751,11 +751,12 @@ Nenhum agente de IA (Claude, Cursor, Grok, DeepSeek, Copilot, ou qualquer outro)
 | Hospedagem | GitHub Pages |
 | Fonte | Branch `main` |
 | Gatilho | Merge de Pull Request aprovado |
-| URL de produção | `https://empratoslimpos.github.io/campo-do-tenente/` |
+| URL de produção | `https://empratoslimpos.com/` |
+| Domínio próprio | Definido pelo arquivo `CNAME` na raiz, criado pelo GitHub. Não apagar nem alterar esse arquivo. |
 | Natureza | Site estático, sem backend, sem banco de dados, sem sessão de usuário |
 | Tempo típico de propagação | 1 a 5 minutos |
 
-**Fluxo de publicação:** o merge de um Pull Request aprovado para `main`, feito exclusivamente pelo mantenedor, é o que publica o site. O GitHub Pages lê a `main` e atualiza a URL de produção sozinho. Não existe deploy manual, não existe outra hospedagem e nenhum agente ou automação publica por conta própria.
+**Fluxo de publicação:** o merge de um Pull Request aprovado para `main`, feito exclusivamente pelo mantenedor, é o que publica o site. O GitHub Pages lê a `main` e atualiza a URL de produção sozinho. O site é servido pelo GitHub Pages com o domínio próprio empratoslimpos.com, definido pelo arquivo `CNAME` na raiz, criado pelo GitHub: esse arquivo não deve ser apagado nem alterado. O endereço antigo no endereço do projeto redireciona para o domínio próprio. Não existe deploy manual, não existe outra hospedagem e nenhum agente ou automação publica por conta própria.
 
 A ausência de backend é uma decisão arquitetural de segurança: sem servidor de aplicação, não há injeção de SQL, não há desserialização insegura, não há gestão de sessão vulnerável e não há superfície de execução remota. A superfície de ataque residual concentra-se no navegador do visitante, e é exatamente essa superfície que a CSP estrita e o `esc()` endereçam.
 
@@ -784,8 +785,8 @@ Obrigatório em **toda** publicação, sem exceção. Deve iniciar em até 10 mi
 Verificação objetiva:
 
 ```bash
-curl -I https://empratoslimpos.github.io/campo-do-tenente/
-curl -sI https://empratoslimpos.github.io/campo-do-tenente/dados/tratados/atuacao_vereadores_2026.json
+curl -I https://empratoslimpos.com/
+curl -sI https://empratoslimpos.com/dados/tratados/atuacao_vereadores_2026.json
 ```
 
 #### 5.3.2 Integridade dos dados ao vivo
@@ -798,8 +799,8 @@ curl -sI https://empratoslimpos.github.io/campo-do-tenente/dados/tratados/atuaca
 - [ ] Contagem ao vivo: projetos de lei (PLEG e PLEX) respeitam o piso mínimo do ano (config_cidade.json).
 
 ```bash
-curl -sO https://empratoslimpos.github.io/campo-do-tenente/dados/tratados/atuacao_vereadores_2026.json
-curl -sO https://empratoslimpos.github.io/campo-do-tenente/dados/tratados/atuacao_vereadores_2026.json.sha256
+curl -sO https://empratoslimpos.com/dados/tratados/atuacao_vereadores_2026.json
+curl -sO https://empratoslimpos.com/dados/tratados/atuacao_vereadores_2026.json.sha256
 sha256sum -c atuacao_vereadores_2026.json.sha256
 ```
 

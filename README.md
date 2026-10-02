@@ -2,7 +2,9 @@
 
 Painel cívico, aberto e gratuito que mostra, a partir dos registros oficiais, o que a Câmara Municipal de Campo do Tenente votou, quem estava presente em cada sessão e como cada vereador votou quando o voto individual foi registrado.
 
-**Endereço do painel (em construção):** https://empratoslimpos.github.io/campo-do-tenente/
+**Endereço do painel (em construção):** https://empratoslimpos.com/
+
+O painel é servido pelo GitHub Pages com o domínio próprio empratoslimpos.com. O arquivo `CNAME` na raiz do repositório, criado pelo GitHub, diz qual é esse domínio: ele não deve ser apagado nem alterado. O endereço antigo no endereço do projeto continua funcionando e leva para o novo.
 
 O painel ainda não publicou nenhum dado. Os números finais só vão aparecer depois da coleta completa, da conferência automática e da aprovação do mantenedor. Enquanto isso, o endereço acima pode estar vazio ou mostrar uma página provisória.
 
