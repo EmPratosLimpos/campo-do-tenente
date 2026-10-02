@@ -160,6 +160,49 @@ def rotulos_especiais_tema(cfg: dict | None = None) -> dict:
     return saida
 
 
+def tipos_tramitacao_coleta(cfg: dict | None = None) -> list[str]:
+    """Siglas da coleta de tramitacao (C8). Nenhuma sigla fixa no codigo."""
+    cfg = cfg if cfg is not None else carregar_config()
+    lista = (cfg.get("tramitacao") or {}).get("tipos_coleta")
+    if not isinstance(lista, list) or not lista:
+        raise SystemExit("config_cidade.json: tramitacao.tipos_coleta deve ser uma lista com ao menos uma sigla.")
+    saida = []
+    for sigla in lista:
+        texto = str(sigla or "").strip()
+        if not texto:
+            raise SystemExit("config_cidade.json: tramitacao.tipos_coleta com sigla vazia.")
+        saida.append(texto)
+    return saida
+
+
+def tipos_proposicoes(cfg: dict | None = None) -> list[str]:
+    cfg = cfg if cfg is not None else carregar_config()
+    lista = (cfg.get("tramitacao") or {}).get("tipos_proposicoes")
+    if not isinstance(lista, list) or not lista:
+        raise SystemExit("config_cidade.json: tramitacao.tipos_proposicoes ausente.")
+    return [str(sigla or "").strip() for sigla in lista]
+
+
+def tipos_executivo(cfg: dict | None = None) -> list[str]:
+    cfg = cfg if cfg is not None else carregar_config()
+    lista = (cfg.get("tramitacao") or {}).get("tipos_executivo")
+    if not isinstance(lista, list) or not lista:
+        raise SystemExit("config_cidade.json: tramitacao.tipos_executivo ausente.")
+    return [str(sigla or "").strip() for sigla in lista]
+
+
+def piso_status_decodificados(cfg: dict | None = None) -> int:
+    cfg = cfg if cfg is not None else carregar_config()
+    valor = (cfg.get("tramitacao") or {}).get("piso_status_decodificados")
+    if valor is None:
+        raise PisoNaoDefinido(
+            "O piso 'piso_status_decodificados' ainda nao foi definido em config_cidade.json. "
+            "O mantenedor precisa definir esse valor depois da coleta. "
+            "Nao vou seguir com um numero inventado."
+        )
+    return int(valor)
+
+
 def user_agent_http(cfg: dict | None = None) -> str:
     slug = nome_cidade(cfg).lower().replace(" ", "-")
     return f"painel-camara-{slug}/0.1 (projeto de transparencia)"

@@ -60,6 +60,8 @@ def pasta_lote_origem(brutos: Path, anos: list[int]) -> Path:
         nome = caminho.name
         if "porsessao" in nome or nome.endswith("_autoria"):
             continue
+        if nome.lower().endswith("_tramitacao") or "sondagem" in nome.lower():
+            continue
         if all((caminho / nome_arquivo).is_file() for nome_arquivo in necessarios):
             candidatas.append(caminho)
     if not candidatas:
