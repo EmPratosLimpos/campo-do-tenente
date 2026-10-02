@@ -23,6 +23,16 @@ Entradas:
     dados/tratados/vereadores.json (nomes e mandatos)
     dados/tratados/atuacao_vereadores_<ano>.json (votacoes ordinarias)
 
+Por materia do Executivo (D-058) acrescentamos mais tres coisas, sempre do
+SAPL e nunca deduzidas:
+
+    votacao_tipo do voto valido, pelo campo tipo_votacao do item da Ordem do
+    Dia ligado ao registro de votacao (votacao_tipo);
+    tipo e situacao do veto, pelo começo da ementa oficial e pelo resultado do
+    voto valido do proprio veto (veto_tipo e veto_situacao);
+    materia_vetada_id, so quando numero e ano citados na ementa do veto levam
+    a UMA unica materia do SAPL (materia_vetada_id).
+
 Saidas (chamado por gerar_dados_tela.py):
     dados/tratados/proposicoes_<ano>.json e proposicoes_legislatura.json
     dados/tratados/executivo_<ano>.json e executivo_legislatura.json
@@ -37,7 +47,9 @@ Uso:
 from __future__ import annotations
 
 import json
+import re
 import sys
+import unicodedata
 from collections import Counter
 from pathlib import Path
 
@@ -57,6 +69,7 @@ from config_cidade import (  # noqa: E402
     tipos_dois_turnos,
     tipos_executivo,
     tipos_proposicoes,
+    tipos_veto,
 )
 from derivar_insumos import BRUTOS, pasta_lote_mais_recente  # noqa: E402
 from gerar_atuacao_vereadores import (  # noqa: E402
@@ -84,9 +97,29 @@ ROTULO_SEM_VOTO_VALIDO = "votacao registrada sem voto valido (so 1o turno ou sem
 ROTULO_SEM_VOTO_INDIVIDUAL = "votacao registrada sem voto nominal no SAPL"
 ROTULO_SEM_TRAMITACAO = "sem tramitacao registrada no SAPL"
 ROTULO_VETADA_SEM_ESTRUTURA = "sem indicacao estruturada no SAPL, ver ementa"
+ROTULO_VETADA_LIGADA = "numero e ano da ementa levam a uma unica materia do SAPL"
 SITUACAO_EM_TRAMITACAO = "Em tramitacao"
 SITUACAO_SEM_REGISTRO = "Sem registro de votação nem de tramitação no SAPL"
 SITUACAO_STATUS_SEM_TEXTO = "status de tramitacao sem texto oficial no SAPL"
+VOTACAO_TIPO_NOMINAL = "nominal"
+VOTACAO_TIPO_SIMBOLICA = "simbolica"
+VOTACAO_TIPO_NAO_INFORMADO = "nao informado no SAPL"
+VETO_TIPO_TOTAL = "total"
+VETO_TIPO_PARCIAL = "parcial"
+VETO_TIPO_NAO_INFORMADO = "nao informado"
+VETO_DERRUBADO = "Veto derrubado"
+VETO_MANTIDO = "Veto mantido"
+VETO_AINDA_VAI_VOTAR = "Camara ainda vai votar"
+PREFIXOS_VETO = (
+    ("VETO INTEGRAL", VETO_TIPO_TOTAL),
+    ("VETO TOTAL", VETO_TIPO_TOTAL),
+    ("VETO PARCIAL", VETO_TIPO_PARCIAL),
+)
+PREFIXO_PROJETO = "PROJETO DE LEI"
+REFERENCIA_PROJETO = re.compile(
+    r"(?:\bPROJETO\s+DE\s+LEI|\bPL)\s*(?:N[.º°]?\s*)?(\d{1,4})"
+    r"(?:\s*(?:[,/\-]\s*)?DE\s+|\s*/\s*)(\d{4})?"
+)
 FONTE_VOTACAO = "votacao"
 FONTE_TRAMITACAO = "tramitacao"
 FONTE_FICHA = "ficha_sapl"
@@ -225,6 +258,245 @@ def carregar_historico(pasta: Path) -> dict[int, list[dict]]:
                 }
             )
     return historico
+
+
+def sem_acento(texto) -> str:
+    """Texto em maiuscula e sem acento, para comparar com a grafia do SAPL."""
+    return "".join(
+        caractere
+        for caractere in unicodedata.normalize("NFD", str(texto or ""))
+        if unicodedata.category(caractere) != "Mn"
+    ).upper()
+
+
+def carregar_tipos_votacao_oficial() -> dict[int, str]:
+    """Nome oficial de cada tipo de votacao, se a tabela estiver nos brutos.
+
+    D-058: quando existe a tabela tipovotacao do SAPL, o codigo do item da
+    Ordem do Dia vira rotulo pelo texto oficial. Sem tabela, a funcao
+    devolve vazio e quem decide o rotulo e o proprio registro de votacao.
+    """
+    achados: list[Path] = []
+    for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
+        if pasta.is_dir():
+            achados.extend(sorted(pasta.glob("tipovotacao_p*.json")))
+    achados.extend(sorted(DIR_BRUTOS.glob("tipovotacao_p*.json")))
+    saida: dict[int, str] = {}
+    for caminho in achados:
+        for item in carregar_json(caminho).get("results") or []:
+            if not isinstance(item, dict) or item.get("id") is None:
+                continue
+            nome = str(item.get("nome") or item.get("descricao") or "").strip()
+            if nome:
+                saida[int(item["id"])] = nome
+    return saida
+
+
+def carregar_ordens_do_dia() -> dict[tuple[int, int], dict]:
+    """Item da Ordem do Dia por (sessao, id do item), dos brutos por sessao.
+
+    D-058: o proprio SAPL faz a ligacao. O registro de votacao traz o id do
+    item da ordem no campo ordem, e o item traz o campo tipo_votacao. Nada
+    e casado por numero de materia nem por data.
+    """
+    saida: dict[tuple[int, int], dict] = {}
+    for caminho in sorted(DIR_BRUTOS.glob("sessao_*_ordemdia.json")):
+        partes = caminho.name.split("_")
+        try:
+            sessao_id = int(partes[1])
+        except (IndexError, ValueError):
+            continue
+        for item in carregar_json(caminho).get("results") or []:
+            if not isinstance(item, dict) or item.get("id") is None:
+                continue
+            saida[(sessao_id, int(item["id"]))] = {
+                "tipo_votacao": item.get("tipo_votacao"),
+                "resultado_item_sapl": item.get("resultado") or "",
+            }
+    if not saida:
+        raise SystemExit(
+            "Nenhum item de Ordem do Dia em dados/brutos. "
+            "O tipo de votacao nao pode ser lido."
+        )
+    return saida
+
+
+def codigo_do_item_da_ordem(registro: dict, ordens: dict[tuple[int, int], dict]):
+    """Codigo tipo_votacao do item da Ordem do Dia ligado a uma votacao."""
+    if not ordens:
+        return None
+    sessao_id = registro.get("sessao_id")
+    if sessao_id is None or registro.get("ordem") is None:
+        return None
+    item = ordens.get((int(sessao_id), int(registro["ordem"])))
+    if item is None:
+        return None
+    codigo = item.get("tipo_votacao")
+    return int(codigo) if codigo is not None else None
+
+
+def rotulo_do_nome_oficial(nome: str) -> str:
+    """Rotulo de votacao pelo nome oficial da tabela tipovotacao do SAPL."""
+    texto = sem_acento(nome)
+    if texto.startswith("NOMINAL"):
+        return VOTACAO_TIPO_NOMINAL
+    if texto.startswith("SIMB"):
+        return VOTACAO_TIPO_SIMBOLICA
+    return VOTACAO_TIPO_NAO_INFORMADO
+
+
+def rotulos_votacao_confirmados(
+    votacoes: dict[int, list[dict]],
+    ordens: dict[tuple[int, int], dict],
+    oficial: dict[int, str],
+) -> dict[int, str]:
+    """Rotulo de cada codigo tipo_votacao, confirmado pelos proprios votos.
+
+    D-058: a tabela oficial tem prioridade. Sem ela, o codigo so vira rotulo
+    quando os votos validos ligados a ele concordam entre si: todo voto com
+    voto individual registrado e nominal, todo voto sem voto individual e
+    simbolica. Codigo sem votacao valida ligado, ou com evidencia que se
+    contradiz, fica de fora do mapa e vira nao informado no SAPL.
+    """
+    if oficial:
+        saida: dict[int, str] = {}
+        for codigo, nome in oficial.items():
+            rotulo = rotulo_do_nome_oficial(nome)
+            if rotulo != VOTACAO_TIPO_NAO_INFORMADO:
+                saida[int(codigo)] = rotulo
+        return saida
+    evidencia: dict[int, set[bool]] = {}
+    for registros in votacoes.values():
+        for registro in registros:
+            if not voto_valido(registro):
+                continue
+            codigo = codigo_do_item_da_ordem(registro, ordens)
+            if codigo is None:
+                continue
+            estado = bool(registro.get("voto_individual_registrado"))
+            evidencia.setdefault(codigo, set()).add(estado)
+    saida: dict[int, str] = {}
+    for codigo, estados in evidencia.items():
+        if len(estados) != 1:
+            continue
+        saida[codigo] = (
+            VOTACAO_TIPO_NOMINAL
+            if next(iter(estados))
+            else VOTACAO_TIPO_SIMBOLICA
+        )
+    return saida
+
+
+def votacao_tipo_de(
+    registro: dict | None,
+    ordens: dict[tuple[int, int], dict],
+    rotulos: dict[int, str],
+) -> str:
+    """Rotulo do tipo de votacao do voto valido. Ausencia vira rotulo."""
+    if registro is None:
+        return VOTACAO_TIPO_NAO_INFORMADO
+    codigo = codigo_do_item_da_ordem(registro, ordens)
+    if codigo is None:
+        return VOTACAO_TIPO_NAO_INFORMADO
+    return rotulos.get(int(codigo), VOTACAO_TIPO_NAO_INFORMADO)
+
+
+def veto_tipo_de(ementa: str) -> str:
+    """Integral, parcial ou nao informado, pelo começo da ementa oficial.
+
+    Nao ha dicionario de veto no codigo: o rotulo vem da frase que o SAPL
+    escreveu na ementa. Ementa que nao comeca com nenhuma delas fica como
+    nao informado.
+    """
+    texto = sem_acento(ementa).strip()
+    for prefixo, rotulo in PREFIXOS_VETO:
+        if texto.startswith(prefixo):
+            return rotulo
+    return VETO_TIPO_NAO_INFORMADO
+
+
+def veto_situacao_de(votacao: dict | None) -> str:
+    """Situacao do veto pelo resultado do voto valido do proprio veto.
+
+    Rejeitado derruba o veto, Aprovado mantem. Sem voto valido, a Camara
+    ainda vai votar. Nenhum outro resultado e deduzido: o script para.
+    """
+    if votacao is None:
+        return VETO_AINDA_VAI_VOTAR
+    oficial = votacao.get("situacao_oficial_sapl")
+    if oficial == "Rejeitado":
+        return VETO_DERRUBADO
+    if oficial == "Aprovado":
+        return VETO_MANTIDO
+    raise SystemExit(
+        f"Voto do veto {votacao.get('registro_votacao_id')} com resultado "
+        f"'{oficial}', fora de Aprovado e Rejeitado. Nao vou deduzir a "
+        "situacao do veto."
+    )
+
+
+def referencia_da_ementa(ementa: str) -> tuple[str | None, str | None]:
+    """Numero e ano do projeto citado na ementa do veto, ou (None, None)."""
+    achado = REFERENCIA_PROJETO.search(sem_acento(ementa))
+    if achado is None:
+        return None, None
+    return achado.group(1), achado.group(2)
+
+
+def numero_normalizado(numero) -> str:
+    """Numero de materia sem zero a esquerda. A ementa do SAPL escreve 008/2025.
+
+    A ficha e a ementa precisam apontar para a mesma chave: sem isso, um
+    veto com numero com zero a esquerda nunca encontraria a materia.
+    """
+    texto = str(numero or "").strip()
+    if texto.isdigit():
+        return str(int(texto))
+    return texto
+
+
+def materia_vetada_de(
+    ementa: str, indice: dict[str, list[int]]
+) -> int | None:
+    """Materia citada na ementa do veto, so quando ela e unica.
+
+    D-058: numero e ano precisam levar a UMA unica materia de projeto de lei
+    do SAPL. Divergencia de numeracao da Prefeitura, materia ambigua ou
+    referencia sem ano deixa o campo nulo. Nao existe tentativa de adivinhar
+    pelo texto da ementa.
+    """
+    numero, ano = referencia_da_ementa(ementa)
+    if not numero or not ano:
+        return None
+    candidatos = indice.get(f"{ano}|{numero_normalizado(numero)}") or []
+    if len(candidatos) != 1:
+        return None
+    return int(candidatos[0])
+
+
+def indexar_projetos(
+    fichas: dict[int, dict], siglas_por_tipo: dict[int, str], catalogo: dict[str, str]
+) -> dict[str, list[int]]:
+    """Projetos de lei do SAPL por ano e numero, lidos do catalogo oficial.
+
+    D-058: so entra materia cujo nome oficial de tipo, lido do catalogo do
+    SAPL, e projeto de lei. O SAPL repete numero entre tipos, entao a
+    busca por ano e numero ainda pode achar mais de uma materia, e nesse
+    caso o veto fica sem materia_vetada_id.
+    """
+    indice: dict[str, list[int]] = {}
+    for materia_id, ficha in sorted(fichas.items()):
+        tipo_id = ficha.get("tipo_id")
+        sigla = siglas_por_tipo.get(int(tipo_id)) if tipo_id is not None else None
+        nome = sem_acento(catalogo.get(str(sigla or ""), ""))
+        if PREFIXO_PROJETO not in nome:
+            continue
+        numero = numero_normalizado(ficha.get("numero"))
+        ano = str(ficha.get("ano") or "").strip()
+        if not numero or not ano:
+            continue
+        indice.setdefault(f"{ano}|{numero}", []).append(int(materia_id))
+    return indice
 
 
 def escolher_ultima(itens: list[dict]) -> dict | None:
@@ -410,23 +682,29 @@ def rotulo_de_votacao(votacao: dict | None, registradas: list[dict]) -> str | No
 
 
 def montar_votacao(
-    materia_id: int, votacoes: dict[int, list[dict]]
+    materia_id: int,
+    votacoes: dict[int, list[dict]],
+    ordens: dict[tuple[int, int], dict] | None = None,
 ) -> tuple[dict | None, str | None]:
     """Votacao que define a materia, ou rotulo de ausencia.
 
     Escolhe a mais recente entre as validas. Materia sem voto valido
-    devolve o rotulo, nunca aprovacao deduzida.
+    devolve o rotulo, nunca aprovacao deduzida. Passando os itens da Ordem
+    do Dia, o codigo tipo_votacao do item ligado entra como numero cru
+    (D-058); sem eles o campo nem entra, porque so o grupo Executivo usa.
+    Quem vira rotulo e o voto, nunca o codigo.
     """
     registros = votacoes.get(int(materia_id)) or []
     escolhida = escolher_votacao(votacoes_validas(registros))
     if escolhida is None:
         return None, ROTULO_SEM_VOTACAO
     totais = escolhida.get("totais_oficiais") or {}
-    return {
+    votacao = {
         "data_sessao": escolhida.get("data_sessao"),
         "sessao_id": escolhida.get("sessao_id"),
         "registro_votacao_id": escolhida.get("id"),
         "turno": escolhida.get("turno"),
+        "tipo_votacao_codigo": codigo_do_item_da_ordem(escolhida, ordens or {}),
         "resultado_texto_sapl": escolhida.get("resultado_texto_sapl"),
         "situacao_oficial_sapl": escolhida.get("situacao_oficial_sapl"),
         "frase_resultado_sapl": escolhida.get("frase_resultado_sapl"),
@@ -439,7 +717,11 @@ def montar_votacao(
         "voto_individual_registrado": bool(escolhida.get("voto_individual_registrado")),
         "link_sessao": escolhida.get("link_sessao"),
         "link_materia": escolhida.get("link_materia"),
-    }, None
+    }
+    # O codigo do item da Ordem do Dia so entra no grupo Executivo.
+    if not ordens:
+        votacao.pop("tipo_votacao_codigo")
+    return votacao, None
 
 
 def registrar_votacoes(registros: list[dict]) -> list[dict]:
@@ -559,6 +841,23 @@ class Base:
         }
         self.vereadores = carregar_vereadores()
         self.por_sigla = self._agrupar_por_sigla()
+        self.ordens_do_dia = carregar_ordens_do_dia()
+        self.tipos_votacao_oficial = carregar_tipos_votacao_oficial()
+        self.siglas_veto = set(tipos_veto(self.cfg))
+        self.projetos = indexar_projetos(
+            self.fichas, self.siglas_por_tipo, self.catalogo
+        )
+
+    def rotulos_votacao(self, votacoes: dict[int, list[dict]]) -> dict[int, str]:
+        """Rotulo de cada codigo tipo_votacao, pela tabela oficial ou pelos votos.
+
+        D-058: a tabela tipovotacao do SAPL manda quando existe. Sem ela, o
+        rotulo so sai quando os votos validos do proprio codigo concordam
+        entre si sobre o voto individual.
+        """
+        return rotulos_votacao_confirmados(
+            votacoes, self.ordens_do_dia, self.tipos_votacao_oficial
+        )
 
     def _agrupar_por_sigla(self) -> dict[str, list[int]]:
         agrupado: dict[str, list[int]] = {}
@@ -587,6 +886,7 @@ class Base:
         unidades: dict[int, str],
         votacoes: dict[int, list[dict]],
         dois_turnos: set[str],
+        rotulos_por_codigo: dict[int, str],
     ) -> dict:
         ficha = self.fichas.get(int(materia_id)) or {}
         numero = ficha.get("numero")
@@ -595,7 +895,11 @@ class Base:
         ultima, rotulo_tram = montar_ultima_tramitacao(
             int(materia_id), historico, status, unidades
         )
-        votacao, _rotulo_descartado = montar_votacao(int(materia_id), votacoes)
+        votacao, _rotulo_descartado = montar_votacao(
+            int(materia_id),
+            votacoes,
+            self.ordens_do_dia if grupo == "executivo" else None,
+        )
         registradas = registrar_votacoes(registros)
         tema, revisada = tema_da_materia(int(materia_id), self.indice_temas)
         valida = escolher_votacao(votacoes_validas(registros))
@@ -643,8 +947,19 @@ class Base:
             "link_sapl": link_materia(int(materia_id), self.cfg),
         }
         if grupo == "executivo":
+            item["votacao_tipo"] = votacao_tipo_de(
+                valida, self.ordens_do_dia, rotulos_por_codigo
+            )
             item["materia_vetada_id"] = None
             item["materia_vetada_rotulo"] = ROTULO_VETADA_SEM_ESTRUTURA
+            if sigla in self.siglas_veto:
+                ementa = ficha.get("ementa") or ""
+                item["veto_tipo"] = veto_tipo_de(ementa)
+                item["veto_situacao"] = veto_situacao_de(votacao)
+                vetada = materia_vetada_de(ementa, self.projetos)
+                if vetada is not None:
+                    item["materia_vetada_id"] = vetada
+                    item["materia_vetada_rotulo"] = ROTULO_VETADA_LIGADA
         return item
 
 
@@ -707,6 +1022,14 @@ def conferir_periodos(blocos: tuple[list, list, list], total: int) -> None:
             raise SystemExit(f"Item de periodo ausente no todo: {fora}")
 
 
+def contagem_de(itens: list[dict], chave: str) -> dict:
+    """Contagem por valor do campo, em ordem de quantidade e depois de nome."""
+    valores = [str(item.get(chave)) for item in itens if item.get(chave)]
+    return dict(
+        sorted(Counter(valores).items(), key=lambda par: (-par[1], par[0]))
+    )
+
+
 def meta_de(
     grupo: str,
     escopo: dict,
@@ -722,7 +1045,7 @@ def meta_de(
     """
     contagem = Counter(item["situacao_final"] for item in itens)
     por_fonte = Counter(item["situacao_final_fonte"] for item in itens)
-    return {
+    meta = {
         "gerado_por": SCRIPT_REL,
         **escopo,
         "grupo": grupo,
@@ -762,6 +1085,52 @@ def meta_de(
             "O campo situacao_final_fonte diz de onde cada uma veio."
         ),
     }
+    meta.update(meta_do_executivo(itens))
+    return meta
+
+
+def meta_do_executivo(itens: list[dict]) -> dict:
+    """Contagens do D-058, que so existem nas materias do Executivo.
+
+    As chaves ficam fora do arquivo quando a contagem fica vazia, para o
+    arquivo das proposicoes continuar igual ao que era.
+    """
+    por_votacao_tipo = contagem_de(itens, "votacao_tipo")
+    if not por_votacao_tipo:
+        return {}
+    saida: dict = {
+        "por_votacao_tipo": por_votacao_tipo,
+        "rotulo_votacao_tipo_nao_informado": VOTACAO_TIPO_NAO_INFORMADO,
+        "observacao_executivo": (
+            "D-058: votacao_tipo vem do campo tipo_votacao do item da Ordem "
+            "do Dia ligado ao registro de votacao, com o mesmo id que o "
+            "SAPL usa. O codigo vira rotulo pela tabela oficial tipovotacao "
+            "quando ela esta nos brutos. Sem tabela, o rotulo so sai quando "
+            "todos os votos validos daquele codigo concordam sobre o voto "
+            "individual: com voto individual e nominal, sem voto individual "
+            "e simbolica. Codigo sem confirmacao, materia sem voto valido e "
+            "item da Ordem do Dia ausente ficam como nao informado no SAPL. "
+            "Nos vetos, veto_tipo vem do começo da ementa oficial, "
+            "veto_situacao vem do resultado do voto valido do proprio veto, "
+            "e materia_vetada_id so quando numero e ano citados na ementa "
+            "levam a uma unica materia de projeto de lei do SAPL."
+        ),
+    }
+    vetoes = [item for item in itens if "veto_situacao" in item]
+    if vetoes:
+        saida["veto_derrotados"] = sum(
+            1 for item in vetoes if item["veto_situacao"] == VETO_DERRUBADO
+        )
+        saida["veto_mantidos"] = sum(
+            1 for item in vetoes if item["veto_situacao"] == VETO_MANTIDO
+        )
+        saida["veto_sem_voto_valido"] = sum(
+            1 for item in vetoes if item["veto_situacao"] == VETO_AINDA_VAI_VOTAR
+        )
+        saida["por_veto_tipo"] = contagem_de(vetoes, "veto_tipo")
+        saida["por_veto_situacao"] = contagem_de(vetoes, "veto_situacao")
+        saida["rotulo_veto_tipo_nao_informado"] = VETO_TIPO_NAO_INFORMADO
+    return saida
 
 
 def montar_arquivo(
@@ -812,6 +1181,7 @@ def gerar_arquivos(cfg: dict) -> dict:
         )
     historico = carregar_historico(pasta)
     votacoes = carregar_votacoes(anos)
+    rotulos_por_codigo = base.rotulos_votacao(votacoes)
     siglas_por_grupo = {
         "proposicoes": tipos_proposicoes(cfg),
         "executivo": tipos_executivo(cfg),
@@ -841,6 +1211,7 @@ def gerar_arquivos(cfg: dict) -> dict:
                         unidades,
                         votacoes,
                         dois_turnos,
+                        rotulos_por_codigo,
                     )
                 )
         do_grupo = ordenar(do_grupo, por_ano=True)
