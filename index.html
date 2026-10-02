@@ -4323,8 +4323,9 @@
     var titulo = tituloExplicacaoTag(tipo, valor);
     var texto = textoExplicacaoTag(tipo, valor, extra);
     var html = "<strong>" + esc(titulo) + "</strong><span>" + esc(texto) + "</span>";
-    if (extra && extra.link) {
-      html += ' <a href="' + esc(urlSegura(extra.link) || extra.link) + '" target="_blank" rel="noopener noreferrer">Ver ato no SAPL</a>';
+    var linkDoAto = (extra && extra.link) ? urlSegura(extra.link) : "";
+    if (linkDoAto) {
+      html += ' <a href="' + esc(linkDoAto) + '" target="_blank" rel="noopener noreferrer">Ver ato no SAPL</a>';
     }
     caixa.innerHTML = html;
     document.body.appendChild(caixa);
