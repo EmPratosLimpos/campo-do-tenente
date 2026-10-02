@@ -26,11 +26,17 @@ sys.path.insert(0, str(RAIZ / "dados" / "tratados"))
 sys.path.insert(0, str(RAIZ / "coletor"))
 
 from gerar_proposicoes_executivo import (  # noqa: E402
+    FONTE_FICHA,
+    FONTE_SEM_REGISTRO,
+    FONTE_TRAMITACAO,
+    FONTE_VOTACAO,
+    FONTES_SITUACAO,
     ROTULO_SEM_TRAMITACAO,
     ROTULO_SEM_VOTACAO,
     ROTULO_SEM_VOTO_INDIVIDUAL,
+    ROTULO_SEM_VOTO_VALIDO,
     SITUACAO_EM_TRAMITACAO,
-    SITUACOES_FINAIS,
+    SITUACAO_SEM_REGISTRO,
     autores_vereadores,
     decodificar_status,
     dividir_periodos,
@@ -39,6 +45,7 @@ from gerar_proposicoes_executivo import (  # noqa: E402
     montar_ultima_tramitacao,
     montar_votacao,
     registro_deliberativo,
+    rotulo_de_votacao,
     situacao_final,
     voto_valido,
     votos_nominais,
@@ -114,6 +121,31 @@ ADIADA = dict(
     resultado_texto_sapl=None,
     frase_resultado_sapl=None,
     texto_registro_sapl="Adiada",
+)
+
+# Tramitacao de exemplo: texto oficial do status, exatamente como o SAPL
+# escreve. A sigla RETAUTOR e do catalogo do SAPL, o texto tambem.
+TRAMITACAO_RETAUTOR = {
+    "data": "2025-09-15",
+    "status_id": 31,
+    "status_sigla": "RETAUTOR",
+    "status_descricao": "Proposição retirada pelo autor",
+    "situacao": "fim",
+    "unidade_origem_id": 1,
+    "unidade_origem": "Plenário",
+    "unidade_destino_id": 1,
+    "unidade_destino": "Plenário",
+    "texto": "",
+    "urgente": False,
+    "resumo_sapl": "Proposição retirada pelo autor",
+}
+
+TRAMITACAO_AGUARDANDO = dict(
+    TRAMITACAO_RETAUTOR,
+    status_id=5,
+    status_sigla="AGPARECER",
+    status_descricao="Aguardando emissão de parecer da comissão",
+    situacao="em curso",
 )
 
 
@@ -195,15 +227,26 @@ class TestRotulosAusencia(unittest.TestCase):
         self.assertIsNone(votacao)
         self.assertEqual(rotulo, ROTULO_SEM_VOTACAO)
 
-    def test_apenas_1o_turno_tem_rotulo(self):
-        votacao, rotulo = montar_votacao(1, {1: [VOTO_1O_TURNO]})
+    def test_apenas_1o_turno_nao_tem_voto_valido(self):
+        votacao, _rotulo = montar_votacao(1, {1: [VOTO_1O_TURNO]})
         self.assertIsNone(votacao)
-        self.assertEqual(rotulo, ROTULO_SEM_VOTACAO)
 
-    def test_pedido_de_vistas_nunca_vira_votacao(self):
-        votacao, rotulo = montar_votacao(1, {1: [PEDIDO_DE_VISTAS]})
+    def test_rotulo_sem_registro_so_quando_nao_ha_votacao_nenhuma(self):
+        registradas = [{"voto_valido": False}, {"voto_valido": False}]
+        self.assertEqual(rotulo_de_votacao(None, []), ROTULO_SEM_VOTACAO)
+        self.assertEqual(rotulo_de_votacao(None, registradas), ROTULO_SEM_VOTO_VALIDO)
+
+    def test_rotulo_nulo_quando_existe_voto_valido(self):
+        self.assertIsNone(rotulo_de_votacao({"id": 1}, []))
+        self.assertIsNone(rotulo_de_votacao({"id": 1}, [{"voto_valido": True}]))
+
+    def test_pedido_de_vistas_nao_vira_votacao(self):
+        votacao, _rotulo = montar_votacao(1, {1: [PEDIDO_DE_VISTAS]})
         self.assertIsNone(votacao)
-        self.assertEqual(rotulo, ROTULO_SEM_VOTACAO)
+        registradas = [{"voto_valido": voto_valido(PEDIDO_DE_VISTAS)}]
+        self.assertEqual(
+            rotulo_de_votacao(votacao, registradas), ROTULO_SEM_VOTO_VALIDO
+        )
 
     def test_votacao_escolhe_a_mais_recente_entre_validas(self):
         registros = [VOTO_1O_TURNO, VOTO_2O_TURNO]
@@ -245,42 +288,86 @@ class TestVotoValido(unittest.TestCase):
 
 
 class TestSituacaoFinal(unittest.TestCase):
+    """Regra nova: situacao final e a fonte dela, sem deduzir nada."""
+
     DOIS_TURNOS = {"TESTE_DOIS_TURNOS"}
 
-    def test_so_1o_turno_aprovado_segue_em_tramitacao(self):
-        situacao = situacao_final([VOTO_1O_TURNO], "TESTE_DOIS_TURNOS", self.DOIS_TURNOS)
-        self.assertEqual(situacao, SITUACAO_EM_TRAMITACAO)
-
-    def test_1o_e_2o_turno_o_segundo_decide(self):
-        situacao = situacao_final(
-            [VOTO_1O_TURNO, VOTO_2O_TURNO], "TESTE_DOIS_TURNOS", self.DOIS_TURNOS
+    def situar(self, registros, ultima=None, ficha=None, sigla="TESTE_DOIS_TURNOS"):
+        return situacao_final(
+            registros, sigla, self.DOIS_TURNOS, ultima, ficha
         )
+
+    def test_voto_valido_no_2o_turno_vem_do_voto(self):
+        situacao, fonte = self.situar([VOTO_1O_TURNO, VOTO_2O_TURNO])
         self.assertEqual(situacao, "Aprovado")
+        self.assertEqual(fonte, FONTE_VOTACAO)
 
     def test_rejeitado_no_1o_turno_encerra_rejeitado(self):
-        situacao = situacao_final(
-            [REJEITADO_1O_TURNO], "TESTE_DOIS_TURNOS", self.DOIS_TURNOS
-        )
+        situacao, fonte = self.situar([REJEITADO_1O_TURNO])
         self.assertEqual(situacao, "Rejeitado")
+        self.assertEqual(fonte, FONTE_VOTACAO)
 
-    def test_apenas_pedido_de_vistas_segue_em_tramitacao(self):
-        situacao = situacao_final(
-            [VOTO_1O_TURNO, PEDIDO_DE_VISTAS], "TESTE_DOIS_TURNOS", self.DOIS_TURNOS
+    def test_so_1o_turno_aprovado_usa_a_tramitacao(self):
+        situacao, fonte = self.situar(
+            [VOTO_1O_TURNO], ultima=TRAMITACAO_AGUARDANDO, ficha=True
         )
-        self.assertEqual(situacao, SITUACAO_EM_TRAMITACAO)
+        self.assertEqual(situacao, TRAMITACAO_AGUARDANDO["status_descricao"])
+        self.assertEqual(fonte, FONTE_TRAMITACAO)
+        self.assertNotEqual(situacao, SITUACAO_EM_TRAMITACAO)
 
-    def test_sem_registro_deliberativo_nao_deduz_aprovacao(self):
-        situacao = situacao_final([PEDIDO_DE_VISTAS], "TESTE_DOIS_TURNOS", self.DOIS_TURNOS)
+    def test_retautor_sem_voto_usa_o_texto_oficial_do_status(self):
+        situacao, fonte = self.situar([], ultima=TRAMITACAO_RETAUTOR, ficha=False)
+        self.assertEqual(situacao, TRAMITACAO_RETAUTOR["status_descricao"])
+        self.assertEqual(fonte, FONTE_TRAMITACAO)
+        self.assertNotEqual(situacao, SITUACAO_EM_TRAMITACAO)
+
+    def test_pedido_de_vistas_sem_voto_valido_usa_a_tramitacao(self):
+        situacao, fonte = self.situar(
+            [VOTO_1O_TURNO, PEDIDO_DE_VISTAS],
+            ultima=TRAMITACAO_AGUARDANDO,
+            ficha=True,
+        )
+        self.assertEqual(situacao, TRAMITACAO_AGUARDANDO["status_descricao"])
+        self.assertEqual(fonte, FONTE_TRAMITACAO)
+
+    def test_sem_registro_com_ficha_true_vem_da_ficha(self):
+        situacao, fonte = self.situar([], ultima=None, ficha=True)
         self.assertEqual(situacao, SITUACAO_EM_TRAMITACAO)
+        self.assertEqual(fonte, FONTE_FICHA)
+
+    def test_sem_registro_com_ficha_false_nao_deduz_tramitacao(self):
+        situacao, fonte = self.situar([], ultima=None, ficha=False)
+        self.assertEqual(situacao, SITUACAO_SEM_REGISTRO)
+        self.assertEqual(fonte, FONTE_SEM_REGISTRO)
+        self.assertNotEqual(situacao, SITUACAO_EM_TRAMITACAO)
+
+    def test_tramitacao_tem_prioridade_sobre_a_ficha(self):
+        situacao, fonte = self.situar([], ultima=TRAMITACAO_RETAUTOR, ficha=True)
+        self.assertEqual(fonte, FONTE_TRAMITACAO)
+        self.assertEqual(situacao, TRAMITACAO_RETAUTOR["status_descricao"])
+
+    def test_status_sem_texto_oficial_nao_inventa(self):
+        ultima = dict(TRAMITACAO_RETAUTOR, status_descricao=None)
+        situacao, fonte = self.situar([], ultima=ultima, ficha=False)
+        self.assertEqual(fonte, FONTE_TRAMITACAO)
+        self.assertNotEqual(situacao, SITUACAO_EM_TRAMITACAO)
+        self.assertTrue(situacao)
 
     def test_tipo_fora_dos_dois_turnos_usa_turno_unico(self):
         registro = dict(VOTO_1O_TURNO, turno="turno unico")
-        situacao = situacao_final([registro], "TESTE_TURNO_UNICO", self.DOIS_TURNOS)
+        situacao, fonte = self.situar([registro], sigla="TESTE_TURNO_UNICO")
         self.assertEqual(situacao, "Aprovado")
+        self.assertEqual(fonte, FONTE_VOTACAO)
 
-    def test_situacao_esta_na_lista_de_rotulos(self):
-        situacoes = {situacao_final([], "X", self.DOIS_TURNOS)}
-        self.assertTrue(situacoes.issubset(set(SITUACOES_FINAIS)))
+    def test_fonte_sempre_conhecida(self):
+        casos = (
+            self.situar([VOTO_2O_TURNO]),
+            self.situar([VOTO_1O_TURNO], ultima=TRAMITACAO_RETAUTOR),
+            self.situar([], ultima=None, ficha=True),
+            self.situar([], ultima=None, ficha=False),
+        )
+        for _situacao, fonte in casos:
+            self.assertIn(fonte, FONTES_SITUACAO)
 
 
 class TestVotosNominais(unittest.TestCase):
@@ -393,17 +480,120 @@ class TestArquivosGerados(unittest.TestCase):
                 self.assertEqual(dados["meta"]["total"], len(dados["todo"]), nome)
                 for item in dados["todo"]:
                     self.assertTrue(item.get("link_sapl"), nome)
+                    self.assertTrue(item.get("tipo_nome"), nome)
+                    self.assertTrue(item.get("situacao_final"), nome)
+                    self.assertIn(item["situacao_final_fonte"], FONTES_SITUACAO, nome)
                     self.assertIn("ultima_tramitacao_rotulo", item, nome)
                     self.assertIn("votacao_rotulo", item, nome)
-                    self.assertIn("situacao_final", item, nome)
-                    self.assertIn(item["situacao_final"], SITUACOES_FINAIS, nome)
-                    self.assertTrue(item.get("tipo_nome"), nome)
                     if item["ultima_tramitacao"] is None:
                         self.assertEqual(item["ultima_tramitacao_rotulo"], ROTULO_SEM_TRAMITACAO)
                     if item["votacao"] is None:
-                        self.assertEqual(item["votacao_rotulo"], ROTULO_SEM_VOTACAO)
                         self.assertEqual(item["votos_nominais"], [])
-                        self.assertEqual(item["votos_nominais_rotulo"], ROTULO_SEM_VOTACAO)
+                    self._conferir_rotulo_de_votacao(item, nome)
+
+    def _conferir_rotulo_de_votacao(self, item: dict, nome: str) -> None:
+        registradas = item["votacoes_registradas"]
+        if item["votacao"] is not None:
+            self.assertIsNone(item["votacao_rotulo"], f"{nome} {item['tipo']}")
+            return
+        if registradas:
+            self.assertEqual(item["votacao_rotulo"], ROTULO_SEM_VOTO_VALIDO, nome)
+            return
+        self.assertEqual(item["votacao_rotulo"], ROTULO_SEM_VOTACAO, nome)
+
+    def _votacao_decide(self, item: dict) -> bool:
+        """Regra 1: voto valido ou rejeicao no 1o turno."""
+        if item["votacao"] is not None:
+            return True
+        return any(
+            registro["deliberativa"]
+            and registro["situacao_oficial_sapl"] == "Rejeitado"
+            for registro in item["votacoes_registradas"]
+        )
+
+    def test_situacao_final_nunca_deduz_em_tramitacao(self):
+        """Em tramitacao so quando vem da ficha do SAPL com o campo true."""
+        achou_ficha = False
+        for nome, dados in self._todos():
+            for item in dados["todo"]:
+                with self.subTest(arquivo=nome, materia=item["tipo"]):
+                    situacao = item["situacao_final"]
+                    fonte = item["situacao_final_fonte"]
+                    if fonte == FONTE_VOTACAO:
+                        self.assertTrue(self._votacao_decide(item), f"{nome} {item['tipo']}")
+                        continue
+                    self.assertFalse(
+                        self._votacao_decide(item), f"{nome} {item['tipo']}"
+                    )
+                    if fonte == FONTE_TRAMITACAO:
+                        ultima = item["ultima_tramitacao"]
+                        self.assertIsNotNone(ultima, f"{nome} {item['tipo']}")
+                        if ultima.get("status_descricao"):
+                            self.assertEqual(situacao, ultima["status_descricao"])
+                        self.assertNotEqual(situacao, SITUACAO_EM_TRAMITACAO)
+                    elif fonte == FONTE_FICHA:
+                        achou_ficha = True
+                        self.assertIs(item["em_tramitacao"], True)
+                        self.assertEqual(situacao, SITUACAO_EM_TRAMITACAO)
+                    else:
+                        self.assertEqual(fonte, FONTE_SEM_REGISTRO)
+                        self.assertIsNone(item["ultima_tramitacao"])
+                        self.assertEqual(item["votacoes_registradas"], [])
+                        self.assertIs(item["em_tramitacao"], False)
+                        self.assertEqual(situacao, SITUACAO_SEM_REGISTRO)
+        self.assertTrue(achou_ficha, "nenhum item com situacao vinda da ficha")
+
+    def test_retautor_sem_voto_usa_o_texto_do_sapl(self):
+        achou = False
+        for nome, dados in self._todos():
+            for item in dados["todo"]:
+                ultima = item["ultima_tramitacao"]
+                if not ultima or not str(ultima.get("status_sigla") or "").strip():
+                    continue
+                if self._votacao_decide(item):
+                    continue
+                achou = True
+                with self.subTest(arquivo=nome, materia=item["tipo"]):
+                    self.assertEqual(item["situacao_final_fonte"], FONTE_TRAMITACAO)
+                    self.assertEqual(
+                        item["situacao_final"], ultima["status_descricao"]
+                    )
+                    self.assertNotEqual(item["situacao_final"], SITUACAO_EM_TRAMITACAO)
+        self.assertTrue(achou, "nenhuma materia com tramitacao e sem voto valido")
+
+    def test_sem_registro_com_ficha_em_tramitacao(self):
+        achou = False
+        for nome, dados in self._todos():
+            for item in dados["todo"]:
+                if item["ultima_tramitacao"] is not None:
+                    continue
+                if self._votacao_decide(item):
+                    continue
+                achou = True
+                with self.subTest(arquivo=nome, materia=item["tipo"]):
+                    if item["em_tramitacao"] is True:
+                        self.assertEqual(item["situacao_final_fonte"], FONTE_FICHA)
+                        self.assertEqual(item["situacao_final"], SITUACAO_EM_TRAMITACAO)
+                    else:
+                        self.assertEqual(
+                            item["situacao_final_fonte"], FONTE_SEM_REGISTRO
+                        )
+                        self.assertEqual(item["situacao_final"], SITUACAO_SEM_REGISTRO)
+        self.assertTrue(achou, "nenhuma materia sem registro de votacao nem de tramitacao")
+
+    def test_meta_conta_por_situacao_final(self):
+        for nome, dados in self._todos():
+            contagem: Counter = Counter()
+            fontes: Counter = Counter()
+            for item in dados["todo"]:
+                contagem[item["situacao_final"]] += 1
+                fontes[item["situacao_final_fonte"]] += 1
+            with self.subTest(arquivo=nome):
+                self.assertEqual(dados["meta"]["por_situacao_final"], dict(contagem))
+                self.assertEqual(
+                    dados["meta"]["por_situacao_final_fonte"],
+                    {fonte: fontes.get(fonte, 0) for fonte in FONTES_SITUACAO},
+                )
 
     def test_voto_sem_deliberacao_nunca_e_votacao_valido(self):
         for nome, dados in self._todos():
@@ -433,14 +623,13 @@ class TestArquivosGerados(unittest.TestCase):
                         validos[-1]["registro_votacao_id"],
                     )
 
-    def test_apenas_1o_turno_fica_em_tramitacao(self):
-        """So 1o turno aprovado nao decide: segue em tramitacao, sem voto.
+    def test_apenas_1o_turno_nao_vira_voto_valido(self):
+        """So 1o turno deixa a materia sem voto valido.
 
-        Rejeicao no 1o turno encerra como rejeitada, tambem sem voto
-        valido. Nenhum dos dois casos vira votacao.
+        A situacao final nao e deduzida: vem do texto oficial do status
+        de tramitacao ou do campo em_tramitacao da ficha.
         """
-        achou_em_tramitacao = False
-        achou_rejeitada = False
+        achou = False
         for nome, dados in self._todos():
             for item in dados["todo"]:
                 registros = item["votacoes_registradas"]
@@ -449,17 +638,19 @@ class TestArquivosGerados(unittest.TestCase):
                     continue
                 if any(r["turno"] != "1o turno" for r in deliberativos):
                     continue
+                achou = True
                 with self.subTest(arquivo=nome, materia=item["tipo"]):
                     self.assertIsNone(item["votacao"])
                     self.assertEqual(item["votos_nominais"], [])
-                    self.assertEqual(item["votacao_rotulo"], ROTULO_SEM_VOTACAO)
-                    if item["situacao_final"] == "Rejeitado":
-                        achou_rejeitada = True
+                    self.assertEqual(item["votacao_rotulo"], ROTULO_SEM_VOTO_VALIDO)
+                    if item["situacao_final_fonte"] == FONTE_VOTACAO:
+                        self.assertEqual(item["situacao_final"], "Rejeitado")
                     else:
-                        achou_em_tramitacao = True
-                        self.assertEqual(item["situacao_final"], SITUACAO_EM_TRAMITACAO)
-        self.assertTrue(achou_em_tramitacao, "nenhuma materia so com 1o turno aprovado")
-        self.assertTrue(achou_rejeitada, "nenhuma materia rejeitada no 1o turno")
+                        self.assertNotEqual(
+                            (item["situacao_final"], item["situacao_final_fonte"]),
+                            (SITUACAO_EM_TRAMITACAO, ""),
+                        )
+        self.assertTrue(achou, "nenhuma materia votada so no 1o turno nos dados")
 
     def test_pedido_de_vistas_nao_vira_votacao_nos_dados(self):
         achou = False
@@ -481,6 +672,9 @@ class TestArquivosGerados(unittest.TestCase):
                             for r in item["votacoes_registradas"]
                             if r["voto_valido"]
                         ])
+                else:
+                    with self.subTest(materia=item["tipo"]):
+                        self.assertEqual(item["votacao_rotulo"], ROTULO_SEM_VOTO_VALIDO)
         self.assertTrue(achou, "nenhum voto sem deliberacao nos dados")
 
     def test_votos_nominais_batem_com_os_votos_validos_da_atuacao(self):

@@ -80,11 +80,18 @@ from gerar_atuacao_vereadores import (  # noqa: E402
 
 SCRIPT_REL = "dados/tratados/gerar_proposicoes_executivo.py"
 ROTULO_SEM_VOTACAO = "sem votacao registrada no SAPL"
+ROTULO_SEM_VOTO_VALIDO = "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)"
 ROTULO_SEM_VOTO_INDIVIDUAL = "votacao registrada sem voto nominal no SAPL"
 ROTULO_SEM_TRAMITACAO = "sem tramitacao registrada no SAPL"
 ROTULO_VETADA_SEM_ESTRUTURA = "sem indicacao estruturada no SAPL, ver ementa"
 SITUACAO_EM_TRAMITACAO = "Em tramitacao"
-SITUACOES_FINAIS = ("Aprovado", "Rejeitado", SITUACAO_EM_TRAMITACAO)
+SITUACAO_SEM_REGISTRO = "Sem registro de votação nem de tramitação no SAPL"
+SITUACAO_STATUS_SEM_TEXTO = "status de tramitacao sem texto oficial no SAPL"
+FONTE_VOTACAO = "votacao"
+FONTE_TRAMITACAO = "tramitacao"
+FONTE_FICHA = "ficha_sapl"
+FONTE_SEM_REGISTRO = "sem_registro"
+FONTES_SITUACAO = (FONTE_VOTACAO, FONTE_TRAMITACAO, FONTE_FICHA, FONTE_SEM_REGISTRO)
 GRUPOS = ("proposicoes", "executivo")
 CHAVE_VOTOS_EXECUTIVO = "votos_plex"
 CHAVE_PROPOSICOES_AUTORIA = "proposicoes_req_moc_ind"
@@ -343,27 +350,63 @@ def votacoes_validas(registros: list[dict]) -> list[dict]:
     return [registro for registro in registros if voto_valido(registro)]
 
 
-def situacao_final(registros: list[dict], sigla: str, dois_turnos: set[str]) -> str:
-    """Situacao final com a regra da atuacao (D-049 e D-050).
+def situacao_final(
+    registros: list[dict],
+    sigla: str,
+    dois_turnos: set[str],
+    ultima: dict | None,
+    em_tramitacao_ficha,
+) -> tuple[str, str]:
+    """Situacao final e a fonte dela, sem deduzir nada.
 
-    Rejeitado no 1o turno encerra como rejeitado. Com 2o turno, o 2o
-    decide. So com 1o turno aprovado continua em tramitacao. Sem nenhum
-    registro deliberativo continua em tramitacao.
+    Ordem da regra, nenhuma etapa pula a anterior:
+
+    1. voto valido (2o turno ou turno unico, deliberativo) ou rejeicao no
+       1o turno: devolve a situacao oficial do SAPL, com fonte votacao;
+    2. sem voto valido, mas com ultima tramitacao: devolve o texto
+       oficial do status, exatamente como o SAPL escreve, com fonte
+       tramitacao;
+    3. sem registro nenhum: usa o campo em_tramitacao da ficha. True vira
+       Em tramitacao, com fonte ficha_sapl. False vira o rotulo de
+       ausencia, com fonte sem_registro.
+
+    Ausencia de registro nunca autoriza escrever Em tramitacao.
     """
     deliberativos = [registro for registro in registros if registro_deliberativo(registro)]
     if sigla in dois_turnos:
-        escolhida, em_tramitacao = escolher_por_turno(
+        escolhida, segue_em_tramitacao = escolher_por_turno(
             [(registro, registro.get("turno")) for registro in deliberativos]
         )
     else:
         escolhida = escolher_votacao(deliberativos) if deliberativos else None
-        em_tramitacao = False
-    if escolhida is None or em_tramitacao:
-        return SITUACAO_EM_TRAMITACAO
-    try:
-        return situacao_da_votacao_escolhida(escolhida)
-    except SystemExit as erro:
-        raise SystemExit(f"{sigla}: {erro}") from erro
+        segue_em_tramitacao = False
+    if escolhida is not None and not segue_em_tramitacao:
+        try:
+            return situacao_da_votacao_escolhida(escolhida), FONTE_VOTACAO
+        except SystemExit as erro:
+            raise SystemExit(f"{sigla}: {erro}") from erro
+    if ultima is not None:
+        oficial = str(ultima.get("status_descricao") or "").strip()
+        if oficial:
+            return oficial, FONTE_TRAMITACAO
+        return SITUACAO_STATUS_SEM_TEXTO, FONTE_TRAMITACAO
+    if em_tramitacao_ficha is True:
+        return SITUACAO_EM_TRAMITACAO, FONTE_FICHA
+    return SITUACAO_SEM_REGISTRO, FONTE_SEM_REGISTRO
+
+
+def rotulo_de_votacao(votacao: dict | None, registradas: list[dict]) -> str | None:
+    """Rotulo da votacao: ausencia so quando nao existe registro nenhum.
+
+    Materia com registro, mas sem voto valido (so 1o turno ou registro sem
+    deliberacao), recebe rotulo proprio: existe votacao no SAPL, ela nao e
+    a que decide.
+    """
+    if votacao is not None:
+        return None
+    if registradas:
+        return ROTULO_SEM_VOTO_VALIDO
+    return ROTULO_SEM_VOTACAO
 
 
 def montar_votacao(
@@ -552,16 +595,27 @@ class Base:
         ultima, rotulo_tram = montar_ultima_tramitacao(
             int(materia_id), historico, status, unidades
         )
-        votacao, rotulo_vot = montar_votacao(int(materia_id), votacoes)
+        votacao, _rotulo_descartado = montar_votacao(int(materia_id), votacoes)
+        registradas = registrar_votacoes(registros)
         tema, revisada = tema_da_materia(int(materia_id), self.indice_temas)
         valida = escolher_votacao(votacoes_validas(registros))
         nominais = votos_nominais(valida, self.vereadores)
+        rotulo_votacao = rotulo_de_votacao(votacao, registradas)
         if nominais:
             rotulo_nominal = None
         elif votacao is None:
-            rotulo_nominal = ROTULO_SEM_VOTACAO
+            rotulo_nominal = (
+                ROTULO_SEM_VOTACAO if not registradas else ROTULO_SEM_VOTO_VALIDO
+            )
         else:
             rotulo_nominal = ROTULO_SEM_VOTO_INDIVIDUAL
+        situacao, fonte = situacao_final(
+            registros,
+            sigla,
+            dois_turnos,
+            ultima,
+            ficha.get("em_tramitacao"),
+        )
         item = {
             "id": int(materia_id),
             "tipo_sigla": sigla,
@@ -575,14 +629,15 @@ class Base:
             "autores": autores_vereadores(
                 int(materia_id), self.autoria, self.vereadores
             ),
-            "situacao_final": situacao_final(registros, sigla, dois_turnos),
+            "situacao_final": situacao,
+            "situacao_final_fonte": fonte,
             "em_tramitacao": ficha.get("em_tramitacao"),
             "resultado_ficha_sapl": ficha.get("resultado_ficha_sapl"),
             "ultima_tramitacao": ultima,
             "ultima_tramitacao_rotulo": rotulo_tram,
-            "votacoes_registradas": registrar_votacoes(registros),
+            "votacoes_registradas": registradas,
             "votacao": votacao,
-            "votacao_rotulo": rotulo_vot,
+            "votacao_rotulo": rotulo_votacao,
             "votos_nominais": nominais,
             "votos_nominais_rotulo": rotulo_nominal,
             "link_sapl": link_materia(int(materia_id), self.cfg),
@@ -660,6 +715,13 @@ def meta_de(
     decodificados: int,
     itens: list[dict],
 ) -> dict:
+    """Contagens do arquivo. A situacao final e texto livre do SAPL.
+
+    Por isso a contagem sai por valor, e nao por uma lista fixa de
+    situacoes. A coluna de fonte mostra de onde cada situacao veio.
+    """
+    contagem = Counter(item["situacao_final"] for item in itens)
+    por_fonte = Counter(item["situacao_final_fonte"] for item in itens)
     return {
         "gerado_por": SCRIPT_REL,
         **escopo,
@@ -673,25 +735,31 @@ def meta_de(
         "por_tipo_sigla": dict(
             sorted(Counter(item["tipo_sigla"] for item in itens).items())
         ),
-        "por_situacao_final": {
-            situacao: sum(1 for item in itens if item["situacao_final"] == situacao)
-            for situacao in SITUACOES_FINAIS
-        },
+        "por_situacao_final": dict(
+            sorted(contagem.items(), key=lambda par: (-par[1], par[0]))
+        ),
+        "por_situacao_final_fonte": {fonte: por_fonte.get(fonte, 0) for fonte in FONTES_SITUACAO},
         "itens_com_votacao_valida": sum(1 for item in itens if item["votacao"] is not None),
         "itens_sem_votacao_valida": sum(1 for item in itens if item["votacao"] is None),
         "votos_nominais_registrados": sum(len(item["votos_nominais"]) for item in itens),
         "rotulo_sem_votacao": ROTULO_SEM_VOTACAO,
+        "rotulo_sem_voto_valido": ROTULO_SEM_VOTO_VALIDO,
         "rotulo_sem_voto_individual": ROTULO_SEM_VOTO_INDIVIDUAL,
         "rotulo_sem_tramitacao": ROTULO_SEM_TRAMITACAO,
+        "situacao_sem_registro": SITUACAO_SEM_REGISTRO,
         "observacao": (
             "Votacao e votos nominais saem so do voto valido: 2o turno ou "
             "turno unico, e so registro deliberativo, lido pelo id do tipo "
             "de resultado do SAPL. Pedido de Vistas, materia adiada e "
             "retirada de pauta nao sao votacao e ficam como fato de "
-            "tramitacao. Materia votada so no 1o turno continua em "
-            "tramitacao. Voto nominal so entra de quem estava no mandato "
-            "na data da sessao. Ausencia de registro recebe rotulo: "
-            "nenhuma aprovacao e deduzida."
+            "tramitacao. Materia votada so no 1o turno nao tem voto "
+            "valido. Voto nominal so entra de quem estava no mandato na "
+            "data da sessao. A situacao final nunca e deduzida: com voto "
+            "valido ou rejeicao no 1o turno vem do registro de votacao; "
+            "sem voto valido, mas com tramitacao, vem do texto oficial do "
+            "status do SAPL; sem registro nenhum, vem do campo "
+            "em_tramitacao da ficha, e False vira o rotulo de ausencia. "
+            "O campo situacao_final_fonte diz de onde cada uma veio."
         ),
     }
 
