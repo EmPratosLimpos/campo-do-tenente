@@ -265,6 +265,9 @@ class TestesChangelog(unittest.TestCase):
 
 
 class TestesWorkflow(unittest.TestCase):
+    SHA_CHECKOUT = "3d3c42e5aac5ba805825da76410c181273ba90b1"
+    SHA_SETUP_PYTHON = "5fda3b95a4ea91299a34e894583c3862153e4b97"
+
     def test_workflows_nao_usam_node_20_nem_ubuntu_latest(self):
         pasta = RAIZ / ".github" / "workflows"
         for caminho in pasta.glob("*.yml"):
@@ -273,11 +276,43 @@ class TestesWorkflow(unittest.TestCase):
             self.assertIn("ubuntu-24.04", texto, caminho.name)
             self.assertNotIn("actions/checkout@v4", texto, caminho.name)
             self.assertNotIn("actions/setup-python@v5", texto, caminho.name)
-            self.assertIn("actions/checkout@v7", texto, caminho.name)
-            self.assertIn("actions/setup-python@v7", texto, caminho.name)
+            self.assertNotIn("actions/checkout@v7", texto, caminho.name)
+            self.assertNotIn("actions/setup-python@v7", texto, caminho.name)
         novo = (pasta / "atualizacao_semanal.yml").read_text(encoding="utf-8")
         self.assertNotIn("\u2014", novo)
         self.assertNotIn("\u2013", novo)
+
+    def test_workflows_fixam_as_acoes_por_sha_comentado(self):
+        pasta = RAIZ / ".github" / "workflows"
+        for caminho in pasta.glob("*.yml"):
+            texto = caminho.read_text(encoding="utf-8")
+            self.assertIn(
+                f"actions/checkout@{self.SHA_CHECKOUT} # v7",
+                texto,
+                caminho.name,
+            )
+            self.assertIn(
+                f"actions/setup-python@{self.SHA_SETUP_PYTHON} # v7",
+                texto,
+                caminho.name,
+            )
+            for linha in texto.splitlines():
+                if "uses: actions/" not in linha:
+                    continue
+                self.assertRegex(
+                    linha.strip(),
+                    r"^uses: actions/[a-z-]+@[0-9a-f]{40} # v[0-9]+$",
+                    f"{caminho.name}: {linha.strip()}",
+                )
+
+    def test_workflow_de_validacao_so_le_e_nao_guarda_token(self):
+        texto = (RAIZ / ".github" / "workflows" / "verificar_pr.yml").read_text(encoding="utf-8")
+        self.assertIn("permissions:", texto)
+        self.assertIn("contents: read", texto)
+        self.assertNotIn("contents: write", texto)
+        self.assertNotIn("issues: write", texto)
+        self.assertNotIn("pull-requests: write", texto)
+        self.assertIn("persist-credentials: false", texto)
 
     def test_atualizacao_semanal_publica_so_dados_na_quarta(self):
         texto = (RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml").read_text(encoding="utf-8")
