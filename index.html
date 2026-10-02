@@ -9,124 +9,187 @@
 <title>Em Pratos Limpos: o que a Câmara de Campo do Tenente vota</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --fundo: #f2f2f7;
-    --superficie: #ffffff;
-    --superficie-2: #e3e3e8;
-    --texto: #1c1c1e;
-    --texto-suave: #636366;
-    --linha: #e5e5ea;
-    --marca: #0051c7;
-    --marca-fundo: #e5f1ff;
-    --marca-solida: #0051c7;
-    --link: #0051c7;
-    --ok: #1e7e34;
-    --ok-fundo: #e8f8ed;
-    --nao: #991b1b;
-    --nao-fundo: #fdecec;
-    --neutro: #5c5c60;
-    --neutro-fundo: #e5e5ea;
-    --aviso-fundo: #fff8e1;
-    --aviso-borda: #9a7b1a;
-    --aviso-texto: #4a3d0f;
-    --graf-presenca: #166534;
-    --graf-falta-just: #a16207;
-    --graf-falta-sem: #991b1b;
-    --graf-aprovado: #34c759;
-    --graf-tramitacao: #007aff;
-    --graf-rejeitado: #ff3b30;
-    --graf-cat-1: #1d4ed8;
-    --graf-cat-2: #0f766e;
-    --graf-cat-3: #a16207;
-    --graf-cat-4: #7c3aed;
-    --graf-cat-5: #be123c;
-    --graf-cat-6: #0369a1;
-    --graf-cat-7: #15803d;
-    --graf-aprovado-fundo: #e8f8ed;
-    --graf-tramitacao-fundo: #e5f1ff;
-    --graf-rejeitado-fundo: #fdecec;
-    --barra-votadas: #ff9500;
-    --barra-lidas: #8e8e93;
-    --barra-unanimidade: #34c759;
-    --barra-maioria: #5856d6;
-    --barra-req: #1d4ed8;
-    --barra-pl: #0f766e;
-    --barra-moc: #a16207;
-    --barra-pr: #7c3aed;
-    --barra-veto: #be123c;
-    --barra-ni: #64748b;
-    --sombra: 0 2px 8px rgba(0, 0, 0, 0.04);
-    --primaria: #0051c7;
-    --borda: #e5e5ea;
-    --fundo-card: #ffffff;
-    --app-laranja: #9a3412;
-    --app-azul: #0051c7;
-    --app-verde: #166534;
-    --app-roxo: #4338ca;
-    --maioria-texto: #4338ca;
-    --capsula-verde: #e8f8ed;
-    --capsula-roxa: #eeedfa;
+    color-scheme: light;
+    --fundo: #EFF4F0;
+    --superficie: #FFFFFF;
+    --superficie-2: #E4ECE6;
+    --texto: #13201A;
+    --texto-suave: #4A5A51;
+    --linha: #D3DED6;
+    --linha-forte: #7C8C82;
+    --marca: #1E7A4C;
+    --marca-fundo: #E1F0E6;
+    --marca-solida: #1E7A4C;
+    --sobre-marca: #FFFFFF;
+    --link: #1A6B43;
+    --foco: #2F55D4;
+    --sim: #2F5BEA;
+    --sim-fundo: #E6ECFD;
+    --sobre-sim: #FFFFFF;
+    --nao: #C2410C;
+    --nao-fundo: #FFF4EE;
+    --sobre-nao: #FFFFFF;
+    --abstencao: #5B6573;
+    --abstencao-fundo: #E7EBEE;
+    --sobre-abstencao: #FFFFFF;
+    --ausente: #4A5A51;
+    --tramitacao: #4E5A66;
+    --tramitacao-fundo: #E7EBEE;
+    --aviso-fundo: #FFF4CC;
+    --aviso-borda: #8F6B00;
+    --aviso-texto: #5C4200;
+    --graf-presenca: #2F5BEA;
+    --graf-falta-just: #A87A00;
+    --graf-falta-sem: #C2410C;
+    --graf-trilha: #DDE5DF;
+    --barra-unanimidade: #2F5BEA;
+    --barra-maioria: #6E8EF0;
+    --sombra: 0 1px 2px rgba(19,32,26,.06), 0 4px 16px rgba(19,32,26,.06);
+    --cat-administracao: #5B6B8C;
+    --cat-administracao-fundo: #E5E7ED;
+    --cat-ruas: #B64000;
+    --cat-ruas-fundo: #F3E0D6;
+    --cat-iluminacao: #A87A00;
+    --cat-iluminacao-fundo: #F1EAD6;
+    --cat-desenvolvimento: #578AE6;
+    --cat-desenvolvimento-fundo: #E4ECFB;
+    --cat-agricultura: #567000;
+    --cat-agricultura-fundo: #E4E8D6;
+    --cat-educacao: #7B4DE0;
+    --cat-educacao-fundo: #EAE3FA;
+    --cat-cultura: #B61064;
+    --cat-cultura-fundo: #F3D9E6;
+    --cat-homenagens: #D8603D;
+    --cat-homenagens-fundo: #F9E6E0;
+    --cat-saude: #D6334A;
+    --cat-saude-fundo: #F8DEE2;
+    --cat-assistencia: #0096A8;
+    --cat-assistencia-fundo: #D6EEF1;
+    --cat-meio-ambiente: #0F9C80;
+    --cat-meio-ambiente-fundo: #D9EFEB;
+    --cat-seguranca: #5272DA;
+    --cat-seguranca-fundo: #E3E8F9;
+    --cat-defesa-civil: #5E2CA5;
+    --cat-defesa-civil-fundo: #E5DDF1;
+    --ok: var(--sim);
+    --ok-fundo: var(--sim-fundo);
+    --neutro: var(--abstencao);
+    --neutro-fundo: var(--abstencao-fundo);
+    --graf-aprovado: var(--sim);
+    --graf-aprovado-fundo: var(--sim-fundo);
+    --graf-rejeitado: var(--nao);
+    --graf-rejeitado-fundo: var(--nao-fundo);
+    --graf-tramitacao: var(--tramitacao);
+    --graf-tramitacao-fundo: var(--tramitacao-fundo);
+    --primaria: var(--marca);
+    --borda: var(--linha);
+    --fundo-card: var(--superficie);
+    --maioria-texto: var(--sim);
+  
+    /* Tipografia: uma família só, três pesos */
+    --fonte: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --peso-texto: 400; --peso-destaque: 600; --peso-titulo: 800;
+  
+    /* Escala de texto (celular / computador acima de 900px) */
+    --t-tela: 26px;        /* título da tela, peso 800, altura de linha 1.15 */
+    --t-resumo: 20px;      /* frase-resumo, peso 600, altura 1.4 */
+    --t-cartao: 18px;      /* título de cartão, peso 800, altura 1.25 */
+    --t-numero: 24px;      /* número em linha; 30px em quadro; peso 800 */
+    --t-materia: 16px;     /* assunto da matéria, peso 600, altura 1.45 */
+    --t-corpo: 15px;       /* texto corrido, peso 400, altura 1.5 */
+    --t-apoio: 13px;       /* datas, sigla, legendas, tags; nunca menor que 13px */
+  
+    /* Espaço */
+    --esp-1: 4px; --esp-2: 8px; --esp-3: 12px; --esp-4: 16px; --esp-5: 20px; --esp-6: 24px; --esp-8: 32px;
+  
+    /* Forma */
+    --raio-cartao: 22px; --raio-quadro: 16px; --raio-controle: 14px; --raio-pilula: 999px;
+    --alvo-minimo: 44px;
   }
-
+  @media (min-width: 900px) {
+    :root { --t-tela: 34px; --t-resumo: 24px; --t-cartao: 20px; --t-corpo: 16px; --t-apoio: 14px; }
+  }
+  
   [data-tema="escuro"] {
-    --fundo: #141820;
-    --superficie: #1c1c1e;
-    --superficie-2: #2c2c2e;
-    --texto: #f2f2f7;
-    --texto-suave: #aeaeb2;
-    --linha: #38383a;
-    --marca: #60a5fa;
-    --marca-fundo: #1a3055;
-    --marca-solida: #1d4ed8;
-    --link: #93c5fd;
-    --ok: #86efac;
-    --ok-fundo: #143322;
-    --nao: #fca5a5;
-    --nao-fundo: #3f1515;
-    --neutro: #c8ced8;
-    --neutro-fundo: #2a3140;
-    --aviso-fundo: #3a3018;
-    --aviso-borda: #c9a227;
-    --aviso-texto: #f5e6b8;
-    --graf-presenca: #86efac;
-    --graf-falta-just: #fcd34d;
-    --graf-falta-sem: #fca5a5;
-    --graf-aprovado: #34d399;
-    --graf-tramitacao: #60a5fa;
-    --graf-rejeitado: #f87171;
-    --graf-cat-1: #60a5fa;
-    --graf-cat-2: #34d399;
-    --graf-cat-3: #fbbf24;
-    --graf-cat-4: #c084fc;
-    --graf-cat-5: #fb7185;
-    --graf-cat-6: #38bdf8;
-    --graf-cat-7: #4ade80;
-    --graf-aprovado-fundo: #143322;
-    --graf-tramitacao-fundo: #1a3055;
-    --graf-rejeitado-fundo: #3f1515;
-    --barra-votadas: #60a5fa;
-    --barra-lidas: #94a3b8;
-    --barra-unanimidade: #34d399;
-    --barra-maioria: #818cf8;
-    --barra-req: #60a5fa;
-    --barra-pl: #34d399;
-    --barra-moc: #fbbf24;
-    --barra-pr: #c084fc;
-    --barra-veto: #fb7185;
-    --barra-ni: #94a3b8;
-    --sombra: 0 2px 8px rgba(0, 0, 0, 0.25);
-    --primaria: #60a5fa;
-    --borda: #38383a;
-    --fundo-card: #2c2c2e;
-    --capsula-verde: #143322;
-    --capsula-roxa: #2a2840;
-    --app-laranja: #fdba74;
-    --app-azul: #93c5fd;
-    --app-verde: #86efac;
-    --app-roxo: #c4b5fd;
-    --maioria-texto: #c4b5fd;
+    color-scheme: dark;
+    --fundo: #0C110E;
+    --superficie: #18201B;
+    --superficie-2: #222C25;
+    --texto: #EEF4F0;
+    --texto-suave: #A3B2A9;
+    --linha: #2C3830;
+    --linha-forte: #71837A;
+    --marca: #4CC48A;
+    --marca-fundo: #173325;
+    --marca-solida: #4CC48A;
+    --sobre-marca: #0C110E;
+    --link: #6FD6A2;
+    --foco: #8FA8FF;
+    --sim: #7FA2FF;
+    --sim-fundo: #1C2547;
+    --sobre-sim: #0C110E;
+    --nao: #FF9A5C;
+    --nao-fundo: #3A2416;
+    --sobre-nao: #0C110E;
+    --abstencao: #B9C3CC;
+    --abstencao-fundo: #262D33;
+    --sobre-abstencao: #0C110E;
+    --ausente: #A3B2A9;
+    --tramitacao: #B9C3CC;
+    --tramitacao-fundo: #262D33;
+    --aviso-fundo: #3A2E0A;
+    --aviso-borda: #E0B53A;
+    --aviso-texto: #F5D77A;
+    --graf-presenca: #7FA2FF;
+    --graf-falta-just: #E0B53A;
+    --graf-falta-sem: #FF9A5C;
+    --graf-trilha: #26302A;
+    --barra-unanimidade: #7FA2FF;
+    --barra-maioria: #4A68C8;
+    --sombra: 0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+    --cat-administracao: #6E89BE;
+    --cat-administracao-fundo: #263135;
+    --cat-ruas: #FF8A4C;
+    --cat-ruas-fundo: #3D3123;
+    --cat-iluminacao: #AC840B;
+    --cat-iluminacao-fundo: #303018;
+    --cat-desenvolvimento: #4182FF;
+    --cat-desenvolvimento-fundo: #1F303F;
+    --cat-agricultura: #B7D433;
+    --cat-agricultura-fundo: #313D1F;
+    --cat-educacao: #A98BFF;
+    --cat-educacao-fundo: #2F313F;
+    --cat-cultura: #FFBCDC;
+    --cat-cultura-fundo: #3D393A;
+    --cat-homenagens: #D9683D;
+    --cat-homenagens-fundo: #372C20;
+    --cat-saude: #FF6B7D;
+    --cat-saude-fundo: #3D2C2B;
+    --cat-assistencia: #1095A4;
+    --cat-assistencia-fundo: #173331;
+    --cat-meio-ambiente: #19AF89;
+    --cat-meio-ambiente-fundo: #18372D;
+    --cat-seguranca: #ABBDF7;
+    --cat-seguranca-fundo: #30393E;
+    --cat-defesa-civil: #C69CFF;
+    --cat-defesa-civil-fundo: #34343F;
+    --ok: var(--sim);
+    --ok-fundo: var(--sim-fundo);
+    --neutro: var(--abstencao);
+    --neutro-fundo: var(--abstencao-fundo);
+    --graf-aprovado: var(--sim);
+    --graf-aprovado-fundo: var(--sim-fundo);
+    --graf-rejeitado: var(--nao);
+    --graf-rejeitado-fundo: var(--nao-fundo);
+    --graf-tramitacao: var(--tramitacao);
+    --graf-tramitacao-fundo: var(--tramitacao-fundo);
+    --primaria: var(--marca);
+    --borda: var(--linha);
+    --fundo-card: var(--superficie);
+    --maioria-texto: var(--sim);
   }
 
   * { box-sizing: border-box; }
@@ -135,7 +198,7 @@
     margin: 0;
     background: var(--fundo);
     color: var(--texto);
-    font-family: "Noto Sans", system-ui, sans-serif;
+    font-family: var(--fonte);
     font-size: 15px;
     line-height: 1.45;
     -webkit-font-smoothing: antialiased;
@@ -143,7 +206,7 @@
 
   a { color: var(--link); }
   a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible {
-    outline: 3px solid var(--marca);
+    outline: 3px solid var(--foco);
     outline-offset: 2px;
   }
 
@@ -161,9 +224,9 @@
     border: 0;
     background: var(--marca-solida);
     color: #ffffff;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
     text-decoration: none;
     border-radius: 8px;
   }
@@ -175,7 +238,7 @@
     overflow: visible;
     padding: 10px 14px;
     min-height: 44px;
-    outline: 3px solid var(--marca);
+    outline: 3px solid var(--foco);
     outline-offset: 2px;
   }
 
@@ -287,8 +350,8 @@
 
   .tag-categoria {
     display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     padding: 3px 8px;
     border-radius: 6px;
     background: var(--marca-fundo);
@@ -323,7 +386,6 @@
     font-size: 13px;
     font-weight: 600;
     color: var(--neutro);
-    text-transform: uppercase;
     letter-spacing: 0.04em;
   }
 
@@ -336,8 +398,8 @@
   }
 
   .titulo-site {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 34px;
     line-height: 1.05;
     margin: 0;
@@ -353,7 +415,7 @@
     border: 1px solid var(--linha);
     padding: 4px 10px;
     border-radius: 20px;
-    font-size: 11.5px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--texto-suave);
     width: fit-content;
@@ -369,7 +431,7 @@
   }
 
   .subtitulo-site {
-    font-family: "Noto Sans", system-ui, sans-serif;
+    font-family: var(--fonte);
     font-weight: 400;
     font-size: 13.5px;
     line-height: 1.4;
@@ -468,9 +530,9 @@
 
   .share-sheet-cabecalho h2 {
     margin: 0;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--texto);
   }
 
@@ -515,7 +577,7 @@
     border-radius: 14px;
     background: var(--superficie-2);
     color: var(--texto);
-    font: 600 11.5px/1.25 "Noto Sans", system-ui, sans-serif;
+    font: 600 13px/1.25 "Noto Sans", system-ui, sans-serif;
     text-align: center;
     cursor: pointer;
     text-decoration: none;
@@ -553,7 +615,7 @@
   .share-sheet-feedback {
     margin: 0;
     padding: 0 16px 12px;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--ok);
     text-align: center;
     min-height: 0;
@@ -614,9 +676,9 @@
   .resumo-sheet-cabecalho h2 {
     margin: 0;
     padding-top: 10px;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--texto);
     line-height: 1.25;
   }
@@ -644,8 +706,8 @@
 
   .resumo-campo-rotulo {
     margin: 0;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     color: var(--texto-suave);
   }
 
@@ -662,7 +724,7 @@
     gap: 6px;
     min-height: 44px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--link);
     text-decoration: none;
   }
@@ -715,8 +777,8 @@
   }
 
   h1 {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 22px;
     line-height: 1.15;
     margin: 0 0 6px;
@@ -724,8 +786,8 @@
   }
 
   .titulo-vereadores {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 22px;
     line-height: 1.15;
     margin: 0 0 6px;
@@ -734,7 +796,7 @@
   }
 
   .coleta {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
     margin: 0 0 10px;
   }
@@ -743,8 +805,8 @@
 
   .seletor-vereador label {
     display: block;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     color: var(--texto-suave);
     margin-bottom: 4px;
   }
@@ -767,7 +829,7 @@
   .aviso, .aviso-ia {
     border-radius: 10px;
     padding: 10px 12px;
-    font-size: 12.5px;
+    font-size: 13px;
     line-height: 1.45;
     margin-bottom: 14px;
   }
@@ -796,15 +858,15 @@
   }
 
   .secao h2 {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 15px;
     margin: 0 0 4px;
     color: var(--texto);
   }
 
   .secao .legenda {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
     margin: 0 0 12px;
   }
@@ -817,7 +879,7 @@
 
   .perfil-foto-wrap { flex-shrink: 0; position: relative; }
 
-  .perfil-iniciais { width: 72px; height: 72px; border-radius: 50%; background: var(--marca-fundo); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--marca); }
+  .perfil-iniciais { width: 72px; height: 72px; border-radius: 50%; background: var(--marca-fundo); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--marca); }
   .iniciais-foto { font-size: 22px; }
 
   .perfil-foto {
@@ -833,8 +895,8 @@
   .perfil-info { flex: 1; min-width: 0; }
 
   .perfil-nome {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 20px;
     margin: 0 0 6px;
     line-height: 1.2;
@@ -846,7 +908,7 @@
     flex-wrap: wrap;
     gap: 6px;
     margin-bottom: 8px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.3;
   }
 
@@ -861,7 +923,7 @@
 
   .badge-partido .nome-partido {
     color: var(--texto-suave);
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .perfil-detalhe {
@@ -877,7 +939,7 @@
     align-items: center;
     min-height: 44px;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 800;
     margin-top: 4px;
   }
 
@@ -900,7 +962,7 @@
     font-size: 13px;
   }
 
-  .rosca-legenda dt { font-weight: 700; }
+  .rosca-legenda dt { font-weight: 800; }
   .rosca-legenda dd { margin: 0; color: var(--texto-suave); white-space: nowrap; word-break: normal; word-wrap: normal; }
 
   .indicador {
@@ -953,15 +1015,15 @@
   }
 
   .contagem-item .num {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 22px;
     line-height: 1;
     margin-bottom: 2px;
   }
 
   .contagem-item .rot {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--texto-suave);
   }
@@ -974,7 +1036,7 @@
     gap: 4px 8px;
     align-items: center;
     margin-bottom: 8px;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .barra-tema .nome {
@@ -998,7 +1060,7 @@
   }
 
   .barra-tema .qtd {
-    font-weight: 700;
+    font-weight: 800;
     font-variant-numeric: tabular-nums;
   }
 
@@ -1063,23 +1125,23 @@
   .status-cartao-rejeitado { background: var(--graf-rejeitado-fundo); }
 
   .status-cartao .num {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 18px;
     line-height: 1.1;
     display: block;
   }
 
   .status-cartao .pct {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     color: var(--texto-suave);
     display: block;
     margin-bottom: 2px;
   }
 
   .status-cartao .rot {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--texto-suave);
     line-height: 1.25;
@@ -1100,8 +1162,8 @@
 
   .busca-materia-wrap label {
     display: block;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     color: var(--texto-suave);
     margin-bottom: 4px;
   }
@@ -1131,7 +1193,7 @@
   .btn-filtro-materia,
   .btn-filtro-pll {
     font: inherit;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     padding: 6px 3px;
     min-height: 44px;
@@ -1153,7 +1215,7 @@
   .atalhos-voto button,
   .btn-secundario {
     font: inherit;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     padding: 10px 12px;
     min-height: 44px;
@@ -1211,7 +1273,7 @@
     margin-top: 8px;
     padding-top: 16px;
     border-top: 1px solid var(--linha);
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
     line-height: 1.5;
   }
@@ -1246,15 +1308,15 @@
   }
 
   .item-pll .numero {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 14px;
   }
 
   .selo {
     display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     padding: 2px 8px;
     border-radius: 999px;
   }
@@ -1271,7 +1333,7 @@
   }
 
   .item-pll .meta {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
   }
 
@@ -1298,14 +1360,14 @@
   }
 
   .voto-card .num {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 20px;
   }
 
   .voto-card .rot {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     color: var(--texto-suave);
     line-height: 1.3;
   }
@@ -1342,14 +1404,14 @@
   }
 
   .lista-votos .data-voto {
-    font-weight: 700;
-    font-size: 12px;
+    font-weight: 800;
+    font-size: 13px;
     color: var(--texto-suave);
   }
 
   .lista-votos .materia-titulo {
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--texto);
     margin: 0;
   }
@@ -1369,7 +1431,7 @@
   .lista-votos .voto-selo {
     display: inline-block;
     font-weight: 800;
-    font-size: 11px;
+    font-size: 13px;
     padding: 2px 8px;
     border-radius: 6px;
     margin-right: 0;
@@ -1385,14 +1447,14 @@
     justify-content: center;
     gap: 8px;
     margin-top: 12px;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
   }
 
   .paginacao button {
     font: inherit;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     padding: 8px 12px;
     border: 1px solid var(--linha);
     border-radius: 8px;
@@ -1421,7 +1483,7 @@
   .erro-carga code {
     display: block;
     margin-top: 8px;
-    font-size: 12px;
+    font-size: 13px;
     word-break: break-all;
   }
 
@@ -1457,8 +1519,8 @@
     justify-content: center;
     gap: 2px;
     border: none;
-    font-family: "Noto Sans", system-ui, sans-serif;
-    font-size: 10px;
+    font-family: var(--fonte);
+    font-size: 13px;
     font-weight: 600;
     padding: 6px 4px 4px;
     min-height: 49px;
@@ -1483,8 +1545,8 @@
   }
 
   .secao-camara-titulo {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 18px;
     line-height: 1.2;
     margin: 0 0 2px;
@@ -1503,8 +1565,8 @@
   .seletor-periodo button {
     flex: 1;
     border: none;
-    font-family: "Noto Sans", system-ui, sans-serif;
-    font-size: 12.5px;
+    font-family: var(--fonte);
+    font-size: 13px;
     font-weight: 600;
     padding: 7px 4px;
     min-height: 44px;
@@ -1532,9 +1594,9 @@
   .painel-vereadores.ativo { display: block; }
 
   .sessao-titulo {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 800;
     margin: 0 0 2px;
     color: var(--texto);
   }
@@ -1545,7 +1607,7 @@
     color: var(--texto-suave);
   }
 
-  .sessao-meta a { font-weight: 700; text-decoration: none; }
+  .sessao-meta a { font-weight: 800; text-decoration: none; }
 
   .bloco-votado {
     background: var(--superficie);
@@ -1557,9 +1619,9 @@
 
 
   .titulo-votado {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 800;
     margin: 0 0 4px;
     display: flex;
     align-items: center;
@@ -1589,7 +1651,7 @@
   }
 
   .legenda-votado {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
     margin: 0 0 12px;
     line-height: 1.45;
@@ -1633,7 +1695,7 @@
 
   .materia-tipo {
     font-size: 13.5px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--texto);
     line-height: 1.3;
   }
@@ -1641,8 +1703,8 @@
   .badge-status {
     padding: 4px 8px;
     border-radius: 8px;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -1654,7 +1716,7 @@
 
   .materia-ementa {
     margin: 0;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 400;
     line-height: 1.35;
     color: var(--texto-suave);
@@ -1695,7 +1757,7 @@
   }
 
   .nota-rodape {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
     line-height: 1.5;
     margin: 8px 0 0;
@@ -1715,8 +1777,8 @@
   .nav-vereador button {
     flex: 1;
     font: inherit;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     padding: 8px 10px;
     min-height: 44px;
     border: 1px solid var(--linha);
@@ -1727,14 +1789,14 @@
   }
 
   .rosca-centro {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
     font-size: 18px;
     fill: var(--texto);
   }
 
   .rosca-centro-sub {
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 600;
     fill: var(--texto-suave);
   }
@@ -1748,9 +1810,9 @@
     margin-bottom: 12px;
   }
   .secao-titulo {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--texto);
     margin: 0;
   }
@@ -1758,7 +1820,7 @@
     display: inline-flex;
     align-items: center;
     min-height: 44px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--link);
     text-decoration: none;
@@ -1848,7 +1910,7 @@
     align-items: center;
     gap: 8px;
     font-size: 13.5px;
-    font-weight: 700;
+    font-weight: 800;
   }
   .cat-laranja { color: var(--app-laranja); }
   .cat-azul { color: var(--app-azul); }
@@ -1872,8 +1934,8 @@
   [data-tema="escuro"] .icone-verde { background: #143322; color: #86efac; }
   [data-tema="escuro"] .icone-roxo { background: #2a2840; color: #c4b5fd; }
   .card-meta {
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
     color: var(--neutro);
     display: inline-flex;
     align-items: center;
@@ -1902,9 +1964,9 @@
     flex-wrap: wrap;
   }
   .metrica-numero {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1;
     color: var(--texto);
   }
@@ -1917,16 +1979,15 @@
     display: flex;
     gap: 12px;
     margin-top: 6px;
-    font-size: 12px;
+    font-size: 13px;
   }
   .item-detalhe {
     display: flex;
     flex-direction: column;
   }
   .det-rotulo {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 800;
     letter-spacing: 0.03em;
   }
   .det-rotulo-unanimidade,
@@ -1934,9 +1995,9 @@
   .det-rotulo-maioria,
   .det-valor-maioria { color: var(--maioria-texto); }
   .det-valor {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 800;
   }
   .det-separador {
     border-left: 1px solid var(--linha);
@@ -1987,9 +2048,9 @@
   }
   .anel-porcento {
     position: absolute;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--texto);
   }
   .barra-trilho {
@@ -2021,13 +2082,13 @@
   .capsula-neutro { background: #f2f2f7; color: #636366; }
   [data-tema="escuro"] .capsula-neutro { background: #2c2c2e; color: #aeaeb2; }
   .card-legenda {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
     margin: 0;
     line-height: 1.45;
   }
   .nota-presenca {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
     margin: 0;
     line-height: 1.45;
@@ -2055,7 +2116,7 @@
     grid-template-columns: 1fr auto;
     gap: 4px 8px;
     align-items: center;
-    font-size: 12px;
+    font-size: 13px;
   }
   .barra-tema-linha .nome {
     grid-column: 1 / -1;
@@ -2075,18 +2136,18 @@
     min-width: 3px;
   }
   .barra-tema-linha .meta-linha {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--texto-suave);
     white-space: nowrap;
   }
   [data-tema="escuro"] .capsula-verde { background: #143322; color: #86efac; }
   [data-tema="escuro"] .capsula-roxa { background: #2a2840; color: #c4b5fd; }
-  .capsula-rotulo { font-size: 11px; font-weight: 600; opacity: 0.9; }
+  .capsula-rotulo { font-size: 13px; font-weight: 600; opacity: 0.9; }
   .capsula-valor {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 800;
   }
   .btn-filtro {
     border-radius: 12px;
@@ -2094,7 +2155,7 @@
     background: var(--linha);
     color: var(--texto);
     cursor: pointer;
-    font-family: inherit;
+    font-family: var(--fonte);
   }
   .btn-filtro.ativo,
   .btn-filtro[aria-pressed="true"] {
@@ -2148,11 +2209,11 @@
   }
   .item-votado .materia-titulo {
     font-size: 13.5px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--texto);
   }
   .item-votado .materia-ementa {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
     line-height: 1.35;
     margin: 0;
@@ -2161,7 +2222,7 @@
   .materia-datas {
     display: block;
     margin-top: 2px;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 400;
     line-height: 1.35;
     color: var(--texto-suave);
@@ -2169,8 +2230,8 @@
   .badge-status {
     padding: 4px 8px;
     border-radius: 8px;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -2193,8 +2254,8 @@
     max-width: 100%;
     padding: 2px 8px;
     border-radius: 999px;
-    font-size: 10px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     line-height: 1.35;
     letter-spacing: 0.01em;
     white-space: nowrap;
@@ -2214,8 +2275,8 @@
     max-width: 100%;
     padding: 2px 8px;
     border-radius: 999px;
-    font-size: 10px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     line-height: 1.35;
     letter-spacing: 0.01em;
     white-space: nowrap;
@@ -2261,9 +2322,9 @@
     margin: 0;
     padding: 2px 8px;
     border-radius: 999px;
-    font-family: inherit;
-    font-size: 10px;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-size: 13px;
+    font-weight: 800;
     line-height: 1.35;
     letter-spacing: 0.01em;
     text-align: left;
@@ -2288,13 +2349,13 @@
     border-radius: 10px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
     padding: 10px 12px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.45;
   }
   .tag-caixa strong {
     display: block;
     margin-bottom: 4px;
-    font-size: 12px;
+    font-size: 13px;
   }
   .tag-caixa a {
     color: var(--link);
@@ -2303,7 +2364,7 @@
   button.badge-status,
   button.selo {
     margin: 0;
-    font-family: inherit;
+    font-family: var(--fonte);
     text-align: left;
     appearance: none;
     -webkit-appearance: none;
@@ -2311,13 +2372,13 @@
     cursor: pointer;
   }
   button.voto-selo {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 800;
   }
   button.badge-status,
   button.selo {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
   }
   button.voto-selo:focus-visible,
   button.badge-status:focus-visible,
@@ -2398,9 +2459,9 @@
     border-radius: 14px;
     background: var(--marca-solida);
     color: #ffffff;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.02em;
     line-height: 1;
     cursor: pointer;
@@ -2463,9 +2524,9 @@
   }
   .votacao-cabecalho h2 {
     margin: 0;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.02em;
     color: var(--texto);
   }
@@ -2490,7 +2551,7 @@
   .votacao-termos h3 {
     margin: 0 0 8px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--texto);
   }
   .votacao-termos-texto {
@@ -2547,7 +2608,7 @@
     border: 2px solid var(--linha);
     background: var(--superficie-2);
     color: var(--texto);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 800;
     display: inline-flex;
     align-items: center;
@@ -2567,11 +2628,11 @@
   .votacao-item-texto strong {
     display: block;
     font-size: 13.5px;
-    font-weight: 700;
+    font-weight: 800;
   }
   .votacao-item-texto span {
     display: block;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
     margin-top: 2px;
   }
@@ -2604,9 +2665,9 @@
     min-height: 48px;
     width: 100%;
     border-radius: 12px;
-    font-family: "Noto Sans", system-ui, sans-serif;
+    font-family: var(--fonte);
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 800;
     cursor: pointer;
     padding: 12px 16px;
   }
@@ -2625,7 +2686,7 @@
   }
   .votacao-ajuda-botao {
     margin: 0;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--texto-suave);
     line-height: 1.4;
   }
@@ -2659,9 +2720,9 @@
     padding: 4px 10px;
     border: 3px solid;
     border-radius: 8px;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.02em;
     opacity: 0;
     pointer-events: none;
@@ -2680,15 +2741,15 @@
   }
   .voto-card-tipo {
     margin: 0 0 6px;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     color: var(--marca);
   }
   .voto-card-titulo {
     margin: 0 0 10px;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fonte);
     font-size: 22px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.2;
     text-wrap: balance;
@@ -2724,9 +2785,9 @@
     border: none;
     background: transparent;
     color: var(--texto);
-    font-family: "Noto Sans", system-ui, sans-serif;
+    font-family: var(--fonte);
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 800;
     cursor: pointer;
   }
   .btn-swipe-circulo {
@@ -2765,8 +2826,8 @@
     display: flex;
     justify-content: space-between;
     gap: 8px;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     font-variant-numeric: tabular-nums;
     color: var(--texto-suave);
     margin-bottom: 4px;
@@ -2785,7 +2846,7 @@
     background: var(--ok);
   }
   .voto-popular-vazio { opacity: 0.5; }
-  .sem-dados { font-size: 11px; color: var(--texto-suave); font-style: italic; }
+  .sem-dados { font-size: 13px; color: var(--texto-suave); font-style: italic; }
 
   .menu-lateral {
     display: none !important;
@@ -2872,8 +2933,8 @@
       margin-bottom: 10px;
     }
     .menu-lateral-titulo {
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
+      font-family: var(--fonte);
+      font-weight: 800;
       font-size: 17px;
       line-height: 1.25;
       margin: 0;
@@ -2885,7 +2946,7 @@
       flex-shrink: 0;
     }
     .menu-lateral-selo {
-      font-size: 12px;
+      font-size: 13px;
       margin: 0;
     }
     .menu-lateral-periodos {
@@ -2894,7 +2955,7 @@
     .menu-lateral-rodape {
       margin-top: auto;
       padding-top: 16px;
-      font-size: 11px;
+      font-size: 13px;
       line-height: 1.4;
     }
     .topo-fixo .topo-acoes,
@@ -2918,7 +2979,7 @@
       border-radius: 12px;
       padding: 10px 12px;
       min-height: 44px;
-      font-family: "Noto Sans", system-ui, sans-serif;
+      font-family: var(--fonte);
       font-size: 14px;
       font-weight: 600;
       background: transparent;
@@ -3062,7 +3123,7 @@
     .nav-principal { padding-top: 2px; padding-bottom: calc(4px + env(safe-area-inset-bottom, 0px)); }
     .nav-principal button { min-height: 44px; }
     .seletor-periodo { margin-top: 0; }
-    .seletor-periodo button { padding: 4px; font-size: 12px; }
+    .seletor-periodo button { padding: 4px; font-size: 13px; }
     .seletor-vereador select { padding: 6px 10px; }
     .conteudo { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
   }
@@ -3077,7 +3138,7 @@
     body {
       background: #ffffff !important;
       color: #000000 !important;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: var(--fonte);
       font-size: 10pt;
       line-height: 1.35;
     }
@@ -3227,8 +3288,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 700;
+    font-family: var(--fonte);
+    font-weight: 800;
   }
   .ac-cabecalho::-webkit-details-marker {
     display: none;
@@ -3236,7 +3297,7 @@
   .ac-cabecalho h2 {
     font-size: 18px;
     margin: 0;
-    font-weight: 700;
+    font-weight: 800;
   }
   .ac-conteudo {
     padding: 14px 20px 20px;
@@ -3599,7 +3660,7 @@
   }
   if (window.top !== window.self) {
     document.documentElement.setAttribute("data-moldura-bloqueada", "1");
-    document.body.innerHTML = '<main style="padding:24px;font-family:sans-serif;max-width:640px;margin:0 auto">'
+    document.body.innerHTML = '<main style="padding:24px;font-family: var(--fonte);max-width:640px;margin:0 auto">'
       + '<h1>Página oficial</h1><p>Este painel não deve ser exibido dentro de outro site.</p>'
       + '<p><a id="link-portal-oficial-moldura" href="#">Abrir o endereço oficial do Em Pratos Limpos</a></p></main>';
     var lk = document.getElementById("link-portal-oficial-moldura");
@@ -4080,10 +4141,10 @@
       '<div class="metrica-detalhes">' +
       '<div class="item-detalhe">' +
       '<span class="det-rotulo det-rotulo-unanimidade">Unanimidade</span>' +
-      '<span class="det-valor">' + unanimes + ' <small style="font-size:11px;font-weight:500">(' + pctUni + "%)</small></span></div>" +
+      '<span class="det-valor">' + unanimes + ' <small style="font-size: 13px;font-weight:400">(' + pctUni + "%)</small></span></div>" +
       '<div class="item-detalhe det-separador">' +
       '<span class="det-rotulo det-rotulo-maioria">Por Maioria</span>' +
-      '<span class="det-valor">' + maioria + ' <small style="font-size:11px;font-weight:500">(' + pctMai + "%)</small></span></div>" +
+      '<span class="det-valor">' + maioria + ' <small style="font-size: 13px;font-weight:400">(' + pctMai + "%)</small></span></div>" +
       (rejeitadas > 0
         ? '<div class="item-detalhe det-separador"><span class="det-rotulo">Rejeitadas</span><span class="det-valor">' +
           rejeitadas +
@@ -5395,10 +5456,10 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (elNum) elNum.textContent = total;
 
     var elUni = document.querySelector("#card-votacoes-sessao .det-valor-unanimidade");
-    if (elUni) elUni.innerHTML = unanimes + ' <small style="font-size:11px;font-weight:500">(' + pctUni + '%)</small>';
+    if (elUni) elUni.innerHTML = unanimes + ' <small style="font-size: 13px;font-weight:400">(' + pctUni + '%)</small>';
 
     var elMai = document.querySelector("#card-votacoes-sessao .det-valor-maioria");
-    if (elMai) elMai.innerHTML = maioria + ' <small style="font-size:11px;font-weight:500">(' + pctMai + '%)</small>';
+    if (elMai) elMai.innerHTML = maioria + ' <small style="font-size: 13px;font-weight:400">(' + pctMai + '%)</small>';
 
     var elPct = document.querySelector("#card-votacoes-sessao .anel-porcento");
     if (elPct) elPct.textContent = pctUni + '%';
