@@ -12,11 +12,19 @@
     "legislatura_fim": 2028
   },
   "campos_pessoais_removidos": {
-    "nota": "SEG2: campos que identificam quem fez a operacao no SAPL. Nenhum dado de voters, nem de quem registrou, fica no repositorio. A remocao e feita antes de gravar, por uma funcao so, e a trava de testes_sanidade.py recusa esses campos em qualquer arquivo de dados/.",
+    "nota": "SEG2: campos que identificam quem fez a operacao no SAPL. Nenhum dado de votante, nem de quem registrou, fica no repositorio. A remocao e feita antes de gravar, por uma funcao so, e a trava de testes_sanidade.py recusa esses campos em qualquer arquivo de dados/.",
     "lista": [
       "ip",
       "user"
     ]
+  },
+  "rede": {
+    "nota": "SEG2: quem o coletor pode chamar e quanto cabe uma resposta. Nada fixo no codigo. O host do SAPL vem sempre de sapl.endereco_base. Um host extra so entra aqui, e so para servico oficial da propria Camara, como o servidor de fotos.",
+    "teto_bytes_resposta": 20971520,
+    "esquemas_permitidos": [
+      "https"
+    ],
+    "hosts_permitidos_extra": []
   },
   "painel": {
     "nome_projeto": "Em Pratos Limpos",

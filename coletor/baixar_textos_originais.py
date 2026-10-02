@@ -24,7 +24,14 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ / "coletor") not in sys.path:
     sys.path.insert(0, str(RAIZ / "coletor"))
 
-from config_cidade import PAUSA_SAPL_SEGUNDOS, endereco_sapl, carregar_config, user_agent_http  # noqa: E402
+from config_cidade import (  # noqa: E402
+    PAUSA_SAPL_SEGUNDOS,
+    carregar_config,
+    conferir_url_permitida,
+    endereco_sapl,
+    host_da_url,
+    user_agent_http,
+)
 
 TETO_PEDIDOS = 8
 BRUTOS = RAIZ / "dados" / "brutos"
@@ -53,10 +60,15 @@ def nome_arquivo(materia_id: int, url: str) -> str:
     return f"materia_{materia_id}_texto_original{ext}"
 
 
-def baixar(url: str, destino: Path, user_agent: str) -> int:
+def baixar(url: str, destino: Path, user_agent: str, cfg: dict) -> int:
+    """So https e host do config. Recusa antes de abrir qualquer conexao."""
+    conferir_url_permitida(url, cfg, rotulo=f"texto original de {destino.name}")
     req = urllib.request.Request(url, headers={"User-Agent": user_agent}, method="GET")
     try:
         with urllib.request.urlopen(req, timeout=120) as resp:
+            from config_cidade import conferir_host_final
+
+            conferir_host_final(host_da_url(resp.geturl()), cfg, destino.name)
             corpo = resp.read()
             status = int(resp.status)
     except urllib.error.HTTPError as exc:
@@ -94,7 +106,7 @@ def main(argv: list[str]) -> None:
             time.sleep(PAUSA_SAPL_SEGUNDOS)
         arquivo = nome_arquivo(materia_id, url)
         quando = agora()
-        status = baixar(url, pasta / arquivo, agente)
+        status = baixar(url, pasta / arquivo, agente, cfg)
         pedidos.append(
             {
                 "n": indice + 1,

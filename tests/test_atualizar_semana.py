@@ -45,18 +45,32 @@ from so_dados_mudaram import (  # noqa: E402
 CFG_COLETOR = {
     "cidade": {"nome": "Cidade Teste", "uf": "PR"},
     "sapl": {"endereco_base": "https://exemplo.invalid"},
+    "campos_pessoais_removidos": {"lista": ["ip", "user"]},
+    "rede": {
+        "teto_bytes_resposta": 1024,
+        "esquemas_permitidos": ["https"],
+        "hosts_permitidos_extra": [],
+    },
 }
+CFG_REDE = CFG_COLETOR["rede"]
 CORPO = b'{"pagination":{"total_pages":1},"results":[]}'
+HOST_CFGSAPL = "exemplo.invalid"
 
 
 class Resposta:
     status = 200
 
-    def __init__(self, corpo: bytes):
+    def __init__(self, corpo: bytes, url: str = "https://exemplo.invalid/api/"):
         self.corpo = corpo
+        self.url = url
 
-    def read(self) -> bytes:
-        return self.corpo
+    def geturl(self):
+        return self.url
+
+    def read(self, tamanho: int | None = None) -> bytes:
+        if tamanho is None:
+            return self.corpo
+        return self.corpo[:tamanho]
 
     def __enter__(self):
         return self
@@ -215,7 +229,11 @@ class TestesRespostaVazia(unittest.TestCase):
         class RespostaVazia:
             status = 200
 
-            def read(self) -> bytes:
+            def geturl(self):
+                return "https://exemplo.invalid/api/"
+
+            def read(self, tamanho=None):
+                del tamanho
                 return b""
 
             def __enter__(self):

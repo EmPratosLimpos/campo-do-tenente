@@ -13,15 +13,23 @@ RAIZ = pathlib.Path(__file__).resolve().parent.parent
 if str(RAIZ / "coletor") not in sys.path:
     sys.path.insert(0, str(RAIZ / "coletor"))
 
-from config_cidade import carregar_config  # noqa: E402
+from config_cidade import (  # noqa: E402
+    carregar_config,
+    conferir_host_final,
+    conferir_url_permitida,
+    host_da_url,
+)
 
 PAUSA = 2.5
 SAIDA = RAIZ / "dados" / "brutos" / "fotos_vereadores"
 
 
-def baixar(url: str, destino: pathlib.Path) -> bool:
+def baixar(url: str, destino: pathlib.Path, cfg: dict) -> bool:
+    """So https e host do config. Recusa antes de abrir qualquer conexao."""
+    conferir_url_permitida(url, cfg, rotulo=f"foto {destino.name}")
     req = urllib.request.Request(url, headers={"User-Agent": "EmPratosLimpos-coletor/1.0"})
     with urllib.request.urlopen(req, timeout=60) as resp:
+        conferir_host_final(host_da_url(resp.geturl()), cfg, destino.name)
         data = resp.read()
     if len(data) < 200:
         return False
@@ -56,7 +64,7 @@ def main():
         if i > 0:
             time.sleep(PAUSA)
         try:
-            if baixar(foto, dest):
+            if baixar(foto, dest, cfg):
                 indice[str(vid)] = rel
                 print(f"OK foto {vid}")
             else:

@@ -212,6 +212,93 @@ ESPACOS = " \t\r\n"
 _DECODER = json.JSONDecoder()
 
 
+def esquemas_permitidos(cfg: dict | None = None) -> list[str]:
+    cfg = cfg if cfg is not None else carregar_config()
+    lista = (cfg.get("rede") or {}).get("esquemas_permitidos")
+    if not isinstance(lista, list) or not lista:
+        raise SystemExit(
+            "config_cidade.json: rede.esquemas_permitidos deve ser uma lista com ao menos um esquema."
+        )
+    return [str(item or "").strip().lower() for item in lista]
+
+
+def teto_bytes_resposta(cfg: dict | None = None) -> int:
+    """Teto de bytes de uma resposta. Acima disso, nada e gravado."""
+    cfg = cfg if cfg is not None else carregar_config()
+    valor = (cfg.get("rede") or {}).get("teto_bytes_resposta")
+    if valor is None:
+        raise SystemExit(
+            "config_cidade.json: rede.teto_bytes_resposta nao foi definido. "
+            "O mantenedor precisa definir esse valor. Nao vou seguir com um numero inventado."
+        )
+    return int(valor)
+
+
+def host_da_url(url: str) -> str:
+    import urllib.parse
+
+    return (urllib.parse.urlparse(str(url or "")).hostname or "").lower()
+
+
+def hosts_permitidos(cfg: dict | None = None) -> set[str]:
+    """Host do SAPL mais os extras declarados no config."""
+    cfg = cfg if cfg is not None else carregar_config()
+    extras = (cfg.get("rede") or {}).get("hosts_permitidos_extra") or []
+    if not isinstance(extras, list):
+        raise SystemExit("config_cidade.json: rede.hosts_permitidos_extra deve ser uma lista.")
+    hosts = {host_da_url(endereco_sapl(cfg))}
+    for item in extras:
+        texto = host_da_url(str(item or "")) or str(item or "").strip().lower()
+        if not texto:
+            raise SystemExit("config_cidade.json: rede.hosts_permitidos_extra tem host vazio.")
+        hosts.add(texto)
+    return {host for host in hosts if host}
+
+
+def conferir_url_permitida(url: str, cfg: dict | None = None, rotulo: str = "") -> str:
+    """So https e host do config. file:, data:, ftp: e outro host sao recusados."""
+    import urllib.parse
+
+    cfg = cfg if cfg is not None else carregar_config()
+    endereco = str(url or "").strip()
+    onde = rotulo or endereco
+    if not endereco:
+        raise SystemExit(f"URL vazia: {onde}")
+    partes = urllib.parse.urlparse(endereco)
+    esquema = (partes.scheme or "").lower()
+    permitidos = esquemas_permitidos(cfg)
+    if esquema not in permitidos:
+        raise SystemExit(
+            f"Esquema '{esquema or 'sem esquema'}' recusado em {onde}. "
+            f"Somente {', '.join(permitidos)}."
+        )
+    host = (partes.hostname or "").lower()
+    liberados = hosts_permitidos(cfg)
+    if host not in liberados:
+        raise SystemExit(
+            f"Host '{host or 'sem host'}' fora da lista do config em {onde}. "
+            f"Liberados: {', '.join(sorted(liberados))}."
+        )
+    return endereco
+
+
+def conferir_host_final(host: str, cfg: dict | None = None, onde: str = "") -> None:
+    """Recusa resposta que veio de outro host, mesmo depois de redirecionar."""
+    cfg = cfg if cfg is not None else carregar_config()
+    liberados = hosts_permitidos(cfg)
+    recebido = (host or "").lower()
+    if not recebido:
+        raise SystemExit(
+            f"Resposta sem host final em {onde}. Nao da para conferir a origem. Nada foi gravado."
+        )
+    if recebido not in liberados:
+        raise SystemExit(
+            f"Resposta veio de '{recebido}', que nao esta no config, em {onde}. "
+            f"Liberados: {', '.join(sorted(liberados))}. Nada foi gravado."
+        )
+
+
+
 def campos_pessoais(cfg: dict | None = None) -> list[str]:
     """Campos que identificam quem operou o SAPL. Lista vem do config."""
     cfg = cfg if cfg is not None else carregar_config()
