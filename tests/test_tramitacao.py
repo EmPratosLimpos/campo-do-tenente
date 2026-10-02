@@ -53,10 +53,6 @@ from config_cidade import (  # noqa: E402
 )
 
 TRATADOS = RAIZ / "dados" / "tratados"
-NOME_OFICIAL_VOTOS = {
-    "Aprovado",
-    "Rejeitado",
-}
 
 VOTO_1O_TURNO = {
     "id": 10,
