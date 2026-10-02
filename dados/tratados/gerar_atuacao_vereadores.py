@@ -39,6 +39,7 @@ from config_cidade import (  # noqa: E402
     tipos_dois_turnos,
     uf_cidade,
 )
+from csv_seguro import EscritorSeguro  # noqa: E402
 CONFIG = carregar_config()
 DOIS_TURNOS = tipos_dois_turnos(CONFIG)
 TURNO_PRIMEIRO = "1o turno"
@@ -140,6 +141,11 @@ def recusar_campos_pessoais(obj, caminho: str = "") -> None:
     elif isinstance(obj, list):
         for indice, valor in enumerate(obj):
             recusar_campos_pessoais(valor, f"{caminho}[{indice}]")
+
+
+# Nome antigo, mantido porque gerar_dados_tela e gerar_proposicoes_executivo
+# importam daqui. Aponta para a mesma funcao de agora.
+recusar_ip = recusar_campos_pessoais
 
 
 def resultados_de_lista(data) -> list:
@@ -1701,8 +1707,10 @@ def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
         "projetos_em_tramitacao",
     ]
     buffer = io.StringIO(newline="")
-    escritor = csv.DictWriter(
-        buffer, fieldnames=campos, delimiter=";", lineterminator="\n"
+    escritor = EscritorSeguro(
+        csv.DictWriter(
+            buffer, fieldnames=campos, delimiter=";", lineterminator="\n"
+        )
     )
     escritor.writeheader()
     for item in vereadores:

@@ -32,6 +32,7 @@ from config_cidade import (  # noqa: E402
     id_tipo_sessao_ordinaria,
     remover_campos_pessoais,
 )
+from csv_seguro import EscritorSeguro  # noqa: E402
 
 CONFIG = carregar_config()
 BRUTOS = RAIZ / "dados" / "brutos"
@@ -853,7 +854,7 @@ def derivar(
         linhas, nomes = ler_paginas(pasta_lote, f"materialegislativa_ano{ano}")
         caminho_csv = pasta_saida / f"materias-{ano}-resposta-original.csv"
         with caminho_csv.open("w", encoding="utf-8-sig", newline="") as handle:
-            escritor = csv.DictWriter(handle, fieldnames=COLUNAS_MATERIA, delimiter=";")
+            escritor = EscritorSeguro(csv.DictWriter(handle, fieldnames=COLUNAS_MATERIA, delimiter=";"))
             escritor.writeheader()
             for materia in linhas:
                 tipo = tipo_materia.get(int(materia["tipo"])) if materia.get("tipo") is not None else None

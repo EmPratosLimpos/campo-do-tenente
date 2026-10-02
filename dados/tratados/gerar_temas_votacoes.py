@@ -41,6 +41,7 @@ from config_cidade import (  # noqa: E402
     nomes_categorias,
     rotulos_especiais_tema,
 )
+from csv_seguro import EscritorSeguro  # noqa: E402
 
 BRUTOS = RAIZ / "dados" / "brutos"
 CONFIG = carregar_config()
@@ -382,7 +383,7 @@ def gerar_temas_do_ano(ano: int):
     saida = Path(__file__).with_name(f"tema-votacoes-{ano}.csv")
     campos = list(linhas[0])
     with saida.open("w", encoding="utf-8", newline="") as arquivo:
-        escritor = csv.DictWriter(arquivo, fieldnames=campos)
+        escritor = EscritorSeguro(csv.DictWriter(arquivo, fieldnames=campos))
         escritor.writeheader()
         escritor.writerows(linhas)
 

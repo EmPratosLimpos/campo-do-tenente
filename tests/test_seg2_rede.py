@@ -3,6 +3,7 @@
 Nenhum teste aqui abre rede. Tudo usa fixture local.
 """
 
+import io
 import json
 import sys
 import tempfile
@@ -266,6 +267,85 @@ class TestRegraDoPauser(unittest.TestCase):
             with tempfile.TemporaryDirectory() as tmp:
                 with self.assertRaises(SystemExit):
                     ColetorLote(CFG, Path(tmp), teto=1)
+
+
+class TestCelulaCsv(unittest.TestCase):
+    """Item F: celula de texto perigoso vira texto, numero nao muda."""
+
+    def setUp(self):
+        from csv_seguro import celula_csv
+
+        self.celula = celula_csv
+
+    def test_texto_perigoso_ganha_apostrofo(self):
+        for texto in ("=1+1", "+1", "-2", "@soma", "\tlider", "\rquebra"):
+            with self.subTest(texto=texto):
+                saida = self.celula(texto)
+                self.assertEqual(saida, "'" + texto)
+                self.assertIsInstance(saida, str)
+
+    def test_texto_comum_nao_muda(self):
+        for texto in ("Projeto de Lei", "", "2026", "10 dias", "a=b"):
+            with self.subTest(texto=texto):
+                self.assertEqual(self.celula(texto), texto)
+
+    def test_numero_e_booleano_nao_mudam(self):
+        for valor in (1, -1, 0, 1.5, True, False, None):
+            with self.subTest(valor=valor):
+                self.assertEqual(self.celula(valor), valor)
+                self.assertIsInstance(self.celula(valor), type(valor))
+
+    def test_escritor_seguro_preserva_o_cabecalho(self):
+        import csv as modulo_csv
+        from csv_seguro import EscritorSeguro
+
+        buffer = io.StringIO(newline="")
+        escritor = EscritorSeguro(
+            modulo_csv.DictWriter(
+                buffer, fieldnames=["nome", "votos"], delimiter=";", lineterminator="\n"
+            )
+        )
+        escritor.writeheader()
+        escritor.writerows(
+            [
+                {"nome": "Ana", "votos": 3},
+                {"nome": "=PERIGO()", "votos": 0},
+            ]
+        )
+        buffer.seek(0)
+        linhas = list(modulo_csv.reader(buffer, delimiter=";"))
+        self.assertEqual(linhas[0], ["nome", "votos"])
+        self.assertEqual(linhas[1], ["Ana", "3"])
+        self.assertEqual(linhas[2], ["'=PERIGO()", "0"])
+
+    def test_nenhum_csv_de_dados_tem_celula_perigosa(self):
+        import csv as modulo_csv
+        from csv_seguro import INICIOS_PERIGOSOS
+
+        achados = []
+        for caminho in sorted((RAIZ / "dados").rglob("*.csv")):
+            with caminho.open(encoding="utf-8-sig", newline="") as handle:
+                for numero, linha in enumerate(modulo_csv.reader(handle), start=1):
+                    for celula in linha:
+                        if isinstance(celula, str) and celula[:1] in INICIOS_PERIGOSOS:
+                            achados.append(f"{caminho.relative_to(RAIZ)}:{numero}")
+        self.assertEqual(achados, [])
+
+    def test_todo_gerador_de_csv_usa_o_escritor_seguro(self):
+        for nome in (
+            "gerar_atuacao_vereadores.py",
+            "gerar_autoria_materias.py",
+            "gerar_tabela_vereadores.py",
+            "gerar_temas_votacoes.py",
+        ):
+            caminho = RAIZ / "dados" / "tratados" / nome
+            with self.subTest(arquivo=nome):
+                texto = caminho.read_text(encoding="utf-8")
+                self.assertIn("from csv_seguro import EscritorSeguro", texto)
+                self.assertIn("EscritorSeguro(", texto)
+        derivar = (RAIZ / "coletor" / "derivar_insumos.py").read_text(encoding="utf-8")
+        self.assertIn("from csv_seguro import EscritorSeguro", derivar)
+        self.assertIn("EscritorSeguro(", derivar)
 
 
 if __name__ == "__main__":
