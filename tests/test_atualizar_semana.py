@@ -545,7 +545,34 @@ class TestesSoDados(unittest.TestCase):
             self.assertFalse(so_dados_mudaram([nome]), nome)
             self.assertEqual(arquivos_fora_do_permitido([nome]), [nome], nome)
 
+    def test_cname_do_dominio_proprio_nao_sai_na_atualizacao_semanal(self):
+        """O CNAME nao entra no commit do bot: dominio so muda por Pull Request."""
+        self.assertFalse(so_dados_mudaram(["CNAME"]))
+        self.assertEqual(arquivos_fora_do_permitido(["CNAME"]), ["CNAME"])
+        semanal = [
+            "dados/brutos/lote_20260927_porsessao/indice.json",
+            "dados/tratados/atuacao_vereadores_2026.json",
+            "dados/tratados/RELATORIO-ATUACAO-VEREADORES-2026.md",
+            "config_cidade.json",
+            "CHANGELOG.md",
+        ]
+        self.assertTrue(so_dados_mudaram(semanal))
+        self.assertEqual(arquivos_fora_do_permitido(semanal), [])
+        self.assertEqual(
+            planejar_publicacao(semanal)["decisao"],
+            "publicar",
+            "a execucao semanal nao pode ser barrada pelo CNAME",
+        )
 
+    def test_workflow_semanal_nao_adiciona_cname_no_commit(self):
+        texto = (RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("git add -- dados config_cidade.json CHANGELOG.md", texto)
+        for linha in texto.splitlines():
+            if linha.strip().startswith("git add"):
+                self.assertNotIn("CNAME", linha)
+        self.assertNotIn("CNAME", texto)
 
     def test_dentro_de_dados_somente_extensoes_permitidas(self):
         permitidos = [
