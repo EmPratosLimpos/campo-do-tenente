@@ -219,6 +219,13 @@
     "voto_presidente": "O presidente da sessão não votou nessa votação.",
     "voto_ausente_justificativa": "O vereador faltou com justificativa oficial nessa votação.",
     "voto_ausente_sem_justificativa": "O vereador faltou sem justificativa oficial nessa votação.",
-    "voto_presente_sem_registro": "O vereador estava presente, mas o voto individual não foi registrado no SAPL."
+    "voto_presente_sem_registro": "O vereador estava presente, mas o voto individual não foi registrado no SAPL.",
+    "unanimidade": "Todos os votos registrados foram favoráveis à matéria.",
+    "maioria": "A matéria foi aprovada pela maioria dos votos registrados.",
+    "nominal": "O voto de cada vereador fica registrado com o nome (art. 201 do Regimento Interno). É obrigatória quando a matéria exige maioria absoluta ou dois terços.",
+    "tramitacao": "A matéria ainda está em tramitação, sem decisão final registrada.",
+    "veto": "O Prefeito pode recusar um projeto aprovado pela Câmara, no todo ou em parte. A Câmara vota de novo e pode manter ou derrubar o veto.",
+    "plex": "Projeto de Lei de origem do Poder Executivo: o projeto foi escrito e enviado pela Prefeitura.",
+    "pleg": "Projeto de Lei de origem do Poder Legislativo: proposta apresentada por vereador ou comissão."
   }
 }
