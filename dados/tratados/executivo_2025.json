@@ -44,7 +44,7 @@
       "nominal": 5
     },
     "rotulo_votacao_tipo_nao_informado": "nao informado no SAPL",
-    "observacao_executivo": "D-058: votacao_tipo vem do campo tipo_votacao do item da Ordem do Dia ligado ao registro de votacao, com o mesmo id que o SAPL usa. O codigo vira rotulo pela tabela oficial tipovotacao quando ela esta nos brutos. Sem tabela, o rotulo so sai quando todos os votos validos daquele codigo concordam sobre o voto individual: com voto individual e nominal, sem voto individual e simbolica. Codigo sem confirmacao, materia sem voto valido e item da Ordem do Dia ausente ficam como nao informado no SAPL. Nos vetos, veto_tipo vem do começo da ementa oficial, veto_situacao vem do resultado do voto valido do proprio veto, e materia_vetada_id so quando numero e ano citados na ementa levam a uma unica materia de projeto de lei do SAPL.",
+    "observacao_executivo": "D-058: votacao_tipo vem do campo tipo_votacao do item da Ordem do Dia ligado ao registro de votacao, com o mesmo id que o SAPL usa. O codigo vira rotulo pela tabela oficial tipovotacao quando ela esta nos brutos. Sem tabela, o rotulo so sai quando todos os votos validos daquele codigo concordam sobre o voto individual: com voto individual e nominal, sem voto individual e simbolica. Codigo sem confirmacao, materia sem voto valido e item da Ordem do Dia ausente ficam como nao informado no SAPL. Nos vetos, veto_tipo vem do começo da ementa oficial e veto_situacao vem do resultado do voto valido do proprio veto. materia_vetada_id tem prioridade na revisao do mantenedor em vetos_revisados.json (fonte revisao_mantenedor). Sem revisao, a regra automatica exige os dois criterios juntos: numero e ano citados na ementa, sem zero a esquerda, levando a materia de projeto de lei, e texto da sumula com a ementa dela parecidas, com similaridade de token de 0,85 para cima (fonte automatica, com o valor medido em materia_vetada_similaridade). Um criterio so, ou mais de um candidato, deixa o vinculo nulo com fonte pendente_revisao.",
     "veto_derrotados": 3,
     "veto_mantidos": 0,
     "veto_sem_voto_valido": 0,
@@ -55,6 +55,13 @@
     "por_veto_situacao": {
       "Veto derrubado": 3
     },
+    "por_materia_vetada_fonte": {
+      "revisao_mantenedor": 3
+    },
+    "veto_com_materia_vetada": 3,
+    "veto_pendente_de_revisao": 0,
+    "fonte_vetos_revisados": "dados/tratados/vetos_revisados.json",
+    "limiar_similaridade_veto": 0.85,
     "rotulo_veto_tipo_nao_informado": "nao informado"
   },
   "sessao": [
@@ -143,6 +150,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/227",
       "votacao_tipo": "simbolica",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -230,6 +240,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/224",
       "votacao_tipo": "simbolica",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -317,6 +330,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/232",
       "votacao_tipo": "simbolica",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     }
   ],
@@ -391,10 +407,14 @@
       "votos_nominais_rotulo": "votacao registrada sem voto nominal no SAPL",
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/212",
       "votacao_tipo": "simbolica",
-      "materia_vetada_id": null,
-      "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa",
+      "materia_vetada_id": 27,
+      "materia_vetada_fonte": "revisao_mantenedor",
+      "materia_vetada_tipo": "PLEG 8/2025",
+      "materia_vetada_link": "https://sapl.campodotenente.pr.leg.br/materia/27",
+      "materia_vetada_rotulo": "vinculo revisado pelo mantenedor",
       "veto_tipo": "total",
-      "veto_situacao": "Veto derrubado"
+      "veto_situacao": "Veto derrubado",
+      "materia_vetada_similaridade": null
     },
     {
       "id": 213,
@@ -466,10 +486,14 @@
       "votos_nominais_rotulo": "votacao registrada sem voto nominal no SAPL",
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/213",
       "votacao_tipo": "simbolica",
-      "materia_vetada_id": null,
-      "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa",
+      "materia_vetada_id": 193,
+      "materia_vetada_fonte": "revisao_mantenedor",
+      "materia_vetada_tipo": "PLEG 7/2025",
+      "materia_vetada_link": "https://sapl.campodotenente.pr.leg.br/materia/193",
+      "materia_vetada_rotulo": "vinculo revisado pelo mantenedor",
       "veto_tipo": "parcial",
-      "veto_situacao": "Veto derrubado"
+      "veto_situacao": "Veto derrubado",
+      "materia_vetada_similaridade": null
     }
   ],
   "todo": [
@@ -498,6 +522,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/138",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -694,6 +721,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/14",
       "votacao_tipo": "nominal",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -890,6 +920,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/29",
       "votacao_tipo": "nominal",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -977,6 +1010,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/32",
       "votacao_tipo": "simbolica",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1064,6 +1100,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/43",
       "votacao_tipo": "simbolica",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1104,6 +1143,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/127",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1144,6 +1186,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/129",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1184,6 +1229,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/130",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1380,6 +1428,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/189",
       "votacao_tipo": "nominal",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1576,6 +1627,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/190",
       "votacao_tipo": "nominal",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1603,6 +1657,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/140",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1799,6 +1856,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/219",
       "votacao_tipo": "nominal",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1839,6 +1899,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/226",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1926,6 +1989,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/227",
       "votacao_tipo": "simbolica",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -1981,6 +2047,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/228",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2068,6 +2137,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/224",
       "votacao_tipo": "simbolica",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2155,6 +2227,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/232",
       "votacao_tipo": "simbolica",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2210,6 +2285,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/236",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2265,6 +2343,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/240",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2292,6 +2373,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/141",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2319,6 +2403,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/144",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2346,6 +2433,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/145",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2373,6 +2463,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/146",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2400,6 +2493,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/147",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2427,6 +2523,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/148",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2454,6 +2553,9 @@
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/149",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     },
     {
@@ -2526,10 +2628,14 @@
       "votos_nominais_rotulo": "votacao registrada sem voto nominal no SAPL",
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/169",
       "votacao_tipo": "simbolica",
-      "materia_vetada_id": null,
-      "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa",
+      "materia_vetada_id": 37,
+      "materia_vetada_fonte": "revisao_mantenedor",
+      "materia_vetada_tipo": "PLEG 13/2025",
+      "materia_vetada_link": "https://sapl.campodotenente.pr.leg.br/materia/37",
+      "materia_vetada_rotulo": "vinculo revisado pelo mantenedor",
       "veto_tipo": "parcial",
-      "veto_situacao": "Veto derrubado"
+      "veto_situacao": "Veto derrubado",
+      "materia_vetada_similaridade": null
     },
     {
       "id": 212,
@@ -2601,10 +2707,14 @@
       "votos_nominais_rotulo": "votacao registrada sem voto nominal no SAPL",
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/212",
       "votacao_tipo": "simbolica",
-      "materia_vetada_id": null,
-      "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa",
+      "materia_vetada_id": 27,
+      "materia_vetada_fonte": "revisao_mantenedor",
+      "materia_vetada_tipo": "PLEG 8/2025",
+      "materia_vetada_link": "https://sapl.campodotenente.pr.leg.br/materia/27",
+      "materia_vetada_rotulo": "vinculo revisado pelo mantenedor",
       "veto_tipo": "total",
-      "veto_situacao": "Veto derrubado"
+      "veto_situacao": "Veto derrubado",
+      "materia_vetada_similaridade": null
     },
     {
       "id": 213,
@@ -2676,10 +2786,14 @@
       "votos_nominais_rotulo": "votacao registrada sem voto nominal no SAPL",
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/213",
       "votacao_tipo": "simbolica",
-      "materia_vetada_id": null,
-      "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa",
+      "materia_vetada_id": 193,
+      "materia_vetada_fonte": "revisao_mantenedor",
+      "materia_vetada_tipo": "PLEG 7/2025",
+      "materia_vetada_link": "https://sapl.campodotenente.pr.leg.br/materia/193",
+      "materia_vetada_rotulo": "vinculo revisado pelo mantenedor",
       "veto_tipo": "parcial",
-      "veto_situacao": "Veto derrubado"
+      "veto_situacao": "Veto derrubado",
+      "materia_vetada_similaridade": null
     }
   ]
 }

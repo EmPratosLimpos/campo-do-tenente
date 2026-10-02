@@ -712,14 +712,35 @@ class TestArquivosGerados(unittest.TestCase):
         self.assertTrue(com_autor, "nenhum item com autor vereador")
 
     def test_executivo_traz_votos_e_vet_traz_rotulo(self):
+        """E6d: todo item do Executivo traz rotulo do veto.
+
+        D-058: o vinculo com a materia vetada pode existir agora, quando vem
+        da revisao do mantenedor ou da regra automatica. Quando existe, o
+        id tem de ser materia de projeto de lei que existe no SAPL e a
+        fonte precisa dizer de onde veio. Quando nao existe, o rotulo
+        explica que o vinculo esta pendente.
+        """
         dados = self._carregar("executivo_legislatura.json")
         plex = [item for item in dados["todo"] if item.get("tipo_sigla") == "PLEX"]
         self.assertTrue(plex, "sem PLEX no executivo")
         vetoes = [item for item in dados["todo"] if item.get("tipo_sigla") == "VET"]
         self.assertTrue(vetoes, "sem VET no executivo")
+        ids_pleg = {item["id"] for item in self._carregar("proposicoes_legislatura.json")["todo"]}
         for veto in vetoes:
-            self.assertIsNone(veto.get("materia_vetada_id"))
             self.assertTrue(veto.get("materia_vetada_rotulo"))
+            vetoado = veto.get("materia_vetada_id")
+            if vetoado is None:
+                self.assertEqual(veto.get("materia_vetada_fonte"), "pendente_revisao")
+                self.assertIsNone(veto.get("materia_vetada_tipo"))
+                self.assertIsNone(veto.get("materia_vetada_link"))
+                continue
+            with self.subTest(veto=veto["tipo"]):
+                self.assertIn(int(vetoado), ids_pleg)
+                self.assertEqual(veto.get("tipo_sigla"), "VET")
+                self.assertNotEqual(int(vetoado), veto["id"])
+                self.assertIn(veto.get("materia_vetada_fonte"), ("revisao_mantenedor", "automatica"))
+                self.assertTrue(veto.get("materia_vetada_tipo"))
+                self.assertTrue(str(veto.get("materia_vetada_link") or "").endswith(f"/materia/{vetoado}"))
         siglas = set(tipos_executivo(self.config))
         self.assertEqual({item["tipo_sigla"] for item in dados["todo"]}, siglas)
         for item in dados["todo"]:

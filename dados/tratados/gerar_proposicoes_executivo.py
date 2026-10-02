@@ -19,6 +19,8 @@ Entradas:
     as pastas de tramitacao e de sondagem)
     dados/brutos/lote_*_tramitacao/ (historico, status e unidades)
     dados/tratados/temas_materias.json (tema por materia)
+    dados/tratados/vetos_revisados.json (vinculo veto e materia, revisado
+    pelo mantenedor; opcional, mesmo espirito de temas_materias.json)
     dados/tratados/autoria_materias.json (autores vereadores)
     dados/tratados/vereadores.json (nomes e mandatos)
     dados/tratados/atuacao_vereadores_<ano>.json (votacoes ordinarias)
@@ -30,8 +32,15 @@ SAPL e nunca deduzidas:
     Dia ligado ao registro de votacao (votacao_tipo);
     tipo e situacao do veto, pelo começo da ementa oficial e pelo resultado do
     voto valido do proprio veto (veto_tipo e veto_situacao);
-    materia_vetada_id, so quando numero e ano citados na ementa do veto levam
-    a UMA unica materia do SAPL (materia_vetada_id).
+    materia_vetada_id, com a materia vetada que o veto aponta. A origem fica
+    em materia_vetada_fonte: revisao_mantenedor quando o vinculo vem do
+    arquivo vetos_revisados.json, que e decisao do mantenedor e tem
+    prioridade; automatica quando os dois criterios automaticos batem ao
+    mesmo tempo, numero e ano citados na ementa (sem zero a esquerda)
+    levando a materia de projeto de lei e texto da sumula parecendo com a
+    ementa dela (similaridade de token de 0,85 para cima, valor medido em
+    materia_vetada_similaridade); pendente_revisao quando nenhum dos dois
+    vira vinculo, e nesse caso o campo fica nulo.
 
 Saidas (chamado por gerar_dados_tela.py):
     dados/tratados/proposicoes_<ano>.json e proposicoes_legislatura.json
@@ -46,6 +55,7 @@ Uso:
 
 from __future__ import annotations
 
+import difflib
 import json
 import re
 import sys
@@ -97,7 +107,9 @@ ROTULO_SEM_VOTO_VALIDO = "votacao registrada sem voto valido (so 1o turno ou sem
 ROTULO_SEM_VOTO_INDIVIDUAL = "votacao registrada sem voto nominal no SAPL"
 ROTULO_SEM_TRAMITACAO = "sem tramitacao registrada no SAPL"
 ROTULO_VETADA_SEM_ESTRUTURA = "sem indicacao estruturada no SAPL, ver ementa"
-ROTULO_VETADA_LIGADA = "numero e ano da ementa levam a uma unica materia do SAPL"
+ROTULO_VETADA_REVISADA = "vinculo revisado pelo mantenedor"
+ROTULO_VETADA_AUTOMATICA = "numero e texto da ementa levam a uma unica materia do SAPL"
+ROTULO_VETADA_PENDENTE = "vinculo do veto pendente de revisao do mantenedor"
 SITUACAO_EM_TRAMITACAO = "Em tramitacao"
 SITUACAO_SEM_REGISTRO = "Sem registro de votação nem de tramitação no SAPL"
 SITUACAO_STATUS_SEM_TEXTO = "status de tramitacao sem texto oficial no SAPL"
@@ -110,12 +122,18 @@ VETO_TIPO_NAO_INFORMADO = "nao informado"
 VETO_DERRUBADO = "Veto derrubado"
 VETO_MANTIDO = "Veto mantido"
 VETO_AINDA_VAI_VOTAR = "Camara ainda vai votar"
+FONTE_VETADA_AUTOMATICA = "automatica"
+FONTE_VETADA_REVISAO = "revisao_mantenedor"
+FONTE_VETADA_PENDENTE = "pendente_revisao"
+LIMIAR_SIMILARIDADE_VETO = 0.85
+ARQUIVO_VETOS_REVISADOS = DIR_SCRIPT / "vetos_revisados.json"
 PREFIXOS_VETO = (
     ("VETO INTEGRAL", VETO_TIPO_TOTAL),
     ("VETO TOTAL", VETO_TIPO_TOTAL),
     ("VETO PARCIAL", VETO_TIPO_PARCIAL),
 )
 PREFIXO_PROJETO = "PROJETO DE LEI"
+MARCA_SUMULA = "sumula"
 REFERENCIA_PROJETO = re.compile(
     r"(?:\bPROJETO\s+DE\s+LEI|\bPL)\s*(?:N[.º°]?\s*)?(\d{1,4})"
     r"(?:\s*(?:[,/\-]\s*)?DE\s+|\s*/\s*)(\d{4})?"
@@ -435,14 +453,6 @@ def veto_situacao_de(votacao: dict | None) -> str:
     )
 
 
-def referencia_da_ementa(ementa: str) -> tuple[str | None, str | None]:
-    """Numero e ano do projeto citado na ementa do veto, ou (None, None)."""
-    achado = REFERENCIA_PROJETO.search(sem_acento(ementa))
-    if achado is None:
-        return None, None
-    return achado.group(1), achado.group(2)
-
-
 def numero_normalizado(numero) -> str:
     """Numero de materia sem zero a esquerda. A ementa do SAPL escreve 008/2025.
 
@@ -455,48 +465,165 @@ def numero_normalizado(numero) -> str:
     return texto
 
 
-def materia_vetada_de(
-    ementa: str, indice: dict[str, list[int]]
-) -> int | None:
-    """Materia citada na ementa do veto, so quando ela e unica.
+def referencia_da_ementa(ementa: str) -> tuple[str | None, str | None]:
+    """Numero e ano do projeto citado na ementa do veto, ou (None, None)."""
+    achado = REFERENCIA_PROJETO.search(sem_acento(ementa))
+    if achado is None:
+        return None, None
+    return achado.group(1), achado.group(2)
 
-    D-058: numero e ano precisam levar a UMA unica materia de projeto de lei
-    do SAPL. Divergencia de numeracao da Prefeitura, materia ambigua ou
-    referencia sem ano deixa o campo nulo. Nao existe tentativa de adivinhar
-    pelo texto da ementa.
+
+def normaliza_texto(texto) -> str:
+    """Minuscula, sem acento, so palavra e numero, com espaco unico.
+
+    E o texto que entra na comparacao do veto com o projeto. A grafia
+    exata da ementa do SAPL muda entre um registro e outro, por isso a
+    comparacao nao usa a string original.
     """
-    numero, ano = referencia_da_ementa(ementa)
-    if not numero or not ano:
-        return None
-    candidatos = indice.get(f"{ano}|{numero_normalizado(numero)}") or []
-    if len(candidatos) != 1:
-        return None
-    return int(candidatos[0])
+    base = re.sub(r"[^a-z0-9]+", " ", sem_acento(texto).lower())
+    return " ".join(base.split())
+
+
+def texto_da_sumula(ementa: str) -> str:
+    """Texto do veto, depois da marca sumula que o SAPL escreve na ementa.
+
+    A ementa do veto vem como "Veto Parcial ao PROJETO DE LEI Nº 013, DE
+    2025 - Sumula: <texto>". Sem a marca, a ementa inteira e o texto.
+    """
+    partes = normaliza_texto(ementa).split(MARCA_SUMULA)
+    if len(partes) > 1:
+        return partes[-1].strip()
+    return normaliza_texto(ementa)
+
+
+def similaridade(primeiro: str, segundo: str) -> float:
+    """Semelhanca de dois textos ja normalizados, de 0 a 1.
+
+    Token a token, na ordem em que aparecem. Vem da biblioteca padrao do
+    Python: nenhum pacote novo e nenhum numero fora do codigo.
+    """
+    if not primeiro or not segundo:
+        return 0.0
+    return difflib.SequenceMatcher(
+        None, primeiro.split(), segundo.split()
+    ).ratio()
+
+
+def e_projeto_de_lei(
+    ficha: dict, siglas_por_tipo: dict[int, str], catalogo: dict[str, str]
+) -> bool:
+    """Projeto de lei pelo nome oficial do tipo, lido do catalogo do SAPL.
+
+    Nao ha sigla fixa no codigo: o nome vem da tabela tipomaterialegislativa.
+    """
+    tipo_id = ficha.get("tipo_id")
+    sigla = siglas_por_tipo.get(int(tipo_id)) if tipo_id is not None else None
+    return PREFIXO_PROJETO in sem_acento(catalogo.get(str(sigla or ""), ""))
 
 
 def indexar_projetos(
     fichas: dict[int, dict], siglas_por_tipo: dict[int, str], catalogo: dict[str, str]
-) -> dict[str, list[int]]:
-    """Projetos de lei do SAPL por ano e numero, lidos do catalogo oficial.
+) -> tuple[dict[str, list[int]], dict[int, str]]:
+    """Dois indices dos projetos de lei: por ano e numero, e ementa limpa.
 
-    D-058: so entra materia cujo nome oficial de tipo, lido do catalogo do
-    SAPL, e projeto de lei. O SAPL repete numero entre tipos, entao a
-    busca por ano e numero ainda pode achar mais de uma materia, e nesse
-    caso o veto fica sem materia_vetada_id.
+    D-058: o SAPL repete numero entre tipos, entao a busca por ano e numero
+    pode trazer mais de uma materia. Ementa normalizada serve para a
+    comparacao de texto do veto com o do projeto.
     """
-    indice: dict[str, list[int]] = {}
+    por_ano_numero: dict[str, list[int]] = {}
+    ementas: dict[int, str] = {}
     for materia_id, ficha in sorted(fichas.items()):
-        tipo_id = ficha.get("tipo_id")
-        sigla = siglas_por_tipo.get(int(tipo_id)) if tipo_id is not None else None
-        nome = sem_acento(catalogo.get(str(sigla or ""), ""))
-        if PREFIXO_PROJETO not in nome:
+        if not e_projeto_de_lei(ficha, siglas_por_tipo, catalogo):
             continue
+        ementa = normaliza_texto(ficha.get("ementa") or "")
+        if ementa:
+            ementas[int(materia_id)] = ementa
         numero = numero_normalizado(ficha.get("numero"))
         ano = str(ficha.get("ano") or "").strip()
         if not numero or not ano:
             continue
-        indice.setdefault(f"{ano}|{numero}", []).append(int(materia_id))
-    return indice
+        por_ano_numero.setdefault(f"{ano}|{numero}", []).append(int(materia_id))
+    return por_ano_numero, ementas
+
+
+def carregar_vetos_revisados(caminho: Path) -> dict[int, int]:
+    """Vinculo veto -> materia vetada decidido pelo mantenedor (D-058).
+
+    Arquivo opcional, no mesmo espirito de temas_materias.json: quem escreve
+    e o mantenedor, e o gerador so le. Cada entrada precisa dizer quem
+    revisou, quando e com que criterio. Veto repetido, id ausente ou
+    entrada sem revisao humana e erro: melhor parar do que publicar um
+    vinculo sem rastro.
+    """
+    if not caminho.exists():
+        return {}
+    dados = carregar_json(caminho)
+    itens = dados if isinstance(dados, list) else dados.get("vetoes") or []
+    saida: dict[int, int] = {}
+    for entrada in itens:
+        if not isinstance(entrada, dict):
+            raise SystemExit(f"{rel(caminho)}: entrada de veto nao e um objeto.")
+        veto_id = entrada.get("veto_id")
+        materia_id = entrada.get("materia_vetada_id")
+        if veto_id is None or materia_id is None:
+            raise SystemExit(
+                f"{rel(caminho)}: entrada sem veto_id ou materia_vetada_id."
+            )
+        if entrada.get("revisada_por_humano") is not True:
+            raise SystemExit(
+                f"{rel(caminho)}: veto {veto_id} sem revisao humana registrada."
+            )
+        for campo in ("revisado_por", "data_revisao", "criterio"):
+            if not str(entrada.get(campo) or "").strip():
+                raise SystemExit(f"{rel(caminho)}: veto {veto_id} sem {campo}.")
+        if int(veto_id) in saida:
+            raise SystemExit(f"{rel(caminho)}: veto {veto_id} repetido.")
+        saida[int(veto_id)] = int(materia_id)
+    return saida
+
+
+def materia_vetada(
+    veto_id: int,
+    ementa: str,
+    revisados: dict[int, int],
+    por_ano_numero: dict[str, list[int]],
+    ementas_de_projeto: dict[int, str],
+) -> tuple[int | None, str, float | None]:
+    """Materia vetada, a fonte do vinculo e a semelhanca medida.
+
+    D-058, em ordem de prioridade:
+
+    1. revisao do mantenedor em vetos_revisados.json: e decisao humana e
+       manda, sem conferenca automatica;
+    2. regra automatica, que exige os dois criterios juntos: o numero e o
+       ano citados na ementa do veto, sem zero a esquerda, precisam levar a
+       materia de projeto de lei, e o texto da sumula do veto precisa
+       parecer com a ementa dela (similaridade de token acima do limiar);
+    3. qualquer outra coisa fica nula, com materia_vetada_fonte
+       pendente_revisao. Um criterio sozinho, ou mais de um candidato,
+       nunca vira vinculo.
+    """
+    if int(veto_id) in revisados:
+        return int(revisados[int(veto_id)]), FONTE_VETADA_REVISAO, None
+    numero, ano = referencia_da_ementa(ementa)
+    por_numero: list[int] = []
+    if numero and ano:
+        por_numero = list(por_ano_numero.get(f"{ano}|{numero_normalizado(numero)}", []))
+    texto = texto_da_sumula(ementa)
+    por_texto = sorted(
+        materia_id
+        for materia_id, ementa_projeto in ementas_de_projeto.items()
+        if similaridade(texto, ementa_projeto) >= LIMIAR_SIMILARIDADE_VETO
+    )
+    juntos = sorted(set(por_numero) & set(por_texto))
+    if len(juntos) != 1:
+        return None, FONTE_VETADA_PENDENTE, None
+    achado = juntos[0]
+    return (
+        int(achado),
+        FONTE_VETADA_AUTOMATICA,
+        round(similaridade(texto, ementas_de_projeto[int(achado)]), 3),
+    )
 
 
 def escolher_ultima(itens: list[dict]) -> dict | None:
@@ -844,9 +971,50 @@ class Base:
         self.ordens_do_dia = carregar_ordens_do_dia()
         self.tipos_votacao_oficial = carregar_tipos_votacao_oficial()
         self.siglas_veto = set(tipos_veto(self.cfg))
-        self.projetos = indexar_projetos(
+        self.projetos, self.ementas_de_projeto = indexar_projetos(
             self.fichas, self.siglas_por_tipo, self.catalogo
         )
+        self.vetos_revisados = carregar_vetos_revisados(ARQUIVO_VETOS_REVISADOS)
+        self.conferir_vetos_revisados(self.vetos_revisados)
+
+    def conferir_vetos_revisados(self, revisados: dict[int, int]) -> None:
+        """A revisao do mantenedor so vale se os ids existirem no SAPL.
+
+        Veto que nao e veto, materia que nao existe ou materia igual ao
+        proprio veto sao erro: e arquivo de revisao com conteudo errado, e
+        isso precisa aparecer na hora, nao na tela.
+        """
+        for veto_id, materia_id in sorted(revisados.items()):
+            if self.sigla_da_materia(veto_id) not in self.siglas_veto:
+                raise SystemExit(
+                    f"Veto {veto_id} em vetos_revisados.json nao e materia de veto "
+                    f"no SAPL. Nada foi gravado."
+                )
+            ficha = self.fichas.get(int(materia_id))
+            if ficha is None:
+                raise SystemExit(
+                    f"Materia {materia_id} de vetos_revisados.json nao existe no SAPL. "
+                    "Nada foi gravado."
+                )
+            if int(materia_id) == int(veto_id):
+                raise SystemExit(
+                    f"Veto {veto_id} apontando para ele mesmo em vetos_revisados.json."
+                )
+            if not e_projeto_de_lei(ficha, self.siglas_por_tipo, self.catalogo):
+                raise SystemExit(
+                    f"Materia {materia_id} do veto {veto_id} nao e projeto de lei no "
+                    f"SAPL. Nada foi gravado."
+                )
+
+    def tipo_da_materia(self, materia_id: int) -> str | None:
+        """Sigla, numero e ano da materia, no mesmo formato do campo tipo."""
+        ficha = self.fichas.get(int(materia_id))
+        if ficha is None:
+            return None
+        sigla = self.sigla_da_materia(int(materia_id))
+        if not sigla:
+            return None
+        return f"{sigla} {ficha.get('numero')}/{ficha.get('ano')}"
 
     def rotulos_votacao(self, votacoes: dict[int, list[dict]]) -> dict[int, str]:
         """Rotulo de cada codigo tipo_votacao, pela tabela oficial ou pelos votos.
@@ -951,15 +1119,34 @@ class Base:
                 valida, self.ordens_do_dia, rotulos_por_codigo
             )
             item["materia_vetada_id"] = None
+            item["materia_vetada_fonte"] = None
+            item["materia_vetada_tipo"] = None
+            item["materia_vetada_link"] = None
             item["materia_vetada_rotulo"] = ROTULO_VETADA_SEM_ESTRUTURA
             if sigla in self.siglas_veto:
                 ementa = ficha.get("ementa") or ""
                 item["veto_tipo"] = veto_tipo_de(ementa)
                 item["veto_situacao"] = veto_situacao_de(votacao)
-                vetada = materia_vetada_de(ementa, self.projetos)
-                if vetada is not None:
+                vetada, fonte, semelhanca = materia_vetada(
+                    int(materia_id),
+                    ementa,
+                    self.vetos_revisados,
+                    self.projetos,
+                    self.ementas_de_projeto,
+                )
+                item["materia_vetada_fonte"] = fonte
+                item["materia_vetada_similaridade"] = semelhanca
+                if vetada is None:
+                    item["materia_vetada_rotulo"] = ROTULO_VETADA_PENDENTE
+                else:
                     item["materia_vetada_id"] = vetada
-                    item["materia_vetada_rotulo"] = ROTULO_VETADA_LIGADA
+                    item["materia_vetada_tipo"] = self.tipo_da_materia(vetada)
+                    item["materia_vetada_link"] = link_materia(vetada, self.cfg)
+                    item["materia_vetada_rotulo"] = (
+                        ROTULO_VETADA_REVISADA
+                        if fonte == FONTE_VETADA_REVISAO
+                        else ROTULO_VETADA_AUTOMATICA
+                    )
         return item
 
 
@@ -1110,10 +1297,17 @@ def meta_do_executivo(itens: list[dict]) -> dict:
             "individual: com voto individual e nominal, sem voto individual "
             "e simbolica. Codigo sem confirmacao, materia sem voto valido e "
             "item da Ordem do Dia ausente ficam como nao informado no SAPL. "
-            "Nos vetos, veto_tipo vem do começo da ementa oficial, "
-            "veto_situacao vem do resultado do voto valido do proprio veto, "
-            "e materia_vetada_id so quando numero e ano citados na ementa "
-            "levam a uma unica materia de projeto de lei do SAPL."
+            "Nos vetos, veto_tipo vem do começo da ementa oficial e "
+            "veto_situacao vem do resultado do voto valido do proprio veto. "
+            "materia_vetada_id tem prioridade na revisao do mantenedor em "
+            "vetos_revisados.json (fonte revisao_mantenedor). Sem revisao, a "
+            "regra automatica exige os dois criterios juntos: numero e ano "
+            "citados na ementa, sem zero a esquerda, levando a materia de "
+            "projeto de lei, e texto da sumula com a ementa dela parecidas, "
+            "com similaridade de token de 0,85 para cima (fonte automatica, "
+            "com o valor medido em materia_vetada_similaridade). Um criterio "
+            "so, ou mais de um candidato, deixa o vinculo nulo com fonte "
+            "pendente_revisao."
         ),
     }
     vetoes = [item for item in itens if "veto_situacao" in item]
@@ -1129,6 +1323,17 @@ def meta_do_executivo(itens: list[dict]) -> dict:
         )
         saida["por_veto_tipo"] = contagem_de(vetoes, "veto_tipo")
         saida["por_veto_situacao"] = contagem_de(vetoes, "veto_situacao")
+        saida["por_materia_vetada_fonte"] = contagem_de(
+            vetoes, "materia_vetada_fonte"
+        )
+        saida["veto_com_materia_vetada"] = sum(
+            1 for item in vetoes if item["materia_vetada_id"] is not None
+        )
+        saida["veto_pendente_de_revisao"] = sum(
+            1 for item in vetoes if item["materia_vetada_id"] is None
+        )
+        saida["fonte_vetos_revisados"] = rel(ARQUIVO_VETOS_REVISADOS)
+        saida["limiar_similaridade_veto"] = LIMIAR_SIMILARIDADE_VETO
         saida["rotulo_veto_tipo_nao_informado"] = VETO_TIPO_NAO_INFORMADO
     return saida
 
