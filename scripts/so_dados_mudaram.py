@@ -2,11 +2,14 @@
 """Regra so dados mudaram, usada pelo workflow semanal.
 
 Recebe a lista de arquivos alterados e responde se todos sao dados.
-Permite: dentro de dados/ apenas .json, .sha256, .csv e .txt, mais
+Permite: dentro de dados/ apenas .json, .sha256, .csv e .txt, mais .md
+somente dentro de dados/tratados/ (os relatorios gerados), mais
 CHANGELOG.md e config_cidade.json na raiz.
 A lista e de extensoes permitidas, nao de extensoes proibidas: qualquer
 arquivo de dados/ fora dessa lista reprova, mesmo com extensao nova.
 Nenhum gerador grava em tela/, por isso tela/ reprova.
+O CNAME da raiz fica de fora da lista: mudar o dominio e mudanca de
+codigo, entra por Pull Request e nao sai na atualizacao semanal.
 
 A regra aceita exatamente o que o workflow leva no commit:
 git add -- dados config_cidade.json CHANGELOG.md.
@@ -23,6 +26,7 @@ from pathlib import Path
 EXATOS_PERMITIDOS = frozenset({"config_cidade.json", "CHANGELOG.md"})
 PREFIXOS_PERMITIDOS = ("dados/",)
 EXTENSOES_PERMITIDAS_DADOS = frozenset({".json", ".sha256", ".csv", ".txt"})
+PREFIXO_RELATORIO_PERMITIDO = "dados/tratados/"
 
 
 def normalizar(caminho: str) -> str:
@@ -44,8 +48,16 @@ def e_dado(normalizado: str) -> bool:
 
 
 def extensao_permitida(normalizado: str) -> bool:
-    """Dentro de dados/ so passam as extensoes da lista permitida."""
-    return Path(normalizado).suffix.lower() in EXTENSOES_PERMITIDAS_DADOS
+    """Dentro de dados/ so passam as extensoes da lista permitida.
+
+    O relatorio em markdown so passa dentro de dados/tratados/, onde os
+    geradores gravam os relatorios de atuacao e de tabela de vereadores.
+    Fora desse diretorio o .md reprova, como qualquer extensao nova.
+    """
+    extensao = Path(normalizado).suffix.lower()
+    if extensao == ".md":
+        return normalizado.startswith(PREFIXO_RELATORIO_PERMITIDO)
+    return extensao in EXTENSOES_PERMITIDAS_DADOS
 
 
 def arquivos_fora_do_permitido(arquivos: list[str]) -> list[str]:

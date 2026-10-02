@@ -527,6 +527,26 @@ class TestesSoDados(unittest.TestCase):
             )
         )
 
+    def test_relatorio_em_markdown_so_passa_em_dados_tratados(self):
+        permitidos = [
+            "dados/tratados/RELATORIO-ATUACAO-VEREADORES-2026.md",
+            "dados/tratados/RELATORIO-TABELA-VEREADORES.md",
+            "dados/tratados/atuacao_vereadores_2026.json",
+        ]
+        self.assertTrue(so_dados_mudaram(permitidos))
+        self.assertEqual(arquivos_fora_do_permitido(permitidos), [])
+        reprovados = [
+            "dados/relatorio.md",
+            "dados/RELATORIO-ATUACAO-VEREADORES-2026.md",
+            "dados/brutos/lote_20260926/notas.md",
+            "dados/tratados_markdown.md",
+        ]
+        for nome in reprovados:
+            self.assertFalse(so_dados_mudaram([nome]), nome)
+            self.assertEqual(arquivos_fora_do_permitido([nome]), [nome], nome)
+
+
+
     def test_dentro_de_dados_somente_extensoes_permitidas(self):
         permitidos = [
             "dados/brutos/lote_20260926/ordemdia_p1.json",
