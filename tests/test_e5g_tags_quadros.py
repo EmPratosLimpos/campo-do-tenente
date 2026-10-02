@@ -160,7 +160,7 @@ class TestTagsCaixa(unittest.TestCase):
                     "return r.left >= 0 && r.right <= window.innerWidth; }"
                 )
                 self.assertTrue(dentro)
-                tag.click()
+                page.keyboard.press("Escape")
                 page.wait_for_timeout(300)
                 self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 0)
                 self.assertEqual(erros, [])
@@ -494,7 +494,7 @@ class TestE5hAcabamento(unittest.TestCase):
                     ".filter(e => !e.closest('.materia-tags')).length"
                 )
                 self.assertEqual(fora, 0)
-                ementa = item.locator(".ementa-voto").first
+                ementa = item.locator(".materia-assunto").first
                 self.assertEqual(ementa.count(), 1)
                 self.assertEqual(
                     ementa.evaluate("n => getComputedStyle(n).display"), "block"

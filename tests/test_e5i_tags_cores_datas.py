@@ -22,7 +22,7 @@ except ImportError:
     PLAYWRIGHT_MOTIVO = "playwright nao instalado"
 
 TEMA_ALVO = "Desenvolvimento e moradia"
-ORDEM_ESPERADA = [TEMA_ALVO, "2\u00ba turno"]
+ORDEM_ESPERADA = ["Aprovado por unanimidade", TEMA_ALVO, "2\u00ba turno"]
 
 CONTRASTE_JS = """
 n => {
@@ -117,11 +117,11 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                             self.assertEqual(quadro.count(), 1)
 
                             barra = page.locator(
-                                "#temas-distribuicao-sessao .barra-tema-linha",
+                                "#temas-distribuicao-sessao .tema-btn",
                                 has_text=TEMA_ALVO,
                             ).first
                             self.assertEqual(barra.count(), 1)
-                            cor_barra = barra.locator(".preenchido").evaluate(
+                            cor_barra = barra.locator(".trilho i").evaluate(
                                 "n => getComputedStyle(n).backgroundColor"
                             )
                             cor_quadro = quadro.evaluate(
@@ -233,7 +233,7 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                                 ".filter(e => !e.closest('.materia-tags')).length"
                             )
                             self.assertEqual(fora, 0)
-                            ementa = item.locator(".ementa-voto").first
+                            ementa = item.locator(".materia-assunto").first
                             self.assertEqual(ementa.count(), 1)
                             self.assertEqual(
                                 ementa.evaluate("n => getComputedStyle(n).display"),

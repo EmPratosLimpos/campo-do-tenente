@@ -56,9 +56,9 @@ JS_HELPERS = """
 
 PERIODOS = ("sessao", "mes", "todo")
 MARCADORES = {
-    "sessao": "Presença dos vereadores",
+    "sessao": "Os 9 vereadores estavam presentes",
     "mes": "Quantas votações por tipo?",
-    "todo": "Qual foi o resultado das votações?",
+    "todo": "Em 66 sessões ordinárias",
 }
 BLOCOS_CABECALHO = (".site-logo", ".topo-tagline")
 BLOCOS_VEREADORES = (
@@ -77,10 +77,9 @@ JS_ESTRUTURA = """() => {
   };
   const corpo = document.querySelector('.pagina-corpo');
   return {
-    todo_em_painel: dentro('painel-periodo-todo', 'cartoes-resultado-todo')
+    todo_em_painel: dentro('painel-periodo-todo', 'cartao-resumo-todo')
       && dentro('painel-periodo-todo', 'bloco-votado-todo')
-      && dentro('painel-periodo-todo', 'temas-distribuicao-todo')
-      && dentro('painel-periodo-todo', 'nota-resultado-todo'),
+      && dentro('painel-periodo-todo', 'temas-distribuicao-todo'),
     vereadores_em_main: dentro('conteudo-principal', 'painel-vereadores'),
     camara_em_main: dentro('conteudo-principal', 'painel-camara'),
     nav_em_corpo: !!(corpo && corpo.contains(document.getElementById('nav-principal')))
@@ -243,31 +242,37 @@ JS_VERIFICA_DISPOSICAO = """(periodo) => {
     c_sel = "#bloco-votado-mes";
   } else {
     a1_sel = "#cartao-resumo-todo";
-    a2_sel = "#cartao-resumo-todo";
+    a2_sel = "";
     b1_sel = "#card-temas-todo";
     c_sel = "#bloco-votado-todo";
   }
   
   const a1 = getRect(a1_sel);
-  const a2 = getRect(a2_sel);
+  const a2 = a2_sel ? getRect(a2_sel) : null;
   const b1 = getRect(b1_sel);
   const c = getRect(c_sel);
   
-  if (!a1 || !a2 || !b1 || !c) return { ok: false, erro: "elementos nao encontrados ou invisiveis: " + !a1 + " " + !a2 + " " + !b1 + " " + !c };
+  if (!a1 || !b1 || !c) return { ok: false, erro: "elementos nao encontrados ou invisiveis: " + !a1 + " " + !b1 + " " + !c };
+  if (periodo !== "todo" && !a2) return { ok: false, erro: "elemento a2 ausente" };
   
   const w = window.innerWidth;
   if (w >= 900) {
     if (Math.abs(a1.top - b1.top) > 2) return { ok: false, erro: "A1 e B1 nao alinhados no topo. diff=" + Math.abs(a1.top - b1.top) };
-    if (a1_sel !== a2_sel) {
+    if (a2 && a1_sel !== a2_sel) {
       const gapA = a2.top - a1.bottom;
       if (gapA < 0 || gapA > 24) return { ok: false, erro: "gap A1-A2 incorreto: " + gapA };
     }
     if (b1.left <= a1.right) return { ok: false, erro: "B1 nao esta a direita de A1" };
     const areaRect = area.getBoundingClientRect();
     if (c.width < areaRect.width - 100) return { ok: false, erro: "C nao tem largura total" };
-    if (c.top < a2.bottom && c.top < b1.bottom) return { ok: false, erro: "C nao esta embaixo das colunas" };
+    const baseCol = a2 ? a2.bottom : a1.bottom;
+    if (c.top < baseCol && c.top < b1.bottom) return { ok: false, erro: "C nao esta embaixo das colunas" };
   } else {
-    if (!(a1.bottom <= a2.top + 2 && a2.bottom <= b1.top + 2 && b1.bottom <= c.top + 2)) {
+    if (periodo === "todo") {
+      if (!(a1.bottom <= b1.top + 2 && b1.bottom <= c.top + 2)) {
+        return { ok: false, erro: "ordem incorreta no mobile (todo)" };
+      }
+    } else if (!(a1.bottom <= a2.top + 2 && a2.bottom <= b1.top + 2 && b1.bottom <= c.top + 2)) {
       return { ok: false, erro: "ordem incorreta no mobile" };
     }
   }
