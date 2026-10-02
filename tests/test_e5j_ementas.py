@@ -384,7 +384,7 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                         for periodo in PERIODOS:
                             self._clicar_periodo(page, periodo)
                             for seletor in (
-                                "#bloco-votado-" + periodo + " .materia-ementa",
+                                "#bloco-votado-" + periodo + " .materia-assunto",
                                 "#bloco-votado-" + periodo + " .item-pll .ementa",
                             ):
                                 textos = page.eval_on_selector_all(
@@ -530,13 +530,13 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 page = browser.new_page()
                 erros = self._erros(page)
                 self._abrir_camara(page, "1440", "claro")
-                tag = page.locator("#bloco-votado-sessao .tag-tipo.tag-explicavel").first
+                tag = page.locator("#bloco-votado-sessao .tag-categoria.tag-explicavel, #bloco-votado-sessao .tag-turno.tag-explicavel").first
                 self.assertEqual(tag.count(), 1)
                 tag.click()
                 page.wait_for_timeout(300)
-                caixa = page.locator("#tag-caixa-explicativa")
+                caixa = page.locator("#folha-generica-backdrop.ativo")
                 self.assertEqual(caixa.count(), 1)
-                self.assertTrue(caixa.inner_text().strip())
+                self.assertTrue(page.locator("#folha-generica-corpo").inner_text().strip())
                 self.assertEqual(erros, [])
                 page.close()
 

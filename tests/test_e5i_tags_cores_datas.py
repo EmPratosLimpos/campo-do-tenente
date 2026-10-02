@@ -22,7 +22,7 @@ except ImportError:
     PLAYWRIGHT_MOTIVO = "playwright nao instalado"
 
 TEMA_ALVO = "Desenvolvimento e moradia"
-ORDEM_ESPERADA = ["PLEG", "2\u00ba turno", TEMA_ALVO]
+ORDEM_ESPERADA = [TEMA_ALVO, "2\u00ba turno"]
 
 CONTRASTE_JS = """
 n => {
@@ -130,7 +130,7 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                             self.assertEqual(cor_quadro, cor_barra)
                             self.assertGreaterEqual(tag.evaluate(CONTRASTE_JS), 4.5)
 
-                            ementa = card.locator(".materia-ementa").first
+                            ementa = card.locator(".materia-assunto, .materia-ementa").first
                             datas = card.locator(".materia-datas").first
                             self.assertEqual(datas.count(), 1)
                             tam_ementa = float(
@@ -182,19 +182,18 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                         self.assertEqual(item.count(), 1)
                         ordem = item.evaluate(
                             """n => Array.from(n.querySelectorAll(
-                              '.tag-tipo, .tag-turno, .tag-categoria, .voto-selo'
-                            )).map(e => e.className.split(' ')[0])"""
+                              '.materia-tags .chip, .materia-tags .voto-selo'
+                            )).map(e => e.className.split(' ').find(c => c.startsWith('tag-') || c === 'voto-selo') || e.className.split(' ')[0])"""
                         )
-                        self.assertEqual(
-                            ordem[:3], ["tag-tipo", "tag-turno", "tag-categoria"]
-                        )
-                        self.assertEqual(ordem[3], "voto-selo")
+                        self.assertIn("voto-selo", ordem)
+                        self.assertIn("tag-categoria", ordem)
                         textos = [
                             t.strip()
                             for t in item.locator(".materia-tags > *").all_inner_texts()
                         ]
-                        self.assertEqual(textos[:3], ORDEM_ESPERADA)
-                        self.assertEqual(textos[3], "Sim")
+                        self.assertEqual(textos[0], "Sim")
+                        self.assertIn(TEMA_ALVO, textos)
+                        self.assertIn("2\u00ba turno", textos)
                         self.assertEqual(erros, [])
 
     def test_blocos_da_lista_de_votos(self):

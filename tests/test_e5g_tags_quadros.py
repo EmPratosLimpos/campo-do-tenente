@@ -138,21 +138,21 @@ class TestTagsCaixa(unittest.TestCase):
                 self._abrir_secao(page, "tit-votos")
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(500)
-                tag = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
+                tag = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                 texto_tag = tag.inner_text()
                 self.assertEqual(tag.evaluate("n => n.tagName"), "BUTTON")
                 self.assertEqual(tag.get_attribute("aria-expanded"), "false")
                 tag.click()
                 page.wait_for_timeout(300)
-                caixa = page.locator("#tag-caixa-explicativa")
+                caixa = page.locator("#folha-generica-backdrop.ativo")
                 self.assertEqual(caixa.count(), 1)
-                self.assertEqual(caixa.get_attribute("role"), "tooltip")
+                self.assertEqual(caixa.get_attribute("role"), "dialog")
                 texto = caixa.inner_text()
                 self.assertIn(texto_tag, texto)
-                self.assertIn("Sigla oficial do tipo de matéria no SAPL", texto)
+                self.assertIn("categorias do projeto", texto)
                 self.assertEqual(tag.get_attribute("aria-expanded"), "true")
                 self.assertEqual(
-                    tag.get_attribute("aria-controls"), "tag-caixa-explicativa"
+                    tag.get_attribute("aria-controls"), "folha-generica"
                 )
                 dentro = caixa.evaluate(
                     "n => { var r = n.getBoundingClientRect(); "
@@ -161,22 +161,7 @@ class TestTagsCaixa(unittest.TestCase):
                 self.assertTrue(dentro)
                 tag.click()
                 page.wait_for_timeout(300)
-                self.assertEqual(page.locator("#tag-caixa-explicativa").count(), 0)
-                pleg = page.locator(
-                    '.lista-votos .tag-tipo.tag-explicavel[data-valor="PLEG"]'
-                ).first
-                if pleg.count() > 0:
-                    pleg.scroll_into_view_if_needed()
-                    page.wait_for_timeout(200)
-                    pleg.click()
-                    page.wait_for_timeout(300)
-                    texto_pleg = page.locator("#tag-caixa-explicativa").inner_text()
-                    self.assertIn(
-                        "Projeto de Lei Origem do Poder Legislativo", texto_pleg
-                    )
-                    self.assertIn("proposta de vereador", texto_pleg)
-                    page.keyboard.press("Escape")
-                    page.wait_for_timeout(200)
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 0)
                 self.assertEqual(erros, [])
 
     def test_teclado_e_esc_e_uma_aberta_por_vez(self):
@@ -187,22 +172,22 @@ class TestTagsCaixa(unittest.TestCase):
                 self._abrir_secao(page, "tit-votos")
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(500)
-                tag_tipo = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
-                tag_tipo.focus()
+                tag_cat = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
+                tag_cat.focus()
                 page.keyboard.press("Enter")
                 page.wait_for_timeout(300)
-                self.assertEqual(page.locator("#tag-caixa-explicativa").count(), 1)
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 1)
                 tag_cat = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                 texto_cat = tag_cat.inner_text()
                 tag_cat.click()
                 page.wait_for_timeout(300)
-                self.assertEqual(page.locator("#tag-caixa-explicativa").count(), 1)
-                texto = page.locator("#tag-caixa-explicativa").inner_text()
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 1)
+                texto = page.locator("#folha-generica-backdrop.ativo").inner_text()
                 self.assertIn("13 categorias do projeto", texto)
                 self.assertIn(texto_cat, texto)
                 page.keyboard.press("Escape")
                 page.wait_for_timeout(300)
-                self.assertEqual(page.locator("#tag-caixa-explicativa").count(), 0)
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 0)
 
     def test_turno_cita_regimento_e_cassado_traz_data(self):
         with sync_playwright() as p:
@@ -215,7 +200,7 @@ class TestTagsCaixa(unittest.TestCase):
                 turno = page.locator(".lista-votos .tag-turno.tag-explicavel").first
                 turno.click()
                 page.wait_for_timeout(300)
-                texto = page.locator("#tag-caixa-explicativa").inner_text()
+                texto = page.locator("#folha-generica-backdrop.ativo").inner_text()
                 self.assertIn("arts. 177 e 178", texto)
                 page.keyboard.press("Escape")
                 page.wait_for_timeout(200)
@@ -227,7 +212,7 @@ class TestTagsCaixa(unittest.TestCase):
                 self.assertEqual(cassado.count(), 1)
                 cassado.click()
                 page.wait_for_timeout(300)
-                texto_cas = page.locator("#tag-caixa-explicativa").inner_text()
+                texto_cas = page.locator("#folha-generica-backdrop.ativo").inner_text()
                 self.assertIn("18/08/2026", texto_cas)
                 self.assertIn("Ver ato no SAPL", texto_cas)
 
@@ -325,11 +310,11 @@ class TestTagsCaixa(unittest.TestCase):
                 self._abrir_secao(page, "tit-votos")
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(500)
-                tag = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
+                tag = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                 tag.click()
                 page.wait_for_timeout(300)
-                self.assertEqual(page.locator("#tag-caixa-explicativa").count(), 1)
-                dentro = page.locator("#tag-caixa-explicativa").evaluate(
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 1)
+                dentro = page.locator("#folha-generica-backdrop.ativo").evaluate(
                     "n => { var r = n.getBoundingClientRect(); "
                     "return r.left >= 0 && r.right <= window.innerWidth; }"
                 )
@@ -350,7 +335,7 @@ class TestTagsCaixa(unittest.TestCase):
                         self._abrir_secao(page, titulo)
                     page.click("button.voto-card[data-voto-card='sim']")
                     page.wait_for_timeout(500)
-                    tag = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
+                    tag = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                     tag.click()
                     page.wait_for_timeout(300)
                     overflow = page.evaluate(
@@ -421,7 +406,7 @@ class TestE5hAcabamento(unittest.TestCase):
                     page.wait_for_timeout(300)
                     page.click("button.voto-card[data-voto-card='sim']")
                     page.wait_for_timeout(500)
-                    tag = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
+                    tag = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                     estilo = tag.evaluate(
                         "n => { var c = getComputedStyle(n); "
                         "return n.tagName + '|' + c.fontSize + '|' + c.paddingTop "

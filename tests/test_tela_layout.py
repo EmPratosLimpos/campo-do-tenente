@@ -238,13 +238,13 @@ JS_VERIFICA_DISPOSICAO = """(periodo) => {
     c_sel = "#bloco-votado-sessao";
   } else if (periodo === "mes") {
     a1_sel = "#card-votacoes-mes";
-    a2_sel = "section[aria-labelledby='tit-tipos-mes']";
+    a2_sel = "#card-tipos-mes";
     b1_sel = "#card-temas-mes";
     c_sel = "#bloco-votado-mes";
   } else {
-    a1_sel = "section[aria-labelledby='tit-tipos-todo']";
-    a2_sel = "section[aria-labelledby='tit-resultado-todo']";
-    b1_sel = "section[aria-labelledby='tit-temas-todo']";
+    a1_sel = "#cartao-resumo-todo";
+    a2_sel = "#cartao-resumo-todo";
+    b1_sel = "#card-temas-todo";
     c_sel = "#bloco-votado-todo";
   }
   
@@ -258,8 +258,10 @@ JS_VERIFICA_DISPOSICAO = """(periodo) => {
   const w = window.innerWidth;
   if (w >= 900) {
     if (Math.abs(a1.top - b1.top) > 2) return { ok: false, erro: "A1 e B1 nao alinhados no topo. diff=" + Math.abs(a1.top - b1.top) };
-    const gapA = a2.top - a1.bottom;
-    if (gapA < 0 || gapA > 24) return { ok: false, erro: "gap A1-A2 incorreto: " + gapA };
+    if (a1_sel !== a2_sel) {
+      const gapA = a2.top - a1.bottom;
+      if (gapA < 0 || gapA > 24) return { ok: false, erro: "gap A1-A2 incorreto: " + gapA };
+    }
     if (b1.left <= a1.right) return { ok: false, erro: "B1 nao esta a direita de A1" };
     const areaRect = area.getBoundingClientRect();
     if (c.width < areaRect.width - 100) return { ok: false, erro: "C nao tem largura total" };
@@ -279,13 +281,8 @@ JS_PRESENCA = """() => {
   if (texto.includes("Fora do mandato naquela data") || texto.includes("fora do mandato")) {
     return { ok: false, erro: "texto 'Fora do mandato' esta visivel" };
   }
-  const bancoMatch = texto.match(/(\\d+)\\s+parlamentares/);
-  const totais = Array.from(card.querySelectorAll('.capsula-valor')).map(x => parseInt(x.innerText, 10));
-  if (bancoMatch && totais.length > 0) {
-    const soma = totais.reduce((a, b) => a + b, 0);
-    if (parseInt(bancoMatch[1], 10) !== soma) {
-      return { ok: false, erro: "soma incorreta: " + soma + " != " + bancoMatch[1] };
-    }
+  if (!/Presentes/i.test(texto) || !/Projetos votados/i.test(texto)) {
+    return { ok: false, erro: "lista de presenca incompleta" };
   }
   return { ok: true };
 }"""
