@@ -1538,6 +1538,55 @@
     word-break: break-all;
   }
 
+
+  .cartao, .card-app, .secao, .bloco-votado.card-app {
+    background: var(--superficie);
+    border-radius: var(--raio-cartao);
+    padding: var(--esp-5);
+    box-shadow: var(--sombra);
+    display: grid;
+    gap: 14px;
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
+  }
+  .conteudo > .painel-camara .card-app,
+  .conteudo > .painel-camara .secao,
+  .conteudo > .painel-camara .bloco-votado { margin-bottom: 16px; }
+  @media (min-width: 900px) {
+    .conteudo > .painel-camara .duas-colunas-desk { gap: 20px; }
+  }
+  .resumo { font-size: var(--t-resumo); font-weight: 600; line-height: 1.4; margin: 0; }
+  .resumo strong, .resumo b { font-weight: 800; }
+  .chip, .tag-categoria, .tag-tipo, .tag-turno {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 32px;
+    padding: 4px 12px;
+    border-radius: var(--raio-pilula);
+    font-size: var(--t-apoio);
+    font-weight: 600;
+    border: 0;
+    background: var(--superficie-2);
+    color: var(--texto);
+    cursor: pointer;
+    position: relative;
+  }
+  .chip::after, .tag-categoria::after, .tag-tipo::after, .tag-turno::after {
+    content: "";
+    position: absolute;
+    inset: -6px -2px;
+  }
+  .chip .cat-quadro, .tag-categoria .cat-quadro {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex: none;
+  }
+  .btn { min-height: var(--alvo-minimo); padding: 0 18px; border-radius: var(--raio-pilula); border: 0; font-weight: 600; cursor: pointer; }
+  .btn-primario { background: var(--marca-solida); color: var(--sobre-marca); }
+  .btn-secundario { background: var(--superficie-2); color: var(--texto); }
+
   .vazio {
     font-size: 13px;
     color: var(--texto-suave);
