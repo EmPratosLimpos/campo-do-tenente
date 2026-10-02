@@ -17,17 +17,27 @@
       "REQ": 35
     },
     "por_situacao_final": {
+      "Sem registro de votação nem de tramitação no SAPL": 60,
       "Aprovado": 57,
-      "Rejeitado": 0,
-      "Em tramitacao": 64
+      "Proposição encaminhada ao Executivo": 2,
+      "Em tramitacao": 1,
+      "Proposição aprovada": 1
+    },
+    "por_situacao_final_fonte": {
+      "votacao": 57,
+      "tramitacao": 3,
+      "ficha_sapl": 1,
+      "sem_registro": 60
     },
     "itens_com_votacao_valida": 57,
     "itens_sem_votacao_valida": 64,
     "votos_nominais_registrados": 18,
     "rotulo_sem_votacao": "sem votacao registrada no SAPL",
+    "rotulo_sem_voto_valido": "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)",
     "rotulo_sem_voto_individual": "votacao registrada sem voto nominal no SAPL",
     "rotulo_sem_tramitacao": "sem tramitacao registrada no SAPL",
-    "observacao": "Votacao e votos nominais saem so do voto valido: 2o turno ou turno unico, e so registro deliberativo, lido pelo id do tipo de resultado do SAPL. Pedido de Vistas, materia adiada e retirada de pauta nao sao votacao e ficam como fato de tramitacao. Materia votada so no 1o turno continua em tramitacao. Voto nominal so entra de quem estava no mandato na data da sessao. Ausencia de registro recebe rotulo: nenhuma aprovacao e deduzida."
+    "situacao_sem_registro": "Sem registro de votação nem de tramitação no SAPL",
+    "observacao": "Votacao e votos nominais saem so do voto valido: 2o turno ou turno unico, e so registro deliberativo, lido pelo id do tipo de resultado do SAPL. Pedido de Vistas, materia adiada e retirada de pauta nao sao votacao e ficam como fato de tramitacao. Materia votada so no 1o turno nao tem voto valido. Voto nominal so entra de quem estava no mandato na data da sessao. A situacao final nunca e deduzida: com voto valido ou rejeicao no 1o turno vem do registro de votacao; sem voto valido, mas com tramitacao, vem do texto oficial do status do SAPL; sem registro nenhum, vem do campo em_tramitacao da ficha, e False vira o rotulo de ausencia. O campo situacao_final_fonte diz de onde cada uma veio."
   },
   "sessao": [
     {
@@ -49,6 +59,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -126,6 +137,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -201,6 +213,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -277,6 +290,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -365,6 +379,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -440,6 +455,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -515,6 +531,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -639,7 +656,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -669,7 +687,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -699,7 +718,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -729,7 +749,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -759,7 +780,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -789,7 +811,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -819,7 +842,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -849,7 +873,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -879,7 +904,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -921,7 +947,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -951,7 +978,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -981,7 +1009,8 @@
           "primeiro_autor": null
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1017,7 +1046,8 @@
           "primeiro_autor": null
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1047,7 +1077,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1083,7 +1114,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1131,7 +1163,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1173,7 +1206,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1203,7 +1237,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1233,7 +1268,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1263,7 +1299,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1293,7 +1330,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1335,7 +1373,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1365,7 +1404,8 @@
           "primeiro_autor": null
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1395,7 +1435,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1425,7 +1466,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1455,7 +1497,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1497,7 +1540,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1527,7 +1571,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1605,7 +1650,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1636,6 +1682,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1717,6 +1764,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1792,6 +1840,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1867,6 +1916,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1941,7 +1991,8 @@
           "primeiro_autor": null
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1984,6 +2035,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2059,6 +2111,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2140,6 +2193,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2215,6 +2269,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2290,6 +2345,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2365,6 +2421,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2440,6 +2497,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2515,6 +2573,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2590,6 +2649,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2665,6 +2725,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2745,7 +2806,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -2776,6 +2838,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2851,6 +2914,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2926,6 +2990,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -3001,6 +3066,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -3076,6 +3142,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -3151,6 +3218,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -3226,6 +3294,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -3301,6 +3370,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -3376,6 +3446,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -3451,6 +3522,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -3543,7 +3615,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -3574,6 +3647,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -3648,7 +3722,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -3678,7 +3753,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -3708,7 +3784,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -3786,7 +3863,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -3817,6 +3895,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -3940,6 +4019,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -4063,6 +4143,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -4186,6 +4267,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -4279,6 +4361,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -4372,6 +4455,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -4465,6 +4549,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -4557,7 +4642,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -4588,6 +4674,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -4678,6 +4765,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -4754,6 +4842,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -4830,6 +4919,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -4906,6 +4996,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -4982,6 +5073,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5166,7 +5258,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5197,6 +5290,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5273,6 +5367,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5348,7 +5443,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5378,7 +5474,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5408,7 +5505,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5444,7 +5542,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5475,6 +5574,7 @@
         }
       ],
       "situacao_final": "Em tramitacao",
+      "situacao_final_fonte": "ficha_sapl",
       "em_tramitacao": true,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5511,6 +5611,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5605,6 +5706,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5808,6 +5910,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5883,7 +5986,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5919,7 +6023,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5949,7 +6054,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -5991,7 +6097,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -6021,7 +6128,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -6051,7 +6159,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -6081,7 +6190,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -6123,7 +6233,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -6153,7 +6264,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -6183,7 +6295,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -6238,6 +6351,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -6312,7 +6426,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -6354,7 +6469,8 @@
           "primeiro_autor": false
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Proposição encaminhada ao Executivo",
+      "situacao_final_fonte": "tramitacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -6415,7 +6531,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Proposição encaminhada ao Executivo",
+      "situacao_final_fonte": "tramitacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -6459,6 +6576,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -6534,6 +6652,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -6609,6 +6728,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -6684,6 +6804,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -6759,6 +6880,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -6833,7 +6955,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Proposição aprovada",
+      "situacao_final_fonte": "tramitacao",
       "em_tramitacao": true,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -6877,6 +7000,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -6958,6 +7082,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -7032,7 +7157,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -7069,6 +7195,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -7144,6 +7271,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -7219,6 +7347,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -7306,6 +7435,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -7381,6 +7511,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -7456,6 +7587,7 @@
         }
       ],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -7536,7 +7668,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -7566,7 +7699,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -7596,7 +7730,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -7632,7 +7767,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -7662,7 +7798,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -7692,7 +7829,8 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,

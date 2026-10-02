@@ -16,16 +16,28 @@
     },
     "por_situacao_final": {
       "Aprovado": 10,
+      "Sem registro de votação nem de tramitação no SAPL": 9,
+      "Aguardando emissão de parecer da comissão": 3,
       "Rejeitado": 3,
-      "Em tramitacao": 16
+      "Proposição transformada em lei": 2,
+      "Proposição Substituída": 1,
+      "Proposição retirada pelo autor": 1
+    },
+    "por_situacao_final_fonte": {
+      "votacao": 13,
+      "tramitacao": 7,
+      "ficha_sapl": 0,
+      "sem_registro": 9
     },
     "itens_com_votacao_valida": 13,
     "itens_sem_votacao_valida": 16,
     "votos_nominais_registrados": 45,
     "rotulo_sem_votacao": "sem votacao registrada no SAPL",
+    "rotulo_sem_voto_valido": "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)",
     "rotulo_sem_voto_individual": "votacao registrada sem voto nominal no SAPL",
     "rotulo_sem_tramitacao": "sem tramitacao registrada no SAPL",
-    "observacao": "Votacao e votos nominais saem so do voto valido: 2o turno ou turno unico, e so registro deliberativo, lido pelo id do tipo de resultado do SAPL. Pedido de Vistas, materia adiada e retirada de pauta nao sao votacao e ficam como fato de tramitacao. Materia votada so no 1o turno continua em tramitacao. Voto nominal so entra de quem estava no mandato na data da sessao. Ausencia de registro recebe rotulo: nenhuma aprovacao e deduzida."
+    "situacao_sem_registro": "Sem registro de votação nem de tramitação no SAPL",
+    "observacao": "Votacao e votos nominais saem so do voto valido: 2o turno ou turno unico, e so registro deliberativo, lido pelo id do tipo de resultado do SAPL. Pedido de Vistas, materia adiada e retirada de pauta nao sao votacao e ficam como fato de tramitacao. Materia votada so no 1o turno nao tem voto valido. Voto nominal so entra de quem estava no mandato na data da sessao. A situacao final nunca e deduzida: com voto valido ou rejeicao no 1o turno vem do registro de votacao; sem voto valido, mas com tramitacao, vem do texto oficial do status do SAPL; sem registro nenhum, vem do campo em_tramitacao da ficha, e False vira o rotulo de ausencia. O campo situacao_final_fonte diz de onde cada uma veio."
   },
   "sessao": [
     {
@@ -40,6 +52,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -124,6 +137,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -208,6 +222,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -294,6 +309,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Rejeitado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -364,6 +380,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Rejeitado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -435,7 +452,8 @@
       "tema": "Administração e finanças",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -461,6 +479,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -654,6 +673,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -847,6 +867,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -931,6 +952,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1014,7 +1036,8 @@
       "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Aguardando emissão de parecer da comissão",
+      "situacao_final_fonte": "tramitacao",
       "em_tramitacao": true,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1052,7 +1075,8 @@
       "tema": "Meio ambiente e proteção animal",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Aguardando emissão de parecer da comissão",
+      "situacao_final_fonte": "tramitacao",
       "em_tramitacao": true,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1090,7 +1114,8 @@
       "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Aguardando emissão de parecer da comissão",
+      "situacao_final_fonte": "tramitacao",
       "em_tramitacao": true,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1129,6 +1154,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1322,6 +1348,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1514,7 +1541,8 @@
       "tema": "Saúde",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -1540,6 +1568,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1732,7 +1761,8 @@
       "tema": "Administração e finanças",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Proposição retirada pelo autor",
+      "situacao_final_fonte": "tramitacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1771,6 +1801,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1854,7 +1885,8 @@
       "tema": "Cultura, esporte e lazer",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Proposição Substituída",
+      "situacao_final_fonte": "tramitacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1889,9 +1921,9 @@
         }
       ],
       "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
+      "votacao_rotulo": "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)",
       "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "votos_nominais_rotulo": "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)",
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/228",
       "materia_vetada_id": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
@@ -1908,6 +1940,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -1992,6 +2025,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2075,7 +2109,8 @@
       "tema": "Cultura, esporte e lazer",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Proposição transformada em lei",
+      "situacao_final_fonte": "tramitacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2110,9 +2145,9 @@
         }
       ],
       "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
+      "votacao_rotulo": "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)",
       "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "votos_nominais_rotulo": "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)",
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/236",
       "materia_vetada_id": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
@@ -2128,7 +2163,8 @@
       "tema": "Administração e finanças",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Proposição transformada em lei",
+      "situacao_final_fonte": "tramitacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2163,9 +2199,9 @@
         }
       ],
       "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
+      "votacao_rotulo": "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)",
       "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "votos_nominais_rotulo": "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)",
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/240",
       "materia_vetada_id": null,
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
@@ -2181,7 +2217,8 @@
       "tema": "Educação",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -2206,7 +2243,8 @@
       "tema": "Ruas, trânsito e transporte",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -2231,7 +2269,8 @@
       "tema": "Administração e finanças",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -2256,7 +2295,8 @@
       "tema": "Administração e finanças",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -2281,7 +2321,8 @@
       "tema": "Administração e finanças",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -2306,7 +2347,8 @@
       "tema": "Educação",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -2331,7 +2373,8 @@
       "tema": "Cultura, esporte e lazer",
       "revisada_por_humano": true,
       "autores": [],
-      "situacao_final": "Em tramitacao",
+      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
+      "situacao_final_fonte": "sem_registro",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
@@ -2357,6 +2400,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Rejeitado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2427,6 +2471,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Rejeitado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -2497,6 +2542,7 @@
       "revisada_por_humano": true,
       "autores": [],
       "situacao_final": "Rejeitado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
