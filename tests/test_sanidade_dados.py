@@ -346,6 +346,53 @@ class TestSemCampoPessoalEmDados(unittest.TestCase):
         sem_chave = '{"a":1,"b":"ip e user dentro do texto"}'
         self.assertEqual(remover_campos_pessoais_do_texto(sem_chave, cfg), sem_chave)
 
+    def test_todo_coletor_grava_pelo_coletor_com_a_remocao(self):
+        """Nenhum coletor abre conexao fora do ColetorLote."""
+        coletor = DIR_RAIZ / "coletor"
+        nomes = (
+            "coletar_tramitacao.py",
+            "sondar_tramitacao.py",
+            "coletar_por_sessao.py",
+            "coletar_autoria.py",
+        )
+        for nome in nomes:
+            caminho = coletor / nome
+            if not caminho.is_file():
+                continue
+            with self.subTest(arquivo=nome):
+                texto = caminho.read_text(encoding="utf-8")
+                self.assertIn("ColetorLote", texto)
+                self.assertNotIn("urlopen(", texto)
+                self.assertNotIn("requests.get(", texto)
+                self.assertNotIn(".get(url", texto)
+
+    def test_coletores_de_tramitacao_nao_gravam_resposta_por_conta_propria(self):
+        coletor = DIR_RAIZ / "coletor"
+        for nome in ("coletar_tramitacao.py", "sondar_tramitacao.py"):
+            caminho = coletor / nome
+            if not caminho.is_file():
+                continue
+            with self.subTest(arquivo=nome):
+                texto = caminho.read_text(encoding="utf-8")
+                self.assertNotIn("write_bytes(", texto)
+                self.assertNotIn("write_text(", texto)
+                self.assertNotIn("open(", texto)
+
+    def test_coletor_lote_usa_a_remocao_antes_de_gravar(self):
+        from coletar_lote import limpar_resposta
+        from config_cidade import carregar_config
+
+        cfg = carregar_config()
+        corpo = b'{"results":[{"id":1,"ip":"10.0.0.1","user":5}],"total":1}'
+        saida = limpar_resposta(corpo, cfg)
+        self.assertEqual(
+            json.loads(saida.decode("utf-8")),
+            {"results": [{"id": 1}], "total": 1},
+        )
+        sem_campo = b'{"results":[{"id":1}]}'
+        self.assertEqual(limpar_resposta(sem_campo, cfg), sem_campo)
+        self.assertEqual(limpar_resposta(b"", cfg), b"")
+
 
 class TestSemPaginaEmDados(unittest.TestCase):
     """Nenhuma pagina de terceiro pode ser versionada dentro de dados/."""
