@@ -13,8 +13,7 @@
       "tipo_resultado_votacao": 3,
       "materia": 189,
       "ordem": 416,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 102,
@@ -29,8 +28,7 @@
       "tipo_resultado_votacao": 2,
       "materia": 231,
       "ordem": 438,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 103,
@@ -45,8 +43,7 @@
       "tipo_resultado_votacao": 3,
       "materia": 230,
       "ordem": 437,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 104,
@@ -61,8 +58,7 @@
       "tipo_resultado_votacao": 3,
       "materia": 229,
       "ordem": 436,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 105,
@@ -77,8 +73,7 @@
       "tipo_resultado_votacao": 3,
       "materia": 190,
       "ordem": 417,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 106,
@@ -93,8 +88,7 @@
       "tipo_resultado_votacao": 3,
       "materia": 219,
       "ordem": 418,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 107,
@@ -109,8 +103,7 @@
       "tipo_resultado_votacao": 3,
       "materia": 233,
       "ordem": 440,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 108,
@@ -125,8 +118,7 @@
       "tipo_resultado_votacao": 3,
       "materia": 234,
       "ordem": 441,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     }
   ],
   "total": 8

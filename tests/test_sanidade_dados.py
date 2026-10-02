@@ -282,6 +282,71 @@ class TestSanidadeDados(unittest.TestCase):
                     self.assertEqual(projeto.get("tipo_descricao"), esperado.get(sigla))
 
 
+class TestSemCampoPessoalEmDados(unittest.TestCase):
+    """Nenhum campo pessoal do SAPL pode ficar em dados/ (SEG2)."""
+
+    def test_nenhum_arquivo_de_dados_tem_campo_pessoal(self):
+        from testes_sanidade import arquivo_com_campo_pessoal
+
+        self.assertEqual(arquivo_com_campo_pessoal(), [])
+
+    def test_a_trava_encontra_campo_pessoal_em_qualquer_nivel(self):
+        from testes_sanidade import arquivo_com_campo_pessoal, campos_pessoais
+        from config_cidade import carregar_config, remover_campos_pessoais
+
+        cfg = carregar_config()
+        chaves = campos_pessoais(cfg)
+        pasta = DIR_RAIZ / "dados" / "brutos" / "lote_tmp_seg2_pessoal"
+        pasta.mkdir(parents=True, exist_ok=True)
+        try:
+            for nome in ("a.json", "b.json"):
+                (pasta / nome).write_text(
+                    json.dumps({"results": [{"id": 1, chaves[0]: "10.0.0.1"}]}),
+                    encoding="utf-8",
+                )
+            achados = arquivo_com_campo_pessoal()
+            self.assertEqual(len(achados), 2, achados)
+            limpo = remover_campos_pessoais({"id": 1, chaves[1]: 5}, cfg)
+            self.assertEqual(limpo, {"id": 1})
+        finally:
+            for arquivo in sorted(pasta.glob("*")):
+                arquivo.unlink()
+            pasta.rmdir()
+        self.assertEqual(arquivo_com_campo_pessoal(), [])
+
+    def test_lista_vem_do_config(self):
+        from config_cidade import campos_pessoais, carregar_config
+
+        cfg = carregar_config()
+        lista = campos_pessoais(cfg)
+        self.assertEqual(lista, ["ip", "user"])
+        for chave in lista:
+            self.assertIsInstance(chave, str)
+            self.assertTrue(chave.strip())
+        self.assertNotIn("nome_parlamentar", lista)
+
+    def test_remocao_no_texto_preserva_o_formato(self):
+        from config_cidade import carregar_config, remover_campos_pessoais_do_texto
+
+        cfg = carregar_config()
+        casos = {
+            '{"a":1,"ip":"1.2.3.4","b":2}': '{"a":1,"b":2}',
+            '{"a":1,"user":5}': '{"a":1}',
+            '{"ip":"1.2.3.4"}': "{}",
+            '{\n  "a": 1,\n  "ip": "x",\n  "b": 2\n}': '{\n  "a": 1,\n  "b": 2\n}',
+            '{\n  "a": 1,\n  "b": 2,\n  "user": 7\n}': '{\n  "a": 1,\n  "b": 2\n}',
+            '{"n":{"ip":1,"user":2}}': '{"n":{}}',
+            '{"a":1,"user":2,"ip":3}': '{"a":1}',
+        }
+        for entrada, esperado in casos.items():
+            with self.subTest(entrada=entrada):
+                saida = remover_campos_pessoais_do_texto(entrada, cfg)
+                self.assertEqual(saida, esperado)
+                self.assertEqual(json.loads(saida), json.loads(esperado))
+        sem_chave = '{"a":1,"b":"ip e user dentro do texto"}'
+        self.assertEqual(remover_campos_pessoais_do_texto(sem_chave, cfg), sem_chave)
+
+
 class TestSemPaginaEmDados(unittest.TestCase):
     """Nenhuma pagina de terceiro pode ser versionada dentro de dados/."""
 

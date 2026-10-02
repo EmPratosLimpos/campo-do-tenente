@@ -30,6 +30,7 @@ from config_cidade import (
     anos_recorte,
     carregar_config,
     endereco_sapl,
+    remover_campos_pessoais,
     user_agent_http,
 )
 
@@ -269,7 +270,8 @@ class Coletor:
                 return None, f"HTTP {resposta.status_code}"
 
             try:
-                return resposta.json(), None
+                # Campos pessoais saem antes de devolver, pela funcao do config.
+                return remover_campos_pessoais(resposta.json(), CONFIG), None
             except ValueError:
                 return None, "resposta nao e JSON"
 

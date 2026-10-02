@@ -165,6 +165,222 @@ def user_agent_http(cfg: dict | None = None) -> str:
     return f"painel-camara-{slug}/0.1 (projeto de transparencia)"
 
 
+ESPACOS = " \t\r\n"
+_DECODER = json.JSONDecoder()
+
+
+def campos_pessoais(cfg: dict | None = None) -> list[str]:
+    """Campos que identificam quem operou o SAPL. Lista vem do config."""
+    cfg = cfg if cfg is not None else carregar_config()
+    lista = (cfg.get("campos_pessoais_removidos") or {}).get("lista")
+    if not isinstance(lista, list) or not lista:
+        raise SystemExit(
+            "config_cidade.json: campos_pessoais_removidos.lista deve ser uma lista "
+            "com ao menos uma chave."
+        )
+    saida = []
+    for chave in lista:
+        texto = str(chave or "").strip()
+        if not texto:
+            raise SystemExit(
+                "config_cidade.json: campos_pessoais_removidos.lista tem chave vazia."
+            )
+        if texto not in saida:
+            saida.append(texto)
+    return saida
+
+
+def _sem_campos(valor, chaves: set[str]):
+    if isinstance(valor, dict):
+        return {
+            chave: _sem_campos(item, chaves)
+            for chave, item in valor.items()
+            if chave not in chaves
+        }
+    if isinstance(valor, list):
+        return [_sem_campos(item, chaves) for item in valor]
+    return valor
+
+
+def remover_campos_pessoais(valor, cfg: dict | None = None):
+    """Tira as chaves pessoais em qualquer nivel, sem mexer em nenhum outro valor."""
+    return _sem_campos(valor, set(campos_pessoais(cfg)))
+
+
+def contem_campos_pessoais(valor, cfg: dict | None = None) -> bool:
+    chaves = set(campos_pessoais(cfg))
+
+    def busca(item) -> bool:
+        if isinstance(item, dict):
+            if chaves & set(item.keys()):
+                return True
+            return any(busca(sub) for sub in item.values())
+        if isinstance(item, list):
+            return any(busca(sub) for sub in item)
+        return False
+
+    return busca(valor)
+
+
+def _inicio_do_membro(texto: str, posicao: int) -> int:
+    """Volta ate o comeco da linha quando o membro so comeca em uma linha nova."""
+    i = posicao
+    while i > 0 and texto[i - 1] in " \t":
+        i -= 1
+    if i > 0 and texto[i - 1] == "\n":
+        return i
+    return posicao
+
+
+def _virgula_anterior(texto: str, posicao: int) -> int | None:
+    i = posicao
+    while i > 0 and texto[i - 1] in " \t\r\n":
+        i -= 1
+    if i > 0 and texto[i - 1] == ",":
+        return i - 1
+    return None
+
+
+def _virgula_depois(texto: str, posicao: int) -> int | None:
+    i = posicao
+    tamanho = len(texto)
+    while i < tamanho and texto[i] in ESPACOS:
+        i += 1
+    if i < tamanho and texto[i] == ",":
+        return i
+    return None
+
+
+def _fim_do_valor(texto: str, posicao: int) -> int:
+    """Fim do valor que vem depois da chave que termina em posicao."""
+    i = posicao
+    tamanho = len(texto)
+    while i < tamanho and texto[i] in ESPACOS:
+        i += 1
+    if i < tamanho and texto[i] == ":":
+        i += 1
+    while i < tamanho and texto[i] in ESPACOS:
+        i += 1
+    _valor, fim = _DECODER.raw_decode(texto, i)
+    return fim
+
+
+def _objetos_do_texto(texto: str) -> list[list[tuple[int, str, int]]]:
+    """Objetos do JSON com a lista de chaves de primeiro nivel, na ordem do arquivo.
+
+    Uma chave e toda string seguida de dois pontos. String que e valor nao conta.
+    """
+    objetos: list[list[tuple[int, str, int]]] = []
+    pilha: list[list[tuple[int, str, int]] | None] = []
+    i = 0
+    tamanho = len(texto)
+    while i < tamanho:
+        caractere = texto[i]
+        if caractere == "{":
+            membros: list[tuple[int, str, int]] = []
+            objetos.append(membros)
+            pilha.append(membros)
+            i += 1
+            continue
+        if caractere == "[":
+            pilha.append(None)
+            i += 1
+            continue
+        if caractere in "}]":
+            if pilha:
+                pilha.pop()
+            i += 1
+            continue
+        if caractere == '"':
+            valor, fim = _DECODER.raw_decode(texto, i)
+            j = fim
+            while j < tamanho and texto[j] in ESPACOS:
+                j += 1
+            if j < tamanho and texto[j] == ":":
+                membros = pilha[-1] if pilha else None
+                if membros is not None:
+                    membros.append((i, valor, fim))
+            i = fim
+            continue
+        i += 1
+    return objetos
+
+
+def remover_campos_pessoais_do_texto(texto: str, cfg: dict | None = None) -> str:
+    """Tira as chaves pessoais do texto JSON sem mudar o formato do arquivo.
+
+    A remocao e feita no proprio texto, entao a indentacao, a ordem das
+    chaves, o LF e o ensure_ascii do arquivo original ficam intactos.
+    Serve tanto para a coleta nova quanto para limpar os brutos ja salvos.
+    """
+    chaves = set(campos_pessoais(cfg))
+    if not texto or not chaves:
+        return texto
+    cortes: list[tuple[int, int]] = []
+    for membros in _objetos_do_texto(texto):
+        if not any(chave in chaves for _inicio, chave, _fim in membros):
+            continue
+        limites = []
+        for inicio, chave, fim in membros:
+            limites.append(
+                {
+                    "chave": chave,
+                    "inicio": inicio,
+                    "linha": _inicio_do_membro(texto, inicio),
+                    "fim": _fim_do_valor(texto, fim),
+                    "depois": _virgula_depois(texto, _fim_do_valor(texto, fim)),
+                    "antes": None,
+                }
+            )
+        for indice, item in enumerate(limites):
+            if indice:
+                limites[indice]["antes"] = limites[indice - 1]["depois"]
+        alvo = [i for i, item in enumerate(limites) if item["chave"] in chaves]
+        inicio_run = 0
+        while inicio_run < len(alvo):
+            fim_run = inicio_run
+            while (
+                fim_run + 1 < len(alvo)
+                and alvo[fim_run + 1] == alvo[fim_run] + 1
+            ):
+                fim_run += 1
+            primeiro = limites[alvo[inicio_run]]
+            ultimo = limites[alvo[fim_run]]
+            if primeiro["antes"] is not None:
+                cortes.append((primeiro["antes"], ultimo["fim"]))
+            elif ultimo["depois"] is not None:
+                cortes.append((primeiro["linha"], ultimo["depois"] + 1))
+            else:
+                cortes.append((primeiro["linha"], ultimo["fim"]))
+            inicio_run = fim_run + 1
+    if not cortes:
+        return texto
+    # Um corte dentro de outro e redundante: o de fora ja leva o texto junto.
+    maximas: list[tuple[int, int]] = []
+    for inicio, fim in sorted(cortes, key=lambda par: (par[0], -par[1])):
+        if maximas and maximas[-1][0] <= inicio and maximas[-1][1] >= fim:
+            continue
+        maximas.append((inicio, fim))
+    saida = texto
+    for inicio, fim in reversed(maximas):
+        saida = saida[:inicio] + saida[fim:]
+    return saida
+
+
+def limpar_bytes_pessoais(corpo: bytes, cfg: dict | None = None) -> bytes:
+    """Aplica a remocao em bytes de resposta do SAPL antes de gravar."""
+    if not corpo:
+        return corpo
+    try:
+        texto = corpo.decode("utf-8")
+    except UnicodeDecodeError:
+        return corpo
+    limpo = remover_campos_pessoais_do_texto(texto, cfg)
+    if limpo == texto:
+        return corpo
+    return limpo.encode("utf-8")
+
+
 def tipos_dois_turnos(cfg: dict | None = None) -> set[str]:
     """Siglas com votacao em dois turnos (D-049). O resto e turno unico."""
     cfg = cfg if cfg is not None else carregar_config()

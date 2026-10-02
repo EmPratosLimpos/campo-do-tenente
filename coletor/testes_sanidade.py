@@ -21,6 +21,7 @@ from pathlib import Path
 from config_cidade import (
     PisoNaoDefinido,
     anos_recorte,
+    campos_pessoais,
     carregar_config,
     exigir_piso,
     pisos_sanidade,
@@ -167,6 +168,39 @@ def testar_sem_pagina_versionada_em_dados() -> None:
     )
 
 
+def arquivo_com_campo_pessoal() -> list[str]:
+    """Arquivo de dados/ com campo pessoal do SAPL dentro de um JSON."""
+    chaves = set(campos_pessoais(CONFIG))
+    achados = []
+    for caminho in sorted(DIR_DADOS.rglob("*.json")):
+        try:
+            dados = json.loads(caminho.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, ValueError):
+            continue
+        if contem_chave(dados, chaves):
+            achados.append(caminho.relative_to(DIR_RAIZ).as_posix())
+    return achados
+
+
+def contem_chave(valor, chaves: set) -> bool:
+    if isinstance(valor, dict):
+        if chaves & set(valor.keys()):
+            return True
+        return any(contem_chave(sub, chaves) for sub in valor.values())
+    if isinstance(valor, list):
+        return any(contem_chave(sub, chaves) for sub in valor)
+    return False
+
+
+def testar_sem_campo_pessoal_em_dados() -> None:
+    achados = arquivo_com_campo_pessoal()
+    nomes = ", ".join(campos_pessoais(CONFIG))
+    checar(
+        not achados,
+        f"dados/ nao pode ter campo pessoal ({nomes}): " + ", ".join(achados),
+    )
+
+
 def main() -> int:
     try:
         pisos = {}
@@ -184,7 +218,10 @@ def main() -> int:
         return 1
 
     falhas = []
-    testes_globais = (("testar_sem_pagina_versionada_em_dados", testar_sem_pagina_versionada_em_dados),)
+    testes_globais = (
+        ("testar_sem_pagina_versionada_em_dados", testar_sem_pagina_versionada_em_dados),
+        ("testar_sem_campo_pessoal_em_dados", testar_sem_campo_pessoal_em_dados),
+    )
     for nome, teste in testes_globais:
         try:
             teste()

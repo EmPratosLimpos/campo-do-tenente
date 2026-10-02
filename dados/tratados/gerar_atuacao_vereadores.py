@@ -29,6 +29,7 @@ if str(DIR_RAIZ / "coletor") not in sys.path:
 from config_cidade import (  # noqa: E402
     PisoNaoDefinido,
     anos_recorte,
+    campos_pessoais,
     carregar_config,
     exigir_piso,
     link_materia,
@@ -122,15 +123,23 @@ def escrever_lf(caminho: Path, texto: str) -> None:
     caminho.write_bytes(texto.encode("utf-8"))
 
 
-def recusar_ip(obj, caminho: str = "") -> None:
+def recusar_campos_pessoais(obj, caminho: str = "") -> None:
+    """Nenhum campo pessoal do SAPL pode chegar em dado tratado (SEG2).
+
+    A lista vem de config_cidade.json, a mesma do coletor.
+    """
+    chaves = set(campos_pessoais(CONFIG))
     if isinstance(obj, dict):
-        if "ip" in obj:
-            raise SystemExit(f"Campo ip em dado tratado: {caminho or 'raiz'}")
+        if chaves & set(obj.keys()):
+            raise SystemExit(
+                f"Campo pessoal em dado tratado: {caminho or 'raiz'}. "
+                "A lista esta em config_cidade.json."
+            )
         for chave, valor in obj.items():
-            recusar_ip(valor, f"{caminho}.{chave}")
+            recusar_campos_pessoais(valor, f"{caminho}.{chave}")
     elif isinstance(obj, list):
         for indice, valor in enumerate(obj):
-            recusar_ip(valor, f"{caminho}[{indice}]")
+            recusar_campos_pessoais(valor, f"{caminho}[{indice}]")
 
 
 def resultados_de_lista(data) -> list:
@@ -2289,7 +2298,7 @@ def gerar_do_ano(ano: int) -> None:
         "projetos_lei": projetos,
         "vereadores": vereadores,
     }
-    recusar_ip(payload)
+    recusar_campos_pessoais(payload)
     arquivo_json = DIR_SCRIPT / f"atuacao_vereadores_{ano}.json"
     arquivo_csv = DIR_SCRIPT / f"atuacao_vereadores_{ano}.csv"
     arquivo_relatorio = DIR_SCRIPT / f"RELATORIO-ATUACAO-VEREADORES-{ano}.md"

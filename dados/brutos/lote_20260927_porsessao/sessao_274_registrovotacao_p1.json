@@ -19,13 +19,11 @@
       "numero_votos_nao": 0,
       "numero_abstencoes": 0,
       "observacao": "",
-      "ip": "177.152.63.134",
       "data_hora": "2026-09-29T20:23:07.387299-03:00",
       "tipo_resultado_votacao": 2,
       "materia": 752,
       "ordem": 702,
-      "expediente": null,
-      "user": 3
+      "expediente": null
     },
     {
       "id": 275,
@@ -36,13 +34,11 @@
       "numero_votos_nao": 0,
       "numero_abstencoes": 0,
       "observacao": "",
-      "ip": "177.152.63.134",
       "data_hora": "2026-09-29T20:26:58.396924-03:00",
       "tipo_resultado_votacao": 2,
       "materia": 811,
       "ordem": 703,
-      "expediente": null,
-      "user": 3
+      "expediente": null
     },
     {
       "id": 276,
@@ -53,13 +49,11 @@
       "numero_votos_nao": 0,
       "numero_abstencoes": 0,
       "observacao": "",
-      "ip": "177.152.63.134",
       "data_hora": "2026-09-29T20:28:11.855994-03:00",
       "tipo_resultado_votacao": 2,
       "materia": 815,
       "ordem": 704,
-      "expediente": null,
-      "user": 3
+      "expediente": null
     },
     {
       "id": 277,
@@ -70,13 +64,11 @@
       "numero_votos_nao": 0,
       "numero_abstencoes": 0,
       "observacao": "",
-      "ip": "177.152.63.134",
       "data_hora": "2026-09-29T20:41:25.760839-03:00",
       "tipo_resultado_votacao": 2,
       "materia": 967,
       "ordem": 705,
-      "expediente": null,
-      "user": 3
+      "expediente": null
     },
     {
       "id": 278,
@@ -87,13 +79,11 @@
       "numero_votos_nao": 0,
       "numero_abstencoes": 0,
       "observacao": "",
-      "ip": "177.152.63.134",
       "data_hora": "2026-09-29T20:44:36.896141-03:00",
       "tipo_resultado_votacao": 2,
       "materia": 968,
       "ordem": 706,
-      "expediente": null,
-      "user": 3
+      "expediente": null
     },
     {
       "id": 279,
@@ -104,13 +94,11 @@
       "numero_votos_nao": 0,
       "numero_abstencoes": 0,
       "observacao": "",
-      "ip": "177.152.63.134",
       "data_hora": "2026-09-29T20:47:57.865311-03:00",
       "tipo_resultado_votacao": 2,
       "materia": 969,
       "ordem": 707,
-      "expediente": null,
-      "user": 3
+      "expediente": null
     }
   ]
 }

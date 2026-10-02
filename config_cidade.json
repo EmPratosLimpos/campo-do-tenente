@@ -11,6 +11,13 @@
     "legislatura_inicio": 2025,
     "legislatura_fim": 2028
   },
+  "campos_pessoais_removidos": {
+    "nota": "SEG2: campos que identificam quem fez a operacao no SAPL. Nenhum dado de voters, nem de quem registrou, fica no repositorio. A remocao e feita antes de gravar, por uma funcao so, e a trava de testes_sanidade.py recusa esses campos em qualquer arquivo de dados/.",
+    "lista": [
+      "ip",
+      "user"
+    ]
+  },
   "painel": {
     "nome_projeto": "Em Pratos Limpos",
     "endereco_publico": "https://empratoslimpos.github.io/campo-do-tenente/",

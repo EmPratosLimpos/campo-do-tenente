@@ -27,10 +27,13 @@ if str(Path(__file__).resolve().parent) not in sys.path:
 from config_cidade import (  # noqa: E402
     anos_recorte,
     carregar_config,
+    contem_campos_pessoais,
     id_legislatura_atual,
     id_tipo_sessao_ordinaria,
+    remover_campos_pessoais,
 )
 
+CONFIG = carregar_config()
 BRUTOS = RAIZ / "dados" / "brutos"
 ROTULO_SEM_VOTO = "voto individual nao registrado no SAPL"
 TEXTO_NAO_VOTOU = "Não Votou"
@@ -59,21 +62,12 @@ COLUNAS_MATERIA = [
 
 
 def sem_ip(valor):
-    if isinstance(valor, dict):
-        return {chave: sem_ip(item) for chave, item in valor.items() if chave != "ip"}
-    if isinstance(valor, list):
-        return [sem_ip(item) for item in valor]
-    return valor
+    """Alias antigo. A remocao e a mesma funcao que o coletor usa."""
+    return remover_campos_pessoais(valor, CONFIG)
 
 
 def contem_ip(valor) -> bool:
-    if isinstance(valor, dict):
-        if "ip" in valor:
-            return True
-        return any(contem_ip(item) for item in valor.values())
-    if isinstance(valor, list):
-        return any(contem_ip(item) for item in valor)
-    return False
+    return contem_campos_pessoais(valor, CONFIG)
 
 
 def fonte(pasta_lote: Path, nome: str) -> str:
@@ -85,8 +79,8 @@ def ler_json(caminho: Path):
 
 
 def gravar_json(caminho: Path, dado) -> None:
-    if contem_ip(dado):
-        raise SystemExit(f"Saida ainda contem ip: {caminho.name}")
+    if contem_campos_pessoais(dado, CONFIG):
+        raise SystemExit(f"Saida ainda contem campo pessoal: {caminho.name}")
     caminho.parent.mkdir(parents=True, exist_ok=True)
     texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
     tmp = caminho.with_suffix(caminho.suffix + ".tmp")

@@ -26,6 +26,7 @@ from config_cidade import (
     exigir_piso,
     id_tipo_sessao_ordinaria,
     pisos_sanidade,
+    remover_campos_pessoais,
 )
 from derivar_insumos import ano_de_data, ler_json
 
@@ -204,7 +205,12 @@ def ler_ids_ordem_da_sessao(pasta: Path, sid: int) -> list[int]:
 
 
 def _gravar_consolidado(pasta: Path, prefixo: str, linhas: list) -> None:
-    """Consolidado por sessao no formato de pagina unica para o derivador."""
+    """Consolidado por sessao no formato de pagina unica para o derivador.
+
+    Os campos pessoais do SAPL sao removidos antes de gravar, pela mesma
+    funcao que o coletor em lote usa.
+    """
+    cfg = carregar_config()
     unicas = []
     vistos = set()
     sem_id = []
@@ -218,17 +224,16 @@ def _gravar_consolidado(pasta: Path, prefixo: str, linhas: list) -> None:
         else:
             sem_id.append(item)
     todas = unicas + sem_id
-    dado = {
-        "pagination": {
-            "total_entries": len(todas),
-            "total_pages": 1,
-            "page": 1,
-            "links": {"next": None, "previous": None},
-            "next_page": None,
-        },
-        "results": todas,
+    dados = {"pagination": {}, "results": todas}
+    limpo = remover_campos_pessoais(dados, cfg)
+    dados["pagination"] = {
+        "total_entries": len(limpo["results"]),
+        "total_pages": 1,
+        "page": 1,
+        "links": {"next": None, "previous": None},
+        "next_page": None,
     }
-    texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
+    texto = json.dumps(limpo, ensure_ascii=False, indent=2) + "\n"
     caminho = pasta / f"{prefixo}_p1.json"
     tmp = caminho.with_suffix(".json.tmp")
     tmp.write_bytes(texto.encode("utf-8"))

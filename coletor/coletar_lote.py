@@ -26,6 +26,7 @@ from config_cidade import (
     anos_recorte,
     carregar_config,
     endereco_sapl,
+    limpar_bytes_pessoais,
     user_agent_http,
 )
 
@@ -65,6 +66,11 @@ def corpo_e_json_valido(corpo: bytes) -> bool:
     except (UnicodeDecodeError, ValueError):
         return False
     return True
+
+
+def limpar_resposta(corpo: bytes, cfg: dict) -> bytes:
+    """Tira os campos pessoais antes de gravar. Vale para toda resposta do SAPL."""
+    return limpar_bytes_pessoais(corpo, cfg)
 
 
 def indice_tem(indice_api: dict | None, chave: str) -> bool:
@@ -305,6 +311,8 @@ class ColetorLote:
                 erro = f"rede: {exc.reason}"
             except TimeoutError:
                 erro = "tempo esgotado"
+
+            corpo = limpar_resposta(corpo, self.cfg)
 
             if (
                 refrescar
