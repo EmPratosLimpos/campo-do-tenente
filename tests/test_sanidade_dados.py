@@ -436,6 +436,40 @@ class TestSemPaginaEmDados(unittest.TestCase):
         afastamento = tratado["afastamentos"][0]
         self.assertEqual(noticia["url_oficial"], afastamento["link_fonte"])
         self.assertEqual(noticia["trecho"], afastamento["trecho"])
+        self.assertEqual(
+            afastamento["arquivo"],
+            "dados/brutos/lote_20260927_noticia_licenca/noticia.json",
+            "o campo arquivo do afastamento aponta para o JSON que existe",
+        )
+        self.assertTrue((DIR_RAIZ / afastamento["arquivo"]).is_file())
+
+    def test_nenhum_derivado_aponta_para_pagina_html_inexistente(self):
+        """O campo arquivo tem de apontar para arquivo que existe no repositorio."""
+        antigo = "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
+        alvos = [
+            "dados/tratados/afastamentos_manuais.json",
+            "dados/tratados/atuacao_vereadores_2025.json",
+            "dados/tratados/atuacao_vereadores_2026.json",
+            "dados/tratados/atuacao_vereadores_legislatura.json",
+        ]
+
+        def varrer(no: object, nome: str) -> None:
+            if isinstance(no, dict):
+                for chave, valor in no.items():
+                    if chave == "arquivo" and isinstance(valor, str):
+                        with self.subTest(arquivo=nome, caminho=valor):
+                            self.assertTrue((DIR_RAIZ / valor).is_file(), valor)
+                    varrer(valor, nome)
+            elif isinstance(no, list):
+                for valor in no:
+                    varrer(valor, nome)
+
+        for alvo in alvos:
+            caminho = DIR_RAIZ / alvo
+            with self.subTest(arquivo=alvo):
+                texto = caminho.read_text(encoding="utf-8")
+                self.assertNotIn(antigo, texto)
+                varrer(json.loads(texto), alvo)
 
 
 if __name__ == "__main__":
