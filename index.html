@@ -1573,6 +1573,29 @@
     border-radius: 3px;
     flex: none;
   }
+  .pilula {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 2px 10px;
+    border-radius: var(--raio-pilula);
+    font-size: var(--t-apoio);
+    font-weight: 600;
+    border: 0;
+  }
+  .pilula-aprovado { background: var(--sim); color: var(--sobre-sim); }
+  .pilula-rejeitado { background: var(--nao); color: var(--sobre-nao); }
+  .pilula-tramitacao {
+    background: transparent;
+    color: var(--tramitacao);
+    border: 1.5px solid var(--tramitacao);
+  }
+  .pilula-sem-deliberacao {
+    background: transparent;
+    color: var(--texto-suave);
+    border: 1.5px dashed var(--ausente);
+  }
+  .numeros .presenca-de { white-space: nowrap; }
   .btn { min-height: var(--alvo-minimo); padding: 0 18px; border-radius: var(--raio-pilula); border: 0; font-weight: 600; cursor: pointer; }
   .btn-primario { background: var(--marca-solida); color: var(--sobre-marca); }
   .btn-secundario { background: var(--superficie-2); color: var(--texto); }
@@ -2027,6 +2050,9 @@
     background: var(--marca-solida);
     color: var(--sobre-marca);
     box-shadow: none;
+  }
+  [data-tema="escuro"] .seletor-periodo button:not(.ativo) {
+    color: var(--texto);
   }
 
   .painel-camara { display: none; }
@@ -4276,6 +4302,11 @@
     };
   }
 
+  function vereadoresNoMandatoNaSessao(sessao) {
+    var c = contagemPresencaSessao(sessao);
+    return c.banca > 0 ? c.banca : c.presentes;
+  }
+
   function capsulaPresenca(classe, rotulo, valor) {
     return (
       '<div class="status-capsula ' +
@@ -4324,10 +4355,18 @@
   }
 
   function htmlNumerosResultado(unanimes, maioria, rejeitadas) {
-    return '<ul class="numeros">' +
-      '<li><b>' + unanimes + '</b><span><span class="marcador-cor" style="background:var(--sim)"></span>Unanimidade</span></li>' +
-      '<li><b>' + maioria + '</b><span><span class="marcador-cor" style="background:var(--sim);opacity:.45"></span>Maioria</span></li>' +
-      '<li><b>' + rejeitadas + '</b><span><span class="marcador-cor listra-anel"></span>Rejeitados</span></li></ul>';
+    var linhas = [];
+    if (unanimes > 0) {
+      linhas.push('<li><b>' + unanimes + '</b><span><span class="marcador-cor" style="background:var(--sim)"></span>Unanimidade</span></li>');
+    }
+    if (maioria > 0) {
+      linhas.push('<li><b>' + maioria + '</b><span><span class="marcador-cor" style="background:var(--sim);opacity:.45"></span>Maioria</span></li>');
+    }
+    if (rejeitadas > 0) {
+      linhas.push('<li><b>' + rejeitadas + '</b><span><span class="marcador-cor listra-anel"></span>Rejeitados</span></li>');
+    }
+    if (!linhas.length) return "";
+    return '<ul class="numeros">' + linhas.join("") + "</ul>";
   }
 
   function htmlFraseResumoPeriodo(periodo) {
@@ -4352,18 +4391,17 @@
       corpo = "A C\u00e2mara votou <strong>" + total + "</strong> projetos de lei: <strong>" + aprovados + "</strong> aprovados e <strong>" + rejeitadas + "</strong> rejeitados.";
     } else if (maioria === 0 && unanimes === total) {
       if (total === 1) {
-        corpo = "A C\u00e2mara aprovou o \u00fanico projeto de lei votado, por " + htmlBotaoTermo("unanimidade") + ".";
+        corpo = "A C\u00e2mara aprovou o \u00fanico projeto de lei votado, por unanimidade.";
       } else {
         var qual = total === 2 ? "os dois" : "todos";
-        corpo = "A C\u00e2mara aprovou os <strong>" + total + "</strong> projetos de lei votados, " + qual + " por " + htmlBotaoTermo("unanimidade") + ".";
+        corpo = "A C\u00e2mara aprovou os <strong>" + total + "</strong> projetos de lei votados, " + qual + " por unanimidade.";
       }
     } else {
-      corpo = "A C\u00e2mara aprovou os <strong>" + total + "</strong> projetos de lei votados: <strong>" + unanimes + "</strong> por " +
-        htmlBotaoTermo("unanimidade") + " e <strong>" + maioria + "</strong> por " + htmlBotaoTermo("maioria") + ".";
+      corpo = "A C\u00e2mara aprovou os <strong>" + total + "</strong> projetos de lei votados: <strong>" + unanimes + "</strong> por unanimidade e <strong>" + maioria + "</strong> por maioria.";
     }
     if (periodo === "sessao") {
       var s = ultimaSessaoOrdinaria();
-      var n = totalVereadoresAtivos();
+      var n = s ? vereadoresNoMandatoNaSessao(s) : 0;
       var p = s && s.n_presentes != null ? s.n_presentes : 0;
       if (n > 0 && p > 0) {
         if (p >= n) corpo += " Os <strong>" + n + "</strong> vereadores estavam presentes.";
@@ -4430,18 +4468,18 @@
     var s = ultimaSessaoOrdinaria();
     if (!card || !s) return;
     var c = contagemPresencaSessao(s);
-    var n = totalVereadoresAtivos() || c.banca;
+    var n = vereadoresNoMandatoNaSessao(s);
     var lista = MATERIAS_CAMARA.sessao || [];
     var frase = c.presentes >= n && n > 0
       ? "Os " + n + " vereadores estavam presentes."
       : (c.presentes + " dos " + n + " vereadores estavam presentes.");
     var pct = n > 0 ? (c.presentes / n) * 100 : 0;
     var linhaFaltas = c.faltas > 0
-      ? '<li style="list-style:none;padding:6px 0"><button type="button" class="linha-btn" data-abrir-faltas="1"><span>Faltas</span><b>' + c.faltas + '</b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></li>'
-      : "<li><b>" + c.faltas + "</b><span>Faltas</span></li>";
+      ? '<li class="clicavel" style="list-style:none;padding:0"><button type="button" class="linha-btn" data-abrir-faltas="1"><span>Faltas</span><b>' + c.faltas + '</b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></li>'
+      : "";
     var numeros = '<ul class="numeros">' +
-      "<li><b>" + c.presentes + "</b><span>Presentes <span class=\"apoio\">" + c.presentes + " de " + n + "</span></span></li>" +
-      (c.faltas > 0 ? linhaFaltas : "<li><b>" + c.faltas + "</b><span>Faltas</span></li>") +
+      "<li><b>" + c.presentes + "</b><span>Presentes <span class=\"apoio presenca-de\">" + c.presentes + " de " + n + "</span></span></li>" +
+      linhaFaltas +
       "<li><b>" + lista.length + "</b><span>Projetos votados</span></li></ul>";
     card.innerHTML = '<h2 class="sr" id="tit-presenca-sessao">Presen\u00e7a na \u00faltima sess\u00e3o</h2>' +
       '<p class="resumo">' + esc(frase) + "</p>" +
@@ -4627,11 +4665,18 @@
     if (tipo === "veto") return "Veto";
     if (tipo === "plex" || tipo === "PLEX") return "PLEX";
     if (tipo === "pleg" || tipo === "PLEG") return "PLEG";
+    if (tipo === "tipo_materia") return valor || "Tipo de matéria";
     return valor || "Termo";
   }
 
   function textoExplicacaoTag(tipo, valor, extra) {
     var ex = explicacoesTags();
+    if (tipo === "tipo_materia") {
+      var desc = descricaoTipoSigla(valor);
+      var fixo = ex.tipo_materia || "";
+      if (desc) return fixo + " " + desc + ".";
+      return fixo || String(valor || "");
+    }
     if (tipo === "categoria") {
       var total = numeroCategorias();
       var fixoCat = ex.categoria || "";
@@ -5979,6 +6024,58 @@ var MAPA_VAR_CATEGORIA = {
     return '<button type="button" class="termo tag-explicavel" data-termo="' + esc(palavra) + '" data-tag="termo" data-valor="' + esc(palavra) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(palavra) + "</button>";
   }
 
+  function chaveExplicacaoSigla(sigla) {
+    var s = String(sigla || "").trim();
+    if (!s) return "tipo_materia";
+    var chave = s.toLowerCase();
+    var ex = explicacoesTags();
+    if (ex[chave]) return chave;
+    return "tipo_materia";
+  }
+
+  function htmlBotaoTermoSigla(sigla) {
+    var s = String(sigla || "").trim();
+    if (!s) return "";
+    var tag = chaveExplicacaoSigla(s);
+    return '<button type="button" class="termo tag-explicavel" data-tag="' + esc(tag) + '" data-valor="' + esc(s) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(s) + "</button>";
+  }
+
+  function htmlLinhaTipoMateria(tipoStr) {
+    var t = String(tipoStr || "").trim();
+    var m = t.match(/^([A-Za-z]+)\s+(.+)$/);
+    if (!m) return '<span class="sigla">' + esc(t) + "</span>";
+    return htmlBotaoTermoSigla(m[1]) + " <span class=\"sigla-num\">" + esc(m[2]) + "</span>";
+  }
+
+  function classePilulaResultado(m) {
+    if (!m) return "pilula-sem-deliberacao";
+    if (m.resultado === "rejeitado") return "pilula-rejeitado";
+    if (m.resultado === "maioria" || m.resultado === "unanimidade") return "pilula-aprovado";
+    if (m.resultado && m.resultado.indexOf("nao_deliberativo:") === 0) return "pilula-sem-deliberacao";
+    if (m.resultado === "em_tramitacao" || m.resultado === "tramitacao") return "pilula-tramitacao";
+    return "pilula-tramitacao";
+  }
+
+  function rotuloPilulaResultado(m) {
+    if (!m) return "";
+    if (m.resultado === "rejeitado") return "Rejeitado";
+    if (m.resultado === "maioria") return "Aprovado por maioria";
+    if (m.resultado === "unanimidade") return "Aprovado por unanimidade";
+    if (m.resultado && m.resultado.indexOf("nao_deliberativo:") === 0) {
+      return m.tipo_resultado || "Sem deliberação";
+    }
+    if (m.resultado === "em_tramitacao" || m.resultado === "tramitacao") return "Em tramitação";
+    if (m.resultado === "primeiro_turno") return "1º turno";
+    if (m.resultado === "turno_nao_identificado") return "Turno não identificado";
+    return "Em tramitação";
+  }
+
+  function htmlPilulaResultadoMateria(m) {
+    var rotulo = rotuloPilulaResultado(m);
+    if (!rotulo) return "";
+    return '<span class="pilula ' + classePilulaResultado(m) + '">' + esc(rotulo) + "</span>";
+  }
+
   function htmlLinkSapMateria(id, rotulo) {
     var href = urlSegura(SAPL_ORIGEM + "/materia/" + encodeURIComponent(String(id)));
     if (!href) return "";
@@ -5986,9 +6083,10 @@ var MAPA_VAR_CATEGORIA = {
       '<svg class="ic" width="16" height="16" aria-hidden="true"><use href="#ic-ver-na-fonte"/></svg></a>';
   }
 
-  function htmlTagsMateria(id, votoHtml, turnoHtml) {
+  function htmlTagsMateria(id, votoHtml, turnoHtml, pilulaHtml) {
     var tags = tagsMateria(id);
     var partes = [];
+    if (pilulaHtml) partes.push(pilulaHtml);
     if (votoHtml) partes.push(votoHtml);
     if (tags && temaValidoParaTag(tags.tag_tema)) {
       partes.push(
@@ -6357,16 +6455,15 @@ var MAPA_VAR_CATEGORIA = {
   function renderCardMateria(m) {
     var turnoHtml = m.turno
       ? '<button type="button" class="chip tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(m.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(m.turno)) + "</button>"
-      : (m.tipo_resultado
-        ? '<button type="button" class="chip tag-turno tag-explicavel" data-tag="resultado" data-valor="' + esc(m.tipo_resultado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.tipo_resultado) + "</button>"
-        : "");
-    var tagsHtml = htmlTagsMateria(m.id, "", turnoHtml);
+      : "";
+    var pilulaHtml = htmlPilulaResultadoMateria(m);
+    var tagsHtml = htmlTagsMateria(m.id, "", turnoHtml, pilulaHtml);
     var datas = textoDatasVotacao(m);
     return '<li class="item-votado materia" data-resultado="' + esc(m.resultado) + '" data-tema="' + esc((tagsMateria(m.id) || {}).tag_tema || "") + '">' +
       tagsHtml +
       '<p class="materia-assunto">' + esc(assuntoMateria(m)) + "</p>" +
-      '<div class="linha-meta"><span class="sigla">' + esc(m.tipo || "") + "</span>" +
-      (datas ? "<span>" + esc(datas) + "</span>" : "") + "</div>" +
+      '<div class="linha-meta">' + htmlLinhaTipoMateria(m.tipo || "") +
+      (datas ? '<span class="materia-datas">' + esc(datas) + "</span>" : "") + "</div>" +
       htmlLinkSapMateria(m.id, "Ver no SAPL") +
       "</li>";
   }
