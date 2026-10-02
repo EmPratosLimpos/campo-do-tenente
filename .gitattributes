@@ -7,5 +7,7 @@
 *.md text eol=lf
 *.yml text eol=lf
 *.txt text eol=lf
-dados/brutos/lote_20260927_noticia_licenca/noticia.html binary
+# Pagina de terceiro nao e versionada: em dados/ so entra o texto puro em JSON.
+# A trava de verdade esta em coletor/testes_sanidade.py, que reprova .html, .htm,
+# .xhtml e .svg em dados/.
 dados/brutos/lote_20260927_noticia_licenca/cabecalhos.txt binary

@@ -282,5 +282,49 @@ class TestSanidadeDados(unittest.TestCase):
                     self.assertEqual(projeto.get("tipo_descricao"), esperado.get(sigla))
 
 
+class TestSemPaginaEmDados(unittest.TestCase):
+    """Nenhuma pagina de terceiro pode ser versionada dentro de dados/."""
+
+    def test_nenhuma_pagina_em_dados(self):
+        from testes_sanidade import pagina_versionada_em_dados
+
+        self.assertEqual(pagina_versionada_em_dados(), [])
+
+    def test_a_trava_encontra_qualquer_pagina(self):
+        from testes_sanidade import pagina_versionada_em_dados
+
+        pasta = DIR_RAIZ / "dados" / "brutos" / "lote_tmp_seg2"
+        pasta.mkdir(parents=True, exist_ok=True)
+        try:
+            for nome in ("pagina.html", "pagina.htm", "pagina.xhtml", "icone.svg"):
+                (pasta / nome).write_text("conteudo", encoding="utf-8")
+            achados = pagina_versionada_em_dados()
+            self.assertEqual(len(achados), 4)
+            for nome in ("pagina.html", "pagina.htm", "pagina.xhtml", "icone.svg"):
+                self.assertIn(f"dados/brutos/lote_tmp_seg2/{nome}", achados)
+        finally:
+            for arquivo in sorted(pasta.glob("*")):
+                arquivo.unlink()
+            pasta.rmdir()
+        self.assertEqual(pagina_versionada_em_dados(), [])
+
+    def test_noticia_da_licenca_ficou_em_json(self):
+        pasta = DIR_RAIZ / "dados" / "brutos" / "lote_20260927_noticia_licenca"
+        self.assertTrue((pasta / "noticia.json").is_file())
+        self.assertFalse((pasta / "noticia.html").exists())
+        noticia = json.loads((pasta / "noticia.json").read_text(encoding="utf-8"))
+        for chave in ("url_oficial", "titulo", "data", "trecho"):
+            self.assertTrue(str(noticia.get(chave) or "").strip(), chave)
+        self.assertTrue(noticia["url_oficial"].startswith("https://"))
+        tratado = json.loads(
+            (DIR_RAIZ / "dados" / "tratados" / "afastamentos_manuais.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        afastamento = tratado["afastamentos"][0]
+        self.assertEqual(noticia["url_oficial"], afastamento["link_fonte"])
+        self.assertEqual(noticia["trecho"], afastamento["trecho"])
+
+
 if __name__ == "__main__":
     unittest.main()
