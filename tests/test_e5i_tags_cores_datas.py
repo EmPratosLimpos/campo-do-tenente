@@ -110,10 +110,11 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                             ).first
                             estilo = tag.evaluate(
                                 "n => { var c = getComputedStyle(n); "
-                                "return c.fontSize + '|' + c.paddingTop + ' ' + c.paddingRight "
-                                "+ ' ' + c.paddingBottom + ' ' + c.paddingLeft; }"
+                                "return c.fontSize + '|' + c.backgroundColor; }"
                             )
-                            self.assertEqual(estilo, "10px|2px 8px 2px 8px")
+                            self.assertTrue(estilo.startswith("13px|"), estilo)
+                            quadro = tag.locator(".cat-quadro").first
+                            self.assertEqual(quadro.count(), 1)
 
                             barra = page.locator(
                                 "#temas-distribuicao-sessao .barra-tema-linha",
@@ -123,10 +124,10 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                             cor_barra = barra.locator(".preenchido").evaluate(
                                 "n => getComputedStyle(n).backgroundColor"
                             )
-                            cor_tag = tag.evaluate(
+                            cor_quadro = quadro.evaluate(
                                 "n => getComputedStyle(n).backgroundColor"
                             )
-                            self.assertEqual(cor_tag, cor_barra)
+                            self.assertEqual(cor_quadro, cor_barra)
                             self.assertGreaterEqual(tag.evaluate(CONTRASTE_JS), 4.5)
 
                             ementa = card.locator(".materia-ementa").first

@@ -428,7 +428,7 @@ class TestE5hAcabamento(unittest.TestCase):
                         "+ ' ' + c.paddingRight + ' ' + c.paddingBottom + ' ' + c.paddingLeft; }"
                     )
                     with self.subTest(largura=largura):
-                        self.assertEqual(estilo, "BUTTON|10px|2px 8px 2px 8px")
+                        self.assertEqual(estilo, "BUTTON|13px|2px 8px 2px 8px")
 
     def test_sem_palavra_sem_acento_nas_abas(self):
         with sync_playwright() as p:

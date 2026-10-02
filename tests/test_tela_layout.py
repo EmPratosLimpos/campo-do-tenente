@@ -60,11 +60,10 @@ MARCADORES = {
     "mes": "Quantas votações por tipo?",
     "todo": "Qual foi o resultado das votações?",
 }
-BLOCOS_CABECALHO = (".titulo-site", ".selo-sapl", ".subtitulo-site")
+BLOCOS_CABECALHO = (".site-logo", ".topo-tagline")
 BLOCOS_VEREADORES = (
-    ".titulo-site",
-    ".selo-sapl",
-    ".subtitulo-site",
+    ".site-logo",
+    ".topo-tagline",
     ".titulo-vereadores",
     ".seletor-vereador",
     ".nav-vereador",
@@ -193,21 +192,11 @@ JS_BOTAO_TEMA = '''() => {
     const btn = document.querySelector("#btn-tema");
     if (!btn) return { ok: false, erro: "botao nao encontrado" };
     const rect = btn.getBoundingClientRect();
-    if (rect.width < 32 || rect.width > 40 || rect.height < 32 || rect.height > 40) return { ok: false, erro: `tamanho incorreto: ${rect.width}x${rect.height}` };
-    if (rect.top > 24 || window.innerWidth - rect.right > 24) return { ok: false, erro: `posicao incorreta: top ${rect.top}, right ${window.innerWidth - rect.right}` };
-    
-    // Check overlap with title, share button or menu
-    const intersect = (r1, r2) => !(r2.left > r1.right || r2.right < r1.left || r2.top > r1.bottom || r2.bottom < r1.top);
-    
-    const elements = [document.querySelector(".titulo-site"), document.querySelector(".btn-abrir-share"), document.querySelector("#menu-lateral")];
-    for (let el of elements) {
-        if (el && el.offsetParent !== null) { // visible
-            if (intersect(rect, el.getBoundingClientRect())) {
-                return { ok: false, erro: "botao sobrepoe outro conteudo" };
-            }
-        }
-    }
-    
+    if (rect.width < 44 || rect.height < 44) return { ok: false, erro: `tamanho incorreto: ${rect.width}x${rect.height}` };
+    const topo = document.querySelector(".topo-marca-linha");
+    if (!topo || !topo.contains(btn)) return { ok: false, erro: "botao fora do cabecalho" };
+    const cs = getComputedStyle(btn);
+    if (cs.position === "fixed") return { ok: false, erro: "botao ainda fixo no canto" };
     return { ok: true };
 }'''
 JS_TOPOS_PRIMEIRA_LINHA = """(params) => {
@@ -474,10 +463,10 @@ class TestTelaLayout(unittest.TestCase):
         if largura >= 900:
             self.assertTrue(lateral, "menu lateral deve aparecer em desktop")
             largura_titulo = page.evaluate(
-                "() => Math.round(document.querySelector('.titulo-site').getBoundingClientRect().width)"
+                "() => Math.round(document.querySelector('.menu-lateral-logo .site-logo').getBoundingClientRect().width)"
             )
             self.assertGreaterEqual(
-                largura_titulo, 300, f"titulo principal estreito em desktop: {largura_titulo}px"
+                largura_titulo, 120, f"logotipo estreito no menu lateral: {largura_titulo}px"
             )
             centro = page.evaluate(
                 """() => {
@@ -492,8 +481,8 @@ class TestTelaLayout(unittest.TestCase):
             )
             
             self.assertTrue(
-                page.locator(".menu-lateral-selo").is_visible(),
-                "selo SAPL deve aparecer no menu lateral em desktop",
+                page.locator("#menu-lateral-tagline").is_visible(),
+                "tagline do painel deve aparecer no menu lateral em desktop",
             )
             self.assertTrue(
                 page.locator("#rodape-menu-lateral").is_visible(),
@@ -534,10 +523,10 @@ class TestTelaLayout(unittest.TestCase):
 
         if largura >= 900:
             largura_titulo = page.evaluate(
-                "() => Math.round(document.querySelector('.titulo-site').getBoundingClientRect().width)"
+                "() => Math.round(document.querySelector('.menu-lateral-logo .site-logo').getBoundingClientRect().width)"
             )
             self.assertGreaterEqual(
-                largura_titulo, 300, f"titulo principal estreito em desktop: {largura_titulo}px"
+                largura_titulo, 120, f"logotipo estreito no menu lateral: {largura_titulo}px"
             )
             seletor_largura = page.evaluate(
                 "() => Math.round(document.querySelector('#sel-vereador').getBoundingClientRect().width)"
@@ -588,8 +577,8 @@ class TestTelaLayout(unittest.TestCase):
             self.assertTrue(nav, "navegacao inferior deve aparecer no celular")
             
             self.assertTrue(
-                page.locator(".cabecalho-bloco .selo-sapl").is_visible(),
-                "selo SAPL deve permanecer no cabecalho no celular",
+                page.locator("#topo-tagline").is_visible(),
+                "tagline do painel deve aparecer no cabecalho no celular",
             )
             rodape_corpo = page.locator("#conteudo-vereadores .rodape-coleta").first
             if rodape_corpo.count():
@@ -624,7 +613,7 @@ class TestTelaLayout(unittest.TestCase):
             topo = page.evaluate(JS_TOPO_MEDICAO)
             self.assertFalse(topo.get("erro"), str(topo))
             self.assertFalse(topo["compacto"], "no topo da pagina o cabecalho deve ser completo")
-            self.assertTrue(page.locator(".titulo-site").is_visible())
+            self.assertTrue(page.locator(".topo-marca-linha").is_visible())
             self.assertGreater(
                 topo["altura_topo"],
                 72,
@@ -652,8 +641,8 @@ class TestTelaLayout(unittest.TestCase):
                 topo["tema_sobrepoe_sel"], f"botao de tema sobrepoe o seletor: {topo}"
             )
             self.assertFalse(
-                page.locator(".titulo-site").is_visible(),
-                "titulo nao deve aparecer dentro da barra compacta",
+                page.locator(".topo-marca-linha").is_visible(),
+                "marca nao deve aparecer dentro da barra compacta",
             )
 
             valor_antes = page.evaluate("() => document.getElementById('sel-vereador').value")
@@ -685,8 +674,8 @@ class TestTelaLayout(unittest.TestCase):
             topo = page.evaluate(JS_TOPO_MEDICAO)
             self.assertFalse(topo["compacto"], "chegando ao topo a barra deve reabrir")
             self.assertTrue(
-                page.locator(".titulo-site").is_visible(),
-                "de volta ao topo o titulo deve reaparecer",
+                page.locator(".topo-marca-linha").is_visible(),
+                "de volta ao topo a marca deve reaparecer",
             )
             self.assertGreater(topo["altura_topo"], 72, f"topo nao reabriu por completo: {topo}")
 

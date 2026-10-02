@@ -197,6 +197,7 @@
   }
 
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
 
   .topo-marca-linha {
     display: flex;
@@ -278,7 +279,7 @@
     white-space: nowrap;
     border: 0;
     background: var(--marca-solida);
-    color: #ffffff;
+    color: var(--sobre-marca);
     font-family: var(--fonte);
     font-size: 14px;
     font-weight: 800;
@@ -293,6 +294,7 @@
     overflow: visible;
     padding: 10px 14px;
     min-height: 44px;
+    min-width: 44px;
     outline: 3px solid var(--foco);
     outline-offset: 2px;
   }
@@ -318,8 +320,8 @@
       padding: 8px 60px 8px 16px;
     }
 
-    .topo-fixo.compacto .topo-util,
-    .topo-fixo.compacto .cabecalho-bloco,
+    .topo-fixo.compacto .topo-tagline,
+    .topo-fixo.compacto .topo-marca-linha,
     .topo-fixo.compacto .sub-camara,
     .topo-fixo.compacto .titulo-vereadores,
     .topo-fixo.compacto .nav-vereador {
@@ -403,15 +405,6 @@
     display: block;
   }
 
-  .tag-categoria {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 800;
-    padding: 3px 8px;
-    border-radius: 6px;
-    background: var(--marca-fundo);
-    color: var(--marca);
-  }
 
   .titulo-acoes-direita {
     display: flex;
@@ -628,7 +621,7 @@
     border-radius: 14px;
     background: var(--superficie-2);
     color: var(--texto);
-    font: 600 13px/1.25 "Noto Sans", system-ui, sans-serif;
+    font: 600 13px/1.25 var(--fonte);
     text-align: center;
     cursor: pointer;
     text-decoration: none;
@@ -1549,9 +1542,6 @@
     grid-template-columns: minmax(0, 1fr);
     min-width: 0;
   }
-  .conteudo > .painel-camara .card-app,
-  .conteudo > .painel-camara .secao,
-  .conteudo > .painel-camara .bloco-votado { margin-bottom: 16px; }
   @media (min-width: 900px) {
     .conteudo > .painel-camara .duas-colunas-desk { gap: 20px; }
   }
@@ -1618,12 +1608,14 @@
     align-items: center;
     justify-content: center;
     gap: 2px;
+    min-width: 44px;
     border: none;
     font-family: var(--fonte);
     font-size: 13px;
     font-weight: 600;
     padding: 6px 4px 4px;
-    min-height: 49px;
+    min-height: 64px;
+    gap: 4px;
     border-radius: 10px;
     background: transparent;
     color: var(--texto-suave);
@@ -1705,10 +1697,11 @@
     flex: 1;
     border: none;
     font-family: var(--fonte);
-    font-size: 13px;
+    font-size: var(--t-apoio);
     font-weight: 600;
     padding: 7px 4px;
     min-height: 44px;
+    min-width: 44px;
     border-radius: 11px;
     background: transparent;
     color: var(--texto-suave);
@@ -1718,9 +1711,9 @@
   }
 
   .seletor-periodo button.ativo {
-    background: var(--superficie);
-    color: var(--texto);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    background: var(--marca-solida);
+    color: var(--sobre-marca);
+    box-shadow: none;
   }
 
   .painel-camara { display: none; }
@@ -1855,10 +1848,10 @@
 
   .materia-ementa {
     margin: 0;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.35;
-    color: var(--texto-suave);
+    font-size: var(--t-materia);
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--texto);
   }
 
   .materia-placar {
@@ -2082,6 +2075,8 @@
     text-decoration: none;
     flex-shrink: 0;
     min-height: 44px;
+    min-width: 44px;
+    padding: 0 6px;
   }
   .card-corpo {
     display: flex;
@@ -2352,11 +2347,11 @@
     color: var(--texto);
   }
   .item-votado .materia-ementa {
-    font-size: 13px;
-    color: var(--texto-suave);
-    line-height: 1.35;
+    font-size: var(--t-materia);
+    color: var(--texto);
+    line-height: 1.45;
     margin: 0;
-    font-weight: 400;
+    font-weight: 600;
   }
   .materia-datas {
     display: block;
@@ -2433,9 +2428,12 @@
   }
 
   .tag-categoria {
-    background: var(--neutro-fundo);
-    color: var(--texto-suave);
-    border: 1px solid var(--linha);
+    background: var(--superficie-2);
+    color: var(--texto);
+    border: 0;
+    font-weight: 600;
+    min-height: 32px;
+    padding: 4px 12px;
   }
 
   [data-tema="escuro"] .tag-tipo {
@@ -2445,9 +2443,9 @@
   }
 
   [data-tema="escuro"] .tag-categoria {
-    background: #2a3140;
-    color: #c8ced8;
-    border-color: #38383a;
+    background: var(--superficie-2);
+    color: var(--texto);
+    border: 0;
   }
 
   .lista-votos .materia-tags {
@@ -3548,7 +3546,7 @@
         <nav class="menu-lateral-nav" id="menu-lateral-nav" aria-label="Seções do painel">
       <button type="button" class="ativo" data-secao-lateral="camara"><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-camara"/></svg>Câmara</button>
       <button type="button" data-secao-lateral="vereadores"><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-vereadores"/></svg>Vereadores</button>
-      <button type="button" data-secao-lateral="prefeito" id="nav-lateral-prefeito" hidden><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-prefeito"/></svg>Prefeito</button>
+      <button type="button" id="nav-lateral-prefeito" hidden><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-prefeito"/></svg>Prefeito</button>
       <button type="button" class="btn-compartilhar-lateral btn-abrir-share" data-share="site" aria-label="Compartilhar" aria-haspopup="dialog" aria-controls="share-sheet"><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-compartilhar"/></svg>Compartilhar</button>
     </nav>
     <div class="menu-lateral-periodos" id="menu-lateral-periodos"></div>
@@ -3566,8 +3564,6 @@
       <div class="topo-icones"><button type="button" class="btn-icone-topo btn-abrir-share btn-compartilhar-topo" data-share="site" aria-label="Compartilhar" aria-haspopup="dialog" aria-controls="share-sheet"><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-compartilhar"/></svg></button><button type="button" class="alternar-tema btn-icone-topo" id="btn-tema" aria-pressed="false" aria-label="Alternar para modo escuro"><svg class="icone-lua ic" width="22" height="22" aria-hidden="true"><use href="#ic-tema-escuro"/></svg><svg class="icone-sol ic" width="22" height="22" aria-hidden="true"><use href="#ic-tema-claro"/></svg></button></div>
     </div>
     <p class="topo-tagline" id="topo-tagline"></p>
-      <p class="subtitulo-site">O que a Câmara de Campo do Tenente vota, e como cada vereador votou</p>
-    </div>
 <div class="sub-camara ativo" id="sub-camara">
       <h2 class="secao-camara-titulo">O que a Câmara votou</h2>
       <div class="seletor-periodo-wrap-mobile">
@@ -3754,7 +3750,7 @@
       <span class="nav-ic"><svg class="ic" width="24" height="24" aria-hidden="true"><use href="#ic-vereadores"/></svg></span>
       <span>Vereadores</span>
     </button>
-    <button type="button" data-secao="prefeito" id="nav-prefeito" hidden>
+    <button type="button" id="nav-prefeito" hidden>
       <span class="nav-ic"><svg class="ic" width="24" height="24" aria-hidden="true"><use href="#ic-prefeito"/></svg></span>
       <span>Prefeito</span>
     </button>
@@ -5618,12 +5614,12 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       MATERIAS_CAMARA = results[0];
       MATERIAS_TAGS = results[1];
       FILTROS_MATERIA = results[2];
-      MAPA_CORES_TEMAS = null;
+      
     }).catch(function () {
       MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       MATERIAS_TAGS = {};
       FILTROS_MATERIA = { sessao: [], mes: [], todo: [] };
-      MAPA_CORES_TEMAS = null;
+      
     });
   }
 
@@ -5764,76 +5760,48 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     };
   }
 
-  var MAPA_CORES_TEMAS = null;
+var MAPA_VAR_CATEGORIA = {
+    "Administração e finanças": "--cat-administracao",
+    "Ruas, trânsito e transporte": "--cat-ruas",
+    "Iluminação, serviços urbanos e conectividade": "--cat-iluminacao",
+    "Desenvolvimento e moradia": "--cat-desenvolvimento",
+    "Agricultura e pecuária": "--cat-agricultura",
+    "Educação": "--cat-educacao",
+    "Cultura, esporte e lazer": "--cat-cultura",
+    "Homenagens, nomes e datas": "--cat-homenagens",
+    "Saúde": "--cat-saude",
+    "Assistência social e direitos": "--cat-assistencia",
+    "Meio ambiente e proteção animal": "--cat-meio-ambiente",
+    "Segurança pública": "--cat-seguranca",
+    "Defesa Civil": "--cat-defesa-civil"
+  };
 
-  function temasConhecidos() {
-    var vistos = {};
-    var ordem = [];
-    Object.keys(MATERIAS_TAGS).forEach(function (chave) {
-      var t = MATERIAS_TAGS[chave] && MATERIAS_TAGS[chave].tag_tema;
-      if (t && !vistos[t]) {
-        vistos[t] = true;
-        ordem.push(t);
+  function varCategoria(tema) {
+    if (!tema) return "--linha-forte";
+    if (CONFIG_CIDADE && CONFIG_CIDADE.categorias && CONFIG_CIDADE.categorias.lista) {
+      for (var i = 0; i < CONFIG_CIDADE.categorias.lista.length; i++) {
+        var c = CONFIG_CIDADE.categorias.lista[i];
+        if (c.nome === tema && c.cor) return c.cor;
       }
-    });
-    ["sessao", "mes", "todo"].forEach(function (p) {
-      (MATERIAS_CAMARA[p] || []).forEach(function (m) {
-        var tags = tagsMateria(m.id);
-        var t = tags && tags.tag_tema;
-        if (t && !vistos[t]) {
-          vistos[t] = true;
-          ordem.push(t);
-        }
-      });
-    });
-    ordem.sort();
-    return ordem;
+    }
+    return MAPA_VAR_CATEGORIA[tema] || "--linha-forte";
   }
 
   function corDoTema(tema) {
-    if (!MAPA_CORES_TEMAS) {
-      MAPA_CORES_TEMAS = {};
-      temasConhecidos().forEach(function (nome, i) {
-        MAPA_CORES_TEMAS[nome] = CORES_TEMAS[i % CORES_TEMAS.length];
-      });
+    var v = varCategoria(tema);
+    if (v.indexOf("--") === 0) {
+      return getComputedStyle(document.documentElement).getPropertyValue(v).trim() || "#7C8C82";
     }
-    var chave = String(tema == null ? "" : tema);
-    return MAPA_CORES_TEMAS[chave] || CORES_TEMAS[0];
-  }
-
-  function luminanciaCor(cor) {
-    var hex = String(cor || "").replace("#", "");
-    if (hex.length === 3) {
-      hex = hex.charAt(0) + hex.charAt(0) + hex.charAt(1) + hex.charAt(1) + hex.charAt(2) + hex.charAt(2);
-    }
-    if (hex.length < 6) return 0;
-    function canal(v) {
-      var c = parseInt(v, 16) / 255;
-      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-    }
-    var r = canal(hex.slice(0, 2));
-    var g = canal(hex.slice(2, 4));
-    var b = canal(hex.slice(4, 6));
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  }
-
-  function razaoContraste(corA, corB) {
-    var la = luminanciaCor(corA);
-    var lb = luminanciaCor(corB);
-    var mais = Math.max(la, lb);
-    var menos = Math.min(la, lb);
-    return (mais + 0.05) / (menos + 0.05);
-  }
-
-  function corTextoContraste(cor) {
-    return razaoContraste(cor, "#ffffff") >= razaoContraste(cor, "#000000")
-      ? "#ffffff"
-      : "#000000";
+    return v;
   }
 
   function estiloCorTema(tema) {
-    var cor = corDoTema(tema);
-    return ' style="background:' + cor + ";color:" + corTextoContraste(cor) + ";border-color:" + cor + '"';
+    var v = varCategoria(tema);
+    return ' style="--cat-cor:var(' + v + ')"';
+  }
+
+  function htmlMarcadorCategoria(tema) {
+    return '<span class="cat-quadro" style="background:var(' + varCategoria(tema) + ')"></span>';
   }
 
   function htmlTagsMateria(id, aposTipo, aposTema) {
@@ -5847,7 +5815,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     return '<div class="materia-tags">' +
       '<button type="button" class="tag-tipo tag-explicavel" data-tag="tipo" data-valor="' + esc(tags.tag_tipo) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(tags.tag_tipo) + "</button>" +
       meio +
-      '<button type="button" class="tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(tags.tag_tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(tags.tag_tema) + '>' + esc(tags.tag_tema) + "</button>" +
+      '<button type="button" class="tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(tags.tag_tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(tags.tag_tema) + '>' + htmlMarcadorCategoria(tags.tag_tema) + esc(tags.tag_tema) + "</button>" +
       fim + "</div>";
   }
 
@@ -6478,7 +6446,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     if (m.categoria) {
       html += '<div class="resumo-campo">' +
         '<p class="resumo-campo-rotulo">Categoria</p>' +
-        '<p class="resumo-campo-valor"><button type="button" class="tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(m.categoria) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(m.categoria) + '>' + esc(m.categoria) + "</button></p></div>";
+        '<p class="resumo-campo-valor"><button type="button" class="tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(m.categoria) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(m.categoria) + '>' + htmlMarcadorCategoria(m.categoria) + esc(m.categoria) + "</button></p></div>";
     }
     html += '<a class="resumo-link-sapl" href="' + esc(linkSap) +
       '" target="_blank" rel="noopener noreferrer">' +
@@ -6716,7 +6684,6 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     });
   }
 
-  var CORES_TEMAS = ["#e74c3c", "#f39c12", "#27ae60", "#2980b9", "#8e44ad", "#e91e63", "#00bcd4", "#795548", "#ff9800"];
 
   function renderTemasDistribuicao(periodo) {
     var container = document.getElementById("temas-distribuicao-" + periodo);
@@ -6740,11 +6707,11 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       var qtd = contagem[tema];
       var pct = Math.round((qtd / max) * 100);
       var pctTotal = Math.round((qtd / total) * 100).toFixed(1).replace(".", ",");
-      var cor = corDoTema(tema);
+      var vcat = varCategoria(tema);
       var rotulo = qtd === 1 ? "1 projeto" : qtd + " projetos";
       return '<div class="barra-tema-linha">' +
         '<span class="nome">' + esc(tema) + '</span>' +
-        '<div class="trilho"><div class="preenchido" style="width:' + pct + '%;background:' + cor + '"></div></div>' +
+        '<div class="trilho"><div class="preenchido" style="width:' + pct + '%;background:var(' + vcat + ')"></div></div>' +
         '<span class="meta-linha">' + rotulo + ' (' + pctTotal + '%)</span></div>';
     }).join("");
 
@@ -6787,7 +6754,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
 
   function initNavegacao() {
     var navBtns = document.querySelectorAll("#nav-principal button");
-    var lateralBtns = document.querySelectorAll("#menu-lateral-nav button");
+    var lateralBtns = document.querySelectorAll("#menu-lateral-nav button[data-secao-lateral]");
     var painelCamara = document.getElementById("painel-camara");
     var painelVereadores = document.getElementById("painel-vereadores");
     var painelPrefeito = document.getElementById("painel-prefeito");
@@ -6849,10 +6816,18 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     }
     function atualizarVisibilidadePrefeito() {
       var on = abaPrefeitoAtiva();
-      ["nav-prefeito", "nav-lateral-prefeito"].forEach(function (id) {
-        var el = document.getElementById(id);
-        if (el) el.hidden = !on;
-      });
+      var nav = document.getElementById("nav-prefeito");
+      if (nav) {
+        nav.hidden = !on;
+        if (on) nav.setAttribute("data-secao", "prefeito");
+        else nav.removeAttribute("data-secao");
+      }
+      var lat = document.getElementById("nav-lateral-prefeito");
+      if (lat) {
+        lat.hidden = !on;
+        if (on) lat.setAttribute("data-secao-lateral", "prefeito");
+        else lat.removeAttribute("data-secao-lateral");
+      }
     }
     atualizarVisibilidadePrefeito();
 
@@ -6878,7 +6853,6 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       }
       subCamara.classList.toggle("ativo", secao === "camara");
       subVereadores.classList.toggle("ativo", secao === "vereadores");
-      if (subCamara) subCamara.classList.toggle("ativo", secao === "camara");
       atualizarRotuloBotaoShare();
       atualizarTopoCompacto();
     }
