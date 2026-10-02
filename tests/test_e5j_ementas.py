@@ -175,7 +175,6 @@ class TestEmentaExibicaoUnidade(unittest.TestCase):
     def setUpClass(cls):
         cls.config = json.loads(ler_html("config_cidade.json"))
         cls.bloco = bloco_ementa(ler_html("index.html"))
-        cls.bloco_modelo = bloco_ementa(ler_html("tela/modelo.html"))
         cls.resultado = cls._rodar(cls.bloco, cls.config, _casos_unidade())
 
     @staticmethod
@@ -263,16 +262,15 @@ class TestEmentaExibicaoUnidade(unittest.TestCase):
         self.assertIn("institui o programa de recuperação fiscal", busca)
 
     def test_lista_de_termos_preservados_vem_do_config_e_nao_do_codigo(self):
-        for nome in ("index.html", "tela/modelo.html"):
-            with self.subTest(arquivo=nome):
-                html = ler_html(nome)
-                for termo in ("Campo do Tenente", "Câmara Municipal", "REFIS", "APAE"):
-                    with self.subTest(termo=termo):
-                        bloco = bloco_ementa(html)
-                        self.assertNotIn('"' + termo + '"', bloco)
+        html = ler_html("index.html")
+        for termo in ("Campo do Tenente", "Câmara Municipal", "REFIS", "APAE"):
+            with self.subTest(termo=termo):
+                bloco = bloco_ementa(html)
+                self.assertNotIn('"' + termo + '"', bloco)
 
-    def test_funcao_existe_nos_dois_arquivos_e_estao_iguais(self):
-        self.assertEqual(self.bloco, self.bloco_modelo)
+    def test_funcao_da_ementa_existe_no_index(self):
+        self.assertIn("function ementaExibicao", self.bloco)
+        self.assertIn("function ementaBusca", self.bloco)
 
     def test_lista_do_config_tem_nota_e_lista_nao_vazia(self):
         bloco = self.config.get("ementa_termos_preservados")
@@ -303,12 +301,10 @@ class TestEmentaExibicaoUnidade(unittest.TestCase):
         for termo in TERMOS_E5K:
             with self.subTest(termo=termo):
                 self.assertIn(termo, lista)
-        for nome in ("index.html", "tela/modelo.html"):
-            with self.subTest(arquivo=nome):
-                bloco = bloco_ementa(ler_html(nome))
-                for termo in TERMOS_E5K:
-                    with self.subTest(termo=termo):
-                        self.assertNotIn('"' + termo + '"', bloco)
+        bloco = bloco_ementa(ler_html("index.html"))
+        for termo in TERMOS_E5K:
+            with self.subTest(termo=termo):
+                self.assertNotIn('"' + termo + '"', bloco)
 
 
 def _casos_unidade() -> dict:

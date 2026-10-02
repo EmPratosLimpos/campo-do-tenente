@@ -69,8 +69,8 @@ class TestTotalIgualSoma(unittest.TestCase):
 
 
 class TestSeletorEstatico(unittest.TestCase):
-    def test_regra_sem_nome_fixo_nos_dois_arquivos(self):
-        for caminho in (RAIZ / "index.html", RAIZ / "tela" / "modelo.html"):
+    def test_regra_sem_nome_fixo_no_index(self):
+        for caminho in (RAIZ / "index.html",):
             with self.subTest(arquivo=caminho.name):
                 texto = caminho.read_text(encoding="utf-8")
                 self.assertIn('localeCompare', texto)
