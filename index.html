@@ -1577,6 +1577,319 @@
   .btn-primario { background: var(--marca-solida); color: var(--sobre-marca); }
   .btn-secundario { background: var(--superficie-2); color: var(--texto); }
 
+  .seg-barra {
+    display: flex;
+    height: 16px;
+    border-radius: var(--raio-pilula);
+    overflow: hidden;
+    gap: 3px;
+    background: var(--graf-trilha);
+  }
+  .seg-barra i, .seg-barra span {
+    display: block;
+    height: 100%;
+    border-radius: var(--raio-pilula);
+  }
+  .seg-barra .listra {
+    background: repeating-linear-gradient(135deg, var(--nao) 0 4px, transparent 4px 7px);
+  }
+  .numeros {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .numeros li {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    padding: 6px 0;
+    border-top: 1px solid var(--linha);
+  }
+  .numeros li:first-child { border-top: 0; }
+  .numeros b {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+    text-align: right;
+    min-width: 3ch;
+    font-variant-numeric: tabular-nums;
+  }
+  .numeros span {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--texto);
+    line-height: 1.3;
+  }
+  .numeros .marcador-cor {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex: none;
+  }
+  .numeros .marcador-cor.listra-anel {
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: inset 0 0 0 2px var(--nao);
+  }
+  @media (min-width: 900px) {
+    .numeros {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .numeros li {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      border: 1px solid var(--linha);
+      border-radius: 14px;
+      padding: 12px 10px;
+      text-align: center;
+      min-height: 0;
+    }
+    .numeros b {
+      grid-column: 1;
+      grid-row: 1;
+      font-size: 30px;
+      text-align: center;
+      justify-self: center;
+    }
+    .numeros span {
+      grid-column: 1;
+      grid-row: 2;
+      justify-content: center;
+      font-size: var(--t-apoio);
+    }
+  }
+  .linha-btn {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    border: 0;
+    border-radius: 14px;
+    background: var(--superficie-2);
+    padding: 8px 12px 8px 14px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--texto);
+  }
+  .linha-btn b {
+    font-size: 24px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+  .linha-btn:hover { box-shadow: inset 0 0 0 2px var(--texto); }
+  .termo {
+    display: inline;
+    border: 0;
+    background: none;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    font-weight: inherit;
+    text-decoration: underline dotted 2px;
+    text-decoration-color: var(--linha-forte);
+    text-underline-offset: 4px;
+    cursor: help;
+    min-height: 24px;
+  }
+  .termo:hover { text-decoration-color: var(--texto); }
+  .temas-lista {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .tema-btn {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 12px;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    padding: 8px;
+    margin: 0 -8px;
+    border-radius: 12px;
+    cursor: pointer;
+    min-height: 44px;
+    color: var(--texto);
+  }
+  .tema-btn:hover { background: var(--superficie-2); }
+  .tema-btn[aria-pressed="true"] {
+    background: var(--superficie-2);
+    box-shadow: inset 0 0 0 2px var(--texto);
+  }
+  .tema-btn .nome { font-size: var(--t-apoio); font-weight: 600; }
+  .tema-btn .qtd { font-size: var(--t-apoio); font-weight: 800; font-variant-numeric: tabular-nums; }
+  .tema-btn .trilho {
+    grid-column: 1 / -1;
+    height: 10px;
+    border-radius: var(--raio-pilula);
+    background: var(--graf-trilha);
+    overflow: hidden;
+  }
+  .tema-btn .trilho i { display: block; height: 100%; border-radius: var(--raio-pilula); }
+  .busca-materia {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--superficie-2);
+    border-radius: 14px;
+    padding: 0 14px;
+    min-height: 48px;
+  }
+  .busca-materia:focus-within {
+    outline: 3px solid var(--foco);
+    outline-offset: 2px;
+  }
+  .busca-materia input {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    min-height: 46px;
+    outline: 0;
+    font-size: 15px;
+    min-width: 0;
+    font-family: var(--fonte);
+    color: var(--texto);
+  }
+  .lista-materias {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .item-votado.materia {
+    display: grid;
+    gap: 8px;
+    padding: 16px 0;
+    border-top: 1px solid var(--linha);
+  }
+  .item-votado.materia:first-child { border-top: 0; padding-top: 4px; }
+  .materia-assunto {
+    font-size: var(--t-materia);
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .linha-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--t-apoio);
+    color: var(--texto-suave);
+  }
+  .linha-meta .sigla { font-weight: 800; color: var(--texto); }
+  .fonte {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: var(--alvo-minimo);
+    color: var(--link);
+    font-weight: 600;
+    font-size: 14px;
+    text-underline-offset: 3px;
+  }
+  .cab-cartao {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .cab-cartao .t2 {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .cab-cartao .apoio {
+    font-size: var(--t-apoio);
+    color: var(--texto-suave);
+    margin: 0;
+  }
+  .folha-generica-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 920;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: var(--veu-folha, rgba(0, 0, 0, 0.45));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+  .folha-generica-backdrop.ativo {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .folha-generica {
+    width: 100%;
+    max-width: 390px;
+    max-height: 92dvh;
+    background: var(--superficie);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.18);
+    transform: translateY(100%);
+    transition: transform 0.25s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .folha-generica-backdrop.ativo .folha-generica { transform: translateY(0); }
+  .folha-generica-corpo {
+    padding: 14px 16px 20px;
+    overflow-y: auto;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .folha-generica-corpo .pessoa {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 12px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid var(--linha);
+  }
+  .folha-generica-corpo .pessoa:first-child { border-top: 0; }
+  .folha-generica-corpo .pessoa .nm { font-weight: 800; }
+  @media (min-width: 700px) {
+    .folha-generica-backdrop { align-items: center; padding: 16px; }
+    .folha-generica {
+      max-width: 480px;
+      border-radius: 16px;
+      max-height: min(92dvh, 720px);
+    }
+    .folha-generica-backdrop.ativo .folha-generica { transform: translateY(0); }
+  }
+
   .vazio {
     font-size: 13px;
     color: var(--texto-suave);
@@ -3173,14 +3486,13 @@
       gap: 20px;
     }
     .duas-colunas-desk {
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
       gap: 20px;
-      align-items: flex-start;
+      align-items: start;
     }
     .duas-colunas-desk > .coluna-A,
     .duas-colunas-desk > .coluna-B {
-      flex: 1;
       min-width: 0;
       display: flex;
       flex-direction: column;
@@ -3589,150 +3901,46 @@
     <div class="painel-camara ativo" id="painel-camara">
 
       <div class="painel-camara-interno ativo" id="painel-periodo-sessao" role="tabpanel" aria-labelledby="tab-periodo-sessao">
-        <div class="secao-titulo-linha">
-          <h2 class="secao-titulo">Votações em Plenário</h2>
-          <div class="titulo-acoes-direita">
-            <a class="secao-sub" id="link-titulo-ultima-sessao" href="#" hidden></a>
-            <button type="button" class="btn-compartilhar-icone btn-abrir-share" data-periodo="sessao" aria-label="Compartilhar votações da última sessão" aria-haspopup="dialog" aria-controls="share-sheet">
-<svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-            </button>
-          </div>
-        </div>
-
         <div class="duas-colunas-desk">
           <div class="coluna-A">
-            <div class="card-app" id="card-votacoes-sessao" aria-labelledby="tit-votacoes-sessao">
-          <div class="card-header">
-            <div class="card-categoria cat-laranja">
-              <div class="card-icone icone-laranja" aria-hidden="true">
-                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 23c6.075 0 11-4.925 11-11 0-4.04-2.18-7.58-5.46-9.52-.39-.23-.88.11-.8.56.57 3.32-.42 6.64-2.74 8.89-2.07-3.04-2.52-6.85-1.2-10.36.17-.46-.3-.9-.73-.69C8.36 2.65 5.5 6.94 5.5 12c0 1.25.21 2.45.59 3.57-1.34-1.2-2.09-2.93-2.09-4.8 0-.48-.56-.76-.92-.44C1.19 12.01 0 14.86 0 18c0 2.76 1.12 5.26 2.93 7.07C4.74 26.88 7.24 28 10 28c.68 0 1.34-.07 1.98-.2-.33-.67-.53-1.42-.53-2.22 0-2.48 2.02-4.5 4.5-4.5h.05c-.39-1.09-.6-2.27-.6-3.5 0-.75.08-1.48.24-2.18-.75.75-1.74 1.28-2.84 1.5-.47.1-.8-.34-.6-.78 1.1-2.4 1.05-5.22-.15-7.58-.23-.46.24-.96.7-.76 2.4 1.03 4.2 3.12 4.7 5.72z"></path></svg>
-              </div>
-              <span id="tit-votacoes-sessao">Votações da Sessão</span>
-            </div>
-            <a class="card-meta" id="link-meta-data-votacoes-sessao" href="#"><span id="texto-meta-data-votacoes-sessao"></span><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
-            </a>
-          </div>
-          <div class="card-corpo">
-            <div class="metricas-bloco">
-              <div class="metrica-destaque">
-                <span class="metrica-numero"></span>
-                <span class="metrica-rotulo">matérias votadas</span>
-              </div>
-              <div class="metrica-detalhes">
-                <div class="item-detalhe">
-                  <span class="det-rotulo det-rotulo-unanimidade">Unanimidade</span>
-                  <span class="det-valor det-valor-unanimidade"></span>
-                </div>
-                <div class="item-detalhe det-separador">
-                  <span class="det-rotulo det-rotulo-maioria">Por Maioria</span>
-                  <span class="det-valor det-valor-maioria"></span>
-                </div>
-              </div>
-            </div>
-            <div class="grafico-anel-box" role="img" aria-label="Matérias votadas na sessão">
-              <svg class="anel-svg" viewBox="0 0 58 58" aria-hidden="true">
-                <circle class="anel-fundo" cx="29" cy="29" r="23"></circle>
-                <circle class="anel-progresso-unanimidade" cx="29" cy="29" r="23"></circle>
-                <circle class="anel-progresso-maioria" cx="29" cy="29" r="23"></circle>
-              </svg>
-              <span class="anel-porcento"></span>
-            </div>
-          </div>
-        </div>
-            <div class="card-app" id="card-presenca-sessao" aria-labelledby="tit-presenca-sessao">
-          <div class="card-header">
-            <div class="card-categoria cat-verde">
-              <div class="card-icone icone-verde" aria-hidden="true">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
-              </div>
-              <span id="tit-presenca-sessao">Presença dos vereadores</span>
-            </div>
-            <a class="card-meta" id="link-meta-presenca-sessao" href="#"><span id="texto-meta-presenca-sessao"></span><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
-            </a>
-          </div>
-          <div class="card-corpo">
-            <div class="status-grade">
-              <div class="status-capsula capsula-verde">
-                <span class="capsula-rotulo">Presentes</span>
-                <span class="capsula-valor"></span>
-              </div>
-              <div class="status-capsula capsula-neutro">
-                <span class="capsula-rotulo">Faltas</span>
-                <span class="capsula-valor"></span>
-              </div>
-            </div>
-
-          </div>
-        </div>
+            <article class="cartao" id="card-votacoes-sessao" aria-labelledby="tit-resumo-sessao"></article>
+            <article class="cartao" id="card-presenca-sessao" aria-labelledby="tit-presenca-sessao"></article>
           </div>
           <div class="coluna-B">
-            <div class="card-app" id="card-temas-sessao" aria-labelledby="tit-temas-sessao">
-          <div id="temas-distribuicao-sessao"></div>
-        </div>
+            <article class="cartao" id="card-temas-sessao"><div id="temas-distribuicao-sessao"></div></article>
           </div>
         </div>
-        <div class="card-app bloco-votado" id="bloco-votado-sessao" data-periodo="sessao"></div>
+        <article class="cartao bloco-votado" id="bloco-votado-sessao" data-periodo="sessao"></article>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
       </div>
 
       <div class="painel-camara-interno" id="painel-periodo-mes" role="tabpanel" aria-labelledby="tab-periodo-mes" hidden>
-        <div class="sessao-titulo-linha">
-          <h2 class="sessao-titulo" id="titulo-periodo-mes"></h2>
-          <button type="button" class="btn-compartilhar-icone btn-abrir-share" data-periodo="mes" aria-label="Compartilhar votações do último mês" aria-haspopup="dialog" aria-controls="share-sheet">
-            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-          </button>
-        </div>
-        <p class="sessao-meta" id="meta-periodo-mes"></p>
         <div class="duas-colunas-desk">
           <div class="coluna-A">
-            <div class="card-app" id="card-votacoes-mes" aria-labelledby="tit-votacoes-mes">
-          <div id="votacoes-mes-conteudo"></div>
-        </div>
-        <section class="secao" aria-labelledby="tit-tipos-mes">
-          <h2 id="tit-tipos-mes">Quantas votações por tipo?</h2>
-          <p class="legenda">Cada barra é um tipo oficial de matéria votada no período.</p>
-          <div class="barra-tema-cam barra-temas" id="tipos-mes-barras"></div></section>
-        </div>
+            <article class="cartao" id="card-votacoes-mes"></article>
+            <article class="cartao" id="card-tipos-mes" aria-labelledby="tit-tipos-mes">
+              <h2 class="t2" id="tit-tipos-mes">Quantas votações por tipo?</h2>
+              <div class="barra-tema-cam barra-temas" id="tipos-mes-barras"></div>
+            </article>
+          </div>
           <div class="coluna-B">
-            <div class="card-app" id="card-temas-mes" aria-labelledby="tit-temas-mes">
-          <div id="temas-distribuicao-mes"></div>
+            <article class="cartao" id="card-temas-mes"><div id="temas-distribuicao-mes"></div></article>
+          </div>
         </div>
-        </div>
-        </div>
-        <div class="card-app bloco-votado" id="bloco-votado-mes" data-periodo="mes"></div>
+        <article class="cartao bloco-votado" id="bloco-votado-mes" data-periodo="mes"></article>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
       </div>
 
       <div class="painel-camara-interno" id="painel-periodo-todo" role="tabpanel" aria-labelledby="tab-periodo-todo" hidden>
-        <div class="sessao-titulo-linha">
-          <h2 class="sessao-titulo"><span id="titulo-periodo-todo"></span></h2>
-          <button type="button" class="btn-compartilhar-icone btn-abrir-share" data-periodo="todo" aria-label="Compartilhar votações do período" aria-haspopup="dialog" aria-controls="share-sheet">
-            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-          </button>
-        </div>
-        <p class="sessao-meta"><span id="meta-periodo-todo"></span></p>
         <div class="duas-colunas-desk">
           <div class="coluna-A">
-            <section class="secao" aria-labelledby="tit-tipos-todo">
-          <h2 id="tit-tipos-todo">Quantos projetos foram votados?</h2>
-          <p class="legenda"><span id="legenda-tipos-todo"></span></p>
-          <div class="barra-tema-cam barra-temas"><div id="barra-tipos-todo"></div></div>
-        </section>
-        <section class="secao" aria-labelledby="tit-resultado-todo">
-          <h2 id="tit-resultado-todo">Qual foi o resultado das votações?</h2>
-          <p class="legenda"><span id="legenda-resultado-todo"></span></p>
-          <div class="barra-status-trilho" id="barra-resultado-todo" role="img"></div>
-          <div class="status-cartoes" id="cartoes-resultado-todo"></div>
-          <p class="nota-rodape" id="nota-resultado-todo"></p>
-        </section>
-        </div>
+            <article class="cartao" id="cartao-resumo-todo"></article>
+          </div>
           <div class="coluna-B">
-            <section class="secao" aria-labelledby="tit-temas-todo">
-          <div id="temas-distribuicao-todo"></div>
-        </section>
+            <article class="cartao" id="card-temas-todo"><div id="temas-distribuicao-todo"></div></article>
+          </div>
         </div>
-        </div>
-        <div class="card-app bloco-votado" id="bloco-votado-todo" data-periodo="todo"></div>
+        <article class="cartao bloco-votado" id="bloco-votado-todo" data-periodo="todo"></article>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
       </div>
     </div>
@@ -3790,6 +3998,21 @@
         <span>Gerar PDF / Imprimir</span>
       </button>
     </div>
+  </div>
+</div>
+
+<div class="folha-generica-backdrop" id="folha-generica-backdrop" aria-hidden="true">
+  <div class="folha-generica" role="dialog" aria-modal="true" aria-labelledby="folha-generica-titulo" id="folha-generica">
+    <div class="share-sheet-grabber" aria-hidden="true"></div>
+    <div class="resumo-sheet-cabecalho">
+      <h2 id="folha-generica-titulo"></h2>
+      <div class="resumo-sheet-acoes">
+        <button type="button" class="btn-icone-topo" id="btn-fechar-folha-generica" aria-label="Fechar">
+          <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+    <div class="folha-generica-corpo" id="folha-generica-corpo"></div>
   </div>
 </div>
 
@@ -4032,22 +4255,7 @@
   }
 
   function atualizarCabecalhoUltimaSessao() {
-    var s = ultimaSessaoOrdinaria();
-    var titulo = document.getElementById("link-titulo-ultima-sessao");
-    var metaData = document.getElementById("texto-meta-data-votacoes-sessao");
-    var metaLink = document.getElementById("link-meta-data-votacoes-sessao");
-    if (!s) {
-      if (titulo) titulo.hidden = true;
-      return;
-    }
-    var href = urlSegura(s.link_sapl) || "#";
-    if (titulo) {
-      titulo.textContent = rotuloOrdinaria(s);
-      titulo.href = href;
-      titulo.hidden = false;
-    }
-    if (metaData) metaData.textContent = formatarData(s.data);
-    if (metaLink) metaLink.href = href;
+    renderCartaoResumoSessao();
   }
 
   function contagemPresencaSessao(sessao) {
@@ -4097,37 +4305,177 @@
     return out;
   }
 
-  function atualizarPresencaUltimaSessao() {
-    var s = ultimaSessaoOrdinaria();
+  function totalVereadoresAtivos() {
     var meta = estado.dados && estado.dados.meta;
-    var rotulos = (meta && meta.rotulos_estados) || {};
-    var textoBanca = document.getElementById("texto-meta-presenca-sessao");
-    var linkMeta = document.getElementById("link-meta-presenca-sessao");
-    var grade = document.querySelector("#card-presenca-sessao .status-grade");
-    if (!s) return;
-    var c = contagemPresencaSessao(s);
-    if (textoBanca) {
-      if (c.banca > 0) {
-        textoBanca.textContent =
-          c.banca === 1 ? "1 parlamentar" : c.banca + " parlamentares";
+    if (meta && meta.n_vereadores != null) return meta.n_vereadores;
+    return vereadoresOrdenados().filter(function (v) { return !mandatoEncerrado(v); }).length;
+  }
+
+  function htmlBarraResultadoVotacao(unanimes, maioria, rejeitadas, total) {
+    if (!total) return "";
+    var pctUni = (unanimes / total) * 100;
+    var pctMai = (maioria / total) * 100;
+    var pctRej = (rejeitadas / total) * 100;
+    var html = '<div class="seg-barra" role="img" aria-label="' + esc(unanimes + " unanimidade, " + maioria + " maioria, " + rejeitadas + " rejeitados") + '">';
+    if (unanimes > 0) html += '<i style="width:' + pctUni.toFixed(2) + '%;background:var(--sim)"></i>';
+    if (maioria > 0) html += '<i style="width:' + pctMai.toFixed(2) + '%;background:var(--sim);opacity:.45"></i>';
+    if (rejeitadas > 0) html += '<i class="listra" style="width:' + pctRej.toFixed(2) + '%"></i>';
+    return html + "</div>";
+  }
+
+  function htmlNumerosResultado(unanimes, maioria, rejeitadas) {
+    return '<ul class="numeros">' +
+      '<li><b>' + unanimes + '</b><span><span class="marcador-cor" style="background:var(--sim)"></span>Unanimidade</span></li>' +
+      '<li><b>' + maioria + '</b><span><span class="marcador-cor" style="background:var(--sim);opacity:.45"></span>Maioria</span></li>' +
+      '<li><b>' + rejeitadas + '</b><span><span class="marcador-cor listra-anel"></span>Rejeitados</span></li></ul>';
+  }
+
+  function htmlFraseResumoPeriodo(periodo) {
+    var lista = MATERIAS_CAMARA[periodo] || [];
+    var c = contagemResultadosMaterias(lista);
+    var total = lista.length;
+    var unanimes = c.unanimidade;
+    var maioria = c.maioria;
+    var rejeitadas = c.rejeitado;
+    var meta = estado.dados && estado.dados.meta;
+    var nSessoes = meta && meta.n_sessoes_ordinarias != null ? meta.n_sessoes_ordinarias : 0;
+    var prefixoLongo = "";
+    if (periodo === "todo" && nSessoes > 0 && total > 0) {
+      prefixoLongo = "Em <strong>" + nSessoes + "</strong> sess\u00f5es ordin\u00e1rias de " + rotuloAnosRecorte() + ", ";
+    }
+    if (total === 0) {
+      return '<p class="resumo">' + prefixoLongo + "A C\u00e2mara n\u00e3o votou projetos de lei neste per\u00edodo.</p>";
+    }
+    var corpo = "";
+    if (rejeitadas > 0) {
+      var aprovados = unanimes + maioria;
+      corpo = "A C\u00e2mara votou <strong>" + total + "</strong> projetos de lei: <strong>" + aprovados + "</strong> aprovados e <strong>" + rejeitadas + "</strong> rejeitados.";
+    } else if (maioria === 0 && unanimes === total) {
+      if (total === 1) {
+        corpo = "A C\u00e2mara aprovou o \u00fanico projeto de lei votado, por " + htmlBotaoTermo("unanimidade") + ".";
       } else {
-        textoBanca.textContent = "";
+        var qual = total === 2 ? "os dois" : "todos";
+        corpo = "A C\u00e2mara aprovou os <strong>" + total + "</strong> projetos de lei votados, " + qual + " por " + htmlBotaoTermo("unanimidade") + ".";
+      }
+    } else {
+      corpo = "A C\u00e2mara aprovou os <strong>" + total + "</strong> projetos de lei votados: <strong>" + unanimes + "</strong> por " +
+        htmlBotaoTermo("unanimidade") + " e <strong>" + maioria + "</strong> por " + htmlBotaoTermo("maioria") + ".";
+    }
+    if (periodo === "sessao") {
+      var s = ultimaSessaoOrdinaria();
+      var n = totalVereadoresAtivos();
+      var p = s && s.n_presentes != null ? s.n_presentes : 0;
+      if (n > 0 && p > 0) {
+        if (p >= n) corpo += " Os <strong>" + n + "</strong> vereadores estavam presentes.";
+        else corpo += " <strong>" + p + "</strong> dos <strong>" + n + "</strong> vereadores estavam presentes.";
       }
     }
-    if (linkMeta) linkMeta.href = urlSegura(s.link_sapl) || "#";
-    if (grade) {
-      var html =
-        capsulaPresenca("capsula-verde", "Presentes", c.presentes) +
-        capsulaPresenca("capsula-neutro", "Faltas", c.faltas);
-      if (c.licenca > 0) {
-        html += capsulaPresenca(
-          "capsula-neutro",
-          rotulos.licenca_tratamento_saude || "Licença",
-          c.licenca
-        );
-      }
-      grade.innerHTML = html;
+    if (prefixoLongo) corpo = prefixoLongo + "a C\u00e2mara votou <strong>" + total + "</strong> projetos de lei. " + corpo.replace(/^A C\u00e2mara /, "");
+    return '<p class="resumo" id="tit-resumo-sessao">' + corpo + "</p>";
+  }
+
+  function htmlCartaoResumoVotacao(periodo, tituloCab, apoioCab) {
+    var lista = MATERIAS_CAMARA[periodo] || [];
+    var c = contagemResultadosMaterias(lista);
+    var total = lista.length;
+    var cab = "";
+    if (tituloCab || apoioCab) {
+      cab = '<div class="cab-cartao"><h2 class="t2">' + esc(tituloCab || "") + "</h2>" +
+        (apoioCab ? '<span class="apoio">' + esc(apoioCab) + "</span>" : "") + "</div>";
     }
+    return cab + htmlFraseResumoPeriodo(periodo) +
+      htmlBarraResultadoVotacao(c.unanimidade, c.maioria, c.rejeitado, total) +
+      htmlNumerosResultado(c.unanimidade, c.maioria, c.rejeitado);
+  }
+
+  function ausentesNaSessao(sessaoId) {
+    var out = [];
+    (estado.dados && estado.dados.vereadores || []).forEach(function (v) {
+      (v.presenca && v.presenca.por_sessao || []).forEach(function (p) {
+        if (parseInt(p.sessao_id, 10) !== parseInt(sessaoId, 10)) return;
+        var presente = p.presente_sessao_plenaria || p.presente_ordem_dia || p.situacao === "presente";
+        if (presente) return;
+        out.push({ v: v, p: p });
+      });
+    });
+    return out;
+  }
+
+  function abrirFolhaQuemFaltou(btn) {
+    var s = ultimaSessaoOrdinaria();
+    if (!s) return;
+    var sid = s.id || s.sessao_id;
+    var ausentes = ausentesNaSessao(sid);
+    var html = ausentes.map(function (item) {
+      var v = item.v;
+      var p = item.p;
+      var foto = renderPerfilFoto(v).replace("perfil-foto-wrap", "avatar");
+      var partido = v.partido_atual || v.partido || "";
+      var tipoFalta = p.justificativa || p.situacao === "ausente_com_justificativa"
+        ? "Falta com justificativa"
+        : "Falta sem justificativa";
+      return '<div class="pessoa">' + foto +
+        '<span class="nm">' + esc(v.nome_parlamentar || v.nome) + "</span>" +
+        '<span class="apoio">' + esc(partido) + " \u00b7 " + esc(tipoFalta) + "</span></div>";
+    }).join("");
+    if (s.link_sapl) {
+      html += '<p><a class="fonte" href="' + esc(urlSegura(s.link_sapl)) + '" target="_blank" rel="noopener noreferrer">Ver a sess\u00e3o no SAPL</a></p>';
+    }
+    html += '<p class="apoio">Toque em &quot;Ver atua\u00e7\u00e3o do vereador&quot; na lista para abrir o perfil na aba Vereadores.</p>';
+    abrirFolhaGenerica("Quem faltou", html, btn);
+  }
+
+  function renderCartaoPresencaSessao() {
+    var card = document.getElementById("card-presenca-sessao");
+    var s = ultimaSessaoOrdinaria();
+    if (!card || !s) return;
+    var c = contagemPresencaSessao(s);
+    var n = totalVereadoresAtivos() || c.banca;
+    var lista = MATERIAS_CAMARA.sessao || [];
+    var frase = c.presentes >= n && n > 0
+      ? "Os " + n + " vereadores estavam presentes."
+      : (c.presentes + " dos " + n + " vereadores estavam presentes.");
+    var pct = n > 0 ? (c.presentes / n) * 100 : 0;
+    var linhaFaltas = c.faltas > 0
+      ? '<li style="list-style:none;padding:6px 0"><button type="button" class="linha-btn" data-abrir-faltas="1"><span>Faltas</span><b>' + c.faltas + '</b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></li>'
+      : "<li><b>" + c.faltas + "</b><span>Faltas</span></li>";
+    var numeros = '<ul class="numeros">' +
+      "<li><b>" + c.presentes + "</b><span>Presentes <span class=\"apoio\">" + c.presentes + " de " + n + "</span></span></li>" +
+      (c.faltas > 0 ? linhaFaltas : "<li><b>" + c.faltas + "</b><span>Faltas</span></li>") +
+      "<li><b>" + lista.length + "</b><span>Projetos votados</span></li></ul>";
+    card.innerHTML = '<h2 class="sr" id="tit-presenca-sessao">Presen\u00e7a na \u00faltima sess\u00e3o</h2>' +
+      '<p class="resumo">' + esc(frase) + "</p>" +
+      '<div class="seg-barra" role="img" aria-label="' + esc(c.presentes + " de " + n + " vereadores presentes") + '">' +
+      '<i style="width:' + pct.toFixed(2) + '%;background:var(--marca-solida)"></i></div>' + numeros;
+    var btnFaltas = card.querySelector("[data-abrir-faltas]");
+    if (btnFaltas) btnFaltas.addEventListener("click", function () { abrirFolhaQuemFaltou(btnFaltas); });
+  }
+
+  function renderCartaoResumoSessao() {
+    var card = document.getElementById("card-votacoes-sessao");
+    var s = ultimaSessaoOrdinaria();
+    if (!card) return;
+    var titulo = s ? rotuloOrdinaria(s) : "\u00daltima sess\u00e3o";
+    var apoio = s && s.data ? formatarData(s.data) : "";
+    card.innerHTML = htmlCartaoResumoVotacao("sessao", titulo, apoio);
+  }
+
+  function renderCartaoResumoMes() {
+    var card = document.getElementById("card-votacoes-mes");
+    if (!card) return;
+    var nomeMes = nomeMesAnteriorUltimaSessao();
+    card.innerHTML = htmlCartaoResumoVotacao("mes", nomeMes || "\u00daltimo m\u00eas", "");
+  }
+
+  function renderCartaoResumoTodo() {
+    var card = document.getElementById("cartao-resumo-todo");
+    if (!card) return;
+    card.innerHTML = htmlCartaoResumoVotacao("todo", rotuloPeriodoLegislatura(), "");
+  }
+
+
+  function atualizarPresencaUltimaSessao() {
+    renderCartaoPresencaSessao();
   }
 
   function ajustarPainelUltimaSessaoSemPll() {
@@ -4168,207 +4516,19 @@
     }
     container.innerHTML =
       '<div class="barra-tema"><span class="nome">Projetos de lei</span>' +
-      '<div class="trilho"><div class="preenchido" style="width:100%;background:var(--barra-pl)"></div></div>' +
+      '<div class="trilho"><div class="preenchido" style="width:100%;background:var(--texto-suave)"></div></div>' +
       '<span class="qtd">' + esc(total) + "</span></div>";
   }
 
   function atualizarPainelTodo() {
-    var meta = estado.dados && estado.dados.meta;
-    var lista = MATERIAS_CAMARA.todo || [];
-    var total = lista.length;
-    var nSessoes = meta && meta.n_sessoes_ordinarias != null ? meta.n_sessoes_ordinarias : 0;
-    var titulo = document.getElementById("titulo-periodo-todo");
-    if (titulo) titulo.textContent = "Todo o per\u00edodo";
-    var metaEl = document.getElementById("meta-periodo-todo");
-    if (metaEl) {
-      metaEl.textContent = nSessoes + " sess\u00f5es ordin\u00e1rias " + rotuloAnosRecorte() + ", " + total + " projetos de lei votados.";
-    }
-    var legTipos = document.getElementById("legenda-tipos-todo");
-    if (legTipos) {
-      legTipos.textContent =
-        "Projetos de lei votados em " + rotuloPeriodoLegislatura() + ".";
-    }
-    var barraTipos = document.getElementById("barra-tipos-todo");
-    if (barraTipos) {
-      if (total === 0) {
-        barraTipos.innerHTML = "";
-      } else {
-        barraTipos.innerHTML =
-          '<div class="barra-tema"><span class="nome">Projetos de lei</span>' +
-          '<div class="trilho"><div class="preenchido" style="width:100%;background:var(--barra-pl)"></div></div>' +
-          '<span class="qtd">' + esc(total) + "</span></div>";
-      }
-    }
-    var contagem = contagemResultadosMaterias(lista);
-    var unanimes = contagem.unanimidade;
-    var maioria = contagem.maioria;
-    var rejeitadas = contagem.rejeitado;
-    var outro = contagem.outro;
-    var legRes = document.getElementById("legenda-resultado-todo");
-    if (legRes) {
-      legRes.textContent =
-        "Resultado dos " + total + " projetos de lei votados em " + rotuloPeriodoLegislatura() + ".";
-    }
-    var barraRes = document.getElementById("barra-resultado-todo");
-    if (barraRes && total > 0) {
-      var pctUni = (unanimes / total) * 100;
-      var pctMai = (maioria / total) * 100;
-      var pctRej = (rejeitadas / total) * 100;
-      var pctOut = (outro / total) * 100;
-      barraRes.setAttribute(
-        "aria-label",
-        unanimes +
-          " unanimidade, " +
-          maioria +
-          " maioria, " +
-          rejeitadas +
-          " rejeitado, " +
-          outro +
-          " outro"
-      );
-      var htmlBarra =
-        '<div class="segmento segmento-unanimidade" style="width:' + pctUni.toFixed(1) + '%"></div>';
-      if (maioria > 0) {
-        htmlBarra +=
-          '<div class="segmento segmento-maioria" style="width:' + pctMai.toFixed(1) + '%"></div>';
-      }
-      if (rejeitadas > 0) {
-        htmlBarra +=
-          '<div class="segmento segmento-rejeitado" style="width:' + pctRej.toFixed(1) + '%"></div>';
-      }
-      if (outro > 0) {
-        htmlBarra +=
-          '<div class="segmento segmento-tramitacao" style="width:' + pctOut.toFixed(1) + '%"></div>';
-      }
-      barraRes.innerHTML = htmlBarra;
-    } else if (barraRes) {
-      barraRes.innerHTML = "";
-      barraRes.removeAttribute("aria-label");
-    }
-    var cartoes = document.getElementById("cartoes-resultado-todo");
-    if (cartoes && total > 0) {
-      function cartaoResultado(classe, num, rot) {
-        var pctCard = ((num / total) * 100).toFixed(0);
-        return (
-          '<div class="status-cartao status-cartao-' +
-          classe +
-          '"><span class="indicador" style="background:var(--barra-' +
-          classe +
-          ',var(--graf-' +
-          classe +
-          '))"></span><span class="num">' +
-          esc(num) +
-          '</span><span class="pct">' +
-          esc(pctCard) +
-          '%</span><span class="rot">' +
-          esc(rot) +
-          "</span></div>"
-        );
-      }
-      var htmlCartoes = cartaoResultado("unanimidade", unanimes, "Unanimidade");
-      htmlCartoes += cartaoResultado("maioria", maioria, "Maioria");
-      htmlCartoes += cartaoResultado("rejeitado", rejeitadas, "Rejeitadas");
-      if (outro > 0) {
-        htmlCartoes += cartaoResultado("tramitacao", outro, "Outro resultado");
-      }
-      cartoes.innerHTML = htmlCartoes;
-    } else if (cartoes) {
-      cartoes.innerHTML = "";
-    }
-    var nota = document.getElementById("nota-resultado-todo");
-    if (nota) {
-      nota.textContent =
-        "Total: " + total + " projetos de lei votados em " + rotuloPeriodoLegislatura() + ".";
-    }
-    var btnShare = document.querySelector("#painel-periodo-todo .btn-compartilhar-icone");
-    if (btnShare) btnShare.setAttribute("aria-label", "Compartilhar vota\u00e7\u00f5es " + rotuloAnosRecorte());
+    renderCartaoResumoTodo();
   }
+
 
   function atualizarVotacoesMes() {
-    var container = document.getElementById("votacoes-mes-conteudo");
-    if (!container) return;
-
-    var lista = MATERIAS_CAMARA.mes || [];
-    var total = lista.length;
-    if (total === 0) {
-      container.innerHTML = "";
-      return;
-    }
-
-    var contagem = contagemResultadosMaterias(lista);
-    var unanimes = contagem.unanimidade;
-    var maioria = contagem.maioria;
-    var rejeitadas = contagem.rejeitado;
-    var outro = contagem.outro;
-    var pctUni = total > 0 ? Math.round((unanimes / total) * 100) : 0;
-    var pctMai = total > 0 ? Math.round((maioria / total) * 100) : 0;
-
-    var rotuloTotal = total === 1 ? "1 projeto votado" : total + " projetos votados";
-
-    container.innerHTML =
-      '<div class="card-header">' +
-      '<div class="card-categoria cat-laranja">' +
-      '<div class="card-icone icone-laranja" aria-hidden="true">' +
-      '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 23c6.075 0 11-4.925 11-11 0-4.04-2.18-7.58-5.46-9.52-.39-.23-.88.11-.8.56.57 3.32-.42 6.64-2.74 8.89-2.07-3.04-2.52-6.85-1.2-10.36.17-.46-.3-.9-.73-.69C8.36 2.65 5.5 6.94 5.5 12c0 1.25.21 2.45.59 3.57-1.34-1.2-2.09-2.93-2.09-4.8 0-.48-.56-.76-.92-.44C1.19 12.01 0 14.86 0 18c0 2.76 1.12 5.26 2.93 7.07C4.74 26.88 7.24 28 10 28c.68 0 1.34-.07 1.98-.2-.33-.67-.53-1.42-.53-2.22 0-2.48 2.02-4.5 4.5-4.5h.05c-.39-1.09-.6-2.27-.6-3.5 0-.75.08-1.48.24-2.18-.75.75-1.74 1.28-2.84 1.5-.47.1-.8-.34-.6-.78 1.1-2.4 1.05-5.22-.15-7.58-.23-.46.24-.96.7-.76 2.4 1.03 4.2 3.12 4.7 5.72z"></path></svg></div>' +
-      '<span id="tit-votacoes-mes">Vota\u00e7\u00f5es do M\u00eas</span></div>' +
-      '<span class="card-meta">' + rotuloTotal + "</span></div>" +
-      '<div class="card-corpo">' +
-      '<div class="metricas-bloco">' +
-      '<div class="metrica-destaque">' +
-      '<span class="metrica-numero">' + total + "</span>" +
-      '<span class="metrica-rotulo">projetos votados</span></div>' +
-      '<div class="metrica-detalhes">' +
-      '<div class="item-detalhe">' +
-      '<span class="det-rotulo det-rotulo-unanimidade">Unanimidade</span>' +
-      '<span class="det-valor">' + unanimes + ' <small style="font-size: 13px;font-weight:400">(' + pctUni + "%)</small></span></div>" +
-      '<div class="item-detalhe det-separador">' +
-      '<span class="det-rotulo det-rotulo-maioria">Por Maioria</span>' +
-      '<span class="det-valor">' + maioria + ' <small style="font-size: 13px;font-weight:400">(' + pctMai + "%)</small></span></div>" +
-      (rejeitadas > 0
-        ? '<div class="item-detalhe det-separador"><span class="det-rotulo">Rejeitadas</span><span class="det-valor">' +
-          rejeitadas +
-          "</span></div>"
-        : "") +
-      (outro > 0
-        ? '<div class="item-detalhe det-separador"><span class="det-rotulo">Outro resultado</span><span class="det-valor">' +
-          outro +
-          "</span></div>"
-        : "") +
-      "</div></div>" +
-      '<div class="grafico-anel-box" role="img" aria-label="' +
-      total +
-      " projetos: " +
-      unanimes +
-      " unanimidade, " +
-      maioria +
-      " maioria, " +
-      rejeitadas +
-      " rejeitado, " +
-      outro +
-      ' outro">' +
-      '<svg class="anel-svg" viewBox="0 0 58 58" aria-hidden="true">' +
-      '<circle class="anel-fundo" cx="29" cy="29" r="23"></circle>' +
-      '<circle class="anel-progresso-unanimidade" cx="29" cy="29" r="23"></circle>' +
-      '<circle class="anel-progresso-maioria" cx="29" cy="29" r="23"></circle></svg>' +
-      '<span class="anel-porcento">' + pctUni + "%</span></div></div>";
-
-    var circ = 2 * Math.PI * 23;
-    var circUni = container.querySelector(".anel-progresso-unanimidade");
-    var circMai = container.querySelector(".anel-progresso-maioria");
-    if (circUni) {
-      circUni.style.strokeDasharray = (pctUni / 100 * circ) + " " + circ;
-      circUni.style.strokeDashoffset = "0";
-    }
-    if (circMai) {
-      if (pctMai === 0) {
-        circMai.style.display = "none";
-      } else {
-        circMai.style.display = "";
-        circMai.style.strokeDasharray = (pctMai / 100 * circ) + " " + circ;
-        circMai.style.strokeDashoffset = -(pctUni / 100 * circ);
-      }
-    }
+    renderCartaoResumoMes();
   }
+
 
   function nomeMesAnteriorUltimaSessao() {
     var sessoes = (estado.dados && estado.dados.sessoes) || [];
@@ -4404,13 +4564,6 @@
     estadoMaterias.listaVisivel.sessao = true;
     ajustarPainelUltimaSessaoSemPll();
   }
-
-  var estadoMaterias = {
-    periodo: "sessao",
-    filtro: "",
-    busca: "",
-    listaVisivel: { sessao: true, mes: true, todo: true }
-  };
 
 
   var DATA_ULTIMA_SESSAO = "";
@@ -4459,7 +4612,6 @@
   }
 
   function tituloExplicacaoTag(tipo, valor) {
-    if (tipo === "tipo") return valor || "Tipo de matéria";
     if (tipo === "categoria") return "Categoria do projeto";
     if (tipo === "turno") return textoTurnoExibicao(valor) || "Turno de votação";
     if (tipo === "resultado") return valor || "Resultado da votação";
@@ -4468,19 +4620,20 @@
     if (tipo === "situacao") return valor || "Situação da matéria";
     if (tipo === "coautoria") return "Coautoria";
     if (tipo === "voto") return valor || "Voto";
-    return valor || "Tag";
+    if (tipo === "unanimidade") return "Unanimidade";
+    if (tipo === "maioria") return "Maioria";
+    if (tipo === "nominal") return "Votação nominal";
+    if (tipo === "tramitacao" || tipo === "tramitação") return "Em tramitação";
+    if (tipo === "veto") return "Veto";
+    if (tipo === "plex" || tipo === "PLEX") return "PLEX";
+    if (tipo === "pleg" || tipo === "PLEG") return "PLEG";
+    return valor || "Termo";
   }
 
   function textoExplicacaoTag(tipo, valor, extra) {
     var ex = explicacoesTags();
-    if (tipo === "tipo") {
-      var desc = descricaoTipoSigla(valor);
-      var base = valor || "";
-      if (desc) base += ": " + desc;
-      if (valor === "PLEG") base += " (proposta de vereador)";
-      var fixo = ex.tipo_materia || "";
-      return (base + ". " + fixo).trim();
-    }
+    if (ex[tipo]) return ex[tipo];
+    if (ex[valor]) return ex[valor];
     if (tipo === "categoria") {
       var total = numeroCategorias();
       var fixoCat = ex.categoria || "";
@@ -4528,25 +4681,56 @@
     return String(valor || "");
   }
 
-  function fecharCaixaTag(devolverFoco) {
-    var caixa = document.getElementById(TAG_CAIXA_ID);
-    var abridor = caixa && caixa.getAttribute("data-abridor");
-    if (caixa && caixa.parentNode) caixa.parentNode.removeChild(caixa);
-    document.querySelectorAll(".tag-explicavel[aria-expanded='true']").forEach(function (b) {
+  var FOLHA_GENERICA_ID = "folha-generica";
+  var TAG_CAIXA_ID = FOLHA_GENERICA_ID;
+  var folhaGenericaGatilho = null;
+
+  function folhaGenericaAberta() {
+    var el = document.getElementById("folha-generica-backdrop");
+    return !!(el && el.classList.contains("ativo"));
+  }
+
+  function fecharFolhaGenerica(devolverFoco) {
+    var backdrop = document.getElementById("folha-generica-backdrop");
+    if (!backdrop) return;
+    backdrop.classList.remove("ativo");
+    backdrop.setAttribute("aria-hidden", "true");
+    var gatilho = folhaGenericaGatilho;
+    folhaGenericaGatilho = null;
+    document.querySelectorAll(".tag-explicavel[aria-expanded='true'], .termo[aria-expanded='true']").forEach(function (b) {
       b.setAttribute("aria-expanded", "false");
     });
-    if (devolverFoco && abridor) {
-      var btn = document.querySelector("[data-tag-id='" + abridor + "']");
-      if (btn && btn.focus) btn.focus();
-    }
+    atualizarOverflowFolhas();
+    if (devolverFoco !== false && gatilho && gatilho.focus) gatilho.focus();
+  }
+
+  function abrirFolhaGenerica(titulo, corpoHtml, gatilho) {
+    var backdrop = document.getElementById("folha-generica-backdrop");
+    var tituloEl = document.getElementById("folha-generica-titulo");
+    var corpo = document.getElementById("folha-generica-corpo");
+    if (!backdrop || !corpo) return;
+    fecharCaixaTag(false);
+    fecharResumoSheet();
+    folhaGenericaGatilho = gatilho || document.activeElement;
+    if (tituloEl) tituloEl.textContent = titulo || "";
+    corpo.innerHTML = corpoHtml || "";
+    backdrop.classList.add("ativo");
+    backdrop.setAttribute("aria-hidden", "false");
+    atualizarOverflowFolhas();
+    var fechar = document.getElementById("btn-fechar-folha-generica");
+    if (fechar) fechar.focus();
+  }
+
+  function fecharCaixaTag(devolverFoco) {
+    fecharFolhaGenerica(devolverFoco);
   }
 
   function abrirCaixaTag(botao) {
-    var tipo = botao.getAttribute("data-tag");
-    var valor = botao.getAttribute("data-valor");
-    var jaAberta = botao.getAttribute("aria-expanded") === "true" &&
-      document.getElementById(TAG_CAIXA_ID);
-    fecharCaixaTag(false);
+    if (!botao) return;
+    var tipo = botao.getAttribute("data-tag") || botao.getAttribute("data-termo") || "termo";
+    var valor = botao.getAttribute("data-valor") || botao.getAttribute("data-termo") || botao.textContent.trim();
+    var jaAberta = botao.getAttribute("aria-expanded") === "true" && folhaGenericaAberta();
+    fecharFolhaGenerica(false);
     if (jaAberta) return;
     var extra = null;
     if (tipo === "cassado") {
@@ -4556,68 +4740,61 @@
       };
     }
     if (tipo === "voto") extra = { rotulo: botao.textContent.trim() };
-    var caixa = document.createElement("div");
-    caixa.id = TAG_CAIXA_ID;
-    caixa.className = "tag-caixa";
-    caixa.setAttribute("role", "tooltip");
+    if (tipo === "termo") tipo = valor;
     var titulo = tituloExplicacaoTag(tipo, valor);
     var texto = textoExplicacaoTag(tipo, valor, extra);
-    var html = "<strong>" + esc(titulo) + "</strong><span>" + esc(texto) + "</span>";
+    var html = "<p>" + esc(texto) + "</p>";
     var linkDoAto = (extra && extra.link) ? urlSegura(extra.link) : "";
     if (linkDoAto) {
-      html += ' <a href="' + esc(linkDoAto) + '" target="_blank" rel="noopener noreferrer">Ver ato no SAPL</a>';
+      html += '<p><a class="fonte" href="' + esc(linkDoAto) + '" target="_blank" rel="noopener noreferrer">Ver ato no SAPL</a></p>';
     }
-    caixa.innerHTML = html;
-    document.body.appendChild(caixa);
     if (!botao.getAttribute("data-tag-id")) {
       botao.setAttribute("data-tag-id", "tag" + Math.random().toString(36).slice(2));
     }
-    caixa.setAttribute("data-abridor", botao.getAttribute("data-tag-id"));
     botao.setAttribute("aria-expanded", "true");
-    var r = botao.getBoundingClientRect();
-    var largura = Math.min(280, window.innerWidth - 24);
-    var esquerda = r.left + window.scrollX;
-    if (esquerda + largura > window.innerWidth - 8) esquerda = window.innerWidth - largura - 8;
-    if (esquerda < 8) esquerda = 8;
-    var topo = r.bottom + window.scrollY + 6;
-    caixa.style.left = esquerda + "px";
-    caixa.style.top = topo + "px";
-    window.__tagAbertaEm = Date.now();
-    var alturaCaixa = caixa.offsetHeight || 80;
-    if (topo + alturaCaixa > window.scrollY + window.innerHeight - 8) {
-      topo = r.top + window.scrollY - alturaCaixa - 6;
-      if (topo < window.scrollY + 8) topo = window.scrollY + 8;
-      caixa.style.top = topo + "px";
-    }
+    abrirFolhaGenerica(titulo, html, botao);
   }
 
   function tagAbertaExiste() {
-    return !!document.getElementById(TAG_CAIXA_ID);
+    return folhaGenericaAberta();
   }
 
   document.addEventListener("click", function (e) {
+    var termo = e.target && e.target.closest ? e.target.closest(".termo") : null;
+    if (termo) {
+      if (e.stopPropagation) e.stopPropagation();
+      termo.setAttribute("data-tag", "termo");
+      termo.setAttribute("data-valor", termo.getAttribute("data-termo") || termo.textContent.trim());
+      abrirCaixaTag(termo);
+      return;
+    }
     var botao = e.target && e.target.closest ? e.target.closest(".tag-explicavel") : null;
     if (botao) {
       if (e.stopPropagation) e.stopPropagation();
       abrirCaixaTag(botao);
       return;
     }
-    var caixa = e.target && e.target.closest ? e.target.closest("#" + TAG_CAIXA_ID) : null;
-    if (!caixa) fecharCaixaTag(false);
+    var backdrop = document.getElementById("folha-generica-backdrop");
+    if (backdrop && e.target === backdrop) fecharFolhaGenerica(true);
   }, true);
 
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && tagAbertaExiste()) {
+    if (e.key === "Escape" && folhaGenericaAberta()) {
       e.stopPropagation();
-      fecharCaixaTag(true);
+      fecharFolhaGenerica(true);
     }
   }, true);
 
-  window.addEventListener("scroll", function () {
-    if (Date.now() - (window.__tagAbertaEm || 0) < 500) return;
-    fecharCaixaTag(false);
-  }, true);
-  window.addEventListener("resize", function () { fecharCaixaTag(false); });
+  function initFolhaGenerica() {
+    var backdrop = document.getElementById("folha-generica-backdrop");
+    var btnFechar = document.getElementById("btn-fechar-folha-generica");
+    if (!backdrop) return;
+    if (btnFechar) btnFechar.addEventListener("click", function () { fecharFolhaGenerica(true); });
+    document.addEventListener("keydown", function (e) {
+      if (!folhaGenericaAberta()) return;
+      if (e.key === "Tab") prenderFocoNaFolha(backdrop, e);
+    });
+  }
 
   function temaInicial() {
     var salvo = localStorage.getItem(STORAGE_TEMA);
@@ -5277,18 +5454,20 @@
       var linkSess = estado.linksSessao[n.sessao_id] ||
         (SAPL_ORIGEM + "/sessao/" + n.sessao_id);
       var turnoHtml = (n.turno === "1o turno" || n.turno === "2o turno")
-        ? '<button type="button" class="tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(n.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(n.turno)) + "</button>"
+        ? '<button type="button" class="chip tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(n.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(n.turno)) + "</button>"
         : "";
-      var votoHtml = '<button type="button" class="voto-selo tag-explicavel ' + classeVotoSelo(n.estado) + '" data-tag="voto" data-valor="' + esc(n.estado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(rotuloVoto(n)) + "</button>";
-      var tagsHtml = htmlTagsMateria(n.materia_id, turnoHtml, votoHtml);
+      var votoHtml = '<button type="button" class="chip voto-selo tag-explicavel ' + classeVotoSelo(n.estado) + '" data-tag="voto" data-valor="' + esc(n.estado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(rotuloVoto(n)) + "</button>";
+      var tagsHtml = htmlTagsMateria(n.materia_id, votoHtml, turnoHtml);
       var tipoNumero = tipoNumeroDoVoto(n);
-      return "<li>" +
-        '<div class="data-voto">' + esc(formatarData(n.data_sessao)) +
-        ", sessão " + esc(n.sessao_id) + "</div>" +
-        (tipoNumero ? '<div class="materia-titulo">' + esc(tipoNumero) + "</div>" : "") +
+      var assunto = ementa ? esc(ementa.length > 180 ? ementa.slice(0, 177) + "..." : ementa) : textoEmenta;
+      return "<li class=\"materia\">" +
         tagsHtml +
-        tituloEmenta + " " +
-        linkExt(linkSess, "Sessão no SAPL") + "</li>";
+        '<p class="materia-assunto">' + assunto + "</p>" +
+        '<div class="linha-meta">' +
+        (tipoNumero ? '<span class="sigla">' + esc(tipoNumero) + "</span>" : "") +
+        '<span>' + esc(formatarData(n.data_sessao)) + ", sessão " + esc(n.sessao_id) + "</span></div>" +
+        (n.materia_id ? htmlLinkSapMateria(n.materia_id, "Ver no SAPL") : linkExt(linkSess, "Ver no SAPL")) +
+        "</li>";
     }).join("");
 
     var listaAtiva = listaVotosAtiva();
@@ -5624,44 +5803,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   }
 
   function atualizarCardVotacoes() {
-    var lista = MATERIAS_CAMARA.sessao || [];
-    var total = lista.length;
-    var unanimes = lista.filter(function(m) { return m.resultado === "unanimidade"; }).length;
-    var maioria = total - unanimes;
-    var pctUni = total > 0 ? Math.round((unanimes / total) * 100) : 0;
-    var pctMai = total > 0 ? Math.round((maioria / total) * 100) : 0;
-
-    var elNum = document.querySelector("#card-votacoes-sessao .metrica-numero");
-    if (elNum) elNum.textContent = total;
-
-    var elUni = document.querySelector("#card-votacoes-sessao .det-valor-unanimidade");
-    if (elUni) elUni.innerHTML = unanimes + ' <small style="font-size: 13px;font-weight:400">(' + pctUni + '%)</small>';
-
-    var elMai = document.querySelector("#card-votacoes-sessao .det-valor-maioria");
-    if (elMai) elMai.innerHTML = maioria + ' <small style="font-size: 13px;font-weight:400">(' + pctMai + '%)</small>';
-
-    var elPct = document.querySelector("#card-votacoes-sessao .anel-porcento");
-    if (elPct) elPct.textContent = pctUni + '%';
-
-    var elAria = document.querySelector("#card-votacoes-sessao .grafico-anel-box");
-    if (elAria) elAria.setAttribute("aria-label", total + " matérias votadas: " + unanimes + " por unanimidade e " + maioria + " por maioria");
-
-    var circ = 2 * Math.PI * 23;
-    var circUni = document.querySelector("#card-votacoes-sessao .anel-progresso-unanimidade");
-    var circMai = document.querySelector("#card-votacoes-sessao .anel-progresso-maioria");
-    if (circUni) {
-      circUni.style.strokeDasharray = (pctUni / 100 * circ) + " " + circ;
-      circUni.style.strokeDashoffset = "0";
-    }
-    if (circMai) {
-      if (pctMai === 0) {
-        circMai.style.display = "none";
-      } else {
-        circMai.style.display = "";
-        circMai.style.strokeDasharray = (pctMai / 100 * circ) + " " + circ;
-        circMai.style.strokeDashoffset = -(pctUni / 100 * circ);
-      }
-    }
+    renderCartaoResumoSessao();
   }
 
   function atualizarPainelMes() {
@@ -5708,8 +5850,9 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
 
   var estadoMaterias = {
     periodo: "sessao",
-    filtro: "",
+    filtroTema: "",
     busca: "",
+    limite: { sessao: 10, mes: 10, todo: 10 },
     listaVisivel: { sessao: true, mes: true, todo: true }
   };
 
@@ -5804,19 +5947,46 @@ var MAPA_VAR_CATEGORIA = {
     return '<span class="cat-quadro" style="background:var(' + varCategoria(tema) + ')"></span>';
   }
 
-  function htmlTagsMateria(id, aposTipo, aposTema) {
-    var tags = tagsMateria(id);
-    var meio = aposTipo || "";
-    var fim = aposTema || "";
-    if (!tags) {
-      if (!meio && !fim) return "";
-      return '<div class="materia-tags">' + meio + fim + "</div>";
+  function temaValidoParaTag(tema) {
+    if (!tema) return false;
+    if (tema === "Não se aplica") return false;
+    if (tema === "Tema não classificado") return false;
+    return true;
+  }
+
+  function assuntoMateria(m) {
+    if (m && m.assunto) {
+      var a = String(m.assunto).trim();
+      if (a) return a.length > 60 ? a.slice(0, 60) : a;
     }
-    return '<div class="materia-tags">' +
-      '<button type="button" class="tag-tipo tag-explicavel" data-tag="tipo" data-valor="' + esc(tags.tag_tipo) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(tags.tag_tipo) + "</button>" +
-      meio +
-      '<button type="button" class="tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(tags.tag_tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(tags.tag_tema) + '>' + htmlMarcadorCategoria(tags.tag_tema) + esc(tags.tag_tema) + "</button>" +
-      fim + "</div>";
+    var e = ementaExibicao((m && m.ementa) || "");
+    return e.replace(/\s*,?\s*e d[aá] outras provid[eê]ncias\.?\s*$/i, "").trim();
+  }
+
+  function htmlBotaoTermo(palavra) {
+    return '<button type="button" class="termo tag-explicavel" data-termo="' + esc(palavra) + '" data-tag="termo" data-valor="' + esc(palavra) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(palavra) + "</button>";
+  }
+
+  function htmlLinkSapMateria(id, rotulo) {
+    var href = urlSegura(SAPL_ORIGEM + "/materia/" + encodeURIComponent(String(id)));
+    if (!href) return "";
+    return '<a class="fonte" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + esc(rotulo || "Ver no SAPL") +
+      '<svg class="ic" width="16" height="16" aria-hidden="true"><use href="#ic-ver-na-fonte"/></svg></a>';
+  }
+
+  function htmlTagsMateria(id, votoHtml, turnoHtml) {
+    var tags = tagsMateria(id);
+    var partes = [];
+    if (votoHtml) partes.push(votoHtml);
+    if (tags && temaValidoParaTag(tags.tag_tema)) {
+      partes.push(
+        '<button type="button" class="chip tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(tags.tag_tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(tags.tag_tema) + ">" +
+        htmlMarcadorCategoria(tags.tag_tema) + esc(tags.tag_tema) + "</button>"
+      );
+    }
+    if (turnoHtml) partes.push(turnoHtml);
+    if (!partes.length) return "";
+    return '<div class="materia-tags">' + partes.join("") + "</div>";
   }
 
   function tipoNumeroMateriaCamara(id) {
@@ -6173,230 +6343,97 @@ var MAPA_VAR_CATEGORIA = {
   }
 
   function renderCardMateria(m) {
-    var badgeClass = m.resultado === "maioria" ? "badge-maioria" : "badge-unanimidade";
-    var placar = placarResumido(m.placar);
-    var badgeHtml = placar ? '<button type="button" class="badge-status tag-explicavel ' + badgeClass + '" data-tag="placar" data-valor="' + esc(placar) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(placar) + '</button>' : '';
     var turnoHtml = m.turno
-      ? '<button type="button" class="tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(m.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(m.turno)) + '</button>'
+      ? '<button type="button" class="chip tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(m.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(m.turno)) + "</button>"
       : (m.tipo_resultado
-        ? '<button type="button" class="tag-turno tag-explicavel" data-tag="resultado" data-valor="' + esc(m.tipo_resultado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.tipo_resultado) + "</button>"
+        ? '<button type="button" class="chip tag-turno tag-explicavel" data-tag="resultado" data-valor="' + esc(m.tipo_resultado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(m.tipo_resultado) + "</button>"
         : "");
-    var tagsHtml = htmlTagsMateria(m.id, turnoHtml, badgeHtml);
-    return '<article class="item-votado materia" data-resultado="' + esc(m.resultado) + '">' +
-      '<div class="materia-link" role="button" tabindex="0" data-materia-id="' + esc(m.id) +
-      '" data-resultado="' + esc(m.resultado) +
-      '" aria-haspopup="dialog" aria-controls="resumo-sheet" aria-label="Abrir resumo de ' + esc(m.tipo) + '">' +
-      '<div class="materia-info"><span class="materia-titulo">' + esc(m.tipo) +
-      '</span>' + tagsHtml +
-      '<span class="materia-ementa">' + esc(ementaExibicao(m.ementa)) + "</span>" +
-      (textoDatasVotacao(m)
-        ? '<span class="materia-datas">' + esc(textoDatasVotacao(m)) + "</span>"
-        : "") +
-      "</div>" +
-      htmlResultadoPopular(m.id) +
-      "</div></article>";
+    var tagsHtml = htmlTagsMateria(m.id, "", turnoHtml);
+    var datas = textoDatasVotacao(m);
+    return '<li class="item-votado materia" data-resultado="' + esc(m.resultado) + '" data-tema="' + esc((tagsMateria(m.id) || {}).tag_tema || "") + '">' +
+      tagsHtml +
+      '<p class="materia-assunto">' + esc(assuntoMateria(m)) + "</p>" +
+      '<div class="linha-meta"><span class="sigla">' + esc(m.tipo || "") + "</span>" +
+      (datas ? "<span>" + esc(datas) + "</span>" : "") + "</div>" +
+      htmlLinkSapMateria(m.id, "Ver no SAPL") +
+      "</li>";
   }
 
   function materiasFiltradas(periodo) {
     var lista = MATERIAS_CAMARA[periodo] || [];
-    var filtro = estadoMaterias.filtro;
+    var filtroTema = estadoMaterias.filtroTema;
     var busca = normalizarTexto(estadoMaterias.busca || "").trim();
     return lista.filter(function (m) {
-      if (filtro && m.resultado !== filtro) return false;
-      if (busca) {
+      if (filtroTema) {
         var tags = tagsMateria(m.id);
-        var texto = m.tipo + " " + ementaBusca(m.ementa) + " " + m.id;
-        if (tags) texto += " " + String(tags.tag_tipo) + " " + String(tags.tag_tema);
+        var tema = tags && tags.tag_tema;
+        if (tema !== filtroTema) return false;
+      }
+      if (busca) {
+        var tagsB = tagsMateria(m.id);
+        var texto = m.tipo + " " + ementaBusca(m.ementa) + " " + m.id + " " + assuntoMateria(m);
+        if (tagsB && tagsB.tag_tema) texto += " " + tagsB.tag_tema;
         if (normalizarTexto(texto).indexOf(busca) === -1) return false;
       }
       return true;
     });
   }
 
-  function legendaVotado(periodo) {
-    var regra = " Matéria votada em mais de uma sessão aparece uma vez por período, com todas as datas.";
-    var regraContagem = " A contagem de resultado considera só o 2º turno ou o turno único. Votação sem deliberação aparece com o nome oficial e não entra na contagem.";
-    if (periodo === "sessao") {
-      return "Lista com ementa (resumo oficial) e placar. Toque abre a página oficial no SAPL (Sistema de Apoio ao Processo Legislativo)." + regra + regraContagem;
-    }
-    if (periodo === "mes") {
-      var mesVotado = nomeMesAnteriorUltimaSessao().toLowerCase();
-      return (mesVotado
-        ? "Projetos de lei votados em " + mesVotado + ". Toque abre a página oficial no SAPL."
-        : "Projetos de lei votados no último mês. Toque abre a página oficial no SAPL.") + regra + regraContagem;
-    }
-    return ("Todos os projetos de lei votados em " + rotuloPeriodoLegislatura() + ". Toque abre a página oficial no SAPL.") + regra + regraContagem;
-  }
-
-  var estadoVotadoPagina = { sessao: 1, mes: 1, todo: 1 };
-  var ITENS_POR_PAGINA = 10;
-
   function renderBlocoVotadoPeriodo(periodo) {
     var bloco = document.getElementById("bloco-votado-" + periodo);
     if (!bloco) return;
     fecharCaixaTag(false);
-
-    var filtros = FILTROS_MATERIA[periodo];
-    var mostrarBusca = periodo !== "sessao";
-    var listaAberta = estadoMaterias.listaVisivel[periodo];
     var itens = materiasFiltradas(periodo);
     var totalItens = (MATERIAS_CAMARA[periodo] || []).length;
-    var totalPaginas = Math.ceil(itens.length / ITENS_POR_PAGINA);
-    var pagina = estadoVotadoPagina[periodo] || 1;
-    if (pagina > totalPaginas) pagina = totalPaginas;
-    if (pagina < 1) pagina = 1;
-    estadoVotadoPagina[periodo] = pagina;
-
-    var inicio = (pagina - 1) * ITENS_POR_PAGINA;
-    var fim = Math.min(inicio + ITENS_POR_PAGINA, itens.length);
-    var paginaItens = itens.slice(inicio, fim);
-
-    var htmlFiltros = '<div class="filtros-scroll filtros-materia" role="group" aria-label="Filtrar matérias votadas">' +
-      filtros.map(function (f) {
-        var ativo = estadoMaterias.filtro === f.id;
-        var pressed = ativo ? ' aria-pressed="true"' : ' aria-pressed="false"';
-        var cls = ativo ? "btn-filtro btn-filtro-materia ativo" : "btn-filtro btn-filtro-materia";
-        return '<button type="button" class="' + cls + '" data-periodo="' + esc(periodo) +
-          '" data-filtro="' + esc(f.id) + '"' + pressed + ">" +
-          esc(textoTurnoExibicao(f.rotulo)) + " (" + esc(f.qtd) + ")</button>";
-      }).join("") + "</div>";
-
-    var htmlBusca = "";
-    if (mostrarBusca) {
-      htmlBusca = '<div class="busca-materia-wrap">' +
-        '<label for="busca-materia-' + esc(periodo) + '">Buscar por ementa ou número da matéria</label>' +
-        '<input type="search" id="busca-materia-' + esc(periodo) + '" class="input-busca-materia" ' +
-        'data-periodo="' + esc(periodo) + '" placeholder="Digite para buscar" value="' + esc(estadoMaterias.busca) + '">' +
-        "</div>";
-    }
-
+    var limite = estadoMaterias.limite[periodo] || 10;
+    if (limite < 10) limite = 10;
+    var visiveis = itens.slice(0, limite);
+    var htmlBusca = '<label class="busca-materia"><span class="sr">Buscar por assunto ou n\u00famero</span>' +
+      '<input type="search" id="busca-materia-' + esc(periodo) + '" class="input-busca-materia" data-periodo="' + esc(periodo) + '" placeholder="Buscar por assunto ou n\u00famero" value="' + esc(estadoMaterias.busca) + '"></label>';
     var htmlLista = "";
-    var htmlVazio = "";
-
-    if (listaAberta) {
-      if (paginaItens.length > 0) {
-        htmlLista = '<div class="lista-itens" aria-live="polite">' +
-          paginaItens.map(renderCardMateria).join("") + "</div>";
-      } else {
-        htmlVazio = '<div class="estado-vazio"><p>Nenhuma matéria encontrada com este filtro.</p></div>';
-      }
+    if (visiveis.length > 0) {
+      htmlLista = '<ul class="lista-materias" aria-live="polite">' + visiveis.map(renderCardMateria).join("") + "</ul>";
     } else {
-      htmlVazio = '<div class="estado-vazio"><p>Selecione um filtro acima ou busque por ementa para ver as matérias.</p></div>';
+      htmlLista = '<div class="vazio"><b>Nenhum projeto encontrado.</b><span>Tente outra palavra ou limpe o filtro de tema.</span>' +
+        (estadoMaterias.filtroTema || estadoMaterias.busca
+          ? ' <button type="button" class="btn btn-secundario btn-limpar-filtros-materia" data-periodo="' + esc(periodo) + '">Limpar filtros</button>'
+          : "") + "</div>";
     }
-
-    var htmlPaginacao = "";
-    if (totalPaginas > 1) {
-      htmlPaginacao = '<div class="paginacao">';
-      if (pagina > 1) {
-        htmlPaginacao += '<button type="button" class="btn-pagina" data-periodo="' + periodo + '" data-pagina="' + (pagina - 1) + '">&laquo;</button>';
-      }
-      for (var i = 1; i <= totalPaginas; i++) {
-        var ativoPag = i === pagina ? ' aria-current="page"' : '';
-        htmlPaginacao += '<button type="button" class="btn-pagina' + (i === pagina ? ' ativo' : '') + '" data-periodo="' + periodo + '" data-pagina="' + i + '"' + ativoPag + '>' + i + '</button>';
-      }
-      if (pagina < totalPaginas) {
-        htmlPaginacao += '<button type="button" class="btn-pagina" data-periodo="' + periodo + '" data-pagina="' + (pagina + 1) + '">&raquo;</button>';
-      }
-      htmlPaginacao += '</div>';
-    }
-
+    var htmlMais = itens.length > limite
+      ? '<button type="button" class="btn btn-secundario btn-mostrar-mais-materia" data-periodo="' + esc(periodo) + '">Mostrar mais</button>'
+      : "";
     bloco.innerHTML =
-      '<div class="card-header">' +
-      '<div class="card-categoria cat-azul">' +
-      '<div class="card-icone icone-azul" aria-hidden="true">' +
-      '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">' +
-      '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>' +
-      '<polyline points="14 2 14 8 20 8"></polyline>' +
-      '<line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>' +
-      '<span id="tit-votado-' + esc(periodo) + '">O que foi votado</span></div>' +
-      '<span class="card-meta">' + esc(totalItens) + ' itens ' +
-      '<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">' +
-      '<path d="M9 18l6-6-6-6"></path></svg></span></div>' +
-      htmlFiltros + htmlBusca + htmlLista + htmlVazio + htmlPaginacao;
-    restaurarSanfonas();
-
-    bloco.querySelectorAll(".btn-filtro-materia").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var p = btn.getAttribute("data-periodo");
-        var f = btn.getAttribute("data-filtro");
-        estadoMaterias.periodo = p;
-        estadoMaterias.filtro = f;
-        estadoMaterias.listaVisivel[p] = true;
-        renderBlocoVotadoPeriodo(p);
-      });
-    });
-
+      '<div class="cab-cartao"><h2 class="t2">Projetos votados</h2><span class="apoio">' + esc(String(itens.length)) + (itens.length === 1 ? " projeto" : " projetos") + "</span></div>" +
+      htmlBusca + htmlLista + htmlMais;
     var inputBusca = bloco.querySelector(".input-busca-materia");
     if (inputBusca) {
       inputBusca.addEventListener("input", function (e) {
-        var p = inputBusca.getAttribute("data-periodo");
         estadoMaterias.busca = e.target.value;
-        estadoMaterias.listaVisivel[p] = true;
-        renderBlocoVotadoPeriodo(p);
-        var novo = document.getElementById("busca-materia-" + p);
-        if (novo) {
-          novo.focus();
-          novo.setSelectionRange(novo.value.length, novo.value.length);
-        }
+        estadoMaterias.limite[periodo] = 10;
+        renderBlocoVotadoPeriodo(periodo);
+        var novo = document.getElementById("busca-materia-" + periodo);
+        if (novo) { novo.focus(); novo.setSelectionRange(novo.value.length, novo.value.length); }
       });
     }
-
-    bloco.querySelectorAll(".materia-link").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var id = parseInt(btn.getAttribute("data-materia-id"), 10);
-        var materia = (MATERIAS_CAMARA[periodo] || []).find(function (m) { return m.id === id; });
-        if (materia) abrirResumoSheet(materia, periodo);
-      });
-      btn.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          var id = parseInt(btn.getAttribute("data-materia-id"), 10);
-          var materia = (MATERIAS_CAMARA[periodo] || []).find(function (m) { return m.id === id; });
-          if (materia) abrirResumoSheet(materia, periodo);
-        }
-      });
-    });
-
-    bloco.querySelectorAll(".btn-pagina").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        estadoVotadoPagina[periodo] = parseInt(this.getAttribute("data-pagina"));
+    var btnMais = bloco.querySelector(".btn-mostrar-mais-materia");
+    if (btnMais) {
+      btnMais.addEventListener("click", function () {
+        estadoMaterias.limite[periodo] = (estadoMaterias.limite[periodo] || 10) + 10;
         renderBlocoVotadoPeriodo(periodo);
       });
-    });
-  }
-
-  var shareContexto = { tipo: "portal" };
-  var shareGatilhoAnterior = null;
-
-  function contextoShareAtivo() {
-    if (estadoUI.secao === "vereadores") {
-      var v = vereadorAtual();
-      if (v) return { tipo: "vereador", dados: v };
-      return { tipo: "portal" };
     }
-    return { tipo: "periodo", periodo: estadoMaterias.periodo || "sessao" };
+    var btnLimpar = bloco.querySelector(".btn-limpar-filtros-materia");
+    if (btnLimpar) {
+      btnLimpar.addEventListener("click", function () {
+        estadoMaterias.filtroTema = "";
+        estadoMaterias.busca = "";
+        estadoMaterias.limite[periodo] = 10;
+        renderTemasDistribuicao(periodo);
+        renderBlocoVotadoPeriodo(periodo);
+      });
+    }
   }
 
-  function tituloShareSheet(ctx) {
-    if (ctx.tipo === "materia" && ctx.dados) return "Compartilhar matéria";
-    if (ctx.tipo === "vereador" && ctx.dados) return "Compartilhar perfil";
-    if (ctx.tipo === "periodo") return "Compartilhar o que foi votado";
-    return "Compartilhar portal";
-  }
-
-  function atualizarRotuloBotaoShare() {
-    var btn = document.querySelector('.btn-abrir-share[data-share="vereador"]');
-    if (!btn) return;
-    var v = vereadorAtual();
-    btn.setAttribute("aria-label", v
-      ? "Compartilhar perfil de " + v.nome_parlamentar
-      : "Compartilhar perfil parlamentar");
-  }
-
-  function folhaShareAberta() {
-    var el = document.getElementById("share-sheet-backdrop");
-    return !!(el && el.classList.contains("ativo"));
-  }
 
   function folhaResumoAberta() {
     var el = document.getElementById("resumo-sheet-backdrop");
@@ -6404,7 +6441,7 @@ var MAPA_VAR_CATEGORIA = {
   }
 
   function atualizarOverflowFolhas() {
-    document.body.style.overflow = (folhaShareAberta() || folhaResumoAberta()) ? "hidden" : "";
+    document.body.style.overflow = (folhaShareAberta() || folhaResumoAberta() || folhaGenericaAberta()) ? "hidden" : "";
   }
 
   function htmlResultadoPopular(id) {
@@ -6688,50 +6725,43 @@ var MAPA_VAR_CATEGORIA = {
   function renderTemasDistribuicao(periodo) {
     var container = document.getElementById("temas-distribuicao-" + periodo);
     if (!container) return;
-
     var lista = MATERIAS_CAMARA[periodo] || [];
     var total = lista.length;
     if (total === 0) { container.innerHTML = ""; return; }
-
     var contagem = {};
     lista.forEach(function (m) {
       var tags = tagsMateria(m.id);
       var tema = (tags && tags.tag_tema) || "Outros";
+      if (!temaValidoParaTag(tema)) return;
       contagem[tema] = (contagem[tema] || 0) + 1;
     });
-
     var ordenado = Object.keys(contagem).sort(function (a, b) { return contagem[b] - contagem[a]; });
     var max = contagem[ordenado[0]] || 1;
-
     var htmlBarras = ordenado.map(function (tema) {
       var qtd = contagem[tema];
       var pct = Math.round((qtd / max) * 100);
-      var pctTotal = Math.round((qtd / total) * 100).toFixed(1).replace(".", ",");
       var vcat = varCategoria(tema);
-      var rotulo = qtd === 1 ? "1 projeto" : qtd + " projetos";
-      return '<div class="barra-tema-linha">' +
-        '<span class="nome">' + esc(tema) + '</span>' +
-        '<div class="trilho"><div class="preenchido" style="width:' + pct + '%;background:var(' + vcat + ')"></div></div>' +
-        '<span class="meta-linha">' + rotulo + ' (' + pctTotal + '%)</span></div>';
+      var pressed = estadoMaterias.filtroTema === tema ? ' aria-pressed="true"' : ' aria-pressed="false"';
+      return '<li><button type="button" class="tema-btn" data-periodo="' + esc(periodo) + '" data-tema="' + esc(tema) + '"' + pressed + '>' +
+        '<span class="nome">' + esc(tema) + '</span><span class="qtd">' + qtd + '</span>' +
+        '<span class="trilho"><i style="width:' + pct + '%;background:var(' + vcat + ')"></i></span></button></li>';
     }).join("");
-
-    var rotuloTotal = total === 1 ? "1 projeto votado" : total + " projetos votados";
-
     container.innerHTML =
-      '<div class="card-header">' +
-      '<div class="card-categoria cat-roxo">' +
-      '<div class="card-icone icone-roxo" aria-hidden="true">' +
-      '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>' +
-      '<span id="tit-temas-' + esc(periodo) + '">Do que tratam os projetos</span></div>' +
-      '<span class="card-meta">' + rotuloTotal + ' ' +
-      '<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></span></div>' +
-      '<p class="card-legenda">Temas dos ' + total + ' projetos votados neste período.</p>' +
-      '<details class="card-detalhes" open>' +
-      '<summary>Ver lista de temas</summary>' +
-      '<div class="card-detalhes-corpo">' +
-      '<div class="barra-tema-sessao" role="img" aria-label="Distribuição temática de ' + total + ' projetos votados">' +
-      htmlBarras + '</div></div></details>';
+      '<div class="cab-cartao"><h2 class="t2" id="tit-temas-' + esc(periodo) + '">Do que tratam os projetos</h2>' +
+      '<span class="apoio">toque para filtrar</span></div>' +
+      '<ul class="temas-lista" role="group" aria-label="Filtrar por tema">' + htmlBarras + "</ul>";
+    container.querySelectorAll(".tema-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var t = btn.getAttribute("data-tema");
+        var p = btn.getAttribute("data-periodo");
+        estadoMaterias.filtroTema = estadoMaterias.filtroTema === t ? "" : t;
+        estadoMaterias.limite[p] = 10;
+        renderTemasDistribuicao(p);
+        renderBlocoVotadoPeriodo(p);
+      });
+    });
   }
+
 
   function initMateriasCamara() {
     ["sessao", "mes", "todo"].forEach(function (periodo) {
@@ -6743,12 +6773,14 @@ var MAPA_VAR_CATEGORIA = {
 
   function resetMateriasPeriodo(periodo) {
     estadoMaterias.periodo = periodo;
-    estadoMaterias.filtro = "";
+    estadoMaterias.filtroTema = "";
     estadoMaterias.busca = "";
+    estadoMaterias.limite[periodo] = 10;
     estadoMaterias.listaVisivel.sessao = false;
     estadoMaterias.listaVisivel.mes = false;
     estadoMaterias.listaVisivel.todo = false;
     estadoMaterias.listaVisivel[periodo] = true;
+    renderTemasDistribuicao(periodo);
     renderBlocoVotadoPeriodo(periodo);
   }
 
@@ -6954,6 +6986,7 @@ var MAPA_VAR_CATEGORIA = {
     aplicarTema(temaInicial());
     initShareSheet();
     initResumoSheet();
+    initFolhaGenerica();
     initNavegacao();
     return carregarMateriasCamara().then(initMateriasCamara);
   }).then(carregar);
