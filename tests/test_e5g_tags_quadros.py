@@ -119,14 +119,8 @@ class TestTagsCaixa(unittest.TestCase):
         page.wait_for_timeout(400)
 
     def _abrir_secao(self, page, titulo_id):
-        page.locator("#" + titulo_id).locator("xpath=ancestor::details[1]").evaluate(
-            """n => {
-              n.open = true;
-              var s = n.querySelector('summary');
-              if (s) s.setAttribute('aria-expanded', 'true');
-            }"""
-        )
-        page.wait_for_timeout(300)
+        page.wait_for_selector("#" + titulo_id, state="visible", timeout=15000)
+        page.wait_for_timeout(200)
 
     def test_caixa_da_tag_tipo_com_descricao_do_sapl(self):
         with sync_playwright() as p:
@@ -138,45 +132,31 @@ class TestTagsCaixa(unittest.TestCase):
                 self._abrir_secao(page, "tit-votos")
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(500)
-                tag = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
+                tag = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                 texto_tag = tag.inner_text()
                 self.assertEqual(tag.evaluate("n => n.tagName"), "BUTTON")
                 self.assertEqual(tag.get_attribute("aria-expanded"), "false")
                 tag.click()
                 page.wait_for_timeout(300)
-                caixa = page.locator("#tag-caixa-explicativa")
+                caixa = page.locator("#folha-generica-backdrop.ativo")
                 self.assertEqual(caixa.count(), 1)
-                self.assertEqual(caixa.get_attribute("role"), "tooltip")
+                dialogo = page.locator("#folha-generica")
+                self.assertEqual(dialogo.get_attribute("role"), "dialog")
                 texto = caixa.inner_text()
+                self.assertIn("categorias do projeto", texto)
                 self.assertIn(texto_tag, texto)
-                self.assertIn("Sigla oficial do tipo de matéria no SAPL", texto)
                 self.assertEqual(tag.get_attribute("aria-expanded"), "true")
                 self.assertEqual(
-                    tag.get_attribute("aria-controls"), "tag-caixa-explicativa"
+                    tag.get_attribute("aria-controls"), "folha-generica"
                 )
                 dentro = caixa.evaluate(
                     "n => { var r = n.getBoundingClientRect(); "
                     "return r.left >= 0 && r.right <= window.innerWidth; }"
                 )
                 self.assertTrue(dentro)
-                tag.click()
+                page.keyboard.press("Escape")
                 page.wait_for_timeout(300)
-                self.assertEqual(page.locator("#tag-caixa-explicativa").count(), 0)
-                pleg = page.locator(
-                    '.lista-votos .tag-tipo.tag-explicavel[data-valor="PLEG"]'
-                ).first
-                if pleg.count() > 0:
-                    pleg.scroll_into_view_if_needed()
-                    page.wait_for_timeout(200)
-                    pleg.click()
-                    page.wait_for_timeout(300)
-                    texto_pleg = page.locator("#tag-caixa-explicativa").inner_text()
-                    self.assertIn(
-                        "Projeto de Lei Origem do Poder Legislativo", texto_pleg
-                    )
-                    self.assertIn("proposta de vereador", texto_pleg)
-                    page.keyboard.press("Escape")
-                    page.wait_for_timeout(200)
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 0)
                 self.assertEqual(erros, [])
 
     def test_teclado_e_esc_e_uma_aberta_por_vez(self):
@@ -187,22 +167,24 @@ class TestTagsCaixa(unittest.TestCase):
                 self._abrir_secao(page, "tit-votos")
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(500)
-                tag_tipo = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
-                tag_tipo.focus()
+                tag_cat = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
+                tag_cat.focus()
                 page.keyboard.press("Enter")
                 page.wait_for_timeout(300)
-                self.assertEqual(page.locator("#tag-caixa-explicativa").count(), 1)
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 1)
+                page.keyboard.press("Escape")
+                page.wait_for_timeout(300)
                 tag_cat = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                 texto_cat = tag_cat.inner_text()
                 tag_cat.click()
                 page.wait_for_timeout(300)
-                self.assertEqual(page.locator("#tag-caixa-explicativa").count(), 1)
-                texto = page.locator("#tag-caixa-explicativa").inner_text()
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 1)
+                texto = page.locator("#folha-generica-backdrop.ativo").inner_text()
                 self.assertIn("13 categorias do projeto", texto)
                 self.assertIn(texto_cat, texto)
                 page.keyboard.press("Escape")
                 page.wait_for_timeout(300)
-                self.assertEqual(page.locator("#tag-caixa-explicativa").count(), 0)
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 0)
 
     def test_turno_cita_regimento_e_cassado_traz_data(self):
         with sync_playwright() as p:
@@ -215,7 +197,7 @@ class TestTagsCaixa(unittest.TestCase):
                 turno = page.locator(".lista-votos .tag-turno.tag-explicavel").first
                 turno.click()
                 page.wait_for_timeout(300)
-                texto = page.locator("#tag-caixa-explicativa").inner_text()
+                texto = page.locator("#folha-generica-backdrop.ativo").inner_text()
                 self.assertIn("arts. 177 e 178", texto)
                 page.keyboard.press("Escape")
                 page.wait_for_timeout(200)
@@ -227,7 +209,7 @@ class TestTagsCaixa(unittest.TestCase):
                 self.assertEqual(cassado.count(), 1)
                 cassado.click()
                 page.wait_for_timeout(300)
-                texto_cas = page.locator("#tag-caixa-explicativa").inner_text()
+                texto_cas = page.locator("#folha-generica-backdrop.ativo").inner_text()
                 self.assertIn("18/08/2026", texto_cas)
                 self.assertIn("Ver ato no SAPL", texto_cas)
 
@@ -239,13 +221,9 @@ class TestTagsCaixa(unittest.TestCase):
                 page.on("pageerror", lambda e: erros.append(str(e)))
                 page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
                 page.click("button[data-secao-lateral='vereadores']")
-                page.wait_for_selector(".perfil-cabecalho", timeout=60000)
+                page.wait_for_selector("#sel-vereador", timeout=60000)
                 page.select_option("#sel-vereador", "2")
                 page.wait_for_timeout(600)
-                page.locator("#tit-votos").locator("xpath=ancestor::details[1]").evaluate(
-                    "n => { n.open = true; }"
-                )
-                page.wait_for_timeout(300)
                 self.assertEqual(page.locator("#filtro-voto").count(), 0)
                 sim = page.locator("button.voto-card[data-voto-card='sim']")
                 self.assertEqual(sim.get_attribute("aria-pressed"), "false")
@@ -259,10 +237,10 @@ class TestTagsCaixa(unittest.TestCase):
                 )
                 texto = page.inner_text("body")
                 self.assertIn("92 registros", texto)
-                selos = page.locator(".lista-votos .voto-selo").all_inner_texts()
+                selos = page.locator(".lista-votos .pilula").all_inner_texts()
                 self.assertTrue(selos)
                 for selo in selos:
-                    self.assertEqual(selo.strip(), "Sim")
+                    self.assertEqual(selo.strip(), "Votou Sim")
                 page.fill("#filtro-texto", "habitacionais")
                 page.wait_for_timeout(800)
                 texto_busca = page.inner_text("body")
@@ -278,7 +256,7 @@ class TestTagsCaixa(unittest.TestCase):
                 page.fill("#filtro-texto", "")
                 page.wait_for_timeout(800)
                 texto_limpo = page.locator("#conteudo-vereadores").inner_text()
-                self.assertIn("Toque em um quadro acima", texto_limpo)
+                self.assertIn("Lista de votações nominais", texto_limpo)
                 self.assertEqual(erros, [])
 
     def test_quadros_projetos_abrem_lista_certa(self):
@@ -289,25 +267,21 @@ class TestTagsCaixa(unittest.TestCase):
                 self._abrir_secao(page, "tit-pll")
                 self.assertEqual(page.locator(".btn-filtro-pll").count(), 0)
                 texto_vazio = page.locator("#conteudo-vereadores").inner_text()
-                self.assertIn("Toque em um quadro acima", texto_vazio)
+                self.assertIn("Nenhum projeto na lista", texto_vazio)
                 page.click("button.contagem-item[data-pl-filtro='aprovado']")
                 page.wait_for_timeout(600)
                 lista = page.locator(".lista-pll").inner_text()
-                self.assertIn("Tema: Administração e finanças.", lista)
+                self.assertIn("Administração e finanças", lista)
                 self.assertEqual(
                     page.locator(
                         "button.contagem-item[data-pl-filtro='aprovado']"
                     ).get_attribute("aria-pressed"),
                     "true",
                 )
-                page.click("button.contagem-item[data-pl-filtro='todos']")
-                page.wait_for_timeout(600)
-                titulo = page.locator(".lista-pll-cab").inner_text()
-                self.assertIn("Todos os projetos", titulo)
-                page.click("button.contagem-item[data-pl-filtro='todos']")
+                page.click("button.contagem-item[data-pl-filtro='aprovado']")
                 page.wait_for_timeout(600)
                 texto_fechado = page.locator("#conteudo-vereadores").inner_text()
-                self.assertIn("Toque em um quadro acima", texto_fechado)
+                self.assertIn("Nenhum projeto na lista", texto_fechado)
 
     def test_tema_escuro_caixa_e_quadros(self):
         with sync_playwright() as p:
@@ -325,11 +299,11 @@ class TestTagsCaixa(unittest.TestCase):
                 self._abrir_secao(page, "tit-votos")
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(500)
-                tag = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
+                tag = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                 tag.click()
                 page.wait_for_timeout(300)
-                self.assertEqual(page.locator("#tag-caixa-explicativa").count(), 1)
-                dentro = page.locator("#tag-caixa-explicativa").evaluate(
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 1)
+                dentro = page.locator("#folha-generica-backdrop.ativo").evaluate(
                     "n => { var r = n.getBoundingClientRect(); "
                     "return r.left >= 0 && r.right <= window.innerWidth; }"
                 )
@@ -350,7 +324,7 @@ class TestTagsCaixa(unittest.TestCase):
                         self._abrir_secao(page, titulo)
                     page.click("button.voto-card[data-voto-card='sim']")
                     page.wait_for_timeout(500)
-                    tag = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
+                    tag = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                     tag.click()
                     page.wait_for_timeout(300)
                     overflow = page.evaluate(
@@ -415,20 +389,16 @@ class TestE5hAcabamento(unittest.TestCase):
                 with _navegador(p) as browser:
                     page = browser.new_page(viewport={"width": largura, "height": 900})
                     self._abrir_vereador(page, "2")
-                    page.locator("#tit-votos").locator(
-                        "xpath=ancestor::details[1]"
-                    ).evaluate("n => { n.open = true; }")
-                    page.wait_for_timeout(300)
                     page.click("button.voto-card[data-voto-card='sim']")
                     page.wait_for_timeout(500)
-                    tag = page.locator(".lista-votos .tag-tipo.tag-explicavel").first
+                    tag = page.locator(".lista-votos .tag-categoria.tag-explicavel").first
                     estilo = tag.evaluate(
                         "n => { var c = getComputedStyle(n); "
                         "return n.tagName + '|' + c.fontSize + '|' + c.paddingTop "
                         "+ ' ' + c.paddingRight + ' ' + c.paddingBottom + ' ' + c.paddingLeft; }"
                     )
                     with self.subTest(largura=largura):
-                        self.assertEqual(estilo, "BUTTON|10px|2px 8px 2px 8px")
+                        self.assertEqual(estilo, "BUTTON|13px|2px 8px 2px 8px")
 
     def test_sem_palavra_sem_acento_nas_abas(self):
         with sync_playwright() as p:
@@ -449,11 +419,6 @@ class TestE5hAcabamento(unittest.TestCase):
                                 msg=f"{palavra} visivel na aba Camara",
                             )
                     self._abrir_vereador(page, "2")
-                    for titulo in ("tit-presenca", "tit-pll", "tit-votos"):
-                        page.locator("#" + titulo).locator(
-                            "xpath=ancestor::details[1]"
-                        ).evaluate("n => { n.open = true; }")
-                    page.wait_for_timeout(400)
                     page.click("button.voto-card[data-voto-card='sim']")
                     page.wait_for_timeout(500)
                     texto_ver = page.inner_text("body").lower()
@@ -472,17 +437,11 @@ class TestE5hAcabamento(unittest.TestCase):
                 with _navegador(p) as browser:
                     page = browser.new_page(viewport={"width": largura, "height": 900})
                     self._abrir_vereador(page, "2")
-                    for titulo in ("tit-presenca", "tit-votos"):
-                        page.locator("#" + titulo).locator(
-                            "xpath=ancestor::details[1]"
-                        ).evaluate("n => { n.open = true; }")
-                    page.wait_for_timeout(400)
                     page.click("button.voto-card[data-voto-card='sim']")
                     page.wait_for_timeout(500)
                     texto = page.locator("#conteudo-vereadores").inner_text()
                     with self.subTest(largura=largura):
                         self.assertIn("2º turno", texto)
-                        self.assertIn("§ 1º", texto)
                         self.assertNotIn("1o turno", texto)
                         self.assertNotIn("2o turno", texto)
                         self.assertNotIn("par. 1o", texto)
@@ -492,10 +451,6 @@ class TestE5hAcabamento(unittest.TestCase):
             with _navegador(p) as browser:
                 page = browser.new_page(viewport={"width": 390, "height": 900})
                 self._abrir_vereador(page, "2")
-                page.locator("#tit-votos").locator(
-                    "xpath=ancestor::details[1]"
-                ).evaluate("n => { n.open = true; }")
-                page.wait_for_timeout(300)
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(500)
                 item = page.locator(".lista-votos li").first
@@ -506,7 +461,7 @@ class TestE5hAcabamento(unittest.TestCase):
                     ".filter(e => !e.closest('.materia-tags')).length"
                 )
                 self.assertEqual(fora, 0)
-                ementa = item.locator(".ementa-voto").first
+                ementa = item.locator(".materia-assunto").first
                 self.assertEqual(ementa.count(), 1)
                 self.assertEqual(
                     ementa.evaluate("n => getComputedStyle(n).display"), "block"

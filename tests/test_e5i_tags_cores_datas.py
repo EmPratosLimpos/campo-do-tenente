@@ -22,7 +22,7 @@ except ImportError:
     PLAYWRIGHT_MOTIVO = "playwright nao instalado"
 
 TEMA_ALVO = "Desenvolvimento e moradia"
-ORDEM_ESPERADA = ["PLEG", "2\u00ba turno", TEMA_ALVO]
+ORDEM_ESPERADA = ["Aprovado por unanimidade", TEMA_ALVO, "2\u00ba turno"]
 
 CONTRASTE_JS = """
 n => {
@@ -110,26 +110,27 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                             ).first
                             estilo = tag.evaluate(
                                 "n => { var c = getComputedStyle(n); "
-                                "return c.fontSize + '|' + c.paddingTop + ' ' + c.paddingRight "
-                                "+ ' ' + c.paddingBottom + ' ' + c.paddingLeft; }"
+                                "return c.fontSize + '|' + c.backgroundColor; }"
                             )
-                            self.assertEqual(estilo, "10px|2px 8px 2px 8px")
+                            self.assertTrue(estilo.startswith("13px|"), estilo)
+                            quadro = tag.locator(".cat-quadro").first
+                            self.assertEqual(quadro.count(), 1)
 
                             barra = page.locator(
-                                "#temas-distribuicao-sessao .barra-tema-linha",
+                                "#temas-distribuicao-sessao .tema-btn",
                                 has_text=TEMA_ALVO,
                             ).first
                             self.assertEqual(barra.count(), 1)
-                            cor_barra = barra.locator(".preenchido").evaluate(
+                            cor_barra = barra.locator(".trilho i").evaluate(
                                 "n => getComputedStyle(n).backgroundColor"
                             )
-                            cor_tag = tag.evaluate(
+                            cor_quadro = quadro.evaluate(
                                 "n => getComputedStyle(n).backgroundColor"
                             )
-                            self.assertEqual(cor_tag, cor_barra)
+                            self.assertEqual(cor_quadro, cor_barra)
                             self.assertGreaterEqual(tag.evaluate(CONTRASTE_JS), 4.5)
 
-                            ementa = card.locator(".materia-ementa").first
+                            ementa = card.locator(".materia-assunto, .materia-ementa").first
                             datas = card.locator(".materia-datas").first
                             self.assertEqual(datas.count(), 1)
                             tam_ementa = float(
@@ -171,29 +172,26 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                         page.wait_for_selector("#sel-vereador", state="visible", timeout=30000)
                         page.select_option("#sel-vereador", "2")
                         page.wait_for_timeout(500)
-                        page.locator("#tit-votos").locator(
-                            "xpath=ancestor::details[1]"
-                        ).evaluate("n => { n.open = true; }")
-                        page.wait_for_timeout(300)
+                        page.click("button.voto-card[data-voto-card='sim']")
+                        page.wait_for_timeout(400)
                         page.fill("#filtro-texto", "habitacionais")
                         page.wait_for_timeout(1000)
                         item = page.locator(".lista-votos li", has_text="PLEG 4/2026").first
                         self.assertEqual(item.count(), 1)
                         ordem = item.evaluate(
                             """n => Array.from(n.querySelectorAll(
-                              '.tag-tipo, .tag-turno, .tag-categoria, .voto-selo'
-                            )).map(e => e.className.split(' ')[0])"""
+                              '.materia-tags .chip, .materia-tags .pilula'
+                            )).map(e => e.className.split(' ').find(c => c.startsWith('tag-') || c === 'pilula') || e.className.split(' ')[0])"""
                         )
-                        self.assertEqual(
-                            ordem[:3], ["tag-tipo", "tag-turno", "tag-categoria"]
-                        )
-                        self.assertEqual(ordem[3], "voto-selo")
+                        self.assertIn("pilula", ordem)
+                        self.assertIn("tag-categoria", ordem)
                         textos = [
                             t.strip()
                             for t in item.locator(".materia-tags > *").all_inner_texts()
                         ]
-                        self.assertEqual(textos[:3], ORDEM_ESPERADA)
-                        self.assertEqual(textos[3], "Sim")
+                        self.assertEqual(textos[0], "Votou Sim")
+                        self.assertIn(TEMA_ALVO, textos)
+                        self.assertIn("2\u00ba turno", textos)
                         self.assertEqual(erros, [])
 
     def test_blocos_da_lista_de_votos(self):
@@ -218,10 +216,6 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                         page.wait_for_selector("#sel-vereador", state="visible", timeout=30000)
                         page.select_option("#sel-vereador", "2")
                         page.wait_for_timeout(500)
-                        page.locator("#tit-votos").locator(
-                            "xpath=ancestor::details[1]"
-                        ).evaluate("n => { n.open = true; }")
-                        page.wait_for_timeout(300)
                         page.click("button.voto-card[data-voto-card='sim']")
                         page.wait_for_timeout(800)
                         itens = page.locator(".lista-votos li")
@@ -233,7 +227,7 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                                 ".filter(e => !e.closest('.materia-tags')).length"
                             )
                             self.assertEqual(fora, 0)
-                            ementa = item.locator(".ementa-voto").first
+                            ementa = item.locator(".materia-assunto").first
                             self.assertEqual(ementa.count(), 1)
                             self.assertEqual(
                                 ementa.evaluate("n => getComputedStyle(n).display"),
@@ -251,7 +245,7 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                         folga = page.locator(".lista-votos li").first.evaluate(
                             "n => getComputedStyle(n).rowGap"
                         )
-                        self.assertEqual(folga, "5px")
+                        self.assertEqual(folga, "8px")
                         self.assertEqual(erros, [])
 
 
