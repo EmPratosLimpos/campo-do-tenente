@@ -35,6 +35,15 @@ def nominais_por_estado(slug: str, estado: str) -> int:
     return sum(1 for n in votos.get("nominais") or [] if n.get("estado") == estado)
 
 
+def nominais_ausentes(slug: str) -> int:
+    votos = votos_da_legislatura(slug)
+    return sum(
+        1
+        for n in votos.get("nominais") or []
+        if n.get("estado") in ("ausente_com_justificativa", "ausente_sem_justificativa")
+    )
+
+
 class _Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(RAIZ), **kwargs)
@@ -113,19 +122,17 @@ class TestVotosVereadores(unittest.TestCase):
             texto_jorge = page.inner_text("body")
             votos_jorge = votos_da_legislatura("jorge-quege")
             self.assertIn(f"{votos_jorge['sim']}\nSim", texto_jorge)
-            self.assertIn(
-                f"{votos_jorge['ausente_com_justificativa']}\nAusente com justificativa",
-                texto_jorge,
+            total_ausente_jorge = (
+                votos_jorge["ausente_com_justificativa"] + votos_jorge["ausente_sem_justificativa"]
             )
+            self.assertIn(f"{total_ausente_jorge}\nAusente", texto_jorge)
+            self.assertNotIn("Ausente com justificativa", texto_jorge)
             self.assertNotIn("Fora do mandato naquela data", texto_jorge)
 
-            page.click("button.voto-card[data-voto-card='ausente_com_justificativa']")
+            page.click("button.voto-card[data-voto-card='ausente']")
             page.wait_for_timeout(1000)
             texto_jorge_filtro = page.inner_text("body")
-            self.assertIn(
-                f"{nominais_por_estado('jorge-quege', 'ausente_com_justificativa')} registros",
-                texto_jorge_filtro,
-            )
+            self.assertIn(f"{nominais_ausentes('jorge-quege')} registros", texto_jorge_filtro)
 
             btn_falta = page.locator("[data-falta-presenca='falta_com_justificativa']")
             if btn_falta.count():

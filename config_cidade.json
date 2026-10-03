@@ -229,6 +229,7 @@
     "voto_abstencao": "O vereador estava presente e optou por não votar nem sim nem não.",
     "voto_nao_votou": "O vereador não registrou voto nessa votação.",
     "voto_presidente": "O presidente da sessão não votou nessa votação.",
+    "voto_ausente": "O vereador não estava presente nessa votação. Se a falta foi justificada, aparece no cartão de Presença.",
     "voto_ausente_justificativa": "O vereador faltou com justificativa oficial nessa votação.",
     "voto_ausente_sem_justificativa": "O vereador faltou sem justificativa oficial nessa votação.",
     "voto_presente_sem_registro": "O vereador estava presente, mas o voto individual não foi registrado no SAPL.",
