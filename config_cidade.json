@@ -79,6 +79,10 @@
     "tipos_proposicoes": ["PLEG", "REQ", "MOC", "IND"],
     "tipos_executivo": ["PLEX", "VET"],
     "tipos_veto": ["VET"],
+    "tipos_pedidos": ["IND", "REQ", "MOC"],
+    "tipos_pedidos_nota": "RI-1: siglas de pedidos de vereador na tela (indicacao, requerimento e mocao). PLEG fica no cartao de projetos de lei.",
+    "ementa_oculta_tipos": ["MOC"],
+    "ementa_oculta_tipos_nota": "RI-1: tipos cujo item na lista do vereador nao mostra ementa na tela (ex.: mocao de homenagem).",
     "piso_status_decodificados": 20,
     "teto_pedidos_execucao": 210
   },
@@ -241,6 +245,9 @@
     "tramitacao": "A matéria ainda está em tramitação, sem decisão final registrada.",
     "veto": "O Prefeito pode recusar um projeto aprovado pela Câmara, no todo ou em parte. A Câmara vota de novo e pode manter ou derrubar o veto.",
     "plex": "Projeto de Lei de origem do Poder Executivo: o projeto foi escrito e enviado pela Prefeitura.",
-    "pleg": "Projeto de Lei de origem do Poder Legislativo: proposta apresentada por vereador ou comissão."
+    "pleg": "Projeto de Lei de origem do Poder Legislativo: proposta apresentada por vereador ou comissão.",
+    "ind": "Indicação: o vereador sugere ao Prefeito uma providência. Não obriga o Executivo, mas registra o pedido na Câmara.",
+    "req": "Requerimento: pedido formal de informação ou de providência sobre assunto de competência do município.",
+    "moc": "Moção: manifestação de apoio, aplauso ou homenagem. Não cria obrigação nem altera a lei."
   }
 }
