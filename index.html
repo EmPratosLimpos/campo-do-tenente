@@ -6073,6 +6073,10 @@
     }
     if (ex[tipo]) return ex[tipo];
     if (ex[valor]) return ex[valor];
+    var chaveMin = String(valor || tipo || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    if (ex[chaveMin]) return ex[chaveMin];
+    var descSigla = descricaoTipoSigla(valor);
+    if (descSigla) return ((ex.tipo_materia || "") + " " + descSigla + ".").trim();
     if (tipo === "turno") {
       if (valor === "1o turno") return ex.turno_1o || valor;
       if (valor === "2o turno") return ex.turno_2o || valor;
