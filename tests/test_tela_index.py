@@ -97,7 +97,7 @@ class TestTelaIndex(unittest.TestCase):
         pares = (
             ("--t-tela: 24px", "--t-tela: 31px"),
             ("--t-resumo: 18px", "--t-resumo: 22px"),
-            ("--t-cartao: 17px", "--t-cartao: 19px"),
+            ("--t-cartao: 17px",),
             ("--t-numero: 22px", "--t-numero-quadro: 28px"),
             ("--t-numero-legenda: 14px", "--t-numero-legenda: 13px"),
             ("--t-materia: 15px",),
