@@ -1903,6 +1903,23 @@
   }
   .folha-generica-corpo .pessoa:first-child { border-top: 0; }
   .folha-generica-corpo .pessoa .nm { font-weight: 800; }
+  .folha-generica-corpo .pessoa-voto {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+  }
+  .folha-generica-corpo .pessoa-voto .avatar,
+  .folha-generica-corpo .pessoa-voto .perfil-iniciais {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+    background: var(--marca-fundo);
+    color: var(--marca);
+  }
   @media (min-width: 700px) {
     .folha-generica-backdrop { align-items: center; padding: 16px; }
     .folha-generica {
@@ -2063,6 +2080,88 @@
 
   .painel-vereadores { display: none; }
   .painel-vereadores.ativo { display: block; }
+
+  .painel-prefeito { display: none; }
+  .painel-prefeito.ativo { display: block; }
+
+  .titulo-prefeito {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 10px;
+    color: var(--texto);
+  }
+  .prefeito-abertura {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    line-height: 1.45;
+  }
+  .caminho-prefeito {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .caminho-prefeito li {
+    background: var(--superficie);
+    border-radius: 16px;
+    padding: 12px;
+    display: grid;
+    gap: 6px;
+    box-shadow: var(--sombra);
+    font-size: 14px;
+    font-weight: 600;
+    align-content: start;
+  }
+  .caminho-prefeito b {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--marca-fundo);
+    color: var(--marca);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .listra-veto {
+    background: repeating-linear-gradient(135deg, var(--texto) 0 3px, transparent 3px 6px);
+  }
+  .seg-barra .listra-veto {
+    border-radius: var(--raio-pilula);
+  }
+  .pilula-veto {
+    background: var(--superficie-2);
+    color: var(--texto);
+    gap: 6px;
+  }
+  .pilula-veto-total .listra-veto {
+    display: none;
+  }
+  .chip-estado-veto {
+    font-size: var(--t-apoio);
+    font-weight: 600;
+    color: var(--texto-suave);
+  }
+  .item-veto {
+    display: grid;
+    gap: 8px;
+    border: 1.5px dashed var(--linha-forte);
+    border-radius: 16px;
+    padding: 14px;
+  }
+  .item-veto + .item-veto { margin-top: 12px; }
+  .btn-votos-plex { width: 100%; margin-top: 4px; }
+  .folha-generica-corpo .pessoa .pilula { margin-left: auto; flex: none; }
+  @media (min-width: 900px) {
+    .caminho-prefeito { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .prefeito-colunas.duas-colunas-desk {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    }
+  }
 
   .sessao-titulo {
     font-family: var(--fonte);
@@ -3884,7 +3983,7 @@
         <nav class="menu-lateral-nav" id="menu-lateral-nav" aria-label="Seções do painel">
       <button type="button" class="ativo" data-secao-lateral="camara"><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-camara"/></svg>Câmara</button>
       <button type="button" data-secao-lateral="vereadores"><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-vereadores"/></svg>Vereadores</button>
-      <button type="button" id="nav-lateral-prefeito" hidden><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-prefeito"/></svg>Prefeito</button>
+      <button type="button" id="nav-lateral-prefeito" data-secao-lateral="prefeito" hidden><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-prefeito"/></svg>Prefeito</button>
       <button type="button" class="btn-compartilhar-lateral btn-abrir-share" data-share="site" aria-label="Compartilhar" aria-haspopup="dialog" aria-controls="share-sheet"><svg class="ic" width="22" height="22" aria-hidden="true"><use href="#ic-compartilhar"/></svg>Compartilhar</button>
     </nav>
     <div class="menu-lateral-periodos" id="menu-lateral-periodos"></div>
@@ -6877,6 +6976,407 @@ var MAPA_VAR_CATEGORIA = {
   }
 
 
+  function abaPrefeitoAtiva() {
+    return CONFIG_CIDADE && CONFIG_CIDADE.abas && CONFIG_CIDADE.abas.prefeito === true;
+  }
+
+  function atualizarVisibilidadePrefeito() {
+    var on = abaPrefeitoAtiva();
+    var nav = document.getElementById("nav-prefeito");
+    if (nav) {
+      nav.hidden = !on;
+      if (on) nav.setAttribute("data-secao", "prefeito");
+      else nav.removeAttribute("data-secao");
+    }
+    var lat = document.getElementById("nav-lateral-prefeito");
+    if (lat) lat.hidden = !on;
+  }
+
+  var EXECUTIVO_DADOS = null;
+  var estadoPrefeito = { filtroTema: "", busca: "", limite: 10 };
+  var prefeitoEventosOk = false;
+
+  function carregarExecutivoPrefeito() {
+    if (!abaPrefeitoAtiva()) return Promise.resolve();
+    var url = prefixoDadosTratados() + "executivo_" + SUFIXO_DADOS + ".json";
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }).then(function (dados) {
+      EXECUTIVO_DADOS = dados;
+      renderPainelPrefeito();
+    }).catch(function () {
+      EXECUTIVO_DADOS = null;
+      var painel = document.getElementById("painel-prefeito");
+      if (painel && abaPrefeitoAtiva()) {
+        painel.innerHTML = '<div class="vazio"><b>N\u00e3o foi poss\u00edvel carregar os projetos do Executivo.</b></div>';
+      }
+    });
+  }
+
+  function listaPlexExecutivo() {
+    if (!EXECUTIVO_DADOS) return [];
+    return (EXECUTIVO_DADOS.todo || []).filter(function (item) {
+      return item && item.tipo_sigla === "PLEX";
+    });
+  }
+
+  function listaVetosExecutivo() {
+    if (!EXECUTIVO_DADOS) return [];
+    return (EXECUTIVO_DADOS.todo || []).filter(function (item) {
+      return item && item.veto_tipo;
+    });
+  }
+
+  function mapaVetosPorMateria() {
+    var mapa = {};
+    listaVetosExecutivo().forEach(function (v) {
+      if (v.materia_vetada_id != null) mapa[String(v.materia_vetada_id)] = v;
+    });
+    return mapa;
+  }
+
+  function idMateriaNum(n) {
+    var x = parseInt(n, 10);
+    return isFinite(x) ? x : null;
+  }
+
+  function pilulaExecutivo(item) {
+    var s = item.situacao_final || "";
+    if (s === "Aprovado") return { classe: "pilula-aprovado", rotulo: "Aprovado" };
+    if (s === "Rejeitado") return { classe: "pilula-rejeitado", rotulo: "Rejeitado" };
+    if (s === "Proposi\u00e7\u00e3o transformada em lei") {
+      return { classe: "pilula-aprovado", rotulo: s };
+    }
+    if (item.em_tramitacao) return { classe: "pilula-tramitacao", rotulo: "Em tramita\u00e7\u00e3o" };
+    if (s) return { classe: "pilula-sem-deliberacao", rotulo: s };
+    return { classe: "pilula-sem-deliberacao", rotulo: "Sem delibera\u00e7\u00e3o" };
+  }
+
+  function htmlPilulaExecutivo(item) {
+    var p = pilulaExecutivo(item);
+    return '<span class="pilula ' + p.classe + '">' + esc(p.rotulo) + "</span>";
+  }
+
+  function contagemResumoPrefeito(plex, vetosMap) {
+    var aprovados = 0;
+    var tramitacao = 0;
+    var comVeto = 0;
+    plex.forEach(function (item) {
+      if (vetosMap[String(item.id)]) {
+        comVeto += 1;
+        return;
+      }
+      var s = item.situacao_final || "";
+      if (s === "Aprovado" || s === "Proposi\u00e7\u00e3o transformada em lei") {
+        aprovados += 1;
+        return;
+      }
+      if (s === "Rejeitado") return;
+      if (item.em_tramitacao || s) tramitacao += 1;
+    });
+    return { aprovados: aprovados, tramitacao: tramitacao, comVeto: comVeto, total: plex.length };
+  }
+
+  function htmlBarraResumoPrefeito(c) {
+    var total = c.total;
+    if (!total) return "";
+    var partes = [];
+    if (c.aprovados > 0) partes.push({ pct: (c.aprovados / total) * 100, tipo: "aprovado" });
+    if (c.tramitacao > 0) partes.push({ pct: (c.tramitacao / total) * 100, tipo: "tramitacao" });
+    if (c.comVeto > 0) partes.push({ pct: (c.comVeto / total) * 100, tipo: "veto" });
+    if (!partes.length) return "";
+    var aria = c.aprovados + " aprovados, " + c.tramitacao + " em tramita\u00e7\u00e3o, " + c.comVeto + " com veto";
+    var html = '<div class="seg-barra" role="img" aria-label="' + esc(aria) + '">';
+    partes.forEach(function (p) {
+      if (p.tipo === "aprovado") {
+        html += '<i style="width:' + p.pct.toFixed(2) + '%;background:var(--sim)"></i>';
+      } else if (p.tipo === "tramitacao") {
+        html += '<i style="width:' + p.pct.toFixed(2) + '%;background:transparent;box-shadow:inset 0 0 0 2px var(--tramitacao);border-radius:var(--raio-pilula)"></i>';
+      } else {
+        html += '<i class="listra-veto" style="width:' + p.pct.toFixed(2) + '%"></i>';
+      }
+    });
+    return html + "</div>";
+  }
+
+  function htmlNumerosResumoPrefeito(c) {
+    var linhas = [];
+    if (c.aprovados > 0) {
+      linhas.push('<li><b class="num">' + c.aprovados + '</b><span><span class="marcador-cor" style="background:var(--sim)"></span>Aprovados</span></li>');
+    }
+    if (c.tramitacao > 0) {
+      linhas.push('<li><b class="num">' + c.tramitacao + '</b><span><span class="marcador-cor" style="background:transparent;border:1.5px solid var(--tramitacao);border-radius:50%"></span>Em tramita\u00e7\u00e3o</span></li>');
+    }
+    if (c.comVeto > 0) {
+      linhas.push('<li><b class="num">' + c.comVeto + '</b><span><span class="marcador-cor listra-veto" style="width:12px;height:12px;border-radius:3px;display:inline-block"></span>Com veto</span></li>');
+    }
+    if (!linhas.length) return "";
+    return '<ul class="numeros">' + linhas.join("") + "</ul>";
+  }
+
+  function plexFiltrados() {
+    var lista = listaPlexExecutivo();
+    var filtroTema = estadoPrefeito.filtroTema;
+    var busca = normalizarTexto(estadoPrefeito.busca || "").trim();
+    return lista.filter(function (item) {
+      if (filtroTema && (item.tema || "") !== filtroTema) return false;
+      if (busca) {
+        var texto = (item.tipo || "") + " " + ementaBusca(item.ementa || "") + " " + item.id + " " + assuntoMateria(item);
+        if (normalizarTexto(texto).indexOf(busca) === -1) return false;
+      }
+      return true;
+    });
+  }
+
+  function renderTemasPrefeito() {
+    var container = document.getElementById("temas-distribuicao-prefeito");
+    if (!container) return;
+    var lista = listaPlexExecutivo();
+    if (!lista.length) { container.innerHTML = ""; return; }
+    var contagem = {};
+    lista.forEach(function (item) {
+      var tema = item.tema || "";
+      if (!temaValidoParaTag(tema)) return;
+      contagem[tema] = (contagem[tema] || 0) + 1;
+    });
+    var ordenado = Object.keys(contagem).sort(function (a, b) { return contagem[b] - contagem[a]; });
+    if (!ordenado.length) { container.innerHTML = ""; return; }
+    var max = contagem[ordenado[0]] || 1;
+    var htmlBarras = ordenado.map(function (tema) {
+      var qtd = contagem[tema];
+      var pct = Math.round((qtd / max) * 100);
+      var vcat = varCategoria(tema);
+      var pressed = estadoPrefeito.filtroTema === tema ? ' aria-pressed="true"' : ' aria-pressed="false"';
+      return '<li><button type="button" class="tema-btn" data-prefeito-tema="' + esc(tema) + '"' + pressed + '>' +
+        '<span class="nome">' + esc(tema) + '</span><span class="qtd">' + qtd + '</span>' +
+        '<span class="trilho"><i style="width:' + pct + '%;background:var(' + vcat + ')"></i></span></button></li>';
+    }).join("");
+    container.innerHTML =
+      '<div class="cab-cartao"><h2 class="t2" id="tit-temas-prefeito">Do que tratam</h2>' +
+      '<span class="apoio">toque para filtrar</span></div>' +
+      '<ul class="temas-lista" role="group" aria-label="Filtrar por tema">' + htmlBarras + "</ul>";
+  }
+
+  function renderVetosPrefeito() {
+    var card = document.getElementById("cartao-vetos-prefeito");
+    if (!card) return;
+    var vetos = listaVetosExecutivo();
+    var htmlLista = "";
+    if (!vetos.length) {
+      htmlLista = '<div class="vazio"><b>Nenhum veto do Prefeito neste per\u00edodo.</b></div>';
+    } else {
+      htmlLista = vetos.map(function (v) {
+        var tipo = v.veto_tipo === "total" ? "Veto total" : v.veto_tipo === "parcial" ? "Veto parcial" : "Veto";
+        var listra = v.veto_tipo === "parcial"
+          ? '<i class="listra-veto" style="width:10px;height:10px;border-radius:2px;display:block"></i>'
+          : "";
+        var pilulaVeto = '<span class="pilula pilula-veto pilula-veto-' + esc(v.veto_tipo || "nao") + '">' + listra + esc(tipo) + "</span>";
+        var sit = v.veto_situacao ? '<span class="chip-estado-veto">' + esc(v.veto_situacao) + "</span>" : "";
+        var assunto = esc(assuntoMateria(v));
+        var dataVeto = v.votacao && v.votacao.data_sessao ? formatarData(v.votacao.data_sessao) : "";
+        var meta = '<div class="linha-meta">' + htmlLinhaTipoMateria(v.tipo || "") +
+          (dataVeto ? '<span>' + esc(dataVeto) + "</span>" : "") + "</div>";
+        var linkVetado = "";
+        if (v.materia_vetada_link) {
+          linkVetado = '<a class="fonte" href="' + esc(urlSegura(v.materia_vetada_link)) + '" target="_blank" rel="noopener noreferrer">' +
+            esc(v.materia_vetada_tipo ? "Ver " + v.materia_vetada_tipo + " no SAPL" : "Ver projeto vetado no SAPL") +
+            '<svg class="ic" width="16" height="16" aria-hidden="true"><use href="#ic-ver-na-fonte"/></svg></a>';
+        }
+        return '<div class="item-veto">' +
+          '<div class="linha-meta">' + pilulaVeto + sit + "</div>" +
+          '<p class="materia-assunto">' + assunto + "</p>" + meta + linkVetado + "</div>";
+      }).join("");
+    }
+    card.innerHTML =
+      '<h2 class="t2" id="tit-vetos-prefeito">Vetos</h2>' +
+      '<p class="apoio">Quando o Prefeito n\u00e3o concorda com um projeto aprovado, ele pode vetar tudo ou s\u00f3 uma parte. A C\u00e2mara vota de novo e pode manter ou derrubar o veto.</p>' +
+      htmlLista;
+  }
+
+  function vereadorPorIdSapl(id) {
+    if (!estado.dados || id == null) return null;
+    return (estado.dados.vereadores || []).find(function (v) {
+      return String(v.id_sapl) === String(id);
+    }) || null;
+  }
+
+  function htmlPilulaVotoEstado(estado, rotulo) {
+    var cls = "pilula-sem-deliberacao";
+    if (estado === "sim") cls = "pilula-aprovado";
+    else if (estado === "nao") cls = "pilula-rejeitado";
+    return '<span class="pilula ' + cls + '">' + esc(rotulo || "") + "</span>";
+  }
+
+  function abrirFolhaVotosPlex(item, btn) {
+    var tipo = String(item.votacao_tipo || "").toLowerCase();
+    var html = "";
+    if (tipo === "simbolica") {
+      html = '<p class="apoio">Vota\u00e7\u00e3o simb\u00f3lica: a C\u00e2mara registrou s\u00f3 o resultado.</p>';
+    } else if (tipo === "nominal" && item.votos_nominais && item.votos_nominais.length) {
+      var votos = item.votos_nominais.slice().sort(function (a, b) {
+        return (a.nome_parlamentar || "").localeCompare(b.nome_parlamentar || "", "pt-BR");
+      });
+      html = votos.map(function (v) {
+        var ver = vereadorPorIdSapl(v.parlamentar_id_sapl);
+        var foto = ver
+          ? renderPerfilFoto(ver).replace("perfil-foto-wrap", "avatar")
+          : '<div class="avatar" aria-hidden="true"><span>' + esc(iniciaisNome(v.nome_parlamentar)) + "</span></div>";
+        return '<div class="pessoa pessoa-voto">' + foto +
+          '<span class="nm">' + esc(v.nome_parlamentar) + "</span>" +
+          htmlPilulaVotoEstado(v.estado, v.rotulo || v.voto_texto_sapl) + "</div>";
+      }).join("");
+    } else {
+      html = "<p class=\"apoio\">" + esc(item.votos_nominais_rotulo || item.votacao_tipo || "Sem registro de vota\u00e7\u00e3o nominal no SAPL.") + "</p>";
+    }
+    if (item.votacao && item.votacao.frase_resultado_sapl) {
+      html += "<p class=\"apoio\">" + esc(item.votacao.frase_resultado_sapl) + "</p>";
+    }
+    abrirFolhaGenerica("Como votou cada vereador", html, btn);
+  }
+
+  function renderListaPrefeito() {
+    var bloco = document.getElementById("lista-prefeito");
+    if (!bloco) return;
+    var itens = plexFiltrados();
+    var totalPlex = listaPlexExecutivo().length;
+    var limite = estadoPrefeito.limite || 10;
+    var visiveis = itens.slice(0, limite);
+    var htmlBusca = '<label class="busca-materia"><span class="sr">Buscar por assunto ou n\u00famero</span>' +
+      '<input type="search" id="busca-prefeito" class="input-busca-materia" placeholder="Buscar por assunto ou n\u00famero" value="' + esc(estadoPrefeito.busca) + '"></label>';
+    var htmlLista = "";
+    if (visiveis.length) {
+      htmlLista = '<ul class="lista-materias" aria-live="polite">' + visiveis.map(function (item) {
+        var turnoHtml = "";
+        if (item.votacao && (item.votacao.turno === "1o turno" || item.votacao.turno === "2o turno")) {
+          turnoHtml = '<button type="button" class="chip tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(item.votacao.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(item.votacao.turno)) + "</button>";
+        }
+        var temaHtml = "";
+        if (temaValidoParaTag(item.tema)) {
+          temaHtml = '<button type="button" class="chip tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(item.tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(item.tema) + ">" +
+            htmlMarcadorCategoria(item.tema) + esc(item.tema) + "</button>";
+        }
+        var tagsHtml = '<div class="materia-tags">' + htmlPilulaExecutivo(item) + temaHtml + turnoHtml + "</div>";
+        var dataTxt = item.votacao && item.votacao.data_sessao ? formatarData(item.votacao.data_sessao) : "";
+        return '<li class="item-votado materia" data-tema="' + esc(item.tema || "") + '">' +
+          tagsHtml +
+          '<p class="materia-assunto">' + esc(assuntoMateria(item)) + "</p>" +
+          '<div class="linha-meta">' + htmlLinhaTipoMateria(item.tipo || "") +
+          (dataTxt ? '<span class="materia-datas">' + esc(dataTxt) + "</span>" : "") + "</div>" +
+          htmlLinkSapMateria(item.id, "Ver no SAPL") +
+          '<button type="button" class="btn btn-secundario btn-votos-plex" data-plex-id="' + esc(String(item.id)) + '">Como votou cada vereador</button>' +
+          "</li>";
+      }).join("") + "</ul>";
+    } else {
+      htmlLista = '<div class="vazio"><b>Nenhum projeto encontrado.</b><span>Tente outra palavra ou limpe o filtro de tema.</span>' +
+        (estadoPrefeito.filtroTema || estadoPrefeito.busca
+          ? ' <button type="button" class="btn btn-secundario" id="btn-limpar-filtros-prefeito">Limpar filtros</button>'
+          : "") + "</div>";
+    }
+    var htmlMais = itens.length > limite
+      ? '<button type="button" class="btn btn-secundario" id="btn-mais-prefeito">Mostrar mais</button>'
+      : "";
+    bloco.innerHTML =
+      '<div class="cab-cartao"><h2 class="t2" id="tit-lista-prefeito">Projetos do Prefeito</h2><span class="apoio">' + esc(String(itens.length)) + (itens.length === 1 ? " projeto" : " projetos") + "</span></div>" +
+      htmlBusca + htmlLista + htmlMais;
+  }
+
+  function renderCartaoResumoPrefeito() {
+    var card = document.getElementById("cartao-resumo-prefeito");
+    if (!card) return;
+    var plex = listaPlexExecutivo();
+    var c = contagemResumoPrefeito(plex, mapaVetosPorMateria());
+    card.innerHTML =
+      '<h2 class="t2" id="tit-resumo-prefeito">Resumo</h2>' +
+      htmlBarraResumoPrefeito(c) +
+      htmlNumerosResumoPrefeito(c);
+  }
+
+  function montarEsqueletoPrefeito() {
+    var painel = document.getElementById("painel-prefeito");
+    if (!painel || painel.getAttribute("data-montado") === "1") return;
+    painel.setAttribute("data-montado", "1");
+    painel.innerHTML =
+      '<h1 class="titulo-prefeito" id="tit-prefeito">O que o Prefeito enviou \u00e0 C\u00e2mara</h1>' +
+      '<p class="prefeito-abertura">Projetos de lei da Prefeitura, os ' + htmlBotaoTermoSigla("PLEX") + ": o que pediam, como a C\u00e2mara votou e o que aconteceu depois.</p>" +
+      '<ol class="caminho-prefeito" aria-label="Caminho de um projeto do Prefeito">' +
+      "<li><b>1</b><span>Prefeitura envia o projeto</span></li>" +
+      "<li><b>2</b><span>C\u00e2mara vota</span></li>" +
+      '<li><b>3</b><span>Prefeito sanciona ou ' + htmlBotaoTermo("veto") + "</span></li>" +
+      "<li><b>4</b><span>C\u00e2mara mant\u00e9m ou derruba o veto</span></li></ol>" +
+      '<div class="duas-colunas-desk prefeito-colunas">' +
+      '<div class="coluna-A">' +
+      '<article class="cartao" id="cartao-resumo-prefeito"></article>' +
+      '<article class="cartao" id="card-temas-prefeito"><div id="temas-distribuicao-prefeito"></div></article>' +
+      '<article class="cartao" id="cartao-vetos-prefeito"></article>' +
+      "</div>" +
+      '<div class="coluna-B">' +
+      '<article class="cartao bloco-votado" id="lista-prefeito"></article>' +
+      "</div></div>" +
+      '<footer class="rodape-coleta" aria-label="Informa\u00e7\u00f5es sobre a coleta de dados"></footer>';
+  }
+
+  function plexPorId(id) {
+    var alvo = idMateriaNum(id);
+    return listaPlexExecutivo().find(function (item) { return idMateriaNum(item.id) === alvo; }) || null;
+  }
+
+  function initEventosPrefeito() {
+    if (prefeitoEventosOk) return;
+    var painel = document.getElementById("painel-prefeito");
+    if (!painel) return;
+    prefeitoEventosOk = true;
+    painel.addEventListener("click", function (e) {
+      var btnTema = e.target.closest(".tema-btn[data-prefeito-tema]");
+      if (btnTema) {
+        var t = btnTema.getAttribute("data-prefeito-tema");
+        estadoPrefeito.filtroTema = estadoPrefeito.filtroTema === t ? "" : t;
+        estadoPrefeito.limite = 10;
+        renderTemasPrefeito();
+        renderListaPrefeito();
+        return;
+      }
+      var btnVotos = e.target.closest(".btn-votos-plex");
+      if (btnVotos) {
+        var item = plexPorId(btnVotos.getAttribute("data-plex-id"));
+        if (item) abrirFolhaVotosPlex(item, btnVotos);
+        return;
+      }
+      if (e.target.id === "btn-mais-prefeito") {
+        estadoPrefeito.limite = (estadoPrefeito.limite || 10) + 10;
+        renderListaPrefeito();
+        return;
+      }
+      if (e.target.id === "btn-limpar-filtros-prefeito") {
+        estadoPrefeito.filtroTema = "";
+        estadoPrefeito.busca = "";
+        estadoPrefeito.limite = 10;
+        renderTemasPrefeito();
+        renderListaPrefeito();
+      }
+    });
+    painel.addEventListener("input", function (e) {
+      if (e.target && e.target.id === "busca-prefeito") {
+        estadoPrefeito.busca = e.target.value;
+        estadoPrefeito.limite = 10;
+        renderListaPrefeito();
+        var novo = document.getElementById("busca-prefeito");
+        if (novo) { novo.focus(); novo.setSelectionRange(novo.value.length, novo.value.length); }
+      }
+    });
+  }
+
+  function renderPainelPrefeito() {
+    if (!abaPrefeitoAtiva()) return;
+    montarEsqueletoPrefeito();
+    initEventosPrefeito();
+    renderCartaoResumoPrefeito();
+    renderTemasPrefeito();
+    renderVetosPrefeito();
+    renderListaPrefeito();
+    atualizarRodapesColeta();
+  }
+
   function initMateriasCamara() {
     ["sessao", "mes", "todo"].forEach(function (periodo) {
       estadoMaterias.listaVisivel[periodo] = true;
@@ -6955,26 +7455,6 @@ var MAPA_VAR_CATEGORIA = {
       lateralPeriodos.appendChild(clonePeriodos);
     }
 
-    
-
-    function abaPrefeitoAtiva() {
-      return CONFIG_CIDADE && CONFIG_CIDADE.abas && CONFIG_CIDADE.abas.prefeito === true;
-    }
-    function atualizarVisibilidadePrefeito() {
-      var on = abaPrefeitoAtiva();
-      var nav = document.getElementById("nav-prefeito");
-      if (nav) {
-        nav.hidden = !on;
-        if (on) nav.setAttribute("data-secao", "prefeito");
-        else nav.removeAttribute("data-secao");
-      }
-      var lat = document.getElementById("nav-lateral-prefeito");
-      if (lat) {
-        lat.hidden = !on;
-        if (on) lat.setAttribute("data-secao-lateral", "prefeito");
-        else lat.removeAttribute("data-secao-lateral");
-      }
-    }
     atualizarVisibilidadePrefeito();
 
     function trocarSecao(secao) {
@@ -6999,6 +7479,7 @@ var MAPA_VAR_CATEGORIA = {
       }
       subCamara.classList.toggle("ativo", secao === "camara");
       subVereadores.classList.toggle("ativo", secao === "vereadores");
+      if (secao === "prefeito") renderPainelPrefeito();
       atualizarRotuloBotaoShare();
       atualizarTopoCompacto();
     }
@@ -7102,7 +7583,7 @@ var MAPA_VAR_CATEGORIA = {
     initResumoSheet();
     initFolhaGenerica();
     initNavegacao();
-    return carregarMateriasCamara().then(initMateriasCamara);
+    return carregarMateriasCamara().then(initMateriasCamara).then(carregarExecutivoPrefeito);
   }).then(carregar);
 })();
 </script>

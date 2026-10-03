@@ -26,9 +26,6 @@
     ],
     "hosts_permitidos_extra": []
   },
-  "abas": {
-    "prefeito": false
-  },
   "painel": {
     "nome_projeto": "Em Pratos Limpos",
     "endereco_publico": "https://empratoslimpos.github.io/campo-do-tenente/",
@@ -45,7 +42,7 @@
   },
   "abas": {
     "nota": "D-058: chave que liga cada aba da tela. False deixa a aba fora do painel mesmo com os dados ja tratados no SAPL. O dado existe antes da tela: quem liga a aba e o mantenedor.",
-    "prefeito": false
+    "prefeito": true
   },
   "vereadores": {
     "numero_esperado": null

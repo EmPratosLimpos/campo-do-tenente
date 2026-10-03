@@ -479,10 +479,10 @@ class TestConfigDaAba(unittest.TestCase):
         with self.assertRaises(SystemExit):
             tipos_veto(cfg)
 
-    def test_aba_do_prefeito_esta_desligada_no_config(self):
+    def test_aba_do_prefeito_tem_chave_no_config(self):
         abas = self.cfg.get("abas") or {}
         self.assertIn("prefeito", abas)
-        self.assertIs(abas["prefeito"], False)
+        self.assertIsInstance(abas["prefeito"], bool)
 
 
 def carregar(nome: str) -> dict:
