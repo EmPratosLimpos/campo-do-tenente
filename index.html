@@ -4444,6 +4444,262 @@
     #conteudo-vereadores .numeros li.clicavel .linha-btn > svg { grid-row: 1; grid-column: 2; }
     #conteudo-vereadores .numeros li span .marcador-cor { margin-top: 3px; }
   }
+
+  /* Abas Câmara e Prefeito, e folhas: revisão contra o protótipo */
+  .secao-camara-titulo,
+  .titulo-prefeito {
+    font-size: var(--t-tela);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 0;
+    color: var(--texto);
+    text-wrap: balance;
+  }
+  .sub-camara.ativo { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+  .sub-camara .seletor-periodo { margin-top: 0; }
+  .seletor-periodo { border-radius: var(--raio-pilula); padding: 4px; }
+  .seletor-periodo button {
+    border-radius: var(--raio-pilula);
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 0 6px;
+  }
+  .nav-principal button.ativo { color: var(--texto); }
+  #painel-camara .cartao.bloco-votado,
+  #painel-prefeito .cartao.bloco-votado {
+    padding: var(--esp-5);
+    border-radius: var(--raio-cartao);
+    margin: 0;
+  }
+  #painel-camara .cab-cartao .apoio,
+  #painel-prefeito .cab-cartao .apoio,
+  #painel-prefeito .cartao > .apoio {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--texto-suave);
+    margin: 0;
+  }
+  #painel-camara .tema-btn,
+  #painel-prefeito .tema-btn {
+    font-family: var(--fonte);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  #painel-camara .tema-btn .nome,
+  #painel-camara .tema-btn .qtd,
+  #painel-prefeito .tema-btn .nome,
+  #painel-prefeito .tema-btn .qtd { font-size: 14px; }
+  #painel-camara .numeros .presenca-de {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--texto-suave);
+  }
+  #painel-camara .lista-materias,
+  #painel-prefeito .lista-materias { display: grid; gap: 0; }
+  #painel-camara .item-votado.materia,
+  #painel-prefeito .item-votado.materia {
+    display: grid;
+    gap: 8px;
+    padding: 16px 0;
+    border-bottom: 0;
+    border-top: 1px solid var(--linha);
+    align-items: start;
+    justify-items: start;
+  }
+  #painel-camara .item-votado.materia:first-child,
+  #painel-prefeito .item-votado.materia:first-child { border-top: 0; padding-top: 4px; }
+  #painel-camara .materia-assunto,
+  #painel-prefeito .materia-assunto { justify-self: stretch; }
+  #painel-camara .materia-tags,
+  #painel-prefeito .materia-tags,
+  #painel-prefeito .item-veto > .linha-meta:first-child {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+  }
+  #painel-camara .chip,
+  #painel-prefeito .chip {
+    min-height: 32px;
+    padding: 4px 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: normal;
+  }
+  #painel-camara .linha-meta,
+  #painel-prefeito .linha-meta { line-height: 1.5; }
+  #painel-camara .linha-meta .materia-datas,
+  #painel-prefeito .linha-meta .materia-datas { display: inline; margin: 0; line-height: 1.5; }
+  .linha-meta .sigla .termo { font-weight: inherit; color: inherit; }
+  #painel-prefeito .item-veto + .item-veto { margin-top: 0; }
+  #painel-prefeito .btn-votos-plex {
+    width: auto;
+    justify-self: start;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 14px 0 10px;
+    border: 0;
+    border-radius: var(--raio-pilula);
+    background: var(--superficie-2);
+    color: var(--texto);
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .painel-prefeito.ativo { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+  .painel-prefeito .prefeito-abertura { font-size: 18px; line-height: 1.4; margin: 0; }
+  .painel-prefeito .caminho-prefeito { margin: 0; }
+  .busca-materia .ic { flex: none; }
+  #temas-distribuicao-sessao,
+  #temas-distribuicao-mes,
+  #temas-distribuicao-todo,
+  #temas-distribuicao-prefeito { display: grid; gap: 14px; min-width: 0; }
+
+  /* Folhas: explicação, quem faltou, votos e compartilhar */
+  .folha-generica {
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+    padding-top: 10px;
+  }
+  .folha-generica .share-sheet-grabber { margin: 0 auto 4px; background: var(--linha-forte); }
+  .folha-generica .resumo-sheet-cabecalho {
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px;
+    border-bottom: 0;
+  }
+  .folha-generica .resumo-sheet-cabecalho h2 {
+    padding: 0;
+    font-size: 18px;
+    line-height: 1.25;
+  }
+  #btn-fechar-folha-generica { background: var(--superficie-2); color: var(--texto); }
+  #btn-fechar-folha-generica svg { width: 18px; height: 18px; stroke-width: 2.4; }
+  .folha-generica-corpo {
+    padding: 10px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+    font-size: 16px;
+    display: grid;
+    gap: 10px;
+    justify-items: start;
+    align-content: start;
+  }
+  .folha-generica-corpo > * { margin: 0; }
+  .folha-generica-corpo > .pessoa { justify-self: stretch; }
+  .folha-generica-corpo .apoio { font-size: 14px; color: var(--texto-suave); }
+  .folha-generica-corpo .pessoa-falta .avatar {
+    grid-row: span 2;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--marca-fundo);
+    color: var(--marca);
+    font-weight: 800;
+  }
+  .folha-generica-corpo .pessoa-falta .avatar img { width: 48px; height: 48px; object-fit: cover; display: block; }
+  .folha-generica-corpo .pessoa-falta .iniciais-foto { font-size: 15px; }
+  .folha-generica-corpo .pessoa-voto .avatar { overflow: hidden; flex: none; }
+  .folha-generica-corpo .pessoa-voto .avatar img { width: 40px; height: 40px; object-fit: cover; display: block; }
+  .folha-generica-corpo .pessoa-voto .iniciais-foto { font-size: 13px; }
+  .folha-generica-corpo .pessoa-falta .linha-meta { line-height: 1.5; }
+  .folha-generica-corpo .pessoa-falta .btn-ir-vereador { grid-column: 2; justify-self: start; margin-top: 4px; font-weight: 800; }
+  .folha-generica-corpo .pessoa-falta .pilula { margin-left: 0; }
+  .folha-generica-corpo .folha-subtitulo + .pessoa { border-top: 0; }
+  .folha-generica-corpo .folha-subtitulo { font-size: 16px; color: var(--texto-suave); }
+  .pilula-falta { gap: 6px; background: var(--superficie-2); color: var(--texto); }
+  .pilula-falta.sem { background: var(--nao-fundo); }
+  .pilula-falta .marcador-cor { width: 12px; height: 12px; }
+  @media (min-width: 700px) {
+    .folha-generica { border-radius: 24px; padding-bottom: 0; }
+  }
+  .share-balao canvas {
+    width: auto;
+    height: min(180px, 19vh);
+    max-width: 100%;
+    max-height: none;
+    aspect-ratio: auto;
+  }
+  .share-vitrine canvas,
+  .share-vitrine canvas.feed,
+  .share-vitrine canvas.story {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: min(300px, 30vh);
+    aspect-ratio: auto;
+    border-radius: 10px;
+  }
+  @media (min-width: 900px) {
+    .topo-fixo .topo-marca-linha .site-logo,
+    .topo-fixo .topo-tagline { display: none; }
+    .topo-fixo .topo-marca-linha { justify-content: flex-end; }
+    .menu-lateral-nav button.ativo { color: var(--texto); }
+    .menu-lateral-nav button.ativo svg { color: var(--marca); }
+    .menu-lateral-periodos .seletor-periodo { border-radius: 18px; }
+    #painel-camara .numeros,
+    #painel-prefeito .numeros {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    #painel-camara .numeros li,
+    #painel-prefeito .numeros li {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      align-items: start;
+      gap: 8px;
+      border: 0;
+      background: var(--superficie-2);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: left;
+    }
+    #painel-camara .numeros b,
+    #painel-prefeito .numeros b {
+      grid-column: 1;
+      grid-row: 1;
+      text-align: left;
+      justify-self: start;
+      font-size: 30px;
+    }
+    #painel-camara .numeros li.presenca-linha b { justify-content: flex-start; width: auto; }
+    #painel-camara .numeros li > span,
+    #painel-prefeito .numeros li > span {
+      grid-column: 1;
+      grid-row: 2;
+      justify-content: flex-start;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--texto-suave);
+    }
+    #painel-camara .numeros li > span .marcador-cor,
+    #painel-prefeito .numeros li > span .marcador-cor { margin-top: 3px; }
+    #painel-camara .numeros li.clicavel { padding: 0; background: transparent; }
+    #painel-camara .numeros li.clicavel .linha-btn {
+      height: 100%;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      align-items: start;
+      padding: 14px;
+      gap: 8px;
+    }
+    #painel-camara .numeros li.clicavel .linha-btn b { grid-row: 1; grid-column: 1; font-size: 30px; line-height: 1; }
+    #painel-camara .numeros li.clicavel .linha-btn > span { grid-row: 2; grid-column: 1 / -1; font-size: 14px; color: var(--texto-suave); }
+    #painel-camara .numeros li.clicavel .linha-btn > svg { grid-row: 1; grid-column: 2; }
+  }
+  /* Folha de impressão: margens da referência (folha-sessao.pdf) e fundo branco */
+  @media print {
+    html, body { background: #FFFFFF !important; }
+    #folha-impressao .fi-frase { margin: 7mm 0 1.5mm; }
+    #folha-impressao .fi-nums { margin: 6mm 0 8mm; }
+    #folha-impressao .fi-h2 { margin-bottom: 3mm; }
+    #folha-impressao .fi-tags { margin-bottom: 2mm; }
+    #folha-impressao .fi-mat h3 { margin-bottom: 1mm; }
+    #folha-impressao .fi-meta { margin-top: 1mm; }
+  }
 </style>
 </head>
 <body>
@@ -4538,12 +4794,12 @@
           <div class="coluna-A">
             <article class="cartao" id="card-votacoes-sessao" aria-labelledby="tit-resumo-sessao"></article>
             <article class="cartao" id="card-presenca-sessao" aria-labelledby="tit-presenca-sessao"></article>
-          </div>
-          <div class="coluna-B">
             <article class="cartao" id="card-temas-sessao"><div id="temas-distribuicao-sessao"></div></article>
           </div>
+          <div class="coluna-B">
+            <article class="cartao bloco-votado" id="bloco-votado-sessao" data-periodo="sessao"></article>
+          </div>
         </div>
-        <article class="cartao bloco-votado" id="bloco-votado-sessao" data-periodo="sessao"></article>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
       </div>
 
@@ -4555,12 +4811,12 @@
               <h2 class="t2" id="tit-tipos-mes">Quantas votações por tipo?</h2>
               <div class="barra-tema-cam barra-temas" id="tipos-mes-barras"></div>
             </article>
-          </div>
-          <div class="coluna-B">
             <article class="cartao" id="card-temas-mes"><div id="temas-distribuicao-mes"></div></article>
           </div>
+          <div class="coluna-B">
+            <article class="cartao bloco-votado" id="bloco-votado-mes" data-periodo="mes"></article>
+          </div>
         </div>
-        <article class="cartao bloco-votado" id="bloco-votado-mes" data-periodo="mes"></article>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
       </div>
 
@@ -4568,12 +4824,12 @@
         <div class="duas-colunas-desk">
           <div class="coluna-A">
             <article class="cartao" id="cartao-resumo-todo"></article>
-          </div>
-          <div class="coluna-B">
             <article class="cartao" id="card-temas-todo"><div id="temas-distribuicao-todo"></div></article>
           </div>
+          <div class="coluna-B">
+            <article class="cartao bloco-votado" id="bloco-votado-todo" data-periodo="todo"></article>
+          </div>
         </div>
-        <article class="cartao bloco-votado" id="bloco-votado-todo" data-periodo="todo"></article>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
       </div>
     </div>
@@ -5377,37 +5633,58 @@
     return '<ul class="numeros">' + linhas.join("") + "</ul>";
   }
 
+  function formaNum(n, um, varios) {
+    return n === 1 ? um : varios;
+  }
+
+  // Frase-resumo do período (textos-compartilhamento.md, seção 5). Devolve HTML com os números em <strong>.
+  // longo: { sessoes: n, anos: "de 2025 e 2026" } acrescenta o contexto do período longo antes.
+  function fraseResumoNumeros(total, unanimes, maioria, rejeitadas, longo) {
+    var N = function (x) { return "<strong>" + x + "</strong>"; };
+    var aprovados = unanimes + maioria;
+    if (longo && longo.sessoes > 0) {
+      var inicio = "Em " + N(longo.sessoes) + " " + formaNum(longo.sessoes, "sessão ordinária", "sessões ordinárias") + " " + longo.anos + ", ";
+      if (total === 0) return inicio + "a Câmara não votou projetos de lei.";
+      inicio += "a Câmara votou " + N(total) + " " + formaNum(total, "projeto de lei", "projetos de lei") + ". ";
+      if (rejeitadas > 0) {
+        if (aprovados === 0) {
+          return inicio + formaNum(rejeitadas, "Foi", "Foram") + " " + N(rejeitadas) + " " + formaNum(rejeitadas, "rejeitado", "rejeitados") + ".";
+        }
+        return inicio + formaNum(aprovados, "Foi", "Foram") + " " + N(aprovados) + " " + formaNum(aprovados, "aprovado", "aprovados") +
+          " e " + N(rejeitadas) + " " + formaNum(rejeitadas, "rejeitado", "rejeitados") + ".";
+      }
+      var sujeito = total === 1 ? "Foi aprovado" : (total === 2 ? "Os dois foram aprovados" : "Todos foram aprovados");
+      if (maioria === 0 && unanimes === total) return inicio + sujeito + " por unanimidade.";
+      if (unanimes === 0 && maioria === total) return inicio + sujeito + " por maioria.";
+      return inicio + sujeito + ": " + N(unanimes) + " por unanimidade e " + N(maioria) + " por maioria.";
+    }
+    if (total === 0) return "A Câmara não votou projetos de lei neste período.";
+    if (rejeitadas > 0) {
+      var partes = aprovados > 0 ? N(aprovados) + " " + formaNum(aprovados, "aprovado", "aprovados") + " e " : "";
+      return "A Câmara votou " + N(total) + " " + formaNum(total, "projeto de lei", "projetos de lei") + ": " +
+        partes + N(rejeitadas) + " " + formaNum(rejeitadas, "rejeitado", "rejeitados") + ".";
+    }
+    if (total === 1) {
+      return "A Câmara aprovou o único projeto de lei votado, por " + (maioria === 1 ? "maioria" : "unanimidade") + ".";
+    }
+    var qual = total === 2 ? "os dois" : "todos";
+    if (maioria === 0 && unanimes === total) {
+      return "A Câmara aprovou os " + N(total) + " projetos de lei votados, " + qual + " por unanimidade.";
+    }
+    if (unanimes === 0 && maioria === total) {
+      return "A Câmara aprovou os " + N(total) + " projetos de lei votados, " + qual + " por maioria.";
+    }
+    return "A Câmara aprovou os " + N(total) + " projetos de lei votados: " + N(unanimes) + " por unanimidade e " + N(maioria) + " por maioria.";
+  }
+
   function htmlFraseResumoPeriodo(periodo, semPresenca) {
     var lista = MATERIAS_CAMARA[periodo] || [];
     var c = contagemResultadosMaterias(lista);
-    var total = lista.length;
-    var unanimes = c.unanimidade;
-    var maioria = c.maioria;
-    var rejeitadas = c.rejeitado;
     var meta = estado.dados && estado.dados.meta;
     var nSessoes = meta && meta.n_sessoes_ordinarias != null ? meta.n_sessoes_ordinarias : 0;
-    var prefixoLongo = "";
-    if (periodo === "todo" && nSessoes > 0 && total > 0) {
-      prefixoLongo = "Em <strong>" + nSessoes + "</strong> sess\u00f5es ordin\u00e1rias de " + rotuloAnosRecorte() + ", ";
-    }
-    if (total === 0) {
-      return '<p class="resumo">' + prefixoLongo + "A C\u00e2mara n\u00e3o votou projetos de lei neste per\u00edodo.</p>";
-    }
-    var corpo = "";
-    if (rejeitadas > 0) {
-      var aprovados = unanimes + maioria;
-      corpo = "A C\u00e2mara votou <strong>" + total + "</strong> projetos de lei: <strong>" + aprovados + "</strong> aprovados e <strong>" + rejeitadas + "</strong> rejeitados.";
-    } else if (maioria === 0 && unanimes === total) {
-      if (total === 1) {
-        corpo = "A C\u00e2mara aprovou o \u00fanico projeto de lei votado, por unanimidade.";
-      } else {
-        var qual = total === 2 ? "os dois" : "todos";
-        corpo = "A C\u00e2mara aprovou os <strong>" + total + "</strong> projetos de lei votados, " + qual + " por unanimidade.";
-      }
-    } else {
-      corpo = "A C\u00e2mara aprovou os <strong>" + total + "</strong> projetos de lei votados: <strong>" + unanimes + "</strong> por unanimidade e <strong>" + maioria + "</strong> por maioria.";
-    }
-    if (periodo === "sessao" && !semPresenca) {
+    var longo = periodo === "todo" && nSessoes > 0 ? { sessoes: nSessoes, anos: rotuloAnosRecorte() } : null;
+    var corpo = fraseResumoNumeros(lista.length, c.unanimidade, c.maioria, c.rejeitado, longo);
+    if (periodo === "sessao" && !semPresenca && lista.length > 0) {
       var s = ultimaSessaoOrdinaria();
       var n = s ? vereadoresNoMandatoNaSessao(s) : 0;
       var p = s && s.n_presentes != null ? s.n_presentes : 0;
@@ -5416,16 +5693,17 @@
         else corpo += " <strong>" + p + "</strong> dos <strong>" + n + "</strong> vereadores estavam presentes.";
       }
     }
-    if (prefixoLongo) corpo = prefixoLongo + "a C\u00e2mara votou <strong>" + total + "</strong> projetos de lei. " + corpo.replace(/^A C\u00e2mara /, "");
-    return '<p class="resumo" id="tit-resumo-sessao">' + corpo + "</p>";
+    return '<p class="resumo" id="tit-resumo-' + esc(periodo) + '">' + corpo + "</p>";
   }
 
-  function htmlCartaoResumoVotacao(periodo, tituloCab, apoioCab) {
+  function htmlCartaoResumoVotacao(periodo, tituloCab, apoioCab, tituloSoLeitor) {
     var lista = MATERIAS_CAMARA[periodo] || [];
     var c = contagemResultadosMaterias(lista);
     var total = lista.length;
     var cab = "";
-    if (tituloCab || apoioCab) {
+    if (tituloSoLeitor && tituloCab) {
+      cab = '<h2 class="sr">' + esc(tituloCab) + "</h2>";
+    } else if (tituloCab || apoioCab) {
       cab = '<div class="cab-cartao"><h2 class="t2">' + esc(tituloCab || "") + "</h2>" +
         (apoioCab ? '<span class="apoio">' + esc(apoioCab) + "</span>" : "") + "</div>";
     }
@@ -5456,19 +5734,41 @@
       var v = item.v;
       var p = item.p;
       var foto = renderPerfilFoto(v).replace("perfil-foto-wrap", "avatar");
-      var partido = v.partido_atual || v.partido || "";
-      var tipoFalta = p.justificativa || p.situacao === "ausente_com_justificativa"
-        ? "Falta com justificativa"
-        : "Falta sem justificativa";
-      return '<div class="pessoa">' + foto +
+      var partido = v.partido_sigla || v.partido_atual || v.partido || "";
+      var comJustificativa = p.justificativa || p.situacao === "ausente_com_justificativa";
+      var tipoFalta = comJustificativa ? "Falta com justificativa" : "Falta sem justificativa";
+      var marcador = comJustificativa
+        ? '<span class="marcador-cor tracejado"></span>'
+        : '<span class="marcador-cor listra-quadro"></span>';
+      return '<div class="pessoa pessoa-falta">' + foto +
         '<span class="nm">' + esc(v.nome_parlamentar || v.nome) + "</span>" +
-        '<span class="apoio">' + esc(partido) + " \u00b7 " + esc(tipoFalta) + "</span></div>";
+        '<span class="linha-meta">' + (partido ? "<span>" + esc(partido) + "</span>" : "") +
+        '<span class="pilula pilula-falta' + (comJustificativa ? "" : " sem") + '">' + marcador + esc(tipoFalta) + "</span></span>" +
+        '<button type="button" class="btn btn-secundario btn-ir-vereador" data-ir-vereador="' + esc(String(v.id_sapl)) + '">Ver atua\u00e7\u00e3o do vereador</button></div>';
     }).join("");
+    if (s.data) html = '<p class="folha-subtitulo">Sess\u00e3o de ' + esc(formatarData(s.data)) + "</p>" + html;
     if (s.link_sapl) {
       html += '<p><a class="fonte" href="' + esc(urlSegura(s.link_sapl)) + '" target="_blank" rel="noopener noreferrer">Ver a sess\u00e3o no SAPL</a></p>';
     }
-    html += '<p class="apoio">Toque em &quot;Ver atua\u00e7\u00e3o do vereador&quot; na lista para abrir o perfil na aba Vereadores.</p>';
     abrirFolhaGenerica("Quem faltou", html, btn);
+    document.querySelectorAll("#folha-generica-corpo [data-ir-vereador]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        estado.vereadorId = b.getAttribute("data-ir-vereador");
+        estado.pagina = 1;
+        estado.filtroPLL = "";
+        estado.filtroPLLTema = "";
+        estado.listaPLLVisivel = false;
+        estado.filtroTexto = "";
+        estado.filtroClassificacao = "";
+        fecharFolhaGenerica(false);
+        renderApp();
+        var nav = window.innerWidth >= 900
+          ? document.querySelector("#menu-lateral-nav [data-secao-lateral='vereadores']")
+          : document.querySelector("#nav-principal [data-secao='vereadores']");
+        if (nav) { nav.click(); nav.focus(); }
+        window.scrollTo(0, 0);
+      });
+    });
   }
 
   function renderCartaoPresencaSessao() {
@@ -5517,7 +5817,7 @@
   function renderCartaoResumoTodo() {
     var card = document.getElementById("cartao-resumo-todo");
     if (!card) return;
-    card.innerHTML = htmlCartaoResumoVotacao("todo", rotuloPeriodoLegislatura(), "");
+    card.innerHTML = htmlCartaoResumoVotacao("todo", rotuloPeriodoLegislatura(), "", true);
   }
 
 
@@ -7120,7 +7420,7 @@ var MAPA_VAR_CATEGORIA = {
     var t = String(tipoStr || "").trim();
     var m = t.match(/^([A-Za-z]+)\s+(.+)$/);
     if (!m) return '<span class="sigla">' + esc(t) + "</span>";
-    return htmlBotaoTermoSigla(m[1]) + " <span class=\"sigla-num\">" + esc(m[2]) + "</span>";
+    return '<span class="sigla">' + htmlBotaoTermoSigla(m[1]) + ' <span class="sigla-num">' + esc(m[2]) + "</span></span>";
   }
 
   function classePilulaResultado(m) {
@@ -7256,7 +7556,7 @@ var MAPA_VAR_CATEGORIA = {
     var limite = estadoMaterias.limite[periodo] || 10;
     if (limite < 10) limite = 10;
     var visiveis = itens.slice(0, limite);
-    var htmlBusca = '<label class="busca-materia"><span class="sr">Buscar por assunto ou n\u00famero</span>' +
+    var htmlBusca = '<label class="busca-materia"><svg class="ic" width="18" height="18" aria-hidden="true"><use href="#ic-buscar"/></svg><span class="sr">Buscar por assunto ou n\u00famero</span>' +
       '<input type="search" id="busca-materia-' + esc(periodo) + '" class="input-busca-materia" data-periodo="' + esc(periodo) + '" placeholder="Buscar por assunto ou n\u00famero" value="' + esc(estadoMaterias.busca) + '"></label>';
     var htmlLista = "";
     if (visiveis.length > 0) {
@@ -7912,7 +8212,7 @@ var MAPA_VAR_CATEGORIA = {
     var meta = (m.tipo || "") + (m.tipo && datas ? ". Votado em " + datas : (datas ? "Votado em " + datas : "")) + ((m.tipo || datas) ? "." : "");
     return '<div class="fi-mat">' + (tags ? '<div class="fi-tags">' + tags + "</div>" : "") +
       "<h3>" + esc(assunto) + "</h3>" +
-      (ementa && ementa !== assunto ? "<p>" + esc(ementa) + "</p>" : "") +
+      (ementa && ementa !== assunto && assuntoMateria({ ementa: m.ementa }) !== assunto ? "<p>" + esc(ementa) + "</p>" : "") +
       (meta ? '<p class="fi-meta">' + esc(meta) + "</p>" : "") + "</div>";
   }
 
@@ -7962,7 +8262,7 @@ var MAPA_VAR_CATEGORIA = {
       }
     } else {
       var p = ctx.periodo || "sessao";
-      frase = textoFrasePeriodo(p, false);
+      frase = textoFrasePeriodo(p, true);
       periodo = p === "sessao" ? "Última sessão ordinária" + (dataUltimaSessaoFmt() ? ", " + dataUltimaSessaoFmt() : "")
         : rotuloContextoPeriodo(p);
       nums = numerosPeriodo(p);
@@ -8498,7 +8798,7 @@ var MAPA_VAR_CATEGORIA = {
     var totalPlex = listaPlexExecutivo().length;
     var limite = estadoPrefeito.limite || 10;
     var visiveis = itens.slice(0, limite);
-    var htmlBusca = '<label class="busca-materia"><span class="sr">Buscar por assunto ou n\u00famero</span>' +
+    var htmlBusca = '<label class="busca-materia"><svg class="ic" width="18" height="18" aria-hidden="true"><use href="#ic-buscar"/></svg><span class="sr">Buscar por assunto ou n\u00famero</span>' +
       '<input type="search" id="busca-prefeito" class="input-busca-materia" placeholder="Buscar por assunto ou n\u00famero" value="' + esc(estadoPrefeito.busca) + '"></label>';
     var htmlLista = "";
     if (visiveis.length) {
