@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; img-src 'self' https://empratoslimpos.goatcounter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://eu.i.posthog.com; form-action 'none'; upgrade-insecure-requests;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; img-src 'self' https://empratoslimpos.goatcounter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://eu.i.posthog.com https://eu-assets.i.posthog.com; form-action 'none'; upgrade-insecure-requests;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Em Pratos Limpos: o que a Câmara de Campo do Tenente vota</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5062,6 +5062,7 @@
   global.CartoesEPL = { desenhar: desenhar, paraBlob: paraBlob, FORMATOS: FORMATOS, CORES: COR, EXEMPLOS: EXEMPLOS };
 })(window);
 </script>
+<script src="assets/posthog-config.js"></script>
 <script src="assets/posthog-1.435.8.js"></script>
 <script>
 (function () {
@@ -5223,7 +5224,7 @@
         rageclick: false,
         person_profiles: "identified_only",
         advanced_disable_feature_flags: true,
-        disable_external_dependency_loading: true
+        disable_external_dependency_loading: true,
       });
     } catch (err) { /* analytics opcional */ }
   }
