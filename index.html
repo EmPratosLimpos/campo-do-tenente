@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; img-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'none'; upgrade-insecure-requests;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; img-src 'self' https://empratoslimpos.goatcounter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://eu.i.posthog.com; form-action 'none'; upgrade-insecure-requests;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Em Pratos Limpos: o que a Câmara de Campo do Tenente vota</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1379,30 +1379,6 @@
   }
 
 
-  .busca-materia-wrap {
-    margin-bottom: 10px;
-  }
-
-  .busca-materia-wrap label {
-    display: block;
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--texto-suave);
-    margin-bottom: 4px;
-  }
-
-  .busca-materia-wrap input {
-    width: 100%;
-    font: inherit;
-    font-size: 13px;
-    padding: 10px 12px;
-    border: 1px solid var(--linha);
-    border-radius: 8px;
-    background: var(--superficie-2);
-    color: var(--texto);
-    min-height: 44px;
-  }
-
   .filtros-materia button[aria-pressed="true"],
   .filtros-pll button[aria-pressed="true"] {
     background: var(--marca-solida);
@@ -1506,6 +1482,22 @@
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+  }
+  .rodape-coleta .rodape-apoio-texto {
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  #gc-contagem {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .item-pll {
@@ -2073,6 +2065,7 @@
   }
   .tema-btn .trilho i { display: block; height: 100%; border-radius: var(--raio-pilula); }
   .busca-materia {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -5069,6 +5062,7 @@
   global.CartoesEPL = { desenhar: desenhar, paraBlob: paraBlob, FORMATOS: FORMATOS, CORES: COR, EXEMPLOS: EXEMPLOS };
 })(window);
 </script>
+<script src="assets/posthog-1.435.8.js"></script>
 <script>
 (function () {
   "use strict";
@@ -5151,6 +5145,114 @@
     return "SAPL da Câmara Municipal de " + nomeCidade();
   }
 
+  function emailContatoPainel() {
+    var p = CONFIG_CIDADE && CONFIG_CIDADE.painel;
+    return p && p.email_contato ? String(p.email_contato).trim() : "";
+  }
+
+  function urlHttpsExterna(url) {
+    if (url == null || !String(url).trim()) return "";
+    try {
+      var u = new URL(String(url).trim());
+      if (u.protocol !== "https:") return "";
+      return u.href;
+    } catch (err) {
+      return "";
+    }
+  }
+
+  function htmlLinhaContatoRodape() {
+    var em = emailContatoPainel();
+    if (!em) return "";
+    return "<p>Cr\u00edticas, elogios ou sugest\u00f5es: <a href=\"mailto:" + esc(em) + "\">" + esc(em) + "</a></p>";
+  }
+
+  function htmlBlocoApoioRodape() {
+    var url = CONFIG_CIDADE && CONFIG_CIDADE.painel ? CONFIG_CIDADE.painel.apoio_url : "";
+    url = urlHttpsExterna(url);
+    if (!url) return "";
+    return "<p><a class=\"link-apoio-projeto\" href=\"" + esc(url) + "\" target=\"_blank\" rel=\"noopener noreferrer\">Apoie o projeto</a></p>" +
+      "<p class=\"rodape-apoio-texto\">N\u00e3o aceitamos doa\u00e7\u00f5es de pol\u00edticos, partidos, candidatos ou pessoas ligadas \u00e0 C\u00e2mara e \u00e0 Prefeitura.</p>";
+  }
+
+  function htmlRodapeColetaExtra() {
+    return htmlLinhaContatoRodape() + htmlBlocoApoioRodape();
+  }
+
+  function caminhoGoatcounter() {
+    var p = window.location.pathname || "/";
+    if (p.endsWith("/index.html")) p = p.slice(0, -"/index.html".length) || "/";
+    if (!p) p = "/";
+    return p;
+  }
+
+  function atualizarGoatcounter() {
+    var gc = CONFIG_CIDADE && CONFIG_CIDADE.painel && CONFIG_CIDADE.painel.goatcounter;
+    if (!gc || !gc.dominio) return;
+    var base = String(gc.dominio).replace(/\/$/, "");
+    var url = base + "/count?p=" + encodeURIComponent(caminhoGoatcounter());
+    var img = document.getElementById("gc-contagem");
+    if (!img) {
+      img = document.createElement("img");
+      img.id = "gc-contagem";
+      img.width = 1;
+      img.height = 1;
+      img.alt = "";
+      img.setAttribute("aria-hidden", "true");
+      document.body.appendChild(img);
+    }
+    img.src = url;
+  }
+
+  function initPosthog() {
+    try {
+      var ph = CONFIG_CIDADE && CONFIG_CIDADE.painel && CONFIG_CIDADE.painel.posthog;
+      if (!ph || !ph.chave_publica || !ph.host || !window.posthog || !posthog.init) return;
+      posthog.init(ph.chave_publica, {
+        api_host: ph.host,
+        persistence: "memory",
+        cookieless_mode: "always",
+        autocapture: false,
+        capture_pageview: true,
+        capture_pageleave: false,
+        disable_session_recording: true,
+        disable_surveys: true,
+        enable_heatmaps: false,
+        capture_performance: false,
+        capture_dead_clicks: false,
+        rageclick: false,
+        person_profiles: "identified_only",
+        advanced_disable_feature_flags: true,
+        disable_external_dependency_loading: true
+      });
+    } catch (err) { /* analytics opcional */ }
+  }
+
+  function captureEvento(nome, props) {
+    try {
+      if (window.posthog && posthog.capture) posthog.capture(nome, props || {});
+    } catch (err) { /* analytics opcional */ }
+  }
+
+  function periodoCamaraAtivo() {
+    var tab = document.querySelector(".painel-camara-interno.ativo");
+    if (!tab) return "";
+    if (tab.id === "painel-periodo-sessao") return "sessao";
+    if (tab.id === "painel-periodo-mes") return "mes";
+    if (tab.id === "painel-periodo-todo") return "todo";
+    return "";
+  }
+
+  function propsContextoAnalytics() {
+    var secao = estadoUI.secao || "camara";
+    var out = { aba: secao };
+    if (secao === "camara") {
+      var p = periodoCamaraAtivo();
+      if (p) out.periodo = p;
+    }
+    return out;
+  }
+
   function rotuloAnosRecorte() {
     if (!ANOS_RECORTE || !ANOS_RECORTE.length) return "da legislatura";
     if (ANOS_RECORTE.length === 1) return "de " + ANOS_RECORTE[0];
@@ -5199,14 +5301,6 @@
     ausente: "Ausente",
     outro: "Outro"
   };
-
-  var CORES_CATEGORIA = [
-    "var(--graf-cat-1)", "var(--graf-cat-2)", "var(--graf-cat-3)",
-    "var(--graf-cat-4)", "var(--graf-cat-5)", "var(--graf-cat-6)",
-    "var(--graf-cat-7)", "var(--graf-cat-1)", "var(--graf-cat-2)",
-    "var(--graf-cat-3)", "var(--graf-cat-4)", "var(--graf-cat-5)",
-    "var(--graf-cat-6)"
-  ];
 
   var estado = {
     dados: null,
@@ -5267,24 +5361,16 @@
 
   function atualizarRodapesColeta() {
     var data = dataColetaExibicao();
-    var fonte = rotuloSaplCamara();
-    var us = ultimaSessaoOrdinaria();
-    var linkSessao = us && us.link_sapl ? urlSegura(us.link_sapl) : "";
+    var linkSapl = SAPL_ORIGEM && /^https:\/\//i.test(SAPL_ORIGEM) ? SAPL_ORIGEM : "";
+    var prefixo = "<p>Projeto independente e apartid\u00e1rio, sem liga\u00e7\u00e3o com a C\u00e2mara ou a Prefeitura. Os dados s\u00e3o p\u00fablicos e v\u00eam do SAPL.</p>";
+    var contatoApoio = htmlRodapeColetaExtra();
+    var coleta = data
+      ? "<p>Dados do SAPL coletados em <strong>" + esc(data) + "</strong>." +
+        (linkSapl ? ' <a href="' + esc(linkSapl) + '" target="_blank" rel="noopener noreferrer">Abrir o SAPL</a>' : "") +
+        "</p>"
+      : "";
     document.querySelectorAll(".rodape-coleta").forEach(function (footer) {
-      var comLink = false;
-      if (footer.id !== "rodape-menu-lateral") {
-        var painel = footer.closest(".painel-camara-interno");
-        comLink = painel && painel.id === "painel-periodo-sessao" && linkSessao;
-      }
-      var prefixo = "<p>Projeto independente e apartidário, sem ligação com a Câmara ou a Prefeitura. Os dados são públicos e vêm do SAPL.</p>";
-      var html = prefixo + "<p>Dado coletado em <strong>" + esc(data) + "</strong>. Fonte: ";
-      if (comLink) {
-        html += '<a href="' + esc(linkSessao) + '" target="_blank" rel="noopener noreferrer">' + esc(fonte) + "</a>";
-      } else {
-        html += esc(fonte);
-      }
-      html += ".</p>";
-      footer.innerHTML = html;
+      footer.innerHTML = prefixo + contatoApoio + coleta;
     });
   }
 
@@ -5313,18 +5399,6 @@
   function vereadoresNoMandatoNaSessao(sessao) {
     var c = contagemPresencaSessao(sessao);
     return c.banca > 0 ? c.banca : c.presentes;
-  }
-
-  function capsulaPresenca(classe, rotulo, valor) {
-    return (
-      '<div class="status-capsula ' +
-      classe +
-      '"><span class="capsula-rotulo">' +
-      esc(rotulo) +
-      '</span><span class="capsula-valor">' +
-      esc(String(valor)) +
-      "</span></div>"
-    );
   }
 
   function contagemResultadosMaterias(lista) {
@@ -5652,7 +5726,6 @@
     return valor;
   }
 
-  var TAG_CAIXA_ID = "tag-caixa-explicativa";
 
   function explicacoesTags() {
     return (CONFIG_CIDADE && CONFIG_CIDADE.explicacoes_tags) || {};
@@ -5809,6 +5882,7 @@
       botao.setAttribute("data-tag-id", "tag" + Math.random().toString(36).slice(2));
     }
     botao.setAttribute("aria-expanded", "true");
+    captureEvento("explicacao_aberta", { termo: String(valor || tipo || titulo || "") });
     abrirFolhaGenerica(titulo, html, botao);
   }
 
@@ -6109,17 +6183,6 @@
       return p.rotulo + ": " + p.valor + " (" + pct + "%)";
     }).join("; ");
     return '<div class="barra-status-trilho" role="img" aria-label="' + esc(aria) + '">' + segs + "</div>";
-  }
-
-  function cartoesStatusPLL(partes, total) {
-    return '<div class="status-cartoes">' + partes.map(function (p) {
-      var pct = total > 0 ? ((p.valor / total) * 100).toFixed(1).replace(".", ",") + "%" : "0%";
-      return '<div class="status-cartao status-cartao-' + p.classe + '">' +
-        '<span class="indicador" style="background:var(--graf-' + p.classe + ')"></span>' +
-        '<span class="num">' + esc(p.valor) + "</span>" +
-        '<span class="pct">' + esc(pct) + "</span>" +
-        '<span class="rot">' + esc(p.rotuloCurto) + "</span></div>";
-    }).join("") + "</div>";
   }
 
   function listaVotosAtiva() {
@@ -6750,6 +6813,10 @@
       estado.listaPLLVisivel = false;
       estado.filtroTexto = "";
       estado.filtroClassificacao = "";
+      var verTroca = vereadoresOrdenados().find(function (ver) {
+        return String(ver.id_sapl) === String(estado.vereadorId);
+      });
+      captureEvento("vereador_trocado", { vereador: verTroca ? verTroca.nome_parlamentar : "" });
       renderApp();
     });
 
@@ -7793,15 +7860,26 @@ var MAPA_VAR_CATEGORIA = {
   }
 
   function executarAcaoShare(acao) {
-    if (acao === "whatsapp") { enviarWhatsApp(); return; }
+    var ctx = propsContextoAnalytics();
+    if (acao === "whatsapp") {
+      captureEvento("whatsapp_enviado", Object.assign({ formato: "feed" }, ctx));
+      enviarWhatsApp();
+      return;
+    }
     if (acao === "legenda") {
       var leg = shareFormatoRede === "story" ? legendaStories(shareContexto) : legendaInstagram(shareContexto);
+      captureEvento("legenda_copiada", Object.assign({ formato: shareFormatoRede }, ctx));
       copiarTextoShare(leg, "Legenda copiada. É só colar no post.");
       return;
     }
-    if (acao === "link") { copiarTextoShare(LINK_COMPARTILHAR, "Link copiado."); return; }
+    if (acao === "link") {
+      captureEvento("link_copiado", ctx);
+      copiarTextoShare(LINK_COMPARTILHAR, "Link copiado.");
+      return;
+    }
     if (acao === "baixar") {
       var formato = shareFormatoRede;
+      captureEvento("imagem_baixada", Object.assign({ formato: formato }, ctx));
       blobDoFormato(formato).then(function (blob) {
         baixarBlob(blob, formato);
         mostrarAvisoShare("Imagem salva.");
@@ -7809,6 +7887,7 @@ var MAPA_VAR_CATEGORIA = {
       return;
     }
     if (acao === "pdf") {
+      captureEvento("pdf_gerado", ctx);
       preencherFolhaImpressao(shareContexto);
       fecharShareSheet();
       window.print();
@@ -7838,6 +7917,7 @@ var MAPA_VAR_CATEGORIA = {
     if (sheet) sheet.scrollTop = 0;
     var fechar = document.getElementById("btn-fechar-share");
     if (fechar) fechar.focus();
+    captureEvento("compartilhar_aberto", propsContextoAnalytics());
     gerarImagensShare();
   }
 
@@ -7981,7 +8061,11 @@ var MAPA_VAR_CATEGORIA = {
       htmlNumerosImpressao(nums.map(function (it) { return { valor: it.valor, de: it.de, rotulo: it.rotulo }; })) +
       (titulo ? '<h2 class="fi-h2">' + esc(titulo) + "</h2>" + corpo : "") +
       '<div class="fi-rodape"><div>Fonte: <b>' + esc(rotuloSaplCamara()) + "</b>." +
-      (coleta ? " Dados coletados em <b>" + esc(coleta) + "</b>." : "") +
+      (coleta ? " Dados do SAPL coletados em <b>" + esc(coleta) + "</b>." : "") +
+      (function () {
+        var em = emailContatoPainel();
+        return em ? "<br>Cr\u00edticas, elogios ou sugest\u00f5es: <b>" + esc(em) + "</b>." : "";
+      })() +
       "<br>Veja tudo e confira cada voto em <b>" + ENDERECO_EXIBIDO + "</b></div>" +
       '<img class="fi-qr" src="marca/qr-site.svg" alt=""></div>';
   }
@@ -8740,6 +8824,8 @@ var MAPA_VAR_CATEGORIA = {
       subCamara.classList.toggle("ativo", secao === "camara");
       subVereadores.classList.toggle("ativo", secao === "vereadores");
       if (secao === "prefeito") renderPainelPrefeito();
+      if (secao === "vereadores") captureEvento("aba_vereadores_aberta", {});
+      if (secao === "prefeito") captureEvento("aba_prefeito_aberta", {});
       atualizarRotuloBotaoShare();
       atualizarTopoCompacto();
     }
@@ -8837,8 +8923,22 @@ var MAPA_VAR_CATEGORIA = {
     if (summary) summary.setAttribute("aria-expanded", e.target.open ? "true" : "false");
   }, true);
 
+  var cliqueApoioOk = false;
+  function initCliqueApoioRodape() {
+    if (cliqueApoioOk) return;
+    cliqueApoioOk = true;
+    document.addEventListener("click", function (e) {
+      var link = e.target && e.target.closest ? e.target.closest(".link-apoio-projeto") : null;
+      if (!link) return;
+      captureEvento("apoio_clicado", {});
+    });
+  }
+
   carregarConfig().then(function () {
     aplicarTema(temaInicial());
+    initPosthog();
+    atualizarGoatcounter();
+    initCliqueApoioRodape();
     initShareSheet();
     initResumoSheet();
     initFolhaGenerica();

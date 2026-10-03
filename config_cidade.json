@@ -31,7 +31,17 @@
     "endereco_publico": "https://empratoslimpos.github.io/campo-do-tenente/",
     "repositorio": "https://github.com/EmPratosLimpos/campo-do-tenente",
     "site_camara": "https://www.campodotenente.pr.leg.br",
-    "site_camara_nota": "fonte oficial usada so para afastamentos que o SAPL nao registra (D-020)"
+    "site_camara_nota": "fonte oficial usada so para afastamentos que o SAPL nao registra (D-020)",
+    "email_contato": "contato@empratoslimpos.com",
+    "goatcounter": {
+      "codigo": "empratoslimpos",
+      "dominio": "https://empratoslimpos.goatcounter.com"
+    },
+    "posthog": {
+      "chave_publica": "phc_w6wbMbPTxJT23ntAUuQRFMWorTkBrrk4s2aUTmFzLCqT",
+      "host": "https://eu.i.posthog.com"
+    },
+    "apoio_url": ""
   },
   "recorte": {
     "anos": [
