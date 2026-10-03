@@ -5363,8 +5363,24 @@
     return "outro";
   }
 
+  function estadoNominalEhAusente(est) {
+    return est === "ausente_com_justificativa" || est === "ausente_sem_justificativa";
+  }
+
+  function contagemAusenteNominal(vo) {
+    if (!vo) return 0;
+    return (vo.ausente_com_justificativa || 0) + (vo.ausente_sem_justificativa || 0);
+  }
+
+  function rotuloExibicaoAusenteNominal() {
+    var rotMeta = rotulosVotoMeta();
+    if (rotMeta.ausente) return rotMeta.ausente;
+    return ROTULOS_VOTO.ausente || "Ausente";
+  }
+
   function rotuloVotoNominal(n) {
     var cls = classificacaoNominal(n);
+    if (estadoNominalEhAusente(cls)) return rotuloExibicaoAusenteNominal();
     var rot = rotulosVotoMeta()[cls];
     if (rot) return rot;
     if (n.rotulo) return n.rotulo;
@@ -6104,8 +6120,9 @@
         abstencao: ex.voto_abstencao,
         nao_votou: ex.voto_nao_votou,
         presidente_que_nao_votou: ex.voto_presidente,
-        ausente_com_justificativa: ex.voto_ausente_justificativa,
-        ausente_sem_justificativa: ex.voto_ausente_sem_justificativa,
+        ausente: ex.voto_ausente,
+        ausente_com_justificativa: ex.voto_ausente || ex.voto_ausente_justificativa,
+        ausente_sem_justificativa: ex.voto_ausente || ex.voto_ausente_sem_justificativa,
         presente_sem_voto_individual_registrado: ex.voto_presente_sem_registro
       };
       return mapa[valor] || String((extra && extra.rotulo) || valor || "");
@@ -6875,18 +6892,22 @@
 
   function quadrosVotosNominais(vo) {
     var rot = (vo && vo.rotulos) || {};
+    var numAus = contagemAusenteNominal(vo);
     var defs = [
       ["sim", rot.sim || "Sim", ""],
       ["nao", rot.nao || "N\u00e3o", ""],
-      ["abstencao", rot.abstencao || "Absten\u00e7\u00e3o", ""],
-      ["ausente_com_justificativa", rot.ausente_com_justificativa || "Ausente com justificativa", " aus"],
-      ["ausente_sem_justificativa", rot.ausente_sem_justificativa || "Ausente sem justificativa", " aus"]
+      ["abstencao", rot.abstencao || "Absten\u00e7\u00e3o", ""]
     ];
+    if (numAus > 0) {
+      defs.push(["ausente", rotuloExibicaoAusenteNominal(), " aus"]);
+    }
+    var idsQuadro = { sim: true, nao: true, abstencao: true, ausente: true };
     var extras = cardsResumoVotos(vo).filter(function (c) {
-      return c.num > 0 && defs.every(function (d) { return d[0] !== c.id; });
+      return c.num > 0 && !idsQuadro[c.id] &&
+        c.id !== "ausente_com_justificativa" && c.id !== "ausente_sem_justificativa";
     });
     var html = defs.map(function (d) {
-      var num = vo[d[0]] != null ? vo[d[0]] : 0;
+      var num = d[0] === "ausente" ? numAus : (vo[d[0]] != null ? vo[d[0]] : 0);
       var ativo = estado.filtroClassificacao === d[0];
       var marc = d[0] === "sim" ? "marcador-cor m-sim" :
         d[0] === "nao" ? "marcador-cor m-nao" :
@@ -6909,7 +6930,11 @@
     var vo = v.votos;
     var nominais = vo.nominais || [];
     var filtrados = nominais.filter(function (n) {
-      if (estado.filtroClassificacao && n.estado !== estado.filtroClassificacao) return false;
+      if (estado.filtroClassificacao) {
+        if (estado.filtroClassificacao === "ausente") {
+          if (!estadoNominalEhAusente(n.estado)) return false;
+        } else if (n.estado !== estado.filtroClassificacao) return false;
+      }
       if (estado.filtroTexto) {
         var busca = normalizarTexto(estado.filtroTexto);
         var ementa = ementaVotacao(n);
