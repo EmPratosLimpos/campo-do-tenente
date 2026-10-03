@@ -189,7 +189,7 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                             t.strip()
                             for t in item.locator(".materia-tags > *").all_inner_texts()
                         ]
-                        self.assertEqual(textos[0], "Sim")
+                        self.assertEqual(textos[0], "Votou Sim")
                         self.assertIn(TEMA_ALVO, textos)
                         self.assertIn("2\u00ba turno", textos)
                         self.assertEqual(erros, [])
@@ -245,7 +245,7 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                         folga = page.locator(".lista-votos li").first.evaluate(
                             "n => getComputedStyle(n).rowGap"
                         )
-                        self.assertEqual(folga, "5px")
+                        self.assertEqual(folga, "8px")
                         self.assertEqual(erros, [])
 
 

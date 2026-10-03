@@ -240,7 +240,7 @@ class TestTagsCaixa(unittest.TestCase):
                 selos = page.locator(".lista-votos .pilula").all_inner_texts()
                 self.assertTrue(selos)
                 for selo in selos:
-                    self.assertEqual(selo.strip(), "Sim")
+                    self.assertEqual(selo.strip(), "Votou Sim")
                 page.fill("#filtro-texto", "habitacionais")
                 page.wait_for_timeout(800)
                 texto_busca = page.inner_text("body")

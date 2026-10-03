@@ -130,7 +130,7 @@ JS_QUEBRA_LETRA = """() => {
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
   let el = walker.currentNode;
   while (el) {
-    if (window.__vis(el) && !el.closest('.pular-conteudo')) {
+    if (window.__vis(el) && !el.closest('.pular-conteudo, .sr, .sr-only')) {
       let direto = '';
       for (const n of el.childNodes) {
         if (n.nodeType === 3) direto += n.textContent;
@@ -555,7 +555,7 @@ class TestTelaLayout(unittest.TestCase):
                 JS_TOPOS_PRIMEIRA_LINHA,
                 {
                     "selArea": "#conteudo-vereadores .vereadores-grade",
-                    "seletorItem": ":scope > .ac-cartao",
+                    "seletorItem": ":scope > .vereadores-coluna > .ac-cartao:first-child",
                 },
             )
             self.assertTrue(
