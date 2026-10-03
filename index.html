@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; img-src 'self' https://empratoslimpos.goatcounter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://eu.i.posthog.com; form-action 'none'; upgrade-insecure-requests;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; img-src 'self' https://empratoslimpos.goatcounter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://eu.i.posthog.com https://eu-assets.i.posthog.com; form-action 'none'; upgrade-insecure-requests;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Em Pratos Limpos: o que a Câmara de Campo do Tenente vota</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5535,6 +5535,7 @@
       ANOS_RECORTE = (cfg.recorte && cfg.recorte.anos) ? cfg.recorte.anos.slice() : ANOS_RECORTE;
       SAPL_ORIGEM = cfg.sapl.endereco_base.replace(/\/$/, "");
       PORTAL_OFICIAL = cfg.painel.endereco_publico.replace(/\/$/, "");
+      ENDERECO_EXIBIDO = PORTAL_OFICIAL.replace(/^https?:\/\//, "");
       return fetch("dados/brutos/fotos_vereadores/indice.json").then(function (r) {
         if (!r.ok) return {};
         return r.json();
@@ -7763,8 +7764,13 @@ var MAPA_VAR_CATEGORIA = {
   }
 
   /* ---------- Compartilhar (fase 11) e folha de impressão (fase 12) ---------- */
-  var ENDERECO_EXIBIDO = "www.empratoslimpos.com";
-  var LINK_COMPARTILHAR = "https://www.empratoslimpos.com";
+  var ENDERECO_EXIBIDO = "";
+
+  function linkCompartilharSite() {
+    if (!PORTAL_OFICIAL) return "";
+    if (estadoUI.secao === "vereadores") return PORTAL_OFICIAL + "#vereadores";
+    return PORTAL_OFICIAL + "/";
+  }
 
   // Os cartões têm fundo claro fixo: a cor da categoria vem sempre do tema claro.
   var CORES_CATEGORIA_CLARO = {
@@ -8174,7 +8180,7 @@ var MAPA_VAR_CATEGORIA = {
     }
     if (acao === "link") {
       captureEvento("link_copiado", ctx);
-      copiarTextoShare(LINK_COMPARTILHAR, "Link copiado.");
+      copiarTextoShare(linkCompartilharSite(), "Link copiado.");
       return;
     }
     if (acao === "baixar") {
