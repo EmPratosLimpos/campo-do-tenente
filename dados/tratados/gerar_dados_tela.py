@@ -654,6 +654,15 @@ def main():
     for ano in anos_recorte(cfg):
         gerar_ano(ano, cfg)
     gerar_legislatura(cfg)
+    try:
+        from gerar_proposicoes_executivo import complementar_legislatura, gerar_arquivos
+    except ImportError:
+        from dados.tratados.gerar_proposicoes_executivo import (  # type: ignore
+            complementar_legislatura,
+            gerar_arquivos,
+        )
+    gerar_arquivos(cfg)
+    complementar_legislatura(cfg)
     return 0
 
 

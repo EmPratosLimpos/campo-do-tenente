@@ -151,7 +151,7 @@ class TestD3TelaPlaywright(unittest.TestCase):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page(viewport={"width": 1440, "height": 900})
-            page.goto(self.base, wait_until="networkidle", timeout=60000)
+            page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
             duplicados = page.evaluate(
                 """() => {
                   const vistos = new Set();
@@ -172,15 +172,11 @@ class TestD3TelaPlaywright(unittest.TestCase):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page(viewport={"width": 1440, "height": 900})
-            page.goto(self.base, wait_until="networkidle", timeout=60000)
+            page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
             page.click("button[data-secao-lateral='vereadores']")
-            page.wait_for_selector(".perfil-cabecalho", timeout=60000)
+            page.wait_for_selector("#sel-vereador", timeout=60000)
             page.select_option("#sel-vereador", label="Jorge Quege (Cassado)")
             page.wait_for_timeout(800)
-            presenca_card = page.locator("#tit-presenca").locator("xpath=ancestor::details[1]")
-            if not presenca_card.evaluate("node => node.open"):
-                page.locator("#tit-presenca").locator("xpath=ancestor::summary[1]").click()
-                page.wait_for_timeout(400)
             texto = page.inner_text("body")
             taxa = _carregar("atuacao_vereadores_legislatura.json")
             jorge = next(

@@ -34,6 +34,7 @@ if str(DIR_RAIZ / "coletor") not in sys.path:
     sys.path.insert(0, str(DIR_RAIZ / "coletor"))
 
 from config_cidade import anos_recorte, carregar_config, link_materia  # noqa: E402
+from csv_seguro import EscritorSeguro  # noqa: E402
 from derivar_insumos import ler_paginas  # noqa: E402
 
 CONFIG = carregar_config()
@@ -213,7 +214,9 @@ def escrever_csv(payload: dict) -> None:
         "link_sapl",
     ]
     with ARQUIVO_CSV.open("w", encoding="utf-8", newline="") as handle:
-        escritor = csv.DictWriter(handle, fieldnames=campos, delimiter=";", lineterminator="\n")
+        escritor = EscritorSeguro(
+            csv.DictWriter(handle, fieldnames=campos, delimiter=";", lineterminator="\n")
+        )
         escritor.writeheader()
         for materia in payload["materias"]:
             base = {

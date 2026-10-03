@@ -43,17 +43,29 @@ from gerar_atuacao_vereadores import (  # noqa: E402
 CFG_COLETOR = {
     "cidade": {"nome": "Cidade Teste", "uf": "PR"},
     "sapl": {"endereco_base": "https://exemplo.invalid"},
+    "campos_pessoais_removidos": {"lista": ["ip", "user"]},
+    "rede": {
+        "teto_bytes_resposta": 1024,
+        "esquemas_permitidos": ["https"],
+        "hosts_permitidos_extra": [],
+    },
 }
 
 
 class Resposta:
     status = 200
 
-    def __init__(self, corpo: bytes):
+    def __init__(self, corpo: bytes, url: str = "https://exemplo.invalid/api/"):
         self.corpo = corpo
+        self.url = url
 
-    def read(self) -> bytes:
-        return self.corpo
+    def geturl(self):
+        return self.url
+
+    def read(self, tamanho=None) -> bytes:
+        if tamanho is None:
+            return self.corpo
+        return self.corpo[:tamanho]
 
     def __enter__(self):
         return self

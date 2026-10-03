@@ -9,7 +9,6 @@
       "data_hora": "2026-06-16T19:18:28.991837-03:00",
       "votacao": 219,
       "parlamentar": 2,
-      "user": 5,
       "ordem": null,
       "expediente": 53
     },
@@ -22,7 +21,6 @@
       "data_hora": "2026-06-16T19:18:28.981085-03:00",
       "votacao": 219,
       "parlamentar": 3,
-      "user": 5,
       "ordem": null,
       "expediente": 53
     },
@@ -35,7 +33,6 @@
       "data_hora": "2026-06-16T19:18:29.012230-03:00",
       "votacao": 219,
       "parlamentar": 7,
-      "user": 5,
       "ordem": null,
       "expediente": 53
     },
@@ -48,7 +45,6 @@
       "data_hora": "2026-06-16T19:18:29.042951-03:00",
       "votacao": 219,
       "parlamentar": 100,
-      "user": 5,
       "ordem": null,
       "expediente": 53
     },
@@ -61,7 +57,6 @@
       "data_hora": "2026-06-16T19:18:29.021123-03:00",
       "votacao": 219,
       "parlamentar": 4,
-      "user": 5,
       "ordem": null,
       "expediente": 53
     },
@@ -74,7 +69,6 @@
       "data_hora": "2026-06-16T19:18:28.968151-03:00",
       "votacao": 219,
       "parlamentar": 8,
-      "user": 5,
       "ordem": null,
       "expediente": 53
     },
@@ -87,7 +81,6 @@
       "data_hora": "2026-06-16T19:18:29.002639-03:00",
       "votacao": 219,
       "parlamentar": 6,
-      "user": 5,
       "ordem": null,
       "expediente": 53
     },
@@ -100,7 +93,6 @@
       "data_hora": "2026-06-16T19:18:29.033914-03:00",
       "votacao": 219,
       "parlamentar": 5,
-      "user": 5,
       "ordem": null,
       "expediente": 53
     },
@@ -113,7 +105,6 @@
       "data_hora": "2026-06-16T19:26:59.001950-03:00",
       "votacao": 220,
       "parlamentar": 7,
-      "user": 5,
       "ordem": 645,
       "expediente": null
     },
@@ -126,7 +117,6 @@
       "data_hora": "2026-06-16T19:26:58.980764-03:00",
       "votacao": 220,
       "parlamentar": 2,
-      "user": 5,
       "ordem": 645,
       "expediente": null
     },
@@ -139,7 +129,6 @@
       "data_hora": "2026-06-16T19:26:58.958449-03:00",
       "votacao": 220,
       "parlamentar": 8,
-      "user": 5,
       "ordem": 645,
       "expediente": null
     },
@@ -152,7 +141,6 @@
       "data_hora": "2026-06-16T19:26:58.991692-03:00",
       "votacao": 220,
       "parlamentar": 6,
-      "user": 5,
       "ordem": 645,
       "expediente": null
     },
@@ -165,7 +153,6 @@
       "data_hora": "2026-06-16T19:26:58.969089-03:00",
       "votacao": 220,
       "parlamentar": 3,
-      "user": 5,
       "ordem": 645,
       "expediente": null
     },
@@ -178,7 +165,6 @@
       "data_hora": "2026-06-16T19:26:59.011730-03:00",
       "votacao": 220,
       "parlamentar": 4,
-      "user": 5,
       "ordem": 645,
       "expediente": null
     },
@@ -191,7 +177,6 @@
       "data_hora": "2026-06-16T19:26:59.037044-03:00",
       "votacao": 220,
       "parlamentar": 100,
-      "user": 5,
       "ordem": 645,
       "expediente": null
     },
@@ -204,7 +189,6 @@
       "data_hora": "2026-06-16T19:26:59.026852-03:00",
       "votacao": 220,
       "parlamentar": 5,
-      "user": 5,
       "ordem": 645,
       "expediente": null
     },
@@ -217,7 +201,6 @@
       "data_hora": "2026-06-16T19:36:09.250798-03:00",
       "votacao": 221,
       "parlamentar": 7,
-      "user": 5,
       "ordem": 646,
       "expediente": null
     },
@@ -230,7 +213,6 @@
       "data_hora": "2026-06-16T19:36:09.240759-03:00",
       "votacao": 221,
       "parlamentar": 6,
-      "user": 5,
       "ordem": 646,
       "expediente": null
     },
@@ -243,7 +225,6 @@
       "data_hora": "2026-06-16T19:36:09.209347-03:00",
       "votacao": 221,
       "parlamentar": 8,
-      "user": 5,
       "ordem": 646,
       "expediente": null
     },
@@ -256,7 +237,6 @@
       "data_hora": "2026-06-16T19:36:09.220627-03:00",
       "votacao": 221,
       "parlamentar": 3,
-      "user": 5,
       "ordem": 646,
       "expediente": null
     },
@@ -269,7 +249,6 @@
       "data_hora": "2026-06-16T19:36:09.260298-03:00",
       "votacao": 221,
       "parlamentar": 4,
-      "user": 5,
       "ordem": 646,
       "expediente": null
     },
@@ -282,7 +261,6 @@
       "data_hora": "2026-06-16T19:36:09.230524-03:00",
       "votacao": 221,
       "parlamentar": 2,
-      "user": 5,
       "ordem": 646,
       "expediente": null
     },
@@ -295,7 +273,6 @@
       "data_hora": "2026-06-16T19:36:09.294208-03:00",
       "votacao": 221,
       "parlamentar": 100,
-      "user": 5,
       "ordem": 646,
       "expediente": null
     },
@@ -308,7 +285,6 @@
       "data_hora": "2026-06-16T19:36:09.275076-03:00",
       "votacao": 221,
       "parlamentar": 5,
-      "user": 5,
       "ordem": 646,
       "expediente": null
     },
@@ -321,7 +297,6 @@
       "data_hora": "2026-06-16T19:41:54.209441-03:00",
       "votacao": 222,
       "parlamentar": 2,
-      "user": 5,
       "ordem": 647,
       "expediente": null
     },
@@ -334,7 +309,6 @@
       "data_hora": "2026-06-16T19:41:54.200313-03:00",
       "votacao": 222,
       "parlamentar": 3,
-      "user": 5,
       "ordem": 647,
       "expediente": null
     },
@@ -347,7 +321,6 @@
       "data_hora": "2026-06-16T19:41:54.228067-03:00",
       "votacao": 222,
       "parlamentar": 7,
-      "user": 5,
       "ordem": 647,
       "expediente": null
     },
@@ -360,7 +333,6 @@
       "data_hora": "2026-06-16T19:41:54.258906-03:00",
       "votacao": 222,
       "parlamentar": 100,
-      "user": 5,
       "ordem": 647,
       "expediente": null
     },
@@ -373,7 +345,6 @@
       "data_hora": "2026-06-16T19:41:54.190894-03:00",
       "votacao": 222,
       "parlamentar": 8,
-      "user": 5,
       "ordem": 647,
       "expediente": null
     },
@@ -386,7 +357,6 @@
       "data_hora": "2026-06-16T19:41:54.236887-03:00",
       "votacao": 222,
       "parlamentar": 4,
-      "user": 5,
       "ordem": 647,
       "expediente": null
     },
@@ -399,7 +369,6 @@
       "data_hora": "2026-06-16T19:41:54.218308-03:00",
       "votacao": 222,
       "parlamentar": 6,
-      "user": 5,
       "ordem": 647,
       "expediente": null
     },
@@ -412,7 +381,6 @@
       "data_hora": "2026-06-16T19:41:54.249842-03:00",
       "votacao": 222,
       "parlamentar": 5,
-      "user": 5,
       "ordem": 647,
       "expediente": null
     }

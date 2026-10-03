@@ -45,18 +45,32 @@ from so_dados_mudaram import (  # noqa: E402
 CFG_COLETOR = {
     "cidade": {"nome": "Cidade Teste", "uf": "PR"},
     "sapl": {"endereco_base": "https://exemplo.invalid"},
+    "campos_pessoais_removidos": {"lista": ["ip", "user"]},
+    "rede": {
+        "teto_bytes_resposta": 1024,
+        "esquemas_permitidos": ["https"],
+        "hosts_permitidos_extra": [],
+    },
 }
+CFG_REDE = CFG_COLETOR["rede"]
 CORPO = b'{"pagination":{"total_pages":1},"results":[]}'
+HOST_CFGSAPL = "exemplo.invalid"
 
 
 class Resposta:
     status = 200
 
-    def __init__(self, corpo: bytes):
+    def __init__(self, corpo: bytes, url: str = "https://exemplo.invalid/api/"):
         self.corpo = corpo
+        self.url = url
 
-    def read(self) -> bytes:
-        return self.corpo
+    def geturl(self):
+        return self.url
+
+    def read(self, tamanho: int | None = None) -> bytes:
+        if tamanho is None:
+            return self.corpo
+        return self.corpo[:tamanho]
 
     def __enter__(self):
         return self
@@ -215,7 +229,11 @@ class TestesRespostaVazia(unittest.TestCase):
         class RespostaVazia:
             status = 200
 
-            def read(self) -> bytes:
+            def geturl(self):
+                return "https://exemplo.invalid/api/"
+
+            def read(self, tamanho=None):
+                del tamanho
                 return b""
 
             def __enter__(self):
@@ -265,6 +283,9 @@ class TestesChangelog(unittest.TestCase):
 
 
 class TestesWorkflow(unittest.TestCase):
+    SHA_CHECKOUT = "3d3c42e5aac5ba805825da76410c181273ba90b1"
+    SHA_SETUP_PYTHON = "5fda3b95a4ea91299a34e894583c3862153e4b97"
+
     def test_workflows_nao_usam_node_20_nem_ubuntu_latest(self):
         pasta = RAIZ / ".github" / "workflows"
         for caminho in pasta.glob("*.yml"):
@@ -273,11 +294,43 @@ class TestesWorkflow(unittest.TestCase):
             self.assertIn("ubuntu-24.04", texto, caminho.name)
             self.assertNotIn("actions/checkout@v4", texto, caminho.name)
             self.assertNotIn("actions/setup-python@v5", texto, caminho.name)
-            self.assertIn("actions/checkout@v7", texto, caminho.name)
-            self.assertIn("actions/setup-python@v7", texto, caminho.name)
+            self.assertNotIn("actions/checkout@v7", texto, caminho.name)
+            self.assertNotIn("actions/setup-python@v7", texto, caminho.name)
         novo = (pasta / "atualizacao_semanal.yml").read_text(encoding="utf-8")
         self.assertNotIn("\u2014", novo)
         self.assertNotIn("\u2013", novo)
+
+    def test_workflows_fixam_as_acoes_por_sha_comentado(self):
+        pasta = RAIZ / ".github" / "workflows"
+        for caminho in pasta.glob("*.yml"):
+            texto = caminho.read_text(encoding="utf-8")
+            self.assertIn(
+                f"actions/checkout@{self.SHA_CHECKOUT} # v7",
+                texto,
+                caminho.name,
+            )
+            self.assertIn(
+                f"actions/setup-python@{self.SHA_SETUP_PYTHON} # v7",
+                texto,
+                caminho.name,
+            )
+            for linha in texto.splitlines():
+                if "uses: actions/" not in linha:
+                    continue
+                self.assertRegex(
+                    linha.strip(),
+                    r"^uses: actions/[a-z-]+@[0-9a-f]{40} # v[0-9]+$",
+                    f"{caminho.name}: {linha.strip()}",
+                )
+
+    def test_workflow_de_validacao_so_le_e_nao_guarda_token(self):
+        texto = (RAIZ / ".github" / "workflows" / "verificar_pr.yml").read_text(encoding="utf-8")
+        self.assertIn("permissions:", texto)
+        self.assertIn("contents: read", texto)
+        self.assertNotIn("contents: write", texto)
+        self.assertNotIn("issues: write", texto)
+        self.assertNotIn("pull-requests: write", texto)
+        self.assertIn("persist-credentials: false", texto)
 
     def test_atualizacao_semanal_publica_so_dados_na_quarta(self):
         texto = (RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml").read_text(encoding="utf-8")
@@ -474,6 +527,79 @@ class TestesSoDados(unittest.TestCase):
             )
         )
 
+    def test_relatorio_em_markdown_so_passa_em_dados_tratados(self):
+        permitidos = [
+            "dados/tratados/RELATORIO-ATUACAO-VEREADORES-2026.md",
+            "dados/tratados/RELATORIO-TABELA-VEREADORES.md",
+            "dados/tratados/atuacao_vereadores_2026.json",
+        ]
+        self.assertTrue(so_dados_mudaram(permitidos))
+        self.assertEqual(arquivos_fora_do_permitido(permitidos), [])
+        reprovados = [
+            "dados/relatorio.md",
+            "dados/RELATORIO-ATUACAO-VEREADORES-2026.md",
+            "dados/brutos/lote_20260926/notas.md",
+            "dados/tratados_markdown.md",
+        ]
+        for nome in reprovados:
+            self.assertFalse(so_dados_mudaram([nome]), nome)
+            self.assertEqual(arquivos_fora_do_permitido([nome]), [nome], nome)
+
+    def test_cname_do_dominio_proprio_nao_sai_na_atualizacao_semanal(self):
+        """O CNAME nao entra no commit do bot: dominio so muda por Pull Request."""
+        self.assertFalse(so_dados_mudaram(["CNAME"]))
+        self.assertEqual(arquivos_fora_do_permitido(["CNAME"]), ["CNAME"])
+        semanal = [
+            "dados/brutos/lote_20260927_porsessao/indice.json",
+            "dados/tratados/atuacao_vereadores_2026.json",
+            "dados/tratados/RELATORIO-ATUACAO-VEREADORES-2026.md",
+            "config_cidade.json",
+            "CHANGELOG.md",
+        ]
+        self.assertTrue(so_dados_mudaram(semanal))
+        self.assertEqual(arquivos_fora_do_permitido(semanal), [])
+        self.assertEqual(
+            planejar_publicacao(semanal)["decisao"],
+            "publicar",
+            "a execucao semanal nao pode ser barrada pelo CNAME",
+        )
+
+    def test_workflow_semanal_nao_adiciona_cname_no_commit(self):
+        texto = (RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("git add -- dados config_cidade.json CHANGELOG.md", texto)
+        for linha in texto.splitlines():
+            if linha.strip().startswith("git add"):
+                self.assertNotIn("CNAME", linha)
+        self.assertNotIn("CNAME", texto)
+
+    def test_dentro_de_dados_somente_extensoes_permitidas(self):
+        permitidos = [
+            "dados/brutos/lote_20260926/ordemdia_p1.json",
+            "dados/brutos/resumo_insumos.json",
+            "dados/brutos/materias-2026-resposta-original.csv",
+            "dados/tratados/LEIA-ME.txt",
+            "dados/tratados/atuacao_vereadores_2026.json.sha256",
+        ]
+        self.assertTrue(so_dados_mudaram(permitidos))
+        self.assertEqual(arquivos_fora_do_permitido(permitidos), [])
+        reprovados = [
+            "dados/pagina.html",
+            "dados/brutos/fotos_vereadores/1.jpg",
+            "dados/brutos/lote_20260927_atas/materia_274_texto_original.pdf",
+            "dados/icones.svg",
+            "dados/arquivo",
+            "dados/brutos/lote_20260927_noticia_licenca/noticia.xhtml",
+            "dados/brutos/lote_20260927_noticia_licenca/pagina.htm",
+        ]
+        for nome in reprovados:
+            self.assertFalse(so_dados_mudaram([nome]), nome)
+            self.assertEqual(arquivos_fora_do_permitido([nome]), [nome], nome)
+        self.assertFalse(
+            so_dados_mudaram(permitidos + ["dados/brutos/fotos_vereadores/1.jpg"])
+        )
+
     def test_codigo_reprova(self):
         self.assertFalse(so_dados_mudaram(["scripts/atualizar_semana.py"]))
         self.assertFalse(so_dados_mudaram(["index.html"]))
@@ -531,6 +657,16 @@ class TestesPlanejarPublicacao(unittest.TestCase):
     def test_bloquear_codigo_dentro_de_dados_e_tela(self):
         for nome in ("dados/script.py", "dados/relatorio.md", "dados/notas.yml", "tela/painel.json"):
             plano = planejar_publicacao([nome])
+            self.assertEqual(plano["decisao"], "bloquear", nome)
+            self.assertEqual(plano["fora"], [nome], nome)
+
+    def test_bloquear_extensao_fora_da_lista_permitida_em_dados(self):
+        for nome in (
+            "dados/brutos/fotos_vereadores/1.jpg",
+            "dados/pagina.html",
+            "dados/arquivo",
+        ):
+            plano = planejar_publicacao(["dados/tratados/vereadores.json", nome])
             self.assertEqual(plano["decisao"], "bloquear", nome)
             self.assertEqual(plano["fora"], [nome], nome)
 

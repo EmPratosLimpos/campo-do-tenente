@@ -89,7 +89,8 @@ class TestTelaVereadores(unittest.TestCase):
         cls.servidor.shutdown()
 
     def _abrir_aba_vereadores(self, page) -> list[str]:
-        page.goto(self.base, wait_until="networkidle", timeout=180000)
+        page.goto(self.base, wait_until="domcontentloaded", timeout=180000)
+        page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
         page.click('button[data-secao="vereadores"]')
         page.wait_for_selector("#sel-vereador", state="visible", timeout=120000)
         return page.eval_on_selector(
@@ -106,11 +107,15 @@ class TestTelaVereadores(unittest.TestCase):
             for vid in valores:
                 page.select_option("#sel-vereador", vid)
                 page.wait_for_timeout(120)
-                texto = page.locator("#conteudo-vereadores").inner_text()
+                texto = (
+                    page.locator("#apoio-vereador").inner_text()
+                    + "\n"
+                    + page.locator("#conteudo-vereadores").inner_text()
+                )
                 with self.subTest(vereador=vid):
-                    self.assertIn("Perfil parlamentar", texto)
+                    self.assertIn("Nome oficial:", texto)
                     self.assertIn("Presença", texto)
-                    self.assertIn("Histórico de votos", texto)
+                    self.assertIn("Votos Nominais", texto)
                     self.assertNotIn("Não foi possível carregar", texto)
                     self.assertNotIn("município", texto.lower())
                     self.assertNotIn("municipio", texto.lower())
@@ -130,8 +135,11 @@ class TestTelaVereadores(unittest.TestCase):
             page.select_option("#sel-vereador", "1")
             page.wait_for_timeout(200)
             texto = page.locator("#conteudo-vereadores").inner_text()
-            self.assertIn("Falta com justificativa", texto)
-            self.assertIn("Licença para tratamento de saúde", texto)
+            self.assertIn("Falta justificada", texto)
+            page.locator("button.linha-btn").filter(has_text="Falta justificada").click()
+            page.wait_for_timeout(400)
+            folha = page.locator("#folha-generica-corpo").inner_text()
+            self.assertIn("tratamento", folha.lower())
             self.assertNotIn("PLL", texto)
             browser.close()
 

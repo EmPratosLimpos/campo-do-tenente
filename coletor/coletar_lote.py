@@ -25,7 +25,11 @@ from config_cidade import (
     PAUSA_SAPL_SEGUNDOS,
     anos_recorte,
     carregar_config,
+    conferir_host_final,
     endereco_sapl,
+    host_da_url,
+    limpar_bytes_pessoais,
+    teto_bytes_resposta,
     user_agent_http,
 )
 
@@ -65,6 +69,31 @@ def corpo_e_json_valido(corpo: bytes) -> bool:
     except (UnicodeDecodeError, ValueError):
         return False
     return True
+
+
+def limpar_resposta(corpo: bytes, cfg: dict) -> bytes:
+    """Tira os campos pessoais antes de gravar. Vale para toda resposta do SAPL."""
+    return limpar_bytes_pessoais(corpo, cfg)
+
+
+def host_final_da_resposta(resp) -> str:
+    """Host da resposta depois de qualquer redirecionamento."""
+    url = ""
+    try:
+        url = resp.geturl()
+    except Exception:
+        url = getattr(resp, "url", "") or ""
+    return host_da_url(url)
+
+
+def ler_limitado(resp, teto: int, onde: str) -> bytes:
+    """Le ate o teto. Acima do teto, falha sem gravar nada."""
+    corpo = resp.read(teto + 1)
+    if len(corpo) > teto:
+        raise SystemExit(
+            f"Resposta maior que o teto de {teto} bytes em {onde}. Nada foi gravado."
+        )
+    return corpo
 
 
 def indice_tem(indice_api: dict | None, chave: str) -> bool:
@@ -264,6 +293,7 @@ class ColetorLote:
         url = montar_url(self.base, caminho, params)
         tentativas_extra = 0
         destino = self.pasta / arquivo
+        teto_bytes = teto_bytes_resposta(self.cfg)
 
         while True:
             if self.pedidos >= self.teto:
@@ -293,11 +323,12 @@ class ColetorLote:
             try:
                 with urllib.request.urlopen(req, timeout=TEMPO_LIMITE) as resp:
                     status = int(resp.status)
-                    corpo = resp.read()
+                    conferir_host_final(host_final_da_resposta(resp), self.cfg, arquivo)
+                    corpo = ler_limitado(resp, teto_bytes, arquivo)
             except urllib.error.HTTPError as exc:
                 status = int(exc.code)
                 try:
-                    corpo = exc.read()
+                    corpo = exc.read(teto_bytes)
                 except Exception:
                     corpo = b""
                 erro = f"HTTP {status}"
@@ -305,6 +336,8 @@ class ColetorLote:
                 erro = f"rede: {exc.reason}"
             except TimeoutError:
                 erro = "tempo esgotado"
+
+            corpo = limpar_resposta(corpo, self.cfg)
 
             if (
                 refrescar

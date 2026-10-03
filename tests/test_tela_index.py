@@ -92,6 +92,31 @@ class TestTelaIndex(unittest.TestCase):
         self.assertFalse((RAIZ / "app.js").exists())
         self.assertFalse((RAIZ / "estilo.css").exists())
 
+    def test_molde_com_conteudo_de_outra_cidade_nao_existe(self):
+        """O index.html e mantido na mao. Nao ha molde de outra cidade no repositorio."""
+        for caminho in (
+            RAIZ / "tela" / "modelo.html",
+            RAIZ / "referencia-campo-largo",
+            RAIZ / "scripts" / "montar_tela_d1b.py",
+            RAIZ / "scripts" / "gerar_modelo_tela.py",
+        ):
+            with self.subTest(caminho=caminho.name):
+                self.assertFalse(caminho.exists())
+        proibidos = (
+            "campolargo",
+            "campo largo",
+            "campolargo",
+            "challenges.cloudflare",
+            "workers.dev",
+        )
+        for caminho in sorted(RAIZ.glob("tela/*")):
+            if not caminho.is_file():
+                continue
+            texto = caminho.read_text(encoding="utf-8", errors="ignore").lower()
+            for termo in proibidos:
+                with self.subTest(arquivo=caminho.name, termo=termo):
+                    self.assertNotIn(termo, texto)
+
 
 if __name__ == "__main__":
     unittest.main()

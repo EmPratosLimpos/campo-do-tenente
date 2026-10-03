@@ -176,8 +176,8 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page()
-            page.goto(self.base, wait_until="networkidle", timeout=120000)
-            page.wait_for_timeout(1200)
+            page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
+            page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
             page.click('button[data-periodo="sessao"]')
             page.wait_for_timeout(600)
             texto = page.inner_text("body")
@@ -188,19 +188,21 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
                 "Nenhum projeto de lei do legislativo (PLL) foi votado na última sessão",
                 texto,
             )
-            page.locator('#bloco-votado-sessao [data-materia-id="811"]').click()
-            page.wait_for_timeout(600)
-            resumo = page.locator("#resumo-sheet-corpo").inner_text()
-            self.assertIn("Turno", resumo)
-            self.assertIn("2º turno", resumo)
+            datas = page.locator("#bloco-votado-sessao .materia-datas").first.inner_text()
+            self.assertIn("22/09/2026", datas)
+            self.assertIn("29/09/2026", datas)
+            page.locator("#bloco-votado-sessao .tag-turno").first.click()
+            page.wait_for_timeout(400)
+            folha = page.locator("#folha-generica-corpo").inner_text()
+            self.assertIn("turno", folha.lower())
             browser.close()
 
     def test_ultimo_mes_mostra_projetos_do_mes(self):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page()
-            page.goto(self.base, wait_until="networkidle", timeout=120000)
-            page.wait_for_timeout(1200)
+            page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
+            page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
             page.click('button[data-periodo="mes"]')
             page.wait_for_timeout(600)
             texto = page.inner_text("body")
@@ -210,8 +212,13 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
                 ).read_text(encoding="utf-8")
             )
             total = len(camara.get("mes") or [])
-            esperado = "1 projeto votado" if total == 1 else f"{total} projetos votados"
-            self.assertIn(esperado, texto)
+            if total == 1:
+                self.assertTrue(
+                    "1 projeto" in texto or "único projeto" in texto or "unico projeto" in texto,
+                    msg=f"texto sem contagem de 1 projeto: {texto[:200]}",
+                )
+            else:
+                self.assertIn(f"{total} projetos", texto)
             browser.close()
 
 

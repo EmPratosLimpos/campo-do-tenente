@@ -35,9 +35,22 @@ def nominais_por_estado(slug: str, estado: str) -> int:
     return sum(1 for n in votos.get("nominais") or [] if n.get("estado") == estado)
 
 
+def nominais_ausentes(slug: str) -> int:
+    votos = votos_da_legislatura(slug)
+    return sum(
+        1
+        for n in votos.get("nominais") or []
+        if n.get("estado") in ("ausente_com_justificativa", "ausente_sem_justificativa")
+    )
+
+
 class _Handler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(RAIZ), **kwargs)
+
     def log_message(self, format, *args):
         pass
+
 
 @unittest.skipUnless(PLAYWRIGHT_OK, PLAYWRIGHT_MOTIVO)
 class TestVotosVereadores(unittest.TestCase):
@@ -57,36 +70,24 @@ class TestVotosVereadores(unittest.TestCase):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page(viewport={"width": 1440, "height": 900})
-            page.goto(self.base, wait_until="networkidle", timeout=60000)
+            page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
+            page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
 
             page.click("button[data-secao-lateral='vereadores']")
-            page.wait_for_selector(".perfil-cabecalho", timeout=60000)
-
-            def abrir_se_fechado(titulo_id):
-                page.locator("#" + titulo_id).locator("xpath=ancestor::details[1]").evaluate(
-                    """n => {
-                      n.open = true;
-                      var s = n.querySelector('summary');
-                      if (s) s.setAttribute('aria-expanded', 'true');
-                    }"""
-                )
-                page.wait_for_timeout(200)
+            page.wait_for_selector("#sel-vereador", timeout=60000)
 
             page.select_option("#sel-vereador", label="Rafael Ventura")
             page.wait_for_timeout(1000)
 
-            abrir_se_fechado("tit-pll")
             page.click("button.contagem-item[data-pl-filtro='aprovado']")
             page.wait_for_timeout(500)
             texto_rafael_aprovados = page.locator(".lista-pll").inner_text()
-            self.assertIn("Tema: Administração e finanças.", texto_rafael_aprovados)
+            self.assertIn("Administração e finanças", texto_rafael_aprovados)
             self.assertNotIn("Tema: .", texto_rafael_aprovados)
 
             opcoes_rafael = page.locator("#sel-vereador option").all_inner_texts()
             self.assertTrue(all("(Cassado)" not in o for o in opcoes_rafael if "Rafael" in o))
 
-            page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
-            page.wait_for_timeout(500)
             texto_rafael = page.inner_text("body")
             votos_rafael = votos_da_legislatura("rafael-ventura")
             self.assertIn(f"{votos_rafael['sim']}\nSim", texto_rafael)
@@ -97,7 +98,6 @@ class TestVotosVereadores(unittest.TestCase):
 
             page.click("button.voto-card[data-voto-card='presidente_que_nao_votou']")
             page.wait_for_timeout(1000)
-            abrir_se_fechado("tit-votos")
             texto_rafael_filtro = page.inner_text("body")
             self.assertIn(
                 f"{nominais_por_estado('rafael-ventura', 'presidente_que_nao_votou')} registros",
@@ -105,23 +105,10 @@ class TestVotosVereadores(unittest.TestCase):
             )
             self.assertNotIn("Pedido de Vistas", texto_rafael_filtro)
 
-            abrir_se_fechado("tit-pll")
-            abrir_se_fechado("tit-votos")
-
-            presenca_card = page.locator("#tit-presenca").locator("xpath=ancestor::details[1]")
-            pll_card = page.locator("#tit-pll").locator("xpath=ancestor::details[1]")
-            votos_card = page.locator("#tit-votos").locator("xpath=ancestor::details[1]")
-            abrir_se_fechado("tit-presenca")
-
-            self.assertTrue(votos_card.evaluate("node => node.open"))
-            self.assertTrue(pll_card.evaluate("node => node.open"))
-            self.assertTrue(presenca_card.evaluate("node => node.open"))
-
             for titulo_id in ("tit-presenca", "tit-pll", "tit-votos"):
-                texto_cab = page.locator("#" + titulo_id).locator("xpath=ancestor::summary[1]").inner_text()
-                self.assertIsNone(re.search(r"\d", texto_cab), f"cabecalho com numero: {titulo_id} -> {texto_cab}")
+                self.assertTrue(page.locator("#" + titulo_id).is_visible())
 
-            self.assertNotIn("Cassado", page.locator(".perfil-nome").inner_text())
+            self.assertNotIn("Cassado", page.locator(".sel-vereador-face .nm").inner_text())
 
             page.select_option("#sel-vereador", label="Jorge Quege (Cassado)")
             page.wait_for_timeout(1000)
@@ -130,65 +117,37 @@ class TestVotosVereadores(unittest.TestCase):
             self.assertEqual(len(opcoes_jorge), 1)
             self.assertIn("(Cassado)", opcoes_jorge[0])
 
-            self.assertIn("Cassado", page.locator(".perfil-nome").inner_text())
-
-            abrir_se_fechado("tit-votos")
+            self.assertIn("Cassado", page.locator("#notas-vereador-wrap .perfil-nome").inner_text())
 
             texto_jorge = page.inner_text("body")
             votos_jorge = votos_da_legislatura("jorge-quege")
             self.assertIn(f"{votos_jorge['sim']}\nSim", texto_jorge)
-            self.assertIn(
-                f"{votos_jorge['ausente_com_justificativa']}\nAusente com justificativa",
-                texto_jorge,
+            total_ausente_jorge = (
+                votos_jorge["ausente_com_justificativa"] + votos_jorge["ausente_sem_justificativa"]
             )
+            self.assertIn(f"{total_ausente_jorge}\nAusente", texto_jorge)
+            self.assertNotIn("Ausente com justificativa", texto_jorge)
             self.assertNotIn("Fora do mandato naquela data", texto_jorge)
 
-            page.click("button.voto-card[data-voto-card='ausente_com_justificativa']")
+            page.click("button.voto-card[data-voto-card='ausente']")
             page.wait_for_timeout(1000)
-            abrir_se_fechado("tit-votos")
             texto_jorge_filtro = page.inner_text("body")
-            self.assertIn(
-                f"{nominais_por_estado('jorge-quege', 'ausente_com_justificativa')} registros",
-                texto_jorge_filtro,
-            )
+            self.assertIn(f"{nominais_ausentes('jorge-quege')} registros", texto_jorge_filtro)
 
-            presenca_card = page.locator("#tit-presenca").locator("xpath=ancestor::details[1]")
-            if not presenca_card.evaluate("node => node.open"):
-                page.locator("#tit-presenca").locator("xpath=ancestor::summary[1]").click()
+            btn_falta = page.locator("[data-falta-presenca='falta_com_justificativa']")
+            if btn_falta.count():
+                btn_falta.first.click()
                 page.wait_for_timeout(400)
+                self.assertEqual(page.locator("#folha-generica-backdrop.ativo").count(), 1)
+                page.keyboard.press("Escape")
+                page.wait_for_timeout(200)
 
-            inner_acs = presenca_card.locator("details.ac-cartao-inner")
-            self.assertGreater(inner_acs.count(), 0)
-
-            ac_1 = inner_acs.nth(0)
-
-            def texto_visivel_sem_literais_js():
-                if not presenca_card.evaluate("node => node.open"):
-                    page.locator("#tit-presenca").locator("xpath=ancestor::summary[1]").click()
-                    page.wait_for_timeout(400)
-                for i in range(inner_acs.count()):
-                    inner_acs.nth(i).locator("summary").click()
-                    page.wait_for_timeout(150)
-                texto = page.locator("body").inner_text()
-                for bad in ["esc(", "' +", "+ '", "length)", "undefined", "NaN", "null"]:
-                    self.assertNotIn(bad, texto)
-
-            ac_1.evaluate("n => { n.open = true; }")
-            page.wait_for_timeout(300)
-            self.assertTrue(ac_1.evaluate("node => node.open"))
-            if inner_acs.count() > 1:
-                ac_2 = inner_acs.nth(1)
-                ac_2.evaluate("n => { n.open = true; }")
-                page.wait_for_timeout(300)
-                self.assertTrue(ac_2.evaluate("node => node.open"))
-
-            for i in range(min(3, inner_acs.count())):
-                cab = inner_acs.nth(i).locator("summary").inner_text()
-                self.assertNotRegex(cab, r"\(\d+\)")
-
-            texto_visivel_sem_literais_js()
+            texto = page.locator("body").inner_text()
+            for bad in ["esc(", "' +", "+ '", "length)", "undefined", "NaN", "null", "(s)", "(ões)"]:
+                self.assertNotIn(bad, texto)
 
             browser.close()
+
 
 if __name__ == "__main__":
     unittest.main()

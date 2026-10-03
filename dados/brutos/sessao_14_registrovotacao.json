@@ -13,8 +13,7 @@
       "tipo_resultado_votacao": 2,
       "materia": 162,
       "ordem": 127,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 52,
@@ -29,8 +28,7 @@
       "tipo_resultado_votacao": 2,
       "materia": 28,
       "ordem": 130,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 53,
@@ -45,8 +43,7 @@
       "tipo_resultado_votacao": 2,
       "materia": 31,
       "ordem": 131,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 56,
@@ -61,8 +58,7 @@
       "tipo_resultado_votacao": 2,
       "materia": 166,
       "ordem": 137,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 57,
@@ -77,8 +73,7 @@
       "tipo_resultado_votacao": 2,
       "materia": 167,
       "ordem": 138,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 58,
@@ -93,8 +88,7 @@
       "tipo_resultado_votacao": 2,
       "materia": 168,
       "ordem": 139,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 59,
@@ -109,8 +103,7 @@
       "tipo_resultado_votacao": 5,
       "materia": 169,
       "ordem": 150,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 61,
@@ -125,8 +118,7 @@
       "tipo_resultado_votacao": 2,
       "materia": 170,
       "ordem": 149,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 62,
@@ -141,8 +133,7 @@
       "tipo_resultado_votacao": 2,
       "materia": 151,
       "ordem": 132,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     },
     {
       "id": 63,
@@ -157,8 +148,7 @@
       "tipo_resultado_votacao": 2,
       "materia": 163,
       "ordem": 133,
-      "expediente": null,
-      "user": 5
+      "expediente": null
     }
   ],
   "total": 10

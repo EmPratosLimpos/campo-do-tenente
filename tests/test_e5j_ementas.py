@@ -175,7 +175,6 @@ class TestEmentaExibicaoUnidade(unittest.TestCase):
     def setUpClass(cls):
         cls.config = json.loads(ler_html("config_cidade.json"))
         cls.bloco = bloco_ementa(ler_html("index.html"))
-        cls.bloco_modelo = bloco_ementa(ler_html("tela/modelo.html"))
         cls.resultado = cls._rodar(cls.bloco, cls.config, _casos_unidade())
 
     @staticmethod
@@ -263,16 +262,15 @@ class TestEmentaExibicaoUnidade(unittest.TestCase):
         self.assertIn("institui o programa de recuperação fiscal", busca)
 
     def test_lista_de_termos_preservados_vem_do_config_e_nao_do_codigo(self):
-        for nome in ("index.html", "tela/modelo.html"):
-            with self.subTest(arquivo=nome):
-                html = ler_html(nome)
-                for termo in ("Campo do Tenente", "Câmara Municipal", "REFIS", "APAE"):
-                    with self.subTest(termo=termo):
-                        bloco = bloco_ementa(html)
-                        self.assertNotIn('"' + termo + '"', bloco)
+        html = ler_html("index.html")
+        for termo in ("Campo do Tenente", "Câmara Municipal", "REFIS", "APAE"):
+            with self.subTest(termo=termo):
+                bloco = bloco_ementa(html)
+                self.assertNotIn('"' + termo + '"', bloco)
 
-    def test_funcao_existe_nos_dois_arquivos_e_estao_iguais(self):
-        self.assertEqual(self.bloco, self.bloco_modelo)
+    def test_funcao_da_ementa_existe_no_index(self):
+        self.assertIn("function ementaExibicao", self.bloco)
+        self.assertIn("function ementaBusca", self.bloco)
 
     def test_lista_do_config_tem_nota_e_lista_nao_vazia(self):
         bloco = self.config.get("ementa_termos_preservados")
@@ -303,12 +301,10 @@ class TestEmentaExibicaoUnidade(unittest.TestCase):
         for termo in TERMOS_E5K:
             with self.subTest(termo=termo):
                 self.assertIn(termo, lista)
-        for nome in ("index.html", "tela/modelo.html"):
-            with self.subTest(arquivo=nome):
-                bloco = bloco_ementa(ler_html(nome))
-                for termo in TERMOS_E5K:
-                    with self.subTest(termo=termo):
-                        self.assertNotIn('"' + termo + '"', bloco)
+        bloco = bloco_ementa(ler_html("index.html"))
+        for termo in TERMOS_E5K:
+            with self.subTest(termo=termo):
+                self.assertNotIn('"' + termo + '"', bloco)
 
 
 def _casos_unidade() -> dict:
@@ -388,7 +384,7 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                         for periodo in PERIODOS:
                             self._clicar_periodo(page, periodo)
                             for seletor in (
-                                "#bloco-votado-" + periodo + " .materia-ementa",
+                                "#bloco-votado-" + periodo + " .materia-assunto",
                                 "#bloco-votado-" + periodo + " .item-pll .ementa",
                             ):
                                 textos = page.eval_on_selector_all(
@@ -420,26 +416,19 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 achou = False
                 for periodo in PERIODOS:
                     self._clicar_periodo(page, periodo)
-                    for card in page.locator(
-                        f"#bloco-votado-{periodo} .materia-link"
-                    ).all():
-                        card.click()
-                        page.wait_for_timeout(400)
-                        texto = page.locator(
-                            "#resumo-sheet-corpo .resumo-campo-valor"
-                        ).all_text_contents()
-                        ementas = [t for t in texto if len(t) > 40]
-                        page.keyboard.press("Escape")
-                        page.wait_for_timeout(300)
-                        if not ementas:
+                    textos = page.eval_on_selector_all(
+                        f"#bloco-votado-{periodo} .materia-assunto",
+                        "els => els.map(e => e.textContent.trim())",
+                    )
+                    for assunto in textos:
+                        if len(assunto) < 20:
                             continue
                         achou = True
-                        for ementa in ementas:
-                            with self.subTest(periodo=periodo):
-                                self.assertLessEqual(
-                                    proporcao_maiusculas(ementa), 0.8, ementa
-                                )
-                self.assertTrue(achou, "nenhuma folha de resumo aberta")
+                        with self.subTest(periodo=periodo):
+                            self.assertLessEqual(
+                                proporcao_maiusculas(assunto), 0.8, assunto
+                            )
+                self.assertTrue(achou, "nenhum assunto de materia na lista")
                 self.assertEqual(erros, [])
                 page.close()
 
@@ -467,18 +456,10 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                         if tema == "escuro":
                             page.locator(".alternar-tema").first.click()
                             page.wait_for_timeout(300)
-                        bloco = page.locator("#tit-votos").locator(
-                            "xpath=ancestor::details[1]"
-                        )
-                        if not bloco.evaluate("n => n.open"):
-                            page.locator("#tit-votos").locator(
-                                "xpath=ancestor::summary[1]"
-                            ).click()
-                            page.wait_for_timeout(400)
                         page.click("button.voto-card[data-voto-card='sim']")
                         page.wait_for_timeout(700)
                         ementas = page.eval_on_selector_all(
-                            ".lista-votos .ementa-voto",
+                            ".lista-votos .materia-assunto",
                             "els => els.map(e => (e.getAttribute('title') || e.textContent).trim())",
                         )
                         self.assertTrue(ementas, "historico sem ementas")
@@ -506,17 +487,13 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 page.wait_for_selector("#sel-vereador", state="visible", timeout=30000)
                 page.select_option("#sel-vereador", VEREADOR_HISTORICO)
                 page.wait_for_timeout(600)
-                bloco = page.locator("#tit-votos").locator("xpath=ancestor::details[1]")
-                if not bloco.evaluate("n => n.open"):
-                    page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
-                    page.wait_for_timeout(400)
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(500)
                 campo = page.locator("#filtro-texto")
                 campo.fill("refis")
                 page.wait_for_timeout(700)
                 ementas = page.eval_on_selector_all(
-                    ".lista-votos .ementa-voto",
+                    ".lista-votos .materia-assunto",
                     "els => els.map(e => (e.getAttribute('title') || e.textContent).trim())",
                 )
                 self.assertTrue(ementas, "busca refis nao achou materia nenhuma")
@@ -534,13 +511,13 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 page = browser.new_page()
                 erros = self._erros(page)
                 self._abrir_camara(page, "1440", "claro")
-                tag = page.locator("#bloco-votado-sessao .tag-tipo.tag-explicavel").first
+                tag = page.locator("#bloco-votado-sessao .tag-categoria.tag-explicavel, #bloco-votado-sessao .tag-turno.tag-explicavel").first
                 self.assertEqual(tag.count(), 1)
                 tag.click()
                 page.wait_for_timeout(300)
-                caixa = page.locator("#tag-caixa-explicativa")
+                caixa = page.locator("#folha-generica-backdrop.ativo")
                 self.assertEqual(caixa.count(), 1)
-                self.assertTrue(caixa.inner_text().strip())
+                self.assertTrue(page.locator("#folha-generica-corpo").inner_text().strip())
                 self.assertEqual(erros, [])
                 page.close()
 
@@ -555,7 +532,7 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 for periodo in PERIODOS:
                     self._clicar_periodo(page, periodo)
                     textos = page.eval_on_selector_all(
-                        "#bloco-votado-" + periodo + " .materia-ementa",
+                        "#bloco-votado-" + periodo + " .materia-assunto",
                         "els => els.map(e => e.textContent.trim())",
                     )
                     for texto in textos:
@@ -597,34 +574,21 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 page.wait_for_selector("#sel-vereador", state="visible", timeout=30000)
                 page.select_option("#sel-vereador", VEREADOR_HISTORICO)
                 page.wait_for_timeout(600)
-                bloco = page.locator("#tit-votos").locator("xpath=ancestor::details[1]")
-                if not bloco.evaluate("n => n.open"):
-                    page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
-                    page.wait_for_timeout(400)
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(700)
                 visiveis = page.eval_on_selector_all(
-                    ".lista-votos .ementa-voto",
+                    ".lista-votos .materia-assunto",
                     "els => els.map(e => e.textContent.trim())",
                 )
-                completas = page.eval_on_selector_all(
-                    ".lista-votos .ementa-voto",
-                    "els => els.map(e => (e.getAttribute('title') || '').trim())",
-                )
                 alvo = "Plano Plurianual"
+                achou = [t for t in visiveis if alvo in t]
                 self.assertTrue(
-                    any(alvo in t for t in visiveis),
+                    achou,
                     "Plano Plurianual nao apareceu no texto visivel: " + str(visiveis),
                 )
-                achou = [t for t in completas if alvo in t]
-                self.assertTrue(achou, "Plano Plurianual nao apareceu no historico: " + str(completas))
                 for texto in achou:
-                    self.assertIn(
-                        "Dispõe sobre o Plano Plurianual de governo do município",
-                        texto,
-                    )
                     self.assertNotIn("plano plurianual", texto.lower().replace(
-                        "Plano Plurianual".lower(), ""
+                        "plano plurianual", ""
                     ))
                     self.assertLessEqual(proporcao_maiusculas(texto), 0.8, texto)
                 self.assertEqual(erros, [], msg=str(erros))

@@ -27,10 +27,14 @@ if str(Path(__file__).resolve().parent) not in sys.path:
 from config_cidade import (  # noqa: E402
     anos_recorte,
     carregar_config,
+    contem_campos_pessoais,
     id_legislatura_atual,
     id_tipo_sessao_ordinaria,
+    remover_campos_pessoais,
 )
+from csv_seguro import EscritorSeguro  # noqa: E402
 
+CONFIG = carregar_config()
 BRUTOS = RAIZ / "dados" / "brutos"
 ROTULO_SEM_VOTO = "voto individual nao registrado no SAPL"
 TEXTO_NAO_VOTOU = "Não Votou"
@@ -59,21 +63,12 @@ COLUNAS_MATERIA = [
 
 
 def sem_ip(valor):
-    if isinstance(valor, dict):
-        return {chave: sem_ip(item) for chave, item in valor.items() if chave != "ip"}
-    if isinstance(valor, list):
-        return [sem_ip(item) for item in valor]
-    return valor
+    """Alias antigo. A remocao e a mesma funcao que o coletor usa."""
+    return remover_campos_pessoais(valor, CONFIG)
 
 
 def contem_ip(valor) -> bool:
-    if isinstance(valor, dict):
-        if "ip" in valor:
-            return True
-        return any(contem_ip(item) for item in valor.values())
-    if isinstance(valor, list):
-        return any(contem_ip(item) for item in valor)
-    return False
+    return contem_campos_pessoais(valor, CONFIG)
 
 
 def fonte(pasta_lote: Path, nome: str) -> str:
@@ -85,8 +80,8 @@ def ler_json(caminho: Path):
 
 
 def gravar_json(caminho: Path, dado) -> None:
-    if contem_ip(dado):
-        raise SystemExit(f"Saida ainda contem ip: {caminho.name}")
+    if contem_campos_pessoais(dado, CONFIG):
+        raise SystemExit(f"Saida ainda contem campo pessoal: {caminho.name}")
     caminho.parent.mkdir(parents=True, exist_ok=True)
     texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
     tmp = caminho.with_suffix(caminho.suffix + ".tmp")
@@ -859,7 +854,7 @@ def derivar(
         linhas, nomes = ler_paginas(pasta_lote, f"materialegislativa_ano{ano}")
         caminho_csv = pasta_saida / f"materias-{ano}-resposta-original.csv"
         with caminho_csv.open("w", encoding="utf-8-sig", newline="") as handle:
-            escritor = csv.DictWriter(handle, fieldnames=COLUNAS_MATERIA, delimiter=";")
+            escritor = EscritorSeguro(csv.DictWriter(handle, fieldnames=COLUNAS_MATERIA, delimiter=";"))
             escritor.writeheader()
             for materia in linhas:
                 tipo = tipo_materia.get(int(materia["tipo"])) if materia.get("tipo") is not None else None
@@ -1011,7 +1006,12 @@ def derivar(
 def pasta_lote_mais_recente(brutos: Path) -> Path:
     candidatas = []
     for caminho in brutos.glob("lote_*"):
-        if not caminho.is_dir() or "porsessao" in caminho.name or caminho.name.endswith("_autoria"):
+        if not caminho.is_dir():
+            continue
+        nome_baixo = caminho.name.lower()
+        if "porsessao" in nome_baixo or caminho.name.endswith("_autoria"):
+            continue
+        if nome_baixo.endswith("_tramitacao") or "sondagem" in nome_baixo:
             continue
         indice = caminho / "indice.json"
         if not indice.exists():

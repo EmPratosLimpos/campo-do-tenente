@@ -69,8 +69,8 @@ class TestTotalIgualSoma(unittest.TestCase):
 
 
 class TestSeletorEstatico(unittest.TestCase):
-    def test_regra_sem_nome_fixo_nos_dois_arquivos(self):
-        for caminho in (RAIZ / "index.html", RAIZ / "tela" / "modelo.html"):
+    def test_regra_sem_nome_fixo_no_index(self):
+        for caminho in (RAIZ / "index.html",):
             with self.subTest(arquivo=caminho.name):
                 texto = caminho.read_text(encoding="utf-8")
                 self.assertIn('localeCompare', texto)
@@ -118,7 +118,8 @@ class TestSeletorPrevia(unittest.TestCase):
         cls.servidor.shutdown()
 
     def _abrir(self, page, largura: int = 390):
-        page.goto(self.base, wait_until="networkidle", timeout=120000)
+        page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
+        page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
         if largura >= 900:
             page.click("button[data-secao-lateral='vereadores']")
         else:
@@ -144,7 +145,7 @@ class TestSeletorPrevia(unittest.TestCase):
                         "#sel-vereador", "el => el.options[el.selectedIndex].text"
                     )
                     self.assertTrue(selecionado.startswith(self.esperados[0]))
-                    perfil = page.locator(".perfil-nome").inner_text()
+                    perfil = page.locator(".sel-vereador-face .nm").inner_text()
                     self.assertIn(self.esperados[0], perfil)
                     anterior = page.locator("#btn-ver-anterior")
                     self.assertTrue(anterior.is_disabled())
@@ -158,17 +159,17 @@ class TestSeletorPrevia(unittest.TestCase):
             self._abrir(page, 1440)
             page.click("#btn-ver-proximo")
             page.wait_for_timeout(500)
-            perfil = page.locator(".perfil-nome").inner_text()
+            perfil = page.locator(".sel-vereador-face .nm").inner_text()
             self.assertIn(self.esperados[1], perfil)
             for _ in range(len(self.esperados) - 2):
                 page.click("#btn-ver-proximo")
                 page.wait_for_timeout(250)
-            ultimo = page.locator(".perfil-nome").inner_text()
+            ultimo = page.locator(".sel-vereador-face .nm").inner_text()
             self.assertIn(self.esperados[-1], ultimo)
             self.assertTrue(page.locator("#btn-ver-proximo").is_disabled())
             page.click("#btn-ver-anterior")
             page.wait_for_timeout(500)
-            volta = page.locator(".perfil-nome").inner_text()
+            volta = page.locator(".sel-vereador-face .nm").inner_text()
             self.assertIn(self.esperados[-2], volta)
             browser.close()
 

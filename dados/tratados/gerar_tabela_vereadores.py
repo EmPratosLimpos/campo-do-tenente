@@ -35,6 +35,7 @@ from config_cidade import (  # noqa: E402
     nome_cidade,
     pisos_sanidade,
 )
+from csv_seguro import EscritorSeguro  # noqa: E402
 
 CONFIG = carregar_config()
 ANOS = anos_recorte(CONFIG)
@@ -516,7 +517,7 @@ def escrever_csv(vereadores: list[dict]) -> None:
         "link_sapl",
     ]
     with ARQUIVO_CSV.open("w", encoding="utf-8", newline="") as handle:
-        escritor = csv.DictWriter(handle, fieldnames=campos, delimiter=";")
+        escritor = EscritorSeguro(csv.DictWriter(handle, fieldnames=campos, delimiter=";"))
         escritor.writeheader()
         for item in vereadores:
             escritor.writerow(

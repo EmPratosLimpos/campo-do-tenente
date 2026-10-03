@@ -11,6 +11,7 @@ Rodar:  python coletor/sondar_campo_do_tenente.py
 from __future__ import annotations
 
 import json
+import sys
 import time
 import urllib.error
 import urllib.parse
@@ -18,6 +19,12 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 
+if str(Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from config_cidade import carregar_config, limpar_bytes_pessoais  # noqa: E402
+
+CONFIG = carregar_config()
 BASE = "https://sapl.campodotenente.pr.leg.br"
 PAUSA = 3.0
 TEMPO_LIMITE = 120
@@ -157,7 +164,8 @@ class Sonda:
                 erro = "tempo esgotado"
 
             destino = SAIDA / nome
-            destino.write_bytes(corpo)
+            # Campos pessoais saem antes de gravar, pela funcao do config.
+            destino.write_bytes(limpar_bytes_pessoais(corpo, CONFIG))
 
             self._registrar(
                 {

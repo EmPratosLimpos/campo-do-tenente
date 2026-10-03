@@ -11,12 +11,38 @@
     "legislatura_inicio": 2025,
     "legislatura_fim": 2028
   },
+  "campos_pessoais_removidos": {
+    "nota": "SEG2: campos que identificam quem fez a operacao no SAPL. Nenhum dado de votante, nem de quem registrou, fica no repositorio. A remocao e feita antes de gravar, por uma funcao so, e a trava de testes_sanidade.py recusa esses campos em qualquer arquivo de dados/.",
+    "lista": [
+      "ip",
+      "user"
+    ]
+  },
+  "rede": {
+    "nota": "SEG2: quem o coletor pode chamar e quanto cabe uma resposta. Nada fixo no codigo. O host do SAPL vem sempre de sapl.endereco_base. Um host extra so entra aqui, e so para servico oficial da propria Camara, como o servidor de fotos.",
+    "teto_bytes_resposta": 20971520,
+    "esquemas_permitidos": [
+      "https"
+    ],
+    "hosts_permitidos_extra": []
+  },
   "painel": {
     "nome_projeto": "Em Pratos Limpos",
-    "endereco_publico": "https://empratoslimpos.github.io/campo-do-tenente/",
+    "endereco_publico": "https://empratoslimpos.com/",
     "repositorio": "https://github.com/EmPratosLimpos/campo-do-tenente",
     "site_camara": "https://www.campodotenente.pr.leg.br",
-    "site_camara_nota": "fonte oficial usada so para afastamentos que o SAPL nao registra (D-020)"
+    "site_camara_nota": "fonte oficial usada so para afastamentos que o SAPL nao registra (D-020)",
+    "email_contato": "contato@empratoslimpos.com",
+    "goatcounter": {
+      "codigo": "empratoslimpos",
+      "dominio": "https://empratoslimpos.goatcounter.com"
+    },
+    "posthog": {
+      "chave_publica": "phc_w6wbMbPTxJT23ntAUuQRFMWorTkBrrk4s2aUTmFzLCqT",
+      "host": "https://eu.i.posthog.com"
+    },
+    "apoio_url": "",
+    "nota_plex_sem_registro_sapl": "{quantidade} projetos do início de {ano} não têm votação registrada no SAPL."
   },
   "recorte": {
     "anos": [
@@ -24,6 +50,10 @@
       2026
     ],
     "nota": "legislatura inteira"
+  },
+  "abas": {
+    "nota": "D-058: chave que liga cada aba da tela. False deixa a aba fora do painel mesmo com os dados ja tratados no SAPL. O dado existe antes da tela: quem liga a aba e o mantenedor.",
+    "prefeito": true
   },
   "vereadores": {
     "numero_esperado": null
@@ -42,6 +72,15 @@
         "projetos_lei_legislativo_e_executivo": 18
       }
     }
+  },
+  "tramitacao": {
+    "nota": "C8 e C9: recorte da coleta de tramitacao e piso de decodificacao. Siglas lidas daqui, nunca fixas no codigo. D-058: tipos_veto sao as siglas do grupo Executivo que sao veto; elas recebem veto_tipo e veto_situacao na aba Prefeito.",
+    "tipos_coleta": ["REQ", "MOC", "IND", "PLEX", "VET"],
+    "tipos_proposicoes": ["PLEG", "REQ", "MOC", "IND"],
+    "tipos_executivo": ["PLEX", "VET"],
+    "tipos_veto": ["VET"],
+    "piso_status_decodificados": 20,
+    "teto_pedidos_execucao": 210
   },
   "categorias": {
     "nota": "D-021: categorias proprias da cidade, na ordem de exibicao. Cada materia recebe um tema principal lido da ementa oficial.",
@@ -191,8 +230,17 @@
     "voto_abstencao": "O vereador estava presente e optou por não votar nem sim nem não.",
     "voto_nao_votou": "O vereador não registrou voto nessa votação.",
     "voto_presidente": "O presidente da sessão não votou nessa votação.",
+    "sem_registro_sapl": "O SAPL não tem votação nem andamento registrado para este projeto. As sessões do início de 2025 não foram registradas pela Câmara no sistema.",
+    "voto_ausente": "O vereador não estava presente nessa votação. Se a falta foi justificada, aparece no cartão de Presença.",
     "voto_ausente_justificativa": "O vereador faltou com justificativa oficial nessa votação.",
     "voto_ausente_sem_justificativa": "O vereador faltou sem justificativa oficial nessa votação.",
-    "voto_presente_sem_registro": "O vereador estava presente, mas o voto individual não foi registrado no SAPL."
+    "voto_presente_sem_registro": "O vereador estava presente, mas o voto individual não foi registrado no SAPL.",
+    "unanimidade": "Todos os votos registrados foram favoráveis à matéria.",
+    "maioria": "A matéria foi aprovada pela maioria dos votos registrados.",
+    "nominal": "O voto de cada vereador fica registrado com o nome (art. 201 do Regimento Interno). É obrigatória quando a matéria exige maioria absoluta ou dois terços.",
+    "tramitacao": "A matéria ainda está em tramitação, sem decisão final registrada.",
+    "veto": "O Prefeito pode recusar um projeto aprovado pela Câmara, no todo ou em parte. A Câmara vota de novo e pode manter ou derrubar o veto.",
+    "plex": "Projeto de Lei de origem do Poder Executivo: o projeto foi escrito e enviado pela Prefeitura.",
+    "pleg": "Projeto de Lei de origem do Poder Legislativo: proposta apresentada por vereador ou comissão."
   }
 }

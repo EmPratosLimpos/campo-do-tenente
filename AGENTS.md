@@ -34,7 +34,8 @@ A norma técnica soberana deste projeto é o documento:
 ## 2. Segregação de Ambientes e Fluxo de Branches
 
 * **Branch `main` (Produção):**
-  * Espelho do GitHub Pages público (`https://empratoslimpos.github.io/campo-do-tenente/`).
+  * Espelho do GitHub Pages público, servido com o domínio próprio `https://empratoslimpos.com/`.
+  * O site é servido pelo GitHub Pages com o domínio próprio empratoslimpos.com, definido pelo arquivo `CNAME` na raiz, criado pelo GitHub. **NUNCA** apague nem altere esse arquivo.
   * **NUNCA** commite diretamente na branch `main`.
   * **NUNCA** faça force push (`git push --force`).
    * Atualizações em `main` só ocorrem via Pull Request formal após validação e aprovação do mantenedor.

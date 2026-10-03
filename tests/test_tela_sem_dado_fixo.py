@@ -124,7 +124,7 @@ class TestTelaSemDadoFixo(unittest.TestCase):
         cls.servidor.shutdown()
 
     def _texto_pagina(self, page):
-        page.goto(self.base, wait_until="networkidle", timeout=120000)
+        page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
         page.wait_for_timeout(800)
         for periodo in ("sessao", "mes", "todo"):
             page.click(f'button[data-periodo="{periodo}"]')
@@ -148,14 +148,14 @@ class TestTelaSemDadoFixo(unittest.TestCase):
             for ano in (2025, 2026):
                 datas_ok |= datas_sessoes_ano(ano)
 
-            page.goto(self.base, wait_until="networkidle", timeout=120000)
-            page.wait_for_timeout(1200)
+            page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
+            page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
             page.click('button[data-periodo="sessao"]')
             rodape = page.locator("#painel-periodo-sessao .rodape-coleta")
             page.wait_for_function(
                 """(sel) => {
                   var el = document.querySelector(sel);
-                  return el && el.innerText.indexOf('Dado coletado') !== -1;
+                  return el && el.innerText.indexOf('Dados do SAPL coletados em') !== -1;
                 }""",
                 arg="#painel-periodo-sessao .rodape-coleta",
                 timeout=15000,

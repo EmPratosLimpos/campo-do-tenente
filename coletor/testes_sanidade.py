@@ -21,6 +21,7 @@ from pathlib import Path
 from config_cidade import (
     PisoNaoDefinido,
     anos_recorte,
+    campos_pessoais,
     carregar_config,
     exigir_piso,
     pisos_sanidade,
@@ -28,9 +29,15 @@ from config_cidade import (
 
 DIR_RAIZ = Path(__file__).resolve().parent.parent
 DIR_TRATADOS = DIR_RAIZ / "dados" / "tratados"
+DIR_BRUTOS = DIR_RAIZ / "dados" / "brutos"
+DIR_DADOS = DIR_RAIZ / "dados"
 CONFIG = carregar_config()
 ANOS = anos_recorte(CONFIG)
 PISOS = {ano: pisos_sanidade(ano, CONFIG) for ano in ANOS}
+
+# Pagina de terceiro nao entra no repositorio. Em dados/ so ha dado do SAPL
+# e o texto puro que comprova o que o SAPL nao registra.
+EXTENSOES_DE_PAGINA = frozenset({".html", ".htm", ".xhtml", ".svg"})
 
 
 class FalhaSanidade(Exception):
@@ -141,6 +148,59 @@ def testar_arquivo_real(ano: int) -> None:
     checar(not tem_chave_ip(dados), f"{ano}: campo ip em dado tratado")
 
 
+def pagina_versionada_em_dados() -> list[str]:
+    """Arquivos de pagina dentro de dados/. Nenhum pode ser versionado."""
+    achados = []
+    for caminho in sorted(DIR_DADOS.rglob("*")):
+        if not caminho.is_file():
+            continue
+        if caminho.suffix.lower() in EXTENSOES_DE_PAGINA:
+            achados.append(caminho.relative_to(DIR_RAIZ).as_posix())
+    return achados
+
+
+def testar_sem_pagina_versionada_em_dados() -> None:
+    achados = pagina_versionada_em_dados()
+    checar(
+        not achados,
+        "dados/ nao pode ter pagina versionada (.html, .htm, .xhtml, .svg): "
+        + ", ".join(achados),
+    )
+
+
+def arquivo_com_campo_pessoal() -> list[str]:
+    """Arquivo de dados/ com campo pessoal do SAPL dentro de um JSON."""
+    chaves = set(campos_pessoais(CONFIG))
+    achados = []
+    for caminho in sorted(DIR_DADOS.rglob("*.json")):
+        try:
+            dados = json.loads(caminho.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, ValueError):
+            continue
+        if contem_chave(dados, chaves):
+            achados.append(caminho.relative_to(DIR_RAIZ).as_posix())
+    return achados
+
+
+def contem_chave(valor, chaves: set) -> bool:
+    if isinstance(valor, dict):
+        if chaves & set(valor.keys()):
+            return True
+        return any(contem_chave(sub, chaves) for sub in valor.values())
+    if isinstance(valor, list):
+        return any(contem_chave(sub, chaves) for sub in valor)
+    return False
+
+
+def testar_sem_campo_pessoal_em_dados() -> None:
+    achados = arquivo_com_campo_pessoal()
+    nomes = ", ".join(campos_pessoais(CONFIG))
+    checar(
+        not achados,
+        f"dados/ nao pode ter campo pessoal ({nomes}): " + ", ".join(achados),
+    )
+
+
 def main() -> int:
     try:
         pisos = {}
@@ -158,6 +218,17 @@ def main() -> int:
         return 1
 
     falhas = []
+    testes_globais = (
+        ("testar_sem_pagina_versionada_em_dados", testar_sem_pagina_versionada_em_dados),
+        ("testar_sem_campo_pessoal_em_dados", testar_sem_campo_pessoal_em_dados),
+    )
+    for nome, teste in testes_globais:
+        try:
+            teste()
+        except FalhaSanidade as erro:
+            falhas.append(f"{nome}: {erro}")
+        except Exception as erro:
+            falhas.append(f"{nome}: erro inesperado - {erro}")
     for ano in ANOS:
         piso = pisos[ano]
         for nome, teste in (
@@ -187,7 +258,7 @@ def main() -> int:
             print(f"  - {falha}", file=sys.stderr)
         return 1
 
-    n_testes = 4 * len(ANOS)
+    n_testes = 4 * len(ANOS) + len(testes_globais)
     print(f"OK: {n_testes} testes de sanidade passaram.")
     return 0
 

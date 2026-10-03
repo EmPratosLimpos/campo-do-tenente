@@ -282,5 +282,195 @@ class TestSanidadeDados(unittest.TestCase):
                     self.assertEqual(projeto.get("tipo_descricao"), esperado.get(sigla))
 
 
+class TestSemCampoPessoalEmDados(unittest.TestCase):
+    """Nenhum campo pessoal do SAPL pode ficar em dados/ (SEG2)."""
+
+    def test_nenhum_arquivo_de_dados_tem_campo_pessoal(self):
+        from testes_sanidade import arquivo_com_campo_pessoal
+
+        self.assertEqual(arquivo_com_campo_pessoal(), [])
+
+    def test_a_trava_encontra_campo_pessoal_em_qualquer_nivel(self):
+        from testes_sanidade import arquivo_com_campo_pessoal, campos_pessoais
+        from config_cidade import carregar_config, remover_campos_pessoais
+
+        cfg = carregar_config()
+        chaves = campos_pessoais(cfg)
+        pasta = DIR_RAIZ / "dados" / "brutos" / "lote_tmp_seg2_pessoal"
+        pasta.mkdir(parents=True, exist_ok=True)
+        try:
+            for nome in ("a.json", "b.json"):
+                (pasta / nome).write_text(
+                    json.dumps({"results": [{"id": 1, chaves[0]: "10.0.0.1"}]}),
+                    encoding="utf-8",
+                )
+            achados = arquivo_com_campo_pessoal()
+            self.assertEqual(len(achados), 2, achados)
+            limpo = remover_campos_pessoais({"id": 1, chaves[1]: 5}, cfg)
+            self.assertEqual(limpo, {"id": 1})
+        finally:
+            for arquivo in sorted(pasta.glob("*")):
+                arquivo.unlink()
+            pasta.rmdir()
+        self.assertEqual(arquivo_com_campo_pessoal(), [])
+
+    def test_lista_vem_do_config(self):
+        from config_cidade import campos_pessoais, carregar_config
+
+        cfg = carregar_config()
+        lista = campos_pessoais(cfg)
+        self.assertEqual(lista, ["ip", "user"])
+        for chave in lista:
+            self.assertIsInstance(chave, str)
+            self.assertTrue(chave.strip())
+        self.assertNotIn("nome_parlamentar", lista)
+
+    def test_remocao_no_texto_preserva_o_formato(self):
+        from config_cidade import carregar_config, remover_campos_pessoais_do_texto
+
+        cfg = carregar_config()
+        casos = {
+            '{"a":1,"ip":"1.2.3.4","b":2}': '{"a":1,"b":2}',
+            '{"a":1,"user":5}': '{"a":1}',
+            '{"ip":"1.2.3.4"}': "{}",
+            '{\n  "a": 1,\n  "ip": "x",\n  "b": 2\n}': '{\n  "a": 1,\n  "b": 2\n}',
+            '{\n  "a": 1,\n  "b": 2,\n  "user": 7\n}': '{\n  "a": 1,\n  "b": 2\n}',
+            '{"n":{"ip":1,"user":2}}': '{"n":{}}',
+            '{"a":1,"user":2,"ip":3}': '{"a":1}',
+        }
+        for entrada, esperado in casos.items():
+            with self.subTest(entrada=entrada):
+                saida = remover_campos_pessoais_do_texto(entrada, cfg)
+                self.assertEqual(saida, esperado)
+                self.assertEqual(json.loads(saida), json.loads(esperado))
+        sem_chave = '{"a":1,"b":"ip e user dentro do texto"}'
+        self.assertEqual(remover_campos_pessoais_do_texto(sem_chave, cfg), sem_chave)
+
+    def test_todo_coletor_grava_pelo_coletor_com_a_remocao(self):
+        """Nenhum coletor abre conexao fora do ColetorLote."""
+        coletor = DIR_RAIZ / "coletor"
+        nomes = (
+            "coletar_tramitacao.py",
+            "sondar_tramitacao.py",
+            "coletar_por_sessao.py",
+            "coletar_autoria.py",
+        )
+        for nome in nomes:
+            caminho = coletor / nome
+            if not caminho.is_file():
+                continue
+            with self.subTest(arquivo=nome):
+                texto = caminho.read_text(encoding="utf-8")
+                self.assertIn("ColetorLote", texto)
+                self.assertNotIn("urlopen(", texto)
+                self.assertNotIn("requests.get(", texto)
+                self.assertNotIn(".get(url", texto)
+
+    def test_coletores_de_tramitacao_nao_gravam_resposta_por_conta_propria(self):
+        coletor = DIR_RAIZ / "coletor"
+        for nome in ("coletar_tramitacao.py", "sondar_tramitacao.py"):
+            caminho = coletor / nome
+            if not caminho.is_file():
+                continue
+            with self.subTest(arquivo=nome):
+                texto = caminho.read_text(encoding="utf-8")
+                self.assertNotIn("write_bytes(", texto)
+                self.assertNotIn("write_text(", texto)
+                self.assertNotIn("open(", texto)
+
+    def test_coletor_lote_usa_a_remocao_antes_de_gravar(self):
+        from coletar_lote import limpar_resposta
+        from config_cidade import carregar_config
+
+        cfg = carregar_config()
+        corpo = b'{"results":[{"id":1,"ip":"10.0.0.1","user":5}],"total":1}'
+        saida = limpar_resposta(corpo, cfg)
+        self.assertEqual(
+            json.loads(saida.decode("utf-8")),
+            {"results": [{"id": 1}], "total": 1},
+        )
+        sem_campo = b'{"results":[{"id":1}]}'
+        self.assertEqual(limpar_resposta(sem_campo, cfg), sem_campo)
+        self.assertEqual(limpar_resposta(b"", cfg), b"")
+
+
+class TestSemPaginaEmDados(unittest.TestCase):
+    """Nenhuma pagina de terceiro pode ser versionada dentro de dados/."""
+
+    def test_nenhuma_pagina_em_dados(self):
+        from testes_sanidade import pagina_versionada_em_dados
+
+        self.assertEqual(pagina_versionada_em_dados(), [])
+
+    def test_a_trava_encontra_qualquer_pagina(self):
+        from testes_sanidade import pagina_versionada_em_dados
+
+        pasta = DIR_RAIZ / "dados" / "brutos" / "lote_tmp_seg2"
+        pasta.mkdir(parents=True, exist_ok=True)
+        try:
+            for nome in ("pagina.html", "pagina.htm", "pagina.xhtml", "icone.svg"):
+                (pasta / nome).write_text("conteudo", encoding="utf-8")
+            achados = pagina_versionada_em_dados()
+            self.assertEqual(len(achados), 4)
+            for nome in ("pagina.html", "pagina.htm", "pagina.xhtml", "icone.svg"):
+                self.assertIn(f"dados/brutos/lote_tmp_seg2/{nome}", achados)
+        finally:
+            for arquivo in sorted(pasta.glob("*")):
+                arquivo.unlink()
+            pasta.rmdir()
+        self.assertEqual(pagina_versionada_em_dados(), [])
+
+    def test_noticia_da_licenca_ficou_em_json(self):
+        pasta = DIR_RAIZ / "dados" / "brutos" / "lote_20260927_noticia_licenca"
+        self.assertTrue((pasta / "noticia.json").is_file())
+        self.assertFalse((pasta / "noticia.html").exists())
+        noticia = json.loads((pasta / "noticia.json").read_text(encoding="utf-8"))
+        for chave in ("url_oficial", "titulo", "data", "trecho"):
+            self.assertTrue(str(noticia.get(chave) or "").strip(), chave)
+        self.assertTrue(noticia["url_oficial"].startswith("https://"))
+        tratado = json.loads(
+            (DIR_RAIZ / "dados" / "tratados" / "afastamentos_manuais.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        afastamento = tratado["afastamentos"][0]
+        self.assertEqual(noticia["url_oficial"], afastamento["link_fonte"])
+        self.assertEqual(noticia["trecho"], afastamento["trecho"])
+        self.assertEqual(
+            afastamento["arquivo"],
+            "dados/brutos/lote_20260927_noticia_licenca/noticia.json",
+            "o campo arquivo do afastamento aponta para o JSON que existe",
+        )
+        self.assertTrue((DIR_RAIZ / afastamento["arquivo"]).is_file())
+
+    def test_nenhum_derivado_aponta_para_pagina_html_inexistente(self):
+        """O campo arquivo tem de apontar para arquivo que existe no repositorio."""
+        antigo = "dados/brutos/lote_20260927_noticia_licenca/noticia.html"
+        alvos = [
+            "dados/tratados/afastamentos_manuais.json",
+            "dados/tratados/atuacao_vereadores_2025.json",
+            "dados/tratados/atuacao_vereadores_2026.json",
+            "dados/tratados/atuacao_vereadores_legislatura.json",
+        ]
+
+        def varrer(no: object, nome: str) -> None:
+            if isinstance(no, dict):
+                for chave, valor in no.items():
+                    if chave == "arquivo" and isinstance(valor, str):
+                        with self.subTest(arquivo=nome, caminho=valor):
+                            self.assertTrue((DIR_RAIZ / valor).is_file(), valor)
+                    varrer(valor, nome)
+            elif isinstance(no, list):
+                for valor in no:
+                    varrer(valor, nome)
+
+        for alvo in alvos:
+            caminho = DIR_RAIZ / alvo
+            with self.subTest(arquivo=alvo):
+                texto = caminho.read_text(encoding="utf-8")
+                self.assertNotIn(antigo, texto)
+                varrer(json.loads(texto), alvo)
+
+
 if __name__ == "__main__":
     unittest.main()

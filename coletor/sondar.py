@@ -22,6 +22,7 @@ from config_cidade import (
     carregar_config,
     endereco_sapl,
     nome_cidade,
+    remover_campos_pessoais,
     user_agent_http,
 )
 
@@ -71,7 +72,7 @@ def sondar(sessao, caminho):
         return caminho, f"HTTP {r.status_code}", r.text[:200]
 
     try:
-        dado = r.json()
+        dado = remover_campos_pessoais(r.json(), CONFIG)
     except ValueError:
         return caminho, "respondeu, mas nao em JSON", r.text[:200]
 

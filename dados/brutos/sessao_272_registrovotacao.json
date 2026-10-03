@@ -13,8 +13,7 @@
       "tipo_resultado_votacao": 3,
       "materia": 820,
       "ordem": null,
-      "expediente": 74,
-      "user": 3
+      "expediente": 74
     },
     {
       "id": 266,
@@ -29,8 +28,7 @@
       "tipo_resultado_votacao": 3,
       "materia": 814,
       "ordem": 696,
-      "expediente": null,
-      "user": 3
+      "expediente": null
     },
     {
       "id": 267,
@@ -45,8 +43,7 @@
       "tipo_resultado_votacao": 3,
       "materia": 816,
       "ordem": 697,
-      "expediente": null,
-      "user": 3
+      "expediente": null
     }
   ],
   "total": 3
