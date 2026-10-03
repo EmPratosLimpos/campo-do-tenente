@@ -6,7 +6,15 @@
 <meta name="color-scheme" content="light dark">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; img-src 'self' https://empratoslimpos.goatcounter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://eu.i.posthog.com https://eu-assets.i.posthog.com; form-action 'none'; upgrade-insecure-requests;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Em Pratos Limpos: o que a Câmara de Campo do Tenente vota</title>
+<title>Em Pratos Limpos: painel independente sobre a política de Campo do Tenente</title>
+<meta name="description" content="Painel independente sobre a política de Campo do Tenente.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Em Pratos Limpos">
+<meta property="og:title" content="Em Pratos Limpos">
+<meta property="og:description" content="Painel independente sobre a política de Campo do Tenente.">
+<meta property="og:url" content="https://empratoslimpos.com/">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://empratoslimpos.com/marca/icone-app-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
@@ -5930,7 +5938,7 @@
     card.innerHTML = '<h2 class="sr" id="tit-presenca-sessao">Presen\u00e7a na \u00faltima sess\u00e3o</h2>' +
       '<p class="resumo">' + esc(frase) + "</p>" +
       '<div class="seg-barra" role="img" aria-label="' + esc(c.presentes + " de " + n + " vereadores presentes") + '">' +
-      '<i style="width:' + pct.toFixed(2) + '%;background:var(--marca-solida)"></i></div>' + numeros;
+      '<i class="seg-cheio-marca" style="width:' + pct.toFixed(2) + '%"></i></div>' + numeros;
     var btnFaltas = card.querySelector("[data-abrir-faltas]");
     if (btnFaltas) btnFaltas.addEventListener("click", function () { abrirFolhaQuemFaltou(btnFaltas); });
   }
@@ -7522,9 +7530,15 @@ var MAPA_VAR_CATEGORIA = {
     return '<span class="cat-quadro" style="background:var(' + varCategoria(tema) + ')"></span>';
   }
 
+  function rotuloNaoSeAplica() {
+    var esp = CONFIG_CIDADE && CONFIG_CIDADE.categorias && CONFIG_CIDADE.categorias.rotulos_especiais;
+    return esp && esp.nao_se_aplica ? String(esp.nao_se_aplica) : "";
+  }
+
   function temaValidoParaTag(tema) {
     if (!tema) return false;
-    if (tema === "Não se aplica") return false;
+    var na = rotuloNaoSeAplica();
+    if (na && tema === na) return false;
     if (tema === "Tema não classificado") return false;
     return true;
   }
