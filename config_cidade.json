@@ -43,6 +43,10 @@
     ],
     "nota": "legislatura inteira"
   },
+  "abas": {
+    "nota": "D-058: chave que liga cada aba da tela. False deixa a aba fora do painel mesmo com os dados ja tratados no SAPL. O dado existe antes da tela: quem liga a aba e o mantenedor.",
+    "prefeito": false
+  },
   "vereadores": {
     "numero_esperado": null
   },
@@ -62,10 +66,11 @@
     }
   },
   "tramitacao": {
-    "nota": "C8 e C9: recorte da coleta de tramitacao e piso de decodificacao. Siglas lidas daqui, nunca fixas no codigo.",
+    "nota": "C8 e C9: recorte da coleta de tramitacao e piso de decodificacao. Siglas lidas daqui, nunca fixas no codigo. D-058: tipos_veto sao as siglas do grupo Executivo que sao veto; elas recebem veto_tipo e veto_situacao na aba Prefeito.",
     "tipos_coleta": ["REQ", "MOC", "IND", "PLEX", "VET"],
     "tipos_proposicoes": ["PLEG", "REQ", "MOC", "IND"],
     "tipos_executivo": ["PLEX", "VET"],
+    "tipos_veto": ["VET"],
     "piso_status_decodificados": 20,
     "teto_pedidos_execucao": 210
   },
