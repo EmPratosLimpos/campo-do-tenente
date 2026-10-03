@@ -320,7 +320,7 @@ JS_TOPO_MEDICAO = """() => {
     Math.round(rs.top + rs.height / 2)
   );
   const lab = document.querySelector('label[for="sel-vereador"]');
-  const share = document.querySelector('#sub-vereadores .btn-abrir-share');
+  const share = document.querySelector('.topo-fixo .btn-compartilhar-topo');
   const tema = document.querySelector('#btn-tema');
   let tema_sobrepoe_sel = false;
   if (tema) {
@@ -643,8 +643,8 @@ class TestTelaLayout(unittest.TestCase):
                 topo["tema_sobrepoe_sel"], f"botao de tema sobrepoe o seletor: {topo}"
             )
             self.assertFalse(
-                page.locator(".topo-marca-linha").is_visible(),
-                "marca nao deve aparecer dentro da barra compacta",
+                page.locator(".topo-fixo.compacto .topo-marca-linha .site-logo").is_visible(),
+                "logotipo nao deve aparecer dentro da barra compacta",
             )
 
             valor_antes = page.evaluate("() => document.getElementById('sel-vereador').value")

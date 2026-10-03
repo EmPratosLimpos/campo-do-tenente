@@ -317,11 +317,11 @@
 
   @media (max-width: 899.98px) {
     .topo-fixo.compacto {
-      padding: 8px 60px 8px 16px;
+      padding: 8px 96px 8px 16px;
     }
 
     .topo-fixo.compacto .topo-tagline,
-    .topo-fixo.compacto .topo-marca-linha,
+    .topo-fixo.compacto .topo-marca-linha .site-logo,
     .topo-fixo.compacto .sub-camara,
     .topo-fixo.compacto .titulo-vereadores,
     .topo-fixo.compacto .nav-vereador {
@@ -360,6 +360,21 @@
       overflow: hidden;
       clip: rect(0 0 0 0);
       white-space: nowrap;
+    }
+
+    .topo-fixo.compacto .topo-marca-linha {
+      min-height: 0;
+      height: 0;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+
+    .topo-fixo.compacto .topo-icones {
+      position: fixed;
+      top: 8px;
+      right: 12px;
+      z-index: 25;
     }
   }
 
@@ -535,6 +550,7 @@
     max-width: 520px;
     max-height: 92vh;
     max-height: 92dvh;
+    min-height: 0;
     background: var(--superficie);
     border-radius: 24px 24px 0 0;
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
@@ -619,13 +635,14 @@
   .share-vitrine canvas {
     display: block;
     justify-self: center;
-    width: auto;
+    width: 100%;
     max-width: 100%;
+    height: auto;
     border-radius: 13px;
   }
 
   .share-balao canvas {
-    height: min(180px, 19vh);
+    max-height: min(180px, 19vh);
     aspect-ratio: 1080 / 1350;
   }
 
@@ -769,7 +786,7 @@
   }
 
   .share-vitrine canvas {
-    height: min(300px, 30vh);
+    max-height: min(300px, 30vh);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
   }
 
