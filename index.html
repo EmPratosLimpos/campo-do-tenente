@@ -105,12 +105,14 @@
     --fonte: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     --peso-texto: 400; --peso-destaque: 600; --peso-titulo: 800;
   
-    /* Escala de texto (celular / computador acima de 900px) */
-    --t-tela: 26px;        /* título da tela, peso 800, altura de linha 1.15 */
-    --t-resumo: 20px;      /* frase-resumo, peso 600, altura 1.4 */
-    --t-cartao: 18px;      /* título de cartão, peso 800, altura 1.25 */
-    --t-numero: 24px;      /* número em linha; 30px em quadro; peso 800 */
-    --t-materia: 16px;     /* assunto da matéria, peso 600, altura 1.45 */
+    /* Escala de destaque (celular; computador redefine ≥900px abaixo) */
+    --t-tela: 24px;        /* título da tela, peso 800, altura 1.15 */
+    --t-resumo: 18px;      /* frase-resumo, peso 600, altura 1.4 */
+    --t-cartao: 17px;      /* título de cartão (.t2), peso 800, altura 1.25 */
+    --t-numero: 22px;      /* número em linha ou quadro no celular, peso 800 */
+    --t-numero-quadro: 22px; /* número grande em quadro (.numeros b, .qv b); 28px no computador */
+    --t-numero-legenda: 14px; /* rótulo em .numeros span; 13px no computador */
+    --t-materia: 15px;     /* assunto da matéria, peso 600, altura 1.45 */
     --t-corpo: 15px;       /* texto corrido, peso 400, altura 1.5 */
     --t-apoio: 13px;       /* datas, sigla, legendas, tags; nunca menor que 13px */
   
@@ -122,7 +124,15 @@
     --alvo-minimo: 44px;
   }
   @media (min-width: 900px) {
-    :root { --t-tela: 34px; --t-resumo: 24px; --t-cartao: 20px; --t-corpo: 16px; --t-apoio: 14px; }
+    :root {
+      --t-tela: 31px;
+      --t-resumo: 22px;
+      --t-cartao: 19px;
+      --t-numero-quadro: 28px;
+      --t-numero-legenda: 13px;
+      --t-corpo: 16px;
+      --t-apoio: 14px;
+    }
   }
   
   [data-tema="escuro"] {
@@ -1910,7 +1920,7 @@
     color: var(--texto);
     font: inherit;
   }
-  .qv.voto-card b { font-size: 28px; font-weight: 800; line-height: 1; }
+  .qv.voto-card b { font-size: var(--t-numero-quadro); font-weight: 800; line-height: 1; }
   .qv.voto-card span { font-size: var(--t-apoio); font-weight: 600; display: flex; align-items: center; gap: 8px; }
   .qv.voto-card.aus { border-style: dashed; }
   .qv.voto-card.ativo { border-color: var(--texto); box-shadow: inset 0 0 0 1px var(--texto); }
@@ -1987,7 +1997,7 @@
   .numeros b {
     grid-column: 2;
     grid-row: 1;
-    font-size: 24px;
+    font-size: var(--t-numero);
     font-weight: 800;
     line-height: 1;
     text-align: right;
@@ -2000,7 +2010,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 15px;
+    font-size: var(--t-numero-legenda);
     font-weight: 600;
     color: var(--texto);
     line-height: 1.3;
@@ -2033,7 +2043,7 @@
     .numeros b {
       grid-column: 1;
       grid-row: 1;
-      font-size: 30px;
+      font-size: var(--t-numero-quadro);
       text-align: center;
       justify-self: center;
     }
@@ -2041,7 +2051,7 @@
       grid-column: 1;
       grid-row: 2;
       justify-content: center;
-      font-size: var(--t-apoio);
+      font-size: var(--t-numero-legenda);
     }
   }
   .linha-btn {
@@ -2063,7 +2073,7 @@
     color: var(--texto);
   }
   .linha-btn b {
-    font-size: 24px;
+    font-size: var(--t-numero);
     font-weight: 800;
     font-variant-numeric: tabular-nums;
   }
@@ -2194,7 +2204,7 @@
     flex-wrap: wrap;
   }
   .cab-cartao .t2 {
-    font-size: 18px;
+    font-size: var(--t-cartao);
     font-weight: 800;
     line-height: 1.25;
     margin: 0;
@@ -4258,7 +4268,7 @@
     white-space: nowrap;
   }
   .t2 {
-    font-size: 18px;
+    font-size: var(--t-cartao);
     font-weight: 800;
     line-height: 1.25;
     margin: 0;
@@ -4377,7 +4387,7 @@
     margin: 0;
     overflow: visible;
   }
-  #conteudo-vereadores .cartao .resumo { font-size: 18px; }
+  #conteudo-vereadores .cartao .resumo { font-size: var(--t-resumo); }
   #conteudo-vereadores .cartao .apoio {
     font-size: 14px;
     color: var(--texto-suave);
@@ -4469,14 +4479,14 @@
       grid-row: 1;
       text-align: left;
       justify-self: start;
-      font-size: 30px;
+      font-size: var(--t-numero-quadro);
     }
     #conteudo-vereadores .numeros span {
       grid-column: 1;
       grid-row: 2;
       justify-content: flex-start;
       align-items: flex-start;
-      font-size: 14px;
+      font-size: var(--t-numero-legenda);
       color: var(--texto-suave);
     }
     #conteudo-vereadores .numeros.proj-num > li.clicavel { grid-column: auto; }
@@ -4489,8 +4499,8 @@
       padding: 14px;
       gap: 8px;
     }
-    #conteudo-vereadores .numeros li.clicavel .linha-btn b { grid-row: 1; grid-column: 1; font-size: 30px; line-height: 1; }
-    #conteudo-vereadores .numeros li.clicavel .linha-btn > span { grid-row: 2; grid-column: 1 / -1; font-size: 14px; color: var(--texto-suave); }
+    #conteudo-vereadores .numeros li.clicavel .linha-btn b { grid-row: 1; grid-column: 1; font-size: var(--t-numero-quadro); line-height: 1; }
+    #conteudo-vereadores .numeros li.clicavel .linha-btn > span { grid-row: 2; grid-column: 1 / -1; font-size: var(--t-numero-legenda); color: var(--texto-suave); }
     #conteudo-vereadores .numeros li.clicavel .linha-btn > svg { grid-row: 1; grid-column: 2; }
     #conteudo-vereadores .numeros li span .marcador-cor { margin-top: 3px; }
   }
@@ -4713,7 +4723,7 @@
       grid-row: 1;
       text-align: left;
       justify-self: start;
-      font-size: 30px;
+      font-size: var(--t-numero-quadro);
     }
     #painel-camara .numeros li.presenca-linha b { justify-content: flex-start; width: auto; }
     #painel-camara .numeros li > span,
@@ -4722,7 +4732,7 @@
       grid-row: 2;
       justify-content: flex-start;
       align-items: flex-start;
-      font-size: 14px;
+      font-size: var(--t-numero-legenda);
       color: var(--texto-suave);
     }
     #painel-camara .numeros li > span .marcador-cor,
@@ -4736,8 +4746,8 @@
       padding: 14px;
       gap: 8px;
     }
-    #painel-camara .numeros li.clicavel .linha-btn b { grid-row: 1; grid-column: 1; font-size: 30px; line-height: 1; }
-    #painel-camara .numeros li.clicavel .linha-btn > span { grid-row: 2; grid-column: 1 / -1; font-size: 14px; color: var(--texto-suave); }
+    #painel-camara .numeros li.clicavel .linha-btn b { grid-row: 1; grid-column: 1; font-size: var(--t-numero-quadro); line-height: 1; }
+    #painel-camara .numeros li.clicavel .linha-btn > span { grid-row: 2; grid-column: 1 / -1; font-size: var(--t-numero-legenda); color: var(--texto-suave); }
     #painel-camara .numeros li.clicavel .linha-btn > svg { grid-row: 1; grid-column: 2; }
   }
   /* Folha de impressão: margens da referência (folha-sessao.pdf) e fundo branco */

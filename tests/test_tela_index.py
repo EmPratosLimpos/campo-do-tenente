@@ -92,6 +92,20 @@ class TestTelaIndex(unittest.TestCase):
         self.assertFalse((RAIZ / "app.js").exists())
         self.assertFalse((RAIZ / "estilo.css").exists())
 
+    def test_tokens_escala_destaque(self):
+        """HF-5: escala de titulos e destaque no :root (celular e computador)."""
+        pares = (
+            ("--t-tela: 24px", "--t-tela: 31px"),
+            ("--t-resumo: 18px", "--t-resumo: 22px"),
+            ("--t-cartao: 17px", "--t-cartao: 19px"),
+            ("--t-numero: 22px", "--t-numero-quadro: 28px"),
+            ("--t-numero-legenda: 14px", "--t-numero-legenda: 13px"),
+            ("--t-materia: 15px",),
+        )
+        for grupo in pares:
+            for token in grupo:
+                self.assertIn(token, self.index, token)
+
     def test_molde_com_conteudo_de_outra_cidade_nao_existe(self):
         """O index.html e mantido na mao. Nao ha molde de outra cidade no repositorio."""
         for caminho in (
