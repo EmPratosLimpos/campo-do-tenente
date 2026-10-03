@@ -463,18 +463,10 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                         if tema == "escuro":
                             page.locator(".alternar-tema").first.click()
                             page.wait_for_timeout(300)
-                        bloco = page.locator("#tit-votos").locator(
-                            "xpath=ancestor::details[1]"
-                        )
-                        if not bloco.evaluate("n => n.open"):
-                            page.locator("#tit-votos").locator(
-                                "xpath=ancestor::summary[1]"
-                            ).click()
-                            page.wait_for_timeout(400)
                         page.click("button.voto-card[data-voto-card='sim']")
                         page.wait_for_timeout(700)
                         ementas = page.eval_on_selector_all(
-                            ".lista-votos .ementa-voto",
+                            ".lista-votos .materia-assunto",
                             "els => els.map(e => (e.getAttribute('title') || e.textContent).trim())",
                         )
                         self.assertTrue(ementas, "historico sem ementas")
@@ -502,17 +494,13 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 page.wait_for_selector("#sel-vereador", state="visible", timeout=30000)
                 page.select_option("#sel-vereador", VEREADOR_HISTORICO)
                 page.wait_for_timeout(600)
-                bloco = page.locator("#tit-votos").locator("xpath=ancestor::details[1]")
-                if not bloco.evaluate("n => n.open"):
-                    page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
-                    page.wait_for_timeout(400)
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(500)
                 campo = page.locator("#filtro-texto")
                 campo.fill("refis")
                 page.wait_for_timeout(700)
                 ementas = page.eval_on_selector_all(
-                    ".lista-votos .ementa-voto",
+                    ".lista-votos .materia-assunto",
                     "els => els.map(e => (e.getAttribute('title') || e.textContent).trim())",
                 )
                 self.assertTrue(ementas, "busca refis nao achou materia nenhuma")
@@ -593,18 +581,14 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 page.wait_for_selector("#sel-vereador", state="visible", timeout=30000)
                 page.select_option("#sel-vereador", VEREADOR_HISTORICO)
                 page.wait_for_timeout(600)
-                bloco = page.locator("#tit-votos").locator("xpath=ancestor::details[1]")
-                if not bloco.evaluate("n => n.open"):
-                    page.locator("#tit-votos").locator("xpath=ancestor::summary[1]").click()
-                    page.wait_for_timeout(400)
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(700)
                 visiveis = page.eval_on_selector_all(
-                    ".lista-votos .ementa-voto",
+                    ".lista-votos .materia-assunto",
                     "els => els.map(e => e.textContent.trim())",
                 )
                 completas = page.eval_on_selector_all(
-                    ".lista-votos .ementa-voto",
+                    ".lista-votos .materia-assunto",
                     "els => els.map(e => (e.getAttribute('title') || '').trim())",
                 )
                 alvo = "Plano Plurianual"

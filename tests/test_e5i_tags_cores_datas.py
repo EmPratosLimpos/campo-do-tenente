@@ -172,20 +172,18 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                         page.wait_for_selector("#sel-vereador", state="visible", timeout=30000)
                         page.select_option("#sel-vereador", "2")
                         page.wait_for_timeout(500)
-                        page.locator("#tit-votos").locator(
-                            "xpath=ancestor::details[1]"
-                        ).evaluate("n => { n.open = true; }")
-                        page.wait_for_timeout(300)
+                        page.click("button.voto-card[data-voto-card='sim']")
+                        page.wait_for_timeout(400)
                         page.fill("#filtro-texto", "habitacionais")
                         page.wait_for_timeout(1000)
                         item = page.locator(".lista-votos li", has_text="PLEG 4/2026").first
                         self.assertEqual(item.count(), 1)
                         ordem = item.evaluate(
                             """n => Array.from(n.querySelectorAll(
-                              '.materia-tags .chip, .materia-tags .voto-selo'
-                            )).map(e => e.className.split(' ').find(c => c.startsWith('tag-') || c === 'voto-selo') || e.className.split(' ')[0])"""
+                              '.materia-tags .chip, .materia-tags .pilula'
+                            )).map(e => e.className.split(' ').find(c => c.startsWith('tag-') || c === 'pilula') || e.className.split(' ')[0])"""
                         )
-                        self.assertIn("voto-selo", ordem)
+                        self.assertIn("pilula", ordem)
                         self.assertIn("tag-categoria", ordem)
                         textos = [
                             t.strip()
@@ -218,10 +216,6 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                         page.wait_for_selector("#sel-vereador", state="visible", timeout=30000)
                         page.select_option("#sel-vereador", "2")
                         page.wait_for_timeout(500)
-                        page.locator("#tit-votos").locator(
-                            "xpath=ancestor::details[1]"
-                        ).evaluate("n => { n.open = true; }")
-                        page.wait_for_timeout(300)
                         page.click("button.voto-card[data-voto-card='sim']")
                         page.wait_for_timeout(800)
                         itens = page.locator(".lista-votos li")

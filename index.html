@@ -324,7 +324,9 @@
     .topo-fixo.compacto .topo-marca-linha,
     .topo-fixo.compacto .sub-camara,
     .topo-fixo.compacto .titulo-vereadores,
-    .topo-fixo.compacto .nav-vereador {
+    .topo-fixo.compacto .nav-vereador,
+    .topo-fixo.compacto #apoio-vereador,
+    .topo-fixo.compacto #notas-vereador-wrap {
       display: none;
     }
 
@@ -350,6 +352,22 @@
       flex-shrink: 0;
     }
 
+    .topo-fixo.compacto .sel-vereador-face {
+      min-height: 44px;
+      padding: 6px 10px;
+      gap: 8px;
+    }
+    .topo-fixo.compacto .sel-vereador-face .perfil-foto-wrap,
+    .topo-fixo.compacto .sel-vereador-face .perfil-foto,
+    .topo-fixo.compacto .sel-vereador-face .perfil-iniciais {
+      display: none;
+    }
+    .topo-fixo.compacto .sel-vereador-face .nm {
+      font-size: 15px;
+    }
+    .topo-fixo.compacto .sel-vereador-face .pt {
+      display: none;
+    }
     .topo-fixo.compacto .seletor-vereador label {
       position: absolute;
       width: 1px;
@@ -1596,6 +1614,127 @@
     border: 1.5px dashed var(--ausente);
   }
   .numeros .presenca-de { white-space: nowrap; }
+  .numeros li.presenca-linha b {
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    gap: 0.2em;
+    white-space: nowrap;
+  }
+  @media (min-width: 900px) {
+    .numeros li.presenca-linha b {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+  .escolha-vereador {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .btn-nav-vereador {
+    flex: none;
+    width: 44px;
+    min-height: 44px;
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: var(--superficie-2);
+    color: var(--texto);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-nav-vereador:disabled { opacity: 0.35; cursor: default; }
+  @media (max-width: 440px) {
+    .escolha-vereador .btn-nav-vereador { display: none; }
+  }
+  .sel-vereador-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+  }
+  .sel-vereador-face {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--linha);
+    border-radius: 14px;
+    background: var(--superficie-2);
+    min-height: 52px;
+    pointer-events: none;
+  }
+  .sel-vereador-face .nm { font-size: 17px; font-weight: 800; display: block; }
+  .sel-vereador-face .pt { font-size: var(--t-apoio); color: var(--texto-suave); font-weight: 600; }
+  .sel-vereador-native {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: 48px;
+    height: 100%;
+    opacity: 0.01;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .linha-btn > span:first-child {
+    min-width: 0;
+    white-space: nowrap;
+  }
+  @media (min-width: 900px) {
+    .numeros.proj-num > li.clicavel {
+      grid-column: 1 / -1;
+    }
+  }
+  .sub-vereadores,
+  .escolha-vereador {
+    max-width: 100%;
+    min-width: 0;
+  }
+  .faixa-votos {
+    display: flex;
+    height: 16px;
+    border-radius: var(--raio-pilula);
+    overflow: hidden;
+    gap: 3px;
+    background: var(--graf-trilha);
+    margin-bottom: 12px;
+  }
+  .faixa-votos i {
+    display: block;
+    height: 100%;
+    border-radius: var(--raio-pilula);
+  }
+  .faixa-votos .listra-suave {
+    background: repeating-linear-gradient(135deg, var(--texto-suave) 0 4px, transparent 4px 7px);
+  }
+  .votos-quadros {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .qv.voto-card {
+    display: grid;
+    gap: 4px;
+    padding: 10px 8px;
+    border: 1.5px solid var(--linha);
+    border-radius: 14px;
+    background: var(--superficie);
+    min-height: 72px;
+    text-align: left;
+    cursor: pointer;
+    color: var(--texto);
+    font: inherit;
+  }
+  .qv.voto-card b { font-size: 28px; font-weight: 800; line-height: 1; }
+  .qv.voto-card span { font-size: var(--t-apoio); font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .qv.voto-card.aus { border-style: dashed; }
+  .qv.voto-card.ativo { border-color: var(--texto); box-shadow: inset 0 0 0 1px var(--texto); }
+  .sub-h { font-size: 15px; font-weight: 800; margin: 16px 0 8px; }
   .btn { min-height: var(--alvo-minimo); padding: 0 18px; border-radius: var(--raio-pilula); border: 0; font-weight: 600; cursor: pointer; }
   .btn-primario { background: var(--marca-solida); color: var(--sobre-marca); }
   .btn-secundario { background: var(--superficie-2); color: var(--texto); }
@@ -1699,7 +1838,7 @@
     width: 100%;
     min-width: 0;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: minmax(min-content, 1fr) auto auto;
     align-items: center;
     gap: 10px;
     min-height: 52px;
@@ -3914,11 +4053,13 @@
     </div>
     <div class="sub-vereadores" id="sub-vereadores">
       <div class="sessao-titulo-linha">
-        <h2 class="titulo-vereadores">Atuação do seu Vereador</h2>
+        <h2 class="titulo-vereadores">Como votou cada vereador</h2>
         <button type="button" class="btn-compartilhar-icone btn-abrir-share" data-share="vereador" aria-label="Compartilhar perfil parlamentar" aria-haspopup="dialog" aria-controls="share-sheet">
           <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
         </button>
       </div>
+      <p class="apoio" id="apoio-vereador"></p>
+      <div id="notas-vereador-wrap"></div>
       <div id="seletor-vereador-wrap"></div>
     </div>
   </header>
@@ -4207,6 +4348,7 @@
     filtroTexto: "",
     filtroClassificacao: "",
     filtroPLL: "",
+    filtroPLLTema: "",
     listaPLLVisivel: false,
     pagina: 1,
     indiceEmentas: {},
@@ -4478,7 +4620,8 @@
       ? '<li class="clicavel" style="list-style:none;padding:0"><button type="button" class="linha-btn" data-abrir-faltas="1"><span>Faltas</span><b>' + c.faltas + '</b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></li>'
       : "";
     var numeros = '<ul class="numeros">' +
-      "<li><b>" + c.presentes + "</b><span>Presentes <span class=\"apoio presenca-de\">" + c.presentes + " de " + n + "</span></span></li>" +
+      '<li class="presenca-linha"><b>' + c.presentes + ' <span class="apoio presenca-de">de ' + n + "</span></b>" +
+      '<span><span class="marcador-cor" style="background:var(--marca-solida)"></span>Presentes</span></li>' +
       linhaFaltas +
       "<li><b>" + lista.length + "</b><span>Projetos votados</span></li></ul>";
     card.innerHTML = '<h2 class="sr" id="tit-presenca-sessao">Presen\u00e7a na \u00faltima sess\u00e3o</h2>' +
@@ -5246,154 +5389,148 @@
     return html;
   }
 
+  function sessoesPresencaPorSituacao(p, situacao) {
+    return (p.por_sessao || []).filter(function (s) {
+      return s.situacao === situacao;
+    });
+  }
+
+  function textoMotivoFaltaSessao(s) {
+    var motivo = s.motivo_ausencia;
+    if (!motivo) return "";
+    var texto = motivo.motivo || "";
+    if (motivo.observacao) texto += (texto ? " (" + motivo.observacao + ")" : motivo.observacao);
+    return texto;
+  }
+
+  function linkMotivoFaltaSessao(s) {
+    var motivo = s.motivo_ausencia;
+    if (motivo && motivo.link_fonte) return linkExt(motivo.link_fonte, "Ver no SAPL");
+    if (motivo && motivo.upload_anexo) return linkExt(motivo.upload_anexo, "Ver no SAPL");
+    return linkExt(s.link_sessao, "Ver no SAPL");
+  }
+
+  function abrirFolhaFaltasPresenca(v, situacao, btn) {
+    var p = v.presenca;
+    var lista = sessoesPresencaPorSituacao(p, situacao);
+    var titulo = situacao === "falta_com_justificativa"
+      ? "Falta justificada"
+      : "Falta sem justificativa";
+    var html = "<ul>";
+    lista.forEach(function (s) {
+      var motivoTexto = textoMotivoFaltaSessao(s);
+      html += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
+        esc(formatarData(s.data_sessao)) +
+        (motivoTexto ? ". " + esc(motivoTexto) : "") +
+        ". " + linkMotivoFaltaSessao(s) + "</li>";
+    });
+    html += "</ul>";
+    abrirFolhaGenerica(titulo, html, btn);
+  }
+
+  function htmlBarraPresencaVereador(p) {
+    var total = p.sessoes_ordinarias || 0;
+    if (!total) return "";
+    var segs = [];
+    if (p.presencas > 0) {
+      segs.push('<i style="width:' + ((p.presencas / total) * 100).toFixed(2) + '%;background:var(--marca-solida)"></i>');
+    }
+    if (p.faltas_com_justificativa > 0) {
+      segs.push('<i style="width:' + ((p.faltas_com_justificativa / total) * 100).toFixed(2) +
+        '%;background:transparent;border:1.5px dashed var(--texto-suave);border-radius:3px"></i>');
+    }
+    if (p.faltas_sem_justificativa > 0) {
+      segs.push('<i class="listra" style="width:' + ((p.faltas_sem_justificativa / total) * 100).toFixed(2) + '%"></i>');
+    }
+    if (!segs.length) return "";
+    var aria = p.presencas + " presen\u00e7as";
+    if (p.faltas_com_justificativa) aria += ", " + p.faltas_com_justificativa + " com justificativa";
+    if (p.faltas_sem_justificativa) aria += ", " + p.faltas_sem_justificativa + " sem justificativa";
+    return '<div class="seg-barra" role="img" aria-label="' + esc(aria) + '">' + segs.join("") + "</div>";
+  }
+
+  function htmlNumerosPresencaVereador(p) {
+    var linhas = [];
+    if (p.presencas > 0) {
+      linhas.push('<li class="presenca-linha"><b>' + esc(p.presencas) + ' <span class="apoio presenca-de">de ' +
+        esc(p.sessoes_ordinarias) + "</span></b><span><span class=\"marcador-cor\" style=\"background:var(--marca-solida)\"></span>Presente</span></li>");
+    }
+    if (p.faltas_com_justificativa > 0) {
+      linhas.push('<li class="clicavel"><button type="button" class="linha-btn" data-falta-presenca="falta_com_justificativa" aria-haspopup="dialog">' +
+        '<span><span class="marcador-cor tracejado"></span>Falta justificada</span><b>' + esc(p.faltas_com_justificativa) +
+        '</b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></li>');
+    }
+    if (p.faltas_sem_justificativa > 0) {
+      linhas.push('<li class="clicavel"><button type="button" class="linha-btn" data-falta-presenca="falta_sem_justificativa" aria-haspopup="dialog">' +
+        '<span><span class="marcador-cor listra-anel"></span>Falta sem justificativa</span><b>' + esc(p.faltas_sem_justificativa) +
+        '</b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></li>');
+    }
+    if (!linhas.length) {
+      return '<p class="vazio"><b>Nenhuma presen\u00e7a registrada</b><span>no recorte de ' + esc(rotuloAnosRecorte()) + ".</span></p>";
+    }
+    return '<ul class="numeros">' + linhas.join("") + "</ul>";
+  }
+
   function renderSecaoPresenca(v) {
     var p = v.presenca;
-    var partes = [
-      { valor: p.presencas, cor: "var(--graf-presenca)", rotulo: "Presente" },
-      { valor: p.faltas_com_justificativa, cor: "var(--graf-falta-just)", rotulo: "Falta com justificativa" },
-      { valor: p.faltas_sem_justificativa, cor: "var(--graf-falta-sem)", rotulo: "Falta sem justificativa" }
-    ];
-
-    function sessoesPorSituacao(situacao) {
-      return (p.por_sessao || []).filter(function (s) {
-        return s.situacao === situacao;
-      });
-    }
-
-    function textoMotivoFalta(s) {
-      var motivo = s.motivo_ausencia;
-      if (!motivo) return "";
-      var texto = motivo.motivo || "";
-      if (motivo.observacao) texto += (texto ? " (" + motivo.observacao + ")" : motivo.observacao);
-      return texto;
-    }
-
-    function linkMotivoFalta(s) {
-      var motivo = s.motivo_ausencia;
-      if (motivo && motivo.link_fonte) return linkExt(motivo.link_fonte, "Fonte oficial");
-      if (motivo && motivo.upload_anexo) return linkExt(motivo.upload_anexo, "Anexo no SAPL");
-      return linkExt(s.link_sessao, "Ver no SAPL");
-    }
-
-    var faltasJust = sessoesPorSituacao("falta_com_justificativa");
-    var faltasSem = sessoesPorSituacao("falta_sem_justificativa");
-
-    var nPlenaria = (p.por_sessao || []).filter(function (s) { return s.presente_sessao_plenaria; }).length;
-    var nOrdemDia = (p.por_sessao || []).filter(function (s) { return s.presente_ordem_dia; }).length;
-
-    var htmlFaltas = "";
-    if (
-      p.faltas_com_justificativa > 0 ||
-      p.faltas_sem_justificativa > 0
-    ) {
-      htmlFaltas += '<div class="faltas-lista">';
-      if (p.faltas_com_justificativa > 0) {
-        htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">Faltas com justificativa oficial' + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(p.faltas_com_justificativa) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
-        faltasJust.forEach(function (s) {
-          var motivoTexto = textoMotivoFalta(s);
-          htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
-            esc(formatarData(s.data_sessao)) + ". " +
-            (motivoTexto ? esc(motivoTexto) + ". " : "") +
-            linkMotivoFalta(s) + "</li>";
-        });
-        htmlFaltas += "</ul></div></details>";
-      }
-      if (p.faltas_sem_justificativa > 0) {
-        htmlFaltas += '<details class="ac-cartao-inner" ><summary class="ac-cabecalho-inner" aria-expanded="false">Faltas sem justificativa' + iconeSanfonaInner() + '</summary><div class="ac-conteudo-inner"><p class="legenda-inner"><strong>' + esc(p.faltas_sem_justificativa) + '</strong> sess\u00e3o(\u00f5es) registrada(s).</p><ul>';
-        faltasSem.forEach(function (s) {
-          htmlFaltas += "<li><strong>Sess\u00e3o " + esc(s.sessao_id) + "</strong>, " +
-            esc(formatarData(s.data_sessao)) + ". " +
-            linkExt(s.link_sessao, "Ver no SAPL") + "</li>";
-        });
-        htmlFaltas += "</ul></div></details>";
-      }
-      htmlFaltas += "</div>";
-    } else {
-      htmlFaltas =
-        '<p class="vazio" style="margin-top:10px">Nenhuma falta registrada nas ' +
-        esc(p.sessoes_ordinarias) +
-        " " +
-        rotuloPeriodoLegislatura() +
-        ".</p>";
-    }
-
+    var taxa = p.taxa_presenca.toFixed(1).replace(".", ",");
     return (
-      '<details class="secao ac-cartao" open>' +
-      '<summary class="ac-cabecalho" aria-expanded="true"><h2 id="tit-presenca">Presen\u00e7a nas sess\u00f5es ordin\u00e1rias</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
-      '<p class="legenda">Total de ' +
-      esc(p.sessoes_ordinarias) +
-      " " +
-      rotuloPeriodoLegislatura() +
-      ' no mandato. Taxa de presen\u00e7a: <strong>' +
-      esc(p.taxa_presenca.toFixed(2).replace(".", ",")) +
-      "%</strong>. Percentual de faltas: <strong>" +
-      esc(p.percentual_faltas.toFixed(2).replace(".", ",")) +
-      "%</strong>.</p>" +
-      '<p class="legenda">Presente na lista da sess\u00e3o em ' + esc(nPlenaria) +
-      " sess\u00f5es e na lista da Ordem do Dia em " + esc(nOrdemDia) + " sess\u00f5es.</p>" +
-      '<p class="legenda">O Regimento Interno (art. 100, § 1º) considera presente quem assina a presen\u00e7a e participa das vota\u00e7\u00f5es. O painel conta presente quem aparece em pelo menos uma das duas listas do SAPL.</p>' +
-      '<div class="grafico-linha">' +
-      '<div class="rosca-wrap">' +
-      roscaSVG(
-        partes,
-        120,
-        p.taxa_presenca.toFixed(1).replace(".", ",") + "%",
-        "presen\u00e7a",
-        "Taxa de presen\u00e7a: " + p.taxa_presenca.toFixed(2).replace(".", ",") + "%"
-      ) +
-      "</div>" +
-      '<div class="rosca-legenda"><dl>' +
-      partes
-        .map(function (pt) {
-          return (
-            '<dt><span class="indicador" style="background:' +
-            pt.cor +
-            '"></span>' +
-            esc(pt.rotulo) +
-            "</dt><dd>" +
-            esc(pt.valor) +
-            " sess\u00f5es</dd>"
-          );
-        })
-        .join("") +
-      "</dl></div></div>" +
-      htmlFaltas +
-      "</div></details>"
+      '<article class="cartao ac-cartao" aria-labelledby="tit-presenca">' +
+      '<h2 class="t2" id="tit-presenca">Presen\u00e7a</h2>' +
+      '<p class="resumo">Esteve em <strong>' + esc(p.presencas) + "</strong> das <strong>" +
+      esc(p.sessoes_ordinarias) + "</strong> " + rotuloPeriodoLegislatura() + ".</p>" +
+      htmlBarraPresencaVereador(p) +
+      htmlNumerosPresencaVereador(p) +
+      '<p class="apoio">Presen\u00e7a de <strong>' + esc(taxa) +
+      "%</strong>. Conta como presente quem assina a lista da sess\u00e3o ou a da Ordem do Dia (Regimento Interno, art. 100).</p>" +
+      "</article>"
     );
+  }
+
+  function htmlBarraPLL(pl) {
+    var total = pl.total_propostos || 0;
+    if (!total) return "";
+    var html = '<div class="seg-barra" role="img" aria-label="' + esc(pl.aprovados + " aprovados, " + pl.em_tramitacao + " em tramita\u00e7\u00e3o") + '">';
+    if (pl.aprovados > 0) html += '<i style="width:' + ((pl.aprovados / total) * 100).toFixed(2) + '%;background:var(--sim)"></i>';
+    if (pl.em_tramitacao > 0) {
+      html += '<i style="width:' + ((pl.em_tramitacao / total) * 100).toFixed(2) +
+        '%;background:transparent;box-shadow:inset 0 0 0 2px var(--texto-suave);border-radius:999px"></i>';
+    }
+    if (pl.rejeitados > 0) html += '<i class="listra" style="width:' + ((pl.rejeitados / total) * 100).toFixed(2) + '%"></i>';
+    return html + "</div>";
+  }
+
+  function htmlPilulaSituacaoPLL(item) {
+    var sit = item.situacao === "Em tramitacao" ? "Em tramitação" : (item.situacao || "");
+    if (sit === "Aprovado") return '<span class="pilula pilula-aprovado">' + esc(sit) + "</span>";
+    if (sit === "Rejeitado") return '<span class="pilula pilula-rejeitado">' + esc(sit) + "</span>";
+    if (sit === "Em tramitação") return '<span class="pilula pilula-tramitacao">' + esc(sit) + "</span>";
+    return sit ? '<span class="pilula pilula-sem-deliberacao">' + esc(sit) + "</span>" : "";
   }
 
   function renderSecaoPLL(v) {
     var pl = v.projetos_lei;
-    var categorias = Object.keys(pl.por_categoria || {});
+    var categorias = Object.keys(pl.por_categoria || {}).filter(function (c) {
+      return (pl.por_categoria[c] || 0) > 0;
+    });
     var maxCat = Math.max.apply(null, categorias.map(function (c) {
       return pl.por_categoria[c] || 0;
     }).concat([1]));
 
-    var barras = categorias.filter(function (c) {
-      return (pl.por_categoria[c] || 0) > 0;
-    }).map(function (c, i) {
-      var q = pl.por_categoria[c];
+    var temasHtml = categorias.map(function (c) {
+      var q = pl.por_categoria[c] || 0;
       var pct = Math.round((q / maxCat) * 100);
-      return '<div class="barra-tema"><span class="nome">' + esc(c) + '</span>' +
-        '<div class="trilho"><div class="preenchido" style="width:' + pct + "%;background:" +
-        CORES_CATEGORIA[i % CORES_CATEGORIA.length] + '"></div></div>' +
-        '<span class="qtd">' + esc(q) + "</span></div>";
+      var pressed = estado.filtroPLLTema === c ? ' aria-pressed="true"' : ' aria-pressed="false"';
+      return '<li><button type="button" class="tema-btn" data-pll-tema="' + esc(c) + '"' + pressed + ">" +
+        '<span class="nome">' + esc(c) + '</span><span class="qtd">' + esc(q) + '</span>' +
+        '<span class="trilho"><i style="width:' + pct + "%;background:var(" + varCategoria(c) + ')"></i></span></button></li>';
     }).join("");
 
-    if (!barras) {
-      barras = '<p class="vazio">Nenhum projeto de lei proposto por este vereador em ' +
-        rotuloPeriodoLegislatura() + '.</p>';
-    }
-
-    var partesStatus = [
-      { valor: pl.aprovados, classe: "aprovado", rotulo: "Aprovado em sessão ordinária", rotuloCurto: "Aprovados" },
-      { valor: pl.em_tramitacao, classe: "tramitacao", rotulo: "Em tramitação", rotuloCurto: "Em tramitação" },
-      { valor: pl.rejeitados, classe: "rejeitado", rotulo: "Rejeitado", rotuloCurto: "Rejeitados" }
-    ];
-    var totalStatus = pl.aprovados + pl.em_tramitacao + pl.rejeitados;
-
     var itensFiltrados = (pl.lista || []).filter(function (item) {
-      if (!estado.filtroPLL || estado.filtroPLL === "todos") return true;
+      if (!estado.listaPLLVisivel) return false;
+      if (!estado.filtroPLL && !estado.filtroPLLTema) return false;
+      if (estado.filtroPLLTema && item.tema !== estado.filtroPLLTema) return false;
+      if (!estado.filtroPLL) return true;
       if (estado.filtroPLL === "aprovado") return item.situacao === "Aprovado";
       if (estado.filtroPLL === "rejeitado") return item.situacao === "Rejeitado";
       if (estado.filtroPLL === "tramitacao") return item.situacao === "Em tramitacao";
@@ -5401,72 +5538,128 @@
     });
 
     var lista = itensFiltrados.map(function (item) {
-      var seloClass = item.situacao === "Aprovado" ? "selo-aprovado"
-        : item.situacao === "Rejeitado" ? "selo-rejeitado" : "selo-tramitacao";
-      var sitRotulo = item.situacao === "Em tramitacao" ? "Em tramitação" : item.situacao;
-      var coaut = item.autoria_conjunta
-        ? '<button type="button" class="selo selo-coautoria tag-explicavel" data-tag="coautoria" data-valor="Coautoria" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">Coautoria</button>' : "";
       var siglaItem = item.tipo_sigla || "PLEG";
-      return '<article class="item-pll">' +
-        '<div class="cab"><span class="numero">' + esc(siglaItem) + " " + esc(item.numero) + "/" + esc(item.ano) + "</span></div>" +
-        '<div class="materia-tags">' +
-        '<button type="button" class="selo tag-explicavel ' + seloClass + '" data-tag="situacao" data-valor="' + esc(sitRotulo) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(sitRotulo) + "</button>" + coaut + "</div>" +
-        '<p class="ementa">' + esc(ementaExibicao(item.ementa)) + "</p>" +
-        '<p class="meta">' + (item.tema ? 'Tema: ' + esc(item.tema) + '. ' : '') +
-        linkExt(item.link_sapl, "Ver no SAPL") + "</p></article>";
+      var assunto = ementaExibicao(item.ementa || "");
+      var pilula = htmlPilulaSituacaoPLL(item);
+      var coaut = item.autoria_conjunta
+        ? '<button type="button" class="chip tag-explicavel" data-tag="coautoria" data-valor="Coautoria" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">Coautoria</button>'
+        : "";
+      var temaBtn = item.tema
+        ? '<button type="button" class="chip tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(item.tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(item.tema) + ">" + htmlMarcadorCategoria(item.tema) + esc(item.tema) + "</button>"
+        : "";
+      var tags = '<div class="materia-tags">' + pilula + temaBtn + coaut + "</div>";
+      return '<li class="materia item-pll">' + tags +
+        '<p class="materia-assunto">' + esc(assunto) + "</p>" +
+        '<div class="linha-meta"><span class="sigla">' + esc(siglaItem) + " " + esc(item.numero) + "/" + esc(item.ano) + "</span></div>" +
+        linkExt(item.link_sapl, "Ver no SAPL") + "</li>";
     }).join("");
 
-    var rotuloFiltroPLL = { aprovado: "Aprovados", tramitacao: "Em tramitação", rejeitado: "Rejeitados", todos: "Todos os projetos" };
-
     var htmlListaPLL = "";
-    if (!estado.filtroPLL) {
-      htmlListaPLL = '<div class="estado-vazio" id="pll-estado-vazio">' +
-        "<p>Toque em um quadro acima para ver os projetos deste vereador.</p></div>";
-    } else if (!estado.listaPLLVisivel) {
-      htmlListaPLL = '<div class="estado-vazio" id="pll-estado-vazio">' +
-        "<p>Filtro ativo. Toque no quadro ativo novamente para ver a lista.</p>" +
-        '<button type="button" class="btn-secundario" id="btn-mostrar-pll">Mostrar lista</button></div>';
+    if (!estado.filtroPLL || !estado.listaPLLVisivel) {
+      htmlListaPLL = '<div class="vazio" id="pll-estado-vazio"><b>Nenhum projeto na lista.</b><span>Toque em Aprovados, Em tramita\u00e7\u00e3o ou em um tema para filtrar.</span></div>';
     } else if (!lista) {
-      htmlListaPLL = '<div class="estado-vazio"><p>Nenhum projeto neste filtro.</p>' +
-        '<button type="button" class="btn-secundario" id="btn-ocultar-pll">Ocultar lista</button></div>';
+      htmlListaPLL = '<div class="vazio"><b>Nenhum projeto neste filtro.</b></div>';
     } else {
-      var tituloLista = rotuloFiltroPLL[estado.filtroPLL] || "Todos os projetos";
-      htmlListaPLL = '<div class="lista-pll-cab"><h3>' + esc(tituloLista) +
-        " (" + itensFiltrados.length + ")</h3>" +
-        '<button type="button" class="btn-secundario" id="btn-ocultar-pll">Ocultar lista</button></div>' +
-        '<div class="lista-pll">' + lista + "</div>";
+      htmlListaPLL = '<ul class="lista-votos lista-pll materias">' + lista + "</ul>";
     }
 
-    function quadroProjetos(id, num, rot) {
+    var setaLinha = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
+    var linhaPLL = function (id, num, rot, marcador) {
+      if (num <= 0 && id === "rejeitado") {
+        return "<li><b>" + esc(num) + "</b><span>" + marcador + esc(rot) + "</span></li>";
+      }
+      if (num <= 0) return "";
       var ativo = estado.filtroPLL === id && estado.listaPLLVisivel;
-      return '<button type="button" class="contagem-item' + (ativo ? " ativo" : "") + '" data-pl-filtro="' + esc(id) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
-        '<div class="num">' + esc(num) + '</div><div class="rot">' + esc(rot) + "</div></button>";
-    }
+      return '<li class="clicavel"><button type="button" class="linha-btn contagem-item' + (ativo ? " ativo" : "") +
+        '" data-pl-filtro="' + esc(id) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
+        "<span>" + marcador + esc(rot) + "</span><b>" + esc(num) + "</b>" + setaLinha + "</button></li>";
+    };
 
-    return '<details class="secao ac-cartao">' +
-      '<summary class="ac-cabecalho" aria-expanded="false"><h2 id="tit-pll">Projetos de lei propostos (PLEG)</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
-      '<p class="legenda">' + esc(legendaSiglaTipo("PLEG")) + ".</p>" +
-      '<div class="contagens-pll" role="group" aria-label="Filtrar projetos por situação">' +
-      quadroProjetos("todos", pl.total_propostos, "Propostos") +
-      quadroProjetos("aprovado", pl.aprovados, "Aprovados") +
-      quadroProjetos("tramitacao", pl.em_tramitacao, "Em tramitação") +
-      quadroProjetos("rejeitado", pl.rejeitados, "Rejeitados") +
-      "</div>" +
-      '<div class="barra-status-pll">' + barraStatusPLL(partesStatus, totalStatus) + "</div>" +
-      cartoesStatusPLL(partesStatus, totalStatus) +
-      '<h3 style="font-size:14px;margin:14px 0 8px">Por tema (' + esc(numeroCategorias()) + " categorias)</h3>" +
-      '<div class="barra-temas">' + barras + "</div>" +
+    var marcAprov = '<span class="marcador-cor" style="background:var(--sim)"></span>';
+    var marcTram = '<span class="marcador-cor tracejado"></span>';
+    var marcRej = '<span class="marcador-cor listra-anel"></span>';
+
+    var numeros = '<ul class="numeros proj-num">' +
+      linhaPLL("aprovado", pl.aprovados, "Aprovados", marcAprov) +
+      linhaPLL("tramitacao", pl.em_tramitacao, "Em tramita\u00e7\u00e3o", marcTram) +
+      (pl.rejeitados > 0 ? "<li><b>" + esc(pl.rejeitados) + "</b><span>" + marcRej + "Rejeitados</span></li>" : "") +
+      "</ul>";
+
+    return '<article class="cartao ac-cartao cartao-pll" aria-labelledby="tit-pll">' +
+      '<div class="cab-cartao"><h2 class="t2" id="tit-pll">Projetos que apresentou</h2><span class="apoio">toque para filtrar</span></div>' +
+      '<p class="resumo">Apresentou <strong>' + esc(pl.total_propostos) + "</strong> projetos de lei " +
+      rotuloAnosRecorte() + ": <strong>" + esc(pl.aprovados) + "</strong> aprovados e <strong>" +
+      esc(pl.em_tramitacao) + "</strong> em " + htmlBotaoTermo("tramita\u00e7\u00e3o") + ".</p>" +
+      htmlBarraPLL(pl) +
+      numeros +
+      (temasHtml ? '<h3 class="sub-h">Por tema</h3><ul class="temas-lista">' + temasHtml + "</ul>" : "") +
       htmlListaPLL +
-      "</div></details>";
+      "</article>";
+  }
+
+  function htmlPilulaVotoNominal(n) {
+    var rot = rotuloVoto(n);
+    var est = n.estado;
+    if (est === "sim") return '<span class="pilula pilula-aprovado">' + esc(rot) + "</span>";
+    if (est === "nao") return '<span class="pilula pilula-rejeitado">' + esc(rot) + "</span>";
+    if (est === "abstencao") return '<span class="pilula" style="background:var(--abstencao);color:var(--sobre-abstencao)">' + esc(rot) + "</span>";
+    return '<span class="pilula pilula-sem-deliberacao">' + esc(rot) + "</span>";
+  }
+
+  function htmlBarraVotosNominais(vo) {
+    var total = vo.total_registros || 0;
+    if (!total) return "";
+    var defs = [
+      { chave: "sim", cor: "var(--sim)" },
+      { chave: "nao", cor: "var(--nao)" },
+      { chave: "abstencao", cor: "var(--abstencao)" }
+    ];
+    var aus = (vo.ausente_com_justificativa || 0) + (vo.ausente_sem_justificativa || 0) +
+      (vo.nao_votou || 0) + (vo.presidente_que_nao_votou || 0) +
+      (vo.presente_sem_voto_individual_registrado || 0) + (vo.fora_do_mandato || 0);
+    var html = '<div class="faixa-votos" role="img" aria-label="' + esc(total + " vota\u00e7\u00f5es nominais") + '">';
+    defs.forEach(function (d) {
+      var n = vo[d.chave] || 0;
+      if (n > 0) html += '<i style="width:' + ((n / total) * 100).toFixed(2) + "%;background:" + d.cor + '"></i>';
+    });
+    if (aus > 0) html += '<i class="listra-suave" style="width:' + ((aus / total) * 100).toFixed(2) + '%"></i>';
+    return html + "</div>";
+  }
+
+  function quadrosVotosNominais(vo) {
+    var rot = (vo && vo.rotulos) || {};
+    var defs = [
+      ["sim", rot.sim || "Sim", ""],
+      ["nao", rot.nao || "N\u00e3o", ""],
+      ["abstencao", rot.abstencao || "Absten\u00e7\u00e3o", ""],
+      ["ausente_com_justificativa", rot.ausente_com_justificativa || "Ausente com justificativa", " aus"],
+      ["ausente_sem_justificativa", rot.ausente_sem_justificativa || "Ausente sem justificativa", " aus"]
+    ];
+    var extras = cardsResumoVotos(vo).filter(function (c) {
+      return c.num > 0 && defs.every(function (d) { return d[0] !== c.id; });
+    });
+    var html = defs.map(function (d) {
+      var num = vo[d[0]] != null ? vo[d[0]] : 0;
+      var ativo = estado.filtroClassificacao === d[0];
+      var marc = d[0] === "sim" ? 'background:var(--sim)' :
+        d[0] === "nao" ? 'border:2px solid var(--nao)' :
+        d[0] === "abstencao" ? 'background:var(--abstencao)' :
+        'border:1.5px dashed var(--texto-suave)';
+      return '<button type="button" class="qv voto-card' + d[2] + (ativo ? " ativo" : "") + '" data-voto-card="' + esc(d[0]) +
+        '" aria-pressed="' + (ativo ? "true" : "false") + '"><b>' + esc(num) +
+        '</b><span><span class="marcador-cor" style="' + marc + '"></span>' + esc(d[1]) + "</span></button>";
+    }).join("");
+    html += extras.map(function (c) {
+      var ativo = estado.filtroClassificacao === c.id;
+      return '<button type="button" class="qv voto-card aus' + (ativo ? " ativo" : "") + '" data-voto-card="' + esc(c.id) +
+        '" aria-pressed="' + (ativo ? "true" : "false") + '"><b>' + esc(c.num) +
+        '</b><span>' + esc(c.rot) + "</span></button>";
+    }).join("");
+    return '<div class="votos-quadros" role="group" aria-label="Filtrar por tipo de voto">' + html + "</div>";
   }
 
   function renderSecaoVotos(v) {
     var vo = v.votos;
-    var todosCards = cardsResumoVotos(vo);
-    var cards = todosCards.filter(function(c) {
-      return c.num > 0 || c.id === 'sim' || c.id === 'nao' || c.id === 'abstencao';
-    });
-
     var nominais = vo.nominais || [];
     var filtrados = nominais.filter(function (n) {
       if (estado.filtroClassificacao && n.estado !== estado.filtroClassificacao) return false;
@@ -5475,9 +5668,9 @@
         var ementa = ementaVotacao(n);
         var tagsBusca = n.materia_id ? tagsMateria(n.materia_id) : null;
         var tipoNumeroBusca = tipoNumeroDoVoto(n);
-        var texto = ementaBusca(ementa || "") + " " + (n.materia_id || "") + " " + n.data_sessao +
+        var texto = (ementa || "") + " " + (n.materia_id || "") + " " + n.data_sessao +
           " " + (tipoNumeroBusca || "");
-        if (tagsBusca) texto += " " + tagsBusca.tag_tipo + " " + tagsBusca.tag_tema;
+        if (tagsBusca) texto += " " + tagsBusca.tag_tema;
         if (normalizarTexto(texto).indexOf(busca) === -1) return false;
       }
       return true;
@@ -5491,29 +5684,19 @@
     var itens = fatia.map(function (n) {
       var ementaBruta = ementaVotacao(n);
       var ementa = ementaBruta ? ementaExibicao(ementaBruta) : "";
-      var textoEmenta = ementa
-        ? esc(ementa.length > 180 ? ementa.slice(0, 177) + "..." : ementa)
-        : (n.materia_id
-          ? "Matéria " + esc(n.materia_id) + " (" + linkExt(linkMateria(n.materia_id), "ementa no SAPL") + ")"
-          : "Matéria não identificada no registro");
-      var tituloEmenta = ementa
-        ? '<span class="ementa-voto" title="' + esc(ementa) + '">' + textoEmenta + "</span>"
-        : '<span class="ementa-voto">' + textoEmenta + "</span>";
-      var linkSess = estado.linksSessao[n.sessao_id] ||
-        (SAPL_ORIGEM + "/sessao/" + n.sessao_id);
+      var assunto = ementa ? esc(ementa.length > 180 ? ementa.slice(0, 177) + "..." : ementa) : "Mat\u00e9ria n\u00e3o identificada no registro";
+      var linkSess = estado.linksSessao[n.sessao_id] || (SAPL_ORIGEM + "/sessao/" + n.sessao_id);
       var turnoHtml = (n.turno === "1o turno" || n.turno === "2o turno")
         ? '<button type="button" class="chip tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(n.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(n.turno)) + "</button>"
         : "";
-      var votoHtml = '<button type="button" class="chip voto-selo tag-explicavel ' + classeVotoSelo(n.estado) + '" data-tag="voto" data-valor="' + esc(n.estado) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(rotuloVoto(n)) + "</button>";
-      var tagsHtml = htmlTagsMateria(n.materia_id, votoHtml, turnoHtml);
+      var pilula = htmlPilulaVotoNominal(n);
+      var tagsHtml = htmlTagsMateria(n.materia_id, "", turnoHtml, pilula);
       var tipoNumero = tipoNumeroDoVoto(n);
-      var assunto = ementa ? esc(ementa.length > 180 ? ementa.slice(0, 177) + "..." : ementa) : textoEmenta;
-      return "<li class=\"materia\">" +
-        tagsHtml +
+      return "<li class=\"materia\">" + tagsHtml +
         '<p class="materia-assunto">' + assunto + "</p>" +
         '<div class="linha-meta">' +
         (tipoNumero ? '<span class="sigla">' + esc(tipoNumero) + "</span>" : "") +
-        '<span>' + esc(formatarData(n.data_sessao)) + ", sessão " + esc(n.sessao_id) + "</span></div>" +
+        '<span>' + esc(formatarData(n.data_sessao)) + ", sess\u00e3o " + esc(n.sessao_id) + "</span></div>" +
         (n.materia_id ? htmlLinkSapMateria(n.materia_id, "Ver no SAPL") : linkExt(linkSess, "Ver no SAPL")) +
         "</li>";
     }).join("");
@@ -5521,41 +5704,32 @@
     var listaAtiva = listaVotosAtiva();
     var htmlListaVotos = "";
     if (!listaAtiva) {
-      htmlListaVotos = '<div class="estado-vazio" id="votos-estado-vazio">' +
-        "<p>Toque em um quadro acima ou busque por ementa para ver a lista detalhada.</p>" +
-        "</div>";
+      htmlListaVotos = '<div class="vazio" id="votos-estado-vazio"><b>Lista de vota\u00e7\u00f5es nominais.</b><span>Toque em um quadro acima ou busque por assunto para ver os registros.</span></div>';
     } else {
       htmlListaVotos =
-        '<ul class="lista-votos" aria-live="polite">' +
+        '<ul class="lista-votos materias" aria-live="polite">' +
         (itens || '<li class="vazio">Nenhum registro neste filtro.</li>') + "</ul>" +
         '<div class="paginacao">' +
         '<button type="button" id="btn-anterior"' + (estado.pagina <= 1 ? " disabled" : "") + ">Anterior</button>" +
-        "<span>Página " + estado.pagina + " de " + totalPag +
+        "<span>P\u00e1gina " + estado.pagina + " de " + totalPag +
         " (" + filtrados.length + " registros)</span>" +
-        '<button type="button" id="btn-proximo"' + (estado.pagina >= totalPag ? " disabled" : "") + ">Próxima</button>" +
+        '<button type="button" id="btn-proximo"' + (estado.pagina >= totalPag ? " disabled" : "") + ">Pr\u00f3xima</button>" +
         "</div>" +
-        '<button type="button" class="btn-secundario" id="btn-limpar-votos" style="margin-top:12px;width:100%">Limpar filtro e ocultar lista</button>';
+        '<button type="button" class="btn btn-secundario" id="btn-limpar-votos" style="margin-top:12px;width:100%">Limpar filtros</button>';
     }
 
-    return '<details class="secao ac-cartao">' +
-      '<summary class="ac-cabecalho" aria-expanded="false"><h2 id="tit-votos">Hist\u00f3rico de votos nominais</h2>' + iconeSanfonaPrincipal() + '</summary><div class="ac-conteudo">' +
-      '<p class="legenda">A vota\u00e7\u00e3o simb\u00f3lica \u00e9 a regra geral (art. 202 do Regimento Interno): conta-se o resultado sem registrar o nome de cada vereador. Na vota\u00e7\u00e3o nominal o voto de cada vereador fica registrado (art. 201); ela \u00e9 obrigat\u00f3ria quando a mat\u00e9ria exige maioria absoluta ou dois ter\u00e7os (art. 203). Total: ' +
-      esc(vo.total_registros) + " vota\u00e7\u00f5es em " + rotuloPeriodoLegislatura() + ".</p>" +
-      '<div class="votos-resumo" role="group" aria-label="Filtrar por tipo de voto">' +
-      cards.map(function (c) {
-        var ativo = estado.filtroClassificacao === c.id;
-        return '<button type="button" class="voto-card' + (ativo ? " ativo" : "") + '" data-voto-card="' + esc(c.id) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
-          '<div class="num">' + esc(c.num) +
-          '</div><div class="rot">' + esc(c.rot) + "</div></button>";
-      }).join("") +
-      "</div>" +
-      '<div class="filtros-votos">' +
-      '<label for="filtro-texto">Buscar por ementa ou número da matéria</label>' +
+    return '<article class="cartao ac-cartao" aria-labelledby="tit-votos">' +
+      '<h2 class="t2" id="tit-votos">Votos com nome registrado</h2>' +
+      '<p class="apoio">Na maior parte das vota\u00e7\u00f5es a C\u00e2mara registra s\u00f3 o resultado. Quando a vota\u00e7\u00e3o \u00e9 ' +
+      htmlBotaoTermo("nominal") + ", o voto de cada vereador fica registrado. Foram <strong>" +
+      esc(vo.total_registros) + "</strong> vota\u00e7\u00f5es assim " + rotuloAnosRecorte() + ".</p>" +
+      htmlBarraVotosNominais(vo) +
+      quadrosVotosNominais(vo) +
+      '<label class="busca" for="filtro-texto"><span class="sr">Buscar vota\u00e7\u00f5es</span>' +
       '<input type="search" id="filtro-texto" value="' + esc(estado.filtroTexto) +
-      '" placeholder="Digite parte da ementa ou ID">' +
-      "</div>" +
+      '" placeholder="Buscar por assunto ou n\u00famero"></label>' +
       htmlListaVotos +
-      "</div></details>";
+      "</article>";
   }
 
   
@@ -5642,36 +5816,49 @@
       return String(ver.id_sapl) === String(estado.vereadorId);
     });
 
+    var fotoSel = renderPerfilFoto(v).replace("perfil-foto-wrap", "perfil-foto-wrap avatar");
+    var partidoSel = "";
+    if (v.partido_sigla || v.partido_nome) {
+      partidoSel = esc(v.partido_sigla || "") +
+        (v.partido_nome && v.partido_nome !== v.partido_sigla ? ", " + esc(v.partido_nome) : "");
+    }
     seletorWrap.innerHTML =
-      '<div class="seletor-vereador">' +
-      '<label for="sel-vereador">Escolha o vereador</label>' +
-      '<select id="sel-vereador">' + opcoes + "</select>" +
-      '<div class="nav-vereador">' +
-      '<button type="button" id="btn-ver-anterior"' + (idxAtual <= 0 ? " disabled" : "") + ">Vereador anterior</button>" +
-      '<button type="button" id="btn-ver-proximo"' + (idxAtual >= listaVereadores.length - 1 ? " disabled" : "") + ">Próximo vereador</button>" +
-      "</div></div>";
+      '<div class="seletor-vereador escolha-vereador">' +
+      '<button type="button" class="btn-nav-vereador" id="btn-ver-anterior" aria-label="Vereador anterior"' +
+      (idxAtual <= 0 ? " disabled" : "") + '><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>' +
+      '<div class="sel-vereador-wrap">' +
+      '<div class="sel-vereador-face" aria-hidden="true">' + fotoSel +
+      '<span class="sel-vereador-texto"><span class="nm">' + esc(v.nome_parlamentar) +
+      '</span><span class="pt">' + partidoSel + "</span></span>" +
+      '<svg style="margin-left:auto;flex:none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>' +
+      '<label class="sr" for="sel-vereador">Escolha o vereador</label>' +
+      '<select id="sel-vereador" class="sel-vereador-native" aria-label="Escolher vereador">' + opcoes + "</select></div>" +
+      '<button type="button" class="btn-nav-vereador" id="btn-ver-proximo" aria-label="Pr\u00f3ximo vereador"' +
+      (idxAtual >= listaVereadores.length - 1 ? " disabled" : "") + '><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>' +
+      "</div>";
+
+    var apoioEl = document.getElementById("apoio-vereador");
+    if (apoioEl) {
+      var linkSap = urlSegura(v.link_sapl)
+        ? ' <a class="fonte" href="' + esc(urlSegura(v.link_sapl)) + '" target="_blank" rel="noopener noreferrer">Perfil no SAPL</a>'
+        : "";
+      apoioEl.innerHTML = "Nome oficial: " + esc(v.nome_oficial) + ". " +
+        esc(periodoVereadorShare().replace(/^sess\u00f5es ordin\u00e1rias /i, "Sess\u00f5es ordin\u00e1rias ")) + "." + linkSap;
+    }
+    var notasWrap = document.getElementById("notas-vereador-wrap");
+    if (notasWrap) {
+      var blocoCas = vereadorComCassacao(v)
+        ? '<p class="perfil-nome" style="margin:0 0 6px">' + esc(v.nome_parlamentar) + renderBadgeCassacao(v) + "</p>"
+        : "";
+      notasWrap.innerHTML = blocoCas + renderNotasParlamentar(v);
+    }
 
     conteudo.innerHTML =
-      '<div class="perfil-e-notas" style="column-span: all; width: 100%; margin-bottom: 20px;">' +
-      '<section class="secao" aria-labelledby="tit-perfil" style="margin-bottom: 20px;">' +
-      '<h2 id="tit-perfil">Perfil parlamentar</h2>' +
-      '<div class="perfil-cabecalho">' +
-      renderPerfilFoto(v) +
-      '<div class="perfil-info">' +
-      '<p class="perfil-nome">' + esc(v.nome_parlamentar) + renderBadgeCassacao(v) + "</p>" +
-      renderBadgePartido(v) +
-      '<p class="perfil-detalhe">Nome oficial: <strong>' + esc(v.nome_oficial) + "</strong></p>" +
-      (urlSegura(v.link_sapl)
-        ? '<a class="link-oficial" href="' + esc(urlSegura(v.link_sapl)) + '" target="_blank" rel="noopener noreferrer">Página oficial do parlamentar no SAPL</a>'
-        : "") +
-      "</div></div></section>" +
-      renderNotasParlamentar(v) +
-      "</div>" +
       '<div class="vereadores-grade">' +
       renderSecaoPresenca(v) +
+      renderSecaoVotos(v) +
       renderSecaoPLL(v) +
       "</div>" +
-      renderSecaoVotos(v) +
       '<footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>';
 
     atualizarRodapesColeta();
@@ -5681,6 +5868,7 @@
       estado.vereadorId = e.target.value;
       estado.pagina = 1;
       estado.filtroPLL = "";
+      estado.filtroPLLTema = "";
       estado.listaPLLVisivel = false;
       estado.filtroTexto = "";
       estado.filtroClassificacao = "";
@@ -5697,6 +5885,7 @@
         estado.vereadorId = lista[novo].id_sapl;
         estado.pagina = 1;
         estado.filtroPLL = "";
+        estado.filtroPLLTema = "";
         estado.listaPLLVisivel = false;
         estado.filtroTexto = "";
         estado.filtroClassificacao = "";
@@ -5744,6 +5933,7 @@
         var f = btn.getAttribute("data-pl-filtro");
         if (estado.filtroPLL === f && estado.listaPLLVisivel) {
           estado.filtroPLL = "";
+          estado.filtroPLLTema = "";
           estado.listaPLLVisivel = false;
         } else {
           estado.filtroPLL = f;
@@ -5753,16 +5943,24 @@
       });
     });
 
-    var btnOcultarPLL = document.getElementById("btn-ocultar-pll");
-    if (btnOcultarPLL) btnOcultarPLL.addEventListener("click", function () {
-      estado.listaPLLVisivel = false;
-      renderApp();
+    document.querySelectorAll("[data-pll-tema]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var tema = btn.getAttribute("data-pll-tema");
+        if (estado.filtroPLLTema === tema) {
+          estado.filtroPLLTema = "";
+          if (!estado.filtroPLL) estado.listaPLLVisivel = false;
+        } else {
+          estado.filtroPLLTema = tema;
+          estado.listaPLLVisivel = true;
+        }
+        renderApp();
+      });
     });
 
-    var btnMostrarPLL = document.getElementById("btn-mostrar-pll");
-    if (btnMostrarPLL) btnMostrarPLL.addEventListener("click", function () {
-      estado.listaPLLVisivel = true;
-      renderApp();
+    document.querySelectorAll("[data-falta-presenca]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        abrirFolhaFaltasPresenca(v, btn.getAttribute("data-falta-presenca"), btn);
+      });
     });
 
     var btnLimparVotos = document.getElementById("btn-limpar-votos");

@@ -66,8 +66,7 @@ BLOCOS_VEREADORES = (
     ".topo-tagline",
     ".titulo-vereadores",
     ".seletor-vereador",
-    ".nav-vereador",
-    ".perfil-cabecalho",
+    ".sel-vereador-wrap",
 )
 JS_ESTRUTURA = """() => {
   const dentro = (idPai, idFilho) => {
@@ -295,8 +294,9 @@ JS_PRESENCA = """() => {
 JS_DUAS_COLUNAS = """(selArea) => {
   const area = document.querySelector(selArea);
   if (!area || !window.__vis(area)) return false;
-  const cards = Array.prototype.slice.call(area.querySelectorAll('.card-app, .secao'))
-    .filter(function (el) { return window.__vis(el); });
+  const cards = Array.prototype.slice.call(
+    area.querySelectorAll('.card-app, .secao, .cartao.ac-cartao, article.cartao')
+  ).filter(function (el) { return window.__vis(el); });
   for (let i = 0; i < cards.length; i++) {
     for (let j = i + 1; j < cards.length; j++) {
       const a = cards[i].getBoundingClientRect();
@@ -503,7 +503,7 @@ class TestTelaLayout(unittest.TestCase):
         btn_tema = page.evaluate(JS_BOTAO_TEMA)
         self.assertTrue(btn_tema["ok"], f"botao de tema com problema: {btn_tema.get('erro')}")
 
-        page.wait_for_selector(".perfil-cabecalho", timeout=60000)
+        page.wait_for_selector("#sel-vereador", timeout=60000)
         page.select_option("#sel-vereador", "1")
         page.wait_for_timeout(500)
         _sem_scroll_horizontal(page)
@@ -540,18 +540,14 @@ class TestTelaLayout(unittest.TestCase):
             duas = page.evaluate(JS_DUAS_COLUNAS, "#conteudo-vereadores .vereadores-grade")
             self.assertTrue(duas, "vereadores deveria ter cartoes em duas colunas em desktop")
             
-            # Check Votos position
             votos_layout = page.evaluate('''() => {
                 const grade = document.querySelector("#conteudo-vereadores .vereadores-grade");
-                const votos = document.querySelector("details[aria-labelledby='tit-votos']") || document.querySelector("section[aria-labelledby='tit-votos']") || document.getElementById("tit-votos").closest("details");
+                const votos = document.getElementById("tit-votos");
                 if (!grade || !votos) return { ok: false, erro: "elementos nao encontrados" };
-                const gradeRect = grade.getBoundingClientRect();
-                const votosRect = votos.getBoundingClientRect();
-                const parentRect = grade.parentElement.getBoundingClientRect();
-                
-                if (votosRect.top < gradeRect.bottom - 5) return { ok: false, erro: "votos nao esta abaixo da grade" };
-                if (Math.abs(votosRect.width - parentRect.width) > 5) return { ok: false, erro: "votos nao ocupa a largura total" };
-                return { ok: true };
+                const cartao = votos.closest("article.cartao");
+                if (!cartao || !grade.contains(cartao)) return { ok: false, erro: "cartao de votos fora da grade" };
+                const cards = grade.querySelectorAll("article.cartao");
+                return { ok: cards.length >= 3 };
             }''')
             self.assertTrue(votos_layout["ok"], f"Layout de votos incorreto: {votos_layout.get('erro')}")
 
@@ -648,12 +644,12 @@ class TestTelaLayout(unittest.TestCase):
             )
 
             valor_antes = page.evaluate("() => document.getElementById('sel-vereador').value")
-            nome_antes = page.inner_text(".perfil-nome")
+            nome_antes = page.locator(".sel-vereador-face .nm").inner_text()
             rolagem_antes = page.evaluate("() => window.scrollY")
             page.select_option("#sel-vereador", index=1)
             page.wait_for_timeout(500)
             valor_depois = page.evaluate("() => document.getElementById('sel-vereador').value")
-            nome_depois = page.inner_text(".perfil-nome")
+            nome_depois = page.locator(".sel-vereador-face .nm").inner_text()
             rolagem_depois = page.evaluate("() => window.scrollY")
             self.assertNotEqual(
                 valor_antes, valor_depois, "troca de vereador nao funcionou na barra compacta"
