@@ -1870,9 +1870,12 @@
     height: 100%;
     border-radius: var(--raio-pilula);
   }
-  .faixa-votos .listra-suave {
+  .faixa-votos .listra-suave,
+  .faixa-votos .seg-listra-suave,
+  .marcador-cor.seg-listra-suave {
     background: repeating-linear-gradient(135deg, var(--texto-suave) 0 4px, transparent 4px 7px);
   }
+  .marcador-cor.seg-listra-suave { border-radius: 3px; }
   .votos-quadros {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
@@ -1914,9 +1917,39 @@
     height: 100%;
     border-radius: var(--raio-pilula);
   }
-  .seg-barra .listra {
+  .seg-barra .listra,
+  .seg-barra .seg-listra-nao,
+  .marcador-cor.seg-listra-nao {
     background: repeating-linear-gradient(135deg, var(--nao) 0 4px, transparent 4px 7px);
   }
+  .marcador-cor.seg-listra-nao { border-radius: 3px; }
+  .seg-barra .seg-anel-tram-suave,
+  .marcador-cor.seg-anel-tram-suave {
+    background: transparent;
+    box-shadow: inset 0 0 0 2px var(--texto-suave);
+    border-radius: var(--raio-pilula);
+  }
+  .seg-barra .seg-anel-tram-cor,
+  .marcador-cor.seg-anel-tram-cor {
+    background: transparent;
+    box-shadow: inset 0 0 0 2px var(--tramitacao);
+    border-radius: var(--raio-pilula);
+  }
+  .seg-barra .seg-falta-just,
+  .marcador-cor.seg-falta-just {
+    background: transparent;
+    border: 1.5px dashed var(--texto-suave);
+    box-sizing: border-box;
+    border-radius: 3px;
+  }
+  .seg-barra .seg-cheio-sim,
+  .marcador-cor.seg-cheio-sim { background: var(--sim); }
+  .seg-barra .seg-cheio-marca,
+  .marcador-cor.seg-cheio-marca { background: var(--marca-solida); }
+  .seg-barra .seg-maioria,
+  .marcador-cor.seg-maioria { background: var(--sim); opacity: .45; }
+  .seg-barra .seg-cheio-texto,
+  .marcador-cor.seg-cheio-texto { background: var(--texto-suave); }
   .numeros {
     display: grid;
     gap: 0;
@@ -5706,28 +5739,32 @@
     return vereadoresOrdenados().filter(function (v) { return !mandatoEncerrado(v); }).length;
   }
 
+  function htmlMarcadorSeg(classe) {
+    return '<span class="marcador-cor ' + classe + '" aria-hidden="true"></span>';
+  }
+
   function htmlBarraResultadoVotacao(unanimes, maioria, rejeitadas, total) {
     if (!total) return "";
     var pctUni = (unanimes / total) * 100;
     var pctMai = (maioria / total) * 100;
     var pctRej = (rejeitadas / total) * 100;
     var html = '<div class="seg-barra" role="img" aria-label="' + esc(unanimes + " unanimidade, " + maioria + " maioria, " + rejeitadas + " rejeitados") + '">';
-    if (unanimes > 0) html += '<i style="width:' + pctUni.toFixed(2) + '%;background:var(--sim)"></i>';
-    if (maioria > 0) html += '<i style="width:' + pctMai.toFixed(2) + '%;background:var(--sim);opacity:.45"></i>';
-    if (rejeitadas > 0) html += '<i class="listra" style="width:' + pctRej.toFixed(2) + '%"></i>';
+    if (unanimes > 0) html += '<i class="seg-cheio-sim" style="width:' + pctUni.toFixed(2) + '%"></i>';
+    if (maioria > 0) html += '<i class="seg-maioria" style="width:' + pctMai.toFixed(2) + '%"></i>';
+    if (rejeitadas > 0) html += '<i class="seg-listra-nao" style="width:' + pctRej.toFixed(2) + '%"></i>';
     return html + "</div>";
   }
 
   function htmlNumerosResultado(unanimes, maioria, rejeitadas) {
     var linhas = [];
     if (unanimes > 0) {
-      linhas.push('<li><b>' + unanimes + '</b><span><span class="marcador-cor" style="background:var(--sim)"></span>Unanimidade</span></li>');
+      linhas.push('<li><b>' + unanimes + '</b><span>' + htmlMarcadorSeg("seg-cheio-sim") + "Unanimidade</span></li>");
     }
     if (maioria > 0) {
-      linhas.push('<li><b>' + maioria + '</b><span><span class="marcador-cor" style="background:var(--sim);opacity:.45"></span>Maioria</span></li>');
+      linhas.push('<li><b>' + maioria + '</b><span>' + htmlMarcadorSeg("seg-maioria") + "Maioria</span></li>");
     }
     if (rejeitadas > 0) {
-      linhas.push('<li><b>' + rejeitadas + '</b><span><span class="marcador-cor listra-anel"></span>Rejeitados</span></li>');
+      linhas.push('<li><b>' + rejeitadas + '</b><span>' + htmlMarcadorSeg("seg-listra-nao") + "Rejeitados</span></li>");
     }
     if (!linhas.length) return "";
     return '<ul class="numeros">' + linhas.join("") + "</ul>";
@@ -5838,8 +5875,8 @@
       var comJustificativa = p.justificativa || p.situacao === "ausente_com_justificativa";
       var tipoFalta = comJustificativa ? "Falta com justificativa" : "Falta sem justificativa";
       var marcador = comJustificativa
-        ? '<span class="marcador-cor tracejado"></span>'
-        : '<span class="marcador-cor listra-quadro"></span>';
+        ? htmlMarcadorSeg("seg-falta-just")
+        : htmlMarcadorSeg("seg-listra-nao");
       return '<div class="pessoa pessoa-falta">' + foto +
         '<span class="nm">' + esc(v.nome_parlamentar || v.nome) + "</span>" +
         '<span class="linha-meta">' + (partido ? "<span>" + esc(partido) + "</span>" : "") +
@@ -5887,7 +5924,7 @@
       : "";
     var numeros = '<ul class="numeros">' +
       '<li class="presenca-linha"><b>' + c.presentes + ' <span class="apoio presenca-de">de ' + n + "</span></b>" +
-      '<span><span class="marcador-cor" style="background:var(--marca-solida)"></span>Presentes</span></li>' +
+      '<span>' + htmlMarcadorSeg("seg-cheio-marca") + "Presentes</span></li>" +
       linhaFaltas +
       "<li><b>" + lista.length + "</b><span>Projetos votados</span></li></ul>";
     card.innerHTML = '<h2 class="sr" id="tit-presenca-sessao">Presen\u00e7a na \u00faltima sess\u00e3o</h2>' +
@@ -6704,14 +6741,13 @@
     if (!total) return "";
     var segs = [];
     if (p.presencas > 0) {
-      segs.push('<i style="width:' + ((p.presencas / total) * 100).toFixed(2) + '%;background:var(--marca-solida)"></i>');
+      segs.push('<i class="seg-cheio-marca" style="width:' + ((p.presencas / total) * 100).toFixed(2) + '%"></i>');
     }
     if (p.faltas_com_justificativa > 0) {
-      segs.push('<i style="width:' + ((p.faltas_com_justificativa / total) * 100).toFixed(2) +
-        '%;background:transparent;border:1.5px dashed var(--texto-suave);border-radius:3px"></i>');
+      segs.push('<i class="seg-falta-just" style="width:' + ((p.faltas_com_justificativa / total) * 100).toFixed(2) + '%"></i>');
     }
     if (p.faltas_sem_justificativa > 0) {
-      segs.push('<i class="listra" style="width:' + ((p.faltas_sem_justificativa / total) * 100).toFixed(2) + '%"></i>');
+      segs.push('<i class="seg-listra-nao" style="width:' + ((p.faltas_sem_justificativa / total) * 100).toFixed(2) + '%"></i>');
     }
     if (!segs.length) return "";
     var aria = p.presencas + " presen\u00e7as";
@@ -6723,16 +6759,16 @@
   function htmlNumerosPresencaVereador(p) {
     var linhas = [];
     if (p.presencas > 0) {
-      linhas.push('<li><b>' + esc(p.presencas) + '</b><span><span class="marcador-cor" style="background:var(--marca-solida)"></span>Presente</span></li>');
+      linhas.push('<li><b>' + esc(p.presencas) + '</b><span>' + htmlMarcadorSeg("seg-cheio-marca") + "Presente</span></li>");
     }
     if (p.faltas_com_justificativa > 0) {
       linhas.push('<li class="clicavel"><button type="button" class="linha-btn" data-falta-presenca="falta_com_justificativa" aria-haspopup="dialog">' +
-        '<span><span class="marcador-cor tracejado"></span>Falta justificada</span><b>' + esc(p.faltas_com_justificativa) +
+        "<span>" + htmlMarcadorSeg("seg-falta-just") + "Falta justificada</span><b>" + esc(p.faltas_com_justificativa) +
         '</b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></li>');
     }
     if (p.faltas_sem_justificativa > 0) {
       linhas.push('<li class="clicavel"><button type="button" class="linha-btn" data-falta-presenca="falta_sem_justificativa" aria-haspopup="dialog">' +
-        '<span><span class="marcador-cor listra-quadro"></span>Falta sem justificativa</span><b>' + esc(p.faltas_sem_justificativa) +
+        "<span>" + htmlMarcadorSeg("seg-listra-nao") + "Falta sem justificativa</span><b>" + esc(p.faltas_sem_justificativa) +
         '</b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></li>');
     }
     if (!linhas.length) {
@@ -6761,12 +6797,11 @@
     var total = pl.total_propostos || 0;
     if (!total) return "";
     var html = '<div class="seg-barra" role="img" aria-label="' + esc(pl.aprovados + " aprovados, " + pl.em_tramitacao + " em tramita\u00e7\u00e3o") + '">';
-    if (pl.aprovados > 0) html += '<i style="width:' + ((pl.aprovados / total) * 100).toFixed(2) + '%;background:var(--sim)"></i>';
+    if (pl.aprovados > 0) html += '<i class="seg-cheio-sim" style="width:' + ((pl.aprovados / total) * 100).toFixed(2) + '%"></i>';
     if (pl.em_tramitacao > 0) {
-      html += '<i style="width:' + ((pl.em_tramitacao / total) * 100).toFixed(2) +
-        '%;background:transparent;box-shadow:inset 0 0 0 2px var(--texto-suave);border-radius:999px"></i>';
+      html += '<i class="seg-anel-tram-suave" style="width:' + ((pl.em_tramitacao / total) * 100).toFixed(2) + '%"></i>';
     }
-    if (pl.rejeitados > 0) html += '<i class="listra" style="width:' + ((pl.rejeitados / total) * 100).toFixed(2) + '%"></i>';
+    if (pl.rejeitados > 0) html += '<i class="seg-listra-nao" style="width:' + ((pl.rejeitados / total) * 100).toFixed(2) + '%"></i>';
     return html + "</div>";
   }
 
@@ -6847,9 +6882,9 @@
         "<span>" + marcador + esc(rot) + "</span><b>" + esc(num) + "</b>" + setaLinha + "</button></li>";
     };
 
-    var marcAprov = '<span class="marcador-cor" style="background:var(--sim)"></span>';
-    var marcTram = '<span class="marcador-cor tracejado"></span>';
-    var marcRej = '<span class="marcador-cor listra-quadro"></span>';
+    var marcAprov = htmlMarcadorSeg("seg-cheio-sim");
+    var marcTram = htmlMarcadorSeg("seg-anel-tram-suave");
+    var marcRej = htmlMarcadorSeg("seg-listra-nao");
 
     var numeros = '<ul class="numeros proj-num">' +
       linhaPLL("aprovado", pl.aprovados, "Aprovados", marcAprov) +
@@ -6896,7 +6931,7 @@
       var n = vo[d.chave] || 0;
       if (n > 0) html += '<i style="width:' + ((n / total) * 100).toFixed(2) + "%;background:" + d.cor + '"></i>';
     });
-    if (aus > 0) html += '<i class="listra-suave" style="width:' + ((aus / total) * 100).toFixed(2) + '%"></i>';
+    if (aus > 0) html += '<i class="seg-listra-suave" style="width:' + ((aus / total) * 100).toFixed(2) + '%"></i>';
     return html + "</div>";
   }
 
@@ -6922,7 +6957,7 @@
       var marc = d[0] === "sim" ? "marcador-cor m-sim" :
         d[0] === "nao" ? "marcador-cor m-nao" :
         d[0] === "abstencao" ? "marcador-cor m-abstencao" :
-        "marcador-cor tracejado";
+        "marcador-cor seg-listra-suave";
       return '<button type="button" class="qv voto-card' + d[2] + (ativo ? " ativo" : "") + '" data-voto-card="' + esc(d[0]) +
         '" aria-pressed="' + (ativo ? "true" : "false") + '"><b>' + esc(num) +
         '</b><span><span class="' + marc + '"></span>' + esc(d[1]) + "</span></button>";
@@ -6931,7 +6966,7 @@
       var ativo = estado.filtroClassificacao === c.id;
       return '<button type="button" class="qv voto-card aus' + (ativo ? " ativo" : "") + '" data-voto-card="' + esc(c.id) +
         '" aria-pressed="' + (ativo ? "true" : "false") + '"><b>' + esc(c.num) +
-        '</b><span><span class="marcador-cor tracejado"></span>' + esc(c.rot) + "</span></button>";
+        '</b><span>' + htmlMarcadorSeg("seg-listra-suave") + esc(c.rot) + "</span></button>";
     }).join("");
     return '<div class="votos-quadros" role="group" aria-label="Filtrar por tipo de voto">' + html + "</div>";
   }
@@ -8702,13 +8737,13 @@ var MAPA_VAR_CATEGORIA = {
     var html = '<div class="seg-barra" role="img" aria-label="' + esc(aria) + '">';
     partes.forEach(function (p) {
       if (p.tipo === "aprovado") {
-        html += '<i style="width:' + p.pct.toFixed(2) + '%;background:var(--sim)"></i>';
+        html += '<i class="seg-cheio-sim" style="width:' + p.pct.toFixed(2) + '%"></i>';
       } else if (p.tipo === "rejeitado") {
-        html += '<i class="listra" style="width:' + p.pct.toFixed(2) + '%"></i>';
+        html += '<i class="seg-listra-nao" style="width:' + p.pct.toFixed(2) + '%"></i>';
       } else if (p.tipo === "tramitacao") {
-        html += '<i style="width:' + p.pct.toFixed(2) + '%;background:transparent;box-shadow:inset 0 0 0 2px var(--tramitacao);border-radius:var(--raio-pilula)"></i>';
+        html += '<i class="seg-anel-tram-cor" style="width:' + p.pct.toFixed(2) + '%"></i>';
       } else if (p.tipo === "retirados") {
-        html += '<i style="width:' + p.pct.toFixed(2) + '%;background:var(--texto-suave)"></i>';
+        html += '<i class="seg-cheio-texto" style="width:' + p.pct.toFixed(2) + '%"></i>';
       }
     });
     return html + "</div>";
@@ -8717,16 +8752,16 @@ var MAPA_VAR_CATEGORIA = {
   function htmlNumerosResumoPrefeito(c) {
     var linhas = [];
     if (c.aprovados > 0) {
-      linhas.push('<li><b class="num">' + c.aprovados + '</b><span><span class="marcador-cor" style="background:var(--sim)"></span>Aprovados</span></li>');
+      linhas.push('<li><b class="num">' + c.aprovados + '</b><span>' + htmlMarcadorSeg("seg-cheio-sim") + "Aprovados</span></li>");
     }
     if (c.rejeitados > 0) {
-      linhas.push('<li><b class="num">' + c.rejeitados + '</b><span><span class="marcador-cor listra-anel"></span>Rejeitados</span></li>');
+      linhas.push('<li><b class="num">' + c.rejeitados + '</b><span>' + htmlMarcadorSeg("seg-listra-nao") + "Rejeitados</span></li>");
     }
     if (c.tramitacao > 0) {
-      linhas.push('<li><b class="num">' + c.tramitacao + '</b><span><span class="marcador-cor" style="background:transparent;border:1.5px solid var(--tramitacao);border-radius:50%"></span>Em tramita\u00e7\u00e3o</span></li>');
+      linhas.push('<li><b class="num">' + c.tramitacao + '</b><span>' + htmlMarcadorSeg("seg-anel-tram-cor") + "Em tramita\u00e7\u00e3o</span></li>");
     }
     if (c.retirados > 0) {
-      linhas.push('<li><b class="num">' + c.retirados + '</b><span><span class="marcador-cor" style="background:var(--texto-suave)"></span>Retirados ou substitu\u00eddos</span></li>');
+      linhas.push('<li><b class="num">' + c.retirados + '</b><span>' + htmlMarcadorSeg("seg-cheio-texto") + "Retirados ou substitu\u00eddos</span></li>");
     }
     if (!linhas.length) return "";
     return '<ul class="numeros">' + linhas.join("") + "</ul>";
