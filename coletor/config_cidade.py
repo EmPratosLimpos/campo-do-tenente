@@ -191,6 +191,15 @@ def tipos_executivo(cfg: dict | None = None) -> list[str]:
     return [str(sigla or "").strip() for sigla in lista]
 
 
+def tipos_veto(cfg: dict | None = None) -> list[str]:
+    """Siglas de veto dentro do grupo Executivo (D-058). Lista vem do config."""
+    cfg = cfg if cfg is not None else carregar_config()
+    lista = (cfg.get("tramitacao") or {}).get("tipos_veto")
+    if not isinstance(lista, list) or not lista:
+        raise SystemExit("config_cidade.json: tramitacao.tipos_veto ausente.")
+    return [str(sigla or "").strip() for sigla in lista]
+
+
 def piso_status_decodificados(cfg: dict | None = None) -> int:
     cfg = cfg if cfg is not None else carregar_config()
     valor = (cfg.get("tramitacao") or {}).get("piso_status_decodificados")
