@@ -7221,6 +7221,17 @@ var MAPA_VAR_CATEGORIA = {
     return juntarLinhas([d.frase, ENDERECO_EXIBIDO, linhaHashtags()]);
   }
 
+  function periodoVereadorShare() {
+    var dados = estado.dados;
+    if (!dados || !dados.sessoes || !dados.sessoes.length) {
+      return rotuloPeriodoLegislatura();
+    }
+    var ultima = dados.sessoes[dados.sessoes.length - 1];
+    var data = formatarData(ultima.data);
+    if (!data) return rotuloPeriodoLegislatura();
+    return rotuloPeriodoLegislatura() + " at\u00e9 " + data;
+  }
+
   function contextoShareAtivo() {
     if (estadoUI.secao === "vereadores") {
       var v = vereadorAtual();
