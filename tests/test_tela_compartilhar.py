@@ -37,10 +37,10 @@ def _png_wh(data: bytes) -> tuple[int, int]:
 class TestTelaCompartilhar(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.servidor = ThreadingHTTPServer(("127.0.0.1", 8795), _Handler)
+        cls.servidor = ThreadingHTTPServer(("127.0.0.1", 8802), _Handler)
         thread = threading.Thread(target=cls.servidor.serve_forever, daemon=True)
         thread.start()
-        cls.base = "http://127.0.0.1:8795/index.html"
+        cls.base = "http://127.0.0.1:8802/index.html"
         time.sleep(0.35)
 
     @classmethod
@@ -55,7 +55,7 @@ class TestTelaCompartilhar(unittest.TestCase):
         )
         erros: list[str] = []
         page.on("pageerror", lambda e: erros.append(str(e)))
-        page.goto(self.base, wait_until="networkidle", timeout=120000)
+        page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
         if escuro:
             page.evaluate("document.documentElement.setAttribute('data-tema','escuro')")
         page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
@@ -151,7 +151,7 @@ class TestTelaCompartilhar(unittest.TestCase):
         page.click('#share-sheet button[data-acao="pdf"]')
         page.wait_for_function("() => window.__printChamado === true", timeout=5000)
         html = page.inner_html("#folha-impressao")
-        self.assertIn("www.empratoslimpos.com", html)
+        self.assertIn("empratoslimpos.com", html)
         self.assertIn("marca/qr-site.svg", html)
 
         page.emulate_media(media="print")

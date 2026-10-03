@@ -118,26 +118,22 @@ class TestTemasRevisadosPlaywright(unittest.TestCase):
             self.assertIsNotNone(sessao)
             c = contagem_presenca(sessao)
 
-            page.goto(self.base, wait_until="networkidle", timeout=120000)
-            page.wait_for_timeout(1200)
+            page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
+            page.wait_for_selector("#card-presenca-sessao .resumo", timeout=60000)
             page.click('button[data-periodo="sessao"]')
             page.wait_for_timeout(600)
 
-            meta_txt = page.locator("#texto-meta-presenca-sessao").inner_text()
-            m = re.search(r"(\d+)\s+parlamentar", meta_txt)
-            self.assertIsNotNone(m, msg=f"meta presenca: {meta_txt}")
+            frase = page.locator("#card-presenca-sessao .resumo").inner_text()
+            m = re.search(r"(\d+)\s+vereadores", frase) or re.search(
+                r"dos (\d+) vereadores", frase
+            )
+            self.assertIsNotNone(m, msg=f"frase presenca: {frase}")
             self.assertEqual(int(m.group(1)), c["banca"])
 
-            presentes = int(
-                page.locator(
-                    "#card-presenca-sessao .capsula-verde .capsula-valor"
-                ).inner_text()
-            )
-            faltas = int(
-                page.locator(
-                    "#card-presenca-sessao .capsula-neutro .capsula-valor"
-                ).first.inner_text()
-            )
+            linha_pres = page.locator("#card-presenca-sessao .presenca-linha b").inner_text()
+            presentes = int(re.search(r"^(\d+)", linha_pres.strip()).group(1))
+            btn_faltas = page.locator("#card-presenca-sessao [data-abrir-faltas]")
+            faltas = int(btn_faltas.locator("b").inner_text()) if btn_faltas.count() else 0
             self.assertEqual(presentes, c["presentes"])
             self.assertEqual(faltas, c["faltas"])
 

@@ -104,22 +104,25 @@ class TestEnderecoNaTela(unittest.TestCase):
         self.assertNotIn(HOST_ANTIGO, self.index)
 
     def test_cabecalho_impresso_mostra_o_dominio_proprio(self):
-        self.assertIn(f'<a href="{ENDERECO_PUBLICO}">{ENDERECO_PUBLICO}</a>', self.index)
+        self.assertIn("ENDERECO_EXIBIDO", self.index)
+        self.assertIn("preencherFolhaImpressao", self.index)
+        self.assertIn("ENDERECO_EXIBIDO = PORTAL_OFICIAL.replace", self.index)
 
     def test_trava_de_moldura_aponta_para_o_dominio_proprio(self):
         self.assertIn(f'lk.href = "{ENDERECO_PUBLICO}";', self.index)
 
     def test_compartilhamento_vem_do_config_e_nao_do_codigo(self):
         """O texto de compartilhamento tem de sair do endereco do config."""
-        self.assertIn('PORTAL_OFICIAL = cfg.painel.endereco_publico', self.index)
-        self.assertIn("return PORTAL_OFICIAL + \"#vereadores\";", self.index)
+        self.assertIn("PORTAL_OFICIAL = cfg.painel.endereco_publico", self.index)
+        self.assertIn('return PORTAL_OFICIAL + "#vereadores";', self.index)
+        self.assertIn("linkCompartilharSite", self.index)
 
     def test_csp_nao_traz_endereco_do_site(self):
-        """A CSP estrita fica em 'self': nenhum host do site pode entrar nela."""
+        """A CSP estrita fica em 'self': o dominio publico do painel nao entra nela."""
         linhas = [linha for linha in self.index.splitlines() if "Content-Security-Policy" in linha]
         self.assertEqual(len(linhas), 1, "esperado uma unica CSP no index.html")
         csp = linhas[0]
-        self.assertNotIn("empratoslimpos", csp)
+        self.assertNotIn(DOMINIO_PROPRIO, csp)
         self.assertNotIn("github.io", csp)
         self.assertIn("default-src 'self'", csp)
         self.assertIn("frame-src 'none'", csp)

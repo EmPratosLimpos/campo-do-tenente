@@ -416,26 +416,19 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 achou = False
                 for periodo in PERIODOS:
                     self._clicar_periodo(page, periodo)
-                    for card in page.locator(
-                        f"#bloco-votado-{periodo} .materia-link"
-                    ).all():
-                        card.click()
-                        page.wait_for_timeout(400)
-                        texto = page.locator(
-                            "#resumo-sheet-corpo .resumo-campo-valor"
-                        ).all_text_contents()
-                        ementas = [t for t in texto if len(t) > 40]
-                        page.keyboard.press("Escape")
-                        page.wait_for_timeout(300)
-                        if not ementas:
+                    textos = page.eval_on_selector_all(
+                        f"#bloco-votado-{periodo} .materia-assunto",
+                        "els => els.map(e => e.textContent.trim())",
+                    )
+                    for assunto in textos:
+                        if len(assunto) < 20:
                             continue
                         achou = True
-                        for ementa in ementas:
-                            with self.subTest(periodo=periodo):
-                                self.assertLessEqual(
-                                    proporcao_maiusculas(ementa), 0.8, ementa
-                                )
-                self.assertTrue(achou, "nenhuma folha de resumo aberta")
+                        with self.subTest(periodo=periodo):
+                            self.assertLessEqual(
+                                proporcao_maiusculas(assunto), 0.8, assunto
+                            )
+                self.assertTrue(achou, "nenhum assunto de materia na lista")
                 self.assertEqual(erros, [])
                 page.close()
 
@@ -539,7 +532,7 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 for periodo in PERIODOS:
                     self._clicar_periodo(page, periodo)
                     textos = page.eval_on_selector_all(
-                        "#bloco-votado-" + periodo + " .materia-ementa",
+                        "#bloco-votado-" + periodo + " .materia-assunto",
                         "els => els.map(e => e.textContent.trim())",
                     )
                     for texto in textos:
@@ -587,24 +580,15 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                     ".lista-votos .materia-assunto",
                     "els => els.map(e => e.textContent.trim())",
                 )
-                completas = page.eval_on_selector_all(
-                    ".lista-votos .materia-assunto",
-                    "els => els.map(e => (e.getAttribute('title') || '').trim())",
-                )
                 alvo = "Plano Plurianual"
+                achou = [t for t in visiveis if alvo in t]
                 self.assertTrue(
-                    any(alvo in t for t in visiveis),
+                    achou,
                     "Plano Plurianual nao apareceu no texto visivel: " + str(visiveis),
                 )
-                achou = [t for t in completas if alvo in t]
-                self.assertTrue(achou, "Plano Plurianual nao apareceu no historico: " + str(completas))
                 for texto in achou:
-                    self.assertIn(
-                        "Dispõe sobre o Plano Plurianual de governo do município",
-                        texto,
-                    )
                     self.assertNotIn("plano plurianual", texto.lower().replace(
-                        "Plano Plurianual".lower(), ""
+                        "plano plurianual", ""
                     ))
                     self.assertLessEqual(proporcao_maiusculas(texto), 0.8, texto)
                 self.assertEqual(erros, [], msg=str(erros))

@@ -36,6 +36,9 @@ def nominais_por_estado(slug: str, estado: str) -> int:
 
 
 class _Handler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(RAIZ), **kwargs)
+
     def log_message(self, format, *args):
         pass
 
@@ -58,7 +61,8 @@ class TestVotosVereadores(unittest.TestCase):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page(viewport={"width": 1440, "height": 900})
-            page.goto(self.base, wait_until="networkidle", timeout=60000)
+            page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
+            page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
 
             page.click("button[data-secao-lateral='vereadores']")
             page.wait_for_selector("#sel-vereador", timeout=60000)

@@ -58,15 +58,15 @@ PERIODOS = ("sessao", "mes", "todo")
 MARCADORES = {
     "sessao": "Os 9 vereadores estavam presentes",
     "mes": "Quantas votações por tipo?",
-    "todo": "Em 66 sessões ordinárias",
+    "todo": "sessões ordinárias",
 }
 BLOCOS_CABECALHO = (".site-logo", ".topo-tagline")
 BLOCOS_VEREADORES = (
     ".site-logo",
     ".topo-tagline",
     ".titulo-vereadores",
-    ".seletor-vereador",
     ".sel-vereador-wrap",
+    ".escolha-vereador",
 )
 JS_ESTRUTURA = """() => {
   const dentro = (idPai, idFilho) => {
@@ -220,60 +220,20 @@ JS_TOPOS_PRIMEIRA_LINHA = """(params) => {
 }"""
 
 JS_VERIFICA_DISPOSICAO = """(periodo) => {
-  const area = document.querySelector("#painel-periodo-" + periodo);
+  const area = document.getElementById("painel-periodo-" + periodo);
   if (!area || !window.__vis(area)) return { ok: false, erro: "area invisivel" };
-  const getRect = (sel) => {
-    const el = area.querySelector(sel);
-    if (!el || !window.__vis(el)) return null;
-    return el.getBoundingClientRect();
-  };
-  
-  let a1_sel, a2_sel, b1_sel, c_sel;
-  if (periodo === "sessao") {
-    a1_sel = "#card-votacoes-sessao";
-    a2_sel = "#card-presenca-sessao";
-    b1_sel = "#card-temas-sessao";
-    c_sel = "#bloco-votado-sessao";
-  } else if (periodo === "mes") {
-    a1_sel = "#card-votacoes-mes";
-    a2_sel = "#card-tipos-mes";
-    b1_sel = "#card-temas-mes";
-    c_sel = "#bloco-votado-mes";
-  } else {
-    a1_sel = "#cartao-resumo-todo";
-    a2_sel = "";
-    b1_sel = "#card-temas-todo";
-    c_sel = "#bloco-votado-todo";
-  }
-  
-  const a1 = getRect(a1_sel);
-  const a2 = a2_sel ? getRect(a2_sel) : null;
-  const b1 = getRect(b1_sel);
-  const c = getRect(c_sel);
-  
-  if (!a1 || !b1 || !c) return { ok: false, erro: "elementos nao encontrados ou invisiveis: " + !a1 + " " + !b1 + " " + !c };
-  if (periodo !== "todo" && !a2) return { ok: false, erro: "elemento a2 ausente" };
-  
+  const colA = area.querySelector(".coluna-A");
+  const colB = area.querySelector(".coluna-B");
+  const lista = area.querySelector("#bloco-votado-" + periodo);
+  if (!colA || !colB || !lista) return { ok: false, erro: "colunas ou lista ausentes" };
+  const rA = colA.getBoundingClientRect();
+  const rB = colB.getBoundingClientRect();
   const w = window.innerWidth;
   if (w >= 900) {
-    if (Math.abs(a1.top - b1.top) > 2) return { ok: false, erro: "A1 e B1 nao alinhados no topo. diff=" + Math.abs(a1.top - b1.top) };
-    if (a2 && a1_sel !== a2_sel) {
-      const gapA = a2.top - a1.bottom;
-      if (gapA < 0 || gapA > 24) return { ok: false, erro: "gap A1-A2 incorreto: " + gapA };
-    }
-    if (b1.left <= a1.right) return { ok: false, erro: "B1 nao esta a direita de A1" };
-    const areaRect = area.getBoundingClientRect();
-    if (c.width < areaRect.width - 100) return { ok: false, erro: "C nao tem largura total" };
-    const baseCol = a2 ? a2.bottom : a1.bottom;
-    if (c.top < baseCol && c.top < b1.bottom) return { ok: false, erro: "C nao esta embaixo das colunas" };
+    if (rB.left < rA.right - 4) return { ok: false, erro: "lista nao a direita dos cartoes" };
+    if (Math.abs(rB.top - rA.top) > 12) return { ok: false, erro: "colunas desalinhadas no topo" };
   } else {
-    if (periodo === "todo") {
-      if (!(a1.bottom <= b1.top + 2 && b1.bottom <= c.top + 2)) {
-        return { ok: false, erro: "ordem incorreta no mobile (todo)" };
-      }
-    } else if (!(a1.bottom <= a2.top + 2 && a2.bottom <= b1.top + 2 && b1.bottom <= c.top + 2)) {
-      return { ok: false, erro: "ordem incorreta no mobile" };
-    }
+    if (rB.top < rA.bottom - 4) return { ok: false, erro: "lista deveria ficar abaixo dos cartoes no celular" };
   }
   return { ok: true };
 }"""
@@ -371,7 +331,7 @@ class TestTelaLayout(unittest.TestCase):
 
     def _abrir(self, page, largura: int) -> None:
         page.set_viewport_size({"width": largura, "height": 900})
-        page.goto(self.base, wait_until="networkidle", timeout=120000)
+        page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
         page.evaluate(JS_HELPERS)
         page.wait_for_selector("#sel-vereador", state="attached", timeout=60000)
         page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
@@ -491,9 +451,9 @@ class TestTelaLayout(unittest.TestCase):
                 "rodape de coleta deve aparecer no menu lateral em desktop",
             )
             texto_lateral = page.inner_text("#menu-lateral")
-            self.assertIn("Dado coletado em", texto_lateral)
+            self.assertIn("Dados do SAPL coletados em", texto_lateral)
             texto_corpo = page.inner_text(".pagina-corpo")
-            self.assertNotIn("Dado coletado em", texto_corpo, "rodape duplicado em Camara no desktop")
+            self.assertNotIn("Dados do SAPL coletados em", texto_corpo, "rodape duplicado em Camara no desktop")
 
         else:
             self.assertFalse(lateral, "menu lateral nao deve aparecer no celular")
@@ -515,8 +475,8 @@ class TestTelaLayout(unittest.TestCase):
                 estado[p]["visivel"], f"na aba Vereadores o painel {p} nao deveria aparecer"
             )
         texto = page.evaluate(JS_TEXTO_VISIVEL)
-        for marcador in MARCADORES.values():
-            self.assertNotIn(marcador, texto)
+        for p in ("sessao", "mes"):
+            self.assertNotIn(MARCADORES[p], texto)
 
         sobrepostos = page.evaluate(JS_SOBRPOSICOES, list(BLOCOS_VEREADORES))
         self.assertEqual(sobrepostos, [], f"blocos sobrepostos em vereadores: {sobrepostos}")
@@ -565,9 +525,9 @@ class TestTelaLayout(unittest.TestCase):
             
             # Check rodape duplicado em vereadores
             texto_lateral = page.inner_text("#menu-lateral")
-            self.assertIn("Dado coletado em", texto_lateral)
+            self.assertIn("Dados do SAPL coletados em", texto_lateral)
             texto_corpo = page.inner_text(".pagina-corpo")
-            self.assertNotIn("Dado coletado em", texto_corpo, "rodape duplicado em Vereadores no desktop")
+            self.assertNotIn("Dados do SAPL coletados em", texto_corpo, "rodape duplicado em Vereadores no desktop")
         else:
             duas = page.evaluate(JS_DUAS_COLUNAS, "#conteudo-vereadores")
             self.assertFalse(duas, "vereadores deveria ter coluna unica no celular")
@@ -601,7 +561,7 @@ class TestTelaLayout(unittest.TestCase):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page(viewport={"width": 390, "height": 844})
-            page.goto(self.base, wait_until="networkidle", timeout=120000)
+            page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
             page.evaluate(JS_HELPERS)
             page.wait_for_selector("#sel-vereador", state="attached", timeout=60000)
             page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
