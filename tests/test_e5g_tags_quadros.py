@@ -43,6 +43,7 @@ CHAVES_EXPLICACOES = (
     "voto_abstencao",
     "voto_nao_votou",
     "voto_presidente",
+    "sem_registro_sapl",
     "voto_ausente",
     "voto_ausente_justificativa",
     "voto_ausente_sem_justificativa",

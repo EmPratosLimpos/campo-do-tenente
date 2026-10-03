@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import pathlib
 import threading
 import time
@@ -9,6 +10,40 @@ import unittest
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
+
+
+def contagem_resumo_plex_registrados() -> dict:
+    dados = json.loads(
+        (RAIZ / "dados" / "tratados" / "executivo_legislatura.json").read_text(encoding="utf-8")
+    )
+    plex = [x for x in dados.get("todo") or [] if x.get("tipo_sigla") == "PLEX"]
+    c = {"aprovados": 0, "rejeitados": 0, "tramitacao": 0, "retirados": 0}
+    for item in plex:
+        if item.get("situacao_final_fonte") == "sem_registro":
+            continue
+        s = (item.get("situacao_final") or "").strip()
+        if s in ("Aprovado", "Proposição transformada em lei"):
+            c["aprovados"] += 1
+        elif s == "Rejeitado":
+            c["rejeitados"] += 1
+        elif s in ("Proposição Substituída", "Proposição retirada pelo autor"):
+            c["retirados"] += 1
+        elif s == "Aguardando emissão de parecer da comissão" or s.startswith(
+            "Adiada discussão"
+        ):
+            c["tramitacao"] += 1
+    return c
+
+
+def qtd_plex_sem_registro() -> int:
+    dados = json.loads(
+        (RAIZ / "dados" / "tratados" / "executivo_legislatura.json").read_text(encoding="utf-8")
+    )
+    return sum(
+        1
+        for x in dados.get("todo") or []
+        if x.get("tipo_sigla") == "PLEX" and x.get("situacao_final_fonte") == "sem_registro"
+    )
 
 try:
     from playwright.sync_api import sync_playwright
@@ -117,6 +152,41 @@ class TestTelaPrefeito(unittest.TestCase):
                     self.assertTrue(overflow, msg=f"rolagem lateral {largura} {tema}")
                     self.assertEqual(erros, [], msg=f"pageerror {largura} {tema}: {erros}")
                     page.close()
+            browser.close()
+
+    def test_resumo_so_plex_com_registro_e_nota_sem_registro(self):
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page(viewport={"width": 1440, "height": 900})
+            erros = []
+            page.on("pageerror", lambda e: erros.append(str(e)))
+            self._abrir_prefeito(page, 1440, "claro")
+            resumo = page.locator("#cartao-resumo-prefeito")
+            texto_resumo = resumo.inner_text()
+            self.assertNotIn("Sem registro no SAPL", texto_resumo.split("Projetos do Prefeito")[0])
+            c = contagem_resumo_plex_registrados()
+            self.assertIn(f"{c['aprovados']}\nAprovados", texto_resumo)
+            self.assertIn(f"{c['rejeitados']}\nRejeitados", texto_resumo)
+            self.assertIn(f"{c['tramitacao']}\nEm tramitação", texto_resumo)
+            self.assertIn(f"{c['retirados']}\nRetirados ou substituídos", texto_resumo)
+            qtd = qtd_plex_sem_registro()
+            if qtd:
+                self.assertIn(
+                    f"{qtd} projetos do início de 2025 não têm votação registrada no SAPL.",
+                    texto_resumo,
+                )
+            pilulas = page.locator(
+                "#lista-prefeito button.pilula-sem-registro-sapl"
+            )
+            while pilulas.count() == 0 and page.locator("#btn-mais-prefeito").count():
+                page.locator("#btn-mais-prefeito").click()
+                page.wait_for_timeout(500)
+            self.assertGreater(pilulas.count(), 0)
+            pilulas.first.click()
+            page.wait_for_selector("#folha-generica-backdrop.ativo", timeout=10000)
+            folha = page.inner_text("#folha-generica-backdrop.ativo")
+            self.assertIn("sessões do início de 2025", folha)
+            self.assertEqual(erros, [])
             browser.close()
 
     def test_folha_votacao_simbolica_ou_nominal(self):

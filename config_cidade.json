@@ -41,7 +41,8 @@
       "chave_publica": "phc_w6wbMbPTxJT23ntAUuQRFMWorTkBrrk4s2aUTmFzLCqT",
       "host": "https://eu.i.posthog.com"
     },
-    "apoio_url": ""
+    "apoio_url": "",
+    "nota_plex_sem_registro_sapl": "{quantidade} projetos do início de {ano} não têm votação registrada no SAPL."
   },
   "recorte": {
     "anos": [
@@ -229,6 +230,7 @@
     "voto_abstencao": "O vereador estava presente e optou por não votar nem sim nem não.",
     "voto_nao_votou": "O vereador não registrou voto nessa votação.",
     "voto_presidente": "O presidente da sessão não votou nessa votação.",
+    "sem_registro_sapl": "O SAPL não tem votação nem andamento registrado para este projeto. As sessões do início de 2025 não foram registradas pela Câmara no sistema.",
     "voto_ausente": "O vereador não estava presente nessa votação. Se a falta foi justificada, aparece no cartão de Presença.",
     "voto_ausente_justificativa": "O vereador faltou com justificativa oficial nessa votação.",
     "voto_ausente_sem_justificativa": "O vereador faltou sem justificativa oficial nessa votação.",

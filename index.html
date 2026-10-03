@@ -1761,6 +1761,15 @@
     color: var(--tramitacao);
     border: 1.5px solid var(--tramitacao);
   }
+  .pilula-sem-registro-sapl {
+    background: transparent;
+    color: var(--texto-suave);
+    border: 1.5px dashed var(--ausente);
+  }
+  button.pilula.tag-explicavel {
+    cursor: pointer;
+    font-family: inherit;
+  }
   .pilula-sem-deliberacao {
     background: transparent;
     color: var(--texto-suave);
@@ -6061,6 +6070,7 @@
     if (tipo === "maioria") return "Maioria";
     if (tipo === "nominal") return "Votação nominal";
     if (tipo === "tramitacao" || tipo === "tramitação") return "Em tramitação";
+    if (tipo === "sem_registro_sapl") return "Sem registro no SAPL";
     if (tipo === "veto") return "Veto";
     if (tipo === "plex" || tipo === "PLEX") return "PLEX";
     if (tipo === "pleg" || tipo === "PLEG") return "PLEG";
@@ -8586,7 +8596,14 @@ var MAPA_VAR_CATEGORIA = {
     return isFinite(x) ? x : null;
   }
 
+  function plexSemRegistroSapl(item) {
+    return item && item.situacao_final_fonte === "sem_registro";
+  }
+
   function pilulaExecutivo(item) {
+    if (plexSemRegistroSapl(item)) {
+      return { classe: "pilula-sem-registro-sapl", rotulo: "Sem registro no SAPL", explicavel: true };
+    }
     var s = item.situacao_final || "";
     if (s === "Aprovado") return { classe: "pilula-aprovado", rotulo: "Aprovado" };
     if (s === "Rejeitado") return { classe: "pilula-rejeitado", rotulo: "Rejeitado" };
@@ -8600,6 +8617,10 @@ var MAPA_VAR_CATEGORIA = {
 
   function htmlPilulaExecutivo(item) {
     var p = pilulaExecutivo(item);
+    if (p.explicavel) {
+      return '<button type="button" class="pilula ' + p.classe + ' tag-explicavel" data-tag="sem_registro_sapl" data-valor="' +
+        esc(p.rotulo) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(p.rotulo) + "</button>";
+    }
     return '<span class="pilula ' + p.classe + '">' + esc(p.rotulo) + "</span>";
   }
 
@@ -8632,33 +8653,51 @@ var MAPA_VAR_CATEGORIA = {
       rejeitados: 0,
       tramitacao: 0,
       retirados: 0,
-      semRegistro: 0,
-      total: plex.length
+      totalRegistrado: 0
     };
     plex.forEach(function (item) {
+      if (plexSemRegistroSapl(item)) return;
       var b = bucketResumoPlex(item);
-      if (b === "outros") return;
+      if (b === "outros" || b === "semRegistro") return;
       c[b] += 1;
     });
+    c.totalRegistrado = c.aprovados + c.rejeitados + c.tramitacao + c.retirados;
     return c;
   }
 
+  function htmlNotaPlexSemRegistroSapl(plex) {
+    var sem = plex.filter(plexSemRegistroSapl);
+    if (!sem.length) return "";
+    var painel = CONFIG_CIDADE && CONFIG_CIDADE.painel;
+    var tpl = painel && painel.nota_plex_sem_registro_sapl;
+    if (!tpl) return "";
+    var anos = sem.map(function (item) { return parseInt(item.ano, 10); }).filter(function (a) { return isFinite(a); });
+    var ano = anos.length ? Math.min.apply(null, anos) : "";
+    if (!ano && CONFIG_CIDADE && CONFIG_CIDADE.sapl && CONFIG_CIDADE.sapl.legislatura_inicio) {
+      ano = CONFIG_CIDADE.sapl.legislatura_inicio;
+    }
+    var qtd = sem.length;
+    var texto = String(tpl)
+      .replace(/\{quantidade\}/g, String(qtd))
+      .replace(/\{ano\}/g, String(ano));
+    if (qtd === 1) texto = texto.replace(/\bprojetos\b/g, "projeto");
+    return '<p class="apoio nota-cartao">' + esc(texto) + "</p>";
+  }
+
   function htmlBarraResumoPrefeito(c) {
-    var total = c.total;
+    var total = c.totalRegistrado;
     if (!total) return "";
     var partes = [];
     if (c.aprovados > 0) partes.push({ pct: (c.aprovados / total) * 100, tipo: "aprovado" });
     if (c.rejeitados > 0) partes.push({ pct: (c.rejeitados / total) * 100, tipo: "rejeitado" });
     if (c.tramitacao > 0) partes.push({ pct: (c.tramitacao / total) * 100, tipo: "tramitacao" });
     if (c.retirados > 0) partes.push({ pct: (c.retirados / total) * 100, tipo: "retirados" });
-    if (c.semRegistro > 0) partes.push({ pct: (c.semRegistro / total) * 100, tipo: "semRegistro" });
     if (!partes.length) return "";
     var aria = [
       c.aprovados ? c.aprovados + " aprovados" : "",
       c.rejeitados ? c.rejeitados + " rejeitados" : "",
       c.tramitacao ? c.tramitacao + " em tramita\u00e7\u00e3o" : "",
-      c.retirados ? c.retirados + " retirados ou substitu\u00eddos" : "",
-      c.semRegistro ? c.semRegistro + " sem registro no SAPL" : ""
+      c.retirados ? c.retirados + " retirados ou substitu\u00eddos" : ""
     ].filter(Boolean).join(", ");
     var html = '<div class="seg-barra" role="img" aria-label="' + esc(aria) + '">';
     partes.forEach(function (p) {
@@ -8670,8 +8709,6 @@ var MAPA_VAR_CATEGORIA = {
         html += '<i style="width:' + p.pct.toFixed(2) + '%;background:transparent;box-shadow:inset 0 0 0 2px var(--tramitacao);border-radius:var(--raio-pilula)"></i>';
       } else if (p.tipo === "retirados") {
         html += '<i style="width:' + p.pct.toFixed(2) + '%;background:var(--texto-suave)"></i>';
-      } else {
-        html += '<i class="marcador-sem-registro" style="width:' + p.pct.toFixed(2) + '%"></i>';
       }
     });
     return html + "</div>";
@@ -8690,9 +8727,6 @@ var MAPA_VAR_CATEGORIA = {
     }
     if (c.retirados > 0) {
       linhas.push('<li><b class="num">' + c.retirados + '</b><span><span class="marcador-cor" style="background:var(--texto-suave)"></span>Retirados ou substitu\u00eddos</span></li>');
-    }
-    if (c.semRegistro > 0) {
-      linhas.push('<li><b class="num">' + c.semRegistro + '</b><span><span class="marcador-cor marcador-sem-registro"></span>Sem registro no SAPL</span></li>');
     }
     if (!linhas.length) return "";
     return '<ul class="numeros">' + linhas.join("") + "</ul>";
@@ -8760,6 +8794,16 @@ var MAPA_VAR_CATEGORIA = {
     });
   }
 
+  function ordenarPlexComSemRegistroNoFim(lista) {
+    var comRegistro = [];
+    var semRegistro = [];
+    lista.forEach(function (item) {
+      if (plexSemRegistroSapl(item)) semRegistro.push(item);
+      else comRegistro.push(item);
+    });
+    return ordenarPlex(comRegistro).concat(ordenarPlex(semRegistro));
+  }
+
   function plexTemVotacaoRegistrada(item) {
     if (!item || !item.votacao) return false;
     var rotulo = String(item.votacao_rotulo || "").toLowerCase();
@@ -8791,7 +8835,7 @@ var MAPA_VAR_CATEGORIA = {
   }
 
   function plexFiltrados() {
-    var lista = ordenarPlex(listaPlexExecutivo());
+    var lista = ordenarPlexComSemRegistroNoFim(listaPlexExecutivo());
     var filtroTema = estadoPrefeito.filtroTema;
     var busca = normalizarTexto(estadoPrefeito.busca || "").trim();
     return lista.filter(function (item) {
@@ -8968,7 +9012,8 @@ var MAPA_VAR_CATEGORIA = {
     card.innerHTML =
       '<div class="cab-cartao"><h2 class="t2" id="tit-resumo-prefeito">Resumo</h2></div>' +
       htmlBarraResumoPrefeito(c) +
-      htmlNumerosResumoPrefeito(c);
+      htmlNumerosResumoPrefeito(c) +
+      htmlNotaPlexSemRegistroSapl(plex);
   }
 
   function montarEsqueletoPrefeito() {
@@ -9021,12 +9066,12 @@ var MAPA_VAR_CATEGORIA = {
         if (item) abrirFolhaVotosPlex(item, btnVotos);
         return;
       }
-      if (e.target.id === "btn-mais-prefeito") {
+      if (e.target.closest("#btn-mais-prefeito")) {
         estadoPrefeito.limite = (estadoPrefeito.limite || 10) + 10;
         renderListaPrefeito();
         return;
       }
-      if (e.target.id === "btn-limpar-filtros-prefeito") {
+      if (e.target.closest("#btn-limpar-filtros-prefeito")) {
         estadoPrefeito.filtroTema = "";
         estadoPrefeito.busca = "";
         estadoPrefeito.limite = 10;
