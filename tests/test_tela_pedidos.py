@@ -52,13 +52,15 @@ class TestConfigPedidos(unittest.TestCase):
         cfg = carregar_config()
         tipos = cfg["tramitacao"]["tipos_pedidos"]
         self.assertEqual(tipos, ["IND", "REQ", "MOC"])
-        self.assertIn("MOC", cfg["tramitacao"]["ementa_oculta_tipos"])
+        self.assertEqual(cfg["tramitacao"]["ementa_oculta_tipos"], [])
 
     def test_nomes_pedidos_no_config(self):
         cfg = carregar_config()
         nomes = cfg["tramitacao"]["nomes_pedidos"]
         self.assertEqual(nomes["REQ"]["plural"], "requerimentos")
         self.assertEqual(nomes["MOC"]["plural"], "moções")
+        self.assertEqual(nomes["REQ"]["rotulo_plural"], "Requerimentos")
+        self.assertEqual(nomes["IND"]["rotulo_singular"], "Indicação")
 
 
 class TestIndexPedidos(unittest.TestCase):
@@ -67,7 +69,6 @@ class TestIndexPedidos(unittest.TestCase):
         self.assertIn("tipos_pedidos", INDEX)
         self.assertIn("nomesPedidosConfig", INDEX)
         self.assertIn("nomes_pedidos", INDEX)
-        self.assertIn("ementa_oculta_tipos", INDEX)
         self.assertIn("carregarProposicoesCamara", INDEX)
 
     def test_plural_e_resumo_sem_regra_fixa_no_js(self):
@@ -85,24 +86,24 @@ class TestIndexPedidos(unittest.TestCase):
         for sigla in ("IND", "REQ", "MOC"):
             self.assertNotIn(f'"{sigla}"', js, msg=f"literal {sigla} no JS fora de comentario")
 
-    def test_pilula_sem_registro_sapl(self):
-        self.assertIn("Sem registro no SAPL", INDEX)
+    def test_pilula_sem_registro_votacao(self):
+        self.assertIn("sem_registro_votacao", INDEX)
         self.assertIn('situacao_final_fonte === "sem_registro"', INDEX)
-
-    def test_ementa_oculta_moc(self):
-        self.assertIn("ementaVisivelPedido", INDEX)
-        self.assertIn("ementaOcultaTipos", INDEX)
 
     def test_estado_vazio_vereador(self):
         self.assertIn("Nenhum pedido registrado no SAPL neste", INDEX)
 
-    def test_cartoes_titulos(self):
+    def test_cartao_pedidos_titulo(self):
         self.assertIn('id="tit-pedidos"', INDEX)
-        self.assertIn("Pedidos dos vereadores", INDEX)
+        self.assertIn("Pedidos que fez", INDEX)
+
+    def test_temas_pedidos_por_tipo(self):
+        self.assertIn("listaTemasPedidos", INDEX)
+        self.assertIn("filtroPedidoTipo", INDEX)
 
 
 class TestAutoriaPedidos(unittest.TestCase):
-    """Regras RI-1f espelhadas para os tres casos de primeiro_autor."""
+    """Regras RI-1f e RI-1g espelhadas para autoria resumida."""
 
     @staticmethod
     def _nome(a: dict) -> str:
@@ -117,16 +118,18 @@ class TestAutoriaPedidos(unittest.TestCase):
         demais = [a for a in autores if a.get("primeiro_autor") is not True]
         if not primarios:
             nomes = [self._nome(a) for a in autores if self._nome(a)]
-            return "Autoria: " + ", ".join(nomes) if nomes else ""
+            if not nomes:
+                return ""
+            if len(nomes) <= 2:
+                return "Autoria: " + ", ".join(nomes)
+            return f"Autoria: {', '.join(nomes[:2])} e mais {len(nomes) - 2} vereadores"
         linha = "Autoria: " + ", ".join(self._nome(a) for a in primarios)
-        outros = [
-            self._nome(a)
-            for a in demais
-            if a.get("parlamentar_id_sapl") != id_vereador and self._nome(a)
-        ]
-        if outros:
+        outros = [self._nome(a) for a in demais if self._nome(a)]
+        if not outros:
+            return linha
+        if len(outros) <= 2:
             return linha + "\ncom " + ", ".join(outros)
-        return linha
+        return linha + f"\ncom {', '.join(outros[:2])} e mais {len(outros) - 2} vereadores"
 
     def test_um_primeiro_autor(self):
         autores = [
@@ -158,9 +161,18 @@ class TestAutoriaPedidos(unittest.TestCase):
         self.assertTrue(txt.startswith("Autoria:"))
         self.assertNotIn("com", txt)
 
+    def test_muitos_autores_resumo(self):
+        autores = [
+            {"parlamentar_id_sapl": i, "nome_parlamentar": f"V{i}", "primeiro_autor": None}
+            for i in range(5)
+        ]
+        txt = self._html_autoria(autores, 99)
+        self.assertIn("e mais 3 vereadores", txt)
+
     def test_js_html_autoria_pedido(self):
         self.assertIn("htmlAutoriaPedido", INDEX)
         self.assertIn("primeiro_autor === true", INDEX)
+        self.assertIn("e mais", INDEX)
         self.assertNotIn("textoCoautoresPedido", INDEX)
 
 

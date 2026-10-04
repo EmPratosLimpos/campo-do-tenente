@@ -82,13 +82,19 @@
     "tipos_pedidos": ["IND", "REQ", "MOC"],
     "tipos_pedidos_nota": "RI-1: siglas de pedidos de vereador na tela (indicacao, requerimento e mocao). PLEG fica no cartao de projetos de lei.",
     "nomes_pedidos": {
-      "IND": { "singular": "indicação", "plural": "indicações" },
-      "REQ": { "singular": "requerimento", "plural": "requerimentos" },
-      "MOC": { "singular": "moção", "plural": "moções" }
+      "IND": { "singular": "indicação", "plural": "indicações", "rotulo_singular": "Indicação", "rotulo_plural": "Indicações" },
+      "REQ": { "singular": "requerimento", "plural": "requerimentos", "rotulo_singular": "Requerimento", "rotulo_plural": "Requerimentos" },
+      "MOC": { "singular": "moção", "plural": "moções", "rotulo_singular": "Moção", "rotulo_plural": "Moções" }
     },
+    "nomes_tipos_votacao": {
+      "PLEG": { "rotulo_singular": "Projeto de lei", "rotulo_plural": "Projetos de lei" },
+      "PLEX": { "rotulo_singular": "Projeto do Prefeito", "rotulo_plural": "Projetos do Prefeito" },
+      "VET": { "rotulo_singular": "Veto", "rotulo_plural": "Vetos" }
+    },
+    "nomes_tipos_votacao_nota": "RI-1g: rotulos de tipos na aba Camara (resumo e filtros). Pedidos usam rotulo em nomes_pedidos.",
     "nomes_pedidos_nota": "RI-1e: nomes exibidos no resumo dos pedidos (singular e plural). Sigla continua nos botoes de filtro.",
-    "ementa_oculta_tipos": ["MOC"],
-    "ementa_oculta_tipos_nota": "RI-1: tipos cujo item na lista do vereador nao mostra ementa na tela (ex.: mocao de homenagem).",
+    "ementa_oculta_tipos": [],
+    "ementa_oculta_tipos_nota": "RI-1g: lista vazia; ementa visivel para todos os tipos de pedido.",
     "piso_status_decodificados": 20,
     "teto_pedidos_execucao": 210
   },

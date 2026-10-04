@@ -531,6 +531,10 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 achou = False
                 for periodo in PERIODOS:
                     self._clicar_periodo(page, periodo)
+                    busca = page.locator("#busca-materia-" + periodo)
+                    if busca.count():
+                        busca.fill("Porteira Adentro")
+                        page.wait_for_timeout(400)
                     textos = page.eval_on_selector_all(
                         "#bloco-votado-" + periodo + " .materia-assunto",
                         "els => els.map(e => e.textContent.trim())",
