@@ -6991,8 +6991,8 @@
         : "";
       var tags = '<div class="materia-tags">' + pilula + temaBtn + "</div>";
       var titulo = item.tipo || ([item.tipo_sigla, item.numero, item.ano].filter(Boolean).join(" ").replace(/(\d+)\s+(\d+)/, "$1/$2"));
-      var coaut = textoCoautoresPedido(item, v.id_sapl);
-      var coautHtml = coaut ? '<p class="apoio">' + esc(coaut) + "</p>" : "";
+      var autoria = htmlAutoriaPedido(item, v.id_sapl);
+      var coautHtml = autoria ? '<p class="apoio">' + autoria + "</p>" : "";
       var ementaHtml = "";
       if (ementaVisivelPedido(item) && item.ementa) {
         ementaHtml = '<p class="materia-assunto">' + esc(ementaExibicao(item.ementa)) + "</p>";
@@ -7702,14 +7702,40 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     return ementaOcultaTipos().indexOf(item.tipo_sigla) < 0;
   }
 
-  function textoCoautoresPedido(item, idVereador) {
-    var nomes = (item.autores || []).filter(function (a) {
-      return String(a.parlamentar_id_sapl) !== String(idVereador);
-    }).map(function (a) { return a.nome_parlamentar; }).filter(Boolean);
+  function nomeAutorPedido(autor) {
+    if (!autor) return "";
+    return autor.nome_parlamentar || autor.nome_no_sapl || autor.nome || "";
+  }
+
+  function juntarNomesLista(nomes) {
     if (!nomes.length) return "";
-    if (nomes.length === 1) return "com " + nomes[0];
-    if (nomes.length === 2) return "com " + nomes[0] + " e " + nomes[1];
-    return "com " + nomes.slice(0, -1).join(", ") + " e " + nomes[nomes.length - 1];
+    if (nomes.length === 1) return nomes[0];
+    if (nomes.length === 2) return nomes[0] + " e " + nomes[1];
+    return nomes.slice(0, -1).join(", ") + " e " + nomes[nomes.length - 1];
+  }
+
+  function htmlAutoriaPedido(item, idVereador) {
+    var autores = item.autores || [];
+    if (!autores.length) return "";
+    if (autores.length === 1 && String(autores[0].parlamentar_id_sapl) === String(idVereador)) {
+      return "";
+    }
+    var primarios = autores.filter(function (a) { return a.primeiro_autor === true; });
+    var demais = autores.filter(function (a) { return a.primeiro_autor !== true; });
+    if (!primarios.length) {
+      var todos = autores.map(nomeAutorPedido).filter(Boolean);
+      if (!todos.length) return "";
+      return "Autoria: " + esc(juntarNomesLista(todos));
+    }
+    var linhaPrim = primarios.map(function (a) {
+      return "<strong>" + esc(nomeAutorPedido(a)) + "</strong>";
+    });
+    var html = "Autoria: " + juntarNomesLista(linhaPrim);
+    var nomesDemais = demais.filter(function (a) {
+      return String(a.parlamentar_id_sapl) !== String(idVereador);
+    }).map(nomeAutorPedido).filter(Boolean);
+    if (!nomesDemais.length) return html;
+    return html + "<br>com " + esc(juntarNomesLista(nomesDemais));
   }
 
   function contagemTemasPedidos(lista) {
