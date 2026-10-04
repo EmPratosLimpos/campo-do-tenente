@@ -2032,22 +2032,55 @@
     min-width: 0;
     white-space: nowrap;
   }
-  .cartao-pedidos .pedido-tipo-textos {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    min-width: 0;
+  /* Caixas de tipo em "Pedidos que fez" (RI-1i): o botão de filtro é a caixa e tem altura automática;
+     a sigla explicável é irmã do botão e ocupa a mesma célula da grade, no rodapé da caixa. */
+  #conteudo-vereadores .cartao-pedidos .numeros li.pedido-tipo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: "caixa";
+    min-height: 0;
+    padding: 4px 0;
+    border-top: 0;
+    background: transparent;
   }
-  .cartao-pedidos .pedido-tipo-textos .termo-explicavel,
-  .cartao-pedidos .pedido-tipo-sigla {
-    white-space: nowrap;
+  #conteudo-vereadores .cartao-pedidos .numeros li.pedido-tipo > .contagem-pedido {
+    grid-area: caixa;
+    height: auto;
+    min-height: 64px;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-rows: auto;
+    align-items: center;
+    padding: 10px 12px 38px 14px;
   }
-  .cartao-pedidos .pedido-tipo-nome {
-    overflow-wrap: break-word;
+  #conteudo-vereadores .cartao-pedidos li.pedido-tipo .pedido-tipo-nome {
+    grid-column: 1;
+    grid-row: 1;
+    display: block;
+    font-size: var(--t-corpo);
+    font-weight: 600;
+    color: var(--texto);
+    line-height: 1.3;
+    overflow-wrap: normal;
     word-break: normal;
     hyphens: none;
-    line-height: 1.35;
+  }
+  #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .contagem-pedido > b { grid-column: 2; grid-row: 1; }
+  #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .contagem-pedido > svg { grid-column: 3; grid-row: 1; }
+  #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .pedido-tipo-sigla {
+    grid-area: caixa;
+    align-self: end;
+    justify-self: start;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    margin: 0 0 10px 14px;
+    font-size: var(--t-apoio);
+    font-weight: 800;
+    color: var(--texto-suave);
+    white-space: nowrap;
   }
   .sub-vereadores,
   .escolha-vereador {
@@ -4691,12 +4724,27 @@
       gap: 8px;
     }
     #conteudo-vereadores .numeros li.clicavel .linha-btn b { grid-row: 1; grid-column: 1; font-size: var(--t-numero-quadro); line-height: 1; }
-    #conteudo-vereadores .numeros li.clicavel .linha-btn > span.pedido-tipo-textos {
-      grid-row: 2;
+    #conteudo-vereadores .cartao-pedidos .numeros.proj-num {
+      grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+    }
+    #conteudo-vereadores .cartao-pedidos .numeros li.pedido-tipo { padding: 0; }
+    #conteudo-vereadores .cartao-pedidos .numeros li.pedido-tipo > .contagem-pedido {
+      height: 100%;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-rows: auto auto;
+      align-items: start;
+      gap: 8px;
+      padding: 14px 14px 44px;
+    }
+    #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .contagem-pedido > b { grid-column: 1; grid-row: 1; font-size: var(--t-numero-quadro); line-height: 1; }
+    #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .contagem-pedido > svg { grid-column: 2; grid-row: 1; }
+    #conteudo-vereadores .cartao-pedidos li.pedido-tipo .pedido-tipo-nome {
       grid-column: 1 / -1;
+      grid-row: 2;
       font-size: var(--t-numero-legenda);
       color: var(--texto-suave);
     }
+    #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .pedido-tipo-sigla { margin: 0 0 12px 14px; }
     #conteudo-vereadores .numeros li.clicavel .linha-btn > svg { grid-row: 1; grid-column: 2; }
     #conteudo-vereadores .numeros li span .marcador-cor { margin-top: 3px; }
   }
@@ -7373,13 +7421,14 @@
       if (num <= 0) return "";
       var rot = rotuloTipoPedidoUi(sigla, num, mapa);
       var ativo = estado.filtroPedidoTipo === sigla && estado.listaPedidosVisivel;
-      return '<li class="clicavel"><button type="button" class="linha-btn contagem-item contagem-pedido' + (ativo ? " ativo" : "") +
+      /* A sigla explicável é um botão próprio: fica ao lado do botão de filtro (botão dentro de botão
+         quebra o HTML e jogava sigla, nome e seta para fora da caixa) e é sobreposta a ele pelo CSS. */
+      return '<li class="clicavel pedido-tipo"><button type="button" class="linha-btn contagem-item contagem-pedido' + (ativo ? " ativo" : "") +
         '" data-ped-filtro="' + esc(sigla) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
         "<b>" + esc(num) + "</b>" +
-        '<span class="pedido-tipo-textos">' +
-        '<span class="pedido-tipo-sigla">' + htmlBotaoTermoSigla(sigla, sigla) + "</span>" +
-        '<span class="pedido-tipo-nome">' + esc(rot) + "</span></span>" +
-        setaLinha + "</button></li>";
+        '<span class="pedido-tipo-nome">' + esc(rot) + "</span>" +
+        setaLinha + "</button>" +
+        '<span class="pedido-tipo-sigla">' + htmlBotaoTermoSigla(sigla, sigla) + "</span></li>";
     }).join("");
 
     var numeros = linhasTipo ? '<ul class="numeros proj-num">' + linhasTipo + "</ul>" : "";
