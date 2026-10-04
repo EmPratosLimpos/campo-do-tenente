@@ -104,8 +104,8 @@ class TestIndexPedidos(unittest.TestCase):
     def test_frase_sapl_pedidos_vereador(self):
         self.assertIn("fraseApoioPedidosVereadorSapl", INDEX)
         self.assertIn("Pedidos anteriores n\\u00e3o t\\u00eam registro de vota\\u00e7\\u00e3o", INDEX)
-        self.assertIn("pedido-tipo-textos", INDEX)
         self.assertIn("pedido-tipo-nome", INDEX)
+        self.assertIn("pedido-tipo-sigla", INDEX)
 
 
 class TestAutoriaPedidos(unittest.TestCase):
