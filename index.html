@@ -1871,18 +1871,22 @@
     min-width: 0;
     white-space: nowrap;
   }
-  @media (min-width: 900px) {
-    .numeros.proj-num > li.clicavel {
-      grid-column: 1 / -1;
-    }
-    .cartao-pedidos .linha-btn.contagem-pedido > span:first-child {
-      white-space: normal;
-      overflow-wrap: anywhere;
-      min-width: 0;
-    }
-    .cartao-pedidos .linha-btn.contagem-pedido > span:first-child .termo {
-      display: block;
-    }
+  .cartao-pedidos .pedido-tipo-textos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    min-width: 0;
+  }
+  .cartao-pedidos .pedido-tipo-textos .termo-explicavel,
+  .cartao-pedidos .pedido-tipo-sigla {
+    white-space: nowrap;
+  }
+  .cartao-pedidos .pedido-tipo-nome {
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    line-height: 1.35;
   }
   .sub-vereadores,
   .escolha-vereador {
@@ -4519,7 +4523,12 @@
       gap: 8px;
     }
     #conteudo-vereadores .numeros li.clicavel .linha-btn b { grid-row: 1; grid-column: 1; font-size: var(--t-numero-quadro); line-height: 1; }
-    #conteudo-vereadores .numeros li.clicavel .linha-btn > span { grid-row: 2; grid-column: 1 / -1; font-size: var(--t-numero-legenda); color: var(--texto-suave); }
+    #conteudo-vereadores .numeros li.clicavel .linha-btn > span.pedido-tipo-textos {
+      grid-row: 2;
+      grid-column: 1 / -1;
+      font-size: var(--t-numero-legenda);
+      color: var(--texto-suave);
+    }
     #conteudo-vereadores .numeros li.clicavel .linha-btn > svg { grid-row: 1; grid-column: 2; }
     #conteudo-vereadores .numeros li span .marcador-cor { margin-top: 3px; }
   }
@@ -7044,7 +7053,11 @@
       var ativo = estado.filtroPedidoTipo === sigla && estado.listaPedidosVisivel;
       return '<li class="clicavel"><button type="button" class="linha-btn contagem-item contagem-pedido' + (ativo ? " ativo" : "") +
         '" data-ped-filtro="' + esc(sigla) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
-        "<span><span class=\"termo\">" + esc(sigla) + "</span> " + esc(rot) + "</span><b>" + esc(num) + "</b>" + setaLinha + "</button></li>";
+        "<b>" + esc(num) + "</b>" +
+        '<span class="pedido-tipo-textos">' +
+        '<span class="pedido-tipo-sigla">' + htmlBotaoTermoSigla(sigla, sigla) + "</span>" +
+        '<span class="pedido-tipo-nome">' + esc(rot) + "</span></span>" +
+        setaLinha + "</button></li>";
     }).join("");
 
     var numeros = linhasTipo ? '<ul class="numeros proj-num">' + linhasTipo + "</ul>" : "";
