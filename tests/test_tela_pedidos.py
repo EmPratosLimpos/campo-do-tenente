@@ -54,13 +54,31 @@ class TestConfigPedidos(unittest.TestCase):
         self.assertEqual(tipos, ["IND", "REQ", "MOC"])
         self.assertIn("MOC", cfg["tramitacao"]["ementa_oculta_tipos"])
 
+    def test_nomes_pedidos_no_config(self):
+        cfg = carregar_config()
+        nomes = cfg["tramitacao"]["nomes_pedidos"]
+        self.assertEqual(nomes["REQ"]["plural"], "requerimentos")
+        self.assertEqual(nomes["MOC"]["plural"], "moções")
+
 
 class TestIndexPedidos(unittest.TestCase):
     def test_js_lê_tipos_do_config(self):
         self.assertIn("tiposPedidos", INDEX)
         self.assertIn("tipos_pedidos", INDEX)
+        self.assertIn("nomesPedidosConfig", INDEX)
+        self.assertIn("nomes_pedidos", INDEX)
         self.assertIn("ementa_oculta_tipos", INDEX)
         self.assertIn("carregarProposicoesCamara", INDEX)
+
+    def test_plural_e_resumo_sem_regra_fixa_no_js(self):
+        js = _js_principal_sem_comentario()
+        self.assertNotIn('lower === "moção"', js)
+        self.assertNotIn("lower.slice(-1)", js)
+        self.assertNotIn('return "moções"', js)
+        self.assertIn("nomesPedidosConfig", js)
+        frag = js[js.find("function htmlFraseResumoPedidos"): js.find("function pedidoFoiAprovado")]
+        self.assertNotIn("htmlBotaoTermoSigla(sigla) +", frag)
+        self.assertIn("htmlBotaoTermoSigla(sigla, rotulo)", frag)
 
     def test_sem_siglas_fixas_no_js(self):
         js = _js_principal_sem_comentario()

@@ -81,6 +81,12 @@
     "tipos_veto": ["VET"],
     "tipos_pedidos": ["IND", "REQ", "MOC"],
     "tipos_pedidos_nota": "RI-1: siglas de pedidos de vereador na tela (indicacao, requerimento e mocao). PLEG fica no cartao de projetos de lei.",
+    "nomes_pedidos": {
+      "IND": { "singular": "indicação", "plural": "indicações" },
+      "REQ": { "singular": "requerimento", "plural": "requerimentos" },
+      "MOC": { "singular": "moção", "plural": "moções" }
+    },
+    "nomes_pedidos_nota": "RI-1e: nomes exibidos no resumo dos pedidos (singular e plural). Sigla continua nos botoes de filtro.",
     "ementa_oculta_tipos": ["MOC"],
     "ementa_oculta_tipos_nota": "RI-1: tipos cujo item na lista do vereador nao mostra ementa na tela (ex.: mocao de homenagem).",
     "piso_status_decodificados": 20,

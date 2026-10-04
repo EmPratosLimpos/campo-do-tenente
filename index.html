@@ -7574,6 +7574,11 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     return [];
   }
 
+  function nomesPedidosConfig() {
+    var tr = CONFIG_CIDADE && CONFIG_CIDADE.tramitacao;
+    return (tr && tr.nomes_pedidos) ? tr.nomes_pedidos : {};
+  }
+
   function itemEhTipoPedido(item) {
     if (!item || !item.tipo_sigla) return false;
     return tiposPedidos().indexOf(item.tipo_sigla) >= 0;
@@ -7625,14 +7630,15 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   }
 
   function rotuloTipoPedidoExibicao(sigla, quantidade, mapaNomes) {
+    var cfg = nomesPedidosConfig()[sigla];
+    if (cfg && (cfg.singular || cfg.plural)) {
+      var forma = quantidade === 1 ? (cfg.singular || cfg.plural) : (cfg.plural || cfg.singular);
+      forma = String(forma).trim();
+      if (forma) return forma.charAt(0).toLowerCase() + forma.slice(1);
+    }
     var nome = (mapaNomes && mapaNomes[sigla]) || sigla;
     var base = String(nome).trim();
-    var lower = base.charAt(0).toLowerCase() + base.slice(1);
-    if (quantidade === 1) return lower;
-    if (lower === "moção") return "moções";
-    if (lower.slice(-1) === "o") return lower.slice(0, -1) + "ões";
-    if (lower.slice(-1) === "m") return lower + "s";
-    return lower + "s";
+    return base.charAt(0).toLowerCase() + base.slice(1);
   }
 
   function contagemPedidosPorTipo(lista) {
@@ -7656,7 +7662,8 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
     tipos.forEach(function (sigla) {
       var q = cont[sigla] || 0;
       if (q <= 0) return;
-      partes.push("<strong>" + esc(q) + "</strong> " + htmlBotaoTermoSigla(sigla) + " " + esc(rotuloTipoPedidoExibicao(sigla, q, mapa)));
+      var rotulo = rotuloTipoPedidoExibicao(sigla, q, mapa);
+      partes.push("<strong>" + esc(q) + "</strong> " + htmlBotaoTermoSigla(sigla, rotulo));
     });
     var pedPal = total === 1 ? "pedido" : "pedidos";
     var divisao = partes.length <= 1 ? partes.join("") :
@@ -7916,11 +7923,12 @@ var MAPA_VAR_CATEGORIA = {
     return "tipo_materia";
   }
 
-  function htmlBotaoTermoSigla(sigla) {
+  function htmlBotaoTermoSigla(sigla, textoVisivel) {
     var s = String(sigla || "").trim();
     if (!s) return "";
     var tag = chaveExplicacaoSigla(s);
-    return '<button type="button" class="termo tag-explicavel" data-tag="' + esc(tag) + '" data-valor="' + esc(s) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(s) + "</button>";
+    var label = textoVisivel != null && String(textoVisivel).trim() !== "" ? String(textoVisivel).trim() : s;
+    return '<button type="button" class="termo tag-explicavel" data-tag="' + esc(tag) + '" data-valor="' + esc(s) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(label) + "</button>";
   }
 
   function htmlLinhaTipoMateria(tipoStr) {
