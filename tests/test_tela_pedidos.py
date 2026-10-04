@@ -101,6 +101,12 @@ class TestIndexPedidos(unittest.TestCase):
         self.assertIn("listaTemasPedidos", INDEX)
         self.assertIn("filtroPedidoTipo", INDEX)
 
+    def test_frase_sapl_pedidos_vereador(self):
+        self.assertIn("fraseApoioPedidosVereadorSapl", INDEX)
+        self.assertIn("Pedidos anteriores n\\u00e3o t\\u00eam registro de vota\\u00e7\\u00e3o", INDEX)
+        self.assertIn("pedido-tipo-textos", INDEX)
+        self.assertIn("pedido-tipo-nome", INDEX)
+
 
 class TestAutoriaPedidos(unittest.TestCase):
     """Regras RI-1f e RI-1g espelhadas para autoria resumida."""

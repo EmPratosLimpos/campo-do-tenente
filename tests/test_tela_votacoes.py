@@ -122,6 +122,23 @@ class TestIndexVotacoes(unittest.TestCase):
         self.assertIn("rotuloTipoPedidoUi", INDEX)
         self.assertIn("rotulo_plural", INDEX)
 
+    def test_grafico_tipos_votacao_ri1h(self):
+        js = _js_principal_sem_comentario()
+        self.assertIn("renderCartaoGraficoTipos", js)
+        self.assertIn("graficoTiposVotacaoModo", js)
+        self.assertIn("grafico_tipos_votacao", INDEX)
+        self.assertIn("card-grafico-tipos-mes", INDEX)
+        self.assertIn("card-grafico-tipos-todo", INDEX)
+        self.assertNotIn("tit-tipos-mes", INDEX)
+        self.assertNotIn('return prefixo + "foram "', js)
+        self.assertIn('return prefixo + "Foram "', js)
+
+    def test_frase_sapl_somente_todo_no_grafico(self):
+        js = _js_principal_sem_comentario()
+        frag_bloco = js[js.find("function renderBlocoVotadoPeriodo"): js.find("function folhaShareAberta")]
+        self.assertNotIn("fraseApoioCorteVotacaoSapl", frag_bloco)
+        self.assertIn("fraseApoioCorteVotacaoSapl", js[js.find("function renderCartaoGraficoTipos"):])
+
 
 class TestContagemVotados(unittest.TestCase):
     def test_pleg_sem_duplicar_proposicoes(self):

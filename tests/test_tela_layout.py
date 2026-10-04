@@ -57,8 +57,8 @@ JS_HELPERS = """
 PERIODOS = ("sessao", "mes", "todo")
 MARCADORES = {
     "sessao": "Os 9 vereadores estavam presentes",
-    "mes": "Quantas votações por tipo?",
-    "todo": "sessões ordinárias",
+    "mes": "itens votados no último mês",
+    "todo": "itens votados na legislatura",
 }
 BLOCOS_CABECALHO = (".site-logo", ".topo-tagline")
 BLOCOS_VEREADORES = (
@@ -76,7 +76,7 @@ JS_ESTRUTURA = """() => {
   };
   const corpo = document.querySelector('.pagina-corpo');
   return {
-    todo_em_painel: dentro('painel-periodo-todo', 'cartao-resumo-todo')
+    todo_em_painel: dentro('painel-periodo-todo', 'card-grafico-tipos-todo')
       && dentro('painel-periodo-todo', 'bloco-votado-todo')
       && dentro('painel-periodo-todo', 'temas-distribuicao-todo'),
     vereadores_em_main: dentro('conteudo-principal', 'painel-vereadores'),
