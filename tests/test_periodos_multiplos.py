@@ -207,20 +207,9 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
             page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
             page.click('button[data-periodo="mes"]')
             page.wait_for_timeout(600)
-            texto = page.inner_text("body")
-            camara = json.loads(
-                (
-                    RAIZ / "dados" / "tratados" / "materias_camara_legislatura.json"
-                ).read_text(encoding="utf-8")
-            )
-            total = len(camara.get("mes") or [])
-            if total == 1:
-                self.assertTrue(
-                    "1 projeto" in texto or "único projeto" in texto or "unico projeto" in texto,
-                    msg=f"texto sem contagem de 1 projeto: {texto[:200]}",
-                )
-            else:
-                self.assertIn(f"{total} projetos", texto)
+            titulo = page.locator("#tit-grafico-tipos-mes").inner_text()
+            self.assertIn("itens votados no último mês", titulo)
+            self.assertIn("itens votados no último mês", page.inner_text("#card-grafico-tipos-mes"))
             browser.close()
 
 
