@@ -4614,7 +4614,25 @@
   #temas-distribuicao-sessao,
   #temas-distribuicao-mes,
   #temas-distribuicao-todo,
-  #temas-distribuicao-prefeito { display: grid; gap: 14px; min-width: 0; }
+  #temas-distribuicao-prefeito,
+  #pedidos-camara-sessao,
+  #pedidos-camara-mes,
+  #pedidos-camara-todo { display: grid; gap: 14px; min-width: 0; }
+  .temas-lista .tema-linha { list-style: none; }
+  .temas-lista .tema-linha .tema-estatico {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 4px 10px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+  }
+  .temas-lista .tema-linha .tema-estatico .trilho { grid-column: 1 / -1; }
 
   /* Folhas: explicação, quem faltou, votos e compartilhar */
   .folha-generica {
@@ -4855,6 +4873,7 @@
             <article class="cartao" id="card-votacoes-sessao" aria-labelledby="tit-resumo-sessao"></article>
             <article class="cartao" id="card-presenca-sessao" aria-labelledby="tit-presenca-sessao"></article>
             <article class="cartao" id="card-temas-sessao"><div id="temas-distribuicao-sessao"></div></article>
+            <article class="cartao" id="card-pedidos-sessao"><div id="pedidos-camara-sessao"></div></article>
           </div>
           <div class="coluna-B">
             <article class="cartao bloco-votado" id="bloco-votado-sessao" data-periodo="sessao"></article>
@@ -4872,6 +4891,7 @@
               <div class="barra-tema-cam barra-temas" id="tipos-mes-barras"></div>
             </article>
             <article class="cartao" id="card-temas-mes"><div id="temas-distribuicao-mes"></div></article>
+            <article class="cartao" id="card-pedidos-mes"><div id="pedidos-camara-mes"></div></article>
           </div>
           <div class="coluna-B">
             <article class="cartao bloco-votado" id="bloco-votado-mes" data-periodo="mes"></article>
@@ -4885,6 +4905,7 @@
           <div class="coluna-A">
             <article class="cartao" id="cartao-resumo-todo"></article>
             <article class="cartao" id="card-temas-todo"><div id="temas-distribuicao-todo"></div></article>
+            <article class="cartao" id="card-pedidos-todo"><div id="pedidos-camara-todo"></div></article>
           </div>
           <div class="coluna-B">
             <article class="cartao bloco-votado" id="bloco-votado-todo" data-periodo="todo"></article>
@@ -5652,6 +5673,10 @@
     filtroPLL: "",
     filtroPLLTema: "",
     listaPLLVisivel: false,
+    filtroPedidoTipo: "",
+    filtroPedidoTema: "",
+    listaPedidosVisivel: false,
+    limitePedidosLista: 10,
     pagina: 1,
     indiceEmentas: {},
     indiceMaterias: {},
@@ -5920,6 +5945,10 @@
         estado.filtroPLL = "";
         estado.filtroPLLTema = "";
         estado.listaPLLVisivel = false;
+        estado.filtroPedidoTipo = "";
+        estado.filtroPedidoTema = "";
+        estado.listaPedidosVisivel = false;
+        estado.limitePedidosLista = 10;
         estado.filtroTexto = "";
         estado.filtroClassificacao = "";
         fecharFolhaGenerica(false);
@@ -6068,6 +6097,7 @@
     restaurarSanfonas();
     ["sessao", "mes", "todo"].forEach(function (p) {
       renderTemasDistribuicao(p);
+      renderPedidosCamara(p);
       renderBlocoVotadoPeriodo(p);
     });
     estadoMaterias.listaVisivel.sessao = true;
@@ -6930,6 +6960,84 @@
       "</article>";
   }
 
+  function renderSecaoPedidos(v) {
+    var lista = pedidosDoVereador(v);
+    if (!lista.length) {
+      return '<article class="cartao ac-cartao cartao-pedidos" aria-labelledby="tit-pedidos">' +
+        '<div class="cab-cartao"><h2 class="t2" id="tit-pedidos">Pedidos que fez</h2></div>' +
+        '<p class="vazio"><b>Nenhum pedido registrado no SAPL neste per\u00edodo.</b></p></article>';
+    }
+    var cont = contagemPedidosPorTipo(lista);
+    var mapa = mapaNomesTipoPedido(lista);
+    var resumo = htmlFraseResumoPedidos(lista, "Fez");
+    var temasHtml = htmlBarrasTemasPedidos(lista, true);
+
+    var itensFiltrados = lista.filter(function (item) {
+      if (!estado.listaPedidosVisivel) return false;
+      if (!estado.filtroPedidoTipo && !estado.filtroPedidoTema) return false;
+      if (estado.filtroPedidoTema && item.tema !== estado.filtroPedidoTema) return false;
+      if (estado.filtroPedidoTipo && item.tipo_sigla !== estado.filtroPedidoTipo) return false;
+      return true;
+    });
+
+    var limite = estado.limitePedidosLista || 10;
+    if (limite < 10) limite = 10;
+    var fatia = itensFiltrados.slice(0, limite);
+
+    var listaHtml = fatia.map(function (item) {
+      var pilula = htmlPilulaSituacaoPedido(item);
+      var temaBtn = item.tema && temaValidoParaTag(item.tema)
+        ? '<button type="button" class="chip tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(item.tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(item.tema) + ">" + htmlMarcadorCategoria(item.tema) + esc(item.tema) + "</button>"
+        : "";
+      var tags = '<div class="materia-tags">' + pilula + temaBtn + "</div>";
+      var titulo = item.tipo || ([item.tipo_sigla, item.numero, item.ano].filter(Boolean).join(" ").replace(/(\d+)\s+(\d+)/, "$1/$2"));
+      var coaut = textoCoautoresPedido(item, v.id_sapl);
+      var coautHtml = coaut ? '<p class="apoio">' + esc(coaut) + "</p>" : "";
+      var ementaHtml = "";
+      if (ementaVisivelPedido(item) && item.ementa) {
+        ementaHtml = '<p class="materia-assunto">' + esc(ementaExibicao(item.ementa)) + "</p>";
+      }
+      var href = urlSegura(item.link_sapl);
+      var link = href ? linkExt(href, "Ver no SAPL") : "";
+      return '<li class="materia item-pedido">' + tags +
+        '<div class="linha-meta"><span class="sigla">' + htmlLinhaTipoMateria(titulo) + "</span></div>" +
+        ementaHtml + coautHtml + link + "</li>";
+    }).join("");
+
+    var htmlLista = "";
+    if ((!estado.filtroPedidoTipo && !estado.filtroPedidoTema) || !estado.listaPedidosVisivel) {
+      htmlLista = '<div class="vazio" id="pedidos-estado-vazio"><b>Nenhum pedido na lista.</b><span>Toque em um tipo ou em um tema para filtrar.</span></div>';
+    } else if (!listaHtml) {
+      htmlLista = '<div class="vazio"><b>Nenhum pedido neste filtro.</b></div>';
+    } else {
+      htmlLista = '<ul class="lista-votos lista-pedidos materias">' + listaHtml + "</ul>";
+      if (itensFiltrados.length > limite) {
+        htmlLista += '<button type="button" class="btn btn-secundario btn-mais-pedidos-vereador">Mostrar mais</button>';
+      }
+    }
+
+    var setaLinha = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
+    var linhasTipo = tiposPedidos().map(function (sigla) {
+      var num = cont[sigla] || 0;
+      if (num <= 0) return "";
+      var rot = rotuloTipoPedidoExibicao(sigla, num, mapa);
+      var ativo = estado.filtroPedidoTipo === sigla && estado.listaPedidosVisivel;
+      return '<li class="clicavel"><button type="button" class="linha-btn contagem-item contagem-pedido' + (ativo ? " ativo" : "") +
+        '" data-ped-filtro="' + esc(sigla) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
+        "<span><span class=\"termo\">" + esc(sigla) + "</span> " + esc(rot) + "</span><b>" + esc(num) + "</b>" + setaLinha + "</button></li>";
+    }).join("");
+
+    var numeros = linhasTipo ? '<ul class="numeros proj-num">' + linhasTipo + "</ul>" : "";
+
+    return '<article class="cartao ac-cartao cartao-pedidos" aria-labelledby="tit-pedidos">' +
+      '<div class="cab-cartao"><h2 class="t2" id="tit-pedidos">Pedidos que fez</h2><span class="apoio">toque para filtrar</span></div>' +
+      '<p class="resumo">' + resumo + "</p>" +
+      numeros +
+      (temasHtml ? '<h3 class="sub-h">Por tema</h3><ul class="temas-lista">' + temasHtml + "</ul>" : "") +
+      htmlLista +
+      "</article>";
+  }
+
   function htmlPilulaVotoNominal(n) {
     var rot = rotuloVoto(n);
     var est = n.estado;
@@ -7197,7 +7305,7 @@
 
     conteudo.innerHTML =
       '<div class="vereadores-grade">' +
-      '<div class="vereadores-coluna">' + renderSecaoPresenca(v) + renderSecaoPLL(v) + "</div>" +
+      '<div class="vereadores-coluna">' + renderSecaoPresenca(v) + renderSecaoPLL(v) + renderSecaoPedidos(v) + "</div>" +
       '<div class="vereadores-coluna">' + renderSecaoVotos(v) + "</div>" +
       "</div>" +
       '<footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>';
@@ -7211,6 +7319,10 @@
       estado.filtroPLL = "";
       estado.filtroPLLTema = "";
       estado.listaPLLVisivel = false;
+      estado.filtroPedidoTipo = "";
+      estado.filtroPedidoTema = "";
+      estado.listaPedidosVisivel = false;
+      estado.limitePedidosLista = 10;
       estado.filtroTexto = "";
       estado.filtroClassificacao = "";
       var verTroca = vereadoresOrdenados().find(function (ver) {
@@ -7232,6 +7344,10 @@
         estado.filtroPLL = "";
         estado.filtroPLLTema = "";
         estado.listaPLLVisivel = false;
+        estado.filtroPedidoTipo = "";
+        estado.filtroPedidoTema = "";
+        estado.listaPedidosVisivel = false;
+        estado.limitePedidosLista = 10;
         estado.filtroTexto = "";
         estado.filtroClassificacao = "";
         renderApp();
@@ -7302,6 +7418,46 @@
       });
     });
 
+    document.querySelectorAll(".contagem-pedido[data-ped-filtro]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var f = btn.getAttribute("data-ped-filtro");
+        if (estado.filtroPedidoTipo === f && estado.listaPedidosVisivel) {
+          estado.filtroPedidoTipo = "";
+          estado.filtroPedidoTema = "";
+          estado.listaPedidosVisivel = false;
+          estado.limitePedidosLista = 10;
+        } else {
+          estado.filtroPedidoTipo = f;
+          estado.listaPedidosVisivel = true;
+          estado.limitePedidosLista = 10;
+        }
+        renderApp();
+      });
+    });
+
+    document.querySelectorAll("[data-pedido-tema]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var tema = btn.getAttribute("data-pedido-tema");
+        if (estado.filtroPedidoTema === tema) {
+          estado.filtroPedidoTema = "";
+          if (!estado.filtroPedidoTipo) estado.listaPedidosVisivel = false;
+        } else {
+          estado.filtroPedidoTema = tema;
+          estado.listaPedidosVisivel = true;
+        }
+        estado.limitePedidosLista = 10;
+        renderApp();
+      });
+    });
+
+    var btnMaisPedidos = document.querySelector(".btn-mais-pedidos-vereador");
+    if (btnMaisPedidos) {
+      btnMaisPedidos.addEventListener("click", function () {
+        estado.limitePedidosLista = (estado.limitePedidosLista || 10) + 10;
+        renderApp();
+      });
+    }
+
     document.querySelectorAll("[data-falta-presenca]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         abrirFolhaFaltasPresenca(v, btn.getAttribute("data-falta-presenca"), btn);
@@ -7359,6 +7515,9 @@
           var primeiros = vereadoresOrdenados();
           if (primeiros.length) estado.vereadorId = primeiros[0].id_sapl;
         }
+        return carregarProposicoesCamara();
+      })
+      .then(function () {
         atualizarInterfaceCamara();
         renderApp();
       })
@@ -7375,6 +7534,7 @@
 var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   var MATERIAS_TAGS = {};
   var FILTROS_MATERIA = { sessao: [], mes: [], todo: [] };
+  var PROPOSICOES_CAMARA = { sessao: [], mes: [], todo: [] };
 
   var MATERIAS_URL = prefixoDadosTratados();
 
@@ -7400,6 +7560,180 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       FILTROS_MATERIA = { sessao: [], mes: [], todo: [] };
       
     });
+  }
+
+  function tiposPedidos() {
+    var tr = CONFIG_CIDADE && CONFIG_CIDADE.tramitacao;
+    if (tr && tr.tipos_pedidos && tr.tipos_pedidos.length) return tr.tipos_pedidos.slice();
+    return [];
+  }
+
+  function ementaOcultaTipos() {
+    var tr = CONFIG_CIDADE && CONFIG_CIDADE.tramitacao;
+    if (tr && tr.ementa_oculta_tipos) return tr.ementa_oculta_tipos.slice();
+    return [];
+  }
+
+  function itemEhTipoPedido(item) {
+    if (!item || !item.tipo_sigla) return false;
+    return tiposPedidos().indexOf(item.tipo_sigla) >= 0;
+  }
+
+  function filtrarListaPedidos(lista) {
+    return (lista || []).filter(itemEhTipoPedido);
+  }
+
+  function carregarProposicoesCamara() {
+    var url = prefixoDadosTratados() + "proposicoes_" + SUFIXO_DADOS + ".json";
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text().then(function (text) { return JSON.parse(text); });
+    }).then(function (dados) {
+      ["sessao", "mes", "todo"].forEach(function (p) {
+        PROPOSICOES_CAMARA[p] = filtrarListaPedidos(dados[p]);
+      });
+    }).catch(function () {
+      PROPOSICOES_CAMARA = { sessao: [], mes: [], todo: [] };
+    });
+  }
+
+  function ordenarPedidosRecentes(a, b) {
+    var ya = parseInt(a.ano, 10) || 0;
+    var yb = parseInt(b.ano, 10) || 0;
+    if (yb !== ya) return yb - ya;
+    return (parseInt(b.numero, 10) || 0) - (parseInt(a.numero, 10) || 0);
+  }
+
+  function pedidosDoVereador(v) {
+    if (!v) return [];
+    var id = v.id_sapl;
+    return (PROPOSICOES_CAMARA.todo || []).filter(function (item) {
+      return (item.autores || []).some(function (a) {
+        return String(a.parlamentar_id_sapl) === String(id);
+      });
+    }).sort(ordenarPedidosRecentes);
+  }
+
+  function mapaNomesTipoPedido(lista) {
+    var mapa = {};
+    (lista || []).forEach(function (item) {
+      if (item.tipo_sigla && item.tipo_nome && mapa[item.tipo_sigla] == null) {
+        mapa[item.tipo_sigla] = item.tipo_nome;
+      }
+    });
+    return mapa;
+  }
+
+  function rotuloTipoPedidoExibicao(sigla, quantidade, mapaNomes) {
+    var nome = (mapaNomes && mapaNomes[sigla]) || sigla;
+    var base = String(nome).trim();
+    var lower = base.charAt(0).toLowerCase() + base.slice(1);
+    if (quantidade === 1) return lower;
+    if (lower === "moção") return "moções";
+    if (lower.slice(-1) === "o") return lower.slice(0, -1) + "ões";
+    if (lower.slice(-1) === "m") return lower + "s";
+    return lower + "s";
+  }
+
+  function contagemPedidosPorTipo(lista) {
+    var tipos = tiposPedidos();
+    var out = {};
+    tipos.forEach(function (t) { out[t] = 0; });
+    (lista || []).forEach(function (item) {
+      if (out[item.tipo_sigla] != null) out[item.tipo_sigla] += 1;
+    });
+    return out;
+  }
+
+  function htmlFraseResumoPedidos(lista, prefixoVerbo) {
+    var total = (lista || []).length;
+    var verbo = prefixoVerbo || "Foram";
+    if (total === 0) return "";
+    var mapa = mapaNomesTipoPedido(lista);
+    var cont = contagemPedidosPorTipo(lista);
+    var tipos = tiposPedidos();
+    var partes = [];
+    tipos.forEach(function (sigla) {
+      var q = cont[sigla] || 0;
+      if (q <= 0) return;
+      partes.push("<strong>" + esc(q) + "</strong> " + htmlBotaoTermoSigla(sigla) + " " + esc(rotuloTipoPedidoExibicao(sigla, q, mapa)));
+    });
+    var pedPal = total === 1 ? "pedido" : "pedidos";
+    var divisao = partes.length <= 1 ? partes.join("") :
+      partes.slice(0, -1).join(", ") + " e " + partes[partes.length - 1];
+    return verbo + " <strong>" + esc(total) + "</strong> " + pedPal +
+      (partes.length ? ": " + divisao : "") + ".";
+  }
+
+  function pedidoFoiAprovado(item) {
+    if (!item || item.situacao_final_fonte !== "votacao") return false;
+    var s = (item.situacao_final || "").toLowerCase();
+    return s.indexOf("aprovad") >= 0 && s.indexOf("rejeitad") < 0;
+  }
+
+  function htmlPilulaSituacaoPedido(item) {
+    if (!item) return "";
+    if (item.situacao_final_fonte === "sem_registro") {
+      return '<span class="pilula pilula-sem-deliberacao">Sem registro no SAPL</span>';
+    }
+    if (pedidoFoiAprovado(item)) {
+      return '<span class="pilula pilula-aprovado">Aprovado</span>';
+    }
+    var sit = item.situacao_final || "";
+    if (/rejeitad/i.test(sit)) {
+      return '<span class="pilula pilula-rejeitado">' + esc(sit) + "</span>";
+    }
+    if (/tramita/i.test(sit) || item.em_tramitacao) {
+      var rot = sit || "Em tramitação";
+      return '<span class="pilula pilula-tramitacao">' + esc(rot.replace(/tramitacao/i, "tramitação")) + "</span>";
+    }
+    if (sit) return '<span class="pilula pilula-sem-deliberacao">' + esc(sit) + "</span>";
+    return "";
+  }
+
+  function ementaVisivelPedido(item) {
+    return ementaOcultaTipos().indexOf(item.tipo_sigla) < 0;
+  }
+
+  function textoCoautoresPedido(item, idVereador) {
+    var nomes = (item.autores || []).filter(function (a) {
+      return String(a.parlamentar_id_sapl) !== String(idVereador);
+    }).map(function (a) { return a.nome_parlamentar; }).filter(Boolean);
+    if (!nomes.length) return "";
+    if (nomes.length === 1) return "com " + nomes[0];
+    if (nomes.length === 2) return "com " + nomes[0] + " e " + nomes[1];
+    return "com " + nomes.slice(0, -1).join(", ") + " e " + nomes[nomes.length - 1];
+  }
+
+  function contagemTemasPedidos(lista) {
+    var contagem = {};
+    (lista || []).forEach(function (item) {
+      var tema = item.tema;
+      if (!temaValidoParaTag(tema)) return;
+      contagem[tema] = (contagem[tema] || 0) + 1;
+    });
+    return contagem;
+  }
+
+  function htmlBarrasTemasPedidos(lista, clicavel) {
+    var contagem = contagemTemasPedidos(lista);
+    var ordenado = Object.keys(contagem).sort(function (a, b) { return contagem[b] - contagem[a]; });
+    if (!ordenado.length) return "";
+    var max = contagem[ordenado[0]] || 1;
+    return ordenado.map(function (tema) {
+      var qtd = contagem[tema];
+      var pct = Math.round((qtd / max) * 100);
+      var vcat = varCategoria(tema);
+      if (clicavel) {
+        var pressed = estado.filtroPedidoTema === tema ? ' aria-pressed="true"' : ' aria-pressed="false"';
+        return '<li><button type="button" class="tema-btn" data-pedido-tema="' + esc(tema) + '"' + pressed + ">" +
+          '<span class="nome">' + esc(tema) + '</span><span class="qtd">' + esc(qtd) + "</span>" +
+          '<span class="trilho"><i style="width:' + pct + "%;background:var(" + vcat + ')"></i></span></button></li>';
+      }
+      return '<li class="tema-linha"><div class="tema-estatico">' +
+        '<span class="nome">' + esc(tema) + '</span><span class="qtd">' + esc(qtd) + "</span>" +
+        '<span class="trilho"><i style="width:' + pct + "%;background:var(" + vcat + ')"></i></span></div></li>';
+    }).join("");
   }
 
   function atualizarCardVotacoes() {
@@ -8426,6 +8760,20 @@ var MAPA_VAR_CATEGORIA = {
       (sigla ? '<p class="fi-meta">' + esc(sigla) + ".</p>" : "") + "</div>";
   }
 
+  function htmlPedidoVereadorImpressao(item) {
+    var tema = temaValidoParaTag(item.tema) ? item.tema : "";
+    var titulo = item.tipo || "";
+    var sit = item.situacao_final_fonte === "sem_registro" ? "Sem registro no SAPL"
+      : (pedidoFoiAprovado(item) ? "Aprovado" : (item.situacao_final || ""));
+    var classe = /aprovad/i.test(sit) ? "fi-aprovado" : /rejeitad/i.test(sit) ? "fi-rejeitado" : "";
+    var ementa = ementaVisivelPedido(item) && item.ementa ? ementaExibicao(item.ementa) : "";
+    return '<div class="fi-mat">' +
+      '<div class="fi-tags">' + htmlTagImpressao(sit, classe, "") +
+      htmlTagImpressao(tema, "", tema ? corCategoriaClaro(tema) : "") + "</div>" +
+      "<h3>" + esc(titulo) + "</h3>" +
+      (ementa ? "<p>" + esc(ementa) + "</p>" : "") + "</div>";
+  }
+
   function preencherFolhaImpressao(ctx) {
     var folha = document.getElementById("folha-impressao");
     if (!folha) return;
@@ -8447,9 +8795,14 @@ var MAPA_VAR_CATEGORIA = {
       if (d.votos.nao > 0) nums.push({ valor: d.votos.nao, rotulo: "Votos Não com nome registrado" });
       if (d.votos.abstencao > 0) nums.push({ valor: d.votos.abstencao, rotulo: d.votos.abstencao === 1 ? "Abstenção" : "Abstenções" });
       var lista = (v.projetos_lei && v.projetos_lei.lista) || [];
+      var pedidos = pedidosDoVereador(v);
       if (lista.length) {
         titulo = "Projetos que apresentou";
         corpo = lista.map(htmlProjetoVereadorImpressao).join("");
+      }
+      if (pedidos.length) {
+        corpo += (corpo ? "" : "") + '<h2 class="fi-h2">Pedidos que fez</h2>' + pedidos.map(htmlPedidoVereadorImpressao).join("");
+        if (!titulo) titulo = "Pedidos que fez";
       }
     } else {
       var p = ctx.periodo || "sessao";
@@ -8602,6 +8955,24 @@ var MAPA_VAR_CATEGORIA = {
         renderBlocoVotadoPeriodo(p);
       });
     });
+  }
+
+  function renderPedidosCamara(periodo) {
+    var container = document.getElementById("pedidos-camara-" + periodo);
+    if (!container) return;
+    var lista = PROPOSICOES_CAMARA[periodo] || [];
+    if (!lista.length) {
+      container.innerHTML =
+        '<div class="cab-cartao"><h2 class="t2" id="tit-pedidos-' + esc(periodo) + '">Pedidos dos vereadores</h2></div>' +
+        '<p class="vazio"><b>Nenhum pedido registrado no SAPL neste per\u00edodo.</b></p>';
+      return;
+    }
+    var resumo = htmlFraseResumoPedidos(lista, "Foram");
+    var temasHtml = htmlBarrasTemasPedidos(lista, false);
+    container.innerHTML =
+      '<div class="cab-cartao"><h2 class="t2" id="tit-pedidos-' + esc(periodo) + '">Pedidos dos vereadores</h2></div>' +
+      '<p class="resumo">' + resumo + "</p>" +
+      (temasHtml ? '<h3 class="sub-h">Temas mais pedidos</h3><ul class="temas-lista" role="list">' + temasHtml + "</ul>" : "");
   }
 
 
@@ -9172,6 +9543,7 @@ var MAPA_VAR_CATEGORIA = {
       estadoMaterias.listaVisivel[periodo] = true;
       renderBlocoVotadoPeriodo(periodo);
       renderTemasDistribuicao(periodo);
+      renderPedidosCamara(periodo);
     });
   }
 
@@ -9389,7 +9761,7 @@ var MAPA_VAR_CATEGORIA = {
     initResumoSheet();
     initFolhaGenerica();
     initNavegacao();
-    return carregarMateriasCamara().then(initMateriasCamara).then(carregarExecutivoPrefeito);
+    return carregarMateriasCamara().then(carregarProposicoesCamara).then(initMateriasCamara).then(carregarExecutivoPrefeito);
   }).then(carregar);
 })();
 </script>
