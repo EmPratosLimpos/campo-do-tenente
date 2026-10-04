@@ -42,7 +42,9 @@
       "host": "https://eu.i.posthog.com"
     },
     "apoio_url": "",
-    "nota_plex_sem_registro_sapl": "{quantidade} projetos do início de {ano} não têm votação registrada no SAPL."
+    "nota_plex_sem_registro_sapl": "{quantidade} projetos do início de {ano} não têm votação registrada no SAPL.",
+    "grafico_tipos_votacao": "barra",
+    "grafico_tipos_votacao_nota": "RI-1h: barra (faixa horizontal por tipo) ou rosca (anel SVG). Padrao barra."
   },
   "recorte": {
     "anos": [
