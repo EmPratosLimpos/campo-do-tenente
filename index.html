@@ -64,6 +64,14 @@
     --graf-vot-tipo-5: #C2410C;
     --graf-vot-tipo-6: #0096A8;
     --graf-vot-tipo-7: #5E2CA5;
+    /* Rosca por tipo (RI-1i): sem verde da marca, sem azul de Sim e sem laranja de Não; VET em tinta, como o veto do protótipo */
+    --rosca-tipo-1: #5B6B8C;
+    --rosca-tipo-2: #0096A8;
+    --rosca-tipo-3: #B61064;
+    --rosca-tipo-4: #7B4DE0;
+    --rosca-tipo-5: #A87A00;
+    --rosca-tipo-6: var(--texto);
+    --rosca-tipo-7: var(--linha-forte);
     --barra-unanimidade: #2F5BEA;
     --barra-maioria: #6E8EF0;
     --sombra: 0 1px 2px rgba(19,32,26,.06), 0 4px 16px rgba(19,32,26,.06);
@@ -183,6 +191,13 @@
     --graf-vot-tipo-5: #FF9A5C;
     --graf-vot-tipo-6: #3EC9D6;
     --graf-vot-tipo-7: #B794F6;
+    --rosca-tipo-1: #6E89BE;
+    --rosca-tipo-2: #1095A4;
+    --rosca-tipo-3: #FFBCDC;
+    --rosca-tipo-4: #A98BFF;
+    --rosca-tipo-5: #E0B53A;
+    --rosca-tipo-6: var(--texto);
+    --rosca-tipo-7: var(--linha-forte);
     --barra-unanimidade: #7FA2FF;
     --barra-maioria: #4A68C8;
     --sombra: 0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
@@ -1279,12 +1294,84 @@
     font-weight: 800;
     font-variant-numeric: tabular-nums;
   }
-  .rosca-tipos-votacao .fatia-tipo-votacao {
-    cursor: pointer;
+  /* Rosca por tipo (RI-1i): anel com a espessura da barra segmentada (16 px), vãos de 3 px,
+     centro com número em --t-numero-quadro e legenda em linhas como a lista de números. */
+  .cartao-grafico-tipos .cab-cartao { margin: 0; }
+  .rosca-tipos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--esp-4) var(--esp-6);
   }
-  .rosca-tipos-votacao .fatia-tipo-votacao:focus-visible {
-    outline: 2px solid var(--foco);
-    outline-offset: 2px;
+  .rosca-tipos-figura {
+    position: relative;
+    flex: 0 0 auto;
+    width: 184px;
+    height: 184px;
+  }
+  .rosca-tipos-votacao { display: block; width: 100%; height: 100%; overflow: visible; }
+  .rosca-tipos-votacao .fatia-tipo-votacao { cursor: pointer; }
+  .rosca-tipos-votacao.com-filtro .fatia-tipo-votacao:not(.ativo) { opacity: 0.28; }
+  @media (prefers-reduced-motion: no-preference) {
+    .rosca-tipos-votacao .fatia-tipo-votacao { transition: opacity 0.18s ease, stroke-width 0.18s ease; }
+  }
+  .rosca-tipos-centro {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 34px;
+    text-align: center;
+    pointer-events: none;
+  }
+  .rosca-tipos-centro b {
+    font-size: var(--t-numero-quadro);
+    font-weight: 800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--texto);
+  }
+  .rosca-tipos-centro span {
+    font-size: var(--t-numero-legenda);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--texto-suave);
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+  .legenda-rosca {
+    flex: 1 1 240px;
+    min-width: 0;
+    gap: 0;
+  }
+  .legenda-rosca li + li { border-top: 1px solid var(--linha); }
+  .legenda-rosca .legenda-tipo-votacao {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: var(--esp-3);
+    min-height: var(--alvo-minimo);
+    padding: 6px var(--esp-2);
+    border: 0;
+    border-radius: var(--raio-controle);
+    background: transparent;
+    font-size: var(--t-corpo);
+    line-height: 1.3;
+  }
+  .legenda-rosca .legenda-tipo-votacao:hover { background: var(--superficie-2); }
+  .cartao-grafico-tipos .legenda-rosca .legenda-tipo-votacao.ativo {
+    background: var(--superficie-2);
+    box-shadow: inset 0 0 0 2px var(--texto);
+  }
+  .legenda-rosca .legenda-nome { overflow-wrap: normal; word-break: normal; hyphens: none; }
+  .legenda-rosca .legenda-qtd { font-size: var(--t-cartao); }
+  .legenda-rosca .indicador { width: 12px; height: 12px; border-radius: 50%; }
+  .legenda-rosca li:has(.ativo) + li,
+  .legenda-rosca li + li:has(.ativo) { border-top-color: transparent; }
+  @media (min-width: 900px) {
+    .rosca-tipos-figura { width: 200px; height: 200px; }
   }
 
   .indicador {
@@ -6147,13 +6234,17 @@
     return partes;
   }
 
-  function htmlLegendaGraficoTipos(periodo, partes) {
-    return '<ul class="legenda-tipos-votacao" role="list">' + partes.map(function (p) {
+  function corTokenRoscaTipoVotacao(sigla) {
+    return "var(--rosca-tipo-" + Math.min(indiceCorTipoVotacao(sigla), 7) + ")";
+  }
+
+  function htmlLegendaGraficoTipos(periodo, partes, classeExtra) {
+    return '<ul class="legenda-tipos-votacao' + (classeExtra ? " " + classeExtra : "") + '" role="list">' + partes.map(function (p) {
       var ativo = estadoMaterias.filtroTipo === p.sigla;
       return '<li><button type="button" class="legenda-tipo-votacao' + (ativo ? " ativo" : "") +
         '" data-periodo="' + esc(periodo) + '" data-tipo-votacao="' + esc(p.sigla) +
         '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
-        '<span class="indicador" style="background:' + p.cor + '" aria-hidden="true"></span>' +
+        '<span class="indicador" style="background:' + esc(p.cor) + '" aria-hidden="true"></span>' +
         '<span class="legenda-nome">' + esc(p.rotulo) + '</span>' +
         '<span class="legenda-qtd">' + esc(p.valor) + "</span></button></li>";
     }).join("") + "</ul>";
@@ -6171,40 +6262,67 @@
     return '<div class="barra-tipos-votacao-trilho" role="group" aria-label="Quantidade por tipo">' + segs + "</div>";
   }
 
-  function roscaSVGTiposInterativa(partes, tamanho, centroPrincipal, periodo) {
-    var raio = (tamanho - 12) / 2;
-    var cx = tamanho / 2;
-    var cy = tamanho / 2;
+  /* Rosca por tipo (RI-1i). SVG montado aqui, sem biblioteca. Anel com a espessura da barra
+     segmentada, vãos de 3 px entre fatias e pontas retas, como os segmentos da barra.
+     As fatias respondem ao toque; teclado e leitor de tela usam a legenda (botões com aria-pressed). */
+  function roscaSVGTiposInterativa(partes, total, periodo) {
+    var lado = 200;
+    var c = lado / 2;
+    var raio = 82;
+    var espessura = 17;
+    var espessuraAtiva = 23;
     var circ = 2 * Math.PI * raio;
-    var total = partes.reduce(function (s, p) { return s + p.valor; }, 0);
-    var centro = '<text x="' + cx + '" y="' + cy + '" text-anchor="middle" class="rosca-centro">' +
-      esc(centroPrincipal) + "</text>";
-    var offset = 0;
+    var vao = 3.4;
+    var minimo = 5;
+    var filtro = estadoMaterias.filtroTipo;
+    var ativa = null;
+    var inicio = -Math.PI / 2;
+    function ponto(ang) {
+      return (c + raio * Math.cos(ang)).toFixed(2) + " " + (c + raio * Math.sin(ang)).toFixed(2);
+    }
     var arcos = partes.map(function (p) {
-      var frac = total > 0 ? p.valor / total : 0;
-      var dash = frac * circ;
-      var gap = circ - dash;
-      var ativo = estadoMaterias.filtroTipo === p.sigla;
-      var arco = '<circle class="fatia-tipo-votacao' + (ativo ? " ativo" : "") + '" cx="' + cx + '" cy="' + cy +
-        '" r="' + raio + '" fill="none" stroke="' + p.cor + '" stroke-width="12" ' +
-        'stroke-dasharray="' + dash.toFixed(2) + " " + gap.toFixed(2) + '" ' +
-        'stroke-dashoffset="' + (-offset).toFixed(2) + '" transform="rotate(-90 ' + cx + " " + cy + ')" ' +
-        'data-periodo="' + esc(periodo) + '" data-tipo-votacao="' + esc(p.sigla) + '" tabindex="0" role="button" ' +
-        'aria-pressed="' + (ativo ? "true" : "false") + '" aria-label="' + esc(p.rotulo + ": " + p.valor) + '"/>';
-      offset += dash;
-      return arco;
+      var ehAtiva = filtro === p.sigla;
+      if (ehAtiva) ativa = p;
+      var attrs = ' class="fatia-tipo-votacao' + (ehAtiva ? " ativo" : "") + '" fill="none" stroke="' + esc(p.cor) +
+        '" stroke-width="' + (ehAtiva ? espessuraAtiva : espessura) + '" stroke-linecap="butt"' +
+        ' data-periodo="' + esc(periodo) + '" data-tipo-votacao="' + esc(p.sigla) + '"';
+      if (partes.length === 1) {
+        return '<circle cx="' + c + '" cy="' + c + '" r="' + raio + '"' + attrs + "/>";
+      }
+      var fatia = total > 0 ? (p.valor / total) * 2 * Math.PI : 0;
+      var comp = Math.max(fatia * raio - vao, minimo);
+      var meio = inicio + fatia / 2;
+      var a0 = meio - comp / raio / 2;
+      var a1 = meio + comp / raio / 2;
+      inicio += fatia;
+      var grande = a1 - a0 > Math.PI ? 1 : 0;
+      return '<path d="M ' + ponto(a0) + " A " + raio + " " + raio + " 0 " + grande + " 1 " + ponto(a1) + '"' + attrs + "/>";
     }).join("");
-    return '<div class="rosca-wrap"><svg class="rosca-tipos-votacao" width="' + tamanho + '" height="' + tamanho +
-      '" viewBox="0 0 ' + tamanho + " " + tamanho + '">' +
-      '<circle cx="' + cx + '" cy="' + cy + '" r="' + raio + '" fill="none" stroke="var(--linha)" stroke-width="12"/>' +
-      arcos + centro + "</svg></div>";
+    var resumo = total + " " + (total === 1 ? "item votado" : "itens votados") + ": " +
+      partes.map(function (p) { return p.valor + " " + p.rotulo; }).join(", ");
+    var numero = ativa ? ativa.valor : total;
+    var rotulo = ativa ? ativa.rotulo : (total === 1 ? "item votado" : "itens votados");
+    return '<div class="rosca-tipos-figura">' +
+      '<svg class="rosca-tipos-votacao' + (ativa ? " com-filtro" : "") + '" viewBox="0 0 ' + lado + " " + lado +
+      '" role="img" aria-label="' + esc(resumo) + '" focusable="false">' + arcos + "</svg>" +
+      '<div class="rosca-tipos-centro" aria-hidden="true"><b>' + esc(numero) + "</b><span>" + esc(rotulo) + "</span>" +
+      (ativa ? "<span>de " + esc(total) + "</span>" : "") + "</div></div>";
   }
 
   function alternarFiltroTipoViaGrafico(periodo, sigla) {
+    var focoNaLegenda = document.activeElement && document.activeElement.classList &&
+      document.activeElement.classList.contains("legenda-tipo-votacao");
     estadoMaterias.filtroTipo = estadoMaterias.filtroTipo === sigla ? "" : sigla;
     estadoMaterias.limite[periodo] = 10;
     renderCartaoGraficoTipos(periodo);
     renderBlocoVotadoPeriodo(periodo);
+    if (focoNaLegenda) {
+      var card = document.getElementById(periodo === "mes" ? "card-grafico-tipos-mes" : "card-grafico-tipos-todo");
+      var alvo = card && Array.prototype.find.call(card.querySelectorAll(".legenda-tipo-votacao"), function (b) {
+        return b.getAttribute("data-tipo-votacao") === sigla;
+      });
+      if (alvo) alvo.focus({ preventScroll: true });
+    }
     if (estadoMaterias.filtroTipo) {
       var bloco = document.getElementById("bloco-votado-" + periodo);
       if (bloco) bloco.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -6247,20 +6365,25 @@
       return;
     }
     var modo = graficoTiposVotacaoModo();
-    var notaModo = modo === "rosca"
-      ? '<p class="apoio nota-grafico-mod">Visualiza\u00e7\u00e3o em rosca. Toque em um tipo para filtrar a lista.</p>'
-      : '<p class="apoio nota-grafico-mod">Visualiza\u00e7\u00e3o em barras. Toque em um tipo para filtrar a lista.</p>';
-    var grafico = modo === "rosca"
-      ? '<div class="grafico-linha grafico-tipos-votacao">' + roscaSVGTiposInterativa(partes, 200, String(total), periodo) +
-        '<div class="rosca-legenda">' + htmlLegendaGraficoTipos(periodo, partes) + "</div></div>"
-      : '<div class="grafico-tipos-votacao">' + htmlBarraGraficoTiposVotacao(periodo, partes, total) +
+    var cabecalho = '<div class="cab-cartao"><h2 class="t2" id="' + tituloId + '">' + esc(titulo) + "</h2>" +
+      '<span class="apoio">toque para filtrar</span></div>';
+    var grafico;
+    if (modo === "rosca") {
+      var partesRosca = partes.map(function (p) {
+        return { sigla: p.sigla, valor: p.valor, rotulo: p.rotulo, cor: corTokenRoscaTipoVotacao(p.sigla) };
+      });
+      grafico = '<div class="rosca-tipos grafico-tipos-votacao">' + roscaSVGTiposInterativa(partesRosca, total, periodo) +
+        htmlLegendaGraficoTipos(periodo, partesRosca, "legenda-rosca") + "</div>";
+    } else {
+      grafico = '<div class="grafico-tipos-votacao">' + htmlBarraGraficoTiposVotacao(periodo, partes, total) +
         htmlLegendaGraficoTipos(periodo, partes) + "</div>";
+    }
     var apoioSapl = "";
     if (periodo === "todo") {
       var fraseTodo = fraseApoioCorteVotacaoSapl();
       if (fraseTodo) apoioSapl = '<p class="apoio apoio-sapl-votacao">' + esc(fraseTodo) + "</p>";
     }
-    card.innerHTML = '<h2 class="t2" id="' + tituloId + '">' + esc(titulo) + "</h2>" + notaModo + grafico + apoioSapl;
+    card.innerHTML = cabecalho + grafico + apoioSapl;
     ligarInteracaoGraficoTipos(card, periodo);
   }
 
