@@ -5908,7 +5908,7 @@
       prefixo = "Em " + N(longo.sessoes) + " " + formaNum(longo.sessoes, "sess\u00e3o ordin\u00e1ria", "sess\u00f5es ordin\u00e1rias") + " " + longo.anos + ", ";
     }
     if (total === 0) {
-      return prefixo + "n\u00e3o houve itens votados com registro no SAPL neste per\u00edodo.";
+      return prefixo + "N\u00e3o houve itens votados com registro no SAPL neste per\u00edodo.";
     }
     var cont = contagemVotacoesPorTipo(periodo);
     var mapa = mapaNomesVotacoesPeriodo(periodo);
@@ -5923,7 +5923,7 @@
     var itemPal = total === 1 ? "item votado" : "itens votados";
     var divisao = partes.length <= 1 ? partes.join("") :
       partes.slice(0, -1).join(", ") + " e " + partes[partes.length - 1];
-    return prefixo + "foram " + N(total) + " " + itemPal + (partes.length ? ": " + divisao : "") + ".";
+    return prefixo + "Foram " + N(total) + " " + itemPal + (partes.length ? ": " + divisao : "") + ".";
   }
 
   function htmlFraseResumoPeriodo(periodo, semPresenca) {
