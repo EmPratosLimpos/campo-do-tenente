@@ -57,6 +57,13 @@
     --graf-falta-just: #A87A00;
     --graf-falta-sem: #C2410C;
     --graf-trilha: #DDE5DF;
+    --graf-vot-tipo-1: #1E7A4C;
+    --graf-vot-tipo-2: #2F5BEA;
+    --graf-vot-tipo-3: #A87A00;
+    --graf-vot-tipo-4: #7B4DE0;
+    --graf-vot-tipo-5: #C2410C;
+    --graf-vot-tipo-6: #0096A8;
+    --graf-vot-tipo-7: #5E2CA5;
     --barra-unanimidade: #2F5BEA;
     --barra-maioria: #6E8EF0;
     --sombra: 0 1px 2px rgba(19,32,26,.06), 0 4px 16px rgba(19,32,26,.06);
@@ -169,6 +176,13 @@
     --graf-falta-just: #E0B53A;
     --graf-falta-sem: #FF9A5C;
     --graf-trilha: #26302A;
+    --graf-vot-tipo-1: #4CC48A;
+    --graf-vot-tipo-2: #7FA2FF;
+    --graf-vot-tipo-3: #E0B53A;
+    --graf-vot-tipo-4: #C69CFF;
+    --graf-vot-tipo-5: #FF9A5C;
+    --graf-vot-tipo-6: #3EC9D6;
+    --graf-vot-tipo-7: #B794F6;
     --barra-unanimidade: #7FA2FF;
     --barra-maioria: #4A68C8;
     --sombra: 0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
@@ -1072,7 +1086,7 @@
     color: var(--texto);
   }
 
-  .conteudo { padding: 0 16px calc(148px + env(safe-area-inset-bottom, 0px)); }
+  .conteudo { padding: 0 16px calc(148px + env(safe-area-inset-bottom, 0px)); min-width: 0; max-width: 100%; }
 
   .aviso, .aviso-ia {
     border-radius: 10px;
@@ -1212,6 +1226,66 @@
 
   .rosca-legenda dt { font-weight: 800; }
   .rosca-legenda dd { margin: 0; color: var(--texto-suave); white-space: nowrap; word-break: normal; word-wrap: normal; }
+
+  .cartao-grafico-tipos .barra-tipos-votacao-trilho {
+    display: flex;
+    height: 16px;
+    border-radius: var(--raio-pilula);
+    overflow: hidden;
+    gap: 3px;
+    background: var(--graf-trilha);
+    margin: 12px 0 16px;
+  }
+  .cartao-grafico-tipos .segmento-tipo-votacao {
+    display: block;
+    height: 100%;
+    min-width: 4px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--raio-pilula);
+    cursor: pointer;
+  }
+  .cartao-grafico-tipos .segmento-tipo-votacao.ativo,
+  .cartao-grafico-tipos .legenda-tipo-votacao.ativo {
+    box-shadow: inset 0 0 0 2px var(--texto);
+  }
+  .legenda-tipos-votacao {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .legenda-tipo-votacao {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: var(--alvo-minimo);
+    padding: 6px 10px;
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: var(--superficie-2);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--texto);
+    text-align: left;
+    cursor: pointer;
+  }
+  .legenda-tipo-votacao .legenda-qtd {
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+  .rosca-tipos-votacao .fatia-tipo-votacao {
+    cursor: pointer;
+  }
+  .rosca-tipos-votacao .fatia-tipo-votacao:focus-visible {
+    outline: 2px solid var(--foco);
+    outline-offset: 2px;
+  }
 
   .indicador {
     display: inline-block;
@@ -4601,6 +4675,8 @@
     border-top: 1px solid var(--linha);
     align-items: start;
     justify-items: start;
+    min-width: 0;
+    max-width: 100%;
   }
   #painel-camara .item-votado.materia:first-child,
   #painel-prefeito .item-votado.materia:first-child { border-top: 0; padding-top: 4px; }
@@ -4915,11 +4991,7 @@
       <div class="painel-camara-interno" id="painel-periodo-mes" role="tabpanel" aria-labelledby="tab-periodo-mes" hidden>
         <div class="duas-colunas-desk">
           <div class="coluna-A">
-            <article class="cartao" id="card-votacoes-mes"></article>
-            <article class="cartao" id="card-tipos-mes" aria-labelledby="tit-tipos-mes">
-              <h2 class="t2" id="tit-tipos-mes">Quantas votações por tipo?</h2>
-              <div class="barra-tema-cam barra-temas" id="tipos-mes-barras"></div>
-            </article>
+            <article class="cartao cartao-grafico-tipos" id="card-grafico-tipos-mes" aria-labelledby="tit-grafico-tipos-mes"></article>
             <article class="cartao" id="card-temas-mes"><div id="temas-distribuicao-mes"></div></article>
           </div>
           <div class="coluna-B">
@@ -4932,7 +5004,7 @@
       <div class="painel-camara-interno" id="painel-periodo-todo" role="tabpanel" aria-labelledby="tab-periodo-todo" hidden>
         <div class="duas-colunas-desk">
           <div class="coluna-A">
-            <article class="cartao" id="cartao-resumo-todo"></article>
+            <article class="cartao cartao-grafico-tipos" id="card-grafico-tipos-todo" aria-labelledby="tit-grafico-tipos-todo"></article>
             <article class="cartao" id="card-temas-todo"><div id="temas-distribuicao-todo"></div></article>
           </div>
           <div class="coluna-B">
@@ -5958,12 +6030,7 @@
       cab = '<div class="cab-cartao"><h2 class="t2">' + esc(tituloCab || "") + "</h2>" +
         (apoioCab ? '<span class="apoio">' + esc(apoioCab) + "</span>" : "") + "</div>";
     }
-    var apoioSapl = "";
-    if (periodo === "todo") {
-      var fraseTodo = fraseApoioCorteVotacaoSapl();
-      if (fraseTodo) apoioSapl = '<p class="apoio apoio-sapl-votacao">' + esc(fraseTodo) + "</p>";
-    }
-    return cab + htmlFraseResumoPeriodo(periodo) + apoioSapl;
+    return cab + htmlFraseResumoPeriodo(periodo);
   }
 
   function ausentesNaSessao(sessaoId) {
@@ -6038,17 +6105,163 @@
     card.innerHTML = htmlCartaoResumoVotacao("sessao", titulo, apoio);
   }
 
-  function renderCartaoResumoMes() {
-    var card = document.getElementById("card-votacoes-mes");
-    if (!card) return;
-    var nomeMes = nomeMesAnteriorUltimaSessao();
-    card.innerHTML = htmlCartaoResumoVotacao("mes", nomeMes || "\u00daltimo m\u00eas", "");
+  function graficoTiposVotacaoModo() {
+    var painel = CONFIG_CIDADE && CONFIG_CIDADE.painel;
+    var modo = painel && painel.grafico_tipos_votacao;
+    return modo === "rosca" ? "rosca" : "barra";
   }
 
-  function renderCartaoResumoTodo() {
-    var card = document.getElementById("cartao-resumo-todo");
+  function indiceCorTipoVotacao(sigla) {
+    var ordem = ordemTiposVotacao();
+    var idx = ordem.indexOf(sigla);
+    return idx >= 0 ? idx + 1 : ordem.length + 1;
+  }
+
+  function corTokenTipoVotacao(sigla) {
+    return "var(--graf-vot-tipo-" + indiceCorTipoVotacao(sigla) + ")";
+  }
+
+  function tituloGraficoTiposVotacao(periodo) {
+    var total = listaVotacoesPeriodo(periodo).length;
+    var pal = total === 1 ? "item votado" : "itens votados";
+    if (periodo === "mes") return total + " " + pal + " no \u00faltimo m\u00eas";
+    if (periodo === "todo") return total + " " + pal + " na legislatura";
+    return total + " " + pal;
+  }
+
+  function partesGraficoTiposVotacao(periodo) {
+    var cont = contagemVotacoesPorTipo(periodo);
+    var mapa = mapaNomesVotacoesPeriodo(periodo);
+    var partes = [];
+    ordemTiposVotacao().forEach(function (sigla) {
+      var q = cont[sigla] || 0;
+      if (q <= 0) return;
+      partes.push({
+        sigla: sigla,
+        valor: q,
+        rotulo: rotuloTipoVotacaoUi(sigla, q, mapa),
+        cor: corTokenTipoVotacao(sigla)
+      });
+    });
+    partes.sort(function (a, b) { return b.valor - a.valor; });
+    return partes;
+  }
+
+  function htmlLegendaGraficoTipos(periodo, partes) {
+    return '<ul class="legenda-tipos-votacao" role="list">' + partes.map(function (p) {
+      var ativo = estadoMaterias.filtroTipo === p.sigla;
+      return '<li><button type="button" class="legenda-tipo-votacao' + (ativo ? " ativo" : "") +
+        '" data-periodo="' + esc(periodo) + '" data-tipo-votacao="' + esc(p.sigla) +
+        '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
+        '<span class="indicador" style="background:' + p.cor + '" aria-hidden="true"></span>' +
+        '<span class="legenda-nome">' + esc(p.rotulo) + '</span>' +
+        '<span class="legenda-qtd">' + esc(p.valor) + "</span></button></li>";
+    }).join("") + "</ul>";
+  }
+
+  function htmlBarraGraficoTiposVotacao(periodo, partes, total) {
+    var segs = partes.map(function (p) {
+      var pct = total > 0 ? (p.valor / total) * 100 : 0;
+      var ativo = estadoMaterias.filtroTipo === p.sigla;
+      return '<button type="button" class="segmento-tipo-votacao' + (ativo ? " ativo" : "") +
+        '" style="width:' + pct.toFixed(2) + "%;background:" + p.cor + '" data-periodo="' + esc(periodo) +
+        '" data-tipo-votacao="' + esc(p.sigla) + '" aria-pressed="' + (ativo ? "true" : "false") +
+        '" aria-label="' + esc(p.rotulo + ": " + p.valor) + '"></button>';
+    }).join("");
+    return '<div class="barra-tipos-votacao-trilho" role="group" aria-label="Quantidade por tipo">' + segs + "</div>";
+  }
+
+  function roscaSVGTiposInterativa(partes, tamanho, centroPrincipal, periodo) {
+    var raio = (tamanho - 12) / 2;
+    var cx = tamanho / 2;
+    var cy = tamanho / 2;
+    var circ = 2 * Math.PI * raio;
+    var total = partes.reduce(function (s, p) { return s + p.valor; }, 0);
+    var centro = '<text x="' + cx + '" y="' + cy + '" text-anchor="middle" class="rosca-centro">' +
+      esc(centroPrincipal) + "</text>";
+    var offset = 0;
+    var arcos = partes.map(function (p) {
+      var frac = total > 0 ? p.valor / total : 0;
+      var dash = frac * circ;
+      var gap = circ - dash;
+      var ativo = estadoMaterias.filtroTipo === p.sigla;
+      var arco = '<circle class="fatia-tipo-votacao' + (ativo ? " ativo" : "") + '" cx="' + cx + '" cy="' + cy +
+        '" r="' + raio + '" fill="none" stroke="' + p.cor + '" stroke-width="12" ' +
+        'stroke-dasharray="' + dash.toFixed(2) + " " + gap.toFixed(2) + '" ' +
+        'stroke-dashoffset="' + (-offset).toFixed(2) + '" transform="rotate(-90 ' + cx + " " + cy + ')" ' +
+        'data-periodo="' + esc(periodo) + '" data-tipo-votacao="' + esc(p.sigla) + '" tabindex="0" role="button" ' +
+        'aria-pressed="' + (ativo ? "true" : "false") + '" aria-label="' + esc(p.rotulo + ": " + p.valor) + '"/>';
+      offset += dash;
+      return arco;
+    }).join("");
+    return '<div class="rosca-wrap"><svg class="rosca-tipos-votacao" width="' + tamanho + '" height="' + tamanho +
+      '" viewBox="0 0 ' + tamanho + " " + tamanho + '">' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="' + raio + '" fill="none" stroke="var(--linha)" stroke-width="12"/>' +
+      arcos + centro + "</svg></div>";
+  }
+
+  function alternarFiltroTipoViaGrafico(periodo, sigla) {
+    estadoMaterias.filtroTipo = estadoMaterias.filtroTipo === sigla ? "" : sigla;
+    estadoMaterias.limite[periodo] = 10;
+    renderCartaoGraficoTipos(periodo);
+    renderBlocoVotadoPeriodo(periodo);
+    if (estadoMaterias.filtroTipo) {
+      var bloco = document.getElementById("bloco-votado-" + periodo);
+      if (bloco) bloco.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }
+
+  function ligarInteracaoGraficoTipos(raiz, periodo) {
+    if (!raiz) return;
+    raiz.querySelectorAll("[data-tipo-votacao][data-periodo]").forEach(function (el) {
+      function ativar() {
+        alternarFiltroTipoViaGrafico(el.getAttribute("data-periodo"), el.getAttribute("data-tipo-votacao"));
+      }
+      el.addEventListener("click", ativar);
+      el.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          ativar();
+        }
+      });
+    });
+  }
+
+  function renderCartaoGraficoTipos(periodo) {
+    if (periodo !== "mes" && periodo !== "todo") return;
+    var id = periodo === "mes" ? "card-grafico-tipos-mes" : "card-grafico-tipos-todo";
+    var card = document.getElementById(id);
     if (!card) return;
-    card.innerHTML = htmlCartaoResumoVotacao("todo", rotuloPeriodoLegislatura(), "", true);
+    var tituloId = "tit-grafico-tipos-" + periodo;
+    var total = listaVotacoesPeriodo(periodo).length;
+    var titulo = tituloGraficoTiposVotacao(periodo);
+    if (total <= 0) {
+      card.innerHTML = '<h2 class="t2" id="' + tituloId + '">' + esc(titulo) + '</h2>' +
+        '<p class="vazio"><b>Nenhum item com vota\u00e7\u00e3o registrada neste per\u00edodo.</b></p>';
+      return;
+    }
+    var partes = partesGraficoTiposVotacao(periodo);
+    if (!partes.length) {
+      card.innerHTML = '<h2 class="t2" id="' + tituloId + '">' + esc(titulo) + '</h2>' +
+        '<p class="vazio"><b>Nenhum item com vota\u00e7\u00e3o registrada neste per\u00edodo.</b></p>';
+      return;
+    }
+    var modo = graficoTiposVotacaoModo();
+    var notaModo = modo === "rosca"
+      ? '<p class="apoio nota-grafico-mod">Visualiza\u00e7\u00e3o em rosca. Toque em um tipo para filtrar a lista.</p>'
+      : '<p class="apoio nota-grafico-mod">Visualiza\u00e7\u00e3o em barras. Toque em um tipo para filtrar a lista.</p>';
+    var grafico = modo === "rosca"
+      ? '<div class="grafico-linha grafico-tipos-votacao">' + roscaSVGTiposInterativa(partes, 200, String(total), periodo) +
+        '<div class="rosca-legenda">' + htmlLegendaGraficoTipos(periodo, partes) + "</div></div>"
+      : '<div class="grafico-tipos-votacao">' + htmlBarraGraficoTiposVotacao(periodo, partes, total) +
+        htmlLegendaGraficoTipos(periodo, partes) + "</div>";
+    var apoioSapl = "";
+    if (periodo === "todo") {
+      var fraseTodo = fraseApoioCorteVotacaoSapl();
+      if (fraseTodo) apoioSapl = '<p class="apoio apoio-sapl-votacao">' + esc(fraseTodo) + "</p>";
+    }
+    card.innerHTML = '<h2 class="t2" id="' + tituloId + '">' + esc(titulo) + "</h2>" + notaModo + grafico + apoioSapl;
+    ligarInteracaoGraficoTipos(card, periodo);
   }
 
   function ajustarPainelUltimaSessaoSemPll() {
@@ -6078,31 +6291,6 @@
     }
   }
 
-  function atualizarTiposMes() {
-    var container = document.getElementById("tipos-mes-barras");
-    if (!container) return;
-    var lista = MATERIAS_CAMARA.mes || [];
-    var total = lista.length;
-    if (total === 0) {
-      container.innerHTML = "";
-      return;
-    }
-    container.innerHTML =
-      '<div class="barra-tema"><span class="nome">Projetos de lei</span>' +
-      '<div class="trilho"><div class="preenchido" style="width:100%;background:var(--texto-suave)"></div></div>' +
-      '<span class="qtd">' + esc(total) + "</span></div>";
-  }
-
-  function atualizarPainelTodo() {
-    renderCartaoResumoTodo();
-  }
-
-
-  function atualizarVotacoesMes() {
-    renderCartaoResumoMes();
-  }
-
-
   function nomeMesAnteriorUltimaSessao() {
     var sessoes = (estado.dados && estado.dados.sessoes) || [];
     var datas = sessoes.map(function (s) { return s.data; }).filter(Boolean).sort();
@@ -6124,10 +6312,9 @@
     atualizarRodapesColeta();
     restaurarSanfonas();
     atualizarPainelMes();
-    atualizarTiposMes();
-    atualizarPainelTodo();
     atualizarCardVotacoes();
-    atualizarVotacoesMes();
+    renderCartaoGraficoTipos("mes");
+    renderCartaoGraficoTipos("todo");
     restaurarSanfonas();
     ["sessao", "mes", "todo"].forEach(function (p) {
       renderTemasDistribuicao(p);
@@ -8423,6 +8610,7 @@ var MAPA_VAR_CATEGORIA = {
         var p = btn.getAttribute("data-periodo");
         estadoMaterias.filtroTipo = estadoMaterias.filtroTipo === sig ? "" : sig;
         estadoMaterias.limite[p] = 10;
+        if (p === "mes" || p === "todo") renderCartaoGraficoTipos(p);
         renderBlocoVotadoPeriodo(p);
       });
     });
