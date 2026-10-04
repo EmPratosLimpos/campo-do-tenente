@@ -101,6 +101,69 @@ class TestIndexPedidos(unittest.TestCase):
         self.assertIn("Pedidos dos vereadores", INDEX)
 
 
+class TestAutoriaPedidos(unittest.TestCase):
+    """Regras RI-1f espelhadas para os tres casos de primeiro_autor."""
+
+    @staticmethod
+    def _nome(a: dict) -> str:
+        return a.get("nome_parlamentar") or a.get("nome_no_sapl") or a.get("nome") or ""
+
+    def _html_autoria(self, autores: list[dict], id_vereador: int) -> str:
+        if not autores:
+            return ""
+        if len(autores) == 1 and autores[0].get("parlamentar_id_sapl") == id_vereador:
+            return ""
+        primarios = [a for a in autores if a.get("primeiro_autor") is True]
+        demais = [a for a in autores if a.get("primeiro_autor") is not True]
+        if not primarios:
+            nomes = [self._nome(a) for a in autores if self._nome(a)]
+            return "Autoria: " + ", ".join(nomes) if nomes else ""
+        linha = "Autoria: " + ", ".join(self._nome(a) for a in primarios)
+        outros = [
+            self._nome(a)
+            for a in demais
+            if a.get("parlamentar_id_sapl") != id_vereador and self._nome(a)
+        ]
+        if outros:
+            return linha + "\ncom " + ", ".join(outros)
+        return linha
+
+    def test_um_primeiro_autor(self):
+        autores = [
+            {"parlamentar_id_sapl": 6, "nome_parlamentar": "Gustavo", "primeiro_autor": True},
+            {"parlamentar_id_sapl": 8, "nome_parlamentar": "Beto", "primeiro_autor": False},
+        ]
+        txt = self._html_autoria(autores, 6)
+        self.assertIn("Autoria:", txt)
+        self.assertIn("Gustavo", txt)
+        self.assertIn("com", txt)
+        self.assertIn("Beto", txt)
+
+    def test_varios_primeiros_autores(self):
+        autores = [
+            {"parlamentar_id_sapl": 6, "nome_parlamentar": "A", "primeiro_autor": True},
+            {"parlamentar_id_sapl": 8, "nome_parlamentar": "B", "primeiro_autor": True},
+            {"parlamentar_id_sapl": 3, "nome_parlamentar": "C", "primeiro_autor": False},
+        ]
+        txt = self._html_autoria(autores, 6)
+        self.assertIn("A", txt.split("com")[0])
+        self.assertIn("B", txt.split("com")[0])
+
+    def test_nenhum_primeiro_autor(self):
+        autores = [
+            {"parlamentar_id_sapl": 6, "nome_parlamentar": "Gustavo", "primeiro_autor": None},
+            {"parlamentar_id_sapl": 8, "nome_parlamentar": "Beto", "primeiro_autor": False},
+        ]
+        txt = self._html_autoria(autores, 6)
+        self.assertTrue(txt.startswith("Autoria:"))
+        self.assertNotIn("com", txt)
+
+    def test_js_html_autoria_pedido(self):
+        self.assertIn("htmlAutoriaPedido", INDEX)
+        self.assertIn("primeiro_autor === true", INDEX)
+        self.assertNotIn("textoCoautoresPedido", INDEX)
+
+
 class TestContagemPorId(unittest.TestCase):
     def test_gustavo_e_beto_batem_com_json(self):
         dados = _carregar_proposicoes()
