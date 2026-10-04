@@ -238,15 +238,12 @@ JS_VERIFICA_DISPOSICAO = """(periodo) => {
   return { ok: true };
 }"""
 
-JS_PRESENCA = """() => {
-  const card = document.getElementById("card-presenca-sessao");
-  if (!card) return { ok: false, erro: "card nao encontrado" };
+JS_RESUMO_SESSAO = """() => {
+  const card = document.getElementById("card-votacoes-sessao");
+  if (!card) return { ok: false, erro: "card resumo sessao nao encontrado" };
   const texto = card.innerText;
-  if (texto.includes("Fora do mandato naquela data") || texto.includes("fora do mandato")) {
-    return { ok: false, erro: "texto 'Fora do mandato' esta visivel" };
-  }
-  if (!/Presentes/i.test(texto) || !/Projetos votados/i.test(texto)) {
-    return { ok: false, erro: "lista de presenca incompleta" };
+  if (!/itens votados|item votado/i.test(texto)) {
+    return { ok: false, erro: "resumo da sessao sem contagem de votacoes: " + texto };
   }
   return { ok: true };
 }"""
@@ -419,8 +416,8 @@ class TestTelaLayout(unittest.TestCase):
                 disp = page.evaluate(JS_VERIFICA_DISPOSICAO, periodo)
                 self.assertTrue(disp["ok"], f"Disposicao incorreta para {periodo} em {largura}: {disp.get('erro')}")
                 if periodo == "sessao":
-                    pres = page.evaluate(JS_PRESENCA)
-                    self.assertTrue(pres["ok"], f"Presenca com erro: {pres.get('erro')}")
+                    resumo = page.evaluate(JS_RESUMO_SESSAO)
+                    self.assertTrue(resumo["ok"], f"Resumo sessao com erro: {resumo.get('erro')}")
         lateral = page.locator("#menu-lateral").is_visible()
         if largura >= 900:
             self.assertTrue(lateral, "menu lateral deve aparecer em desktop")

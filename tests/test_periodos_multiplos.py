@@ -188,7 +188,9 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
                 "Nenhum projeto de lei do legislativo (PLL) foi votado na última sessão",
                 texto,
             )
-            datas = page.locator("#bloco-votado-sessao .materia-datas").first.inner_text()
+            item = page.locator('#bloco-votado-sessao li.item-votado:has-text("PLEG 4/2026")')
+            self.assertGreater(item.count(), 0, "PLEG 4/2026 deveria aparecer na lista da sessao")
+            datas = item.locator(".materia-datas").inner_text()
             self.assertIn("22/09/2026", datas)
             self.assertIn("29/09/2026", datas)
             page.locator("#bloco-votado-sessao .tag-turno").first.click()
