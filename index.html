@@ -4807,11 +4807,13 @@
     font-weight: 400;
     color: var(--texto-suave);
   }
+  /* RI-1j: trilha da grade com mínimo 0, para que uma tag longa não alargue o item além do cartão */
   #painel-camara .lista-materias,
-  #painel-prefeito .lista-materias { display: grid; gap: 0; }
+  #painel-prefeito .lista-materias { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
   #painel-camara .item-votado.materia,
   #painel-prefeito .item-votado.materia {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 8px;
     padding: 16px 0;
     border-bottom: 0;
@@ -4841,6 +4843,15 @@
     font-weight: 600;
     line-height: 1.5;
     letter-spacing: normal;
+  }
+  /* RI-1j: tag longa ("Iluminação, serviços urbanos e conectividade") quebra linha dentro do cartão, sem cortar texto */
+  .materia-tags .chip {
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: break-word;
   }
   #painel-camara .linha-meta,
   #painel-prefeito .linha-meta { line-height: 1.5; }
