@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import pathlib
 import re
 import threading
@@ -45,11 +44,11 @@ class TestRi1iEstatico(unittest.TestCase):
         self.assertIn("<path", rosca)
         self.assertNotRegex(rosca, r"\son[a-z]+=", "atributo de evento inline na rosca")
         # todo texto vindo de dado passa por esc()
-        for trecho in ("esc(p.sigla)", "esc(p.cor)", "esc(resumo)", "esc(numero)", "esc(rotulo)"):
+        for trecho in ("esc(p.sigla)", "esc(p.cor)", "esc(ariaGrafico)", "esc(numero)", "esc(rotulo)"):
             self.assertIn(trecho, rosca)
 
     def test_rosca_cores_por_token_nos_dois_temas(self):
-        # RI-1j: barra e rosca usam a mesma paleta (--graf-vot-tipo-N), definida nos dois temas
+        # RI-1k: rosca usa paleta --graf-vot-tipo-N nos dois temas
         for i in range(1, 8):
             self.assertGreaterEqual(INDEX.count(f"--graf-vot-tipo-{i}:"), 2, msg=f"--graf-vot-tipo-{i}")
         self.assertIn('"var(--graf-vot-tipo-"', INDEX)
@@ -89,12 +88,6 @@ class _Handler(SimpleHTTPRequestHandler):
         pass
 
 
-def _config_com_grafico(modo: str) -> str:
-    cfg = json.loads((RAIZ / "config_cidade.json").read_text(encoding="utf-8"))
-    cfg.setdefault("painel", {})["grafico_tipos_votacao"] = modo
-    return json.dumps(cfg, ensure_ascii=False)
-
-
 JS_CAIXAS = """() => {
   const out = [];
   document.querySelectorAll('.cartao-pedidos .numeros li.clicavel').forEach(li => {
@@ -131,15 +124,10 @@ class TestRi1iPlaywright(unittest.TestCase):
         finally:
             cls.servidor.server_close()
 
-    def _abrir(self, browser, modo: str, largura: int):
+    def _abrir(self, browser, largura: int):
         page = browser.new_page(viewport={"width": largura, "height": 900})
         erros: list[str] = []
         page.on("pageerror", lambda e: erros.append(str(e)))
-        corpo = _config_com_grafico(modo)
-        page.route(
-            "**/config_cidade.json",
-            lambda r: r.fulfill(body=corpo, content_type="application/json; charset=utf-8"),
-        )
         page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
         page.wait_for_load_state("networkidle", timeout=90000)
         return page, erros
@@ -153,7 +141,7 @@ class TestRi1iPlaywright(unittest.TestCase):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             for largura in (390, 1440):
-                page, erros = self._abrir(browser, "rosca", largura)
+                page, erros = self._abrir(browser, largura)
                 self._periodo(page, largura, "todo")
                 card = "#card-grafico-tipos-todo"
                 self.assertNotIn("Visualiza", page.inner_text(card))
@@ -194,7 +182,7 @@ class TestRi1iPlaywright(unittest.TestCase):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             for largura in (390, 900, 1200, 1440):
-                page, erros = self._abrir(browser, "barra", largura)
+                page, erros = self._abrir(browser, largura)
                 if largura >= 900:
                     page.locator("button[data-secao-lateral='vereadores']").click(timeout=15000)
                 else:

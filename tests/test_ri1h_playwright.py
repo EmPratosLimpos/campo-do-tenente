@@ -1,8 +1,7 @@
-"""RI-1h: Playwright sem pageerror, barra e rosca, rolagem lateral."""
+"""RI-1h: Playwright sem pageerror e rolagem lateral (grafico de tipos em rosca)."""
 
 from __future__ import annotations
 
-import json
 import pathlib
 import threading
 import time
@@ -24,12 +23,6 @@ except ImportError:
 class _Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(RAIZ), **kwargs)
-
-
-def _config_com_grafico(modo: str) -> str:
-    cfg = json.loads((RAIZ / "config_cidade.json").read_text(encoding="utf-8"))
-    cfg.setdefault("painel", {})["grafico_tipos_votacao"] = modo
-    return json.dumps(cfg, ensure_ascii=False)
 
 
 @unittest.skipUnless(PLAYWRIGHT_OK, PLAYWRIGHT_MOTIVO)
@@ -70,17 +63,6 @@ class TestRi1hPlaywright(unittest.TestCase):
             page.wait_for_selector("#painel-camara.ativo", timeout=30000)
         page.wait_for_timeout(300)
 
-    def _abrir_com_modo_grafico(self, page, modo: str):
-        cfg_body = _config_com_grafico(modo)
-
-        def rota(route):
-            if route.request.url.endswith("/config_cidade.json"):
-                route.fulfill(body=cfg_body, content_type="application/json; charset=utf-8")
-            else:
-                route.continue_()
-
-        page.route("**/*", rota)
-
     def _percorrer_abas(self, page, largura: int, tema: str):
         page.set_viewport_size({"width": largura, "height": 900})
         page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
@@ -107,28 +89,18 @@ class TestRi1hPlaywright(unittest.TestCase):
         )
         self.assertTrue(overflow, msg=f"rolagem lateral {largura} {tema}")
 
-    def test_sem_pageerror_barra_e_rosca(self):
+    def test_sem_pageerror_rosca_tipos(self):
         with sync_playwright() as p:
             browser = p.chromium.launch()
-            for modo in ("barra", "rosca"):
-                for largura in (320, 390, 900, 1440):
-                    for tema in ("claro", "escuro"):
-                        page = browser.new_page()
-                        erros = []
-                        page.on("pageerror", lambda e: erros.append(str(e)))
-                        self._abrir_com_modo_grafico(page, modo)
-                        self._percorrer_abas(page, largura, tema)
-                        if modo == "rosca":
-                            page.wait_for_selector(
-                                ".cartao-grafico-tipos .rosca-tipos-votacao, .cartao-grafico-tipos .barra-tipos-votacao-trilho",
-                                timeout=15000,
-                            )
-                        self.assertEqual(
-                            erros,
-                            [],
-                            msg=f"pageerror modo={modo} {largura} {tema}: {erros}",
-                        )
-                        page.close()
+            for largura in (320, 390, 900, 1440):
+                for tema in ("claro", "escuro"):
+                    page = browser.new_page()
+                    erros = []
+                    page.on("pageerror", lambda e: erros.append(str(e)))
+                    self._percorrer_abas(page, largura, tema)
+                    page.wait_for_selector(".cartao-grafico-tipos .rosca-tipos-votacao", timeout=15000)
+                    self.assertEqual(erros, [], msg=f"pageerror {largura} {tema}: {erros}")
+                    page.close()
             browser.close()
 
 
