@@ -127,6 +127,8 @@
     --t-numero: 22px;      /* número em linha ou quadro no celular, peso 800 */
     --t-numero-quadro: 22px; /* número grande em quadro (.numeros b, .qv b); 28px no computador */
     --t-numero-legenda: 14px; /* rótulo em .numeros span; 13px no computador */
+    --t-numero-rosca: 18px;  /* total no centro da rosca de tipos (RI-1j); 20px no computador */
+    --t-rosca-rotulo: 13px;  /* rótulo no centro da rosca de tipos (RI-1j) */
     --t-materia: 15px;     /* assunto da matéria, peso 600, altura 1.45 */
     --t-corpo: 15px;       /* texto corrido, peso 400, altura 1.5 */
     --t-apoio: 13px;       /* datas, sigla, legendas, tags; nunca menor que 13px */
@@ -145,6 +147,7 @@
       --t-cartao: 17px;
       --t-numero-quadro: 28px;
       --t-numero-legenda: 13px;
+      --t-numero-rosca: 20px;
       --t-corpo: 16px;
       --t-apoio: 14px;
     }
@@ -1307,8 +1310,8 @@
   .rosca-tipos-figura {
     position: relative;
     flex: 0 0 auto;
-    width: 184px;
-    height: 184px;
+    width: 130px;
+    height: 130px;
   }
   .rosca-tipos-votacao { display: block; width: 100%; height: 100%; overflow: visible; }
   .rosca-tipos-votacao .fatia-tipo-votacao { cursor: pointer; }
@@ -1323,22 +1326,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    padding: 0 34px;
+    gap: 2px;
+    padding: 0 20px;
     text-align: center;
     pointer-events: none;
   }
+  /* RI-1j: rosca menor (130 px no celular, 140 px no computador); centro reduzido na mesma proporção */
   .rosca-tipos-centro b {
-    font-size: var(--t-numero-quadro);
+    font-size: var(--t-numero-rosca);
     font-weight: 800;
     line-height: 1;
     font-variant-numeric: tabular-nums;
     color: var(--texto);
   }
   .rosca-tipos-centro span {
-    font-size: var(--t-numero-legenda);
+    font-size: var(--t-rosca-rotulo);
     font-weight: 600;
-    line-height: 1.25;
+    line-height: 1.2;
     color: var(--texto-suave);
     overflow-wrap: normal;
     word-break: normal;
@@ -1370,8 +1374,14 @@
   .legenda-rosca .indicador { width: 12px; height: 12px; border-radius: 50%; }
   .legenda-rosca li:has(.ativo) + li,
   .legenda-rosca li + li:has(.ativo) { border-top-color: transparent; }
+  /* RI-1j: legenda ao lado da rosca a partir de 360 px, centrada na altura do anel */
+  @media (min-width: 360px) {
+    .rosca-tipos { flex-wrap: nowrap; justify-content: flex-start; gap: var(--esp-4); }
+    .legenda-rosca { flex: 1 1 auto; }
+  }
   @media (min-width: 900px) {
-    .rosca-tipos-figura { width: 200px; height: 200px; }
+    .rosca-tipos-figura { width: 140px; height: 140px; }
+    .rosca-tipos { gap: var(--esp-5); }
   }
 
   .indicador {
@@ -6317,10 +6327,10 @@
     var lado = 200;
     var c = lado / 2;
     var raio = 82;
-    var espessura = 17;
-    var espessuraAtiva = 23;
+    var espessura = 20;
+    var espessuraAtiva = 26;
     var circ = 2 * Math.PI * raio;
-    var vao = 3.4;
+    var vao = 4.6;
     var minimo = 5;
     var filtro = estadoMaterias.filtroTipo;
     var ativa = null;
