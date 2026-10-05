@@ -57,21 +57,16 @@
     --graf-falta-just: #A87A00;
     --graf-falta-sem: #C2410C;
     --graf-trilha: #DDE5DF;
-    --graf-vot-tipo-1: #1E7A4C;
-    --graf-vot-tipo-2: #2F5BEA;
-    --graf-vot-tipo-3: #A87A00;
-    --graf-vot-tipo-4: #7B4DE0;
-    --graf-vot-tipo-5: #C2410C;
-    --graf-vot-tipo-6: #0096A8;
-    --graf-vot-tipo-7: #5E2CA5;
-    /* Rosca por tipo (RI-1i): sem verde da marca, sem azul de Sim e sem laranja de Não; VET em tinta, como o veto do protótipo */
-    --rosca-tipo-1: #5B6B8C;
-    --rosca-tipo-2: #0096A8;
-    --rosca-tipo-3: #B61064;
-    --rosca-tipo-4: #7B4DE0;
-    --rosca-tipo-5: #A87A00;
-    --rosca-tipo-6: var(--texto);
-    --rosca-tipo-7: var(--linha-forte);
+    /* Tipos de item votado (RI-1j), na barra e na rosca. Ordem: PLEG, REQ, MOC, IND, PLEX, VET, outro.
+       Sem verde (marca), azul (Sim) e laranja (Não). Quatro matizes (ouro, magenta, roxo, marrom) e dois neutros
+       bem separados em luminosidade (cinza e tinta); pares distinguíveis também em deuteranopia e protanopia. */
+    --graf-vot-tipo-1: #9C7700;
+    --graf-vot-tipo-2: #D63A9C;
+    --graf-vot-tipo-3: #5B5560;
+    --graf-vot-tipo-4: #3F1D7A;
+    --graf-vot-tipo-5: #6E4314;
+    --graf-vot-tipo-6: var(--texto);
+    --graf-vot-tipo-7: var(--linha-forte);
     --barra-unanimidade: #2F5BEA;
     --barra-maioria: #6E8EF0;
     --sombra: 0 1px 2px rgba(19,32,26,.06), 0 4px 16px rgba(19,32,26,.06);
@@ -187,20 +182,13 @@
     --graf-falta-just: #E0B53A;
     --graf-falta-sem: #FF9A5C;
     --graf-trilha: #26302A;
-    --graf-vot-tipo-1: #4CC48A;
-    --graf-vot-tipo-2: #7FA2FF;
-    --graf-vot-tipo-3: #E0B53A;
-    --graf-vot-tipo-4: #C69CFF;
-    --graf-vot-tipo-5: #FF9A5C;
-    --graf-vot-tipo-6: #3EC9D6;
-    --graf-vot-tipo-7: #B794F6;
-    --rosca-tipo-1: #6E89BE;
-    --rosca-tipo-2: #1095A4;
-    --rosca-tipo-3: #FFBCDC;
-    --rosca-tipo-4: #A98BFF;
-    --rosca-tipo-5: #E0B53A;
-    --rosca-tipo-6: var(--texto);
-    --rosca-tipo-7: var(--linha-forte);
+    --graf-vot-tipo-1: #E8C547;
+    --graf-vot-tipo-2: #D65DB1;
+    --graf-vot-tipo-3: #A9B1AC;
+    --graf-vot-tipo-4: #C9A8FF;
+    --graf-vot-tipo-5: #A87850;
+    --graf-vot-tipo-6: var(--texto);
+    --graf-vot-tipo-7: var(--linha-forte);
     --barra-unanimidade: #7FA2FF;
     --barra-maioria: #4A68C8;
     --sombra: 0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
@@ -1374,14 +1362,24 @@
   .legenda-rosca .indicador { width: 12px; height: 12px; border-radius: 50%; }
   .legenda-rosca li:has(.ativo) + li,
   .legenda-rosca li + li:has(.ativo) { border-top-color: transparent; }
-  /* RI-1j: legenda ao lado da rosca a partir de 360 px, centrada na altura do anel */
-  @media (min-width: 360px) {
-    .rosca-tipos { flex-wrap: nowrap; justify-content: flex-start; gap: var(--esp-4); }
+  /* RI-1j: legenda ao lado da rosca, centrada na altura do anel, sempre que o cartão tem largura para
+     o nome mais longo ("Requerimentos") sem quebrar a palavra: 316 px de conteúdo no celular (tela de 390 px),
+     344 px no computador (fonte 16 px). Em cartão mais estreito a legenda fica abaixo. */
+  .cartao-grafico-tipos { container: tipos-votacao / inline-size; }
+  @container tipos-votacao (min-width: 316px) {
+    .rosca-tipos { flex-wrap: nowrap; justify-content: flex-start; gap: var(--esp-3); }
     .legenda-rosca { flex: 1 1 auto; }
+    .legenda-rosca .legenda-tipo-votacao { gap: var(--esp-2); padding: 6px 6px 6px 4px; }
   }
   @media (min-width: 900px) {
     .rosca-tipos-figura { width: 140px; height: 140px; }
-    .rosca-tipos { gap: var(--esp-5); }
+    @container tipos-votacao (min-width: 316px) and (max-width: 343.98px) {
+      .rosca-tipos { flex-wrap: wrap; justify-content: center; }
+      .legenda-rosca { flex: 1 1 240px; }
+    }
+    @container tipos-votacao (min-width: 344px) {
+      .rosca-tipos { gap: var(--esp-4); }
+    }
   }
 
   .indicador {
@@ -6262,8 +6260,9 @@
     return idx >= 0 ? idx + 1 : ordem.length + 1;
   }
 
+  /* RI-1j: uma paleta só para barra e rosca (--graf-vot-tipo-1 a 7, claro e escuro). */
   function corTokenTipoVotacao(sigla) {
-    return "var(--graf-vot-tipo-" + indiceCorTipoVotacao(sigla) + ")";
+    return "var(--graf-vot-tipo-" + Math.min(indiceCorTipoVotacao(sigla), 7) + ")";
   }
 
   function tituloGraficoTiposVotacao(periodo) {
@@ -6290,10 +6289,6 @@
     });
     partes.sort(function (a, b) { return b.valor - a.valor; });
     return partes;
-  }
-
-  function corTokenRoscaTipoVotacao(sigla) {
-    return "var(--rosca-tipo-" + Math.min(indiceCorTipoVotacao(sigla), 7) + ")";
   }
 
   function htmlLegendaGraficoTipos(periodo, partes, classeExtra) {
@@ -6427,11 +6422,8 @@
       '<span class="apoio">toque para filtrar</span></div>';
     var grafico;
     if (modo === "rosca") {
-      var partesRosca = partes.map(function (p) {
-        return { sigla: p.sigla, valor: p.valor, rotulo: p.rotulo, cor: corTokenRoscaTipoVotacao(p.sigla) };
-      });
-      grafico = '<div class="rosca-tipos grafico-tipos-votacao">' + roscaSVGTiposInterativa(partesRosca, total, periodo) +
-        htmlLegendaGraficoTipos(periodo, partesRosca, "legenda-rosca") + "</div>";
+      grafico = '<div class="rosca-tipos grafico-tipos-votacao">' + roscaSVGTiposInterativa(partes, total, periodo) +
+        htmlLegendaGraficoTipos(periodo, partes, "legenda-rosca") + "</div>";
     } else {
       grafico = '<div class="grafico-tipos-votacao">' + htmlBarraGraficoTiposVotacao(periodo, partes, total) +
         htmlLegendaGraficoTipos(periodo, partes) + "</div>";
