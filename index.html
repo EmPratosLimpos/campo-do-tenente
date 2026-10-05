@@ -6366,12 +6366,14 @@
     var resumo = total + " " + (total === 1 ? "item votado" : "itens votados") + ": " +
       partes.map(function (p) { return p.valor + " " + p.rotulo; }).join(", ");
     var numero = ativa ? ativa.valor : total;
-    var rotulo = ativa ? ativa.rotulo : (total === 1 ? "item votado" : "itens votados");
+    var rotulo = ativa ? ("de " + total) : (total === 1 ? "item votado" : "itens votados");
+    var ariaGrafico = ativa
+      ? ativa.valor + " " + ativa.rotulo + ", de " + total + " " + (total === 1 ? "item votado" : "itens votados")
+      : resumo;
     return '<div class="rosca-tipos-figura">' +
       '<svg class="rosca-tipos-votacao' + (ativa ? " com-filtro" : "") + '" viewBox="0 0 ' + lado + " " + lado +
-      '" role="img" aria-label="' + esc(resumo) + '" focusable="false">' + arcos + "</svg>" +
-      '<div class="rosca-tipos-centro" aria-hidden="true"><b>' + esc(numero) + "</b><span>" + esc(rotulo) + "</span>" +
-      (ativa ? "<span>de " + esc(total) + "</span>" : "") + "</div></div>";
+      '" role="img" aria-label="' + esc(ariaGrafico) + '" focusable="false">' + arcos + "</svg>" +
+      '<div class="rosca-tipos-centro" aria-hidden="true"><b>' + esc(numero) + "</b><span>" + esc(rotulo) + "</span></div></div>";
   }
 
   function alternarFiltroTipoViaGrafico(periodo, sigla) {
