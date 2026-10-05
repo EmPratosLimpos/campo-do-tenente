@@ -56,7 +56,8 @@ class TestRi1iEstatico(unittest.TestCase):
     def test_rosca_centro_usa_tokens_de_numero(self):
         bloco = INDEX[INDEX.find(".rosca-tipos-centro b {"):]
         bloco = bloco[: bloco.find("}")]
-        self.assertIn("var(--t-numero-quadro)", bloco)
+        # RI-1j: centro reduzido na proporcao da rosca menor
+        self.assertIn("var(--t-numero-rosca)", bloco)
 
     def test_rosca_movimento_reduzido(self):
         self.assertRegex(
