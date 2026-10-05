@@ -1234,25 +1234,6 @@
   .rosca-legenda dt { font-weight: 800; }
   .rosca-legenda dd { margin: 0; color: var(--texto-suave); white-space: nowrap; word-break: normal; word-wrap: normal; }
 
-  .cartao-grafico-tipos .barra-tipos-votacao-trilho {
-    display: flex;
-    height: 16px;
-    border-radius: var(--raio-pilula);
-    overflow: hidden;
-    gap: 3px;
-    background: var(--graf-trilha);
-    margin: 12px 0 16px;
-  }
-  .cartao-grafico-tipos .segmento-tipo-votacao {
-    display: block;
-    height: 100%;
-    min-width: 4px;
-    padding: 0;
-    border: 0;
-    border-radius: var(--raio-pilula);
-    cursor: pointer;
-  }
-  .cartao-grafico-tipos .segmento-tipo-votacao.ativo,
   .cartao-grafico-tipos .legenda-tipo-votacao.ativo {
     box-shadow: inset 0 0 0 2px var(--texto);
   }
@@ -6260,19 +6241,13 @@
     card.innerHTML = htmlCartaoResumoVotacao("sessao", titulo, apoio);
   }
 
-  function graficoTiposVotacaoModo() {
-    var painel = CONFIG_CIDADE && CONFIG_CIDADE.painel;
-    var modo = painel && painel.grafico_tipos_votacao;
-    return modo === "rosca" ? "rosca" : "barra";
-  }
-
   function indiceCorTipoVotacao(sigla) {
     var ordem = ordemTiposVotacao();
     var idx = ordem.indexOf(sigla);
     return idx >= 0 ? idx + 1 : ordem.length + 1;
   }
 
-  /* RI-1j: uma paleta só para barra e rosca (--graf-vot-tipo-1 a 7, claro e escuro). */
+  /* RI-1k: paleta da rosca (--graf-vot-tipo-1 a 7, claro e escuro). */
   function corTokenTipoVotacao(sigla) {
     return "var(--graf-vot-tipo-" + Math.min(indiceCorTipoVotacao(sigla), 7) + ")";
   }
@@ -6313,18 +6288,6 @@
         '<span class="legenda-nome">' + esc(p.rotulo) + '</span>' +
         '<span class="legenda-qtd">' + esc(p.valor) + "</span></button></li>";
     }).join("") + "</ul>";
-  }
-
-  function htmlBarraGraficoTiposVotacao(periodo, partes, total) {
-    var segs = partes.map(function (p) {
-      var pct = total > 0 ? (p.valor / total) * 100 : 0;
-      var ativo = estadoMaterias.filtroTipo === p.sigla;
-      return '<button type="button" class="segmento-tipo-votacao' + (ativo ? " ativo" : "") +
-        '" style="width:' + pct.toFixed(2) + "%;background:" + p.cor + '" data-periodo="' + esc(periodo) +
-        '" data-tipo-votacao="' + esc(p.sigla) + '" aria-pressed="' + (ativo ? "true" : "false") +
-        '" aria-label="' + esc(p.rotulo + ": " + p.valor) + '"></button>';
-    }).join("");
-    return '<div class="barra-tipos-votacao-trilho" role="group" aria-label="Quantidade por tipo">' + segs + "</div>";
   }
 
   /* Rosca por tipo (RI-1i). SVG montado aqui, sem biblioteca. Anel com a espessura da barra
@@ -6431,17 +6394,10 @@
         '<p class="vazio"><b>Nenhum item com vota\u00e7\u00e3o registrada neste per\u00edodo.</b></p>';
       return;
     }
-    var modo = graficoTiposVotacaoModo();
     var cabecalho = '<div class="cab-cartao"><h2 class="t2" id="' + tituloId + '">' + esc(titulo) + "</h2>" +
       '<span class="apoio">toque para filtrar</span></div>';
-    var grafico;
-    if (modo === "rosca") {
-      grafico = '<div class="rosca-tipos grafico-tipos-votacao">' + roscaSVGTiposInterativa(partes, total, periodo) +
-        htmlLegendaGraficoTipos(periodo, partes, "legenda-rosca") + "</div>";
-    } else {
-      grafico = '<div class="grafico-tipos-votacao">' + htmlBarraGraficoTiposVotacao(periodo, partes, total) +
-        htmlLegendaGraficoTipos(periodo, partes) + "</div>";
-    }
+    var grafico = '<div class="rosca-tipos grafico-tipos-votacao">' + roscaSVGTiposInterativa(partes, total, periodo) +
+      htmlLegendaGraficoTipos(periodo, partes, "legenda-rosca") + "</div>";
     var apoioSapl = "";
     if (periodo === "todo") {
       var fraseTodo = fraseApoioCorteVotacaoSapl();
