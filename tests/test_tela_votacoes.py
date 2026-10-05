@@ -125,8 +125,9 @@ class TestIndexVotacoes(unittest.TestCase):
     def test_grafico_tipos_votacao_ri1h(self):
         js = _js_principal_sem_comentario()
         self.assertIn("renderCartaoGraficoTipos", js)
-        self.assertIn("graficoTiposVotacaoModo", js)
-        self.assertIn("grafico_tipos_votacao", INDEX)
+        self.assertIn("roscaSVGTiposInterativa", js)
+        self.assertNotIn("graficoTiposVotacaoModo", js)
+        self.assertNotIn("grafico_tipos_votacao", (RAIZ / "config_cidade.json").read_text(encoding="utf-8"))
         self.assertIn("card-grafico-tipos-mes", INDEX)
         self.assertIn("card-grafico-tipos-todo", INDEX)
         self.assertNotIn("tit-tipos-mes", INDEX)

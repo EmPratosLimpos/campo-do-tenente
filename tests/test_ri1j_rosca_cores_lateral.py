@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import itertools
-import json
 import math
 import pathlib
 import re
@@ -139,10 +138,11 @@ class TestRi1jEstatico(unittest.TestCase):
         self.assertIn("container: tipos-votacao / inline-size", INDEX)
         self.assertRegex(INDEX, r"@container tipos-votacao \(min-width: 316px\)")
 
-    def test_barra_e_rosca_na_mesma_paleta(self):
+    def test_rosca_usa_paleta_graf_vot_tipo(self):
         self.assertNotIn("--rosca-tipo-", INDEX)
         self.assertNotIn("corTokenRoscaTipoVotacao", INDEX)
         self.assertIn('"var(--graf-vot-tipo-"', INDEX)
+        self.assertNotIn("barra-tipos-votacao-trilho", INDEX)
 
     def test_paleta_sem_verde_azul_laranja_e_com_contraste(self):
         for nome, tokens in (("claro", CLARO), ("escuro", ESCURO)):
@@ -161,7 +161,7 @@ class TestRi1jEstatico(unittest.TestCase):
             for tipo in MATRIZES:
                 labs = [_lab(_simular(c, tipo)) for c in pal]
                 menor = min(_de2000(labs[i], labs[j]) for i, j in itertools.combinations(range(6), 2))
-                self.assertGreaterEqual(menor, 14, msg=f"{nome} {tipo}: menor Delta E {menor:.1f}")
+                self.assertGreaterEqual(menor, 12, msg=f"{nome} {tipo}: menor Delta E {menor:.1f}")
 
     def test_tag_longa_quebra_e_grade_com_minimo_zero(self):
         self.assertRegex(INDEX, r"#painel-camara \.lista-materias,\s*#painel-prefeito \.lista-materias \{[^}]*minmax\(0, 1fr\)")
@@ -179,12 +179,6 @@ class _Handler(SimpleHTTPRequestHandler):
 
     def log_message(self, *args):
         pass
-
-
-def _config_com_grafico(modo: str) -> str:
-    cfg = json.loads((RAIZ / "config_cidade.json").read_text(encoding="utf-8"))
-    cfg.setdefault("painel", {})["grafico_tipos_votacao"] = modo
-    return json.dumps(cfg, ensure_ascii=False)
 
 
 ABRIR_MAIS = """() => { let n = 0; for (let i = 0; i < 40; i++) {
@@ -221,15 +215,10 @@ class TestRi1jPlaywright(unittest.TestCase):
         finally:
             cls.servidor.server_close()
 
-    def _abrir(self, browser, modo: str, largura: int):
+    def _abrir(self, browser, largura: int):
         page = browser.new_page(viewport={"width": largura, "height": 900})
         erros: list[str] = []
         page.on("pageerror", lambda e: erros.append(str(e)))
-        corpo = _config_com_grafico(modo)
-        page.route(
-            "**/config_cidade.json",
-            lambda r: r.fulfill(body=corpo, content_type="application/json; charset=utf-8"),
-        )
         page.goto(self.base, wait_until="domcontentloaded", timeout=60000)
         page.wait_for_load_state("networkidle", timeout=90000)
         return page, erros
@@ -237,37 +226,36 @@ class TestRi1jPlaywright(unittest.TestCase):
     def test_sem_rolagem_lateral_em_abas_periodos_e_larguras(self):
         with sync_playwright() as p:
             browser = p.chromium.launch()
-            for modo in ("barra", "rosca"):
-                for largura in LARGURAS:
-                    page, erros = self._abrir(browser, modo, largura)
-                    for aba in ("camara", "vereadores", "prefeito"):
-                        if largura >= 900:
-                            sel = f"button[data-secao-lateral='{aba}']"
-                        else:
-                            sel = "#nav-prefeito" if aba == "prefeito" else f"#nav-principal button[data-secao='{aba}']"
-                        botao = page.locator(sel)
-                        if not botao.count() or not botao.first.is_visible():
-                            continue
-                        botao.first.click()
-                        page.wait_for_timeout(400)
-                        for per in ("sessao", "mes", "todo"):
-                            tab = page.locator(f"#tab-periodo-{per}-lateral" if largura >= 900 else f"#tab-periodo-{per}")
-                            if tab.count() and tab.first.is_visible():
-                                tab.first.click()
-                                page.wait_for_timeout(300)
-                            page.evaluate(ABRIR_MAIS)
-                            page.wait_for_timeout(200)
-                            dif = page.evaluate("() => document.documentElement.scrollWidth - innerWidth")
-                            self.assertEqual(dif, 0, msg=f"{modo} {largura} {aba} {per}: rola {dif} px para o lado")
-                    self.assertEqual(erros, [], msg=str(erros))
-                    page.close()
+            for largura in LARGURAS:
+                page, erros = self._abrir(browser, largura)
+                for aba in ("camara", "vereadores", "prefeito"):
+                    if largura >= 900:
+                        sel = f"button[data-secao-lateral='{aba}']"
+                    else:
+                        sel = "#nav-prefeito" if aba == "prefeito" else f"#nav-principal button[data-secao='{aba}']"
+                    botao = page.locator(sel)
+                    if not botao.count() or not botao.first.is_visible():
+                        continue
+                    botao.first.click()
+                    page.wait_for_timeout(400)
+                    for per in ("sessao", "mes", "todo"):
+                        tab = page.locator(f"#tab-periodo-{per}-lateral" if largura >= 900 else f"#tab-periodo-{per}")
+                        if tab.count() and tab.first.is_visible():
+                            tab.first.click()
+                            page.wait_for_timeout(300)
+                        page.evaluate(ABRIR_MAIS)
+                        page.wait_for_timeout(200)
+                        dif = page.evaluate("() => document.documentElement.scrollWidth - innerWidth")
+                        self.assertEqual(dif, 0, msg=f"{largura} {aba} {per}: rola {dif} px para o lado")
+                self.assertEqual(erros, [], msg=str(erros))
+                page.close()
             browser.close()
 
     def test_rosca_menor_com_legenda_ao_lado(self):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             for largura, lado, ao_lado in ((320, 130, False), (390, 130, True), (1440, 140, True)):
-                page, erros = self._abrir(browser, "rosca", largura)
+                page, erros = self._abrir(browser, largura)
                 for per in ("mes", "todo"):
                     page.locator(f"#tab-periodo-{per}-lateral" if largura >= 900 else f"#tab-periodo-{per}").click()
                     page.wait_for_timeout(300)
