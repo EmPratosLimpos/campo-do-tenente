@@ -49,9 +49,10 @@ class TestRi1iEstatico(unittest.TestCase):
             self.assertIn(trecho, rosca)
 
     def test_rosca_cores_por_token_nos_dois_temas(self):
+        # RI-1j: barra e rosca usam a mesma paleta (--graf-vot-tipo-N), definida nos dois temas
         for i in range(1, 8):
-            self.assertGreaterEqual(INDEX.count(f"--rosca-tipo-{i}:"), 2, msg=f"--rosca-tipo-{i}")
-        self.assertIn('"var(--rosca-tipo-"', INDEX)
+            self.assertGreaterEqual(INDEX.count(f"--graf-vot-tipo-{i}:"), 2, msg=f"--graf-vot-tipo-{i}")
+        self.assertIn('"var(--graf-vot-tipo-"', INDEX)
 
     def test_rosca_centro_usa_tokens_de_numero(self):
         bloco = INDEX[INDEX.find(".rosca-tipos-centro b {"):]
