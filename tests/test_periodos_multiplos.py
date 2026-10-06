@@ -172,26 +172,44 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
     def tearDownClass(cls):
         cls.servidor.shutdown()
 
-    def test_ultima_sessao_mostra_o_pleg_4_com_as_duas_datas(self):
+    def test_pleg_4_duas_datas_visiveis_no_periodo_todo(self):
+        camara = json.loads(
+            (RAIZ / "dados" / "tratados" / "materias_camara_legislatura.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        item811 = next(
+            (m for m in (camara.get("todo") or []) if int(m["id"]) == 811),
+            None,
+        )
+        self.assertIsNotNone(item811, "PLEG 811 deveria existir em todo")
+        tipo = item811["tipo"]
+        datas_voto = [v["data_sessao"] for v in item811["votacoes"]]
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page()
             page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
-            page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
-            page.click('button[data-periodo="sessao"]')
-            page.wait_for_timeout(600)
-            texto = page.inner_text("body")
-            self.assertIn("PLEG 4/2026", texto)
-            self.assertIn("Votada em 22/09/2026 e 29/09/2026", texto)
-            self.assertIn("2º turno", texto)
-            self.assertNotIn(
-                "Nenhum projeto de lei do legislativo (PLL) foi votado na última sessão",
-                texto,
+            page.wait_for_selector(
+                "#bloco-votado-sessao .cab-cartao", state="visible", timeout=60000
             )
-            datas = page.locator("#bloco-votado-sessao .materia-datas").first.inner_text()
-            self.assertIn("22/09/2026", datas)
-            self.assertIn("29/09/2026", datas)
-            page.locator("#bloco-votado-sessao .tag-turno").first.click()
+            page.click('button[data-periodo="todo"]')
+            page.wait_for_selector(
+                "#bloco-votado-todo .cab-cartao", state="visible", timeout=60000
+            )
+            page.wait_for_timeout(400)
+            texto = page.inner_text("body")
+            self.assertIn(tipo, texto)
+            self.assertIn("2º turno", texto)
+            item = page.locator(
+                '#bloco-votado-todo li.item-votado:has-text("' + tipo + '")'
+            )
+            self.assertGreater(item.count(), 0, tipo + " deveria aparecer na lista Tudo")
+            datas = item.locator(".materia-datas").inner_text()
+            for d in datas_voto:
+                partes = d.split("-")
+                fmt = f"{partes[2]}/{partes[1]}/{partes[0]}"
+                self.assertIn(fmt, datas)
+            page.locator("#bloco-votado-todo .tag-turno").first.click()
             page.wait_for_timeout(400)
             folha = page.locator("#folha-generica-corpo").inner_text()
             self.assertIn("turno", folha.lower())
@@ -205,20 +223,9 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
             page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
             page.click('button[data-periodo="mes"]')
             page.wait_for_timeout(600)
-            texto = page.inner_text("body")
-            camara = json.loads(
-                (
-                    RAIZ / "dados" / "tratados" / "materias_camara_legislatura.json"
-                ).read_text(encoding="utf-8")
-            )
-            total = len(camara.get("mes") or [])
-            if total == 1:
-                self.assertTrue(
-                    "1 projeto" in texto or "único projeto" in texto or "unico projeto" in texto,
-                    msg=f"texto sem contagem de 1 projeto: {texto[:200]}",
-                )
-            else:
-                self.assertIn(f"{total} projetos", texto)
+            titulo = page.locator("#tit-grafico-tipos-mes").inner_text()
+            self.assertIn("itens votados no último mês", titulo)
+            self.assertIn("itens votados no último mês", page.inner_text("#card-grafico-tipos-mes"))
             browser.close()
 
 

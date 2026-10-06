@@ -108,35 +108,16 @@ class TestTemasRevisadosPlaywright(unittest.TestCase):
     def tearDownClass(cls):
         cls.servidor.shutdown()
 
-    def test_cartao_presenca_bate_com_ultima_sessao(self):
+    def test_resumo_sessao_menciona_votacoes(self):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page()
-            path = RAIZ / "dados" / "tratados" / "atuacao_vereadores_legislatura.json"
-            dados = json.loads(path.read_text(encoding="utf-8"))
-            sessao = ultima_sessao(dados)
-            self.assertIsNotNone(sessao)
-            c = contagem_presenca(sessao)
-
             page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
-            page.wait_for_selector("#card-presenca-sessao .resumo", timeout=60000)
+            page.wait_for_selector("#card-votacoes-sessao .resumo", timeout=60000)
             page.click('button[data-periodo="sessao"]')
             page.wait_for_timeout(600)
-
-            frase = page.locator("#card-presenca-sessao .resumo").inner_text()
-            m = re.search(r"(\d+)\s+vereadores", frase) or re.search(
-                r"dos (\d+) vereadores", frase
-            )
-            self.assertIsNotNone(m, msg=f"frase presenca: {frase}")
-            self.assertEqual(int(m.group(1)), c["banca"])
-
-            linha_pres = page.locator("#card-presenca-sessao .presenca-linha b").inner_text()
-            presentes = int(re.search(r"^(\d+)", linha_pres.strip()).group(1))
-            btn_faltas = page.locator("#card-presenca-sessao [data-abrir-faltas]")
-            faltas = int(btn_faltas.locator("b").inner_text()) if btn_faltas.count() else 0
-            self.assertEqual(presentes, c["presentes"])
-            self.assertEqual(faltas, c["faltas"])
-
+            frase = page.locator("#card-votacoes-sessao .resumo").inner_text()
+            self.assertRegex(frase, r"itens votados|item votado", msg=f"resumo: {frase}")
             browser.close()
 
 

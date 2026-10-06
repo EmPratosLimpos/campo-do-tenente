@@ -57,6 +57,17 @@
     --graf-falta-just: #A87A00;
     --graf-falta-sem: #C2410C;
     --graf-trilha: #DDE5DF;
+    /* Tipos de item votado na rosca (RI-1k). Ordem: PLEG, REQ, MOC, IND, PLEX, VET, outro.
+       Coral, ciano, índigo, roxo, âmbar e grafite; os tipos mais numerosos (IND, REQ, PLEX) nas cores mais fortes.
+       Sem rosa, verde (marca), azul (Sim) e laranja (Não); contraste de 3:1 ou mais contra o cartão e
+       pares distinguíveis também em deuteranopia e protanopia. */
+    --graf-vot-tipo-1: #B81D3A;
+    --graf-vot-tipo-2: #0E7490;
+    --graf-vot-tipo-3: #3B1FA8;
+    --graf-vot-tipo-4: #A855F7;
+    --graf-vot-tipo-5: #C08000;
+    --graf-vot-tipo-6: #374151;
+    --graf-vot-tipo-7: var(--linha-forte);
     --barra-unanimidade: #2F5BEA;
     --barra-maioria: #6E8EF0;
     --sombra: 0 1px 2px rgba(19,32,26,.06), 0 4px 16px rgba(19,32,26,.06);
@@ -112,6 +123,8 @@
     --t-numero: 22px;      /* número em linha ou quadro no celular, peso 800 */
     --t-numero-quadro: 22px; /* número grande em quadro (.numeros b, .qv b); 28px no computador */
     --t-numero-legenda: 14px; /* rótulo em .numeros span; 13px no computador */
+    --t-numero-rosca: 18px;  /* total no centro da rosca de tipos (RI-1j); 20px no computador */
+    --t-rosca-rotulo: 13px;  /* rótulo no centro da rosca de tipos (RI-1j) */
     --t-materia: 15px;     /* assunto da matéria, peso 600, altura 1.45 */
     --t-corpo: 15px;       /* texto corrido, peso 400, altura 1.5 */
     --t-apoio: 13px;       /* datas, sigla, legendas, tags; nunca menor que 13px */
@@ -130,6 +143,7 @@
       --t-cartao: 17px;
       --t-numero-quadro: 28px;
       --t-numero-legenda: 13px;
+      --t-numero-rosca: 20px;
       --t-corpo: 16px;
       --t-apoio: 14px;
     }
@@ -169,6 +183,13 @@
     --graf-falta-just: #E0B53A;
     --graf-falta-sem: #FF9A5C;
     --graf-trilha: #26302A;
+    --graf-vot-tipo-1: #FF5A5F;
+    --graf-vot-tipo-2: #67E8F9;
+    --graf-vot-tipo-3: #6050F5;
+    --graf-vot-tipo-4: #CA82FF;
+    --graf-vot-tipo-5: #FBBF24;
+    --graf-vot-tipo-6: #8B95A1;
+    --graf-vot-tipo-7: var(--linha-forte);
     --barra-unanimidade: #7FA2FF;
     --barra-maioria: #4A68C8;
     --sombra: 0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
@@ -1072,7 +1093,7 @@
     color: var(--texto);
   }
 
-  .conteudo { padding: 0 16px calc(148px + env(safe-area-inset-bottom, 0px)); }
+  .conteudo { padding: 0 16px calc(148px + env(safe-area-inset-bottom, 0px)); min-width: 0; max-width: 100%; }
 
   .aviso, .aviso-ia {
     border-radius: 10px;
@@ -1212,6 +1233,136 @@
 
   .rosca-legenda dt { font-weight: 800; }
   .rosca-legenda dd { margin: 0; color: var(--texto-suave); white-space: nowrap; word-break: normal; word-wrap: normal; }
+
+  .cartao-grafico-tipos .legenda-tipo-votacao.ativo {
+    box-shadow: inset 0 0 0 2px var(--texto);
+  }
+  .legenda-tipos-votacao {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .legenda-tipo-votacao {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: var(--alvo-minimo);
+    padding: 6px 10px;
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: var(--superficie-2);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--texto);
+    text-align: left;
+    cursor: pointer;
+  }
+  .legenda-tipo-votacao .legenda-qtd {
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Rosca por tipo (RI-1i): anel com a espessura da barra segmentada (16 px), vãos de 3 px,
+     centro com número em --t-numero-quadro e legenda em linhas como a lista de números. */
+  .cartao-grafico-tipos .cab-cartao { margin: 0; }
+  .rosca-tipos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--esp-4) var(--esp-6);
+  }
+  .rosca-tipos-figura {
+    position: relative;
+    flex: 0 0 auto;
+    width: 130px;
+    height: 130px;
+  }
+  .rosca-tipos-votacao { display: block; width: 100%; height: 100%; overflow: visible; }
+  .rosca-tipos-votacao .fatia-tipo-votacao { cursor: pointer; }
+  .rosca-tipos-votacao.com-filtro .fatia-tipo-votacao:not(.ativo) { opacity: 0.28; }
+  @media (prefers-reduced-motion: no-preference) {
+    .rosca-tipos-votacao .fatia-tipo-votacao { transition: opacity 0.18s ease, stroke-width 0.18s ease; }
+  }
+  .rosca-tipos-centro {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 0 20px;
+    text-align: center;
+    pointer-events: none;
+  }
+  /* RI-1j: rosca menor (130 px no celular, 140 px no computador); centro reduzido na mesma proporção */
+  .rosca-tipos-centro b {
+    font-size: var(--t-numero-rosca);
+    font-weight: 800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--texto);
+  }
+  .rosca-tipos-centro span {
+    font-size: var(--t-rosca-rotulo);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--texto-suave);
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+  .legenda-rosca {
+    flex: 1 1 240px;
+    min-width: 0;
+    gap: 0;
+  }
+  .legenda-rosca li + li { border-top: 1px solid var(--linha); }
+  .legenda-rosca .legenda-tipo-votacao {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: var(--esp-3);
+    min-height: var(--alvo-minimo);
+    padding: 6px var(--esp-2);
+    border: 0;
+    border-radius: var(--raio-controle);
+    background: transparent;
+    font-size: var(--t-corpo);
+    line-height: 1.3;
+  }
+  .legenda-rosca .legenda-tipo-votacao:hover { background: var(--superficie-2); }
+  .cartao-grafico-tipos .legenda-rosca .legenda-tipo-votacao.ativo {
+    background: var(--superficie-2);
+    box-shadow: inset 0 0 0 2px var(--texto);
+  }
+  .legenda-rosca .legenda-nome { overflow-wrap: normal; word-break: normal; hyphens: none; }
+  .legenda-rosca .legenda-qtd { font-size: var(--t-cartao); }
+  .legenda-rosca .indicador { width: 12px; height: 12px; border-radius: 50%; }
+  .legenda-rosca li:has(.ativo) + li,
+  .legenda-rosca li + li:has(.ativo) { border-top-color: transparent; }
+  /* RI-1j: legenda ao lado da rosca, centrada na altura do anel, sempre que o cartão tem largura para
+     o nome mais longo ("Requerimentos") sem quebrar a palavra: 316 px de conteúdo no celular (tela de 390 px),
+     344 px no computador (fonte 16 px). Em cartão mais estreito a legenda fica abaixo. */
+  .cartao-grafico-tipos { container: tipos-votacao / inline-size; }
+  @container tipos-votacao (min-width: 316px) {
+    .rosca-tipos { flex-wrap: nowrap; justify-content: flex-start; gap: var(--esp-3); }
+    .legenda-rosca { flex: 1 1 auto; }
+    .legenda-rosca .legenda-tipo-votacao { gap: var(--esp-2); padding: 6px 6px 6px 4px; }
+  }
+  @media (min-width: 900px) {
+    .rosca-tipos-figura { width: 140px; height: 140px; }
+    @container tipos-votacao (min-width: 316px) and (max-width: 343.98px) {
+      .rosca-tipos { flex-wrap: wrap; justify-content: center; }
+      .legenda-rosca { flex: 1 1 240px; }
+    }
+    @container tipos-votacao (min-width: 344px) {
+      .rosca-tipos { gap: var(--esp-4); }
+    }
+  }
 
   .indicador {
     display: inline-block;
@@ -1871,15 +2022,71 @@
     min-width: 0;
     white-space: nowrap;
   }
-  @media (min-width: 900px) {
-    .numeros.proj-num > li.clicavel {
-      grid-column: 1 / -1;
-    }
+  /* Caixas de tipo em "Pedidos que fez" (RI-1i): o botão de filtro é a caixa e tem altura automática;
+     a sigla explicável é irmã do botão e ocupa a mesma célula da grade, no rodapé da caixa. */
+  #conteudo-vereadores .cartao-pedidos .numeros li.pedido-tipo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: "caixa";
+    min-height: 0;
+    padding: 4px 0;
+    border-top: 0;
+    background: transparent;
+  }
+  #conteudo-vereadores .cartao-pedidos .numeros li.pedido-tipo > .contagem-pedido {
+    grid-area: caixa;
+    height: auto;
+    min-height: 64px;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-rows: auto;
+    align-items: center;
+    padding: 10px 12px 38px 14px;
+  }
+  #conteudo-vereadores .cartao-pedidos li.pedido-tipo .pedido-tipo-nome {
+    grid-column: 1;
+    grid-row: 1;
+    display: block;
+    font-size: var(--t-corpo);
+    font-weight: 600;
+    color: var(--texto);
+    line-height: 1.3;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+  #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .contagem-pedido > b { grid-column: 2; grid-row: 1; }
+  #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .contagem-pedido > svg { grid-column: 3; grid-row: 1; }
+  #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .pedido-tipo-sigla {
+    grid-area: caixa;
+    align-self: end;
+    justify-self: start;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    margin: 0 0 10px 14px;
+    font-size: var(--t-apoio);
+    font-weight: 800;
+    color: var(--texto-suave);
+    white-space: nowrap;
   }
   .sub-vereadores,
   .escolha-vereador {
     max-width: 100%;
     min-width: 0;
+  }
+  .filtros-tipo-votacao {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 12px;
+    min-width: 0;
+  }
+  .filtro-tipo-votacao.ativo {
+    border-color: var(--marca);
+    background: var(--marca-suave);
   }
   .faixa-votos {
     display: flex;
@@ -2176,6 +2383,11 @@
     font-weight: 600;
     line-height: 1.45;
     margin: 0;
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
   }
   .linha-meta {
     display: flex;
@@ -3858,7 +4070,8 @@
   #conteudo-vereadores .perfil-cabecalho {
     max-width: 100%;
     box-sizing: border-box;
-    overflow-wrap: anywhere;
+    min-width: 0;
+    overflow-wrap: break-word;
   }
 
   .duas-colunas-desk {
@@ -3871,6 +4084,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    min-width: 0;
   }
   .duas-colunas-desk > .coluna-A > *,
   .duas-colunas-desk > .coluna-B > * {
@@ -4500,7 +4714,27 @@
       gap: 8px;
     }
     #conteudo-vereadores .numeros li.clicavel .linha-btn b { grid-row: 1; grid-column: 1; font-size: var(--t-numero-quadro); line-height: 1; }
-    #conteudo-vereadores .numeros li.clicavel .linha-btn > span { grid-row: 2; grid-column: 1 / -1; font-size: var(--t-numero-legenda); color: var(--texto-suave); }
+    #conteudo-vereadores .cartao-pedidos .numeros.proj-num {
+      grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+    }
+    #conteudo-vereadores .cartao-pedidos .numeros li.pedido-tipo { padding: 0; }
+    #conteudo-vereadores .cartao-pedidos .numeros li.pedido-tipo > .contagem-pedido {
+      height: 100%;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-rows: auto auto;
+      align-items: start;
+      gap: 8px;
+      padding: 14px 14px 44px;
+    }
+    #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .contagem-pedido > b { grid-column: 1; grid-row: 1; font-size: var(--t-numero-quadro); line-height: 1; }
+    #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .contagem-pedido > svg { grid-column: 2; grid-row: 1; }
+    #conteudo-vereadores .cartao-pedidos li.pedido-tipo .pedido-tipo-nome {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      font-size: var(--t-numero-legenda);
+      color: var(--texto-suave);
+    }
+    #conteudo-vereadores .cartao-pedidos li.pedido-tipo > .pedido-tipo-sigla { margin: 0 0 12px 14px; }
     #conteudo-vereadores .numeros li.clicavel .linha-btn > svg { grid-row: 1; grid-column: 2; }
     #conteudo-vereadores .numeros li span .marcador-cor { margin-top: 3px; }
   }
@@ -4555,17 +4789,21 @@
     font-weight: 400;
     color: var(--texto-suave);
   }
+  /* RI-1j: trilha da grade com mínimo 0, para que uma tag longa não alargue o item além do cartão */
   #painel-camara .lista-materias,
-  #painel-prefeito .lista-materias { display: grid; gap: 0; }
+  #painel-prefeito .lista-materias { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
   #painel-camara .item-votado.materia,
   #painel-prefeito .item-votado.materia {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 8px;
     padding: 16px 0;
     border-bottom: 0;
     border-top: 1px solid var(--linha);
     align-items: start;
     justify-items: start;
+    min-width: 0;
+    max-width: 100%;
   }
   #painel-camara .item-votado.materia:first-child,
   #painel-prefeito .item-votado.materia:first-child { border-top: 0; padding-top: 4px; }
@@ -4587,6 +4825,15 @@
     font-weight: 600;
     line-height: 1.5;
     letter-spacing: normal;
+  }
+  /* RI-1j: tag longa ("Iluminação, serviços urbanos e conectividade") quebra linha dentro do cartão, sem cortar texto */
+  .materia-tags .chip {
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: break-word;
   }
   #painel-camara .linha-meta,
   #painel-prefeito .linha-meta { line-height: 1.5; }
@@ -4614,7 +4861,22 @@
   #temas-distribuicao-sessao,
   #temas-distribuicao-mes,
   #temas-distribuicao-todo,
-  #temas-distribuicao-prefeito { display: grid; gap: 14px; min-width: 0; }
+  #temas-distribuicao-prefeito,
+  .temas-lista .tema-linha { list-style: none; }
+  .temas-lista .tema-linha .tema-estatico {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 4px 10px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+  }
+  .temas-lista .tema-linha .tema-estatico .trilho { grid-column: 1 / -1; }
 
   /* Folhas: explicação, quem faltou, votos e compartilhar */
   .folha-generica {
@@ -4853,11 +5115,10 @@
         <div class="duas-colunas-desk">
           <div class="coluna-A">
             <article class="cartao" id="card-votacoes-sessao" aria-labelledby="tit-resumo-sessao"></article>
-            <article class="cartao" id="card-presenca-sessao" aria-labelledby="tit-presenca-sessao"></article>
             <article class="cartao" id="card-temas-sessao"><div id="temas-distribuicao-sessao"></div></article>
           </div>
           <div class="coluna-B">
-            <article class="cartao bloco-votado" id="bloco-votado-sessao" data-periodo="sessao"></article>
+            <article class="cartao bloco-votado" id="bloco-votado-sessao" data-periodo="sessao"><span class="sr" id="live-votado-sessao" aria-live="polite" aria-atomic="true"></span></article>
           </div>
         </div>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
@@ -4866,15 +5127,11 @@
       <div class="painel-camara-interno" id="painel-periodo-mes" role="tabpanel" aria-labelledby="tab-periodo-mes" hidden>
         <div class="duas-colunas-desk">
           <div class="coluna-A">
-            <article class="cartao" id="card-votacoes-mes"></article>
-            <article class="cartao" id="card-tipos-mes" aria-labelledby="tit-tipos-mes">
-              <h2 class="t2" id="tit-tipos-mes">Quantas votações por tipo?</h2>
-              <div class="barra-tema-cam barra-temas" id="tipos-mes-barras"></div>
-            </article>
+            <article class="cartao cartao-grafico-tipos" id="card-grafico-tipos-mes" aria-labelledby="tit-grafico-tipos-mes"></article>
             <article class="cartao" id="card-temas-mes"><div id="temas-distribuicao-mes"></div></article>
           </div>
           <div class="coluna-B">
-            <article class="cartao bloco-votado" id="bloco-votado-mes" data-periodo="mes"></article>
+            <article class="cartao bloco-votado" id="bloco-votado-mes" data-periodo="mes"><span class="sr" id="live-votado-mes" aria-live="polite" aria-atomic="true"></span></article>
           </div>
         </div>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
@@ -4883,11 +5140,11 @@
       <div class="painel-camara-interno" id="painel-periodo-todo" role="tabpanel" aria-labelledby="tab-periodo-todo" hidden>
         <div class="duas-colunas-desk">
           <div class="coluna-A">
-            <article class="cartao" id="cartao-resumo-todo"></article>
+            <article class="cartao cartao-grafico-tipos" id="card-grafico-tipos-todo" aria-labelledby="tit-grafico-tipos-todo"></article>
             <article class="cartao" id="card-temas-todo"><div id="temas-distribuicao-todo"></div></article>
           </div>
           <div class="coluna-B">
-            <article class="cartao bloco-votado" id="bloco-votado-todo" data-periodo="todo"></article>
+            <article class="cartao bloco-votado" id="bloco-votado-todo" data-periodo="todo"><span class="sr" id="live-votado-todo" aria-live="polite" aria-atomic="true"></span></article>
           </div>
         </div>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
@@ -5652,6 +5909,10 @@
     filtroPLL: "",
     filtroPLLTema: "",
     listaPLLVisivel: false,
+    filtroPedidoTipo: "",
+    filtroPedidoTema: "",
+    listaPedidosVisivel: false,
+    limitePedidosLista: 10,
     pagina: 1,
     indiceEmentas: {},
     indiceMaterias: {},
@@ -5839,14 +6100,53 @@
     return "A Câmara aprovou os " + N(total) + " projetos de lei votados: " + N(unanimes) + " por unanimidade e " + N(maioria) + " por maioria.";
   }
 
+  function mapaNomesVotacoesPeriodo(periodo) {
+    var mapa = {};
+    listaVotacoesPeriodo(periodo).forEach(function (e) {
+      var item = e.raw;
+      if (item.tipo_sigla && item.tipo_nome && mapa[item.tipo_sigla] == null) {
+        mapa[item.tipo_sigla] = item.tipo_nome;
+      }
+      if (e.kind === "pleg" && item.tipo_descricao && mapa[e.tipo_sigla] == null) {
+        mapa[e.tipo_sigla] = item.tipo_descricao;
+      }
+    });
+    return mapa;
+  }
+
+  function fraseResumoContagemTipos(periodo, longo) {
+    var lista = listaVotacoesPeriodo(periodo);
+    var total = lista.length;
+    var N = function (x) { return "<strong>" + x + "</strong>"; };
+    var prefixo = "";
+    if (longo && longo.sessoes > 0) {
+      prefixo = "Em " + N(longo.sessoes) + " " + formaNum(longo.sessoes, "sess\u00e3o ordin\u00e1ria", "sess\u00f5es ordin\u00e1rias") + " " + longo.anos + ", ";
+    }
+    if (total === 0) {
+      return prefixo + "N\u00e3o houve itens votados com registro no SAPL neste per\u00edodo.";
+    }
+    var cont = contagemVotacoesPorTipo(periodo);
+    var mapa = mapaNomesVotacoesPeriodo(periodo);
+    var partes = [];
+    ordemTiposVotacao().forEach(function (sigla) {
+      var q = cont[sigla] || 0;
+      if (q <= 0) return;
+      var rotulo = rotuloTipoVotacaoUi(sigla, q, mapa);
+      rotulo = rotulo.charAt(0).toLowerCase() + rotulo.slice(1);
+      partes.push(N(q) + " " + htmlBotaoTermoSigla(sigla, rotulo));
+    });
+    var itemPal = total === 1 ? "item votado" : "itens votados";
+    var divisao = partes.length <= 1 ? partes.join("") :
+      partes.slice(0, -1).join(", ") + " e " + partes[partes.length - 1];
+    return prefixo + "Foram " + N(total) + " " + itemPal + (partes.length ? ": " + divisao : "") + ".";
+  }
+
   function htmlFraseResumoPeriodo(periodo, semPresenca) {
-    var lista = MATERIAS_CAMARA[periodo] || [];
-    var c = contagemResultadosMaterias(lista);
     var meta = estado.dados && estado.dados.meta;
     var nSessoes = meta && meta.n_sessoes_ordinarias != null ? meta.n_sessoes_ordinarias : 0;
     var longo = periodo === "todo" && nSessoes > 0 ? { sessoes: nSessoes, anos: rotuloAnosRecorte() } : null;
-    var corpo = fraseResumoNumeros(lista.length, c.unanimidade, c.maioria, c.rejeitado, longo);
-    if (periodo === "sessao" && !semPresenca && lista.length > 0) {
+    var corpo = fraseResumoContagemTipos(periodo, longo);
+    if (periodo === "sessao" && !semPresenca && listaVotacoesPeriodo(periodo).length > 0) {
       var s = ultimaSessaoOrdinaria();
       var n = s ? vereadoresNoMandatoNaSessao(s) : 0;
       var p = s && s.n_presentes != null ? s.n_presentes : 0;
@@ -5859,9 +6159,6 @@
   }
 
   function htmlCartaoResumoVotacao(periodo, tituloCab, apoioCab, tituloSoLeitor) {
-    var lista = MATERIAS_CAMARA[periodo] || [];
-    var c = contagemResultadosMaterias(lista);
-    var total = lista.length;
     var cab = "";
     if (tituloSoLeitor && tituloCab) {
       cab = '<h2 class="sr">' + esc(tituloCab) + "</h2>";
@@ -5869,9 +6166,7 @@
       cab = '<div class="cab-cartao"><h2 class="t2">' + esc(tituloCab || "") + "</h2>" +
         (apoioCab ? '<span class="apoio">' + esc(apoioCab) + "</span>" : "") + "</div>";
     }
-    return cab + htmlFraseResumoPeriodo(periodo) +
-      htmlBarraResultadoVotacao(c.unanimidade, c.maioria, c.rejeitado, total) +
-      htmlNumerosResultado(c.unanimidade, c.maioria, c.rejeitado);
+    return cab + htmlFraseResumoPeriodo(periodo);
   }
 
   function ausentesNaSessao(sessaoId) {
@@ -5920,6 +6215,10 @@
         estado.filtroPLL = "";
         estado.filtroPLLTema = "";
         estado.listaPLLVisivel = false;
+        estado.filtroPedidoTipo = "";
+        estado.filtroPedidoTema = "";
+        estado.listaPedidosVisivel = false;
+        estado.limitePedidosLista = 10;
         estado.filtroTexto = "";
         estado.filtroClassificacao = "";
         fecharFolhaGenerica(false);
@@ -5933,33 +6232,6 @@
     });
   }
 
-  function renderCartaoPresencaSessao() {
-    var card = document.getElementById("card-presenca-sessao");
-    var s = ultimaSessaoOrdinaria();
-    if (!card || !s) return;
-    var c = contagemPresencaSessao(s);
-    var n = vereadoresNoMandatoNaSessao(s);
-    var lista = MATERIAS_CAMARA.sessao || [];
-    var frase = c.presentes >= n && n > 0
-      ? "Os " + n + " vereadores estavam presentes."
-      : (c.presentes + " dos " + n + " vereadores estavam presentes.");
-    var pct = n > 0 ? (c.presentes / n) * 100 : 0;
-    var linhaFaltas = c.faltas > 0
-      ? '<li class="clicavel" style="list-style:none;padding:0"><button type="button" class="linha-btn" data-abrir-faltas="1"><span>Faltas</span><b>' + c.faltas + '</b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></li>'
-      : "";
-    var numeros = '<ul class="numeros">' +
-      '<li class="presenca-linha"><b>' + c.presentes + ' <span class="apoio presenca-de">de ' + n + "</span></b>" +
-      '<span>' + htmlMarcadorSeg("seg-cheio-marca") + "Presentes</span></li>" +
-      linhaFaltas +
-      "<li><b>" + lista.length + "</b><span>Projetos votados</span></li></ul>";
-    card.innerHTML = '<h2 class="sr" id="tit-presenca-sessao">Presen\u00e7a na \u00faltima sess\u00e3o</h2>' +
-      '<p class="resumo">' + esc(frase) + "</p>" +
-      '<div class="seg-barra" role="img" aria-label="' + esc(c.presentes + " de " + n + " vereadores presentes") + '">' +
-      '<i class="seg-cheio-marca" style="width:' + pct.toFixed(2) + '%"></i></div>' + numeros;
-    var btnFaltas = card.querySelector("[data-abrir-faltas]");
-    if (btnFaltas) btnFaltas.addEventListener("click", function () { abrirFolhaQuemFaltou(btnFaltas); });
-  }
-
   function renderCartaoResumoSessao() {
     var card = document.getElementById("card-votacoes-sessao");
     var s = ultimaSessaoOrdinaria();
@@ -5969,33 +6241,187 @@
     card.innerHTML = htmlCartaoResumoVotacao("sessao", titulo, apoio);
   }
 
-  function renderCartaoResumoMes() {
-    var card = document.getElementById("card-votacoes-mes");
-    if (!card) return;
-    var nomeMes = nomeMesAnteriorUltimaSessao();
-    card.innerHTML = htmlCartaoResumoVotacao("mes", nomeMes || "\u00daltimo m\u00eas", "");
+  function indiceCorTipoVotacao(sigla) {
+    var ordem = ordemTiposVotacao();
+    var idx = ordem.indexOf(sigla);
+    return idx >= 0 ? idx + 1 : ordem.length + 1;
   }
 
-  function renderCartaoResumoTodo() {
-    var card = document.getElementById("cartao-resumo-todo");
-    if (!card) return;
-    card.innerHTML = htmlCartaoResumoVotacao("todo", rotuloPeriodoLegislatura(), "", true);
+  /* RI-1k: paleta da rosca (--graf-vot-tipo-1 a 7, claro e escuro). */
+  function corTokenTipoVotacao(sigla) {
+    return "var(--graf-vot-tipo-" + Math.min(indiceCorTipoVotacao(sigla), 7) + ")";
   }
 
+  function tituloGraficoTiposVotacao(periodo) {
+    var total = listaVotacoesPeriodo(periodo).length;
+    var pal = total === 1 ? "item votado" : "itens votados";
+    if (periodo === "mes") return total + " " + pal + " no \u00faltimo m\u00eas";
+    if (periodo === "todo") return total + " " + pal + " na legislatura";
+    return total + " " + pal;
+  }
 
-  function atualizarPresencaUltimaSessao() {
-    renderCartaoPresencaSessao();
+  function partesGraficoTiposVotacao(periodo) {
+    var cont = contagemVotacoesPorTipo(periodo);
+    var mapa = mapaNomesVotacoesPeriodo(periodo);
+    var partes = [];
+    ordemTiposVotacao().forEach(function (sigla) {
+      var q = cont[sigla] || 0;
+      if (q <= 0) return;
+      partes.push({
+        sigla: sigla,
+        valor: q,
+        rotulo: rotuloTipoVotacaoUi(sigla, q, mapa),
+        cor: corTokenTipoVotacao(sigla)
+      });
+    });
+    partes.sort(function (a, b) { return b.valor - a.valor; });
+    return partes;
+  }
+
+  function htmlLegendaGraficoTipos(periodo, partes, classeExtra) {
+    return '<ul class="legenda-tipos-votacao' + (classeExtra ? " " + classeExtra : "") + '" role="list">' + partes.map(function (p) {
+      var ativo = estadoMaterias.filtroTipo === p.sigla;
+      return '<li><button type="button" class="legenda-tipo-votacao' + (ativo ? " ativo" : "") +
+        '" data-periodo="' + esc(periodo) + '" data-tipo-votacao="' + esc(p.sigla) +
+        '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
+        '<span class="indicador" style="background:' + esc(p.cor) + '" aria-hidden="true"></span>' +
+        '<span class="legenda-nome">' + esc(p.rotulo) + '</span>' +
+        '<span class="legenda-qtd">' + esc(p.valor) + "</span></button></li>";
+    }).join("") + "</ul>";
+  }
+
+  /* Rosca por tipo (RI-1i). SVG montado aqui, sem biblioteca. Anel com a espessura da barra
+     segmentada, vãos de 3 px entre fatias e pontas retas, como os segmentos da barra.
+     As fatias respondem ao toque; teclado e leitor de tela usam a legenda (botões com aria-pressed). */
+  function roscaSVGTiposInterativa(partes, total, periodo) {
+    var lado = 200;
+    var c = lado / 2;
+    var raio = 82;
+    var espessura = 20;
+    var espessuraAtiva = 26;
+    var circ = 2 * Math.PI * raio;
+    var vao = 4.6;
+    var minimo = 5;
+    var filtro = estadoMaterias.filtroTipo;
+    var ativa = null;
+    var inicio = -Math.PI / 2;
+    function ponto(ang) {
+      return (c + raio * Math.cos(ang)).toFixed(2) + " " + (c + raio * Math.sin(ang)).toFixed(2);
+    }
+    var arcos = partes.map(function (p) {
+      var ehAtiva = filtro === p.sigla;
+      if (ehAtiva) ativa = p;
+      var attrs = ' class="fatia-tipo-votacao' + (ehAtiva ? " ativo" : "") + '" fill="none" stroke="' + esc(p.cor) +
+        '" stroke-width="' + (ehAtiva ? espessuraAtiva : espessura) + '" stroke-linecap="butt"' +
+        ' data-periodo="' + esc(periodo) + '" data-tipo-votacao="' + esc(p.sigla) + '"';
+      if (partes.length === 1) {
+        return '<circle cx="' + c + '" cy="' + c + '" r="' + raio + '"' + attrs + "/>";
+      }
+      var fatia = total > 0 ? (p.valor / total) * 2 * Math.PI : 0;
+      var comp = Math.max(fatia * raio - vao, minimo);
+      var meio = inicio + fatia / 2;
+      var a0 = meio - comp / raio / 2;
+      var a1 = meio + comp / raio / 2;
+      inicio += fatia;
+      var grande = a1 - a0 > Math.PI ? 1 : 0;
+      return '<path d="M ' + ponto(a0) + " A " + raio + " " + raio + " 0 " + grande + " 1 " + ponto(a1) + '"' + attrs + "/>";
+    }).join("");
+    var resumo = total + " " + (total === 1 ? "item votado" : "itens votados") + ": " +
+      partes.map(function (p) { return p.valor + " " + p.rotulo; }).join(", ");
+    var numero = ativa ? ativa.valor : total;
+    var rotulo = ativa ? ("de " + total) : (total === 1 ? "item votado" : "itens votados");
+    var ariaGrafico = ativa
+      ? ativa.valor + " " + ativa.rotulo + ", de " + total + " " + (total === 1 ? "item votado" : "itens votados")
+      : resumo;
+    return '<div class="rosca-tipos-figura">' +
+      '<svg class="rosca-tipos-votacao' + (ativa ? " com-filtro" : "") + '" viewBox="0 0 ' + lado + " " + lado +
+      '" role="img" aria-label="' + esc(ariaGrafico) + '" focusable="false">' + arcos + "</svg>" +
+      '<div class="rosca-tipos-centro" aria-hidden="true"><b>' + esc(numero) + "</b><span>" + esc(rotulo) + "</span></div></div>";
+  }
+
+  function alternarFiltroTipoViaGrafico(periodo, sigla) {
+    var focoNaLegenda = document.activeElement && document.activeElement.classList &&
+      document.activeElement.classList.contains("legenda-tipo-votacao");
+    estadoMaterias.filtroTipo = estadoMaterias.filtroTipo === sigla ? "" : sigla;
+    estadoMaterias.limite[periodo] = 10;
+    renderCartaoGraficoTipos(periodo);
+    renderBlocoVotadoPeriodo(periodo);
+    ajustarPainelUltimaSessaoSemPll();
+    if (focoNaLegenda) {
+      var card = document.getElementById(periodo === "mes" ? "card-grafico-tipos-mes" : "card-grafico-tipos-todo");
+      var alvo = card && Array.prototype.find.call(card.querySelectorAll(".legenda-tipo-votacao"), function (b) {
+        return b.getAttribute("data-tipo-votacao") === sigla;
+      });
+      if (alvo) alvo.focus({ preventScroll: true });
+    }
+    if (estadoMaterias.filtroTipo) {
+      var bloco = document.getElementById("bloco-votado-" + periodo);
+      if (bloco) bloco.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }
+
+  function ligarInteracaoGraficoTipos(raiz, periodo) {
+    if (!raiz) return;
+    raiz.querySelectorAll(".fatia-tipo-votacao[data-tipo-votacao]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        alternarFiltroTipoViaGrafico(el.getAttribute("data-periodo"), el.getAttribute("data-tipo-votacao"));
+      });
+    });
+    raiz.querySelectorAll(".legenda-tipo-votacao[data-tipo-votacao]").forEach(function (el) {
+      function ativar() {
+        alternarFiltroTipoViaGrafico(el.getAttribute("data-periodo"), el.getAttribute("data-tipo-votacao"));
+      }
+      el.addEventListener("click", ativar);
+      el.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          ativar();
+        }
+      });
+    });
+  }
+
+  function renderCartaoGraficoTipos(periodo) {
+    if (periodo !== "mes" && periodo !== "todo") return;
+    var id = periodo === "mes" ? "card-grafico-tipos-mes" : "card-grafico-tipos-todo";
+    var card = document.getElementById(id);
+    if (!card) return;
+    var tituloId = "tit-grafico-tipos-" + periodo;
+    var total = listaVotacoesPeriodo(periodo).length;
+    var titulo = tituloGraficoTiposVotacao(periodo);
+    if (total <= 0) {
+      card.innerHTML = '<h2 class="t2" id="' + tituloId + '">' + esc(titulo) + '</h2>' +
+        '<p class="vazio"><b>Nenhum item com vota\u00e7\u00e3o registrada neste per\u00edodo.</b></p>';
+      return;
+    }
+    var partes = partesGraficoTiposVotacao(periodo);
+    if (!partes.length) {
+      card.innerHTML = '<h2 class="t2" id="' + tituloId + '">' + esc(titulo) + '</h2>' +
+        '<p class="vazio"><b>Nenhum item com vota\u00e7\u00e3o registrada neste per\u00edodo.</b></p>';
+      return;
+    }
+    var cabecalho = '<div class="cab-cartao"><h2 class="t2" id="' + tituloId + '">' + esc(titulo) + "</h2>" +
+      '<span class="apoio">toque para filtrar</span></div>';
+    var grafico = '<div class="rosca-tipos grafico-tipos-votacao">' + roscaSVGTiposInterativa(partes, total, periodo) +
+      htmlLegendaGraficoTipos(periodo, partes, "legenda-rosca") + "</div>";
+    var apoioSapl = "";
+    if (periodo === "todo") {
+      var fraseTodo = fraseApoioCorteVotacaoSapl();
+      if (fraseTodo) apoioSapl = '<p class="apoio apoio-sapl-votacao">' + esc(fraseTodo) + "</p>";
+    }
+    card.innerHTML = cabecalho + grafico + apoioSapl;
+    ligarInteracaoGraficoTipos(card, periodo);
   }
 
   function ajustarPainelUltimaSessaoSemPll() {
-    var lista = MATERIAS_CAMARA.sessao || [];
+    var lista = listaVotacoesPeriodo("sessao");
     if (lista.length > 0) return;
     var bloco = document.getElementById("bloco-votado-sessao");
     if (!bloco) return;
     var us = ultimaSessaoOrdinaria();
     var dataFmt = us && us.data ? formatarData(us.data) : "";
     var texto =
-      "Nenhum projeto de lei foi votado na última sessão ordinária";
+      "Nenhum item com vota\u00e7\u00e3o registrada na \u00faltima sess\u00e3o ordin\u00e1ria";
     if (dataFmt) texto += " (" + dataFmt + ")";
     texto += ".";
     var vazio = bloco.querySelector(".estado-vazio");
@@ -6013,31 +6439,6 @@
         '<p class="vazio" style="margin:0">' + esc(texto) + "</p>";
     }
   }
-
-  function atualizarTiposMes() {
-    var container = document.getElementById("tipos-mes-barras");
-    if (!container) return;
-    var lista = MATERIAS_CAMARA.mes || [];
-    var total = lista.length;
-    if (total === 0) {
-      container.innerHTML = "";
-      return;
-    }
-    container.innerHTML =
-      '<div class="barra-tema"><span class="nome">Projetos de lei</span>' +
-      '<div class="trilho"><div class="preenchido" style="width:100%;background:var(--texto-suave)"></div></div>' +
-      '<span class="qtd">' + esc(total) + "</span></div>";
-  }
-
-  function atualizarPainelTodo() {
-    renderCartaoResumoTodo();
-  }
-
-
-  function atualizarVotacoesMes() {
-    renderCartaoResumoMes();
-  }
-
 
   function nomeMesAnteriorUltimaSessao() {
     var sessoes = (estado.dados && estado.dados.sessoes) || [];
@@ -6057,14 +6458,12 @@
   function atualizarInterfaceCamara() {
     dataUltimaSessaoFmt();
     atualizarCabecalhoUltimaSessao();
-    atualizarPresencaUltimaSessao();
     atualizarRodapesColeta();
     restaurarSanfonas();
     atualizarPainelMes();
-    atualizarTiposMes();
-    atualizarPainelTodo();
     atualizarCardVotacoes();
-    atualizarVotacoesMes();
+    renderCartaoGraficoTipos("mes");
+    renderCartaoGraficoTipos("todo");
     restaurarSanfonas();
     ["sessao", "mes", "todo"].forEach(function (p) {
       renderTemasDistribuicao(p);
@@ -6072,6 +6471,7 @@
     });
     estadoMaterias.listaVisivel.sessao = true;
     ajustarPainelUltimaSessaoSemPll();
+    atualizarBannerErroCamara();
   }
 
 
@@ -6133,6 +6533,7 @@
     if (tipo === "nominal") return "Votação nominal";
     if (tipo === "tramitacao" || tipo === "tramitação") return "Em tramitação";
     if (tipo === "sem_registro_sapl") return "Sem registro no SAPL";
+    if (tipo === "sem_registro_votacao") return "Sem registro de vota\u00e7\u00e3o";
     if (tipo === "veto") return "Veto";
     if (tipo === "plex" || tipo === "PLEX") return "PLEX";
     if (tipo === "pleg" || tipo === "PLEG") return "PLEG";
@@ -6184,6 +6585,7 @@
       if (/rejeit/i.test(s)) return ex.situacao_rejeitado || s;
       return ex.situacao_tramitacao || s;
     }
+    if (tipo === "sem_registro_votacao") return textoExplicacaoSemRegistroVotacao();
     if (tipo === "coautoria") return ex.coautoria || "Coautoria";
     if (tipo === "voto") {
       var mapa = {
@@ -6930,6 +7332,106 @@
       "</article>";
   }
 
+  function renderSecaoPedidos(v) {
+    var lista = pedidosDoVereador(v);
+    if (!lista.length) {
+      return '<article class="cartao ac-cartao cartao-pedidos" aria-labelledby="tit-pedidos">' +
+        '<div class="cab-cartao"><h2 class="t2" id="tit-pedidos">Pedidos que fez</h2></div>' +
+        '<p class="vazio"><b>Nenhum pedido registrado no SAPL neste per\u00edodo.</b></p></article>';
+    }
+    var listaContagemTipo = lista;
+    if (estado.filtroPedidoTema) {
+      listaContagemTipo = lista.filter(function (item) {
+        return item.tema === estado.filtroPedidoTema;
+      });
+    }
+    var cont = contagemPedidosPorTipo(listaContagemTipo);
+    var mapa = mapaNomesTipoPedido(lista);
+    var resumo = htmlFraseResumoPedidos(lista, "Fez");
+    var listaTemasPedidos = lista;
+    if (estado.filtroPedidoTipo) {
+      listaTemasPedidos = lista.filter(function (item) {
+        return item.tipo_sigla === estado.filtroPedidoTipo;
+      });
+    }
+    var temasHtml = htmlBarrasTemasPedidos(listaTemasPedidos, true);
+
+    var itensFiltrados = lista.filter(function (item) {
+      if (!estado.listaPedidosVisivel) return false;
+      if (!estado.filtroPedidoTipo && !estado.filtroPedidoTema) return false;
+      if (estado.filtroPedidoTema && item.tema !== estado.filtroPedidoTema) return false;
+      if (estado.filtroPedidoTipo && item.tipo_sigla !== estado.filtroPedidoTipo) return false;
+      return true;
+    });
+
+    var limite = estado.limitePedidosLista || 10;
+    if (limite < 10) limite = 10;
+    var fatia = itensFiltrados.slice(0, limite);
+
+    var listaHtml = fatia.map(function (item) {
+      var pilula = htmlPilulaSituacaoPedido(item);
+      var temaBtn = item.tema && temaValidoParaTag(item.tema)
+        ? '<button type="button" class="chip tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(item.tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(item.tema) + ">" + htmlMarcadorCategoria(item.tema) + esc(item.tema) + "</button>"
+        : "";
+      var tags = '<div class="materia-tags">' + pilula + temaBtn + "</div>";
+      var titulo = item.tipo || ([item.tipo_sigla, item.numero, item.ano].filter(Boolean).join(" ").replace(/(\d+)\s+(\d+)/, "$1/$2"));
+      var autoria = htmlAutoriaPedido(item, v.id_sapl);
+      var coautHtml = autoria ? '<p class="apoio">' + autoria + "</p>" : "";
+      var ementaHtml = item.ementa
+        ? '<p class="materia-assunto">' + esc(ementaExibicao(item.ementa)) + "</p>"
+        : "";
+      var href = urlSegura(item.link_sapl);
+      var link = href ? linkExt(href, "Ver no SAPL") : "";
+      return '<li class="materia item-pedido">' + tags +
+        ementaHtml +
+        '<div class="linha-meta"><span class="sigla">' + htmlLinhaTipoMateria(titulo) + "</span></div>" +
+        coautHtml + link + "</li>";
+    }).join("");
+
+    var htmlLista = "";
+    if ((!estado.filtroPedidoTipo && !estado.filtroPedidoTema) || !estado.listaPedidosVisivel) {
+      htmlLista = '<div class="vazio" id="pedidos-estado-vazio"><b>Nenhum pedido na lista.</b><span>Toque em um tipo ou em um tema para filtrar.</span></div>';
+    } else if (!listaHtml) {
+      htmlLista = '<div class="vazio"><b>Nenhum pedido neste filtro.</b></div>';
+    } else {
+      htmlLista = '<ul class="lista-votos lista-pedidos materias">' + listaHtml + "</ul>";
+      if (itensFiltrados.length > limite) {
+        htmlLista += '<button type="button" class="btn btn-secundario btn-mais-pedidos-vereador">Mostrar mais</button>';
+      }
+    }
+
+    var setaLinha = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
+    var linhasTipo = tiposPedidos().map(function (sigla) {
+      var num = cont[sigla] || 0;
+      if (num <= 0) return "";
+      var rot = rotuloTipoPedidoUi(sigla, num, mapa);
+      var ativo = estado.filtroPedidoTipo === sigla && estado.listaPedidosVisivel;
+      /* A sigla explicável é um botão próprio: fica ao lado do botão de filtro (botão dentro de botão
+         quebra o HTML e jogava sigla, nome e seta para fora da caixa) e é sobreposta a ele pelo CSS. */
+      return '<li class="clicavel pedido-tipo"><button type="button" class="linha-btn contagem-item contagem-pedido' + (ativo ? " ativo" : "") +
+        '" data-ped-filtro="' + esc(sigla) + '" aria-pressed="' + (ativo ? "true" : "false") + '">' +
+        "<b>" + esc(num) + "</b>" +
+        '<span class="pedido-tipo-nome">' + esc(rot) + "</span>" +
+        setaLinha + "</button>" +
+        '<span class="pedido-tipo-sigla">' + htmlBotaoTermoSigla(sigla, sigla) + "</span></li>";
+    }).join("");
+
+    var numeros = linhasTipo ? '<ul class="numeros proj-num">' + linhasTipo + "</ul>" : "";
+
+    var apoioPedidos = fraseApoioPedidosVereadorSapl();
+    var htmlApoioPedidos = apoioPedidos
+      ? '<p class="apoio apoio-sapl-pedidos">' + esc(apoioPedidos) + "</p>"
+      : "";
+    return '<article class="cartao ac-cartao cartao-pedidos" aria-labelledby="tit-pedidos">' +
+      '<div class="cab-cartao"><h2 class="t2" id="tit-pedidos">Pedidos que fez</h2><span class="apoio">toque para filtrar</span></div>' +
+      '<p class="resumo">' + resumo + "</p>" +
+      htmlApoioPedidos +
+      numeros +
+      (temasHtml ? '<h3 class="sub-h">Por tema</h3><ul class="temas-lista">' + temasHtml + "</ul>" : "") +
+      htmlLista +
+      "</article>";
+  }
+
   function htmlPilulaVotoNominal(n) {
     var rot = rotuloVoto(n);
     var est = n.estado;
@@ -7133,6 +7635,14 @@
     return ativos.concat(encerrados);
   }
 
+  function restaurarFocoAposRender(attr, valor) {
+    if (!valor) return;
+    requestAnimationFrame(function () {
+      var el = document.querySelector("[" + attr + '="' + valor + '"]');
+      if (el && typeof el.focus === "function") el.focus({ preventScroll: true });
+    });
+  }
+
   function renderApp() {
     var v = vereadorAtual();
     if (!v || !estado.dados) return;
@@ -7197,7 +7707,7 @@
 
     conteudo.innerHTML =
       '<div class="vereadores-grade">' +
-      '<div class="vereadores-coluna">' + renderSecaoPresenca(v) + renderSecaoPLL(v) + "</div>" +
+      '<div class="vereadores-coluna">' + renderSecaoPresenca(v) + renderSecaoPLL(v) + renderSecaoPedidos(v) + "</div>" +
       '<div class="vereadores-coluna">' + renderSecaoVotos(v) + "</div>" +
       "</div>" +
       '<footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>';
@@ -7211,6 +7721,10 @@
       estado.filtroPLL = "";
       estado.filtroPLLTema = "";
       estado.listaPLLVisivel = false;
+      estado.filtroPedidoTipo = "";
+      estado.filtroPedidoTema = "";
+      estado.listaPedidosVisivel = false;
+      estado.limitePedidosLista = 10;
       estado.filtroTexto = "";
       estado.filtroClassificacao = "";
       var verTroca = vereadoresOrdenados().find(function (ver) {
@@ -7232,6 +7746,10 @@
         estado.filtroPLL = "";
         estado.filtroPLLTema = "";
         estado.listaPLLVisivel = false;
+        estado.filtroPedidoTipo = "";
+        estado.filtroPedidoTema = "";
+        estado.listaPedidosVisivel = false;
+        estado.limitePedidosLista = 10;
         estado.filtroTexto = "";
         estado.filtroClassificacao = "";
         renderApp();
@@ -7285,6 +7803,7 @@
           estado.listaPLLVisivel = true;
         }
         renderApp();
+        restaurarFocoAposRender("data-pl-filtro", f);
       });
     });
 
@@ -7299,8 +7818,55 @@
           estado.listaPLLVisivel = true;
         }
         renderApp();
+        restaurarFocoAposRender("data-pll-tema", tema);
       });
     });
+
+    document.querySelectorAll(".contagem-pedido[data-ped-filtro]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var f = btn.getAttribute("data-ped-filtro");
+        if (estado.filtroPedidoTipo === f && estado.listaPedidosVisivel) {
+          estado.filtroPedidoTipo = "";
+          estado.filtroPedidoTema = "";
+          estado.listaPedidosVisivel = false;
+          estado.limitePedidosLista = 10;
+        } else {
+          estado.filtroPedidoTipo = f;
+          estado.listaPedidosVisivel = true;
+          estado.limitePedidosLista = 10;
+        }
+        renderApp();
+        restaurarFocoAposRender("data-ped-filtro", f);
+      });
+    });
+
+    document.querySelectorAll("[data-pedido-tema]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var tema = btn.getAttribute("data-pedido-tema");
+        if (estado.filtroPedidoTema === tema) {
+          estado.filtroPedidoTema = "";
+          if (!estado.filtroPedidoTipo) estado.listaPedidosVisivel = false;
+        } else {
+          estado.filtroPedidoTema = tema;
+          estado.listaPedidosVisivel = true;
+        }
+        estado.limitePedidosLista = 10;
+        renderApp();
+        restaurarFocoAposRender("data-pedido-tema", tema);
+      });
+    });
+
+    var btnMaisPedidos = document.querySelector(".btn-mais-pedidos-vereador");
+    if (btnMaisPedidos) {
+      btnMaisPedidos.addEventListener("click", function () {
+        estado.limitePedidosLista = (estado.limitePedidosLista || 10) + 10;
+        renderApp();
+        requestAnimationFrame(function () {
+          var alvo = document.querySelector(".btn-mais-pedidos-vereador");
+          if (alvo && typeof alvo.focus === "function") alvo.focus({ preventScroll: true });
+        });
+      });
+    }
 
     document.querySelectorAll("[data-falta-presenca]").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -7359,6 +7925,9 @@
           var primeiros = vereadoresOrdenados();
           if (primeiros.length) estado.vereadorId = primeiros[0].id_sapl;
         }
+        return carregarProposicoesCamara();
+      })
+      .then(function () {
         atualizarInterfaceCamara();
         renderApp();
       })
@@ -7375,8 +7944,33 @@
 var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   var MATERIAS_TAGS = {};
   var FILTROS_MATERIA = { sessao: [], mes: [], todo: [] };
+  var ERRO_CARGA_MATERIAS_CAMARA = false;
+  var ERRO_CARGA_EXECUTIVO = false;
+  var PROPOSICOES_CAMARA = { sessao: [], mes: [], todo: [] };
+  var PROPOSICOES_INTEGRA = { sessao: [], mes: [], todo: [] };
+  var DATA_MINIMA_VOTACAO_CACHE = "";
 
   var MATERIAS_URL = prefixoDadosTratados();
+
+  function atualizarBannerErroCamara() {
+    var painel = document.getElementById("painel-camara");
+    if (!painel) return;
+    var banner = document.getElementById("erro-carga-camara");
+    if (!ERRO_CARGA_MATERIAS_CAMARA && !ERRO_CARGA_EXECUTIVO) {
+      if (banner) banner.remove();
+      return;
+    }
+    var partes = [];
+    if (ERRO_CARGA_MATERIAS_CAMARA) partes.push("materiais da C\u00e2mara");
+    if (ERRO_CARGA_EXECUTIVO) partes.push("projetos do Executivo");
+    var html = '<div class="erro-carga"><strong>N\u00e3o foi poss\u00edvel carregar os dados.</strong> Falha ao carregar: ' +
+      esc(partes.join(" e ")) + ".</div>";
+    if (!banner) {
+      painel.insertAdjacentHTML("afterbegin", '<div id="erro-carga-camara"></div>');
+      banner = document.getElementById("erro-carga-camara");
+    }
+    banner.innerHTML = html;
+  }
 
   function carregarMateriasCamara() {
     var urls = [
@@ -7393,13 +7987,385 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       MATERIAS_CAMARA = results[0];
       MATERIAS_TAGS = results[1];
       FILTROS_MATERIA = results[2];
-      
+      DATA_MINIMA_VOTACAO_CACHE = "";
+      ERRO_CARGA_MATERIAS_CAMARA = false;
     }).catch(function () {
       MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       MATERIAS_TAGS = {};
       FILTROS_MATERIA = { sessao: [], mes: [], todo: [] };
-      
+      ERRO_CARGA_MATERIAS_CAMARA = true;
     });
+  }
+
+  function tiposPedidos() {
+    var tr = CONFIG_CIDADE && CONFIG_CIDADE.tramitacao;
+    if (tr && tr.tipos_pedidos && tr.tipos_pedidos.length) return tr.tipos_pedidos.slice();
+    return [];
+  }
+
+  function nomesPedidosConfig() {
+    var tr = CONFIG_CIDADE && CONFIG_CIDADE.tramitacao;
+    return (tr && tr.nomes_pedidos) ? tr.nomes_pedidos : {};
+  }
+
+  function itemEhTipoPedido(item) {
+    if (!item || !item.tipo_sigla) return false;
+    return tiposPedidos().indexOf(item.tipo_sigla) >= 0;
+  }
+
+  function filtrarListaPedidos(lista) {
+    return (lista || []).filter(itemEhTipoPedido);
+  }
+
+  function carregarProposicoesCamara() {
+    var url = prefixoDadosTratados() + "proposicoes_" + SUFIXO_DADOS + ".json";
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text().then(function (text) { return JSON.parse(text); });
+    }).then(function (dados) {
+      ["sessao", "mes", "todo"].forEach(function (p) {
+        PROPOSICOES_INTEGRA[p] = dados[p] || [];
+        PROPOSICOES_CAMARA[p] = filtrarListaPedidos(dados[p]);
+      });
+      DATA_MINIMA_VOTACAO_CACHE = "";
+    }).catch(function () {
+      PROPOSICOES_CAMARA = { sessao: [], mes: [], todo: [] };
+      PROPOSICOES_INTEGRA = { sessao: [], mes: [], todo: [] };
+    });
+  }
+
+  function itemTemVotacaoValida(item) {
+    return !!(item && item.situacao_final_fonte === "votacao" && item.votacao && item.votacao.data_sessao);
+  }
+
+  function datasVotacaoRegistradas() {
+    var datas = [];
+    function addData(d) {
+      if (d && datas.indexOf(d) < 0) datas.push(d);
+    }
+    ["sessao", "mes", "todo"].forEach(function (p) {
+      (MATERIAS_CAMARA[p] || []).forEach(function (m) {
+        addData(m.data_sessao);
+        ((m.votacoes) || []).forEach(function (v) { addData(v && v.data_sessao); });
+      });
+    });
+    ["sessao", "mes", "todo"].forEach(function (p) {
+      (PROPOSICOES_INTEGRA[p] || []).forEach(function (item) {
+        if (itemTemVotacaoValida(item)) addData(item.votacao.data_sessao);
+      });
+    });
+    if (EXECUTIVO_DADOS) {
+      ["sessao", "mes", "todo"].forEach(function (p) {
+        (EXECUTIVO_DADOS[p] || []).forEach(function (item) {
+          if (itemTemVotacaoValida(item)) addData(item.votacao.data_sessao);
+        });
+      });
+    }
+    return datas.sort();
+  }
+
+  function dataMinimaVotacaoRegistrada() {
+    if (DATA_MINIMA_VOTACAO_CACHE) return DATA_MINIMA_VOTACAO_CACHE;
+    var datas = datasVotacaoRegistradas();
+    DATA_MINIMA_VOTACAO_CACHE = datas.length ? datas[0] : "";
+    return DATA_MINIMA_VOTACAO_CACHE;
+  }
+
+  function fraseApoioCorteVotacaoSapl() {
+    var d = dataMinimaVotacaoRegistrada();
+    if (!d) return "";
+    return "O SAPL registra vota\u00e7\u00f5es a partir de " + formatarData(d) +
+      ". Itens anteriores sem registro n\u00e3o aparecem aqui.";
+  }
+
+  function fraseApoioPedidosVereadorSapl() {
+    var d = dataMinimaVotacaoRegistrada();
+    if (!d) return "";
+    return "O SAPL registra vota\u00e7\u00f5es a partir de " + formatarData(d) +
+      ". Pedidos anteriores n\u00e3o t\u00eam registro de vota\u00e7\u00e3o.";
+  }
+
+  function textoExplicacaoSemRegistroVotacao() {
+    var d = dataMinimaVotacaoRegistrada();
+    if (!d) return "Este pedido \u00e9 anterior e n\u00e3o tem vota\u00e7\u00e3o registrada no SAPL.";
+    return "O SAPL registra vota\u00e7\u00f5es a partir de " + formatarData(d) +
+      ". Este pedido \u00e9 anterior e n\u00e3o tem vota\u00e7\u00e3o registrada.";
+  }
+
+  function tiposProposicoesConfig() {
+    var tr = CONFIG_CIDADE && CONFIG_CIDADE.tramitacao;
+    if (tr && tr.tipos_proposicoes) return tr.tipos_proposicoes.slice();
+    return [];
+  }
+
+  function tiposExecutivoConfig() {
+    var tr = CONFIG_CIDADE && CONFIG_CIDADE.tramitacao;
+    if (tr && tr.tipos_executivo) return tr.tipos_executivo.slice();
+    return [];
+  }
+
+  function mapaNomesTiposLista(lista) {
+    var mapa = {};
+    (lista || []).forEach(function (item) {
+      if (item.tipo_sigla && item.tipo_nome && mapa[item.tipo_sigla] == null) {
+        mapa[item.tipo_sigla] = item.tipo_nome;
+      }
+    });
+    return mapa;
+  }
+
+  function listaVotacoesPeriodo(periodo) {
+    var out = [];
+    var idsPleg = {};
+    (MATERIAS_CAMARA[periodo] || []).forEach(function (m) {
+      idsPleg[m.id] = true;
+      var sigPleg = m.tipo_sigla || (tiposProposicoesConfig()[0] || "");
+      out.push({ kind: "pleg", raw: m, id: m.id, tipo_sigla: sigPleg, data: m.data_sessao || "" });
+    });
+    if (EXECUTIVO_DADOS) {
+      (EXECUTIVO_DADOS[periodo] || []).forEach(function (item) {
+        if (!itemTemVotacaoValida(item)) return;
+        var sig = item.tipo_sigla || "";
+        if (tiposExecutivoConfig().indexOf(sig) < 0) return;
+        out.push({ kind: "exec", raw: item, id: item.id, tipo_sigla: sig, data: item.votacao.data_sessao });
+      });
+    }
+    (PROPOSICOES_INTEGRA[periodo] || []).forEach(function (item) {
+      if (!itemTemVotacaoValida(item)) return;
+      if (idsPleg[item.id]) return;
+      var sig = item.tipo_sigla || "";
+      if (tiposPedidos().indexOf(sig) < 0) return;
+      out.push({ kind: "prop", raw: item, id: item.id, tipo_sigla: sig, data: item.votacao.data_sessao });
+    });
+    out.sort(function (a, b) {
+      if (a.data !== b.data) return a.data < b.data ? 1 : -1;
+      return (parseInt(b.id, 10) || 0) - (parseInt(a.id, 10) || 0);
+    });
+    return out;
+  }
+
+  function contagemVotacoesPorTipo(periodo) {
+    var lista = listaVotacoesPeriodo(periodo);
+    var out = {};
+    lista.forEach(function (e) {
+      var t = e.tipo_sigla || "";
+      out[t] = (out[t] || 0) + 1;
+    });
+    return out;
+  }
+
+  function ordemTiposVotacao() {
+    var tr = CONFIG_CIDADE && CONFIG_CIDADE.tramitacao;
+    if (!tr) return [];
+    var ordem = (tr.tipos_proposicoes || []).slice();
+    (tr.tipos_executivo || []).forEach(function (s) { if (ordem.indexOf(s) < 0) ordem.push(s); });
+    (tr.tipos_pedidos || []).forEach(function (s) { if (ordem.indexOf(s) < 0) ordem.push(s); });
+    return ordem;
+  }
+
+  function tituloCartaoVotacoesPeriodo(periodo) {
+    if (periodo === "sessao") return "Vota\u00e7\u00f5es da sess\u00e3o";
+    if (periodo === "mes") return "Vota\u00e7\u00f5es do m\u00eas";
+    return "Vota\u00e7\u00f5es da legislatura";
+  }
+
+  function ordenarPedidosRecentes(a, b) {
+    var ya = parseInt(a.ano, 10) || 0;
+    var yb = parseInt(b.ano, 10) || 0;
+    if (yb !== ya) return yb - ya;
+    return (parseInt(b.numero, 10) || 0) - (parseInt(a.numero, 10) || 0);
+  }
+
+  function pedidosDoVereador(v) {
+    if (!v) return [];
+    var id = v.id_sapl;
+    return (PROPOSICOES_CAMARA.todo || []).filter(function (item) {
+      return (item.autores || []).some(function (a) {
+        return String(a.parlamentar_id_sapl) === String(id);
+      });
+    }).sort(ordenarPedidosRecentes);
+  }
+
+  function mapaNomesTipoPedido(lista) {
+    var mapa = {};
+    (lista || []).forEach(function (item) {
+      if (item.tipo_sigla && item.tipo_nome && mapa[item.tipo_sigla] == null) {
+        mapa[item.tipo_sigla] = item.tipo_nome;
+      }
+    });
+    return mapa;
+  }
+
+  function rotuloTipoPedidoExibicao(sigla, quantidade, mapaNomes) {
+    var cfg = nomesPedidosConfig()[sigla];
+    if (cfg && (cfg.singular || cfg.plural)) {
+      var forma = quantidade === 1 ? (cfg.singular || cfg.plural) : (cfg.plural || cfg.singular);
+      forma = String(forma).trim();
+      if (forma) return forma.charAt(0).toLowerCase() + forma.slice(1);
+    }
+    var nome = (mapaNomes && mapaNomes[sigla]) || sigla;
+    var base = String(nome).trim();
+    return base.charAt(0).toLowerCase() + base.slice(1);
+  }
+
+  function rotuloTipoPedidoUi(sigla, quantidade, mapaNomes) {
+    var cfg = nomesPedidosConfig()[sigla];
+    if (cfg) {
+      var rot = quantidade === 1 ? (cfg.rotulo_singular || cfg.singular) : (cfg.rotulo_plural || cfg.plural);
+      rot = String(rot || "").trim();
+      if (rot) return rot;
+    }
+    var nome = (mapaNomes && mapaNomes[sigla]) || sigla;
+    var base = String(nome).trim();
+    if (!base) return sigla;
+    return base.charAt(0).toUpperCase() + base.slice(1);
+  }
+
+  function nomesTiposVotacaoConfig() {
+    var tr = CONFIG_CIDADE && CONFIG_CIDADE.tramitacao;
+    return (tr && tr.nomes_tipos_votacao) ? tr.nomes_tipos_votacao : {};
+  }
+
+  function rotuloTipoVotacaoUi(sigla, quantidade, mapaNomes) {
+    var cfg = nomesTiposVotacaoConfig()[sigla];
+    if (cfg) {
+      var rot = quantidade === 1 ? (cfg.rotulo_singular || cfg.rotulo_plural) : (cfg.rotulo_plural || cfg.rotulo_singular);
+      rot = String(rot || "").trim();
+      if (rot) return rot;
+    }
+    if (sigla && tiposPedidos().indexOf(sigla) >= 0) {
+      return rotuloTipoPedidoUi(sigla, quantidade, mapaNomes);
+    }
+    var nome = (mapaNomes && mapaNomes[sigla]) || descricaoTipoSigla(sigla) || sigla;
+    nome = String(nome).trim();
+    if (!nome) return sigla;
+    return nome.charAt(0).toUpperCase() + nome.slice(1);
+  }
+
+  function contagemPedidosPorTipo(lista) {
+    var tipos = tiposPedidos();
+    var out = {};
+    tipos.forEach(function (t) { out[t] = 0; });
+    (lista || []).forEach(function (item) {
+      if (out[item.tipo_sigla] != null) out[item.tipo_sigla] += 1;
+    });
+    return out;
+  }
+
+  function htmlFraseResumoPedidos(lista, prefixoVerbo) {
+    var total = (lista || []).length;
+    var verbo = prefixoVerbo || "Foram";
+    if (total === 0) return "";
+    var mapa = mapaNomesTipoPedido(lista);
+    var cont = contagemPedidosPorTipo(lista);
+    var tipos = tiposPedidos();
+    var partes = [];
+    tipos.forEach(function (sigla) {
+      var q = cont[sigla] || 0;
+      if (q <= 0) return;
+      var rotulo = rotuloTipoPedidoExibicao(sigla, q, mapa);
+      partes.push("<strong>" + esc(q) + "</strong> " + htmlBotaoTermoSigla(sigla, rotulo));
+    });
+    var pedPal = total === 1 ? "pedido" : "pedidos";
+    var divisao = partes.length <= 1 ? partes.join("") :
+      partes.slice(0, -1).join(", ") + " e " + partes[partes.length - 1];
+    return verbo + " <strong>" + esc(total) + "</strong> " + pedPal +
+      (partes.length ? ": " + divisao : "") + ".";
+  }
+
+  function pedidoFoiAprovado(item) {
+    if (!item || item.situacao_final_fonte !== "votacao") return false;
+    var s = (item.situacao_final || "").toLowerCase();
+    return s.indexOf("aprovad") >= 0 && s.indexOf("rejeitad") < 0;
+  }
+
+  function htmlPilulaSituacaoPedido(item) {
+    if (!item) return "";
+    if (item.situacao_final_fonte === "sem_registro") {
+      return '<button type="button" class="pilula pilula-sem-deliberacao tag-explicavel" data-tag="sem_registro_votacao" data-valor="Sem registro de vota\u00e7\u00e3o" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">Sem registro de vota\u00e7\u00e3o</button>';
+    }
+    if (pedidoFoiAprovado(item)) {
+      return '<span class="pilula pilula-aprovado">Aprovado</span>';
+    }
+    var sit = item.situacao_final || "";
+    if (/rejeitad/i.test(sit)) {
+      return '<span class="pilula pilula-rejeitado">' + esc(sit) + "</span>";
+    }
+    if (/tramita/i.test(sit) || item.em_tramitacao) {
+      var rot = sit || "Em tramitação";
+      return '<span class="pilula pilula-tramitacao">' + esc(rot.replace(/tramitacao/i, "tramitação")) + "</span>";
+    }
+    if (sit) return '<span class="pilula pilula-sem-deliberacao">' + esc(sit) + "</span>";
+    return "";
+  }
+
+  function nomeAutorPedido(autor) {
+    if (!autor) return "";
+    return autor.nome_parlamentar || autor.nome_no_sapl || autor.nome || "";
+  }
+
+  function juntarNomesLista(nomes) {
+    if (!nomes.length) return "";
+    if (nomes.length === 1) return nomes[0];
+    if (nomes.length === 2) return nomes[0] + " e " + nomes[1];
+    return nomes.slice(0, -1).join(", ") + " e " + nomes[nomes.length - 1];
+  }
+
+  function htmlAutoriaPedido(item, idVereador) {
+    var autores = item.autores || [];
+    if (!autores.length) return "";
+    if (autores.length === 1 && String(autores[0].parlamentar_id_sapl) === String(idVereador)) {
+      return "";
+    }
+    var primarios = autores.filter(function (a) { return a.primeiro_autor === true; });
+    var demais = autores.filter(function (a) { return a.primeiro_autor !== true; });
+    if (!primarios.length) {
+      var todos = autores.map(nomeAutorPedido).filter(Boolean);
+      if (!todos.length) return "";
+      if (todos.length <= 2) return "Autoria: " + esc(juntarNomesLista(todos));
+      return "Autoria: " + esc(todos.slice(0, 2).join(", ")) + " e mais " + esc(String(todos.length - 2)) + " vereadores";
+    }
+    var linhaPrim = primarios.map(function (a) {
+      return "<strong>" + esc(nomeAutorPedido(a)) + "</strong>";
+    });
+    var html = "Autoria: " + juntarNomesLista(linhaPrim);
+    var nomesDemais = demais.map(nomeAutorPedido).filter(Boolean);
+    if (!nomesDemais.length) return html;
+    if (nomesDemais.length <= 2) {
+      return html + "<br>com " + esc(juntarNomesLista(nomesDemais));
+    }
+    return html + "<br>com " + esc(nomesDemais.slice(0, 2).join(", ")) + " e mais " + esc(String(nomesDemais.length - 2)) + " vereadores";
+  }
+
+  function contagemTemasPedidos(lista) {
+    var contagem = {};
+    (lista || []).forEach(function (item) {
+      var tema = item.tema;
+      if (!temaValidoParaTag(tema)) return;
+      contagem[tema] = (contagem[tema] || 0) + 1;
+    });
+    return contagem;
+  }
+
+  function htmlBarrasTemasPedidos(lista, clicavel) {
+    var contagem = contagemTemasPedidos(lista);
+    var ordenado = Object.keys(contagem).sort(function (a, b) { return contagem[b] - contagem[a]; });
+    if (!ordenado.length) return "";
+    var max = contagem[ordenado[0]] || 1;
+    return ordenado.map(function (tema) {
+      var qtd = contagem[tema];
+      var pct = Math.round((qtd / max) * 100);
+      var vcat = varCategoria(tema);
+      if (clicavel) {
+        var pressed = estado.filtroPedidoTema === tema ? ' aria-pressed="true"' : ' aria-pressed="false"';
+        return '<li><button type="button" class="tema-btn" data-pedido-tema="' + esc(tema) + '"' + pressed + ">" +
+          '<span class="nome">' + esc(tema) + '</span><span class="qtd">' + esc(qtd) + "</span>" +
+          '<span class="trilho"><i style="width:' + pct + "%;background:var(" + vcat + ')"></i></span></button></li>';
+      }
+      return '<li class="tema-linha"><div class="tema-estatico">' +
+        '<span class="nome">' + esc(tema) + '</span><span class="qtd">' + esc(qtd) + "</span>" +
+        '<span class="trilho"><i style="width:' + pct + "%;background:var(" + vcat + ')"></i></span></div></li>';
+    }).join("");
   }
 
   function atualizarCardVotacoes() {
@@ -7451,6 +8417,7 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   var estadoMaterias = {
     periodo: "sessao",
     filtroTema: "",
+    filtroTipo: "",
     busca: "",
     limite: { sessao: 10, mes: 10, todo: 10 },
     listaVisivel: { sessao: true, mes: true, todo: true }
@@ -7582,11 +8549,12 @@ var MAPA_VAR_CATEGORIA = {
     return "tipo_materia";
   }
 
-  function htmlBotaoTermoSigla(sigla) {
+  function htmlBotaoTermoSigla(sigla, textoVisivel) {
     var s = String(sigla || "").trim();
     if (!s) return "";
     var tag = chaveExplicacaoSigla(s);
-    return '<button type="button" class="termo tag-explicavel" data-tag="' + esc(tag) + '" data-valor="' + esc(s) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(s) + "</button>";
+    var label = textoVisivel != null && String(textoVisivel).trim() !== "" ? String(textoVisivel).trim() : s;
+    return '<button type="button" class="termo tag-explicavel" data-tag="' + esc(tag) + '" data-valor="' + esc(s) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(label) + "</button>";
   }
 
   function htmlLinhaTipoMateria(tipoStr) {
@@ -7700,52 +8668,130 @@ var MAPA_VAR_CATEGORIA = {
       "</li>";
   }
 
-  function materiasFiltradas(periodo) {
-    var lista = MATERIAS_CAMARA[periodo] || [];
-    var filtroTema = estadoMaterias.filtroTema;
-    var busca = normalizarTexto(estadoMaterias.busca || "").trim();
-    return lista.filter(function (m) {
-      if (filtroTema) {
-        var tags = tagsMateria(m.id);
-        var tema = tags && tags.tag_tema;
-        if (tema !== filtroTema) return false;
-      }
+  function temaItemVotacao(entry) {
+    if (!entry) return "";
+    if (entry.kind === "pleg") {
+      var tags = tagsMateria(entry.raw.id);
+      return (tags && tags.tag_tema) || entry.raw.categoria || "";
+    }
+    return entry.raw.tema || "";
+  }
+
+  function votacoesFiltradasFacet(periodo, omissao) {
+    omissao = omissao || {};
+    var lista = listaVotacoesPeriodo(periodo);
+    var filtroTema = omissao.tema ? "" : estadoMaterias.filtroTema;
+    var filtroTipo = omissao.tipo ? "" : estadoMaterias.filtroTipo;
+    var busca = omissao.busca ? "" : normalizarTexto(estadoMaterias.busca || "").trim();
+    return lista.filter(function (entry) {
+      if (filtroTipo && entry.tipo_sigla !== filtroTipo) return false;
+      var tema = temaItemVotacao(entry);
+      if (filtroTema && tema !== filtroTema) return false;
       if (busca) {
-        var tagsB = tagsMateria(m.id);
-        var texto = m.tipo + " " + ementaBusca(m.ementa) + " " + m.id + " " + assuntoMateria(m);
-        if (tagsB && tagsB.tag_tema) texto += " " + tagsB.tag_tema;
+        var item = entry.raw;
+        var tipoLinha = item.tipo || (entry.tipo_sigla + " " + (item.numero || "") + "/" + (item.ano || ""));
+        var texto = tipoLinha + " " + ementaBusca(item.ementa || "") + " " + entry.id;
+        if (entry.kind === "pleg") texto += " " + assuntoMateria(item);
+        else texto += " " + ementaExibicao(item.ementa || "");
+        if (tema) texto += " " + tema;
         if (normalizarTexto(texto).indexOf(busca) === -1) return false;
       }
       return true;
     });
   }
 
+  function votacoesFiltradas(periodo) {
+    return votacoesFiltradasFacet(periodo, {});
+  }
+
+  function htmlFiltrosTipoVotacao(periodo) {
+    var listaFacet = votacoesFiltradasFacet(periodo, { tipo: true });
+    var cont = {};
+    listaFacet.forEach(function (e) {
+      var t = e.tipo_sigla || "";
+      cont[t] = (cont[t] || 0) + 1;
+    });
+    var mapa = mapaNomesVotacoesPeriodo(periodo);
+    var botoes = ordemTiposVotacao().map(function (sigla) {
+      var q = cont[sigla] || 0;
+      if (q <= 0) return "";
+      var ativo = estadoMaterias.filtroTipo === sigla;
+      var rot = rotuloTipoVotacaoUi(sigla, q, mapa);
+      return '<button type="button" class="chip filtro-tipo-votacao' + (ativo ? " ativo" : "") +
+        '" data-periodo="' + esc(periodo) + '" data-tipo-votacao="' + esc(sigla) +
+        '" aria-pressed="' + (ativo ? "true" : "false") + '">' + esc(rot) + "</button>";
+    }).join("");
+    if (!botoes) return "";
+    return '<div class="filtros-tipo-votacao" role="group" aria-label="Filtrar por tipo">' + botoes + "</div>";
+  }
+
+  function renderCardVotacaoEntrada(entry) {
+    if (entry.kind === "pleg") return renderCardMateria(entry.raw);
+    var item = entry.raw;
+    var turnoHtml = "";
+    if (item.votacao && (item.votacao.turno === "1o turno" || item.votacao.turno === "2o turno")) {
+      turnoHtml = '<button type="button" class="chip tag-turno tag-explicavel" data-tag="turno" data-valor="' + esc(item.votacao.turno) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '">' + esc(textoTurnoExibicao(item.votacao.turno)) + "</button>";
+    }
+    var tema = item.tema;
+    var temaBtn = tema && temaValidoParaTag(tema)
+      ? '<button type="button" class="chip tag-categoria tag-explicavel" data-tag="categoria" data-valor="' + esc(tema) + '" aria-expanded="false" aria-controls="' + TAG_CAIXA_ID + '"' + estiloCorTema(tema) + ">" + htmlMarcadorCategoria(tema) + esc(tema) + "</button>"
+      : "";
+    var pilula = htmlPilulaSituacaoPedido(item);
+    var tagsHtml = '<div class="materia-tags">' + pilula + temaBtn + turnoHtml + "</div>";
+    var tipoLinha = item.tipo || [item.tipo_sigla, item.numero, item.ano].filter(Boolean).join(" ").replace(/(\d+)\s+(\d+)/, "$1/$2");
+    var dataTxt = item.votacao && item.votacao.data_sessao ? formatarData(item.votacao.data_sessao) : "";
+    var href = urlSegura((item.votacao && item.votacao.link_materia) || item.link_sapl);
+    var link = href ? '<a class="fonte" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">Ver no SAPL<svg class="ic" width="16" height="16" aria-hidden="true"><use href="#ic-ver-na-fonte"/></svg></a>' : "";
+    return '<li class="item-votado materia" data-tipo="' + esc(entry.tipo_sigla) + '" data-tema="' + esc(tema || "") + '">' +
+      tagsHtml +
+      '<p class="materia-assunto">' + esc(ementaExibicao(item.ementa || "")) + "</p>" +
+      '<div class="linha-meta">' + htmlLinhaTipoMateria(tipoLinha) +
+      (dataTxt ? '<span class="materia-datas">' + esc(dataTxt) + "</span>" : "") + "</div>" +
+      link + "</li>";
+  }
+
   function renderBlocoVotadoPeriodo(periodo) {
     var bloco = document.getElementById("bloco-votado-" + periodo);
     if (!bloco) return;
     fecharCaixaTag(false);
-    var itens = materiasFiltradas(periodo);
-    var totalItens = (MATERIAS_CAMARA[periodo] || []).length;
+    var listaBase = listaVotacoesPeriodo(periodo);
+    var itens = votacoesFiltradas(periodo);
     var limite = estadoMaterias.limite[periodo] || 10;
     if (limite < 10) limite = 10;
     var visiveis = itens.slice(0, limite);
+    var htmlApoio = "";
+    var htmlFiltros = htmlFiltrosTipoVotacao(periodo);
+    var temFiltro = !!(estadoMaterias.filtroTema || estadoMaterias.filtroTipo || estadoMaterias.busca);
     var htmlBusca = '<label class="busca-materia"><svg class="ic" width="18" height="18" aria-hidden="true"><use href="#ic-buscar"/></svg><span class="sr">Buscar por assunto ou n\u00famero</span>' +
       '<input type="search" id="busca-materia-' + esc(periodo) + '" class="input-busca-materia" data-periodo="' + esc(periodo) + '" placeholder="Buscar por assunto ou n\u00famero" value="' + esc(estadoMaterias.busca) + '"></label>';
     var htmlLista = "";
     if (visiveis.length > 0) {
-      htmlLista = '<ul class="lista-materias" aria-live="polite">' + visiveis.map(renderCardMateria).join("") + "</ul>";
+      htmlLista = '<ul class="lista-materias">' + visiveis.map(renderCardVotacaoEntrada).join("") + "</ul>";
+    } else if (!temFiltro && listaBase.length === 0) {
+      if (periodo !== "sessao") {
+        htmlLista = '<div class="vazio"><b>Nenhum item com vota\u00e7\u00e3o registrada neste per\u00edodo.</b></div>';
+      }
+    } else if (!temFiltro) {
+      htmlLista = '<div class="vazio"><b>Nenhum item encontrado.</b></div>';
     } else {
-      htmlLista = '<div class="vazio"><b>Nenhum projeto encontrado.</b><span>Tente outra palavra ou limpe o filtro de tema.</span>' +
-        (estadoMaterias.filtroTema || estadoMaterias.busca
-          ? ' <button type="button" class="btn btn-secundario btn-limpar-filtros-materia" data-periodo="' + esc(periodo) + '">Limpar filtros</button>'
-          : "") + "</div>";
+      htmlLista = '<div class="vazio"><b>Nenhum item encontrado.</b><span>Tente outra palavra ou limpe os filtros.</span>' +
+        ' <button type="button" class="btn btn-secundario btn-limpar-filtros-materia" data-periodo="' + esc(periodo) + '">Limpar filtros</button></div>';
     }
     var htmlMais = itens.length > limite
       ? '<button type="button" class="btn btn-secundario btn-mostrar-mais-materia" data-periodo="' + esc(periodo) + '">Mostrar mais</button>'
       : "";
+    var liveEl = document.getElementById("live-votado-" + periodo);
+    var liveAntes = liveEl ? liveEl.outerHTML : "";
     bloco.innerHTML =
-      '<div class="cab-cartao"><h2 class="t2">Projetos votados</h2><span class="apoio">' + esc(String(itens.length)) + (itens.length === 1 ? " projeto" : " projetos") + "</span></div>" +
-      htmlBusca + htmlLista + htmlMais;
+      liveAntes +
+      '<div class="cab-cartao"><h2 class="t2">' + esc(tituloCartaoVotacoesPeriodo(periodo)) + '</h2><span class="apoio">' + esc(String(itens.length)) + (itens.length === 1 ? " item" : " itens") + "</span></div>" +
+      htmlApoio + htmlFiltros + htmlBusca + htmlLista + htmlMais;
+    liveEl = document.getElementById("live-votado-" + periodo);
+    if (liveEl) {
+      liveEl.textContent = itens.length === 0
+        ? "Nenhum item encontrado"
+        : (itens.length + (itens.length === 1 ? " item" : " itens"));
+    }
     var inputBusca = bloco.querySelector(".input-busca-materia");
     if (inputBusca) {
       inputBusca.addEventListener("input", function (e) {
@@ -7761,18 +8807,34 @@ var MAPA_VAR_CATEGORIA = {
       btnMais.addEventListener("click", function () {
         estadoMaterias.limite[periodo] = (estadoMaterias.limite[periodo] || 10) + 10;
         renderBlocoVotadoPeriodo(periodo);
+        ajustarPainelUltimaSessaoSemPll();
       });
     }
     var btnLimpar = bloco.querySelector(".btn-limpar-filtros-materia");
     if (btnLimpar) {
       btnLimpar.addEventListener("click", function () {
         estadoMaterias.filtroTema = "";
+        estadoMaterias.filtroTipo = "";
         estadoMaterias.busca = "";
         estadoMaterias.limite[periodo] = 10;
         renderTemasDistribuicao(periodo);
+        if (periodo === "mes" || periodo === "todo") renderCartaoGraficoTipos(periodo);
         renderBlocoVotadoPeriodo(periodo);
+        ajustarPainelUltimaSessaoSemPll();
       });
     }
+    bloco.querySelectorAll(".filtro-tipo-votacao").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var sig = btn.getAttribute("data-tipo-votacao");
+        var p = btn.getAttribute("data-periodo");
+        estadoMaterias.filtroTipo = estadoMaterias.filtroTipo === sig ? "" : sig;
+        estadoMaterias.limite[p] = 10;
+        if (p === "mes" || p === "todo") renderCartaoGraficoTipos(p);
+        renderBlocoVotadoPeriodo(p);
+        ajustarPainelUltimaSessaoSemPll();
+      });
+    });
+    ajustarPainelUltimaSessaoSemPll();
   }
 
 
@@ -8426,6 +9488,20 @@ var MAPA_VAR_CATEGORIA = {
       (sigla ? '<p class="fi-meta">' + esc(sigla) + ".</p>" : "") + "</div>";
   }
 
+  function htmlPedidoVereadorImpressao(item) {
+    var tema = temaValidoParaTag(item.tema) ? item.tema : "";
+    var titulo = item.tipo || "";
+    var sit = item.situacao_final_fonte === "sem_registro" ? "Sem registro de vota\u00e7\u00e3o"
+      : (pedidoFoiAprovado(item) ? "Aprovado" : (item.situacao_final || ""));
+    var classe = /aprovad/i.test(sit) ? "fi-aprovado" : /rejeitad/i.test(sit) ? "fi-rejeitado" : "";
+    var ementa = item.ementa ? ementaExibicao(item.ementa) : "";
+    return '<div class="fi-mat">' +
+      '<div class="fi-tags">' + htmlTagImpressao(sit, classe, "") +
+      htmlTagImpressao(tema, "", tema ? corCategoriaClaro(tema) : "") + "</div>" +
+      "<h3>" + esc(titulo) + "</h3>" +
+      (ementa ? "<p>" + esc(ementa) + "</p>" : "") + "</div>";
+  }
+
   function preencherFolhaImpressao(ctx) {
     var folha = document.getElementById("folha-impressao");
     if (!folha) return;
@@ -8447,9 +9523,14 @@ var MAPA_VAR_CATEGORIA = {
       if (d.votos.nao > 0) nums.push({ valor: d.votos.nao, rotulo: "Votos Não com nome registrado" });
       if (d.votos.abstencao > 0) nums.push({ valor: d.votos.abstencao, rotulo: d.votos.abstencao === 1 ? "Abstenção" : "Abstenções" });
       var lista = (v.projetos_lei && v.projetos_lei.lista) || [];
+      var pedidos = pedidosDoVereador(v);
       if (lista.length) {
         titulo = "Projetos que apresentou";
         corpo = lista.map(htmlProjetoVereadorImpressao).join("");
+      }
+      if (pedidos.length) {
+        corpo += (corpo ? "" : "") + '<h2 class="fi-h2">Pedidos que fez</h2>' + pedidos.map(htmlPedidoVereadorImpressao).join("");
+        if (!titulo) titulo = "Pedidos que fez";
       }
     } else {
       var p = ctx.periodo || "sessao";
@@ -8567,13 +9648,12 @@ var MAPA_VAR_CATEGORIA = {
   function renderTemasDistribuicao(periodo) {
     var container = document.getElementById("temas-distribuicao-" + periodo);
     if (!container) return;
-    var lista = MATERIAS_CAMARA[periodo] || [];
+    var lista = votacoesFiltradasFacet(periodo, { tema: true });
     var total = lista.length;
     if (total === 0) { container.innerHTML = ""; return; }
     var contagem = {};
-    lista.forEach(function (m) {
-      var tags = tagsMateria(m.id);
-      var tema = (tags && tags.tag_tema) || "Outros";
+    lista.forEach(function (entry) {
+      var tema = temaItemVotacao(entry);
       if (!temaValidoParaTag(tema)) return;
       contagem[tema] = (contagem[tema] || 0) + 1;
     });
@@ -8589,7 +9669,7 @@ var MAPA_VAR_CATEGORIA = {
         '<span class="trilho"><i style="width:' + pct + '%;background:var(' + vcat + ')"></i></span></button></li>';
     }).join("");
     container.innerHTML =
-      '<div class="cab-cartao"><h2 class="t2" id="tit-temas-' + esc(periodo) + '">Do que tratam os projetos</h2>' +
+      '<div class="cab-cartao"><h2 class="t2" id="tit-temas-' + esc(periodo) + '">Do que tratam as vota\u00e7\u00f5es</h2>' +
       '<span class="apoio">toque para filtrar</span></div>' +
       '<ul class="temas-lista" role="group" aria-label="Filtrar por tema">' + htmlBarras + "</ul>";
     container.querySelectorAll(".tema-btn").forEach(function (btn) {
@@ -8600,10 +9680,10 @@ var MAPA_VAR_CATEGORIA = {
         estadoMaterias.limite[p] = 10;
         renderTemasDistribuicao(p);
         renderBlocoVotadoPeriodo(p);
+        ajustarPainelUltimaSessaoSemPll();
       });
     });
   }
-
 
   function abaPrefeitoAtiva() {
     return CONFIG_CIDADE && CONFIG_CIDADE.abas && CONFIG_CIDADE.abas.prefeito === true;
@@ -8626,20 +9706,24 @@ var MAPA_VAR_CATEGORIA = {
   var prefeitoEventosOk = false;
 
   function carregarExecutivoPrefeito() {
-    if (!abaPrefeitoAtiva()) return Promise.resolve();
     var url = prefixoDadosTratados() + "executivo_" + SUFIXO_DADOS + ".json";
     return fetch(url).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     }).then(function (dados) {
       EXECUTIVO_DADOS = dados;
-      renderPainelPrefeito();
+      ERRO_CARGA_EXECUTIVO = false;
+      DATA_MINIMA_VOTACAO_CACHE = "";
+      if (abaPrefeitoAtiva()) renderPainelPrefeito();
+      atualizarBannerErroCamara();
     }).catch(function () {
       EXECUTIVO_DADOS = null;
+      ERRO_CARGA_EXECUTIVO = true;
       var painel = document.getElementById("painel-prefeito");
       if (painel && abaPrefeitoAtiva()) {
         painel.innerHTML = '<div class="vazio"><b>N\u00e3o foi poss\u00edvel carregar os projetos do Executivo.</b></div>';
       }
+      atualizarBannerErroCamara();
     });
   }
 
@@ -9178,14 +10262,18 @@ var MAPA_VAR_CATEGORIA = {
   function resetMateriasPeriodo(periodo) {
     estadoMaterias.periodo = periodo;
     estadoMaterias.filtroTema = "";
+    estadoMaterias.filtroTipo = "";
     estadoMaterias.busca = "";
     estadoMaterias.limite[periodo] = 10;
     estadoMaterias.listaVisivel.sessao = false;
     estadoMaterias.listaVisivel.mes = false;
     estadoMaterias.listaVisivel.todo = false;
     estadoMaterias.listaVisivel[periodo] = true;
+    renderCartaoGraficoTipos("mes");
+    renderCartaoGraficoTipos("todo");
     renderTemasDistribuicao(periodo);
     renderBlocoVotadoPeriodo(periodo);
+    ajustarPainelUltimaSessaoSemPll();
   }
 
   function initNavegacao() {
@@ -9389,7 +10477,7 @@ var MAPA_VAR_CATEGORIA = {
     initResumoSheet();
     initFolhaGenerica();
     initNavegacao();
-    return carregarMateriasCamara().then(initMateriasCamara).then(carregarExecutivoPrefeito);
+    return carregarMateriasCamara().then(carregarProposicoesCamara).then(initMateriasCamara).then(carregarExecutivoPrefeito);
   }).then(carregar);
 })();
 </script>

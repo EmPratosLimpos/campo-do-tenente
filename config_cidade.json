@@ -79,6 +79,22 @@
     "tipos_proposicoes": ["PLEG", "REQ", "MOC", "IND"],
     "tipos_executivo": ["PLEX", "VET"],
     "tipos_veto": ["VET"],
+    "tipos_pedidos": ["IND", "REQ", "MOC"],
+    "tipos_pedidos_nota": "RI-1: siglas de pedidos de vereador na tela (indicacao, requerimento e mocao). PLEG fica no cartao de projetos de lei.",
+    "nomes_pedidos": {
+      "IND": { "singular": "indicação", "plural": "indicações", "rotulo_singular": "Indicação", "rotulo_plural": "Indicações" },
+      "REQ": { "singular": "requerimento", "plural": "requerimentos", "rotulo_singular": "Requerimento", "rotulo_plural": "Requerimentos" },
+      "MOC": { "singular": "moção", "plural": "moções", "rotulo_singular": "Moção", "rotulo_plural": "Moções" }
+    },
+    "nomes_tipos_votacao": {
+      "PLEG": { "rotulo_singular": "Projeto de lei", "rotulo_plural": "Projetos de lei" },
+      "PLEX": { "rotulo_singular": "Projeto do Prefeito", "rotulo_plural": "Projetos do Prefeito" },
+      "VET": { "rotulo_singular": "Veto", "rotulo_plural": "Vetos" }
+    },
+    "nomes_tipos_votacao_nota": "RI-1g: rotulos de tipos na aba Camara (resumo e filtros). Pedidos usam rotulo em nomes_pedidos.",
+    "nomes_pedidos_nota": "RI-1e: nomes exibidos no resumo dos pedidos (singular e plural). Sigla continua nos botoes de filtro.",
+    "ementa_oculta_tipos": [],
+    "ementa_oculta_tipos_nota": "RI-1g: lista vazia; ementa visivel para todos os tipos de pedido.",
     "piso_status_decodificados": 20,
     "teto_pedidos_execucao": 210
   },
@@ -241,6 +257,9 @@
     "tramitacao": "A matéria ainda está em tramitação, sem decisão final registrada.",
     "veto": "O Prefeito pode recusar um projeto aprovado pela Câmara, no todo ou em parte. A Câmara vota de novo e pode manter ou derrubar o veto.",
     "plex": "Projeto de Lei de origem do Poder Executivo: o projeto foi escrito e enviado pela Prefeitura.",
-    "pleg": "Projeto de Lei de origem do Poder Legislativo: proposta apresentada por vereador ou comissão."
+    "pleg": "Projeto de Lei de origem do Poder Legislativo: proposta apresentada por vereador ou comissão.",
+    "ind": "Indicação: o vereador sugere ao Prefeito uma providência. Não obriga o Executivo, mas registra o pedido na Câmara.",
+    "req": "Requerimento: pedido formal de informação ou de providência sobre assunto de competência do município.",
+    "moc": "Moção: manifestação de apoio, aplauso ou homenagem. Não cria obrigação nem altera a lei."
   }
 }
