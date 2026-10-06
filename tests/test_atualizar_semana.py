@@ -340,7 +340,11 @@ class TestesWorkflow(unittest.TestCase):
     def test_atualizacao_semanal_publica_so_dados_na_quarta(self):
         texto = (RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml").read_text(encoding="utf-8")
         self.assertIn("cron: '0 13 * * 3'", texto)
+        self.assertIn("cron: '0 19 * * 3'", texto)
+        self.assertIn("cron: '0 13 * * 4'", texto)
         self.assertIn("Quarta-feira as 10:00", texto)
+        self.assertIn("16:00 em Brasilia", texto)
+        self.assertIn("Quinta-feira as 10:00", texto)
         self.assertIn("workflow_dispatch:", texto)
         self.assertIn("contents: write", texto)
         self.assertIn("issues: write", texto)
@@ -360,6 +364,25 @@ class TestesWorkflow(unittest.TestCase):
         self.assertNotIn("push --force", texto)
         self.assertNotIn("atualizacao-dados/", texto)
         self.assertNotIn("--base desenvolvimento", texto)
+
+    def test_repeticao_pula_quando_a_semana_ja_saiu(self):
+        texto = (RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml").read_text(encoding="utf-8")
+        self.assertIn("Ver se a semana ja foi publicada", texto)
+        self.assertIn("last-monday", texto)
+        self.assertIn("Atualiza dados ate a sessao ordinaria", texto)
+        self.assertIn("Semana ja publicada. Termino sem nada.", texto)
+        self.assertIn("steps.publicada.outputs.ja != 'true'", texto)
+        for passo in (
+            "Atualizar a semana",
+            "Ver se houve dado novo",
+            "Conferir que so dados mudaram",
+            "Sanidade final",
+            "Commit na main so com dados",
+            "Levar para desenvolvimento sem force",
+        ):
+            pos_passo = texto.index(passo)
+            janela = texto[pos_passo:pos_passo + 600]
+            self.assertIn("publicada", janela, passo)
 
     def test_workflow_auxiliares_fora_do_repositorio(self):
         texto = (RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml").read_text(encoding="utf-8")

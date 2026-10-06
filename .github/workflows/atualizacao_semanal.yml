@@ -5,6 +5,10 @@ on:
     # Quarta-feira as 10:00 no horario de Brasilia (UTC-3, sem horario de verao).
     # 10:00 em Brasilia equivale a 13:00 UTC. Fora da madrugada, quando o SAPL falhou.
     - cron: '0 13 * * 3'
+    # Repeticao de quarta as 16:00 em Brasilia (19:00 UTC), so se a semana nao saiu.
+    - cron: '0 19 * * 3'
+    # Repeticao de Quinta-feira as 10:00 em Brasilia (13:00 UTC), so se a semana nao saiu.
+    - cron: '0 13 * * 4'
   workflow_dispatch:
 
 permissions:
@@ -34,14 +38,29 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r coletor/requirements.txt
 
+      - name: Ver se a semana ja foi publicada
+        id: publicada
+        run: |
+          segunda=$(TZ=America/Sao_Paulo date -d 'last-monday' +%Y-%m-%d)
+          echo "Procurando publicacao desde segunda ${segunda}."
+          if git log --since="$segunda" --grep="Atualiza dados ate a sessao ordinaria" --oneline | grep -q .; then
+            echo "ja=true" >> "$GITHUB_OUTPUT"
+            echo "Semana ja publicada. Termino sem nada."
+          else
+            echo "ja=false" >> "$GITHUB_OUTPUT"
+            echo "Semana ainda nao publicada. Sigo com a coleta."
+          fi
+
       - name: Atualizar a semana
         id: atualizar
+        if: steps.publicada.outputs.ja != 'true'
         run: |
           set -o pipefail
           python scripts/atualizar_semana.py 2>&1 | tee "$RUNNER_TEMP/atualizacao.log"
 
       - name: Ver se houve dado novo
         id: mudanca
+        if: steps.publicada.outputs.ja != 'true'
         run: |
           git status --porcelain > "$RUNNER_TEMP/mudanca.txt"
           cat "$RUNNER_TEMP/mudanca.txt"
@@ -53,7 +72,7 @@ jobs:
           fi
 
       - name: Conferir que so dados mudaram
-        if: steps.mudanca.outputs.houve == 'true'
+        if: steps.publicada.outputs.ja != 'true' && steps.mudanca.outputs.houve == 'true'
         run: |
           git diff --name-only > "$RUNNER_TEMP/alterados.txt"
           git ls-files --others --exclude-standard >> "$RUNNER_TEMP/alterados.txt"
@@ -68,7 +87,7 @@ jobs:
           fi
 
       - name: Sanidade final
-        if: steps.mudanca.outputs.houve == 'true'
+        if: steps.publicada.outputs.ja != 'true' && steps.mudanca.outputs.houve == 'true'
         run: |
           set -o pipefail
           python coletor/testes_sanidade.py 2>&1 | tee "$RUNNER_TEMP/sanidade.log"
@@ -76,7 +95,7 @@ jobs:
           python scripts/verificar_regras.py 2>&1 | tee "$RUNNER_TEMP/regras.log"
 
       - name: Commit na main so com dados
-        if: steps.mudanca.outputs.houve == 'true'
+        if: steps.publicada.outputs.ja != 'true' && steps.mudanca.outputs.houve == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -113,7 +132,7 @@ jobs:
           git push origin main
 
       - name: Levar para desenvolvimento sem force
-        if: steps.mudanca.outputs.houve == 'true'
+        if: steps.publicada.outputs.ja != 'true' && steps.mudanca.outputs.houve == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
