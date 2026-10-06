@@ -2,9 +2,9 @@ name: Atualizacao semanal dos dados
 
 on:
   schedule:
-    # Quarta-feira as 03:00 no horario de Brasilia (UTC-3, sem horario de verao).
-    # 03:00 em Brasilia equivale a 06:00 UTC.
-    - cron: '0 6 * * 3'
+    # Quarta-feira as 10:00 no horario de Brasilia (UTC-3, sem horario de verao).
+    # 10:00 em Brasilia equivale a 13:00 UTC. Fora da madrugada, quando o SAPL falhou.
+    - cron: '0 13 * * 3'
   workflow_dispatch:
 
 permissions:
