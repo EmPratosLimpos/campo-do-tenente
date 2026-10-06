@@ -7332,16 +7332,22 @@
         '<div class="cab-cartao"><h2 class="t2" id="tit-pedidos">Pedidos que fez</h2></div>' +
         '<p class="vazio"><b>Nenhum pedido registrado no SAPL neste per\u00edodo.</b></p></article>';
     }
-    var cont = contagemPedidosPorTipo(lista);
+    var listaFacetTipo = lista;
+    if (estado.filtroPedidoTema) {
+      listaFacetTipo = lista.filter(function (item) {
+        return item.tema === estado.filtroPedidoTema;
+      });
+    }
+    var cont = contagemPedidosPorTipo(listaFacetTipo);
     var mapa = mapaNomesTipoPedido(lista);
     var resumo = htmlFraseResumoPedidos(lista, "Fez");
-    var listaTemasPedidos = lista;
+    var listaFacetTema = lista;
     if (estado.filtroPedidoTipo) {
-      listaTemasPedidos = lista.filter(function (item) {
+      listaFacetTema = lista.filter(function (item) {
         return item.tipo_sigla === estado.filtroPedidoTipo;
       });
     }
-    var temasHtml = htmlBarrasTemasPedidos(listaTemasPedidos, true);
+    var temasHtml = htmlBarrasTemasPedidos(listaFacetTema, true);
 
     var itensFiltrados = lista.filter(function (item) {
       if (!estado.listaPedidosVisivel) return false;
@@ -8625,11 +8631,12 @@ var MAPA_VAR_CATEGORIA = {
     return entry.raw.tema || "";
   }
 
-  function votacoesFiltradas(periodo) {
+  function votacoesFiltradasFacet(periodo, omissao) {
+    omissao = omissao || {};
     var lista = listaVotacoesPeriodo(periodo);
-    var filtroTema = estadoMaterias.filtroTema;
-    var filtroTipo = estadoMaterias.filtroTipo;
-    var busca = normalizarTexto(estadoMaterias.busca || "").trim();
+    var filtroTema = omissao.tema ? "" : estadoMaterias.filtroTema;
+    var filtroTipo = omissao.tipo ? "" : estadoMaterias.filtroTipo;
+    var busca = omissao.busca ? "" : normalizarTexto(estadoMaterias.busca || "").trim();
     return lista.filter(function (entry) {
       if (filtroTipo && entry.tipo_sigla !== filtroTipo) return false;
       var tema = temaItemVotacao(entry);
@@ -8647,9 +8654,14 @@ var MAPA_VAR_CATEGORIA = {
     });
   }
 
-  function htmlFiltrosTipoVotacao(periodo, listaBase) {
+  function votacoesFiltradas(periodo) {
+    return votacoesFiltradasFacet(periodo, {});
+  }
+
+  function htmlFiltrosTipoVotacao(periodo) {
+    var listaFacet = votacoesFiltradasFacet(periodo, { tipo: true });
     var cont = {};
-    listaBase.forEach(function (e) {
+    listaFacet.forEach(function (e) {
       var t = e.tipo_sigla || "";
       cont[t] = (cont[t] || 0) + 1;
     });
@@ -8696,13 +8708,12 @@ var MAPA_VAR_CATEGORIA = {
     var bloco = document.getElementById("bloco-votado-" + periodo);
     if (!bloco) return;
     fecharCaixaTag(false);
-    var listaBase = listaVotacoesPeriodo(periodo);
     var itens = votacoesFiltradas(periodo);
     var limite = estadoMaterias.limite[periodo] || 10;
     if (limite < 10) limite = 10;
     var visiveis = itens.slice(0, limite);
     var htmlApoio = "";
-    var htmlFiltros = htmlFiltrosTipoVotacao(periodo, listaBase);
+    var htmlFiltros = htmlFiltrosTipoVotacao(periodo);
     var htmlBusca = '<label class="busca-materia"><svg class="ic" width="18" height="18" aria-hidden="true"><use href="#ic-buscar"/></svg><span class="sr">Buscar por assunto ou n\u00famero</span>' +
       '<input type="search" id="busca-materia-' + esc(periodo) + '" class="input-busca-materia" data-periodo="' + esc(periodo) + '" placeholder="Buscar por assunto ou n\u00famero" value="' + esc(estadoMaterias.busca) + '"></label>';
     var htmlLista = "";
@@ -9572,7 +9583,7 @@ var MAPA_VAR_CATEGORIA = {
   function renderTemasDistribuicao(periodo) {
     var container = document.getElementById("temas-distribuicao-" + periodo);
     if (!container) return;
-    var lista = listaVotacoesPeriodo(periodo);
+    var lista = votacoesFiltradasFacet(periodo, { tema: true });
     var total = lista.length;
     if (total === 0) { container.innerHTML = ""; return; }
     var contagem = {};
