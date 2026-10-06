@@ -5118,7 +5118,7 @@
             <article class="cartao" id="card-temas-sessao"><div id="temas-distribuicao-sessao"></div></article>
           </div>
           <div class="coluna-B">
-            <article class="cartao bloco-votado" id="bloco-votado-sessao" data-periodo="sessao"></article>
+            <article class="cartao bloco-votado" id="bloco-votado-sessao" data-periodo="sessao"><span class="sr" id="live-votado-sessao" aria-live="polite" aria-atomic="true"></span></article>
           </div>
         </div>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
@@ -5131,7 +5131,7 @@
             <article class="cartao" id="card-temas-mes"><div id="temas-distribuicao-mes"></div></article>
           </div>
           <div class="coluna-B">
-            <article class="cartao bloco-votado" id="bloco-votado-mes" data-periodo="mes"></article>
+            <article class="cartao bloco-votado" id="bloco-votado-mes" data-periodo="mes"><span class="sr" id="live-votado-mes" aria-live="polite" aria-atomic="true"></span></article>
           </div>
         </div>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
@@ -5144,7 +5144,7 @@
             <article class="cartao" id="card-temas-todo"><div id="temas-distribuicao-todo"></div></article>
           </div>
           <div class="coluna-B">
-            <article class="cartao bloco-votado" id="bloco-votado-todo" data-periodo="todo"></article>
+            <article class="cartao bloco-votado" id="bloco-votado-todo" data-periodo="todo"><span class="sr" id="live-votado-todo" aria-live="polite" aria-atomic="true"></span></article>
           </div>
         </div>
         <footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>
@@ -6362,7 +6362,12 @@
 
   function ligarInteracaoGraficoTipos(raiz, periodo) {
     if (!raiz) return;
-    raiz.querySelectorAll("[data-tipo-votacao][data-periodo]").forEach(function (el) {
+    raiz.querySelectorAll(".fatia-tipo-votacao[data-tipo-votacao]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        alternarFiltroTipoViaGrafico(el.getAttribute("data-periodo"), el.getAttribute("data-tipo-votacao"));
+      });
+    });
+    raiz.querySelectorAll(".legenda-tipo-votacao[data-tipo-votacao]").forEach(function (el) {
       function ativar() {
         alternarFiltroTipoViaGrafico(el.getAttribute("data-periodo"), el.getAttribute("data-tipo-votacao"));
       }
@@ -8775,9 +8780,18 @@ var MAPA_VAR_CATEGORIA = {
     var htmlMais = itens.length > limite
       ? '<button type="button" class="btn btn-secundario btn-mostrar-mais-materia" data-periodo="' + esc(periodo) + '">Mostrar mais</button>'
       : "";
+    var liveEl = document.getElementById("live-votado-" + periodo);
+    var liveAntes = liveEl ? liveEl.outerHTML : "";
     bloco.innerHTML =
+      liveAntes +
       '<div class="cab-cartao"><h2 class="t2">' + esc(tituloCartaoVotacoesPeriodo(periodo)) + '</h2><span class="apoio">' + esc(String(itens.length)) + (itens.length === 1 ? " item" : " itens") + "</span></div>" +
       htmlApoio + htmlFiltros + htmlBusca + htmlLista + htmlMais;
+    liveEl = document.getElementById("live-votado-" + periodo);
+    if (liveEl) {
+      liveEl.textContent = itens.length === 0
+        ? "Nenhum item encontrado"
+        : (itens.length + (itens.length === 1 ? " item" : " itens"));
+    }
     var inputBusca = bloco.querySelector(".input-busca-materia");
     if (inputBusca) {
       inputBusca.addEventListener("input", function (e) {
