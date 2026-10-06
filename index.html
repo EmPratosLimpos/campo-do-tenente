@@ -6466,6 +6466,7 @@
     });
     estadoMaterias.listaVisivel.sessao = true;
     ajustarPainelUltimaSessaoSemPll();
+    atualizarBannerErroCamara();
   }
 
 
@@ -7938,11 +7939,33 @@
 var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
   var MATERIAS_TAGS = {};
   var FILTROS_MATERIA = { sessao: [], mes: [], todo: [] };
+  var ERRO_CARGA_MATERIAS_CAMARA = false;
+  var ERRO_CARGA_EXECUTIVO = false;
   var PROPOSICOES_CAMARA = { sessao: [], mes: [], todo: [] };
   var PROPOSICOES_INTEGRA = { sessao: [], mes: [], todo: [] };
   var DATA_MINIMA_VOTACAO_CACHE = "";
 
   var MATERIAS_URL = prefixoDadosTratados();
+
+  function atualizarBannerErroCamara() {
+    var painel = document.getElementById("painel-camara");
+    if (!painel) return;
+    var banner = document.getElementById("erro-carga-camara");
+    if (!ERRO_CARGA_MATERIAS_CAMARA && !ERRO_CARGA_EXECUTIVO) {
+      if (banner) banner.remove();
+      return;
+    }
+    var partes = [];
+    if (ERRO_CARGA_MATERIAS_CAMARA) partes.push("materiais da C\u00e2mara");
+    if (ERRO_CARGA_EXECUTIVO) partes.push("projetos do Executivo");
+    var html = '<div class="erro-carga"><strong>N\u00e3o foi poss\u00edvel carregar os dados.</strong> Falha ao carregar: ' +
+      esc(partes.join(" e ")) + ".</div>";
+    if (!banner) {
+      painel.insertAdjacentHTML("afterbegin", '<div id="erro-carga-camara"></div>');
+      banner = document.getElementById("erro-carga-camara");
+    }
+    banner.innerHTML = html;
+  }
 
   function carregarMateriasCamara() {
     var urls = [
@@ -7960,11 +7983,12 @@ var MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       MATERIAS_TAGS = results[1];
       FILTROS_MATERIA = results[2];
       DATA_MINIMA_VOTACAO_CACHE = "";
+      ERRO_CARGA_MATERIAS_CAMARA = false;
     }).catch(function () {
       MATERIAS_CAMARA = { sessao: [], mes: [], todo: [] };
       MATERIAS_TAGS = {};
       FILTROS_MATERIA = { sessao: [], mes: [], todo: [] };
-      
+      ERRO_CARGA_MATERIAS_CAMARA = true;
     });
   }
 
@@ -9668,21 +9692,24 @@ var MAPA_VAR_CATEGORIA = {
   var prefeitoEventosOk = false;
 
   function carregarExecutivoPrefeito() {
-    if (!abaPrefeitoAtiva()) return Promise.resolve();
     var url = prefixoDadosTratados() + "executivo_" + SUFIXO_DADOS + ".json";
     return fetch(url).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     }).then(function (dados) {
       EXECUTIVO_DADOS = dados;
+      ERRO_CARGA_EXECUTIVO = false;
       DATA_MINIMA_VOTACAO_CACHE = "";
-      renderPainelPrefeito();
+      if (abaPrefeitoAtiva()) renderPainelPrefeito();
+      atualizarBannerErroCamara();
     }).catch(function () {
       EXECUTIVO_DADOS = null;
+      ERRO_CARGA_EXECUTIVO = true;
       var painel = document.getElementById("painel-prefeito");
       if (painel && abaPrefeitoAtiva()) {
         painel.innerHTML = '<div class="vazio"><b>N\u00e3o foi poss\u00edvel carregar os projetos do Executivo.</b></div>';
       }
+      atualizarBannerErroCamara();
     });
   }
 
