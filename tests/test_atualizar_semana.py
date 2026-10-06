@@ -1001,6 +1001,44 @@ class TestesPedidoPendente(unittest.TestCase):
                 with self.assertRaises(SystemExit):
                     coletor.pedir("/api/um/", None, "lista_p1.json", refrescar=True)
 
+    def test_repeticao_conta_no_teto_e_respeita_a_pausa(self):
+        dormiu = []
+        primeira = b'{"pagination": {"total_pages": 2, "total_entries": 2}, "results": [{"id": 1}]}'
+        segunda = b'{"pagination": {"total_pages": 2, "total_entries": 2}, "results": [{"id": 2}]}'
+        liberado = {"p2": False}
+
+        def comportamento(req, timeout=None):
+            del timeout
+            if "page=1" in req.full_url:
+                return Resposta(primeira)
+            if liberado["p2"]:
+                return Resposta(segunda)
+            return RespostaVazia()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pasta = Path(tmp)
+            orcamento = OrcamentoExecucao(50)
+            coletor = ColetorLote(CFG_COLETOR, pasta, teto=50)
+            coletor.orcamento_execucao = orcamento
+            coletor.adiar_falha = True
+            pendentes = nova_fila_pendentes()
+            with mock.patch(
+                "coletar_lote.urllib.request.urlopen", comportamento
+            ), mock.patch("coletar_lote.time.sleep", dormiu.append):
+                atualizar_paginas(
+                    coletor, "/api/um/", {}, "exemplo", False, pendentes
+                )
+                self.assertEqual(len(pendentes), 1)
+                self.assertEqual(pendentes[0]["arquivo"], "exemplo_p2.json")
+                antes = orcamento.pedidos
+                liberado["p2"] = True
+                for item in pendentes:
+                    item["refazer"]()
+                depois = orcamento.pedidos
+            self.assertGreater(depois, antes)
+            self.assertIn(2.5, dormiu)
+            self.assertTrue((pasta / "exemplo_p2.json").is_file())
+
     def test_pagina_que_falha_entra_na_fila_e_a_coleta_continua(self):
         chamadas = {"n": 0}
         primeira = b'{"pagination": {"total_pages": 2, "total_entries": 2}, "results": [{"id": 1}]}'
