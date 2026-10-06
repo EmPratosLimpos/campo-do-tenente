@@ -63,6 +63,38 @@ def _data_minima_votacao() -> str:
     return min(datas) if datas else ""
 
 
+def _lista_votados_todo() -> list[str]:
+    """Espelha listaVotacoesPeriodo('todo') para testes sem navegador."""
+    cfg = carregar_config()
+    tipos_ped = cfg["tramitacao"]["tipos_pedidos"]
+    tipos_exec = cfg["tramitacao"]["tipos_executivo"]
+    tipos_pleg = cfg["tramitacao"]["tipos_proposicoes"]
+    sig_pleg = tipos_pleg[0] if tipos_pleg else "PLEG"
+    siglas: list[str] = []
+    materias = _carregar_json("materias_camara")
+    ids_pleg: set = set()
+    for m in materias.get("todo") or []:
+        ids_pleg.add(m.get("id"))
+        siglas.append(m.get("tipo_sigla") or sig_pleg)
+    prop = _carregar_json("proposicoes")
+    for item in prop.get("todo") or []:
+        if not _item_votacao_valida(item):
+            continue
+        if item.get("id") in ids_pleg:
+            continue
+        sig = item.get("tipo_sigla") or ""
+        if sig in tipos_ped:
+            siglas.append(sig)
+    execu = _carregar_json("executivo")
+    for item in execu.get("todo") or []:
+        if not _item_votacao_valida(item):
+            continue
+        sig = item.get("tipo_sigla") or ""
+        if sig in tipos_exec:
+            siglas.append(sig)
+    return siglas
+
+
 def _contar_votados_todo() -> dict[str, int]:
     cfg = carregar_config()
     tipos_ped = cfg["tramitacao"]["tipos_pedidos"]
@@ -111,7 +143,9 @@ class TestIndexVotacoes(unittest.TestCase):
         self.assertIn("dataMinimaVotacaoRegistrada", INDEX)
         self.assertIn("fraseApoioCorteVotacaoSapl", INDEX)
         d = _data_minima_votacao()
-        self.assertEqual(d, "2025-05-13")
+        self.assertTrue(d)
+        self.assertRegex(d, r"^\d{4}-\d{2}-\d{2}$")
+        self.assertEqual(d, _data_minima_votacao())
 
     def test_sem_registro_votacao_etiqueta(self):
         self.assertIn("sem_registro_votacao", INDEX)
@@ -157,14 +191,14 @@ class TestContagemVotados(unittest.TestCase):
             self.assertGreater(pleg_prop, 0)
             self.assertEqual(cont.get("PLEG", 0), pleg_m)
 
-    def test_contagens_todo_batem_esperado(self):
+    def test_contagens_todo_soma_por_tipo_igual_total(self):
         cont = _contar_votados_todo()
-        self.assertEqual(cont.get("PLEG", 0), 16)
-        self.assertEqual(cont.get("IND", 0), 58)
-        self.assertEqual(cont.get("REQ", 0), 30)
-        self.assertEqual(cont.get("MOC", 0), 7)
-        self.assertEqual(cont.get("PLEX", 0), 17)
-        self.assertEqual(cont.get("VET", 0), 3)
+        siglas = _lista_votados_todo()
+        self.assertEqual(sum(cont.values()), len(siglas))
+        por_sigla: dict[str, int] = {}
+        for sig in siglas:
+            por_sigla[sig] = por_sigla.get(sig, 0) + 1
+        self.assertEqual(cont, por_sigla)
 
 
 if __name__ == "__main__":

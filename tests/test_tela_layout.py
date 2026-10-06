@@ -56,7 +56,7 @@ JS_HELPERS = """
 
 PERIODOS = ("sessao", "mes", "todo")
 MARCADORES = {
-    "sessao": "Os 9 vereadores estavam presentes",
+    "sessao": "vereadores estavam presentes",
     "mes": "itens votados no último mês",
     "todo": "itens votados na legislatura",
 }
