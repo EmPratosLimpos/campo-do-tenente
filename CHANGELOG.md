@@ -24,6 +24,21 @@ Está prevista uma atualização semanal automática. Cada vez que ela trouxer s
 
 ---
 
+## 2026-10-05: v1.2.0, pedidos dos vereadores e votações unificadas
+
+**O que mudou nos dados**
+- Nenhum arquivo de dados mudou. A configuração ganhou os nomes e as explicações de requerimentos, indicações e moções.
+
+**O que mudou na tela**
+- Cartão "Pedidos que fez" em cada vereador: requerimentos, indicações e moções, com tipos, temas e o primeiro autor em destaque.
+- Aba Câmara: resumo do período, gráfico em rosca dos tipos votados e lista "Votações" com projetos, requerimentos, indicações, moções e vetos juntos, filtrável por tipo.
+- "Do que tratam as votações" passa a contar todos os tipos.
+
+**De onde veio**
+- Dados do SAPL já publicados na v1.1. Pedidos sem registro de votação aparecem marcados: o SAPL só registra votações a partir de 13/05/2025.
+
+---
+
 ## 2026-10-01: 34a sessão ordinária e nova regra de presença
 
 **O que mudou nos dados**
