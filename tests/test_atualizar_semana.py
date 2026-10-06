@@ -334,8 +334,8 @@ class TestesWorkflow(unittest.TestCase):
 
     def test_atualizacao_semanal_publica_so_dados_na_quarta(self):
         texto = (RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml").read_text(encoding="utf-8")
-        self.assertIn("cron: '0 6 * * 3'", texto)
-        self.assertIn("Quarta-feira as 03:00", texto)
+        self.assertIn("cron: '0 13 * * 3'", texto)
+        self.assertIn("Quarta-feira as 10:00", texto)
         self.assertIn("workflow_dispatch:", texto)
         self.assertIn("contents: write", texto)
         self.assertIn("issues: write", texto)
