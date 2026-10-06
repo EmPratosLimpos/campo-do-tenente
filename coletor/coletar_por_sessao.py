@@ -81,7 +81,13 @@ def sessoes_ordinarias(
         for ano in anos:
             caminhos.extend(sorted(pasta_lote.glob(f"sessaoplenaria_ano{int(ano)}_p*.json")))
     for caminho in caminhos:
-        dados = ler_json(caminho)
+        try:
+            dados = ler_json(caminho)
+        except (OSError, ValueError, UnicodeDecodeError):
+            print(f"AVISO: bruto ilegivel pulado em {caminho.name}. Vale o piso de sessoes.")
+            continue
+        if not isinstance(dados, dict):
+            continue
         for item in dados.get("results") or []:
             if not isinstance(item, dict) or item.get("id") is None:
                 continue
@@ -183,7 +189,12 @@ def ler_ids_ordem_da_sessao(pasta: Path, sid: int) -> list[int]:
         caminho = pasta / f"sessao_{int(sid)}_ordemdia_p{numero}.json"
         if not caminho.is_file():
             break
-        dados = ler_json(caminho)
+        try:
+            dados = ler_json(caminho)
+        except (OSError, ValueError, UnicodeDecodeError) as exc:
+            raise SystemExit(
+                f"sessao {int(sid)} ordemdia pagina {numero} ilegivel ({exc}). Parei."
+            ) from exc
         for item in dados.get("results") or []:
             if isinstance(item, dict) and item.get("id") is not None:
                 ids.append(int(item["id"]))
@@ -250,7 +261,12 @@ def _ler_paginas_por_prefixo(pasta: Path, prefixo: str) -> list[dict]:
         caminho = pasta / f"{prefixo}_p{numero}.json"
         if not caminho.is_file():
             break
-        dados = ler_json(caminho)
+        try:
+            dados = ler_json(caminho)
+        except (OSError, ValueError, UnicodeDecodeError) as exc:
+            raise SystemExit(
+                f"{prefixo}: pagina {numero} ilegivel ({exc}). Parei."
+            ) from exc
         if not isinstance(dados, dict):
             raise SystemExit(f"{prefixo}: pagina {numero} sem objeto JSON.")
         linhas.extend(list(dados.get("results") or []))
@@ -450,7 +466,18 @@ def conferir_prefixo(pasta: Path, prefixo: str, sid: int, recurso: str) -> dict:
                 }
             parou_por_arquivo_ausente = True
             break
-        dados = ler_json(caminho)
+        try:
+            dados = ler_json(caminho)
+        except (OSError, ValueError, UnicodeDecodeError):
+            return {
+                "sessao_id": sid,
+                "recurso": recurso,
+                "bate": False,
+                "motivo": "arquivo ilegivel",
+                "total_entries": None,
+                "linhas": 0,
+                "ids_distintos": 0,
+            }
         paginas_lidas += 1
         ultima_paginacao = dados.get("pagination") or {}
         if numero == 1:

@@ -48,6 +48,23 @@ class OrcamentoEsgotado(Exception):
     pass
 
 
+class PedidoPendente(Exception):
+    """Um pedido que falhou depois das tentativas extras e ficou para repetir.
+
+    Nao derruba a execucao: o chamador registra na fila de pendentes e
+    segue com os outros pedidos. A fila e repetida uma vez ao fim da
+    coleta, com a mesma pausa e o mesmo teto. Carrega o caminho, os
+    parametros, o nome do arquivo e o motivo da falha.
+    """
+
+    def __init__(self, caminho: str, params: dict | None, arquivo: str, motivo: str):
+        super().__init__(f"pendente {arquivo}: {motivo}")
+        self.caminho = caminho
+        self.params = dict(params or {})
+        self.arquivo = arquivo
+        self.motivo = motivo
+
+
 def agora() -> str:
     return datetime.now().astimezone().isoformat(timespec="seconds")
 
@@ -185,6 +202,7 @@ class ColetorLote:
         self.ultimo_igual = False
         self.simulado = False
         self.orcamento_execucao = None
+        self.adiar_falha = False
 
     def _carregar_indice(self) -> None:
         if not self.indice_path.exists():
@@ -262,7 +280,29 @@ class ColetorLote:
         self._recusar_orcamento()
         orc.pedidos += 1
 
-    def pedir(self, caminho: str, params: dict | None, arquivo: str, refrescar: bool = False):
+    def pedir(
+        self,
+        caminho: str,
+        params: dict | None,
+        arquivo: str,
+        refrescar: bool = False,
+        adiar_falha: bool = False,
+    ):
+        """Pede uma pagina ao SAPL, com pausa, teto e tentativas extras.
+
+        Com adiar_falha (ou self.adiar_falha), a falha depois das
+        tentativas extras vira PedidoPendente em vez de parar a execucao.
+        O teto estourado (OrcamentoEsgotado) sempre para, nunca e adiado.
+        """
+        adiar = bool(adiar_falha or self.adiar_falha)
+        try:
+            return self._pedir_ou_falhar(caminho, params, arquivo, refrescar)
+        except SystemExit as exc:
+            if not adiar:
+                raise
+            raise PedidoPendente(caminho, params, arquivo, str(exc)) from exc
+
+    def _pedir_ou_falhar(self, caminho: str, params: dict | None, arquivo: str, refrescar: bool = False):
         self.ultimo_igual = False
         if not refrescar:
             ja = self._ja_baixado(arquivo)
@@ -355,14 +395,17 @@ class ColetorLote:
             valido = status == 200 and corpo_e_json_valido(corpo)
             if status == 200 and not valido:
                 erro = "resposta vazia ou ilegivel"
-            nome_gravado = arquivo if valido else nome_falha
             if valido:
+                nome_gravado = arquivo
                 tmp = destino.with_suffix(destino.suffix + ".tmp")
                 tmp.write_bytes(corpo)
                 tmp.replace(destino)
                 self.gravou = True
             else:
-                (self.pasta / nome_gravado).write_bytes(corpo)
+                pasta_falhas = self.pasta / "falhas"
+                pasta_falhas.mkdir(parents=True, exist_ok=True)
+                (pasta_falhas / nome_falha).write_bytes(corpo)
+                nome_gravado = f"falhas/{nome_falha}"
             self._registrar(
                 {
                     "url": url,

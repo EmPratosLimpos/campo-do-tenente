@@ -27,8 +27,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
+import time
 from datetime import date
 from pathlib import Path
 
@@ -42,6 +44,7 @@ from coletar_lote import (  # noqa: E402
     PAGE_SIZE,
     ColetorLote,
     OrcamentoEsgotado,
+    PedidoPendente,
     continuar_apos_primeira,
     plano_de_coleta,
 )
@@ -71,8 +74,95 @@ from derivar_insumos import (  # noqa: E402
 )
 
 TETO_EXECUCAO = 400
+ESPERA_PENDENTES_SEGUNDOS = 300
 CHANGELOG = RAIZ / "CHANGELOG.md"
 RESUMO_INSUMOS = BRUTOS / "resumo_insumos.json"
+
+
+def esperar_antes_da_repeticao(segundos: int = ESPERA_PENDENTES_SEGUNDOS) -> None:
+    """Espera de 5 minutos entre a coleta e a repeticao dos pendentes.
+
+    Funcao separada para os testes mockarem sem esperar de verdade.
+    A pausa de 2,5 s entre pedidos continua valendo dentro da repeticao.
+    """
+    time.sleep(segundos)
+
+
+def nova_fila_pendentes() -> list:
+    """Fila de pedidos que falharam e serao repetidos uma vez ao fim."""
+    return []
+
+
+def arquivo_bom(pasta: Path, arquivo: str) -> bool:
+    """Arquivo salvo que pode ser usado: existe, nao esta vazio e e JSON valido."""
+    caminho = pasta / arquivo
+    if not caminho.is_file() or caminho.stat().st_size == 0:
+        return False
+    try:
+        dados = json.loads(caminho.read_text(encoding="utf-8"))
+    except (OSError, ValueError, UnicodeDecodeError):
+        return False
+    return isinstance(dados, dict)
+
+
+def repetir_pendentes(pendentes: list, ids_novas: list[int], simulado: bool = False) -> list[str]:
+    """Espera 5 minutos e repete uma vez cada pendente, um por vez.
+
+    Cada repeticao conta no teto de 400 e respeita a pausa de 2,5 s,
+    nunca em paralelo. Resposta vazia ou invalida nunca e gravada, por
+    isso o arquivo bom anterior segue intacto. Devolve os avisos de
+    itens antigos que seguiram com o arquivo salvo. Se, depois da
+    repeticao, ainda faltar algo da sessao nova (ou qualquer item sem
+    arquivo anterior), levanta SystemExit com a lista do que faltou e
+    nada e publicado.
+    """
+    avisos: list[str] = []
+    if not pendentes:
+        return avisos
+    print(
+        f"{len(pendentes)} pedidos pendentes. "
+        "Espero 5 minutos e repito uma vez cada um."
+    )
+    if not simulado:
+        esperar_antes_da_repeticao()
+    restantes = []
+    for item in pendentes:
+        print(f"repetindo: {item['descricao']}")
+        try:
+            item["refazer"]()
+        except PedidoPendente as exc:
+            restantes.append(item)
+            print(f"  continua pendente: {item['descricao']} ({exc.motivo})")
+    novas = {int(item) for item in ids_novas}
+    faltando_nova: list[str] = []
+    faltando_sem_arquivo: list[str] = []
+    for item in restantes:
+        sid = item.get("sessao_id")
+        if sid is not None and int(sid) in novas:
+            faltando_nova.append(item["descricao"])
+            continue
+        pasta = item.get("pasta")
+        arquivo = item.get("arquivo")
+        if pasta is not None and arquivo is not None and arquivo_bom(pasta, arquivo):
+            avisos.append(item["descricao"])
+            print(f"  aviso: {item['descricao']}. Sigo com o arquivo ja salvo.")
+            continue
+        if sid is not None and pasta is not None and sessao_tem_arquivo(pasta, int(sid)):
+            avisos.append(item["descricao"])
+            print(f"  aviso: {item['descricao']}. Sigo com os arquivos ja salvos da sessao.")
+            continue
+        faltando_sem_arquivo.append(item["descricao"])
+    if faltando_nova or faltando_sem_arquivo:
+        partes = []
+        if faltando_nova:
+            partes.append("da sessao nova: " + "; ".join(faltando_nova))
+        if faltando_sem_arquivo:
+            partes.append("sem arquivo anterior: " + "; ".join(faltando_sem_arquivo))
+        raise SystemExit(
+            "Faltou dado depois da repeticao. Nada foi publicado. Faltando "
+            + ". ".join(partes)
+        )
+    return avisos
 
 GERADORES = (
     "dados/tratados/gerar_tabela_vereadores.py",
@@ -202,6 +292,7 @@ def preparar_coletor(cfg: dict, pasta: Path, orcamento: OrcamentoExecucao, simul
     coletor.orcamento_execucao = orcamento
     coletor.simulado = simulado
     coletor.teto = coletor.pedidos + orcamento.teto
+    coletor.adiar_falha = True
     return coletor
 
 
@@ -296,12 +387,39 @@ def plano_sem_listas_grandes(anos: list[int], indice: dict) -> list[dict]:
     ]
 
 
-def atualizar_paginas(coletor: ColetorLote, caminho: str, params: dict, prefixo: str, simulado: bool) -> None:
-    """Reconfere a primeira pagina. So repete as seguintes se ela mudou ou faltar arquivo."""
+def atualizar_paginas(
+    coletor: ColetorLote,
+    caminho: str,
+    params: dict,
+    prefixo: str,
+    simulado: bool,
+    pendentes: list | None = None,
+) -> None:
+    """Reconfere a primeira pagina. So repete as seguintes se ela mudou ou faltar arquivo.
+
+    Com fila de pendentes, o pedido que falhar depois das tentativas
+    extras nao para a coleta: entra na fila e e repetido uma vez ao fim.
+    """
     params = dict(params)
     params["page_size"] = PAGE_SIZE
     params["page"] = 1
-    primeiro = coletor.pedir(caminho, params, f"{prefixo}_p1.json", refrescar=not simulado)
+    try:
+        primeiro = coletor.pedir(caminho, params, f"{prefixo}_p1.json", refrescar=not simulado)
+    except PedidoPendente as exc:
+        if pendentes is None:
+            raise
+        pendentes.append(
+            {
+                "descricao": f"{prefixo} pagina 1 ({exc.motivo})",
+                "sessao_id": None,
+                "pasta": coletor.pasta,
+                "arquivo": f"{prefixo}_p1.json",
+                "refazer": lambda: atualizar_paginas(
+                    coletor, caminho, params, prefixo, simulado, None
+                ),
+            }
+        )
+        return
     if not isinstance(primeiro, dict):
         raise SystemExit(f"{prefixo}: resposta sem objeto JSON")
     pagina1_igual = simulado or bool(coletor.ultimo_igual)
@@ -311,7 +429,24 @@ def atualizar_paginas(coletor: ColetorLote, caminho: str, params: dict, prefixo:
         arquivo = f"{prefixo}_p{pagina}.json"
         existe = (coletor.pasta / arquivo).is_file()
         refrescar = (not simulado) and existe and (not pagina1_igual)
-        dados = coletor.pedir(caminho, params, arquivo, refrescar=refrescar)
+        try:
+            dados = coletor.pedir(caminho, params, arquivo, refrescar=refrescar)
+        except PedidoPendente as exc:
+            if pendentes is None:
+                raise
+            retrato = dict(params)
+            pendentes.append(
+                {
+                    "descricao": f"{prefixo} pagina {pagina} ({exc.motivo})",
+                    "sessao_id": None,
+                    "pasta": coletor.pasta,
+                    "arquivo": arquivo,
+                    "refazer": lambda: coletor.pedir(
+                        caminho, dict(retrato), arquivo, refrescar=True
+                    ),
+                }
+            )
+            return None
         if not isinstance(dados, dict):
             raise SystemExit(f"{prefixo}: resposta sem objeto JSON")
         return dados
@@ -335,7 +470,7 @@ def estimar_sondas(pasta_lote: Path, anos: list[int]) -> tuple[int, int]:
     return conferencia, 0
 
 
-def baixar_lote(coletor: ColetorLote, anos: list[int], simulado: bool) -> None:
+def baixar_lote(coletor: ColetorLote, anos: list[int], simulado: bool, pendentes: list | None = None) -> None:
     """Lote pequeno: catalogos, sessoes do ano, materias do ano e expediente.
 
     As listas grandes de presenca, ordem, voto, justificativa e mesa ficam
@@ -347,25 +482,45 @@ def baixar_lote(coletor: ColetorLote, anos: list[int], simulado: bool) -> None:
     plano = plano_sem_listas_grandes(anos, indice)
     for item in plano:
         print(item["prefixo"])
-        atualizar_paginas(coletor, item["caminho"], item["params"], item["prefixo"], simulado)
+        atualizar_paginas(coletor, item["caminho"], item["params"], item["prefixo"], simulado, pendentes)
 
 
-def coletar_sessoes_novas(coletor: ColetorLote, sessoes: list[dict]) -> None:
-    """Coleta por sessao dos pacotes grandes, com mesa, registros e votos."""
+def coletar_sessoes_novas(coletor: ColetorLote, sessoes: list[dict], pendentes: list | None = None) -> None:
+    """Coleta por sessao dos pacotes grandes, com mesa, registros e votos.
+
+    Com fila de pendentes, a sessao que falhar por rede ou recusa do
+    SAPL nao para as outras: entra na fila e e refeita por inteiro uma
+    vez ao fim. A recusa por vazio suspeito continua parando, pois
+    indica filtro mudado no SAPL.
+    """
     for sessao in sessoes:
         sid = int(sessao["id"])
         print(f"sessao {sid} numero {sessao.get('numero')} {sessao.get('data_inicio')}")
-        resumo = coletar_sessao_completa(coletor, sid)
+        try:
+            resumo = coletar_sessao_completa(coletor, sid)
+        except PedidoPendente as exc:
+            if pendentes is None:
+                raise
+            pendentes.append(
+                {
+                    "descricao": f"sessao {sid} ({exc.motivo})",
+                    "sessao_id": sid,
+                    "pasta": coletor.pasta,
+                    "arquivo": None,
+                    "refazer": lambda sid=sid: coletar_sessao_completa(coletor, sid),
+                }
+            )
+            continue
         print(
             f"  ordem {resumo['n_ordem']}, "
             f"registros {resumo['n_registros']}, votos {resumo['n_votos']}"
         )
 
 
-def coletar_autoria(coletor: ColetorLote, anos: list[int], simulado: bool) -> None:
+def coletar_autoria(coletor: ColetorLote, anos: list[int], simulado: bool, pendentes: list | None = None) -> None:
     for caminho, prefixo in PLANO:
         print(prefixo)
-        atualizar_paginas(coletor, caminho, {}, prefixo, simulado)
+        atualizar_paginas(coletor, caminho, {}, prefixo, simulado, pendentes)
     primeiro = coletor.pedir(
         "/api/materia/autoria/",
         {"page_size": PAGE_SIZE, "page": 1},
@@ -377,12 +532,33 @@ def coletar_autoria(coletor: ColetorLote, anos: list[int], simulado: bool) -> No
         print(f"autoria_materia_ano{ano}")
         prefixo = f"autoria_materia_ano{ano}"
         params = {"materia__ano": ano, "page_size": PAGE_SIZE, "page": 1}
-        pagina = coletor.pedir(
-            "/api/materia/autoria/",
-            params,
-            f"{prefixo}_p1.json",
-            refrescar=not simulado,
-        )
+        try:
+            pagina = coletor.pedir(
+                "/api/materia/autoria/",
+                params,
+                f"{prefixo}_p1.json",
+                refrescar=not simulado,
+            )
+        except PedidoPendente as exc:
+            if pendentes is None:
+                raise
+            pendentes.append(
+                {
+                    "descricao": f"{prefixo} pagina 1 ({exc.motivo})",
+                    "sessao_id": None,
+                    "pasta": coletor.pasta,
+                    "arquivo": f"{prefixo}_p1.json",
+                    "refazer": (
+                        lambda ano=ano, prefixo=prefixo: coletor.pedir(
+                            "/api/materia/autoria/",
+                            {"materia__ano": ano, "page_size": PAGE_SIZE, "page": 1},
+                            f"{prefixo}_p1.json",
+                            refrescar=True,
+                        )
+                    ),
+                }
+            )
+            continue
         total = total_entries(pagina)
         if total is None or (total_sem_filtro is not None and total >= total_sem_filtro):
             print(f"  filtro materia__ano={ano} ignorado pelo SAPL, nao pagina")
@@ -396,7 +572,30 @@ def coletar_autoria(coletor: ColetorLote, anos: list[int], simulado: bool) -> No
             arquivo = f"{prefixo}_p{numero}.json"
             existe = (coletor.pasta / arquivo).is_file()
             refrescar = (not simulado) and existe and (not pagina1_igual)
-            return coletor.pedir("/api/materia/autoria/", params, arquivo, refrescar=refrescar)
+            try:
+                return coletor.pedir("/api/materia/autoria/", params, arquivo, refrescar=refrescar)
+            except PedidoPendente as exc:
+                if pendentes is None:
+                    raise
+                pendentes.append(
+                    {
+                        "descricao": f"{prefixo} pagina {numero} ({exc.motivo})",
+                        "sessao_id": None,
+                        "pasta": coletor.pasta,
+                        "arquivo": arquivo,
+                        "refazer": (
+                            lambda ano=ano, prefixo=prefixo, pagina=numero, nome=arquivo: (
+                                coletor.pedir(
+                                    "/api/materia/autoria/",
+                                    {"materia__ano": ano, "page_size": PAGE_SIZE, "page": pagina},
+                                    nome,
+                                    refrescar=True,
+                                )
+                            )
+                        ),
+                    }
+                )
+                return None
 
         continuar_apos_primeira(pagina, prefixo, baixar)
 
@@ -425,12 +624,18 @@ def fichas_em_tramitacao(pasta_lote: Path) -> dict[int, bool]:
     return mapa
 
 
-def coletar_tramitacao(coletor: ColetorLote, pasta_lote: Path, simulado: bool) -> None:
+def coletar_tramitacao(
+    coletor: ColetorLote,
+    pasta_lote: Path,
+    simulado: bool,
+    pendentes: list | None = None,
+) -> None:
     """Tramitacao so das materias novas ou com em_tramitacao verdadeiro.
 
     Mesma pausa e teto da execucao, um pedido por vez. Tipos lidos do
     config, nunca fixos aqui. Catalogos de status e unidades sao
-    reconferidos pagina a pagina.
+    reconferidos pagina a pagina. Com fila de pendentes, a materia que
+    falhar por rede ou recusa entra na fila e e refeita uma vez ao fim.
     """
     from coletar_tramitacao import (
         carregar_materias_alvo,
@@ -442,29 +647,17 @@ def coletar_tramitacao(coletor: ColetorLote, pasta_lote: Path, simulado: bool) -
     cfg = carregar_config()
     alvos = carregar_materias_alvo(cfg)
     fichas = fichas_em_tramitacao(pasta_lote)
-    for materia in alvos:
-        mid = int(materia["id"])
-        arquivo = f"tramitacao_materia{mid}_p1.json"
-        existe = (coletor.pasta / arquivo).is_file()
-        if existe and not fichas.get(mid, False):
-            continue
-        if simulado:
-            print(f"  {arquivo} ausente ou em tramitacao. Modo simulado nao baixa.")
-            continue
-        print(f"tramitacao materia {mid}")
-        try:
-            primeira = coletor.pedir(
-                "/api/materia/tramitacao/",
-                {"materia": mid},
-                arquivo,
-                refrescar=existe,
-            )
-            conferir_tramitacao(primeira, mid, arquivo)
-        except SystemExit as exc:
-            print(f"  Falhou a materia {mid}, sigo: {exc}")
-            continue
+
+    def baixar_materia(mid: int, arquivo: str, existe: bool) -> None:
+        primeira = coletor.pedir(
+            "/api/materia/tramitacao/",
+            {"materia": mid},
+            arquivo,
+            refrescar=existe,
+        )
+        conferir_tramitacao(primeira, mid, arquivo)
         if not isinstance(primeira, dict):
-            continue
+            return
         pagina = int((primeira.get("pagination") or {}).get("page") or 1)
         atual = primeira
         while tem_proxima(atual):
@@ -481,12 +674,43 @@ def coletar_tramitacao(coletor: ColetorLote, pasta_lote: Path, simulado: bool) -
             except SystemExit as exc:
                 print(f"  Falhou {proximo}, sigo: {exc}")
                 break
+
+    for materia in alvos:
+        mid = int(materia["id"])
+        arquivo = f"tramitacao_materia{mid}_p1.json"
+        existe = (coletor.pasta / arquivo).is_file()
+        if existe and not fichas.get(mid, False):
+            continue
+        if simulado:
+            print(f"  {arquivo} ausente ou em tramitacao. Modo simulado nao baixa.")
+            continue
+        print(f"tramitacao materia {mid}")
+        try:
+            baixar_materia(mid, arquivo, existe)
+        except PedidoPendente as exc:
+            if pendentes is None:
+                raise
+            pendentes.append(
+                {
+                    "descricao": f"tramitacao materia {mid} ({exc.motivo})",
+                    "sessao_id": None,
+                    "pasta": coletor.pasta,
+                    "arquivo": arquivo,
+                    "refazer": lambda mid=mid, arquivo=arquivo: baixar_materia(
+                        mid, arquivo, (coletor.pasta / arquivo).is_file()
+                    ),
+                }
+            )
+            continue
+        except SystemExit as exc:
+            print(f"  Falhou a materia {mid}, sigo: {exc}")
+            continue
     for caminho, prefixo in (
         ("/api/materia/statustramitacao/", "statustramitacao"),
         ("/api/materia/unidadetramitacao/", "unidadetramitacao"),
     ):
         print(prefixo)
-        atualizar_paginas(coletor, caminho, {}, prefixo, simulado)
+        atualizar_paginas(coletor, caminho, {}, prefixo, simulado, pendentes)
 
 
 def rodar(argumentos: list[str]) -> None:
@@ -497,9 +721,17 @@ def rodar(argumentos: list[str]) -> None:
 
 
 def ler_json(caminho: Path) -> dict:
+    """Le um bruto como dicionario, sem nunca estourar JSONDecodeError.
+
+    Arquivo ausente, vazio ou ilegivel devolve dicionario vazio. Resposta
+    vazia do SAPL nunca e dado, por isso vazio aqui significa ausente.
+    """
     if not caminho.is_file():
         return {}
-    dados = json.loads(caminho.read_text(encoding="utf-8"))
+    try:
+        dados = json.loads(caminho.read_text(encoding="utf-8"))
+    except (OSError, ValueError, UnicodeDecodeError):
+        return {}
     return dados if isinstance(dados, dict) else {}
 
 
@@ -567,7 +799,15 @@ def linhas_sessoes(sessoes: list[dict]) -> list[str]:
     return linhas
 
 
-def montar_entrada(data_iso: str, fonte: str, pedidos: int, sessoes: list[dict], contagens: list[str], hashes: list[str]) -> str:
+def montar_entrada(
+    data_iso: str,
+    fonte: str,
+    pedidos: int,
+    sessoes: list[dict],
+    contagens: list[str],
+    hashes: list[str],
+    avisos: list[str] | None = None,
+) -> str:
     linhas = [
         f"## {data_iso}: atualização semanal dos dados",
         "",
@@ -585,6 +825,8 @@ def montar_entrada(data_iso: str, fonte: str, pedidos: int, sessoes: list[dict],
             linhas.append(f"- {linha}")
     else:
         linhas.append("- Nenhum hash de atuação mudou.")
+    for aviso in avisos or []:
+        linhas.append(f"- Coleta com aviso: {aviso}. Valeu o arquivo ja salvo.")
     linhas.append(f"- Pedidos ao SAPL nesta execução: {pedidos}.")
     linhas.extend(
         [
@@ -621,6 +863,26 @@ def bloqueio_de_rede(*_args, **_kwargs):
     raise SystemExit("Modo simulado: pedido de rede bloqueado.")
 
 
+def conferir_coleta_por_sessao(pasta_sessao: Path, sessoes: list[dict]) -> list[dict]:
+    """Confere pagina a pagina da coleta por sessao e grava a conferencia.
+
+    Devolve as divergencias. Prefixo sem arquivo e so pulado, pois a
+    sessao pode estar na fila de pendentes para repetir ao fim.
+    """
+    divergencias = []
+    for sessao in sessoes:
+        sid = int(sessao["id"])
+        for _caminho, recurso in list(RECURSOS) + [(CAMINHO_MESA, RECURSO_MESA)]:
+            prefixo = f"sessao_{sid}_{recurso}"
+            if not (pasta_sessao / f"{prefixo}_p1.json").is_file():
+                continue
+            conf = conferir_prefixo(pasta_sessao, prefixo, sid, recurso)
+            if not conf["bate"]:
+                divergencias.append(conf)
+    gravar_conferencia(pasta_sessao, sessoes, divergencias)
+    return divergencias
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Atualizacao semanal dos dados do SAPL.")
     parser.add_argument(
@@ -643,13 +905,19 @@ def main(argv: list[str] | None = None) -> int:
     def confirmar_ano(ano: int) -> bool:
         coletor_sonda = preparar_coletor(cfg, pasta_lote, orcamento, False)
         coletor_sonda.pular_pausa = False
-        confirmou = confirmar_sessao_ordinaria_no_ano(coletor_sonda, ano, tipo)
+        try:
+            confirmou = confirmar_sessao_ordinaria_no_ano(coletor_sonda, ano, tipo)
+        except PedidoPendente as exc:
+            print(f"Ano {ano} sem confirmacao do SAPL ({exc.motivo}). O recorte nao mudou.")
+            confirmou = False
         if not confirmou:
             coletor_sonda.gravou = False
         coletores.append(coletor_sonda)
         return confirmou
 
     coletores = []
+    pendentes = nova_fila_pendentes()
+    avisos_coleta: list[str] = []
     anos, config_alterada = incluir_ano_se_confirmado(cfg, hoje, args.simulado, confirmar_ano)
     if config_alterada and not args.simulado:
         gravar_anos_no_config(anos)
@@ -677,7 +945,7 @@ def main(argv: list[str] | None = None) -> int:
         coletor_lote = preparar_coletor(cfg, pasta_lote, orcamento, args.simulado)
         coletores.append(coletor_lote)
         try:
-            baixar_lote(coletor_lote, anos, args.simulado)
+            baixar_lote(coletor_lote, anos, args.simulado, pendentes)
         except OrcamentoEsgotado as exc:
             print(f"PAROU: {exc}")
             return 2
@@ -718,7 +986,7 @@ def main(argv: list[str] | None = None) -> int:
             coletor_sessao = preparar_coletor(cfg, pasta_sessao, orcamento, False)
             coletores.append(coletor_sessao)
             try:
-                coletar_sessoes_novas(coletor_sessao, lista_alvo)
+                coletar_sessoes_novas(coletor_sessao, lista_alvo, pendentes)
             except OrcamentoEsgotado as exc:
                 print(f"PAROU: {exc}")
                 print(
@@ -726,27 +994,13 @@ def main(argv: list[str] | None = None) -> int:
                     "fora da rotina semanal. Nada foi publicado."
                 )
                 return 2
-            divergencias = []
-            for sessao in sessoes:
-                sid = int(sessao["id"])
-                for _caminho, recurso in list(RECURSOS) + [(CAMINHO_MESA, RECURSO_MESA)]:
-                    prefixo = f"sessao_{sid}_{recurso}"
-                    if not (pasta_sessao / f"{prefixo}_p1.json").is_file():
-                        continue
-                    conf = conferir_prefixo(pasta_sessao, prefixo, sid, recurso)
-                    if not conf["bate"]:
-                        divergencias.append(conf)
-                for recurso in (RECURSO_REGISTRO, RECURSO_VOTO):
-                    consolidado = pasta_sessao / f"sessao_{sid}_{recurso}_p1.json"
-                    if consolidado.is_file():
-                        continue
-            gravar_conferencia(pasta_sessao, sessoes, divergencias)
+            conferir_coleta_por_sessao(pasta_sessao, sessoes)
 
         pasta_autoria = pasta_autoria_mais_recente(BRUTOS)
         coletor_autoria = preparar_coletor(cfg, pasta_autoria, orcamento, args.simulado)
         coletores.append(coletor_autoria)
         try:
-            coletar_autoria(coletor_autoria, anos, args.simulado)
+            coletar_autoria(coletor_autoria, anos, args.simulado, pendentes)
         except OrcamentoEsgotado as exc:
             print(f"PAROU: {exc}")
             return 2
@@ -760,7 +1014,7 @@ def main(argv: list[str] | None = None) -> int:
                 coletor_tramitacao = preparar_coletor(cfg, pasta_tramitacao, orcamento, False)
                 coletores.append(coletor_tramitacao)
                 try:
-                    coletar_tramitacao(coletor_tramitacao, pasta_lote, False)
+                    coletar_tramitacao(coletor_tramitacao, pasta_lote, False, pendentes)
                 except OrcamentoEsgotado as exc:
                     print(f"PAROU: {exc}")
                     return 2
@@ -768,10 +1022,22 @@ def main(argv: list[str] | None = None) -> int:
             coletor_tramitacao = preparar_coletor(cfg, pasta_tramitacao, orcamento, args.simulado)
             coletores.append(coletor_tramitacao)
             try:
-                coletar_tramitacao(coletor_tramitacao, pasta_lote, args.simulado)
+                coletar_tramitacao(coletor_tramitacao, pasta_lote, args.simulado, pendentes)
             except OrcamentoEsgotado as exc:
                 print(f"PAROU: {exc}")
                 return 2
+
+        try:
+            avisos_coleta = repetir_pendentes(
+                pendentes,
+                [int(item["id"]) for item in lista_novas],
+                args.simulado,
+            )
+        except OrcamentoEsgotado as exc:
+            print(f"PAROU: {exc}")
+            return 2
+        if pasta_sessao is not None and lista_alvo and not args.simulado:
+            conferir_coleta_por_sessao(pasta_sessao, sessoes)
     finally:
         coletar_lote.urllib.request.urlopen = original_urlopen
 
@@ -801,6 +1067,7 @@ def main(argv: list[str] | None = None) -> int:
         lista_novas,
         linhas_contagem(contagens_antes, contagens_depois),
         linhas_hash(hashes_antes, hashes_depois),
+        avisos_coleta,
     )
     gravar_changelog(entrada)
     print("CHANGELOG atualizado.")

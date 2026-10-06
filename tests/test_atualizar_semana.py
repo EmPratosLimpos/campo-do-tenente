@@ -21,19 +21,24 @@ from atualizar_semana import (  # noqa: E402
     OrcamentoExecucao,
     ano_corrente_candidato,
     anos_da_execucao,
+    arquivo_bom,
+    atualizar_paginas,
     confirmar_sessao_ordinaria_no_ano,
+    conferir_coleta_por_sessao,
     custo_minimo_sessoes,
     incluir_ano_se_confirmado,
     inserir_entrada,
     linhas_contagem,
     montar_entrada,
+    nova_fila_pendentes,
     plano_sem_listas_grandes,
+    repetir_pendentes,
     sessao_tem_arquivo,
     sessoes_alvo_para_coleta,
     sessoes_novas,
     ultima_sessao_coletada,
 )
-from coletar_lote import ColetorLote, OrcamentoEsgotado  # noqa: E402
+from coletar_lote import ColetorLote, OrcamentoEsgotado, PedidoPendente  # noqa: E402
 
 sys.path.insert(0, str(RAIZ / "scripts"))
 from so_dados_mudaram import (  # noqa: E402
@@ -831,6 +836,339 @@ class TesteSimulado(unittest.TestCase):
         self.assertIn("Nada mudou.", resultado.stdout)
         self.assertNotIn("pedido de rede bloqueado", resultado.stdout + resultado.stderr)
         self.assertEqual(porcelana(), antes)
+
+
+class RespostaVazia:
+    """Servidor falso que devolve corpo vazio com HTTP 200."""
+
+    status = 200
+
+    def geturl(self):
+        return "https://exemplo.invalid/api/"
+
+    def read(self, tamanho=None):
+        del tamanho
+        return b""
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_args):
+        return False
+
+
+def _coletor_com_falhas(tmp, comportamento, teto=50, adiar=True):
+    """Coletor com servidor falso. comportamento(req) devolve corpo ou levanta."""
+    import urllib.error
+
+    pasta = Path(tmp)
+    orcamento = OrcamentoExecucao(teto)
+    coletor = ColetorLote(CFG_COLETOR, pasta, teto=50)
+    coletor.orcamento_execucao = orcamento
+    coletor.adiar_falha = adiar
+
+    def urlopen(req, timeout=None):
+        del timeout
+        return comportamento(req)
+
+    return coletor, orcamento, urlopen
+
+
+class TestesPedidoPendente(unittest.TestCase):
+    def test_falha_persistente_vira_pendente_e_preserva_o_arquivo_bom(self):
+        import urllib.error
+
+        bom = b'{"pagination": {"total_pages": 1}, "results": [{"id": 1}]}'
+
+        def comportamento(req):
+            del req
+            raise urllib.error.URLError("recusado")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pasta = Path(tmp)
+            (pasta / "lista_p1.json").write_bytes(bom)
+            coletor, orcamento, urlopen = _coletor_com_falhas(tmp, comportamento)
+            with mock.patch(
+                "coletar_lote.urllib.request.urlopen", urlopen
+            ), mock.patch("coletar_lote.time.sleep", lambda *a: None):
+                with self.assertRaises(PedidoPendente) as ctx:
+                    coletor.pedir("/api/um/", None, "lista_p1.json", refrescar=True)
+            self.assertIn("lista_p1.json", str(ctx.exception))
+            self.assertEqual((pasta / "lista_p1.json").read_bytes(), bom)
+            self.assertFalse(coletor.gravou)
+            self.assertEqual(orcamento.pedidos, 3)
+
+    def test_resposta_vazia_nunca_e_gravada_nem_substitui(self):
+        bom = b'{"pagination": {"total_pages": 1}, "results": [{"id": 1}]}'
+        with tempfile.TemporaryDirectory() as tmp:
+            pasta = Path(tmp)
+            (pasta / "lista_p1.json").write_bytes(bom)
+            coletor, _orcamento, urlopen = _coletor_com_falhas(
+                tmp, lambda req: RespostaVazia()
+            )
+            with mock.patch(
+                "coletar_lote.urllib.request.urlopen", urlopen
+            ), mock.patch("coletar_lote.time.sleep", lambda *a: None):
+                with self.assertRaises(PedidoPendente):
+                    coletor.pedir("/api/um/", None, "lista_p1.json", refrescar=True)
+            self.assertEqual((pasta / "lista_p1.json").read_bytes(), bom)
+            falhas = list((pasta / "falhas").glob("lista_p1_t*.json"))
+            self.assertTrue(falhas)
+            for falha in falhas:
+                self.assertIn("_t", falha.name)
+            self.assertFalse(list(pasta.glob("lista_p1_t*.json")))
+
+    def test_recuperacao_depois_de_vazio_grava_so_o_valido(self):
+        tentativas = {"n": 0}
+        valido = b'{"pagination": {"total_pages": 1}, "results": [{"id": 2}]}'
+
+        def comportamento(req):
+            del req
+            tentativas["n"] += 1
+            if tentativas["n"] < 3:
+                return RespostaVazia()
+            return Resposta(valido)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pasta = Path(tmp)
+            coletor, _orcamento, urlopen = _coletor_com_falhas(tmp, comportamento)
+            with mock.patch(
+                "coletar_lote.urllib.request.urlopen", urlopen
+            ), mock.patch("coletar_lote.time.sleep", lambda *a: None):
+                dados = coletor.pedir("/api/um/", None, "lista_p1.json", refrescar=True)
+            self.assertEqual(dados["results"], [{"id": 2}])
+            self.assertEqual(
+                json.loads((pasta / "lista_p1.json").read_text(encoding="utf-8"))["results"],
+                [{"id": 2}],
+            )
+            self.assertTrue(coletor.gravou)
+
+    def test_teto_conta_as_tentativas_extras(self):
+        import urllib.error
+
+        def comportamento(req):
+            del req
+            raise urllib.error.URLError("recusado")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            coletor, orcamento, urlopen = _coletor_com_falhas(
+                tmp, comportamento, teto=2
+            )
+            with mock.patch(
+                "coletar_lote.urllib.request.urlopen", urlopen
+            ), mock.patch("coletar_lote.time.sleep", lambda *a: None):
+                with self.assertRaises(OrcamentoEsgotado):
+                    coletor.pedir("/api/um/", None, "lista_p1.json", refrescar=True)
+            self.assertEqual(orcamento.pedidos, 2)
+
+    def test_sem_adiar_a_falha_continua_parando(self):
+        import urllib.error
+
+        def comportamento(req):
+            del req
+            raise urllib.error.URLError("recusado")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            coletor, _orcamento, urlopen = _coletor_com_falhas(
+                tmp, comportamento, adiar=False
+            )
+            with mock.patch(
+                "coletar_lote.urllib.request.urlopen", urlopen
+            ), mock.patch("coletar_lote.time.sleep", lambda *a: None):
+                with self.assertRaises(SystemExit):
+                    coletor.pedir("/api/um/", None, "lista_p1.json", refrescar=True)
+
+    def test_pagina_que_falha_entra_na_fila_e_a_coleta_continua(self):
+        chamadas = {"n": 0}
+        primeira = b'{"pagination": {"total_pages": 2, "total_entries": 2}, "results": [{"id": 1}]}'
+
+        def comportamento(req):
+            url = req.full_url
+            if "page=1" in url:
+                return Resposta(primeira)
+            chamadas["n"] += 1
+            return RespostaVazia()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            coletor, _orcamento, urlopen = _coletor_com_falhas(tmp, comportamento)
+            pendentes = nova_fila_pendentes()
+            with mock.patch(
+                "coletar_lote.urllib.request.urlopen", urlopen
+            ), mock.patch("coletar_lote.time.sleep", lambda *a: None):
+                atualizar_paginas(
+                    coletor, "/api/um/", {}, "exemplo", False, pendentes
+                )
+            self.assertEqual(len(pendentes), 1)
+            self.assertEqual(pendentes[0]["arquivo"], "exemplo_p2.json")
+            self.assertTrue((Path(tmp) / "exemplo_p1.json").is_file())
+            self.assertFalse((Path(tmp) / "exemplo_p2.json").is_file())
+
+
+class TestesArquivoBom(unittest.TestCase):
+    def test_classifica_arquivo_salvo(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            pasta = Path(tmp)
+            self.assertFalse(arquivo_bom(pasta, "ausente.json"))
+            (pasta / "vazio.json").write_bytes(b"")
+            self.assertFalse(arquivo_bom(pasta, "vazio.json"))
+            (pasta / "quebrado.json").write_bytes(b"nao e json")
+            self.assertFalse(arquivo_bom(pasta, "quebrado.json"))
+            (pasta / "lista.json").write_bytes(b"[]")
+            self.assertFalse(arquivo_bom(pasta, "lista.json"))
+            (pasta / "bom.json").write_bytes(b'{"results": []}')
+            self.assertTrue(arquivo_bom(pasta, "bom.json"))
+
+
+class TestesRepetirPendentes(unittest.TestCase):
+    def test_fila_vazia_nao_espera_e_nao_avisa(self):
+        import atualizar_semana as modulo
+
+        with mock.patch.object(modulo, "esperar_antes_da_repeticao") as espera:
+            self.assertEqual(repetir_pendentes([], [99]), [])
+            espera.assert_not_called()
+
+    def test_pendente_que_recupera_some_da_fila(self):
+        import atualizar_semana as modulo
+
+        feitos = []
+        pendentes = [
+            {
+                "descricao": "exemplo pagina 2",
+                "sessao_id": None,
+                "pasta": None,
+                "arquivo": None,
+                "refazer": lambda: feitos.append(1),
+            }
+        ]
+        with mock.patch.object(modulo, "esperar_antes_da_repeticao") as espera:
+            self.assertEqual(repetir_pendentes(pendentes, [99]), [])
+            espera.assert_called_once_with()
+        self.assertEqual(feitos, [1])
+
+    def test_falta_da_sessao_nova_nao_publica(self):
+        import atualizar_semana as modulo
+
+        def quebrado():
+            raise PedidoPendente("/api/x/", {}, "sessao_99_ordemdia_p1.json", "recusado")
+
+        pendentes = [
+            {
+                "descricao": "sessao 99 (recusado)",
+                "sessao_id": 99,
+                "pasta": None,
+                "arquivo": None,
+                "refazer": quebrado,
+            }
+        ]
+        with mock.patch.object(
+            modulo, "esperar_antes_da_repeticao", lambda *a: None
+        ):
+            with self.assertRaises(SystemExit) as ctx:
+                repetir_pendentes(pendentes, [99])
+        mensagem = str(ctx.exception)
+        self.assertIn("sessao nova", mensagem)
+        self.assertIn("Nada foi publicado", mensagem)
+        self.assertIn("sessao 99", mensagem)
+
+    def test_falta_antiga_com_arquivo_segue_com_aviso(self):
+        import atualizar_semana as modulo
+
+        def quebrado():
+            raise PedidoPendente("/api/x/", {}, "autoria_p3.json", "recusado")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pasta = Path(tmp)
+            (pasta / "autoria_p3.json").write_bytes(b'{"results": []}')
+            pendentes = [
+                {
+                    "descricao": "autoria pagina 3 (recusado)",
+                    "sessao_id": None,
+                    "pasta": pasta,
+                    "arquivo": "autoria_p3.json",
+                    "refazer": quebrado,
+                }
+            ]
+            with mock.patch.object(
+                modulo, "esperar_antes_da_repeticao", lambda *a: None
+            ):
+                avisos = repetir_pendentes(pendentes, [99])
+        self.assertEqual(avisos, ["autoria pagina 3 (recusado)"])
+
+    def test_falta_antiga_sem_arquivo_nao_publica(self):
+        import atualizar_semana as modulo
+
+        def quebrado():
+            raise PedidoPendente("/api/x/", {}, "autoria_p3.json", "recusado")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pendentes = [
+                {
+                    "descricao": "autoria pagina 3 (recusado)",
+                    "sessao_id": None,
+                    "pasta": Path(tmp),
+                    "arquivo": "autoria_p3.json",
+                    "refazer": quebrado,
+                }
+            ]
+            with mock.patch.object(
+                modulo, "esperar_antes_da_repeticao", lambda *a: None
+            ):
+                with self.assertRaises(SystemExit) as ctx:
+                    repetir_pendentes(pendentes, [99])
+        self.assertIn("Nada foi publicado", str(ctx.exception))
+
+    def test_simulado_nao_espera_os_cinco_minutos(self):
+        import atualizar_semana as modulo
+
+        feitos = []
+        pendentes = [
+            {
+                "descricao": "exemplo",
+                "sessao_id": None,
+                "pasta": None,
+                "arquivo": None,
+                "refazer": lambda: feitos.append(1),
+            }
+        ]
+        with mock.patch.object(modulo, "esperar_antes_da_repeticao") as espera:
+            self.assertEqual(repetir_pendentes(pendentes, [99], True), [])
+            espera.assert_not_called()
+        self.assertEqual(feitos, [1])
+
+    def test_aviso_entra_no_changelog(self):
+        entrada = montar_entrada(
+            "2026-09-27",
+            "https://exemplo.invalid",
+            12,
+            [],
+            [],
+            [],
+            ["autoria pagina 3 (recusado)"],
+        )
+        self.assertIn("Coleta com aviso", entrada)
+        self.assertIn("autoria pagina 3", entrada)
+
+
+class TestesConferenciaPorSessao(unittest.TestCase):
+    def test_conferencia_grava_divergencia_sem_parar(self):
+        import atualizar_semana as modulo
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pasta = Path(tmp)
+            pagina = {
+                "pagination": {"total_entries": 2, "total_pages": 1, "page": 1},
+                "results": [{"id": 1}],
+            }
+            (pasta / "sessao_5_ordemdia_p1.json").write_text(
+                json.dumps(pagina), encoding="utf-8"
+            )
+            divergencias = modulo.conferir_coleta_por_sessao(
+                pasta, [{"id": 5, "numero": 1, "data_inicio": "2026-01-01"}]
+            )
+            self.assertTrue(
+                [item for item in divergencias if item["recurso"] == "ordemdia"]
+            )
+            self.assertTrue((pasta / "conferencia.json").is_file())
 
 
 if __name__ == "__main__":
