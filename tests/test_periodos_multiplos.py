@@ -189,9 +189,14 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
             browser = p.chromium.launch()
             page = browser.new_page()
             page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
-            page.wait_for_selector("#bloco-votado-todo .cab-cartao", timeout=60000)
+            page.wait_for_selector(
+                "#bloco-votado-sessao .cab-cartao", state="visible", timeout=60000
+            )
             page.click('button[data-periodo="todo"]')
-            page.wait_for_timeout(600)
+            page.wait_for_selector(
+                "#bloco-votado-todo .cab-cartao", state="visible", timeout=60000
+            )
+            page.wait_for_timeout(400)
             texto = page.inner_text("body")
             self.assertIn(tipo, texto)
             self.assertIn("2º turno", texto)

@@ -13,7 +13,7 @@ if str(RAIZ / "coletor") not in sys.path:
     sys.path.insert(0, str(RAIZ / "coletor"))
 
 from config_cidade import carregar_config  # noqa: E402
-from test_tela_votacoes import _contar_votados_todo, _lista_votados_todo  # noqa: E402
+from tests.test_tela_votacoes import _contar_votados_todo, _lista_votados_todo  # noqa: E402
 
 INDEX = (RAIZ / "index.html").read_text(encoding="utf-8")
 SUFIXO = "legislatura"

@@ -7339,22 +7339,22 @@
         '<div class="cab-cartao"><h2 class="t2" id="tit-pedidos">Pedidos que fez</h2></div>' +
         '<p class="vazio"><b>Nenhum pedido registrado no SAPL neste per\u00edodo.</b></p></article>';
     }
-    var listaFacetTipo = lista;
+    var listaContagemTipo = lista;
     if (estado.filtroPedidoTema) {
-      listaFacetTipo = lista.filter(function (item) {
+      listaContagemTipo = lista.filter(function (item) {
         return item.tema === estado.filtroPedidoTema;
       });
     }
-    var cont = contagemPedidosPorTipo(listaFacetTipo);
+    var cont = contagemPedidosPorTipo(listaContagemTipo);
     var mapa = mapaNomesTipoPedido(lista);
     var resumo = htmlFraseResumoPedidos(lista, "Fez");
-    var listaFacetTema = lista;
+    var listaTemasPedidos = lista;
     if (estado.filtroPedidoTipo) {
-      listaFacetTema = lista.filter(function (item) {
+      listaTemasPedidos = lista.filter(function (item) {
         return item.tipo_sigla === estado.filtroPedidoTipo;
       });
     }
-    var temasHtml = htmlBarrasTemasPedidos(listaFacetTema, true);
+    var temasHtml = htmlBarrasTemasPedidos(listaTemasPedidos, true);
 
     var itensFiltrados = lista.filter(function (item) {
       if (!estado.listaPedidosVisivel) return false;
