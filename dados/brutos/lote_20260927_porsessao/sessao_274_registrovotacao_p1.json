@@ -1,14 +1,5 @@
 {
-  "pagination": {
-    "total_entries": 6,
-    "total_pages": 1,
-    "page": 1,
-    "links": {
-      "next": null,
-      "previous": null
-    },
-    "next_page": null
-  },
+  "pagination": {},
   "results": [
     {
       "id": 274,

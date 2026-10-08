@@ -1618,5 +1618,33 @@
   "969": {
     "tag_tipo": "IND",
     "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "1047": {
+    "tag_tipo": "PDL",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "1052": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "1054": {
+    "tag_tipo": "IND",
+    "tag_tema": "Cultura, esporte e lazer"
+  },
+  "1055": {
+    "tag_tipo": "IND",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "1056": {
+    "tag_tipo": "MOC",
+    "tag_tema": "Homenagens, nomes e datas"
+  },
+  "1058": {
+    "tag_tipo": "REQ",
+    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+  },
+  "1097": {
+    "tag_tipo": "ATA",
+    "tag_tema": "não se aplica"
   }
 }

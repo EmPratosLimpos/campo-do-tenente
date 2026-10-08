@@ -1,18 +1,18 @@
 # Atuação dos vereadores nas sessões ordinárias de 2026
 
 Cidade: Campo do Tenente (PR)
-Dado coletado em: 2026-09-29T22:57:44-03:00
-Fonte da data: dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em
+Dado coletado em: 2026-10-08T19:40:06-03:00
+Fonte da data: dados/brutos/lote_20260929_tramitacao/indice.json campo atualizado_em
 Script: `dados/tratados/gerar_atuacao_vereadores.py`
 Fonte dos fatos: arquivos em `dados/brutos/`, `dados/tratados/vereadores.json`, `dados/tratados/presidencia_sessoes.json` e `dados/tratados/autoria_materias.json`.
 
 ## Em uma frase
 
-Nas 34 sessões ordinárias de 2026 que estão no SAPL, os 10 vereadores com mandato nesse ano tiveram presença, voto e projetos de lei lidos do registro oficial.
+Nas 35 sessões ordinárias de 2026 que estão no SAPL, os 10 vereadores com mandato nesse ano tiveram presença, voto e projetos de lei lidos do registro oficial.
 
 ## O que este recorte cobre
 
-Ano 2026. Só sessão ordinária. O piso de sessões (33) é mínimo: o arquivo traz 34, que é pelo menos esse piso.
+Ano 2026. Só sessão ordinária. O piso de sessões (33) é mínimo: o arquivo traz 35, que é pelo menos esse piso.
 
 Presença e voto nominal só entram quando a data da sessão cai dentro do mandato da pessoa, pelas datas da tabela de vereadores. Sessão fora desse intervalo não aparece na lista da pessoa: a atuação de quem saiu fica congelada na data de saída.
 
@@ -60,7 +60,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/1
 
 Presente em 4 das 28 sessões em que a presença conta (taxa 14,29%).
 
-Faltas com justificativa: 24. Faltas sem justificativa: 0. Sessões fora do mandato: 6.
+Faltas com justificativa: 24. Faltas sem justificativa: 0. Sessões fora do mandato: 7.
 
 ### Dr. Marcos Rodrigues
 
@@ -68,7 +68,7 @@ Partido: MDB (MOVIMENTO DEMOCRÁTICO BRASILEIRO)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/2
 
-Presente em 32 das 34 sessões em que a presença conta (taxa 94,12%).
+Presente em 33 das 35 sessões em que a presença conta (taxa 94,29%).
 
 Faltas com justificativa: 1. Faltas sem justificativa: 1. Sessões fora do mandato: 0.
 
@@ -78,7 +78,7 @@ Partido: PDT (PARTIDO DEMOCRÁTICO TRABALHISTA)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/3
 
-Presente em 33 das 34 sessões em que a presença conta (taxa 97,06%).
+Presente em 34 das 35 sessões em que a presença conta (taxa 97,14%).
 
 Faltas com justificativa: 1. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
@@ -88,7 +88,7 @@ Partido: MDB (MOVIMENTO DEMOCRÁTICO BRASILEIRO)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/4
 
-Presente em 32 das 34 sessões em que a presença conta (taxa 94,12%).
+Presente em 33 das 35 sessões em que a presença conta (taxa 94,29%).
 
 Faltas com justificativa: 1. Faltas sem justificativa: 1. Sessões fora do mandato: 0.
 
@@ -98,7 +98,7 @@ Partido: PL (PARTIDO LIBERAL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/5
 
-Presente em 34 das 34 sessões em que a presença conta (taxa 100,00%).
+Presente em 35 das 35 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
@@ -108,7 +108,7 @@ Partido: UNIÃO (UNIÃO BRASIL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/6
 
-Presente em 34 das 34 sessões em que a presença conta (taxa 100,00%).
+Presente em 35 das 35 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
@@ -118,7 +118,7 @@ Partido: PL (PARTIDO LIBERAL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/7
 
-Presente em 34 das 34 sessões em que a presença conta (taxa 100,00%).
+Presente em 35 das 35 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
@@ -128,7 +128,7 @@ Partido: PP (PARTIDO PROGRESSISTA)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/8
 
-Presente em 32 das 34 sessões em que a presença conta (taxa 94,12%).
+Presente em 33 das 35 sessões em que a presença conta (taxa 94,29%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 2. Sessões fora do mandato: 0.
 
@@ -138,7 +138,7 @@ Partido: UNIÃO (UNIÃO BRASIL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/9
 
-Presente em 32 das 34 sessões em que a presença conta (taxa 94,12%).
+Presente em 33 das 35 sessões em que a presença conta (taxa 94,29%).
 
 Faltas com justificativa: 2. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
@@ -148,7 +148,7 @@ Partido: PP (PARTIDO PROGRESSISTA)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/100
 
-Presente em 29 das 29 sessões em que a presença conta (taxa 100,00%).
+Presente em 30 das 30 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 5.
 
@@ -176,7 +176,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Dr. Marcos Rodrigues
 
-- Sim: 83
+- Sim: 87
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -190,7 +190,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Cleiton Costa
 
-- Sim: 85
+- Sim: 89
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -204,7 +204,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Kinho Lazarino
 
-- Sim: 82
+- Sim: 86
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -222,7 +222,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
-- Presidente que não votou: 83
+- Presidente que não votou: 87
 - Ausente com justificativa: 0
 - Ausente sem justificativa: 0
 - Fora do mandato naquela data: 0
@@ -232,7 +232,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Gustavo Vizentin
 
-- Sim: 89
+- Sim: 93
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -246,7 +246,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Josemar Veiga
 
-- Sim: 87
+- Sim: 91
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -260,7 +260,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Beto Maurer
 
-- Sim: 80
+- Sim: 84
 - Não: 2
 - Abstenção: 0
 - Não votou: 0
@@ -274,7 +274,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Gilmar Barbosa
 
-- Sim: 82
+- Sim: 86
 - Não: 0
 - Abstenção: 0
 - Não votou: 0
@@ -288,7 +288,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ### Rivanildo Cavalheiro
 
-- Sim: 85
+- Sim: 89
 - Não: 0
 - Abstenção: 2
 - Não votou: 0
@@ -374,14 +374,14 @@ Nenhum projeto de lei do Legislativo com esta autoria neste ano.
 
 ## Totais
 
-- Sessões ordinárias no SAPL: 34
+- Sessões ordinárias no SAPL: 35
 - Vereadores com mandato no ano: 10
-- Presenças dentro do mandato: 296
+- Presenças dentro do mandato: 305
 - Faltas com justificativa: 29
 - Faltas sem justificativa: 4
 - Afastamentos que não contam como falta: 0
-- Votações: 126
-- Votações com voto individual: 106
+- Votações: 130
+- Votações com voto individual: 110
 - Votações sem voto individual: 20
 
 ## Como repetir

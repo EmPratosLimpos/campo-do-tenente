@@ -22,11 +22,14 @@
       "dados/brutos/lote_20260927_autoria/autoria_p7.json",
       "dados/brutos/lote_20260927_autoria/autoria_p8.json",
       "dados/brutos/lote_20260927_autoria/autoria_p9.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p10.json"
+      "dados/brutos/lote_20260927_autoria/autoria_p10.json",
+      "dados/brutos/lote_20260927_autoria/autoria_p11.json",
+      "dados/brutos/lote_20260927_autoria/autoria_p12.json",
+      "dados/brutos/lote_20260927_autoria/autoria_p13.json"
     ],
-    "autoria_total_entries_api": 906,
-    "autoria_total_linhas_lidas": 906,
-    "autoria_ids_distintos": 865,
+    "autoria_total_entries_api": 1281,
+    "autoria_total_linhas_lidas": 1281,
+    "autoria_ids_distintos": 1231,
     "nota_autoria": "A lista materia/autoria repetiu ids entre paginas e o filtro por ano foi ignorado pelo SAPL. Ela so informa o primeiro autor. A ligacao materia e autor vem do campo autores da propria materia.",
     "por_ano": {
       "2025": {
@@ -45,16 +48,16 @@
         ]
       },
       "2026": {
-        "n_materias": 140,
-        "total_entries_api": 140,
-        "n_pares_materia_autor": 159,
+        "n_materias": 147,
+        "total_entries_api": 147,
+        "n_pares_materia_autor": 181,
         "materias_por_tipo_de_autor": {
           "Chefe do Poder Executivo Municipal": 35,
           "Comissão": 3,
           "MESA DIRETORA": 1,
-          "Parlamentar": 68,
+          "Parlamentar": 74,
           "sem autor registrado no SAPL": 19,
-          "Órgão": 15
+          "Órgão": 16
         },
         "arquivos_materias": [
           "dados/brutos/lote_20260926/materialegislativa_ano2026_p1.json",
@@ -1413,8 +1416,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 13,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 2,
@@ -2159,8 +2162,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 13,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 2,
@@ -2182,8 +2185,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 13,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 2,
@@ -2205,8 +2208,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 13,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 2,
@@ -2263,8 +2266,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 8,
-          "primeiro_autor": true,
-          "primeiro_autor_rotulo": null,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 3,
@@ -2610,8 +2613,8 @@
         {
           "ordem_no_sapl": 2,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -2680,8 +2683,8 @@
         {
           "ordem_no_sapl": 2,
           "autor_id": 12,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 7,
@@ -2773,8 +2776,8 @@
         {
           "ordem_no_sapl": 2,
           "autor_id": 12,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 7,
@@ -3192,8 +3195,8 @@
         {
           "ordem_no_sapl": 3,
           "autor_id": 13,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 2,
@@ -3623,8 +3626,8 @@
         {
           "ordem_no_sapl": 2,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -4411,8 +4414,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -4435,8 +4438,8 @@
         {
           "ordem_no_sapl": 3,
           "autor_id": 14,
-          "primeiro_autor": true,
-          "primeiro_autor_rotulo": null,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 4,
@@ -4470,8 +4473,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -5238,8 +5241,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -5480,8 +5483,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -5665,8 +5668,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": true,
-          "primeiro_autor_rotulo": null,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -6438,8 +6441,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": true,
-          "primeiro_autor_rotulo": null,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -6461,8 +6464,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": true,
-          "primeiro_autor_rotulo": null,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -6507,8 +6510,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": true,
-          "primeiro_autor_rotulo": null,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -6530,8 +6533,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": true,
-          "primeiro_autor_rotulo": null,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -7302,8 +7305,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 12,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 7,
@@ -7921,8 +7924,8 @@
         {
           "ordem_no_sapl": 3,
           "autor_id": 13,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 2,
@@ -8188,8 +8191,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 13,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 2,
@@ -8781,8 +8784,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 9,
-          "primeiro_autor": true,
-          "primeiro_autor_rotulo": null,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 9,
@@ -8827,8 +8830,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 9,
-          "primeiro_autor": true,
-          "primeiro_autor_rotulo": null,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 9,
@@ -9123,8 +9126,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 13,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 2,
@@ -9788,8 +9791,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -9903,8 +9906,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -10317,8 +10320,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -10501,8 +10504,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 7,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 5,
           "tipo_autor": "Órgão",
           "parlamentar_id_sapl": null,
@@ -10524,8 +10527,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 15,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 5,
@@ -10547,8 +10550,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 15,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 5,
@@ -10570,12 +10573,353 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 15,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 5,
           "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1047,
+      "ano": 2026,
+      "numero": 3,
+      "tipo_materia_id": 4,
+      "rotulo_sapl": "Projeto de Decreto Legislativo nº 3 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1047",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 16,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 8,
+          "nome_no_sapl": "Beto Maurer",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 2,
+          "autor_id": 8,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 3,
+          "nome_no_sapl": "Cleiton Costa",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 3,
+          "autor_id": 13,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 2,
+          "nome_no_sapl": "Dr. Marcos Rodrigues",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 4,
+          "autor_id": 9,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 9,
+          "nome_no_sapl": "Gilmar Barbosa",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 5,
+          "autor_id": 10,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 6,
+          "nome_no_sapl": "Gustavo Vizentin",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 6,
+          "autor_id": 12,
+          "primeiro_autor": null,
+          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 7,
+          "nome_no_sapl": "Josemar Veiga",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 7,
+          "autor_id": 14,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 4,
+          "nome_no_sapl": "Kinho Lazarino",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 8,
+          "autor_id": 15,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1052,
+      "ano": 2026,
+      "numero": 35,
+      "tipo_materia_id": 9,
+      "rotulo_sapl": "Indicação nº 35 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1052",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 15,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1054,
+      "ano": 2026,
+      "numero": 36,
+      "tipo_materia_id": 9,
+      "rotulo_sapl": "Indicação nº 36 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1054",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 15,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1055,
+      "ano": 2026,
+      "numero": 37,
+      "tipo_materia_id": 9,
+      "rotulo_sapl": "Indicação nº 37 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1055",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 14,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 4,
+          "nome_no_sapl": "Kinho Lazarino",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1056,
+      "ano": 2026,
+      "numero": 1,
+      "tipo_materia_id": 10,
+      "rotulo_sapl": "Moção nº 1 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 16,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 8,
+          "nome_no_sapl": "Beto Maurer",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 2,
+          "autor_id": 8,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 3,
+          "nome_no_sapl": "Cleiton Costa",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 3,
+          "autor_id": 13,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 2,
+          "nome_no_sapl": "Dr. Marcos Rodrigues",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 4,
+          "autor_id": 9,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 9,
+          "nome_no_sapl": "Gilmar Barbosa",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 5,
+          "autor_id": 10,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 6,
+          "nome_no_sapl": "Gustavo Vizentin",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 6,
+          "autor_id": 12,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 7,
+          "nome_no_sapl": "Josemar Veiga",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 7,
+          "autor_id": 14,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 4,
+          "nome_no_sapl": "Kinho Lazarino",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 8,
+          "autor_id": 15,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 9,
+          "autor_id": 24,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 100,
+          "nome_no_sapl": "Rivanildo Cavalheiro",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1058,
+      "ano": 2026,
+      "numero": 19,
+      "tipo_materia_id": 14,
+      "rotulo_sapl": "Requerimento nº 19 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1058",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 15,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1097,
+      "ano": 2026,
+      "numero": 36,
+      "tipo_materia_id": 19,
+      "rotulo_sapl": "Ata Sessão nº 36 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1097",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 7,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 5,
+          "tipo_autor": "Órgão",
+          "parlamentar_id_sapl": null,
+          "nome_no_sapl": "Secretária Legislativa - SLEG",
           "cargo_no_sapl": null,
           "lacuna": null
         }

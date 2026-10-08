@@ -370,8 +370,8 @@
     },
     "2026": {
       "arquivo_sessoes": "dados/brutos/contagem_votacoes_ordinarias_2026.json",
-      "n_sessoes_ordinarias": 34,
-      "n_com_presidente": 34,
+      "n_sessoes_ordinarias": 35,
+      "n_com_presidente": 35,
       "lacunas": [],
       "sessoes": [
         {
@@ -746,6 +746,17 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 284,
+          "lacuna": null
+        },
+        {
+          "sessao_id": 275,
+          "numero": 35,
+          "data": "2026-10-06",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
+          "arquivo_de_origem": "dados/brutos/sessao_275_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": 289,
           "lacuna": null
         }
       ]
