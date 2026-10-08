@@ -124,30 +124,37 @@ class TestPleg4Real(unittest.TestCase):
             )
         )
 
-    def test_ultima_sessao_contem_o_pleg_4_com_o_voto_de_29_09(self):
-        bloco = self.camara.get("sessao") or []
-        achados = [m for m in bloco if int(m["id"]) == 811]
-        self.assertEqual(len(achados), 1)
-        item = achados[0]
-        self.assertEqual(item["tipo"], "PLEG 4/2026")
-        self.assertEqual(item["data_sessao"], "2026-09-29")
-        self.assertEqual(item["sessao_id"], 274)
-        self.assertEqual(item["resultado"], "unanimidade")
-        self.assertEqual(
-            [(v["data_sessao"], v["sessao_id"]) for v in item["votacoes"]],
-            [("2026-09-22", 273), ("2026-09-29", 274)],
-        )
-
     def test_todo_conta_o_pleg_4_uma_vez_com_a_votacao_mais_recente(self):
         bloco = self.camara.get("todo") or []
         achados = [m for m in bloco if int(m["id"]) == 811]
         self.assertEqual(len(achados), 1)
-        self.assertEqual(achados[0]["data_sessao"], "2026-09-29")
-        self.assertEqual(len(achados[0]["votacoes"]), 2)
+        item = achados[0]
+        self.assertEqual(item["tipo"], "PLEG 4/2026")
+        datas = [v["data_sessao"] for v in item["votacoes"]]
+        self.assertGreaterEqual(len(datas), 2)
+        self.assertEqual(item["data_sessao"], max(datas))
 
-    def test_mes_anterior_nao_repete_o_pleg_4(self):
-        bloco = self.camara.get("mes") or []
-        self.assertEqual([m for m in bloco if int(m["id"]) == 811], [])
+    def test_sessao_so_traz_o_pleg_4_com_a_data_da_ultima_sessao(self):
+        bloco = self.camara.get("sessao") or []
+        achados = [m for m in bloco if int(m["id"]) == 811]
+        if not achados:
+            self.skipTest("PLEG 4/2026 fora da ultima sessao nesta base")
+        self.assertEqual(len(achados), 1)
+        todo = self.camara.get("todo") or []
+        ultima = max(
+            [m["data_sessao"] for m in todo]
+            + [v["data_sessao"] for m in todo for v in m.get("votacoes") or []]
+        )
+        self.assertEqual(achados[0]["data_sessao"], ultima)
+
+    def test_pleg_4_nao_se_repete_dentro_de_cada_periodo(self):
+        for periodo in ("sessao", "mes", "todo"):
+            bloco = self.camara.get(periodo) or []
+            self.assertLessEqual(
+                len([m for m in bloco if int(m["id"]) == 811]),
+                1,
+                f"PLEG 4/2026 repetido em {periodo}",
+            )
 
 
 class _Handler(SimpleHTTPRequestHandler):

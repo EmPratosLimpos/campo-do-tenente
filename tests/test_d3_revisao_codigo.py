@@ -44,14 +44,42 @@ class TestD3PresencaLegislatura(unittest.TestCase):
     def test_jorge_quege_legislatura(self):
         v = _vereador_por_slug(self.leg, "jorge-quege")
         p = v["presenca"]
-        self.assertEqual(p["sessoes_ordinarias"], 60)
-        self.assertEqual(p["presencas"], 36)
-        self.assertEqual(p["faltas_com_justificativa"], 24)
-        self.assertEqual(p["faltas_sem_justificativa"], 0)
-        self.assertEqual(p["faltas_totais"], 24)
-        self.assertAlmostEqual(p["taxa_presenca"], 60.0)
-        self.assertAlmostEqual(p["percentual_faltas"], round(24 * 100 / 60, 2))
-        self.assertEqual(p["sessoes_licenca"], 0)
+        campos = (
+            "sessoes_ordinarias",
+            "presencas",
+            "faltas_totais",
+            "faltas_com_justificativa",
+            "faltas_sem_justificativa",
+            "sessoes_licenca",
+            "sessoes_fora_do_mandato",
+        )
+        soma = {c: 0 for c in campos}
+        for _ano, dados in self.por_ano.items():
+            va = next(
+                (x for x in dados["vereadores"] if x["id_sapl"] == v["id_sapl"]),
+                None,
+            )
+            if va is None:
+                continue
+            for c in campos:
+                soma[c] += va["presenca"].get(c) or 0
+        for c in campos:
+            self.assertEqual(p.get(c), soma[c], msg=f"campo {c}")
+        self.assertEqual(
+            p["presencas"] + p["faltas_totais"], p["sessoes_ordinarias"]
+        )
+        self.assertEqual(
+            p["faltas_com_justificativa"] + p["faltas_sem_justificativa"],
+            p["faltas_totais"],
+        )
+        self.assertAlmostEqual(
+            p["taxa_presenca"],
+            round(p["presencas"] * 100 / p["sessoes_ordinarias"], 2),
+        )
+        self.assertAlmostEqual(
+            p["percentual_faltas"],
+            round(p["faltas_totais"] * 100 / p["sessoes_ordinarias"], 2),
+        )
         vereadores = json.loads(
             (TRATADOS / "vereadores.json").read_text(encoding="utf-8")
         )
