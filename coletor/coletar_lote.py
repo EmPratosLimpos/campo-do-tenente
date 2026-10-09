@@ -57,6 +57,20 @@ MARCAS_BLOQUEANTES = (
 )
 
 
+def e_lote_principal(caminho) -> bool:
+    """Pasta de lote principal: nao e sondagem, nao e autoria, nao e porsessao.
+
+    Mesmo filtro de pasta_lote_origem e dos geradores: a pasta de
+    sondagem, a de autoria e a por sessao nunca entram como lote.
+    """
+    nome = getattr(caminho, "name", str(caminho))
+    if "porsessao" in nome or nome.endswith("_autoria"):
+        return False
+    if nome.lower().endswith("_tramitacao") or "sondagem" in nome.lower():
+        return False
+    return True
+
+
 def motivo_bloqueante(motivo: str) -> bool:
     """Host fora do config e resposta acima do teto bloqueiam a publicacao.
 
@@ -558,7 +572,11 @@ def main() -> None:
         if not pasta.is_absolute():
             pasta = RAIZ / pasta
     elif args.somente_completar:
-        pastas = sorted(caminho for caminho in BRUTOS.glob("lote_*") if caminho.is_dir())
+        pastas = sorted(
+            caminho
+            for caminho in BRUTOS.glob("lote_*")
+            if caminho.is_dir() and e_lote_principal(caminho)
+        )
         if not pastas:
             raise SystemExit("Nenhuma pasta de lote para completar.")
         pasta = pastas[-1]

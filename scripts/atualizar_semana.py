@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -918,9 +919,28 @@ def coletar_tramitacao(
         atualizar_paginas(coletor, caminho, {}, prefixo, simulado, pendentes)
 
 
+VAR_CHAVE_CLASSIFICADOR = "OPENCODE_ZEN_API_KEY"
+
+
+def ambiente_sem_chave() -> dict[str, str]:
+    """Ambiente dos subprocessos sem a chave do classificador.
+
+    So o classificador (que roda no mesmo processo) recebe a chave. Os
+    testes, as regras e os geradores rodam sem ela: um print do ambiente
+    num teste nao pode vazar o secret.
+    """
+    return {
+        chave: valor
+        for chave, valor in os.environ.items()
+        if chave != VAR_CHAVE_CLASSIFICADOR
+    }
+
+
 def rodar(argumentos: list[str]) -> None:
     print(">", " ".join(argumentos))
-    resultado = subprocess.run([sys.executable, *argumentos], cwd=RAIZ)
+    resultado = subprocess.run(
+        [sys.executable, *argumentos], cwd=RAIZ, env=ambiente_sem_chave()
+    )
     if resultado.returncode != 0:
         raise SystemExit(resultado.returncode)
 
@@ -1013,6 +1033,7 @@ def montar_entrada(
     hashes: list[str],
     avisos: list[str] | None = None,
     temas: list[str] | None = None,
+    avisos_conferencia: list[str] | None = None,
 ) -> str:
     linhas = [
         f"## {data_iso}: atualização semanal dos dados",
@@ -1035,6 +1056,8 @@ def montar_entrada(
         linhas.append(f"- {linha}")
     for aviso in avisos or []:
         linhas.append(f"- Coleta com aviso: {aviso}. Valeu o arquivo ja salvo.")
+    for aviso in avisos_conferencia or []:
+        linhas.append(f"- {aviso}.")
     linhas.append(f"- Pedidos ao SAPL nesta execução: {pedidos}.")
     linhas.extend(
         [
@@ -1299,19 +1322,20 @@ def main(argv: list[str] | None = None) -> int:
         except OrcamentoEsgotado as exc:
             print(f"PAROU: {exc}")
             return 2
+        avisos_conferencia: list[str] = []
         if not args.simulado:
             aviso_autoria = conferir_autoria_apos_repeticao(
                 pasta_autoria, retrato_autoria_antes
             )
             if aviso_autoria is not None:
                 print(f"  {aviso_autoria}")
-                avisos_coleta.append(aviso_autoria)
+                avisos_conferencia.append(aviso_autoria)
         if pasta_sessao is not None and lista_novas and not args.simulado:
             for aviso in avisos_ordem_vazia(
                 pasta_sessao, [int(item["id"]) for item in lista_novas]
             ):
                 print(f"  aviso: {aviso}.")
-                avisos_coleta.append(aviso)
+                avisos_conferencia.append(aviso)
         if pasta_sessao is not None and lista_alvo and not args.simulado:
             divergencias = conferir_coleta_por_sessao(pasta_sessao, sessoes)
             bloqueantes, avisos_conf = separar_divergencias_por_alvo(
@@ -1328,7 +1352,7 @@ def main(argv: list[str] | None = None) -> int:
                     "Conferencia da coleta por sessao divergiu na sessao nova. "
                     f"Nada foi publicado. {detalhes}"
                 )
-            avisos_coleta.extend(avisos_conf)
+            avisos_conferencia.extend(avisos_conf)
     finally:
         coletar_lote.urllib.request.urlopen = original_urlopen
 
@@ -1344,7 +1368,9 @@ def main(argv: list[str] | None = None) -> int:
     resumo_temas: dict = {"novas": [], "consenso": [], "pendentes": [], "avisos": [], "tokens_total": 0}
     sem_chave_temas = classificar_temas.ler_chave() is None
     try:
-        resumo_temas = classificar_temas.classificar_novas(cfg, classificar_temas.ler_chave())
+        resumo_temas = classificar_temas.classificar_novas(
+            cfg, classificar_temas.ler_chave(), abrir_issues=False
+        )
     except (SystemExit, OSError, ValueError) as exc:
         print(f"Classificador de temas pulado: {exc}")
         resumo_temas = {"novas": [], "consenso": [], "pendentes": [], "avisos": [str(exc)[:160]], "tokens_total": 0}
@@ -1353,10 +1379,6 @@ def main(argv: list[str] | None = None) -> int:
         f"{len(resumo_temas.get('pendentes') or [])} pendentes, "
         f"{int(resumo_temas.get('tokens_total') or 0)} tokens."
     )
-    linhas_temas = classificar_temas.linhas_changelog_temas(resumo_temas, sem_chave_temas)
-    for aviso in resumo_temas.get("avisos") or []:
-        linhas_temas.append(f"Aviso do classificador de temas: {aviso}.")
-
     contagens_antes = ler_json(RESUMO_INSUMOS).get("contagens") or {}
     hashes_antes = ler_hashes(anos)
     rodar(["coletor/derivar_insumos.py"])
@@ -1366,6 +1388,17 @@ def main(argv: list[str] | None = None) -> int:
     rodar(["-m", "unittest", "discover", "-s", "tests"])
     rodar(["coletor/gerar_hash_integridade.py"])
     rodar(["scripts/verificar_regras.py"])
+
+    try:
+        resumo_temas["avisos"].extend(
+            classificar_temas.abrir_issues_revisao(resumo_temas)
+        )
+    except (OSError, ValueError) as exc:
+        print(f"Issues de revisao de tema puladas: {exc}")
+        resumo_temas["avisos"].append(str(exc)[:160])
+    linhas_temas = classificar_temas.linhas_changelog_temas(resumo_temas, sem_chave_temas)
+    for aviso in resumo_temas.get("avisos") or []:
+        linhas_temas.append(f"Aviso do classificador de temas: {aviso}.")
 
     contagens_depois = ler_json(RESUMO_INSUMOS).get("contagens") or {}
     hashes_depois = ler_hashes(anos)
@@ -1378,6 +1411,7 @@ def main(argv: list[str] | None = None) -> int:
         linhas_hash(hashes_antes, hashes_depois),
         avisos_coleta,
         linhas_temas,
+        avisos_conferencia,
     )
     gravar_changelog(entrada)
     print("CHANGELOG atualizado.")

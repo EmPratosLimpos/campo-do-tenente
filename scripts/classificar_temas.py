@@ -567,6 +567,23 @@ def garantir_issue(titulo: str, corpo: str, correr=None) -> str:
     return ""
 
 
+def abrir_issues_revisao(resultado: dict, correr=None) -> list[str]:
+    """Abre as issues de revisao das pendentes. So chama no fim, quando publica.
+
+    Se a semana falhar antes (sanidade, testes, regras), nao abre: a
+    materia volta a ser tentada na semana seguinte. Devolve os avisos.
+    """
+    avisos: list[str] = []
+    modelos = resultado.get("modelos") or []
+    for pendente in resultado.get("pendentes") or []:
+        materia = pendente["materia"]
+        corpo = corpo_revisao(materia, pendente["votos"], modelos, pendente.get("motivo") or "")
+        aviso = garantir_issue(titulo_revisao(materia), corpo, correr)
+        if aviso:
+            avisos.append(aviso)
+    return avisos
+
+
 def classificar_novas(
     cfg: dict | None = None,
     chave: str | None = None,
@@ -574,6 +591,7 @@ def classificar_novas(
     pedir=pedir_modelo,
     correr=None,
     gravar: bool = True,
+    abrir_issues: bool = True,
 ) -> dict:
     """Classifica as materias novas do recorte sem tema.
 
@@ -582,6 +600,10 @@ def classificar_novas(
     classificada por consenso nao e classificada de novo (ambas ja tem
     entrada no arquivo, por isso nem aparecem como novas). Devolve
     {novas, consenso, pendentes, avisos, tokens_total}.
+
+    Com abrir_issues False, as issues de revisao nao sao abertas aqui:
+    quem chama abre depois, com abrir_issues_revisao, so quando a semana
+    vai mesmo publicar.
     """
     cfg = cfg if cfg is not None else carregar_config()
     conf = ler_conf_classificacao(cfg)
@@ -597,6 +619,7 @@ def classificar_novas(
         "pendentes": [],
         "avisos": [],
         "tokens_total": 0,
+        "modelos": list(nomes_modelos),
     }
     if not novas:
         return resultado
@@ -619,12 +642,8 @@ def classificar_novas(
             resultado["pendentes"].append(
                 {"materia": materia, "votos": [], "motivo": "sem chave do classificador na execucao"}
             )
-    for pendente in resultado["pendentes"]:
-        materia = pendente["materia"]
-        corpo = corpo_revisao(materia, pendente["votos"], nomes_modelos, pendente.get("motivo") or "")
-        aviso = garantir_issue(titulo_revisao(materia), corpo, correr)
-        if aviso:
-            resultado["avisos"].append(aviso)
+    if abrir_issues:
+        resultado["avisos"].extend(abrir_issues_revisao(resultado, correr))
     return resultado
 
 

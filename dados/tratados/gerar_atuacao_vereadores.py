@@ -26,6 +26,7 @@ if str(DIR_SCRIPT) not in sys.path:
 if str(DIR_RAIZ / "coletor") not in sys.path:
     sys.path.insert(0, str(DIR_RAIZ / "coletor"))
 
+from coletar_lote import e_lote_principal  # noqa: E402
 from config_cidade import (  # noqa: E402
     PisoNaoDefinido,
     anos_recorte,
@@ -250,7 +251,7 @@ def carregar_tipos_resultado() -> dict[int, str]:
     """Nome oficial de cada tipo de resultado, lido da tabela ja baixada."""
     achados = []
     for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
-        if not pasta.is_dir():
+        if not pasta.is_dir() or not e_lote_principal(pasta):
             continue
         for caminho in sorted(pasta.glob("tiporesultadovotacao_p*.json")):
             achados.append(caminho)
@@ -273,7 +274,7 @@ def carregar_catalogo_tipos_materia() -> tuple[dict[str, str], str]:
     """
     achados = []
     for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
-        if not pasta.is_dir():
+        if not pasta.is_dir() or not e_lote_principal(pasta):
             continue
         for caminho in sorted(pasta.glob("tipomaterialegislativa_p*.json")):
             achados.append(caminho)
@@ -301,7 +302,7 @@ def carregar_tipos_justificativa() -> tuple[dict[int, str], str]:
     """Descricao oficial de cada tipo de justificativa de ausencia do SAPL."""
     achados = []
     for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
-        if not pasta.is_dir():
+        if not pasta.is_dir() or not e_lote_principal(pasta):
             continue
         for caminho in sorted(pasta.glob("tipojustificativa_p*.json")):
             achados.append(caminho)

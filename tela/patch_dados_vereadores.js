@@ -39,10 +39,41 @@
     });
   }
 
+  function textoNotaFactual(nota) {
+    if (!nota) return "";
+    if (typeof nota === "string") return nota;
+    if (typeof nota === "object" && nota.texto) return String(nota.texto);
+    return "";
+  }
+
+  function linkFonteNotaFactual(fonte) {
+    if (!fonte || typeof fonte !== "object") return "";
+    if (fonte.link_fonte) return urlSegura(fonte.link_fonte);
+    if (fonte.materia_id) return urlSegura(linkMateria(fonte.materia_id));
+    return "";
+  }
+
   function renderNotasParlamentar(v) {
     var html = "";
-    if (v.nota_factual) {
-      html += '<p class="nota-factual">' + esc(v.nota_factual) + "</p>";
+    var nota = v.nota_factual;
+    var textoNota = textoNotaFactual(nota);
+    if (textoNota) {
+      html += '<p class="nota-factual">' + esc(textoNota) + "</p>";
+    }
+    var fontes = nota && typeof nota === "object" && Array.isArray(nota.fontes) ? nota.fontes : [];
+    if (fontes.length) {
+      html += '<div class="nota-factual-fontes"><p class="apoio nota-cartao"><strong>Fonte:</strong> ';
+      var links = [];
+      fontes.forEach(function (f) {
+        var rotulo = f.fonte || "Ver fonte";
+        var href = linkFonteNotaFactual(f);
+        if (href) {
+          links.push('<a class="fonte" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + esc(rotulo) + "</a>");
+        } else {
+          links.push("<span>" + esc(rotulo) + "</span>");
+        }
+      });
+      html += links.join(" ") + "</p></div>";
     }
     var afast = v.afastamentos || [];
     if (afast.length) {
