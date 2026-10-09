@@ -4282,6 +4282,7 @@
       width: 100%;
     }
     #conteudo-vereadores .perfil-e-notas .nota-factual,
+    #conteudo-vereadores .perfil-e-notas .nota-factual-fontes,
     #conteudo-vereadores .perfil-e-notas .faltas-lista {
       max-width: 100%;
       box-sizing: border-box;
@@ -5855,8 +5856,20 @@
     return "de " + ANOS_RECORTE[0] + " e " + ANOS_RECORTE[ANOS_RECORTE.length - 1];
   }
 
+  function rotuloAnosVereador(v) {
+    var anos = (v && v.anos_com_mandato && v.anos_com_mandato.length) ? v.anos_com_mandato.slice() : (ANOS_RECORTE || []).slice();
+    if (!anos.length) return "da legislatura";
+    anos.sort(function (a, b) { return a - b; });
+    if (anos.length === 1) return "de " + anos[0];
+    return "de " + anos[0] + " e " + anos[anos.length - 1];
+  }
+
   function rotuloPeriodoLegislatura() {
     return "sess\u00f5es ordin\u00e1rias " + rotuloAnosRecorte();
+  }
+
+  function rotuloPeriodoVereador(v) {
+    return "sess\u00f5es ordin\u00e1rias " + rotuloAnosVereador(v);
   }
 
   function prefixoDadosTratados() {
@@ -6885,6 +6898,10 @@
     }
     if (s === base || s.indexOf(base + "/") === 0) return s;
     if (s.charAt(0) === "/" && s.charAt(1) !== "/") return base + s;
+    var siteCamara = CONFIG_CIDADE && CONFIG_CIDADE.painel && CONFIG_CIDADE.painel.site_camara
+      ? String(CONFIG_CIDADE.painel.site_camara).replace(/\/$/, "")
+      : "";
+    if (siteCamara && (s === siteCamara || s.indexOf(siteCamara + "/") === 0)) return s;
     return "";
   }
 
@@ -7101,10 +7118,41 @@
     });
   }
 
+  function textoNotaFactual(nota) {
+    if (!nota) return "";
+    if (typeof nota === "string") return nota;
+    if (typeof nota === "object" && nota.texto) return String(nota.texto);
+    return "";
+  }
+
+  function linkFonteNotaFactual(fonte) {
+    if (!fonte || typeof fonte !== "object") return "";
+    if (fonte.link_fonte) return urlSegura(fonte.link_fonte);
+    if (fonte.materia_id) return urlSegura(linkMateria(fonte.materia_id));
+    return "";
+  }
+
   function renderNotasParlamentar(v) {
     var html = "";
-    if (v.nota_factual) {
-      html += '<p class="nota-factual">' + esc(v.nota_factual) + "</p>";
+    var nota = v.nota_factual;
+    var textoNota = textoNotaFactual(nota);
+    if (textoNota) {
+      html += '<p class="nota-factual">' + esc(textoNota) + "</p>";
+    }
+    var fontes = nota && typeof nota === "object" && Array.isArray(nota.fontes) ? nota.fontes : [];
+    if (fontes.length) {
+      html += '<div class="nota-factual-fontes"><p class="apoio nota-cartao"><strong>Fonte:</strong> ';
+      var links = [];
+      fontes.forEach(function (f) {
+        var rotulo = f.fonte || "Ver fonte";
+        var href = linkFonteNotaFactual(f);
+        if (href) {
+          links.push('<a class="fonte" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + esc(rotulo) + "</a>");
+        } else {
+          links.push("<span>" + esc(rotulo) + "</span>");
+        }
+      });
+      html += links.join(" ") + "</p></div>";
     }
     var afast = v.afastamentos || [];
     if (afast.length) {
@@ -7695,7 +7743,7 @@
         ? ' <a class="fonte" href="' + esc(urlSegura(v.link_sapl)) + '" target="_blank" rel="noopener noreferrer">Perfil no SAPL</a>'
         : "";
       apoioEl.innerHTML = "Nome oficial: " + esc(v.nome_oficial) + ". " +
-        esc(periodoVereadorShare().replace(/^sess\u00f5es ordin\u00e1rias /i, "Sess\u00f5es ordin\u00e1rias ").replace(/ at\u00e9 /, ", at\u00e9 ")) + "." + linkSap;
+        esc(periodoVereadorShare(v).replace(/^sess\u00f5es ordin\u00e1rias /i, "Sess\u00f5es ordin\u00e1rias ").replace(/ at\u00e9 /, ", at\u00e9 ")) + "." + linkSap;
     }
     var notasWrap = document.getElementById("notas-vereador-wrap");
     if (notasWrap) {
@@ -9175,15 +9223,16 @@ var MAPA_VAR_CATEGORIA = {
     return juntarLinhas([d.frase, ENDERECO_EXIBIDO, linhaHashtags()]);
   }
 
-  function periodoVereadorShare() {
+  function periodoVereadorShare(v) {
+    v = v || vereadorAtual();
     var dados = estado.dados;
     if (!dados || !dados.sessoes || !dados.sessoes.length) {
-      return rotuloPeriodoLegislatura();
+      return rotuloPeriodoVereador(v);
     }
     var ultima = dados.sessoes[dados.sessoes.length - 1];
     var data = formatarData(ultima.data);
-    if (!data) return rotuloPeriodoLegislatura();
-    return rotuloPeriodoLegislatura() + " at\u00e9 " + data;
+    if (!data) return rotuloPeriodoVereador(v);
+    return rotuloPeriodoVereador(v) + " at\u00e9 " + data;
   }
 
   function contextoShareAtivo() {
