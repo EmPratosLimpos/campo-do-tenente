@@ -60,11 +60,20 @@ def extensao_permitida(normalizado: str) -> bool:
     return extensao in EXTENSOES_PERMITIDAS_DADOS
 
 
+def e_falha_de_coleta(normalizado: str) -> bool:
+    """Artefato de tentativa falhada. Fica fora do commit semanal."""
+    partes = str(normalizado or "").split("/")
+    return "falhas" in partes
+
+
 def arquivos_fora_do_permitido(arquivos: list[str]) -> list[str]:
     fora = []
     for item in arquivos or []:
         normal = normalizar(item)
         if not normal:
+            continue
+        if e_falha_de_coleta(normal):
+            fora.append(normal)
             continue
         if not e_dado(normal):
             fora.append(normal)

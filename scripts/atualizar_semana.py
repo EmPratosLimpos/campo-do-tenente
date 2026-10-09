@@ -1015,6 +1015,10 @@ def main(argv: list[str] | None = None) -> int:
     pasta_lote = pasta_lote_mais_recente(BRUTOS)
     tipo = id_tipo_sessao_ordinaria(cfg)
 
+    coletores = []
+    pendentes = nova_fila_pendentes()
+    avisos_coleta: list[str] = []
+
     def confirmar_ano(ano: int) -> bool:
         coletor_sonda = preparar_coletor(cfg, pasta_lote, orcamento, False)
         coletor_sonda.pular_pausa = False
@@ -1022,15 +1026,14 @@ def main(argv: list[str] | None = None) -> int:
             confirmou = confirmar_sessao_ordinaria_no_ano(coletor_sonda, ano, tipo)
         except PedidoPendente as exc:
             print(f"Ano {ano} sem confirmacao do SAPL ({exc.motivo}). O recorte nao mudou.")
+            avisos_coleta.append(
+                f"sonda do ano {ano} falhou ({exc.motivo}). O recorte nao mudou."
+            )
             confirmou = False
         if not confirmou:
             coletor_sonda.gravou = False
         coletores.append(coletor_sonda)
         return confirmou
-
-    coletores = []
-    pendentes = nova_fila_pendentes()
-    avisos_coleta: list[str] = []
     anos, config_alterada = incluir_ano_se_confirmado(cfg, hoje, args.simulado, confirmar_ano)
     if config_alterada and not args.simulado:
         gravar_anos_no_config(anos)

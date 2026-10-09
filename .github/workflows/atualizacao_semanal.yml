@@ -22,7 +22,10 @@ concurrency:
 jobs:
   atualizar:
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    # Conta pior: 400 pedidos com 2,5 s de pausa (1000 s), tentativas
+    # extras com esperas de 30 s e 60 s, espera de 5 min da repeticao,
+    # mais sanidade e testes. 240 min cobre sem estourar sem avisar.
+    timeout-minutes: 240
     steps:
       - name: Checkout da main
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -150,7 +153,7 @@ jobs:
           git push origin desenvolvimento
 
       - name: Registrar falha com issue
-        if: failure()
+        if: failure() || cancelled()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -159,6 +162,7 @@ jobs:
             exit 0
           fi
           data_br=$(TZ=America/Sao_Paulo date +%d/%m/%Y)
+          titulo="Atualizacao de dados falhou em ${data_br}"
           motivo=""
           if [[ -f "$RUNNER_TEMP/motivo_falha.txt" ]]; then
             motivo=$(cat "$RUNNER_TEMP/motivo_falha.txt")
@@ -169,7 +173,13 @@ jobs:
             corpo="${corpo} Motivo: ${motivo}"
           fi
           corpo="${corpo} Trecho do erro: ${trecho}"
-          gh issue create \
-            --title "Atualizacao de dados falhou em ${data_br}" \
-            --body "$corpo"
+          existente=$(gh issue list --search "$titulo in:title" --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [[ -n "$existente" ]]; then
+            echo "Issue aberta com o mesmo titulo do dia: #${existente}. Comento nela."
+            gh issue comment "$existente" --body "$corpo"
+          else
+            gh issue create \
+              --title "$titulo" \
+              --body "$corpo"
+          fi
           echo "::error::A atualizacao semanal falhou. Nada foi publicado."
