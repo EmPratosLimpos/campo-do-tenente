@@ -1,0 +1,55 @@
+{
+  "rodada_id": "sessao:275",
+  "sessao_id": 275,
+  "data_sessao": "2026-10-06",
+  "status": "aberta",
+  "fecha_ate": "2026-12-05",
+  "materias": [
+    {
+      "id": 1052,
+      "sigla": "IND",
+      "numero": "35",
+      "ano": "2026",
+      "ementa": "Indica ao Poder Executivo Municipal a realização de limpeza e manutenção de bueiros na localidade de Morrinho Alto.",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1052",
+      "ordem_pauta": 708
+    },
+    {
+      "id": 1054,
+      "sigla": "IND",
+      "numero": "36",
+      "ano": "2026",
+      "ementa": "Indica ao Poder Executivo Municipal a realização de manutenção e melhorias na academia ao ar livre localizada em frente ao Posto de Saúde da localidade de Lageado.",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1054",
+      "ordem_pauta": 709
+    },
+    {
+      "id": 1055,
+      "sigla": "IND",
+      "numero": "37",
+      "ano": "2026",
+      "ementa": "Solicita a realização de poda das árvores existentes na Avenida Miguel Komarchewski, visando melhorar a circulação e a segurança no local",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1055",
+      "ordem_pauta": 710
+    },
+    {
+      "id": 1058,
+      "sigla": "REQ",
+      "numero": "19",
+      "ano": "2026",
+      "ementa": "Solicita o envio de Oficio à Companhia de Saneamento do Paraná – SANEPAR, para que sejam realizadas vistorias e adotadas as providências necessárias para solucionar os problemas na rede de esgotamento sanitário do Município, que têm ocasionado frequentes retornos de esgoto para as residências.",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1058",
+      "ordem_pauta": 711
+    }
+  ],
+  "gerado_de": [
+    "dados/tratados/atuacao_vereadores_2025.json",
+    "dados/tratados/atuacao_vereadores_2026.json",
+    "dados/tratados/executivo_2025.json",
+    "dados/tratados/executivo_2026.json",
+    "dados/tratados/proposicoes_2025.json",
+    "dados/tratados/proposicoes_2026.json",
+    "dados/tratados/tema-votacoes-2025.csv",
+    "dados/tratados/tema-votacoes-2026.csv"
+  ]
+}

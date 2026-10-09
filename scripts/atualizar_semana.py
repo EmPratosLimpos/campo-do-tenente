@@ -232,6 +232,7 @@ GERADORES = (
     "dados/tratados/gerar_atuacao_vereadores.py",
     "dados/tratados/gerar_temas_votacoes.py",
     "dados/tratados/gerar_dados_tela.py",
+    "dados/tratados/gerar_rodada_votacao.py",
 )
 
 PREFIXOS_GRANDES_POR_SESSAO = frozenset(

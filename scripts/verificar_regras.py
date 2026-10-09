@@ -5,6 +5,7 @@ Executado localmente por qualquer agente ou desenvolvedor antes de commits.
 """
 
 import hashlib
+import json
 import pathlib
 import re
 import subprocess
@@ -115,6 +116,80 @@ def main():
                 erros.append(f"VIOLACAO: Caractere travessao encontrado em {nome}!")
             else:
                 print(f"OK: {nome} limpo.")
+
+    # 7. Rodada da votacao popular sem autor e so com sigla elegivel
+    print("\nVerificando rodada da votacao popular...")
+    rodada_path = ROOT / "dados" / "tratados" / "votacao_rodada.json"
+    if not rodada_path.is_file():
+        erros.append(
+            "Arquivo dados/tratados/votacao_rodada.json ausente. "
+            "Rode python dados/tratados/gerar_rodada_votacao.py"
+        )
+    else:
+        try:
+            rodada = rodada_path.read_text(encoding="utf-8")
+            if "\r" in rodada:
+                raise ValueError("fim de linha CR")
+            rodada = json.loads(rodada)
+        except (ValueError, UnicodeDecodeError) as exc:
+            erros.append(f"Rodada da votacao com JSON invalido: {exc}.")
+            rodada = None
+        if isinstance(rodada, dict):
+            for chave in (
+                "rodada_id",
+                "sessao_id",
+                "data_sessao",
+                "status",
+                "fecha_ate",
+                "materias",
+                "gerado_de",
+            ):
+                if chave not in rodada:
+                    erros.append(f"Rodada da votacao sem a chave {chave}.")
+            if rodada.get("status") not in ("aberta", "sem_materias_elegiveis"):
+                erros.append(
+                    f"Status da rodada invalido: {rodada.get('status')!r}."
+                )
+            proibidas = ("autor", "partido", "vereador")
+
+            def chaves_proibidas(valor, caminho="raiz"):
+                achadas = []
+                if isinstance(valor, dict):
+                    for chave, item in valor.items():
+                        if any(parte in str(chave).lower() for parte in proibidas):
+                            achadas.append(f"{caminho}.{chave}")
+                        achadas.extend(chaves_proibidas(item, f"{caminho}.{chave}"))
+                elif isinstance(valor, list):
+                    for posicao, item in enumerate(valor):
+                        achadas.extend(chaves_proibidas(item, f"{caminho}[{posicao}]"))
+                return achadas
+
+            achadas = chaves_proibidas(rodada)
+            if achadas:
+                erros.append(
+                    "Rodada da votacao com chave de autor, partido ou vereador: "
+                    + ", ".join(sorted(set(achadas)))
+                    + "."
+                )
+            elegiveis = set((config.get("votacao_popular") or {}).get("siglas_elegiveis") or [])
+            excluidas = set((config.get("votacao_popular") or {}).get("siglas_excluidas") or [])
+            materias = rodada.get("materias")
+            if not isinstance(materias, list):
+                erros.append("Rodada da votacao com materias fora de lista.")
+            else:
+                for materia in materias:
+                    if not isinstance(materia, dict):
+                        erros.append("Rodada da votacao com materia fora de objeto.")
+                        continue
+                    sigla = str(materia.get("sigla") or "")
+                    if sigla in excluidas or sigla not in elegiveis:
+                        erros.append(
+                            f"Materia {materia.get('id')} com sigla nao elegivel: {sigla}."
+                        )
+                print(
+                    f"OK: Rodada {rodada.get('rodada_id')} com "
+                    f"{len(materias)} materias, sem autor e so com sigla elegivel."
+                )
 
     print("\n-------------------------------------------------------")
     if erros:
