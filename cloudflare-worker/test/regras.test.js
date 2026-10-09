@@ -411,7 +411,7 @@ describe("resultados e limites", () => {
 
   it("mensagens sem travessao e sem segredo", () => {
     for (const texto of Object.values(MENSAGENS_ERRO)) {
-      assert.ok(!texto.includes("—") && !texto.includes("–"), texto);
+      assert.ok(!texto.includes("\u2014") && !texto.includes("\u2013"), texto);
     }
   });
 });
