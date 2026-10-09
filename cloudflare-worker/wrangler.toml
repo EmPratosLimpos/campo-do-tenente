@@ -1,0 +1,32 @@
+# Worker da votacao popular. Nomes literais aqui sao configuracao, nao codigo:
+# o slug vem do nome da cidade em config_cidade.json ("Campo do Tenente").
+# Nenhum segredo neste arquivo. Segredos so no cofre, com secret put,
+# na Parada 2. database_id sai na Parada 2.
+
+name = "epl-votacao-campo-do-tenente"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+AMBIENTE = "producao"
+SITE_ORIGEM = "https://empratoslimpos.com"
+RODADA_URL = "https://empratoslimpos.com/dados/tratados/votacao_rodada.json"
+TURNSTILE_SITE_KEY = "PREENCHER_NA_PARADA_2"
+RODADA_ID_LOCAL = ""
+
+[triggers]
+crons = ["0 12 * * *"]
+
+[env.teste]
+vars = { AMBIENTE = "teste", SITE_ORIGEM = "https://empratoslimpos.com", RODADA_URL = "https://empratoslimpos.com/dados/tratados/votacao_rodada.json", TURNSTILE_SITE_KEY = "PREENCHER_NA_PARADA_2", RODADA_ID_LOCAL = "" }
+[[env.teste.d1_databases]]
+binding = "DB"
+database_name = "epl-votacao-campo-do-tenente-teste"
+database_id = "PREENCHER_NA_PARADA_2"
+
+[env.producao]
+vars = { AMBIENTE = "producao", SITE_ORIGEM = "https://empratoslimpos.com", RODADA_URL = "https://empratoslimpos.com/dados/tratados/votacao_rodada.json", TURNSTILE_SITE_KEY = "PREENCHER_NA_PARADA_2", RODADA_ID_LOCAL = "" }
+[[env.producao.d1_databases]]
+binding = "DB"
+database_name = "epl-votacao-campo-do-tenente"
+database_id = "PREENCHER_NA_PARADA_2"
