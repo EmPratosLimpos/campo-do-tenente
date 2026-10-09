@@ -63,6 +63,7 @@ AGENTE_HTTP = "painel-temas/1.0"
 TIPOS_SEM_TEMA = ("ATA", "OFEX")
 CONFIANCAS_VALIDAS = ("alta", "media", "baixa")
 PREFIXO_CONSENSO = "consenso D-047"
+MOTIVO_CORTADA = "resposta cortada pelo limite"
 
 
 def ler_chave(import_os=None) -> str | None:
@@ -221,6 +222,83 @@ def _texto_e_tokens_responses(dados: dict) -> tuple[str | None, int]:
         return None, 0
 
 
+def _finish_e_raciocinio_chat(dados: dict) -> tuple[str, int]:
+    """finish_reason e tokens de raciocinio da resposta chat."""
+    finish = ""
+    raciocinio = 0
+    try:
+        escolhas = dados.get("choices") or []
+        if escolhas and isinstance(escolhas[0], dict):
+            finish = str(escolhas[0].get("finish_reason") or "")
+        uso = dados.get("usage") or {}
+        if isinstance(uso, dict):
+            det = uso.get("completion_tokens_details") or {}
+            if isinstance(det, dict):
+                try:
+                    raciocinio += int(det.get("reasoning_tokens") or 0)
+                except (TypeError, ValueError):
+                    pass
+            try:
+                raciocinio += int(uso.get("reasoning_tokens") or 0)
+            except (TypeError, ValueError):
+                pass
+            det2 = uso.get("output_tokens_details") or {}
+            if isinstance(det2, dict):
+                try:
+                    raciocinio += int(det2.get("reasoning_tokens") or 0)
+                except (TypeError, ValueError):
+                    pass
+    except (AttributeError, TypeError, ValueError):
+        pass
+    return finish, max(0, raciocinio)
+
+
+def _finish_e_raciocinio_responses(dados: dict) -> tuple[str, int]:
+    """finish_reason e raciocinio da resposta responses."""
+    finish = ""
+    raciocinio = 0
+    try:
+        inc = dados.get("incomplete_details") or {}
+        if isinstance(inc, dict):
+            motivo = str(inc.get("reason") or "").lower()
+            if "max_output" in motivo or "max_tokens" in motivo:
+                finish = "length"
+        status = str(dados.get("status") or "").lower()
+        if status == "incomplete" and not finish:
+            finish = "length"
+        direto = str(dados.get("finish_reason") or "")
+        if direto and not finish:
+            finish = direto
+        for bloco in dados.get("output") or []:
+            if isinstance(bloco, dict) and str(bloco.get("finish_reason") or "").lower() == "length":
+                finish = "length"
+                break
+        uso = dados.get("usage") or {}
+        if isinstance(uso, dict):
+            det = uso.get("output_tokens_details") or {}
+            if isinstance(det, dict):
+                try:
+                    raciocinio += int(det.get("reasoning_tokens") or 0)
+                except (TypeError, ValueError):
+                    pass
+            try:
+                raciocinio += int(uso.get("reasoning_tokens") or 0)
+            except (TypeError, ValueError):
+                pass
+    except (AttributeError, TypeError, ValueError):
+        pass
+    return finish, max(0, raciocinio)
+
+
+def _eh_resposta_cortada(texto: str | None, finish: str, raciocinio: int) -> bool:
+    """Cortada quando o limite parou a escrita ou sobrou so raciocinio."""
+    if (finish or "").strip().lower() == "length":
+        return True
+    if not (texto or "").strip() and raciocinio > 0:
+        return True
+    return False
+
+
 def _e_limite_de_uso(status: int | None, corpo: str) -> bool:
     if status == 429:
         return True
@@ -239,24 +317,29 @@ def pedir_modelo(
     sessao_id: str,
     tempo_limite: int,
     teto_tokens: int,
-) -> tuple[dict | None, str | None, int, float]:
+) -> tuple[dict | None, str | None, int, float, str]:
     """Um pedido ao modelo, com no maximo uma tentativa extra.
 
-    Devolve (resposta, erro, tokens, segundos). Resposta e o dicionario
-    {tema, confianca, justificativa} ou None. Erro e texto curto sem a
-    chave quando a chamada falhou. Erro de limite de uso do plano conta
-    como resposta invalida daquele modelo.
+    Devolve (resposta, erro, tokens, segundos, finish_reason). Resposta
+    e o dicionario {tema, confianca, justificativa} ou None. Erro e
+    texto curto sem a chave quando a chamada falhou. Erro de limite de
+    uso do plano conta como resposta invalida daquele modelo.
+    Resposta cortada pelo limite (finish_reason length ou conteudo
+    vazio com raciocinio) ganha UMA nova tentativa com o dobro do
+    teto, ainda dentro do maximo de uma extra por modelo.
     """
     e_responses = "responses" in (endpoint or "")
-    corpo = (
-        _corpo_responses(modelo_id, prompt, teto_tokens)
-        if e_responses
-        else _corpo_chat(modelo_id, prompt, teto_tokens)
-    )
-    dados_envio = json.dumps(corpo).encode("utf-8")
     ultimo_erro = "sem resposta"
+    ultimo_finish = ""
     comeco = time.monotonic()
-    for _tentativa in range(2):
+    teto_atual = int(teto_tokens)
+    for tentativa in range(2):
+        corpo = (
+            _corpo_responses(modelo_id, prompt, teto_atual)
+            if e_responses
+            else _corpo_chat(modelo_id, prompt, teto_atual)
+        )
+        dados_envio = json.dumps(corpo).encode("utf-8")
         pedido = urllib.request.Request(
             endpoint,
             data=dados_envio,
@@ -279,30 +362,44 @@ def pedir_modelo(
             except (OSError, ValueError):
                 corpo_erro = ""
             if _e_limite_de_uso(exc.code, corpo_erro):
-                return None, "limite de uso do plano", 0, time.monotonic() - comeco
-            ultimo_erro = f"HTTP {exc.code}: {corpo_erro[:200]}"
+                return None, f"HTTP {exc.code}: limite de uso do plano", 0, time.monotonic() - comeco, ""
+            ultimo_erro = f"HTTP {exc.code}: {corpo_erro[:160]}"
+            ultimo_finish = ""
             continue
         except (urllib.error.URLError, TimeoutError, OSError, ValueError) as exc:
             ultimo_erro = f"falha de rede: {exc}"[:200]
+            ultimo_finish = ""
             continue
         try:
             dados = json.loads(bruto)
         except ValueError:
-            ultimo_erro = f"resposta sem JSON: {bruto[:200]}"
+            ultimo_erro = f"JSON invalido na resposta inicial: {bruto[:80]}"
+            ultimo_finish = ""
             continue
         if e_responses:
             texto, tokens = _texto_e_tokens_responses(dados)
+            finish, raciocinio = _finish_e_raciocinio_responses(dados)
         else:
             texto, tokens = _texto_e_tokens_chat(dados)
+            finish, raciocinio = _finish_e_raciocinio_chat(dados)
         if texto is None:
-            ultimo_erro = f"formato inesperado: {bruto[:200]}"
+            ultimo_erro = f"formato inesperado: {bruto[:160]}"
+            ultimo_finish = finish or ""
             continue
+        if _eh_resposta_cortada(texto, finish, raciocinio):
+            ultimo_erro = MOTIVO_CORTADA
+            ultimo_finish = (finish or "length").strip() or "length"
+            if tentativa == 0:
+                teto_atual = int(teto_tokens) * 2
+                continue
+            return None, ultimo_erro, 0, time.monotonic() - comeco, ultimo_finish
         try:
-            return extrair_json_resposta(texto), None, tokens, time.monotonic() - comeco
+            return extrair_json_resposta(texto), None, tokens, time.monotonic() - comeco, finish or ""
         except ValueError as exc:
-            ultimo_erro = f"JSON invalido na resposta: {exc}"
+            ultimo_erro = f"JSON invalido: {exc}"[:200]
+            ultimo_finish = finish or ""
             continue
-    return None, ultimo_erro, 0, time.monotonic() - comeco
+    return None, ultimo_erro, 0, time.monotonic() - comeco, ultimo_finish
 
 
 def validar_resposta(resposta: dict, materia: dict, cfg: dict) -> tuple[str, str, str] | None:
@@ -326,6 +423,29 @@ def validar_resposta(resposta: dict, materia: dict, cfg: dict) -> tuple[str, str
     return tema, confianca, justificativa
 
 
+def motivo_resposta_invalida(resposta: dict, materia: dict, cfg: dict) -> str:
+    """Texto curto do motivo, sem a chave, com o tema dado quando fora da lista."""
+    aceitos = set(t["nome"] for t in categorias(cfg))
+    especiais = rotulos_especiais_tema(cfg)
+    aceitos |= {especiais["nao_se_aplica"], especiais["sem_ementa"]}
+    tema = str((resposta or {}).get("tema") or "").strip()
+    confianca = str((resposta or {}).get("confianca") or "").strip().lower()
+    justificativa = sem_travessao(str((resposta or {}).get("justificativa") or "").strip())
+    if tema not in aceitos:
+        if tema:
+            return f"tema fora da lista: {tema}"[:200]
+        return "tema ausente na resposta"
+    if confianca not in CONFIANCAS_VALIDAS:
+        return f"confianca invalida: {confianca or '(vazia)'}"[:200]
+    if not justificativa:
+        return "justificativa vazia"
+    if tema == especiais["nao_se_aplica"] and str(materia.get("sigla")) not in TIPOS_SEM_TEMA:
+        return "nao se aplica so para ATA e OFEX"
+    if tema == especiais["sem_ementa"] and (materia.get("ementa") or "").strip():
+        return "sem ementa so para materia sem ementa"
+    return "resposta invalida"
+
+
 def classificar_materia(
     materia: dict,
     cfg: dict,
@@ -336,13 +456,16 @@ def classificar_materia(
 ) -> list[dict]:
     """Um pedido por modelo, um de cada vez, sem paralelismo.
 
-    Devolve os votos validos: [{modelo, tema, confianca, justificativa,
-    tokens, tempo_s}]. Voto invalido ou com limite de uso nao entra.
+    Devolve todos os votos, validos e invalidos. Valido:
+    {modelo, tema, confianca, justificativa, tokens, tempo_s,
+    motivo "", finish_reason}. Invalido: {modelo, tema None,
+    motivo curto, finish_reason, tokens 0, tempo_s}. O motivo nunca
+    tem a chave. O consenso usa so os validos.
     """
     votos: list[dict] = []
     prompt = montar_prompt(materia, cfg)
     for modelo in conf["modelos"]:
-        resposta, _erro, tokens, segundos = pedir(
+        chamada = pedir(
             modelo["id"],
             modelo["endpoint"],
             prompt,
@@ -351,10 +474,36 @@ def classificar_materia(
             conf["tempo_limite_s"],
             conf["max_tokens_resposta"],
         )
+        if isinstance(chamada, tuple) and len(chamada) == 5:
+            resposta, erro, tokens, segundos, finish = chamada
+        else:
+            resposta, erro, tokens, segundos = chamada  # compatibilidade com pedir falso de 4 itens
+            finish = ""
+        tempo = round(float(segundos or 0), 1)
         if resposta is None:
+            votos.append(
+                {
+                    "modelo": modelo["id"],
+                    "tema": None,
+                    "motivo": str(erro or "sem resposta")[:200],
+                    "finish_reason": str(finish or ""),
+                    "tokens": 0,
+                    "tempo_s": tempo,
+                }
+            )
             continue
         valido = validar_resposta(resposta, materia, cfg)
         if valido is None:
+            votos.append(
+                {
+                    "modelo": modelo["id"],
+                    "tema": None,
+                    "motivo": motivo_resposta_invalida(resposta, materia, cfg),
+                    "finish_reason": str(finish or ""),
+                    "tokens": 0,
+                    "tempo_s": tempo,
+                }
+            )
             continue
         tema, confianca, justificativa = valido
         votos.append(
@@ -363,18 +512,23 @@ def classificar_materia(
                 "tema": tema,
                 "confianca": confianca,
                 "justificativa": justificativa,
-                "tokens": int(tokens),
-                "tempo_s": round(float(segundos), 1),
+                "motivo": "",
+                "finish_reason": str(finish or ""),
+                "tokens": int(tokens or 0),
+                "tempo_s": tempo,
             }
         )
     return votos
 
 
 def consenso_de(votos: list[dict]) -> dict | None:
-    """Dois ou tres votos iguais formam consenso; senao, None."""
+    """Dois ou tres votos iguais formam consenso; senao, None. So votos validos."""
     contagem: dict[str, list[dict]] = {}
     for voto in votos or []:
-        contagem.setdefault(voto["tema"], []).append(voto)
+        tema = (voto or {}).get("tema")
+        if not tema:
+            continue
+        contagem.setdefault(tema, []).append(voto)
     for tema, iguais in contagem.items():
         if len(iguais) >= 2:
             primeiro = iguais[0]
@@ -518,8 +672,18 @@ def corpo_revisao(materia: dict, votos: list[dict], modelos: list[str], motivo: 
     por_modelo = {v["modelo"]: v for v in votos}
     for nome in modelos:
         voto = por_modelo.get(nome)
-        if voto is None:
-            linhas.append(f"- {nome}: sem resposta valida.")
+        if voto is None or not voto.get("tema"):
+            motivo = ""
+            finish = ""
+            if isinstance(voto, dict):
+                motivo = str(voto.get("motivo") or "")[:200]
+                finish = str(voto.get("finish_reason") or "")
+            if not motivo:
+                motivo = "sem resposta valida"
+            texto_linha = f"- {nome}: sem resposta valida. Motivo: {motivo}."
+            if finish:
+                texto_linha += f" finish_reason {finish}."
+            linhas.append(texto_linha)
         else:
             linhas.append(
                 f"- {nome}: tema {voto['tema']!r}, confianca {voto['confianca']}, {voto['justificativa']}"
@@ -669,7 +833,8 @@ def sondar_ultimas_revisadas(cfg: dict | None = None, chave: str | None = None, 
     """Sondagem manual: roda os modelos nas ultimas 7 revisadas, sem gravar.
 
     Mostra no log, para cada modelo, se respondeu, o tempo, o tema dado
-    e se bateu com o tema revisado, mais o consenso por materia e o
+    e se bateu com o tema revisado, mais o motivo e o finish_reason
+    quando nao houver resposta valida, o consenso por materia e o
     total de tokens. Nunca grava nada nem faz commit.
     """
     cfg = cfg if cfg is not None else carregar_config()
@@ -692,13 +857,24 @@ def sondar_ultimas_revisadas(cfg: dict | None = None, chave: str | None = None, 
         linhas_modelos = []
         for nome in nomes_modelos:
             voto = por_modelo.get(nome)
-            if voto is None:
-                linhas_modelos.append({"modelo": nome, "respondeu": False, "tempo_s": None,
-                                        "tema": None, "bateu": False, "tokens": 0})
+            if voto is None or not voto.get("tema"):
+                motivo = ""
+                finish = ""
+                tempo = None
+                if isinstance(voto, dict):
+                    motivo = str(voto.get("motivo") or "")[:200] or "sem resposta valida"
+                    finish = str(voto.get("finish_reason") or "")
+                    tempo = voto.get("tempo_s")
+                else:
+                    motivo = "sem resposta valida"
+                linhas_modelos.append({"modelo": nome, "respondeu": False, "tempo_s": tempo,
+                                        "tema": None, "bateu": False, "tokens": 0,
+                                        "motivo": motivo, "finish_reason": finish})
             else:
                 bateu = voto["tema"] == entrada.get("tema")
                 linhas_modelos.append({"modelo": nome, "respondeu": True, "tempo_s": voto["tempo_s"],
-                                        "tema": voto["tema"], "bateu": bateu, "tokens": voto["tokens"]})
+                                        "tema": voto["tema"], "bateu": bateu, "tokens": voto["tokens"],
+                                        "motivo": "", "finish_reason": str(voto.get("finish_reason") or "")})
                 saida["tokens_total"] += int(voto.get("tokens") or 0)
         bateu_consenso = consenso is not None and consenso["tema"] == entrada.get("tema")
         saida["materias"].append(
@@ -721,7 +897,14 @@ def imprimir_sondagem(saida: dict) -> None:
         print(f"Materia {item['sigla']} {item['numero']}/{item['ano']} (id {item['id']}): tema revisado {item['tema_revisado']!r}.")
         for linha in item["modelos"]:
             if not linha["respondeu"]:
-                print(f"  {linha['modelo']}: sem resposta valida.")
+                detalhe = f"  {linha['modelo']}: sem resposta valida."
+                motivo = str(linha.get("motivo") or "")
+                finish = str(linha.get("finish_reason") or "")
+                if motivo:
+                    detalhe += f" Motivo: {motivo}."
+                if finish:
+                    detalhe += f" finish_reason {finish}."
+                print(detalhe)
                 continue
             bateu = "bateu" if linha["bateu"] else "divergiu"
             print(

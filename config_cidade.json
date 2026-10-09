@@ -170,7 +170,7 @@
       {"id": "mimo-v2.6-flash", "endpoint": "https://opencode.ai/zen/go/v1/chat/completions"}
     ],
     "tempo_limite_s": 60,
-    "max_tokens_resposta": 300
+    "max_tokens_resposta": 2000
   },
   "turnos_votacao": {
     "nota": "D-049: siglas com votacao em dois turnos. As demais siglas seguem turno unico.",
