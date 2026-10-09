@@ -105,6 +105,46 @@ def arquivo_bom(pasta: Path, arquivo: str) -> bool:
     return isinstance(dados, dict)
 
 
+PREFIXOS_LISTA_DESCOBERTA = ("sessaoplenaria_ano", "materialegislativa_ano")
+
+
+def e_lista_descoberta(arquivo: str | None) -> bool:
+    """Lista que descobre a sessao nova. Falha nela bloqueia a publicacao."""
+    if not arquivo:
+        return False
+    nome = str(arquivo).split("/")[-1]
+    return nome.startswith(PREFIXOS_LISTA_DESCOBERTA)
+
+
+def e_indice_api(arquivo: str | None) -> bool:
+    """Indice da API. Sem ele o plano do lote nao existe, por isso bloqueia."""
+    if not arquivo:
+        return False
+    return str(arquivo).split("/")[-1] == "api_indice.json"
+
+
+def maior_data_inicio(sessoes: list[dict]) -> str:
+    """Maior data_inicio da lista de sessoes, ou vazio quando nao ha data."""
+    datas = [str(item.get("data_inicio") or "") for item in sessoes or []]
+    datas = [item for item in datas if item]
+    return max(datas) if datas else ""
+
+
+def conferir_lista_nao_regrediu(antes: list[dict], depois: list[dict]) -> None:
+    """A lista de sessoes nao pode voltar no tempo depois da coleta.
+
+    Se a maior data_inicio depois da coleta for menor que a de antes,
+    a lista veio incompleta e nada pode ser publicado.
+    """
+    maxima_antes = maior_data_inicio(antes)
+    maxima_depois = maior_data_inicio(depois)
+    if maxima_antes and maxima_depois and maxima_depois < maxima_antes:
+        raise SystemExit(
+            "Lista de sessoes regrediu depois da coleta "
+            f"(antes {maxima_antes}, agora {maxima_depois}). Nada foi publicado."
+        )
+
+
 def repetir_pendentes(pendentes: list, ids_novas: list[int], simulado: bool = False) -> list[str]:
     """Espera 5 minutos e repete uma vez cada pendente, um por vez.
 
@@ -112,8 +152,9 @@ def repetir_pendentes(pendentes: list, ids_novas: list[int], simulado: bool = Fa
     nunca em paralelo. Resposta vazia ou invalida nunca e gravada, por
     isso o arquivo bom anterior segue intacto. Devolve os avisos de
     itens antigos que seguiram com o arquivo salvo. Se, depois da
-    repeticao, ainda faltar algo da sessao nova (ou qualquer item sem
-    arquivo anterior), levanta SystemExit com a lista do que faltou e
+    repeticao, ainda faltar algo da sessao nova, da lista de descoberta
+    (sessoes ou materias do ano), do indice da API, ou qualquer item sem
+    arquivo anterior, levanta SystemExit com a lista do que faltou e
     nada e publicado.
     """
     avisos: list[str] = []
@@ -135,14 +176,22 @@ def repetir_pendentes(pendentes: list, ids_novas: list[int], simulado: bool = Fa
             print(f"  continua pendente: {item['descricao']} ({exc.motivo})")
     novas = {int(item) for item in ids_novas}
     faltando_nova: list[str] = []
+    faltando_descoberta: list[str] = []
+    faltando_indice: list[str] = []
     faltando_sem_arquivo: list[str] = []
     for item in restantes:
         sid = item.get("sessao_id")
+        arquivo = item.get("arquivo")
+        if e_lista_descoberta(arquivo):
+            faltando_descoberta.append(item["descricao"])
+            continue
+        if e_indice_api(arquivo):
+            faltando_indice.append(item["descricao"])
+            continue
         if sid is not None and int(sid) in novas:
             faltando_nova.append(item["descricao"])
             continue
         pasta = item.get("pasta")
-        arquivo = item.get("arquivo")
         if pasta is not None and arquivo is not None and arquivo_bom(pasta, arquivo):
             avisos.append(item["descricao"])
             print(f"  aviso: {item['descricao']}. Sigo com o arquivo ja salvo.")
@@ -152,8 +201,15 @@ def repetir_pendentes(pendentes: list, ids_novas: list[int], simulado: bool = Fa
             print(f"  aviso: {item['descricao']}. Sigo com os arquivos ja salvos da sessao.")
             continue
         faltando_sem_arquivo.append(item["descricao"])
-    if faltando_nova or faltando_sem_arquivo:
+    if faltando_nova or faltando_descoberta or faltando_indice or faltando_sem_arquivo:
         partes = []
+        if faltando_descoberta:
+            partes.append(
+                "da lista de descoberta (sessoes ou materias do ano): "
+                + "; ".join(faltando_descoberta)
+            )
+        if faltando_indice:
+            partes.append("do indice da API: " + "; ".join(faltando_indice))
         if faltando_nova:
             partes.append("da sessao nova: " + "; ".join(faltando_nova))
         if faltando_sem_arquivo:
@@ -475,8 +531,24 @@ def baixar_lote(coletor: ColetorLote, anos: list[int], simulado: bool, pendentes
 
     As listas grandes de presenca, ordem, voto, justificativa e mesa ficam
     de fora. Elas sao coletadas por sessao, so das novas e da ultima.
+    O indice da API entra na fila de pendentes como os vizinhos. Se ele
+    continuar falhando depois da repeticao, a publicacao e bloqueada.
     """
-    indice = coletor.pedir("/api/", None, "api_indice.json", refrescar=not simulado)
+    try:
+        indice = coletor.pedir("/api/", None, "api_indice.json", refrescar=not simulado)
+    except PedidoPendente as exc:
+        if pendentes is None:
+            raise
+        pendentes.append(
+            {
+                "descricao": f"indice da API ({exc.motivo})",
+                "sessao_id": None,
+                "pasta": coletor.pasta,
+                "arquivo": "api_indice.json",
+                "refazer": lambda: baixar_lote(coletor, anos, simulado, None),
+            }
+        )
+        return
     if not isinstance(indice, dict):
         raise SystemExit("Indice da API nao e um objeto JSON.")
     plano = plano_sem_listas_grandes(anos, indice)
@@ -521,12 +593,26 @@ def coletar_autoria(coletor: ColetorLote, anos: list[int], simulado: bool, pende
     for caminho, prefixo in PLANO:
         print(prefixo)
         atualizar_paginas(coletor, caminho, {}, prefixo, simulado, pendentes)
-    primeiro = coletor.pedir(
-        "/api/materia/autoria/",
-        {"page_size": PAGE_SIZE, "page": 1},
-        "autoria_p1.json",
-        refrescar=False,
-    )
+    try:
+        primeiro = coletor.pedir(
+            "/api/materia/autoria/",
+            {"page_size": PAGE_SIZE, "page": 1},
+            "autoria_p1.json",
+            refrescar=False,
+        )
+    except PedidoPendente as exc:
+        if pendentes is None:
+            raise
+        pendentes.append(
+            {
+                "descricao": f"autoria pagina 1 ({exc.motivo})",
+                "sessao_id": None,
+                "pasta": coletor.pasta,
+                "arquivo": "autoria_p1.json",
+                "refazer": lambda: coletar_autoria(coletor, anos, simulado, None),
+            }
+        )
+        return
     total_sem_filtro = total_entries(primeiro)
     for ano in anos:
         print(f"autoria_materia_ano{ano}")
@@ -944,6 +1030,7 @@ def main(argv: list[str] | None = None) -> int:
 
         coletor_lote = preparar_coletor(cfg, pasta_lote, orcamento, args.simulado)
         coletores.append(coletor_lote)
+        sessoes_antes = sessoes_ordinarias(pasta_lote, tipo)
         try:
             baixar_lote(coletor_lote, anos, args.simulado, pendentes)
         except OrcamentoEsgotado as exc:
@@ -952,6 +1039,7 @@ def main(argv: list[str] | None = None) -> int:
 
         tipo = id_tipo_sessao_ordinaria(cfg)
         sessoes = sessoes_ordinarias(pasta_lote, tipo)
+        conferir_lista_nao_regrediu(sessoes_antes, sessoes)
         pasta_sessao = pasta_porsessao_mais_recente(BRUTOS)
         if pasta_sessao is None:
             lista_novas = list(sessoes)
