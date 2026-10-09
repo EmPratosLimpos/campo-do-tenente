@@ -24,6 +24,26 @@ Está prevista uma atualização semanal automática. Cada vez que ela trouxer s
 
 ---
 
+## 2026-10-09: v1.2.1, atualização semanal mais segura, autoria completa e temas automáticos
+
+**O que mudou nos dados**
+- Autoria das matérias recoletada do SAPL com a lista em ordem fixa: 1.281 registros, sem repetição nem falta. Corrige a marca de primeiro autor em 10 matérias (entre elas IND 6, IND 56, IND 59 e REQ 36 de 2025); o número de matérias de cada vereador não muda.
+- Nota sobre a posse do vereador Rivanildo Cavalheiro com texto revisto e três fontes oficiais.
+- 2025 segue igual, com o mesmo hash.
+
+**O que mudou na tela**
+- Perfil do vereador Rivanildo Cavalheiro: a nota sobre a posse aparece em texto, com os links das fontes, no lugar de "[object Object]". O período do perfil mostra só os anos em que ele teve mandato.
+
+**O que mudou na atualização semanal**
+- Uma falha isolada do SAPL não derruba mais a semana: o pedido é repetido uma vez depois de 5 minutos. Se faltar algo da sessão nova, nada é publicado e abre uma issue.
+- A sessão nova não é publicada com presença vazia; presença ainda não lançada no SAPL não vira falta.
+- Novas tentativas às quartas às 16h e às quintas às 10h, só se a semana ainda não foi publicada.
+- Tema de matéria nova escolhido por consenso de três modelos de inteligência artificial (decisões D-047, D-071 e D-072). Sem consenso, a matéria fica sem tema e o mantenedor recebe uma issue para decidir.
+- Arquivo de ano fechado só é regravado quando o conteúdo muda.
+
+**De onde veio**
+- https://sapl.campodotenente.pr.leg.br/api/materia/autoria/ (lista ordenada por id), coletada em 09/10/2026, 21 pedidos.
+
 ## 2026-10-08: 35a sessão ordinária
 
 **O que mudou nos dados**
