@@ -249,7 +249,7 @@
   },
   "69": {
     "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "70": {
     "tag_tipo": "IND",
@@ -289,7 +289,7 @@
   },
   "79": {
     "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "80": {
     "tag_tipo": "IND",
@@ -681,7 +681,7 @@
   },
   "193": {
     "tag_tipo": "PLEG",
-    "tag_tema": "Agricultura e pecuária"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "27": {
     "tag_tipo": "PLEG",
@@ -937,7 +937,7 @@
   },
   "112": {
     "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "102": {
     "tag_tipo": "REQ",
@@ -1037,7 +1037,7 @@
   },
   "220": {
     "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "221": {
     "tag_tipo": "REQ",
@@ -1045,7 +1045,7 @@
   },
   "234": {
     "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "169": {
     "tag_tipo": "VET",
@@ -1057,7 +1057,7 @@
   },
   "213": {
     "tag_tipo": "VET",
-    "tag_tema": "Agricultura e pecuária"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "277": {
     "tag_tipo": "ATA",
@@ -1257,7 +1257,7 @@
   },
   "350": {
     "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "352": {
     "tag_tipo": "IND",
@@ -1573,7 +1573,7 @@
   },
   "605": {
     "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "696": {
     "tag_tipo": "REQ",
@@ -1601,7 +1601,7 @@
   },
   "889": {
     "tag_tipo": "REQ",
-    "tag_tema": "Meio ambiente e proteção animal"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "966": {
     "tag_tipo": "ATA",
@@ -1625,7 +1625,7 @@
   },
   "1052": {
     "tag_tipo": "IND",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "1054": {
     "tag_tipo": "IND",
@@ -1641,7 +1641,7 @@
   },
   "1058": {
     "tag_tipo": "REQ",
-    "tag_tema": "Iluminação, serviços urbanos e conectividade"
+    "tag_tema": "Desenvolvimento e moradia"
   },
   "1097": {
     "tag_tipo": "ATA",

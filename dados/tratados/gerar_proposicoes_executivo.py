@@ -70,6 +70,7 @@ for caminho in (DIR_SCRIPT, DIR_RAIZ / "coletor"):
     if str(caminho) not in sys.path:
         sys.path.insert(0, str(caminho))
 
+from coletar_lote import e_lote_principal  # noqa: E402
 from config_cidade import (  # noqa: E402
     anos_recorte,
     carregar_config,
@@ -296,7 +297,7 @@ def carregar_tipos_votacao_oficial() -> dict[int, str]:
     """
     achados: list[Path] = []
     for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
-        if pasta.is_dir():
+        if pasta.is_dir() and e_lote_principal(pasta):
             achados.extend(sorted(pasta.glob("tipovotacao_p*.json")))
     achados.extend(sorted(DIR_BRUTOS.glob("tipovotacao_p*.json")))
     saida: dict[int, str] = {}

@@ -133,7 +133,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -356,7 +356,7 @@
       "numero": "34",
       "ano": "2025",
       "ementa": "Requer informações sobre a não execução do Contrato referente ao Pregão 21/2025 (Vigência 16/06/2025 - 16/06/2026|) com a Empresa Reis Multiserviços LTDA, responsável pela limpeza de fossas sépticas no município.”",
-      "tema": "Iluminação, serviços urbanos e conectividade",
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autores": [
         {
@@ -520,14 +520,14 @@
       "numero": "36",
       "ano": "2025",
       "ementa": "\"Solicita informações à SANEPAR sobre valores de ligação da rede de esgoto, apoio ao Executivo Municipal, fornecimento de materiais e possibilidade de audiência pública\".",
-      "tema": "Iluminação, serviços urbanos e conectividade",
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autores": [
         {
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -739,7 +739,7 @@
       "numero": "12",
       "ano": "2025",
       "ementa": "Solicitação de estudo para ampliação da rede de abastecimento de água na localidade de Lageado",
-      "tema": "Iluminação, serviços urbanos e conectividade",
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autores": [
         {
@@ -1098,7 +1098,7 @@
       "numero": "22",
       "ano": "2025",
       "ementa": "Indica a criação de Projeto de Lei para custear os serviços da instalação de esgoto sanitário para famílias de baixa renda",
-      "tema": "Iluminação, serviços urbanos e conectividade",
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autores": [
         {
@@ -3290,7 +3290,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -3518,7 +3518,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -3594,7 +3594,7 @@
           "parlamentar_id_sapl": 3,
           "nome_parlamentar": "Cleiton Costa",
           "nome_no_sapl": "Cleiton Costa",
-          "primeiro_autor": null
+          "primeiro_autor": true
         },
         {
           "parlamentar_id_sapl": 2,
@@ -5594,7 +5594,7 @@
       "numero": "7",
       "ano": "2025",
       "ementa": "DISPÕE SOBRE A DIVULGAÇÃO DE INFORMAÇÕES SOBRE OS SERVIÇOS DE SANEAMENTO BÁSICO E DO PROGRAMA PORTEIRA ADENTRO DO MUNICÍPIO NO SITE OFICIAL DA PREFEITURA DE CAMPO DO TENENTE - PR.",
-      "tema": "Agricultura e pecuária",
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autores": [
         {
@@ -7412,7 +7412,7 @@
       "numero": "34",
       "ano": "2025",
       "ementa": "Requer informações sobre a não execução do Contrato referente ao Pregão 21/2025 (Vigência 16/06/2025 - 16/06/2026|) com a Empresa Reis Multiserviços LTDA, responsável pela limpeza de fossas sépticas no município.”",
-      "tema": "Iluminação, serviços urbanos e conectividade",
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autores": [
         {
@@ -7576,14 +7576,14 @@
       "numero": "36",
       "ano": "2025",
       "ementa": "\"Solicita informações à SANEPAR sobre valores de ligação da rede de esgoto, apoio ao Executivo Municipal, fornecimento de materiais e possibilidade de audiência pública\".",
-      "tema": "Iluminação, serviços urbanos e conectividade",
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autores": [
         {
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -7788,7 +7788,7 @@
       "numero": "8",
       "ano": "2025",
       "ementa": "Requer informações da Sanepar referenta a finalização das Obras",
-      "tema": "Iluminação, serviços urbanos e conectividade",
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autores": [
         {

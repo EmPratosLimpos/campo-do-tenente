@@ -1,0 +1,159 @@
+{
+  "fonte": "https://sapl.campodotenente.pr.leg.br",
+  "pausa_segundos": 2.5,
+  "page_size": 100,
+  "teto_pedidos": 40,
+  "total_pedidos": 21,
+  "iniciado_em": "2026-10-09T00:42:00-03:00",
+  "atualizado_em": "2026-10-09T00:44:04-03:00",
+  "duracao_segundos": 59.0,
+  "pedidos": [
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=1",
+      "quando": "2026-10-09T00:42:00-03:00",
+      "status": 200,
+      "arquivo": "autoria_p1.json",
+      "n": 1
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=2",
+      "quando": "2026-10-09T00:42:03-03:00",
+      "status": 200,
+      "arquivo": "autoria_p2.json",
+      "n": 2
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=3",
+      "quando": "2026-10-09T00:42:06-03:00",
+      "status": 200,
+      "arquivo": "autoria_p3.json",
+      "n": 3
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=4",
+      "quando": "2026-10-09T00:42:10-03:00",
+      "status": 200,
+      "arquivo": "autoria_p4.json",
+      "n": 4
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=5",
+      "quando": "2026-10-09T00:42:13-03:00",
+      "status": 200,
+      "arquivo": "autoria_p5.json",
+      "n": 5
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=6",
+      "quando": "2026-10-09T00:42:16-03:00",
+      "status": 200,
+      "arquivo": "autoria_p6.json",
+      "n": 6
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=7",
+      "quando": "2026-10-09T00:42:19-03:00",
+      "status": 200,
+      "arquivo": "autoria_p7.json",
+      "n": 7
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=8",
+      "quando": "2026-10-09T00:42:22-03:00",
+      "status": 200,
+      "arquivo": "autoria_p8.json",
+      "n": 8
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=9",
+      "quando": "2026-10-09T00:42:26-03:00",
+      "status": 200,
+      "arquivo": "autoria_p9.json",
+      "n": 9
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=10",
+      "quando": "2026-10-09T00:42:29-03:00",
+      "status": 200,
+      "arquivo": "autoria_p10.json",
+      "n": 10
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=11",
+      "quando": "2026-10-09T00:42:32-03:00",
+      "status": 200,
+      "arquivo": "autoria_p11.json",
+      "n": 11
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=12",
+      "quando": "2026-10-09T00:42:35-03:00",
+      "status": 200,
+      "arquivo": "autoria_p12.json",
+      "n": 12
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?o=id&page_size=100&page=13",
+      "quando": "2026-10-09T00:42:38-03:00",
+      "status": 200,
+      "arquivo": "autoria_p13.json",
+      "n": 13
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/base/autor/?page_size=100&page=1",
+      "quando": "2026-10-09T00:42:42-03:00",
+      "status": 200,
+      "arquivo": "autor_p1.json",
+      "n": 14
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/base/tipoautor/?page_size=100&page=1",
+      "quando": "2026-10-09T00:42:44-03:00",
+      "status": 200,
+      "arquivo": "tipoautor_p1.json",
+      "n": 15
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/parlamentares/cargomesa/?page_size=100&page=1",
+      "quando": "2026-10-09T00:42:47-03:00",
+      "status": 200,
+      "arquivo": "cargomesa_p1.json",
+      "n": 16
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?materia=62&page_size=100&page=1",
+      "quando": "2026-10-09T00:43:52-03:00",
+      "status": 200,
+      "arquivo": "conf_materia_62.json",
+      "n": 17
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?materia=142&page_size=100&page=1",
+      "quando": "2026-10-09T00:43:55-03:00",
+      "status": 200,
+      "arquivo": "conf_materia_142.json",
+      "n": 18
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?materia=199&page_size=100&page=1",
+      "quando": "2026-10-09T00:43:58-03:00",
+      "status": 200,
+      "arquivo": "conf_materia_199.json",
+      "n": 19
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?materia=230&page_size=100&page=1",
+      "quando": "2026-10-09T00:44:00-03:00",
+      "status": 200,
+      "arquivo": "conf_materia_230.json",
+      "n": 20
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/autoria/?materia=231&page_size=100&page=1",
+      "quando": "2026-10-09T00:44:03-03:00",
+      "status": 200,
+      "arquivo": "conf_materia_231.json",
+      "n": 21
+    }
+  ]
+}

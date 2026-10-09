@@ -4,8 +4,8 @@
     "cidade": "Campo do Tenente",
     "uf": "PR",
     "ano": 2025,
-    "dado_coletado_em": "2026-09-29T22:57:44-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em",
+    "dado_coletado_em": "2026-10-09T00:44:04-03:00",
+    "fonte_data_coleta": "dados/brutos/lote_20261009_autoria/indice.json campo atualizado_em",
     "n_sessoes_ordinarias": 32,
     "piso_sessoes_ordinarias": 32,
     "n_vereadores": 9,
@@ -102,9 +102,10 @@
     "presentes_com_justificativa_na_mesma_sessao": [],
     "projetos_lei_legislativo_por_categoria": {
       "Administração e finanças": 8,
-      "Agricultura e pecuária": 2,
+      "Agricultura e pecuária": 1,
       "Assistência social e direitos": 2,
       "Cultura, esporte e lazer": 2,
+      "Desenvolvimento e moradia": 1,
       "Educação": 1,
       "Homenagens, nomes e datas": 2,
       "Meio ambiente e proteção animal": 1
@@ -8426,7 +8427,7 @@
       "ano": "2025",
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
-      "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\r\nPROFESSORES E EDUCADORES INFANTIS",
+      "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\nPROFESSORES E EDUCADORES INFANTIS",
       "tema": "Educação",
       "revisada_por_humano": true,
       "autoria": {
@@ -9967,7 +9968,7 @@
       "tipo_sigla": "PLEG",
       "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
       "ementa": "DISPÕE SOBRE A DIVULGAÇÃO DE INFORMAÇÕES SOBRE OS SERVIÇOS DE SANEAMENTO BÁSICO E DO PROGRAMA PORTEIRA ADENTRO DO MUNICÍPIO NO SITE OFICIAL DA PREFEITURA DE CAMPO DO TENENTE - PR.",
-      "tema": "Agricultura e pecuária",
+      "tema": "Desenvolvimento e moradia",
       "revisada_por_humano": true,
       "autoria": {
         "rotulo": null,
@@ -13400,7 +13401,7 @@
         "autorias_conjuntas": 4,
         "por_categoria": {
           "Administração e finanças": 3,
-          "Agricultura e pecuária": 1
+          "Desenvolvimento e moradia": 1
         },
         "lista": [
           {
@@ -13428,7 +13429,7 @@
             "tipo_sigla": "PLEG",
             "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
             "ementa": "DISPÕE SOBRE A DIVULGAÇÃO DE INFORMAÇÕES SOBRE OS SERVIÇOS DE SANEAMENTO BÁSICO E DO PROGRAMA PORTEIRA ADENTRO DO MUNICÍPIO NO SITE OFICIAL DA PREFEITURA DE CAMPO DO TENENTE - PR.",
-            "tema": "Agricultura e pecuária",
+            "tema": "Desenvolvimento e moradia",
             "revisada_por_humano": true,
             "situacao": "Aprovado",
             "nome_oficial_ultimo_registro": "Aprovada por Unanimidade",
@@ -14806,7 +14807,7 @@
         "autorias_conjuntas": 4,
         "por_categoria": {
           "Administração e finanças": 3,
-          "Agricultura e pecuária": 1
+          "Desenvolvimento e moradia": 1
         },
         "lista": [
           {
@@ -14834,7 +14835,7 @@
             "tipo_sigla": "PLEG",
             "tipo_descricao": "Projeto de Lei Origem do Poder Legislativo",
             "ementa": "DISPÕE SOBRE A DIVULGAÇÃO DE INFORMAÇÕES SOBRE OS SERVIÇOS DE SANEAMENTO BÁSICO E DO PROGRAMA PORTEIRA ADENTRO DO MUNICÍPIO NO SITE OFICIAL DA PREFEITURA DE CAMPO DO TENENTE - PR.",
-            "tema": "Agricultura e pecuária",
+            "tema": "Desenvolvimento e moradia",
             "revisada_por_humano": true,
             "situacao": "Aprovado",
             "nome_oficial_ultimo_registro": "Aprovada por Unanimidade",

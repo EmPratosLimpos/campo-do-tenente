@@ -39,10 +39,19 @@
     });
   }
 
+  function textoNotaFactual(nota) {
+    if (!nota) return "";
+    if (typeof nota === "string") return nota;
+    if (typeof nota === "object" && nota.texto) return String(nota.texto);
+    return "";
+  }
+
   function renderNotasParlamentar(v) {
     var html = "";
-    if (v.nota_factual) {
-      html += '<p class="nota-factual">' + esc(v.nota_factual) + "</p>";
+    var nota = v.nota_factual;
+    var textoNota = textoNotaFactual(nota);
+    if (textoNota) {
+      html += '<p class="nota-factual">' + esc(textoNota) + "</p>";
     }
     var afast = v.afastamentos || [];
     if (afast.length) {

@@ -26,6 +26,7 @@ if str(DIR_SCRIPT) not in sys.path:
 if str(DIR_RAIZ / "coletor") not in sys.path:
     sys.path.insert(0, str(DIR_RAIZ / "coletor"))
 
+from coletar_lote import e_lote_principal  # noqa: E402
 from config_cidade import (  # noqa: E402
     PisoNaoDefinido,
     anos_recorte,
@@ -250,7 +251,7 @@ def carregar_tipos_resultado() -> dict[int, str]:
     """Nome oficial de cada tipo de resultado, lido da tabela ja baixada."""
     achados = []
     for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
-        if not pasta.is_dir():
+        if not pasta.is_dir() or not e_lote_principal(pasta):
             continue
         for caminho in sorted(pasta.glob("tiporesultadovotacao_p*.json")):
             achados.append(caminho)
@@ -273,7 +274,7 @@ def carregar_catalogo_tipos_materia() -> tuple[dict[str, str], str]:
     """
     achados = []
     for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
-        if not pasta.is_dir():
+        if not pasta.is_dir() or not e_lote_principal(pasta):
             continue
         for caminho in sorted(pasta.glob("tipomaterialegislativa_p*.json")):
             achados.append(caminho)
@@ -301,7 +302,7 @@ def carregar_tipos_justificativa() -> tuple[dict[int, str], str]:
     """Descricao oficial de cada tipo de justificativa de ausencia do SAPL."""
     achados = []
     for pasta in sorted(DIR_BRUTOS.glob("lote_*")):
-        if not pasta.is_dir():
+        if not pasta.is_dir() or not e_lote_principal(pasta):
             continue
         for caminho in sorted(pasta.glob("tipojustificativa_p*.json")):
             achados.append(caminho)
@@ -1668,7 +1669,7 @@ def temas_globais(projetos: list[dict]) -> dict[str, int]:
     return dict(sorted(contagem.items()))
 
 
-def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
+def montar_csv(vereadores: list[dict]) -> str:
     campos = [
         "id_sapl",
         "slug_codigo",
@@ -1760,14 +1761,18 @@ def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
                 "projetos_em_tramitacao": projetos["em_tramitacao"],
             }
         )
-    escrever_lf(caminho, buffer.getvalue())
+    return buffer.getvalue()
+
+
+def escrever_csv(caminho: Path, vereadores: list[dict]) -> None:
+    escrever_lf(caminho, montar_csv(vereadores))
 
 
 def pct(valor: float) -> str:
     return f"{valor:.2f}".replace(".", ",")
 
 
-def escrever_relatorio(caminho: Path, payload: dict) -> None:
+def montar_relatorio(payload: dict) -> str:
     meta = payload["meta"]
     ano = meta["ano"]
     cidade = meta["cidade"]
@@ -2056,7 +2061,96 @@ def escrever_relatorio(caminho: Path, payload: dict) -> None:
             "",
         ]
     )
-    escrever_lf(caminho, "\n".join(linhas))
+    texto = "\n".join(linhas)
+    if not texto.endswith("\n"):
+        texto += "\n"
+    return texto
+
+
+def escrever_relatorio(caminho: Path, payload: dict) -> None:
+    escrever_lf(caminho, montar_relatorio(payload))
+
+
+CAMPOS_DATA_COLETA = ("dado_coletado_em", "fonte_data_coleta")
+
+
+def ano_corrente_hoje() -> int:
+    """Ano corrente pela data de hoje. Ano diferente deste e ano fechado."""
+    from datetime import date as _date
+
+    return int(_date.today().year)
+
+
+def sem_cr(valor):
+    """Troca quebra Windows por LF em todo texto, sem mexer em numero ou lista."""
+    if isinstance(valor, str):
+        return valor.replace("\r\n", "\n").replace("\r", "\n")
+    if isinstance(valor, dict):
+        return {chave: sem_cr(item) for chave, item in valor.items()}
+    if isinstance(valor, list):
+        return [sem_cr(item) for item in valor]
+    return valor
+
+
+def json_sem_datas(texto: str) -> str:
+    """JSON canonico sem os metadados de data de coleta, para comparar ano fechado.
+
+    Quebra de linha Windows (CR) tambem e ignorada: uma ementa gravada
+    com \\r\\n numa versao antiga e o mesmo conteudo com \\n. So
+    conteudo de verdade (numero, voto, presenca, autoria) regrava o ano.
+    """
+    try:
+        dados = sem_cr(json.loads(texto))
+    except ValueError:
+        return texto.replace("\r\n", "\n").replace("\r", "\n")
+    if isinstance(dados, dict) and isinstance(dados.get("meta"), dict):
+        for campo in CAMPOS_DATA_COLETA:
+            if campo in dados["meta"]:
+                dados["meta"][campo] = ""
+    return json.dumps(dados, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+
+
+def relatorio_sem_datas(texto: str) -> str:
+    """Relatorio sem as linhas de data de coleta, para comparar ano fechado."""
+    linhas = []
+    for linha in texto.splitlines():
+        if linha.startswith("Dado coletado em:") or linha.startswith("Fonte da data:"):
+            continue
+        linhas.append(linha)
+    return "\n".join(linhas) + "\n"
+
+
+def ano_fechado_sem_mudanca(
+    ano: int, texto_json_novo: str, texto_csv_novo: str, texto_relatorio_novo: str
+) -> bool:
+    """Ano fechado so e regravado quando o conteudo muda.
+
+    Compara o JSON sem dado_coletado_em e fonte_data_coleta, o CSV por
+    inteiro e o relatorio sem as linhas de data. Se a unica diferenca
+    for metadado de data ou de pasta fonte, o arquivo antigo fica como
+    esta, byte a byte. O ano corrente sempre e regravado.
+    """
+    if int(ano) == ano_corrente_hoje():
+        return False
+    arquivo_json = DIR_SCRIPT / f"atuacao_vereadores_{int(ano)}.json"
+    arquivo_csv = DIR_SCRIPT / f"atuacao_vereadores_{int(ano)}.csv"
+    arquivo_relatorio = DIR_SCRIPT / f"RELATORIO-ATUACAO-VEREADORES-{int(ano)}.md"
+    for caminho in (arquivo_json, arquivo_csv, arquivo_relatorio):
+        if not caminho.is_file():
+            return False
+    try:
+        velho_json = arquivo_json.read_text(encoding="utf-8")
+        velho_csv = arquivo_csv.read_text(encoding="utf-8")
+        velho_relatorio = arquivo_relatorio.read_text(encoding="utf-8")
+    except OSError:
+        return False
+    if json_sem_datas(velho_json) != json_sem_datas(texto_json_novo):
+        return False
+    if velho_csv.replace("\r\n", "\n") != texto_csv_novo.replace("\r\n", "\n"):
+        return False
+    if relatorio_sem_datas(velho_relatorio) != relatorio_sem_datas(texto_relatorio_novo):
+        return False
+    return True
 
 
 def gerar_do_ano(ano: int) -> None:
@@ -2310,10 +2404,14 @@ def gerar_do_ano(ano: int) -> None:
     arquivo_json = DIR_SCRIPT / f"atuacao_vereadores_{ano}.json"
     arquivo_csv = DIR_SCRIPT / f"atuacao_vereadores_{ano}.csv"
     arquivo_relatorio = DIR_SCRIPT / f"RELATORIO-ATUACAO-VEREADORES-{ano}.md"
-    escrever_lf(
-        arquivo_json,
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-    )
+    texto_json = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+    texto_csv = montar_csv(vereadores)
+    texto_relatorio = montar_relatorio(payload)
+    if ano_fechado_sem_mudanca(ano, texto_json, texto_csv, texto_relatorio):
+        print(f"{ano}: ano fechado sem mudanca de conteudo. Arquivos mantidos.")
+        print(f"  {rel(arquivo_json)}")
+        return
+    escrever_lf(arquivo_json, texto_json)
     escrever_csv(arquivo_csv, vereadores)
     escrever_relatorio(arquivo_relatorio, payload)
     print(
