@@ -24,12 +24,6 @@ TEXTO_NOTA_RIVANILDO = (
     "Assumiu em 17/03/2026 durante a licença de Jorge Quege; "
     "vaga permanente após a cassação em 18/08/2026."
 )
-LINK_NOTICIA_CAMARA = (
-    "https://www.campodotenente.pr.leg.br/institucional/noticias/"
-    "rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal"
-)
-
-
 class _Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(RAIZ), **kwargs)
@@ -117,7 +111,7 @@ class TestNotaFactualTela(unittest.TestCase):
                     self.assertNotIn("[object Object]", texto)
             browser.close()
 
-    def test_nota_rivanildo_texto_e_link_noticia(self):
+    def test_nota_rivanildo_so_texto_sem_fonte(self):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page(viewport={"width": 390, "height": 900})
@@ -126,9 +120,9 @@ class TestNotaFactualTela(unittest.TestCase):
             page.wait_for_timeout(300)
             wrap = page.locator("#notas-vereador-wrap")
             self.assertIn(TEXTO_NOTA_RIVANILDO, wrap.inner_text())
-            link = wrap.locator("a.fonte").filter(has_text="Notícia da Câmara")
-            self.assertEqual(link.count(), 1)
-            self.assertIn("rivanildo-braz-cavalheiro", link.first.get_attribute("href") or "")
+            self.assertEqual(wrap.locator("a.fonte").count(), 0)
+            self.assertEqual(wrap.locator(".nota-factual-fontes").count(), 0)
+            self.assertNotIn("Fonte:", wrap.inner_text())
             apoio = page.locator("#apoio-vereador").inner_text()
             self.assertIn("Sessões ordinárias de 2026", apoio)
             self.assertNotIn("2025 e 2026", apoio)
