@@ -146,8 +146,13 @@ class TestTemasMaterias(unittest.TestCase):
                     },
                     item["id"],
                 )
-            self.assertIs(item["revisada_por_humano"], True)
-            self.assertEqual(item["revisado_por"], "mantenedor")
+            if item["revisada_por_humano"] is True:
+                self.assertEqual(item["revisado_por"], "mantenedor")
+            else:
+                # Entrada nova por consenso (D-047), ainda sem revisao do mantenedor.
+                self.assertIs(item["revisada_por_humano"], False)
+                self.assertEqual(item["revisado_por"], "")
+                self.assertTrue(item["classificado_por"].startswith("consenso D-047"))
             self.assertRegex(str(item["data"]), r"^\d{4}-\d{2}-\d{2}$", item["id"])
 
     def test_sem_travessao(self):

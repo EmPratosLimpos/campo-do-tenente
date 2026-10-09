@@ -498,9 +498,16 @@ def titulo_revisao(materia: dict) -> str:
     return f"Tema para revisao: {materia.get('sigla')} {materia.get('numero')}/{materia.get('ano')}"
 
 
-def corpo_revisao(materia: dict, votos: list[dict], modelos: list[str]) -> str:
+def corpo_revisao(materia: dict, votos: list[dict], modelos: list[str], motivo: str = "") -> str:
+    if motivo == "sem chave do classificador na execucao":
+        primeira = (
+            "A materia nova ficou sem tema porque a execucao nao tinha "
+            "a chave do classificador (D-047)."
+        )
+    else:
+        primeira = "A materia nova ficou sem tema porque os modelos nao formaram consenso (D-047)."
     linhas = [
-        "A materia nova ficou sem tema porque os modelos nao formaram consenso (D-047).",
+        primeira,
         "",
         f"Materia: {materia.get('sigla')} {materia.get('numero')}/{materia.get('ano')} (id {materia.get('id')}).",
         f"Ementa oficial: {(materia.get('ementa') or '').strip() or '(sem ementa no SAPL)'}",
@@ -593,28 +600,28 @@ def classificar_novas(
     }
     if not novas:
         return resultado
-    if not chave:
+    if chave:
+        sessao_id = uuid.uuid4().hex
+        for materia in novas:
+            votos = classificar_materia(materia, cfg, chave, sessao_id, conf, pedir)
+            resultado["tokens_total"] += sum(int(v.get("tokens") or 0) for v in votos)
+            consenso = consenso_de(votos)
+            if consenso is None:
+                resultado["pendentes"].append(
+                    {"materia": materia, "votos": votos, "motivo": "sem consenso entre os modelos"}
+                )
+                continue
+            resultado["consenso"].append(entrada_de_consenso(consenso, materia, dia))
+        if gravar and resultado["consenso"]:
+            gravar_entradas(resultado["consenso"])
+    else:
         for materia in novas:
             resultado["pendentes"].append(
                 {"materia": materia, "votos": [], "motivo": "sem chave do classificador na execucao"}
             )
-        return resultado
-    sessao_id = uuid.uuid4().hex
-    for materia in novas:
-        votos = classificar_materia(materia, cfg, chave, sessao_id, conf, pedir)
-        resultado["tokens_total"] += sum(int(v.get("tokens") or 0) for v in votos)
-        consenso = consenso_de(votos)
-        if consenso is None:
-            resultado["pendentes"].append(
-                {"materia": materia, "votos": votos, "motivo": "sem consenso entre os modelos"}
-            )
-            continue
-        resultado["consenso"].append(entrada_de_consenso(consenso, materia, dia))
-    if gravar and resultado["consenso"]:
-        gravar_entradas(resultado["consenso"])
     for pendente in resultado["pendentes"]:
         materia = pendente["materia"]
-        corpo = corpo_revisao(materia, pendente["votos"], nomes_modelos)
+        corpo = corpo_revisao(materia, pendente["votos"], nomes_modelos, pendente.get("motivo") or "")
         aviso = garantir_issue(titulo_revisao(materia), corpo, correr)
         if aviso:
             resultado["avisos"].append(aviso)
