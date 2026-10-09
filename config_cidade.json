@@ -161,6 +161,17 @@
       "sem_ementa_descricao": "Matéria sem ementa registrada no SAPL."
     }
   },
+  "classificacao_temas": {
+    "nota": "D-047: tema de materia nova por consenso de tres modelos do plano OpenCode Go, de familias diferentes, cada um sem ver a resposta dos outros. Endpoint e modelos nunca ficam fixos no codigo. Resposta curta para o custo ficar em centavos.",
+    "endpoint": "https://opencode.ai/zen/go/v1/chat/completions",
+    "modelos": [
+      {"id": "deepseek-v4-flash", "endpoint": "https://opencode.ai/zen/go/v1/chat/completions"},
+      {"id": "glm-5.3-flash", "endpoint": "https://opencode.ai/zen/go/v1/chat/completions"},
+      {"id": "mimo-v2.6-flash", "endpoint": "https://opencode.ai/zen/go/v1/chat/completions"}
+    ],
+    "tempo_limite_s": 60,
+    "max_tokens_resposta": 300
+  },
   "turnos_votacao": {
     "nota": "D-049: siglas com votacao em dois turnos. As demais siglas seguem turno unico.",
     "dois_turnos": ["PLEG", "PLEX", "PLC", "PLCL", "PELOM", "PSUB", "PSUBE"]
