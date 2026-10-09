@@ -6898,6 +6898,10 @@
     }
     if (s === base || s.indexOf(base + "/") === 0) return s;
     if (s.charAt(0) === "/" && s.charAt(1) !== "/") return base + s;
+    var siteCamara = CONFIG_CIDADE && CONFIG_CIDADE.painel && CONFIG_CIDADE.painel.site_camara
+      ? String(CONFIG_CIDADE.painel.site_camara).replace(/\/$/, "")
+      : "";
+    if (siteCamara && (s === siteCamara || s.indexOf(siteCamara + "/") === 0)) return s;
     return "";
   }
 

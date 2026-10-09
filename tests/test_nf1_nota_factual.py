@@ -38,6 +38,10 @@ class _Handler(SimpleHTTPRequestHandler):
         pass
 
 
+class _ReuseHTTPServer(ThreadingHTTPServer):
+    allow_reuse_address = True
+
+
 def arquivos_atuacao_com_nota() -> list[pathlib.Path]:
     pasta = RAIZ / "dados" / "tratados"
     return sorted(pasta.glob("atuacao_vereadores_*.json"))
@@ -79,10 +83,11 @@ class TestNotaFactualDados(unittest.TestCase):
 class TestNotaFactualTela(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.servidor = ThreadingHTTPServer(("127.0.0.1", 8796), _Handler)
+        cls.servidor = _ReuseHTTPServer(("127.0.0.1", 0), _Handler)
+        cls.port = cls.servidor.server_address[1]
         thread = threading.Thread(target=cls.servidor.serve_forever, daemon=True)
         thread.start()
-        cls.base = "http://127.0.0.1:8796/index.html"
+        cls.base = f"http://127.0.0.1:{cls.port}/index.html"
         time.sleep(0.35)
 
     @classmethod
@@ -92,7 +97,11 @@ class TestNotaFactualTela(unittest.TestCase):
     def _abrir_vereadores(self, page):
         page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
         page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
-        page.click('button[data-secao="vereadores"]')
+        lateral = page.locator("button[data-secao-lateral='vereadores']")
+        if lateral.count():
+            lateral.click(timeout=15000)
+        else:
+            page.locator("#nav-principal button[data-secao='vereadores']").click(timeout=15000)
         page.wait_for_selector("#sel-vereador", state="visible", timeout=60000)
 
     def test_nenhum_vereador_mostra_object_object(self):
@@ -121,8 +130,9 @@ class TestNotaFactualTela(unittest.TestCase):
             page.wait_for_timeout(300)
             wrap = page.locator("#notas-vereador-wrap")
             self.assertIn(TEXTO_NOTA_RIVANILDO, wrap.inner_text())
-            link = wrap.locator(f'a[href="{LINK_NOTICIA_CAMARA}"]')
+            link = wrap.locator("a.fonte").filter(has_text="Notícia da Câmara")
             self.assertEqual(link.count(), 1)
+            self.assertIn("rivanildo-braz-cavalheiro", link.first.get_attribute("href") or "")
             apoio = page.locator("#apoio-vereador").inner_text()
             self.assertIn("Sessões ordinárias de 2026", apoio)
             self.assertNotIn("2025 e 2026", apoio)
