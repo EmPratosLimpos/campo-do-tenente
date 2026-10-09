@@ -2,11 +2,11 @@
   "fonte": "https://sapl.campodotenente.pr.leg.br",
   "pausa_segundos": 2.5,
   "page_size": 100,
-  "teto_pedidos": 286,
-  "total_pedidos": 262,
+  "teto_pedidos": 662,
+  "total_pedidos": 267,
   "iniciado_em": "2026-09-29T18:27:03-03:00",
-  "atualizado_em": "2026-09-29T19:46:24-03:00",
-  "duracao_segundos": 4166.7,
+  "atualizado_em": "2026-10-08T19:40:06-03:00",
+  "duracao_segundos": 4205.5,
   "pedidos": [
     {
       "url": "https://sapl.campodotenente.pr.leg.br/api/materia/tramitacao/?materia=57",
@@ -1841,6 +1841,41 @@
       "status": 200,
       "arquivo": "unidadetramitacao_p3.json",
       "n": 262
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/tramitacao/?materia=968",
+      "quando": "2026-10-08T19:39:29-03:00",
+      "status": 200,
+      "arquivo": "tramitacao_materia968_p1.json",
+      "n": 263
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/tramitacao/?materia=969",
+      "quando": "2026-10-08T19:39:32-03:00",
+      "status": 200,
+      "arquivo": "tramitacao_materia969_p1.json",
+      "n": 264
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/tramitacao/?materia=967",
+      "quando": "2026-10-08T19:40:00-03:00",
+      "status": 200,
+      "arquivo": "tramitacao_materia967_p1.json",
+      "n": 265
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/statustramitacao/?page_size=100&page=1",
+      "quando": "2026-10-08T19:40:02-03:00",
+      "status": 200,
+      "arquivo": "statustramitacao_p1.json",
+      "n": 266
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/unidadetramitacao/?page_size=100&page=1",
+      "quando": "2026-10-08T19:40:05-03:00",
+      "status": 200,
+      "arquivo": "unidadetramitacao_p1.json",
+      "n": 267
     }
   ]
 }

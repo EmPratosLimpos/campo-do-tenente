@@ -1,0 +1,65 @@
+{
+  "pagination": {},
+  "results": [
+    {
+      "id": 281,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 3 - Indicação nº 35 de 2026 em 35ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-10-06T19:43:48.685114-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 1052,
+      "ordem": 708,
+      "expediente": null
+    },
+    {
+      "id": 282,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 4 - Indicação nº 36 de 2026 em 35ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-10-06T19:49:32.748012-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 1054,
+      "ordem": 709,
+      "expediente": null
+    },
+    {
+      "id": 283,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 5 - Indicação nº 37 de 2026 em 35ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-10-06T19:58:00.898323-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 1055,
+      "ordem": 710,
+      "expediente": null
+    },
+    {
+      "id": 284,
+      "__str__": "Ordem: Ordem do Dia/Expediente: 6 - Requerimento nº 19 de 2026 em 35ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Unanimidade",
+      "link_detail_backend": "",
+      "metadata": {},
+      "numero_votos_sim": 8,
+      "numero_votos_nao": 0,
+      "numero_abstencoes": 0,
+      "observacao": "",
+      "data_hora": "2026-10-06T20:07:03.999634-03:00",
+      "tipo_resultado_votacao": 2,
+      "materia": 1058,
+      "ordem": 711,
+      "expediente": null
+    }
+  ]
+}

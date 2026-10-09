@@ -69,7 +69,8 @@
     "limiar_similaridade_veto": 0.85,
     "rotulo_veto_tipo_nao_informado": "nao informado"
   },
-  "sessao": [
+  "sessao": [],
+  "mes": [
     {
       "id": 752,
       "tipo_sigla": "PLEX",
@@ -270,7 +271,6 @@
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     }
   ],
-  "mes": [],
   "todo": [
     {
       "id": 138,

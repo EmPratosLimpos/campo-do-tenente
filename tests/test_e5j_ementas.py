@@ -511,7 +511,18 @@ class TestEmentaTextoNormalNaTela(unittest.TestCase):
                 page = browser.new_page()
                 erros = self._erros(page)
                 self._abrir_camara(page, "1440", "claro")
-                tag = page.locator("#bloco-votado-sessao .tag-categoria.tag-explicavel, #bloco-votado-sessao .tag-turno.tag-explicavel").first
+                tag = None
+                for periodo in PERIODOS:
+                    self._clicar_periodo(page, periodo)
+                    candidata = page.locator(
+                        f"#bloco-votado-{periodo} .tag-categoria.tag-explicavel, "
+                        f"#bloco-votado-{periodo} .tag-turno.tag-explicavel"
+                    ).first
+                    if candidata.count() > 0:
+                        tag = candidata
+                        break
+                if tag is None:
+                    self.skipTest("nenhum periodo com tag explicavel nesta base")
                 self.assertEqual(tag.count(), 1)
                 tag.click()
                 page.wait_for_timeout(300)

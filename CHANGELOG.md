@@ -24,6 +24,25 @@ Está prevista uma atualização semanal automática. Cada vez que ela trouxer s
 
 ---
 
+## 2026-10-08: 35a sessão ordinária
+
+**O que mudou nos dados**
+- Sessão ordinária 35 incluída: 06/10/2026 (registro 275 no SAPL), com 4 itens de ordem, 4 registros de votação e 36 votos nominais. Votadas as IND 35, 36 e 37/2026 e o REQ 19/2026. Presidente da sessão: Rafael Ventura, 9 vereadores presentes.
+- Revisão de lançamento atrasado da sessão 34 (29/09/2026): sem mudança nos votos.
+- 2026 passou a 35 sessões ordinárias; 2025 segue igual, com o mesmo hash.
+- Matérias novas 1047, 1052, 1054, 1055, 1056, 1058 e 1097 com tema: seis por consenso de três modelos (D-047), aprovadas pelo mantenedor, e a IND 37/2026 decidida pelo mantenedor porque os três modelos discordaram.
+- Autoria de requerimentos, indicações e moções recoletada do SAPL. A lista de autorias do SAPL vem paginada sem ordem fixa e alguns registros podem faltar a cada coleta; a correção da coleta está em andamento.
+- Hash SHA-256 novo de atuacao_vereadores_2026.json: c057c9e1a85ba545db27a0a72d97d0cd5c34db04d2bd3c54ca8c9fe07ae13dd8.
+- Pedidos ao SAPL nesta coleta: 62.
+
+**O que mudou na tela**
+- Última sessão na tela: 35a, 06/10/2026.
+
+**De onde veio**
+- SAPL da Câmara Municipal de Campo do Tenente, https://sapl.campodotenente.pr.leg.br. Coleta em 08/10/2026.
+
+---
+
 ## 2026-10-05: v1.2.0, pedidos dos vereadores e votações unificadas
 
 **O que mudou nos dados**

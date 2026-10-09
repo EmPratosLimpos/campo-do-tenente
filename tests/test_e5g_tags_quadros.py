@@ -76,6 +76,17 @@ class _Handler(SimpleHTTPRequestHandler):
         pass
 
 
+def registros_sim_vereador_2() -> int:
+    """Votos nominais Sim do vereador 2, lidos do proprio arquivo da tela."""
+    dados = json.loads(
+        (RAIZ / "dados" / "tratados" / "atuacao_vereadores_legislatura.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    vereador = next(v for v in dados["vereadores"] if v.get("id_sapl") == 2)
+    return sum(1 for n in vereador["votos"]["nominais"] if n.get("estado") == "sim")
+
+
 @contextmanager
 def _navegador(p):
     browser = p.chromium.launch()
@@ -238,7 +249,8 @@ class TestTagsCaixa(unittest.TestCase):
                     "true",
                 )
                 texto = page.inner_text("body")
-                self.assertIn("92 registros", texto)
+                esperado = f"{registros_sim_vereador_2()} registros"
+                self.assertIn(esperado, texto)
                 selos = page.locator(".lista-votos .pilula").all_inner_texts()
                 self.assertTrue(selos)
                 for selo in selos:
@@ -246,7 +258,7 @@ class TestTagsCaixa(unittest.TestCase):
                 page.fill("#filtro-texto", "habitacionais")
                 page.wait_for_timeout(800)
                 texto_busca = page.inner_text("body")
-                self.assertNotIn("92 registros", texto_busca)
+                self.assertNotIn(esperado, texto_busca)
                 page.click("button.voto-card[data-voto-card='sim']")
                 page.wait_for_timeout(600)
                 self.assertEqual(
@@ -311,7 +323,7 @@ class TestTagsCaixa(unittest.TestCase):
                 )
                 self.assertTrue(dentro)
                 texto = page.inner_text("body")
-                self.assertIn("92 registros", texto)
+                self.assertIn(f"{registros_sim_vereador_2()} registros", texto)
                 self.assertEqual(erros, [])
 
     def test_sem_rolagem_lateral_e_sem_erro_console(self):

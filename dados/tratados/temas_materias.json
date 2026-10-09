@@ -1,7 +1,7 @@
 {
   "descricao": "Tema principal de cada materia do recorte, lido da ementa oficial no SAPL.",
   "fonte": "dados/brutos/lote_20260926/materialegislativa_ano*_p*.json",
-  "total": 405,
+  "total": 412,
   "materias": [
     {
       "id": 278,
@@ -5672,6 +5672,104 @@
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
       "data": "2026-10-01"
+    },
+    {
+      "id": 1047,
+      "ano": 2026,
+      "sigla": "PDL",
+      "numero": 3,
+      "tema": "Homenagens, nomes e datas",
+      "confianca": "alta",
+      "justificativa": "Concede título honorífico (Mãe Tenentiana). Consenso 3 de 3.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1047",
+      "classificado_por": "consenso D-047: muse-spark-1.3, mimo-v2.6-flash, nemotron-3-ultra",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-08"
+    },
+    {
+      "id": 1052,
+      "ano": 2026,
+      "sigla": "IND",
+      "numero": 35,
+      "tema": "Iluminação, serviços urbanos e conectividade",
+      "confianca": "alta",
+      "justificativa": "Limpeza e manutenção de bueiros, serviço urbano. Consenso 3 de 3.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1052",
+      "classificado_por": "consenso D-047: muse-spark-1.3, mimo-v2.6-flash, nemotron-3-ultra",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-08"
+    },
+    {
+      "id": 1054,
+      "ano": 2026,
+      "sigla": "IND",
+      "numero": 36,
+      "tema": "Cultura, esporte e lazer",
+      "confianca": "alta",
+      "justificativa": "Manutenção de academia ao ar livre, equipamento de esporte e lazer. Consenso 3 de 3.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1054",
+      "classificado_por": "consenso D-047: muse-spark-1.3, mimo-v2.6-flash, nemotron-3-ultra",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-08"
+    },
+    {
+      "id": 1055,
+      "ano": 2026,
+      "sigla": "IND",
+      "numero": 37,
+      "tema": "Iluminação, serviços urbanos e conectividade",
+      "confianca": "media",
+      "justificativa": "Poda de árvores por circulação e segurança. Os tres modelos discordaram; tema decidido pelo mantenedor.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1055",
+      "classificado_por": "mantenedor (modelos sem consenso, D-047)",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-08"
+    },
+    {
+      "id": 1056,
+      "ano": 2026,
+      "sigla": "MOC",
+      "numero": 1,
+      "tema": "Homenagens, nomes e datas",
+      "confianca": "alta",
+      "justificativa": "Moção de aplausos, homenagem. Consenso 3 de 3.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1056",
+      "classificado_por": "consenso D-047: muse-spark-1.3, mimo-v2.6-flash, nemotron-3-ultra",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-08"
+    },
+    {
+      "id": 1058,
+      "ano": 2026,
+      "sigla": "REQ",
+      "numero": 19,
+      "tema": "Iluminação, serviços urbanos e conectividade",
+      "confianca": "media",
+      "justificativa": "Problemas na rede de esgoto (SANEPAR), serviço urbano. Consenso 2 de 3.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1058",
+      "classificado_por": "consenso D-047: muse-spark-1.3, mimo-v2.6-flash, nemotron-3-ultra",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-08"
+    },
+    {
+      "id": 1097,
+      "ano": 2026,
+      "sigla": "ATA",
+      "numero": 36,
+      "tema": "não se aplica",
+      "confianca": "alta",
+      "justificativa": "Ata de sessao registra a reuniao, nao trata de um tema proprio. Consenso 3 de 3.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1097",
+      "classificado_por": "consenso D-047: muse-spark-1.3, mimo-v2.6-flash, nemotron-3-ultra",
+      "revisada_por_humano": true,
+      "revisado_por": "mantenedor",
+      "data": "2026-10-08"
     }
   ]
 }
