@@ -1,7 +1,15 @@
 {
   "cidade": {
     "nome": "Campo do Tenente",
-    "uf": "PR"
+    "uf": "PR",
+    "codigo_ibge": "4104105",
+    "codigo_ibge_fonte": "https://servicodados.ibge.gov.br/api/v1/localidades/municipios/4104105",
+    "codigo_ibge_nota": "Confirmado pela API de localidades do IBGE a partir de nome e UF do config. Nao fixar codigo no codigo."
+  },
+  "votacao_popular": {
+    "nota": "V1 votacao popular: rodada e a ultima sessao ordinaria com dados publicados. Entram as materias votadas nela, menos as siglas excluidas e menos votacoes procedimentais (vistas, adiada, retirada). Ordem neutra pela pauta. Lista de siglas lida daqui, nunca fixa no codigo.",
+    "siglas_elegiveis": ["PLEG", "PLEX", "PLC", "PLCL", "PRE", "PDL", "PSUB", "PSUBE", "REQ", "MOC", "IND", "VET"],
+    "siglas_excluidas": ["ATA", "COMPR", "EMD"]
   },
   "sapl": {
     "endereco_base": "https://sapl.campodotenente.pr.leg.br",

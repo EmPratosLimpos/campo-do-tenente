@@ -1,0 +1,17 @@
+{
+  "area_km2_ibge": "304.488",
+  "codigo_ibge": "4104105",
+  "data_download": "2026-10-09",
+  "fonte_codigo": "https://servicodados.ibge.gov.br/api/v1/localidades/municipios/4104105",
+  "malha_arquivo": "4104105_malha_ibge.geojson",
+  "malha_versao_ou_ano_ibge": "nao informado pela API (payload e /metadados trazem so codarea, centroide, regiao limitrofe e area)",
+  "metodo_simplificacao": "Douglas-Peucker em Python puro (dados/territorio/simplificar_contorno.py), plano local equiretangular",
+  "pedidos_ibge_nesta_tarefa": 4,
+  "pontos_antes": 380,
+  "pontos_depois": 285,
+  "sha256_malha_original": "77b11cd4b33ae97b823d6de166d3ccb88a93531568997f64779c7b6aba066688",
+  "simplificado_arquivo": "4104105_contorno_simplificado.json",
+  "sistema_coordenadas": "WGS84 (EPSG:4326), graus decimais lon/lat, padrao GeoJSON RFC 7946; IBGE nao declara CRS no payload",
+  "tolerancia_simplificacao_m": 60.0,
+  "url_malha_pedida": "https://servicodados.ibge.gov.br/api/v3/malhas/municipios/4104105?formato=application/vnd.geo+json"
+}
