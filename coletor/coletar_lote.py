@@ -48,6 +48,25 @@ class OrcamentoEsgotado(Exception):
     pass
 
 
+MARCAS_BLOQUEANTES = (
+    "nao esta no config",
+    "fora da lista do config",
+    "Resposta sem host final",
+    "maior que o teto",
+    "Resposta veio de",
+)
+
+
+def motivo_bloqueante(motivo: str) -> bool:
+    """Host fora do config e resposta acima do teto bloqueiam a publicacao.
+
+    Esses dois motivos nunca viram pendente: indicam origem suspeita ou
+    resposta grande demais, e a semana nao pode seguir com aviso.
+    """
+    texto = str(motivo or "")
+    return any(marca in texto for marca in MARCAS_BLOQUEANTES)
+
+
 class PedidoPendente(Exception):
     """Um pedido que falhou depois das tentativas extras e ficou para repetir.
 
@@ -299,6 +318,8 @@ class ColetorLote:
             return self._pedir_ou_falhar(caminho, params, arquivo, refrescar)
         except SystemExit as exc:
             if not adiar:
+                raise
+            if motivo_bloqueante(str(exc)):
                 raise
             raise PedidoPendente(caminho, params, arquivo, str(exc)) from exc
 

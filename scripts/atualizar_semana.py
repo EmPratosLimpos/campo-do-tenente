@@ -572,29 +572,53 @@ def baixar_lote(coletor: ColetorLote, anos: list[int], simulado: bool, pendentes
         atualizar_paginas(coletor, item["caminho"], item["params"], item["prefixo"], simulado, pendentes)
 
 
-def coletar_sessoes_novas(coletor: ColetorLote, sessoes: list[dict], pendentes: list | None = None) -> None:
+def coletar_sessoes_novas(
+    coletor: ColetorLote,
+    sessoes: list[dict],
+    pendentes: list | None = None,
+    ids_novas: set[int] | list[int] | None = None,
+) -> None:
     """Coleta por sessao dos pacotes grandes, com mesa, registros e votos.
 
     Com fila de pendentes, a sessao que falhar por rede ou recusa do
     SAPL nao para as outras: entra na fila e e refeita por inteiro uma
     vez ao fim. A recusa por vazio suspeito continua parando, pois
     indica filtro mudado no SAPL.
+
+    A decisao de sessao nova e tomada uma vez aqui (id em ids_novas) e
+    reaproveitada na repeticao, em vez de olhar o disco de novo. Sem
+    ids_novas, cada sessao decide pelo disco, so para uso isolado.
     """
+    novas = {int(item) for item in ids_novas} if ids_novas is not None else None
     for sessao in sessoes:
         sid = int(sessao["id"])
         print(f"sessao {sid} numero {sessao.get('numero')} {sessao.get('data_inicio')}")
+        if novas is None:
+            e_nova = None
+        else:
+            e_nova = sid in novas
         try:
-            resumo = coletar_sessao_completa(coletor, sid)
+            if e_nova is None:
+                resumo = coletar_sessao_completa(coletor, sid)
+            else:
+                resumo = coletar_sessao_completa(coletor, sid, e_nova)
         except PedidoPendente as exc:
             if pendentes is None:
                 raise
+            if e_nova is None:
+                refazer = lambda sid=sid: coletar_sessao_completa(coletor, sid)
+            else:
+                refazer = lambda sid=sid, e_nova=e_nova: coletar_sessao_completa(
+                    coletor, sid, e_nova
+                )
             pendentes.append(
                 {
                     "descricao": f"sessao {sid} ({exc.motivo})",
                     "sessao_id": sid,
                     "pasta": coletor.pasta,
                     "arquivo": None,
-                    "refazer": lambda sid=sid: coletar_sessao_completa(coletor, sid),
+                    "e_nova": e_nova,
+                    "refazer": refazer,
                 }
             )
             continue
@@ -679,6 +703,17 @@ def coletar_autoria_estavel(coletor: ColetorLote, simulado: bool, pendentes: lis
             lambda: coletar_autoria_estavel(coletor, simulado, None),
         )
         return
+    except SystemExit as exc:
+        restaurar()
+        if coletar_lote.motivo_bloqueante(str(exc)):
+            raise
+        adiar(
+            f"autoria pagina 1 ({exc})",
+            f"{prefixo}_p1.json",
+            str(exc),
+            lambda: coletar_autoria_estavel(coletor, simulado, None),
+        )
+        return
     if not isinstance(primeiro, dict):
         restaurar()
         adiar(
@@ -695,27 +730,25 @@ def coletar_autoria_estavel(coletor: ColetorLote, simulado: bool, pendentes: lis
         try:
             return coletor.pedir(caminho, dict(params), arquivo, refrescar=True)
         except PedidoPendente as exc:
-            adiar(
-                f"autoria pagina {pagina} ({exc.motivo})",
-                arquivo,
-                exc.motivo,
-                lambda pagina=pagina, nome=arquivo: coletor.pedir(
-                    caminho,
-                    {**dict(PARAMS_AUTORIA_ESTAVEL), "page_size": PAGE_SIZE, "page": pagina},
-                    nome,
-                    refrescar=True,
-                ),
-            )
-            return None
+            restaurar()
+            raise PedidoPendente(
+                caminho, dict(PARAMS_AUTORIA_ESTAVEL), arquivo, exc.motivo
+            ) from exc
+        except SystemExit as exc:
+            restaurar()
+            raise
 
     try:
         continuar_apos_primeira(primeiro, prefixo, baixar)
-    except SystemExit as exc:
+    except (PedidoPendente, SystemExit) as exc:
         restaurar()
+        if isinstance(exc, SystemExit) and coletar_lote.motivo_bloqueante(str(exc)):
+            raise
+        motivo = exc.motivo if isinstance(exc, PedidoPendente) else str(exc)
         adiar(
-            f"autoria ({exc})",
+            f"autoria ({motivo})",
             f"{prefixo}_p1.json",
-            str(exc),
+            motivo,
             lambda: coletar_autoria_estavel(coletor, simulado, None),
         )
         return
@@ -731,6 +764,44 @@ def coletar_autoria_estavel(coletor: ColetorLote, simulado: bool, pendentes: lis
         )
         return
     print(f"  autoria confere: {detalhe}.")
+
+
+def retrato_autoria(pasta: Path, prefixo: str = "autoria") -> dict[str, bytes]:
+    """Copia dos arquivos da autoria antes da coleta, para restaurar depois."""
+    retrato: dict[str, bytes] = {}
+    numero = 1
+    while (pasta / f"{prefixo}_p{numero}.json").is_file():
+        nome = f"{prefixo}_p{numero}.json"
+        retrato[nome] = (pasta / nome).read_bytes()
+        numero += 1
+    return retrato
+
+
+def restaurar_autoria(pasta: Path, retrato: dict[str, bytes], prefixo: str = "autoria") -> None:
+    """Devolve a autoria ao estado anterior. Pagina nova alem do retrato e apagada."""
+    atual = 1
+    while (pasta / f"{prefixo}_p{atual}.json").is_file():
+        atual += 1
+    for pos in range(1, atual):
+        nome = f"{prefixo}_p{pos}.json"
+        if nome in retrato:
+            (pasta / nome).write_bytes(retrato[nome])
+        else:
+            (pasta / nome).unlink()
+
+
+def conferir_autoria_apos_repeticao(pasta: Path, retrato: dict[str, bytes]) -> str | None:
+    """Confere a autoria depois da repeticao. Se nao fechar, restaura e devolve o aviso.
+
+    Devolve None quando confere, ou o texto do aviso para o CHANGELOG quando
+    a lista ficou misturada. Nunca mistura pagina nova no meio das antigas:
+    ou a lista inteira e nova e confere, ou valem as antigas.
+    """
+    ok, detalhe = conferir_autoria(pasta)
+    if ok:
+        return None
+    restaurar_autoria(pasta, retrato)
+    return f"autoria nao fecha depois da repeticao ({detalhe}). Valem os arquivos antigos."
 
 
 def pasta_tramitacao_mais_recente(brutos: Path) -> Path | None:
@@ -1155,7 +1226,12 @@ def main(argv: list[str] | None = None) -> int:
             coletor_sessao = preparar_coletor(cfg, pasta_sessao, orcamento, False)
             coletores.append(coletor_sessao)
             try:
-                coletar_sessoes_novas(coletor_sessao, lista_alvo, pendentes)
+                coletar_sessoes_novas(
+                    coletor_sessao,
+                    lista_alvo,
+                    pendentes,
+                    {int(item["id"]) for item in lista_novas},
+                )
             except OrcamentoEsgotado as exc:
                 print(f"PAROU: {exc}")
                 print(
@@ -1166,6 +1242,7 @@ def main(argv: list[str] | None = None) -> int:
             conferir_coleta_por_sessao(pasta_sessao, sessoes)
 
         pasta_autoria = pasta_autoria_mais_recente(BRUTOS)
+        retrato_autoria_antes = retrato_autoria(pasta_autoria)
         coletor_autoria = preparar_coletor(cfg, pasta_autoria, orcamento, args.simulado)
         coletores.append(coletor_autoria)
         try:
@@ -1205,6 +1282,13 @@ def main(argv: list[str] | None = None) -> int:
         except OrcamentoEsgotado as exc:
             print(f"PAROU: {exc}")
             return 2
+        if not args.simulado:
+            aviso_autoria = conferir_autoria_apos_repeticao(
+                pasta_autoria, retrato_autoria_antes
+            )
+            if aviso_autoria is not None:
+                print(f"  {aviso_autoria}")
+                avisos_coleta.append(aviso_autoria)
         if pasta_sessao is not None and lista_alvo and not args.simulado:
             divergencias = conferir_coleta_por_sessao(pasta_sessao, sessoes)
             bloqueantes, avisos_conf = separar_divergencias_por_alvo(

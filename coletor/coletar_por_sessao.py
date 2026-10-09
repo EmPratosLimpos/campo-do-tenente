@@ -394,6 +394,12 @@ RECURSOS_PRESENCA_E_ORDEM = (
 )
 
 
+RECURSOS_PRESENCA = (
+    "sessaoplenariapresenca",
+    "presencaordemdia",
+)
+
+
 def total_entries_da_pagina(pasta: Path, prefixo: str) -> int | None:
     """total_entries da pagina 1 salva, ou None quando ausente ou ilegivel."""
     caminho = pasta / f"{prefixo}_p1.json"
@@ -411,7 +417,9 @@ def total_entries_da_pagina(pasta: Path, prefixo: str) -> int | None:
     return int(total)
 
 
-def coletar_sessao_completa(coletor: ColetorLote, sid: int) -> dict:
+def coletar_sessao_completa(
+    coletor: ColetorLote, sid: int, e_nova: bool | None = None
+) -> dict:
     """Coleta por sessao dos 7 pacotes grandes: presencas, ordem, justificativa, mesa, registros e votos.
 
     Recusa a sessao quando a ordem tem itens e vieram zero registros,
@@ -421,6 +429,11 @@ def coletar_sessao_completa(coletor: ColetorLote, sid: int) -> dict:
     nesse ponto indica filtro mudado no SAPL ou coleta quebrada, por
     isso nada e publicado. A recusa restaura os arquivos previos e
     grava um aviso sessao_<id>_recusada.json para o log e para a issue.
+
+    A decisao de sessao nova e tomada uma vez por execucao: quem chama
+    passa e_nova (True quando a sessao nao tinha nenhum dos 4 recursos
+    antes desta execucao comecar, em geral o id em lista_novas). Sem o
+    argumento, cai no calculo antigo pelo disco, so para uso isolado.
     """
     sid = int(sid)
     pasta = coletor.pasta
@@ -435,10 +448,11 @@ def coletar_sessao_completa(coletor: ColetorLote, sid: int) -> dict:
         caminho = pasta / f"sessao_{sid}_{recurso}_p1.json"
         if caminho.name not in previos:
             previos[caminho.name] = caminho.read_bytes() if caminho.is_file() else None
-    e_nova = all(
-        previos.get(f"sessao_{sid}_{recurso}_p1.json") is None
-        for _caminho, recurso in RECURSOS
-    )
+    if e_nova is None:
+        e_nova = all(
+            previos.get(f"sessao_{sid}_{recurso}_p1.json") is None
+            for _caminho, recurso in RECURSOS
+        )
     for caminho, recurso in RECURSOS:
         pedir_recurso(coletor, sid, caminho, recurso)
     pedir_mesa_por_sessao(coletor, sid)
