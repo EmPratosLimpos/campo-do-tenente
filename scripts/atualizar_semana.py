@@ -152,10 +152,10 @@ def repetir_pendentes(pendentes: list, ids_novas: list[int], simulado: bool = Fa
     nunca em paralelo. Resposta vazia ou invalida nunca e gravada, por
     isso o arquivo bom anterior segue intacto. Devolve os avisos de
     itens antigos que seguiram com o arquivo salvo. Se, depois da
-    repeticao, ainda faltar algo da sessao nova, da lista de descoberta
-    (sessoes ou materias do ano), do indice da API, ou qualquer item sem
-    arquivo anterior, levanta SystemExit com a lista do que faltou e
-    nada e publicado.
+    repeticao, ainda faltar algo da sessao do alvo (nova mais a ultima
+    em revisao), da lista de descoberta (sessoes ou materias do ano),
+    do indice da API, ou qualquer item sem arquivo anterior, levanta
+    SystemExit com a lista do que faltou e nada e publicado.
     """
     avisos: list[str] = []
     if not pendentes:
@@ -949,6 +949,33 @@ def bloqueio_de_rede(*_args, **_kwargs):
     raise SystemExit("Modo simulado: pedido de rede bloqueado.")
 
 
+def separar_divergencias_por_alvo(
+    divergencias: list[dict], ids_novas: list[int] | set[int], ids_alvo: list[int] | set[int]
+) -> tuple[list[dict], list[str]]:
+    """Divergencia na sessao nova bloqueia; na revisao vira aviso no CHANGELOG.
+
+    So o alvo da semana importa. Divergencia de sessao fora do alvo e
+    ignorada aqui, pois nao foi recoletada nesta execucao.
+    """
+    novas = {int(item) for item in ids_novas}
+    alvo = {int(item) for item in ids_alvo}
+    revisao = set(alvo) - set(novas)
+    bloqueantes: list[dict] = []
+    avisos: list[str] = []
+    for conf in divergencias or []:
+        try:
+            sid = int(conf.get("sessao_id"))
+        except (TypeError, ValueError):
+            continue
+        if sid in novas:
+            bloqueantes.append(conf)
+        elif sid in revisao:
+            recurso = conf.get("recurso")
+            motivo = conf.get("motivo")
+            avisos.append(f"conferencia da sessao {sid} ({recurso}): {motivo}")
+    return bloqueantes, avisos
+
+
 def conferir_coleta_por_sessao(pasta_sessao: Path, sessoes: list[dict]) -> list[dict]:
     """Confere pagina a pagina da coleta por sessao e grava a conferencia.
 
@@ -1024,6 +1051,7 @@ def main(argv: list[str] | None = None) -> int:
 
     original_urlopen = coletar_lote.urllib.request.urlopen
     lista_novas: list[dict] = []
+    lista_alvo: list[dict] = []
     try:
         if args.simulado:
             coletar_lote.urllib.request.urlopen = bloqueio_de_rede
@@ -1118,14 +1146,29 @@ def main(argv: list[str] | None = None) -> int:
         try:
             avisos_coleta = repetir_pendentes(
                 pendentes,
-                [int(item["id"]) for item in lista_novas],
+                [int(item["id"]) for item in lista_alvo],
                 args.simulado,
             )
         except OrcamentoEsgotado as exc:
             print(f"PAROU: {exc}")
             return 2
         if pasta_sessao is not None and lista_alvo and not args.simulado:
-            conferir_coleta_por_sessao(pasta_sessao, sessoes)
+            divergencias = conferir_coleta_por_sessao(pasta_sessao, sessoes)
+            bloqueantes, avisos_conf = separar_divergencias_por_alvo(
+                divergencias,
+                [int(item["id"]) for item in lista_novas],
+                [int(item["id"]) for item in lista_alvo],
+            )
+            if bloqueantes:
+                detalhes = "; ".join(
+                    f"sessao {item['sessao_id']} {item['recurso']}: {item['motivo']}"
+                    for item in bloqueantes
+                )
+                raise SystemExit(
+                    "Conferencia da coleta por sessao divergiu na sessao nova. "
+                    f"Nada foi publicado. {detalhes}"
+                )
+            avisos_coleta.extend(avisos_conf)
     finally:
         coletar_lote.urllib.request.urlopen = original_urlopen
 

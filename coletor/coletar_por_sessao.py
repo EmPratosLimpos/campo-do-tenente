@@ -163,7 +163,7 @@ def exigir_filtro(dados: dict, sid: int, recurso: str) -> None:
 def pedir_recurso(coletor: ColetorLote, sid: int, caminho: str, recurso: str) -> str:
     prefixo = f"sessao_{sid}_{recurso}"
     params = {"sessao_plenaria": sid, "page_size": PAGE_SIZE, "page": 1}
-    primeiro = coletor.pedir(caminho, params, f"{prefixo}_p1.json")
+    primeiro = coletor.pedir(caminho, params, f"{prefixo}_p1.json", refrescar=True)
     exigir_filtro(primeiro, sid, recurso)
 
     def baixar(pagina: int):
@@ -292,7 +292,7 @@ def pedir_registros_da_sessao(
     for oid in sorted({int(item) for item in ids_ordem}):
         params = {"ordem": int(oid), "page_size": PAGE_SIZE, "page": 1}
         prefixo_ordem = f"sessao_{sid}_registrovotacao_ordem_{int(oid)}"
-        primeiro = coletor.pedir(CAMINHO_REGISTRO, dict(params), f"{prefixo_ordem}_p1.json")
+        primeiro = coletor.pedir(CAMINHO_REGISTRO, dict(params), f"{prefixo_ordem}_p1.json", refrescar=True)
         if not isinstance(primeiro, dict):
             raise SystemExit(f"sessao {sid} registrovotacao ordem {oid}: sem objeto JSON.")
 
@@ -320,7 +320,7 @@ def pedir_votos_da_sessao(
     for vid in sorted({int(item) for item in ids_registro}):
         params = {"votacao": int(vid), "page_size": PAGE_SIZE, "page": 1}
         prefixo_voto = f"sessao_{sid}_votoparlamentar_votacao_{int(vid)}"
-        primeiro = coletor.pedir(CAMINHO_VOTO, dict(params), f"{prefixo_voto}_p1.json")
+        primeiro = coletor.pedir(CAMINHO_VOTO, dict(params), f"{prefixo_voto}_p1.json", refrescar=True)
         if not isinstance(primeiro, dict):
             raise SystemExit(f"sessao {sid} votoparlamentar votacao {vid}: sem objeto JSON.")
 
@@ -387,14 +387,40 @@ def recusar_sessao_vazia(
     )
 
 
+RECURSOS_PRESENCA_E_ORDEM = (
+    "sessaoplenariapresenca",
+    "presencaordemdia",
+    "ordemdia",
+)
+
+
+def total_entries_da_pagina(pasta: Path, prefixo: str) -> int | None:
+    """total_entries da pagina 1 salva, ou None quando ausente ou ilegivel."""
+    caminho = pasta / f"{prefixo}_p1.json"
+    if not caminho.is_file():
+        return None
+    try:
+        dados = ler_json(caminho)
+    except (OSError, ValueError, UnicodeDecodeError):
+        return None
+    if not isinstance(dados, dict):
+        return None
+    total = (dados.get("pagination") or {}).get("total_entries")
+    if isinstance(total, bool) or not isinstance(total, int):
+        return None
+    return int(total)
+
+
 def coletar_sessao_completa(coletor: ColetorLote, sid: int) -> dict:
     """Coleta por sessao dos 7 pacotes grandes: presencas, ordem, justificativa, mesa, registros e votos.
 
     Recusa a sessao quando a ordem tem itens e vieram zero registros,
-    ou quando ha registros e zero votos. Vazio nesse ponto indica
-    filtro mudado no SAPL ou coleta quebrada, por isso nada e publicado.
-    A recusa restaura os consolidados previos e grava um aviso
-    sessao_<id>_recusada.json para o log e para a issue.
+    ou quando ha registros e zero votos. Sessao nova com presenca ou
+    ordem do dia com total_entries 0 tambem e recusada, pois ausencia
+    ainda nao lancada nao pode virar falta sem justificativa. Vazio
+    nesse ponto indica filtro mudado no SAPL ou coleta quebrada, por
+    isso nada e publicado. A recusa restaura os arquivos previos e
+    grava um aviso sessao_<id>_recusada.json para o log e para a issue.
     """
     sid = int(sid)
     pasta = coletor.pasta
@@ -405,9 +431,32 @@ def coletar_sessao_completa(coletor: ColetorLote, sid: int) -> dict:
     for recurso in (RECURSO_REGISTRO, RECURSO_VOTO):
         caminho = pasta / f"sessao_{sid}_{recurso}_p1.json"
         previos[caminho.name] = caminho.read_bytes() if caminho.is_file() else None
+    for _caminho, recurso in list(RECURSOS) + [(CAMINHO_MESA, RECURSO_MESA)]:
+        caminho = pasta / f"sessao_{sid}_{recurso}_p1.json"
+        if caminho.name not in previos:
+            previos[caminho.name] = caminho.read_bytes() if caminho.is_file() else None
+    e_nova = all(
+        previos.get(f"sessao_{sid}_{recurso}_p1.json") is None
+        for _caminho, recurso in RECURSOS
+    )
     for caminho, recurso in RECURSOS:
         pedir_recurso(coletor, sid, caminho, recurso)
     pedir_mesa_por_sessao(coletor, sid)
+    if e_nova:
+        for recurso in RECURSOS_PRESENCA_E_ORDEM:
+            total = total_entries_da_pagina(pasta, f"sessao_{sid}_{recurso}")
+            if total == 0:
+                recusar_sessao_vazia(
+                    coletor.pasta,
+                    sid,
+                    (
+                        f"sessao nova com {recurso} zerado (total_entries 0). "
+                        "A presenca ou a ordem ainda nao foi lancada no SAPL. "
+                        "Ausencia nao vira falta."
+                    ),
+                    {"recurso": recurso, "total_entries": 0},
+                    restaurar=previos,
+                )
     ids_ordem = ler_ids_ordem_da_sessao(coletor.pasta, sid)
     registros = pedir_registros_da_sessao(coletor, sid, ids_ordem)
     if ids_ordem and not registros:
