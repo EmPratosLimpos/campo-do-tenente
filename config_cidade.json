@@ -9,7 +9,23 @@
   "votacao_popular": {
     "nota": "V1 votacao popular: rodada e a ultima sessao ordinaria com dados publicados. Entram as materias votadas nela, menos as siglas excluidas e menos votacoes procedimentais (vistas, adiada, retirada). Ordem neutra pela pauta. Lista de siglas lida daqui, nunca fixa no codigo.",
     "siglas_elegiveis": ["PLEG", "PLEX", "PLC", "PLCL", "PRE", "PDL", "PSUB", "PSUBE", "REQ", "MOC", "IND", "VET"],
-    "siglas_excluidas": ["ATA", "COMPR", "EMD"]
+    "siglas_excluidas": ["ATA", "COMPR", "EMD"],
+    "limites": {
+      "nota": "V2 votacao popular, numeros aprovados pelo mantenedor em 09/10/2026. Limites por endereco de internet. O Worker e a tela leem daqui ou de copia gerada, nada de numero fixo no codigo.",
+      "limite_geral_pedidos": 100,
+      "limite_geral_janela_s": 60,
+      "limite_geral_por_endereco": true,
+      "limite_votar_pedidos": 5,
+      "limite_votar_janela_s": 60,
+      "limite_votar_por_endereco": true,
+      "teto_votos_por_endereco_por_rodada": 30,
+      "validade_autorizacao_min": 10,
+      "precisao_gps_max_m": 100,
+      "margem_divisa_m": 100,
+      "minimo_respostas_por_materia": 10,
+      "retencao_identificadores_dias": 30
+    },
+    "dias_maximos_rodada": 60
   },
   "sapl": {
     "endereco_base": "https://sapl.campodotenente.pr.leg.br",
