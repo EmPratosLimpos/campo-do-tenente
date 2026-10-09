@@ -84,3 +84,6 @@ _wrangler/
 .dev.vars*
 !.dev.vars.example
 !.env.example
+
+# Artefatos de tentativa falhada do SAPL: nunca entram no commit semanal
+dados/**/falhas/

@@ -4,8 +4,8 @@
     "cidade": "Campo do Tenente",
     "uf": "PR",
     "ano": 2026,
-    "dado_coletado_em": "2026-10-08T19:40:06-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20260929_tramitacao/indice.json campo atualizado_em",
+    "dado_coletado_em": "2026-10-09T00:44:04-03:00",
+    "fonte_data_coleta": "dados/brutos/lote_20261009_autoria/indice.json campo atualizado_em",
     "n_sessoes_ordinarias": 35,
     "piso_sessoes_ordinarias": 33,
     "n_vereadores": 10,
@@ -35385,24 +35385,24 @@
         2026
       ],
       "nota_factual": {
-        "texto": "assumiu em 2026-03-17 durante a licenca de Jorge Quege; vaga permanente apos a cassacao em 2026-08-18",
+        "texto": "Assumiu em 17/03/2026 durante a licença de Jorge Quege; vaga permanente após a cassação em 18/08/2026.",
         "fontes": [
           {
-            "fonte": "Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
+            "fonte": "Notícia da Câmara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal",
             "link_fonte": "https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal",
             "fonte_oficial_encontrada": true,
             "materia_id": null,
             "trecho": "A Câmara Municipal informa que o suplente Rivanildo Braz Cavalheiro (PP) tomou posse no cargo de vereador pelo período de 120 dias. A convocação ocorre em razão do afastamento do vereador Jorge Luiz Quege (PP), que solicitou licença para tratamento de saúde."
           },
           {
-            "fonte": "Ata da sessao ordinaria de 17 de marco de 2026 registra a posse do suplente e nao registra a licenca",
+            "fonte": "Ata da sessão ordinária de 17/03/2026: registra a posse do suplente e não registra a licença",
             "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/274",
             "fonte_oficial_encontrada": true,
             "materia_id": 274,
             "trecho": "o presidente informou que seria realizada a posse do vereador suplente Rivanildo Braz Cavalheiro."
           },
           {
-            "fonte": "Projeto de Decreto Legislativo n 2 de 2026",
+            "fonte": "Projeto de Decreto Legislativo nº 2/2026",
             "link_fonte": "https://sapl.campodotenente.pr.leg.br/materia/792",
             "fonte_oficial_encontrada": true,
             "materia_id": 792,

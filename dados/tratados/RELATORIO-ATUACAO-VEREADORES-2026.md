@@ -1,8 +1,8 @@
 # Atuação dos vereadores nas sessões ordinárias de 2026
 
 Cidade: Campo do Tenente (PR)
-Dado coletado em: 2026-10-08T19:40:06-03:00
-Fonte da data: dados/brutos/lote_20260929_tramitacao/indice.json campo atualizado_em
+Dado coletado em: 2026-10-09T00:44:04-03:00
+Fonte da data: dados/brutos/lote_20261009_autoria/indice.json campo atualizado_em
 Script: `dados/tratados/gerar_atuacao_vereadores.py`
 Fonte dos fatos: arquivos em `dados/brutos/`, `dados/tratados/vereadores.json`, `dados/tratados/presidencia_sessoes.json` e `dados/tratados/autoria_materias.json`.
 
@@ -152,11 +152,11 @@ Presente em 30 das 30 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 5.
 
-assumiu em 2026-03-17 durante a licenca de Jorge Quege; vaga permanente apos a cassacao em 2026-08-18
+Assumiu em 17/03/2026 durante a licença de Jorge Quege; vaga permanente após a cassação em 18/08/2026.
 
-Fonte: Noticia da Camara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal. Link: https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal.
-Fonte: Ata da sessao ordinaria de 17 de marco de 2026 registra a posse do suplente e nao registra a licenca. Link: https://sapl.campodotenente.pr.leg.br/materia/274.
-Fonte: Projeto de Decreto Legislativo n 2 de 2026. Link: https://sapl.campodotenente.pr.leg.br/materia/792.
+Fonte: Notícia da Câmara: Rivanildo Braz Cavalheiro assume vaga de suplente na Câmara Municipal. Link: https://www.campodotenente.pr.leg.br/institucional/noticias/rivanildo-braz-cavalheiro-assume-vaga-de-suplente-na-camara-municipal.
+Fonte: Ata da sessão ordinária de 17/03/2026: registra a posse do suplente e não registra a licença. Link: https://sapl.campodotenente.pr.leg.br/materia/274.
+Fonte: Projeto de Decreto Legislativo nº 2/2026. Link: https://sapl.campodotenente.pr.leg.br/materia/792.
 
 ## Estados de voto de cada vereador
 

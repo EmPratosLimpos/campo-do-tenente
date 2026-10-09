@@ -5,6 +5,10 @@ on:
     # Quarta-feira as 10:00 no horario de Brasilia (UTC-3, sem horario de verao).
     # 10:00 em Brasilia equivale a 13:00 UTC. Fora da madrugada, quando o SAPL falhou.
     - cron: '0 13 * * 3'
+    # Repeticao de quarta as 16:00 em Brasilia (19:00 UTC), so se a semana nao saiu.
+    - cron: '0 19 * * 3'
+    # Repeticao de Quinta-feira as 10:00 em Brasilia (13:00 UTC), so se a semana nao saiu.
+    - cron: '0 13 * * 4'
   workflow_dispatch:
 
 permissions:
@@ -18,7 +22,10 @@ concurrency:
 jobs:
   atualizar:
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    # Conta pior: 400 pedidos com 2,5 s de pausa (1000 s), tentativas
+    # extras com esperas de 30 s e 60 s, espera de 5 min da repeticao,
+    # mais sanidade e testes. 240 min cobre sem estourar sem avisar.
+    timeout-minutes: 240
     steps:
       - name: Checkout da main
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -34,14 +41,32 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r coletor/requirements.txt
 
+      - name: Ver se a semana ja foi publicada
+        id: publicada
+        run: |
+          segunda=$(TZ=America/Sao_Paulo date -d 'last-monday' +%Y-%m-%d)
+          echo "Procurando publicacao desde segunda ${segunda}."
+          if git log --since="$segunda" --grep="Atualiza dados ate a sessao ordinaria" --oneline | grep -q .; then
+            echo "ja=true" >> "$GITHUB_OUTPUT"
+            echo "Semana ja publicada. Termino sem nada."
+          else
+            echo "ja=false" >> "$GITHUB_OUTPUT"
+            echo "Semana ainda nao publicada. Sigo com a coleta."
+          fi
+
       - name: Atualizar a semana
         id: atualizar
+        if: steps.publicada.outputs.ja != 'true'
+        env:
+          OPENCODE_ZEN_API_KEY: ${{ secrets.OPENCODE_ZEN_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -o pipefail
           python scripts/atualizar_semana.py 2>&1 | tee "$RUNNER_TEMP/atualizacao.log"
 
       - name: Ver se houve dado novo
         id: mudanca
+        if: steps.publicada.outputs.ja != 'true'
         run: |
           git status --porcelain > "$RUNNER_TEMP/mudanca.txt"
           cat "$RUNNER_TEMP/mudanca.txt"
@@ -53,7 +78,7 @@ jobs:
           fi
 
       - name: Conferir que so dados mudaram
-        if: steps.mudanca.outputs.houve == 'true'
+        if: steps.publicada.outputs.ja != 'true' && steps.mudanca.outputs.houve == 'true'
         run: |
           git diff --name-only > "$RUNNER_TEMP/alterados.txt"
           git ls-files --others --exclude-standard >> "$RUNNER_TEMP/alterados.txt"
@@ -68,7 +93,7 @@ jobs:
           fi
 
       - name: Sanidade final
-        if: steps.mudanca.outputs.houve == 'true'
+        if: steps.publicada.outputs.ja != 'true' && steps.mudanca.outputs.houve == 'true'
         run: |
           set -o pipefail
           python coletor/testes_sanidade.py 2>&1 | tee "$RUNNER_TEMP/sanidade.log"
@@ -76,7 +101,7 @@ jobs:
           python scripts/verificar_regras.py 2>&1 | tee "$RUNNER_TEMP/regras.log"
 
       - name: Commit na main so com dados
-        if: steps.mudanca.outputs.houve == 'true'
+        if: steps.publicada.outputs.ja != 'true' && steps.mudanca.outputs.houve == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -113,7 +138,7 @@ jobs:
           git push origin main
 
       - name: Levar para desenvolvimento sem force
-        if: steps.mudanca.outputs.houve == 'true'
+        if: steps.publicada.outputs.ja != 'true' && steps.mudanca.outputs.houve == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -131,7 +156,7 @@ jobs:
           git push origin desenvolvimento
 
       - name: Registrar falha com issue
-        if: failure()
+        if: failure() || cancelled()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -140,6 +165,7 @@ jobs:
             exit 0
           fi
           data_br=$(TZ=America/Sao_Paulo date +%d/%m/%Y)
+          titulo="Atualizacao de dados falhou em ${data_br}"
           motivo=""
           if [[ -f "$RUNNER_TEMP/motivo_falha.txt" ]]; then
             motivo=$(cat "$RUNNER_TEMP/motivo_falha.txt")
@@ -150,7 +176,13 @@ jobs:
             corpo="${corpo} Motivo: ${motivo}"
           fi
           corpo="${corpo} Trecho do erro: ${trecho}"
-          gh issue create \
-            --title "Atualizacao de dados falhou em ${data_br}" \
-            --body "$corpo"
+          existente=$(gh issue list --search "$titulo in:title" --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [[ -n "$existente" ]]; then
+            echo "Issue aberta com o mesmo titulo do dia: #${existente}. Comento nela."
+            gh issue comment "$existente" --body "$corpo"
+          else
+            gh issue create \
+              --title "$titulo" \
+              --body "$corpo"
+          fi
           echo "::error::A atualizacao semanal falhou. Nada foi publicado."
