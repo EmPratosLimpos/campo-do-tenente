@@ -39,7 +39,7 @@ if str(RAIZ / "coletor") not in sys.path:
     sys.path.insert(0, str(RAIZ / "coletor"))
 
 import coletar_lote  # noqa: E402
-from coletar_autoria import PLANO, total_entries  # noqa: E402
+from coletar_autoria import PARAMS_AUTORIA_ESTAVEL, PLANO, conferir_autoria  # noqa: E402
 from coletar_lote import (  # noqa: E402
     PAGE_SIZE,
     ColetorLote,
@@ -336,7 +336,9 @@ def pasta_autoria_mais_recente(brutos: Path) -> Path:
     candidatas = [
         caminho
         for caminho in brutos.glob("lote_*_autoria")
-        if caminho.is_dir() and (caminho / "indice.json").exists()
+        if caminho.is_dir()
+        and (caminho / "indice.json").exists()
+        and (caminho / "autor_p1.json").exists()
     ]
     if not candidatas:
         raise SystemExit("Nenhuma pasta de autoria em dados/brutos. Nada foi baixado.")
@@ -511,9 +513,12 @@ def atualizar_paginas(
 
 
 def estimar_sondas(pasta_lote: Path, anos: list[int]) -> tuple[int, int]:
-    """Pedidos se a primeira pagina nao mudar. As listas grandes nao entram.
+    """Pedidos numa semana sem sessao nova. As listas grandes nao entram.
 
-    O primeiro numero e a conferencia das listas pequenas ja salvas.
+    O primeiro numero e a conferencia das listas pequenas ja salvas
+    mais a lista inteira de autoria com o=id (hoje 13 paginas) e os 3
+    catalogos de autor. A autoria e sempre refeita por inteiro, pois
+    correcao antiga no SAPL so aparece na lista completa.
     O segundo e zero, mantido para compatibilidade: nao ha mais leitura
     ordering=id em lote, pois as listas grandes saem por sessao.
     """
@@ -522,7 +527,14 @@ def estimar_sondas(pasta_lote: Path, anos: list[int]) -> tuple[int, int]:
         return 0, 0
     indice = json.loads(indice_path.read_text(encoding="utf-8"))
     plano = plano_sem_listas_grandes(anos, indice)
-    conferencia = 1 + len(plano) + len(PLANO) + len(anos)
+    try:
+        pasta_autoria = pasta_autoria_mais_recente(BRUTOS)
+        paginas_autoria = len(list(pasta_autoria.glob("autoria_p*.json")))
+    except SystemExit:
+        paginas_autoria = 0
+    if paginas_autoria < 1:
+        paginas_autoria = 13
+    conferencia = 1 + len(plano) + 3 + paginas_autoria
     return conferencia, 0
 
 
@@ -590,100 +602,132 @@ def coletar_sessoes_novas(coletor: ColetorLote, sessoes: list[dict], pendentes: 
 
 
 def coletar_autoria(coletor: ColetorLote, anos: list[int], simulado: bool, pendentes: list | None = None) -> None:
+    """Autoria estavel: lista inteira com o=id, toda semana.
+
+    A lista sem ordenacao mistura as paginas entre um pedido e outro
+    (ids repetidos e faltando). Com o=id ela vem em ordem crescente e
+    repete igual. Por isso toda a lista e refeita aqui (hoje 13 paginas),
+    e nao so a primeira pagina: uma correcao antiga no SAPL so aparece
+    na lista inteira. Os catalogos pequenos (autor, tipoautor, cargomesa)
+    seguem no esquema de reconferir a pagina 1. O filtro por ano e
+    ignorado pelo SAPL e nao e mais pedido.
+
+    Depois de baixar, os ids unicos tem que somar total_entries. Se nao
+    fechar (duplicado ou faltando), os arquivos novos sao descartados,
+    valem os antigos e o item entra na fila de pendentes para repetir
+    uma vez ao fim, com aviso no CHANGELOG. Resposta vazia ou invalida
+    nunca substitui arquivo bom (o proprio coletor ja recusa).
+    """
     for caminho, prefixo in PLANO:
+        if prefixo == "autoria":
+            continue
         print(prefixo)
         atualizar_paginas(coletor, caminho, {}, prefixo, simulado, pendentes)
-    try:
-        primeiro = coletor.pedir(
-            "/api/materia/autoria/",
-            {"page_size": PAGE_SIZE, "page": 1},
-            "autoria_p1.json",
-            refrescar=False,
-        )
-    except PedidoPendente as exc:
+    print("autoria")
+    coletar_autoria_estavel(coletor, simulado, pendentes)
+
+
+def coletar_autoria_estavel(coletor: ColetorLote, simulado: bool, pendentes: list | None = None) -> None:
+    prefixo = "autoria"
+    caminho = "/api/materia/autoria/"
+    antigos: dict[str, bytes] = {}
+    numero = 1
+    while (coletor.pasta / f"{prefixo}_p{numero}.json").is_file():
+        antigos[f"{prefixo}_p{numero}.json"] = (coletor.pasta / f"{prefixo}_p{numero}.json").read_bytes()
+        numero += 1
+
+    def restaurar() -> None:
+        atual = 1
+        while (coletor.pasta / f"{prefixo}_p{atual}.json").is_file():
+            atual += 1
+        for pos in range(1, atual):
+            nome = f"{prefixo}_p{pos}.json"
+            if nome in antigos:
+                (coletor.pasta / nome).write_bytes(antigos[nome])
+            else:
+                (coletor.pasta / nome).unlink()
+
+    def adiar(descricao: str, arquivo: str, motivo: str, refazer) -> None:
         if pendentes is None:
-            raise
+            raise PedidoPendente(caminho, dict(PARAMS_AUTORIA_ESTAVEL), arquivo, motivo)
         pendentes.append(
             {
-                "descricao": f"autoria pagina 1 ({exc.motivo})",
+                "descricao": descricao,
                 "sessao_id": None,
                 "pasta": coletor.pasta,
-                "arquivo": "autoria_p1.json",
-                "refazer": lambda: coletar_autoria(coletor, anos, simulado, None),
+                "arquivo": arquivo,
+                "refazer": refazer,
             }
         )
+
+    if simulado:
         return
-    total_sem_filtro = total_entries(primeiro)
-    for ano in anos:
-        print(f"autoria_materia_ano{ano}")
-        prefixo = f"autoria_materia_ano{ano}"
-        params = {"materia__ano": ano, "page_size": PAGE_SIZE, "page": 1}
+    params = dict(PARAMS_AUTORIA_ESTAVEL)
+    params["page_size"] = PAGE_SIZE
+    params["page"] = 1
+    try:
+        primeiro = coletor.pedir(caminho, params, f"{prefixo}_p1.json", refrescar=True)
+    except PedidoPendente as exc:
+        restaurar()
+        adiar(
+            f"autoria pagina 1 ({exc.motivo})",
+            f"{prefixo}_p1.json",
+            exc.motivo,
+            lambda: coletar_autoria_estavel(coletor, simulado, None),
+        )
+        return
+    if not isinstance(primeiro, dict):
+        restaurar()
+        adiar(
+            "autoria pagina 1 (resposta sem objeto JSON)",
+            f"{prefixo}_p1.json",
+            "resposta sem objeto JSON",
+            lambda: coletar_autoria_estavel(coletor, simulado, None),
+        )
+        return
+
+    def baixar(pagina: int):
+        params["page"] = pagina
+        arquivo = f"{prefixo}_p{pagina}.json"
         try:
-            pagina = coletor.pedir(
-                "/api/materia/autoria/",
-                params,
-                f"{prefixo}_p1.json",
-                refrescar=not simulado,
-            )
+            return coletor.pedir(caminho, dict(params), arquivo, refrescar=True)
         except PedidoPendente as exc:
-            if pendentes is None:
-                raise
-            pendentes.append(
-                {
-                    "descricao": f"{prefixo} pagina 1 ({exc.motivo})",
-                    "sessao_id": None,
-                    "pasta": coletor.pasta,
-                    "arquivo": f"{prefixo}_p1.json",
-                    "refazer": (
-                        lambda ano=ano, prefixo=prefixo: coletor.pedir(
-                            "/api/materia/autoria/",
-                            {"materia__ano": ano, "page_size": PAGE_SIZE, "page": 1},
-                            f"{prefixo}_p1.json",
-                            refrescar=True,
-                        )
-                    ),
-                }
+            adiar(
+                f"autoria pagina {pagina} ({exc.motivo})",
+                arquivo,
+                exc.motivo,
+                lambda pagina=pagina, nome=arquivo: coletor.pedir(
+                    caminho,
+                    {**dict(PARAMS_AUTORIA_ESTAVEL), "page_size": PAGE_SIZE, "page": pagina},
+                    nome,
+                    refrescar=True,
+                ),
             )
-            continue
-        total = total_entries(pagina)
-        if total is None or (total_sem_filtro is not None and total >= total_sem_filtro):
-            print(f"  filtro materia__ano={ano} ignorado pelo SAPL, nao pagina")
-            continue
-        if not isinstance(pagina, dict):
-            raise SystemExit(f"{prefixo}: resposta sem objeto JSON")
-        pagina1_igual = simulado or bool(coletor.ultimo_igual)
+            return None
 
-        def baixar(numero: int):
-            params["page"] = numero
-            arquivo = f"{prefixo}_p{numero}.json"
-            existe = (coletor.pasta / arquivo).is_file()
-            refrescar = (not simulado) and existe and (not pagina1_igual)
-            try:
-                return coletor.pedir("/api/materia/autoria/", params, arquivo, refrescar=refrescar)
-            except PedidoPendente as exc:
-                if pendentes is None:
-                    raise
-                pendentes.append(
-                    {
-                        "descricao": f"{prefixo} pagina {numero} ({exc.motivo})",
-                        "sessao_id": None,
-                        "pasta": coletor.pasta,
-                        "arquivo": arquivo,
-                        "refazer": (
-                            lambda ano=ano, prefixo=prefixo, pagina=numero, nome=arquivo: (
-                                coletor.pedir(
-                                    "/api/materia/autoria/",
-                                    {"materia__ano": ano, "page_size": PAGE_SIZE, "page": pagina},
-                                    nome,
-                                    refrescar=True,
-                                )
-                            )
-                        ),
-                    }
-                )
-                return None
-
-        continuar_apos_primeira(pagina, prefixo, baixar)
+    try:
+        continuar_apos_primeira(primeiro, prefixo, baixar)
+    except SystemExit as exc:
+        restaurar()
+        adiar(
+            f"autoria ({exc})",
+            f"{prefixo}_p1.json",
+            str(exc),
+            lambda: coletar_autoria_estavel(coletor, simulado, None),
+        )
+        return
+    ok, detalhe = conferir_autoria(coletor.pasta, prefixo)
+    if not ok:
+        print(f"  autoria com o=id nao fecha ({detalhe}). Valem os arquivos antigos.")
+        restaurar()
+        adiar(
+            f"autoria nao fecha ({detalhe})",
+            f"{prefixo}_p1.json",
+            detalhe,
+            lambda: coletar_autoria_estavel(coletor, simulado, None),
+        )
+        return
+    print(f"  autoria confere: {detalhe}.")
 
 
 def pasta_tramitacao_mais_recente(brutos: Path) -> Path | None:
