@@ -28,11 +28,12 @@ Está prevista uma atualização semanal automática. Cada vez que ela trouxer s
 
 **O que mudou nos dados**
 - Autoria das matérias recoletada do SAPL com a lista em ordem fixa: 1.281 registros, sem repetição nem falta. Corrige a marca de primeiro autor em 10 matérias (entre elas IND 6, IND 56, IND 59 e REQ 36 de 2025); o número de matérias de cada vereador não muda.
-- Nota sobre a posse do vereador Rivanildo Cavalheiro com texto revisto e três fontes oficiais.
-- 2025 segue igual, com o mesmo hash.
+- Nota sobre a posse do vereador Rivanildo Cavalheiro com texto revisto e três fontes oficiais, guardadas nos dados.
+- Esgoto, saneamento, água e drenagem passam para o tema "Desenvolvimento e moradia", por revisão do mantenedor: 12 matérias (IND 12, IND 22, REQ 8, REQ 34, REQ 36, PLEG 7 e VET 3 de 2025; IND 12, IND 35, REQ 9, REQ 17 e REQ 19 de 2026). A descrição do tema passa a citar saneamento.
+- Em 2025 mudam só os temas dessas matérias e as contagens por tema; votos, presenças e números de pedidos seguem iguais. Hash novo de atuacao_vereadores_2025.json: adf8f8978a3029fda22f47d97d4f2478978191bbb61819063e5f183751b41aef.
 
 **O que mudou na tela**
-- Perfil do vereador Rivanildo Cavalheiro: a nota sobre a posse aparece em texto, com os links das fontes, no lugar de "[object Object]". O período do perfil mostra só os anos em que ele teve mandato.
+- Perfil do vereador Rivanildo Cavalheiro: a nota sobre a posse aparece em texto, no lugar de "[object Object]". O período do perfil mostra só os anos em que ele teve mandato.
 
 **O que mudou na atualização semanal**
 - Uma falha isolada do SAPL não derruba mais a semana: o pedido é repetido uma vez depois de 5 minutos. Se faltar algo da sessão nova, nada é publicado e abre uma issue.
