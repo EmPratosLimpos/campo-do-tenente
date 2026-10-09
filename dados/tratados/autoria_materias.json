@@ -7,29 +7,29 @@
     ],
     "fonte_ligacao": "campo autores de materialegislativa",
     "arquivos_autor": [
-      "dados/brutos/lote_20260927_autoria/autor_p1.json"
+      "dados/brutos/lote_20261009_autoria/autor_p1.json"
     ],
     "arquivos_tipoautor": [
-      "dados/brutos/lote_20260927_autoria/tipoautor_p1.json"
+      "dados/brutos/lote_20261009_autoria/tipoautor_p1.json"
     ],
     "arquivos_autoria": [
-      "dados/brutos/lote_20260927_autoria/autoria_p1.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p2.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p3.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p4.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p5.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p6.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p7.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p8.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p9.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p10.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p11.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p12.json",
-      "dados/brutos/lote_20260927_autoria/autoria_p13.json"
+      "dados/brutos/lote_20261009_autoria/autoria_p1.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p2.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p3.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p4.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p5.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p6.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p7.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p8.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p9.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p10.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p11.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p12.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p13.json"
     ],
     "autoria_total_entries_api": 1281,
     "autoria_total_linhas_lidas": 1281,
-    "autoria_ids_distintos": 1231,
+    "autoria_ids_distintos": 1281,
     "nota_autoria": "A lista materia/autoria repetiu ids entre paginas e o filtro por ano foi ignorado pelo SAPL. Ela so informa o primeiro autor. A ligacao materia e autor vem do campo autores da propria materia.",
     "por_ano": {
       "2025": {
@@ -2266,8 +2266,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 8,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 3,
@@ -4438,8 +4438,8 @@
         {
           "ordem_no_sapl": 3,
           "autor_id": 14,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 4,
@@ -5668,8 +5668,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -6441,8 +6441,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -6464,8 +6464,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -6510,8 +6510,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -6533,8 +6533,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 10,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 6,
@@ -8784,8 +8784,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 9,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 9,
@@ -8830,8 +8830,8 @@
         {
           "ordem_no_sapl": 1,
           "autor_id": 9,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 9,
@@ -10656,8 +10656,8 @@
         {
           "ordem_no_sapl": 6,
           "autor_id": 12,
-          "primeiro_autor": null,
-          "primeiro_autor_rotulo": "primeiro autor nao informado: a lista de autoria do SAPL nao trouxe este par",
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
           "tipo_autor_id": 2,
           "tipo_autor": "Parlamentar",
           "parlamentar_id_sapl": 7,

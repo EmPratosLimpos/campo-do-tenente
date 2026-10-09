@@ -4048,7 +4048,7 @@
           "parlamentar_id_sapl": 9,
           "nome_parlamentar": "Gilmar Barbosa",
           "nome_no_sapl": "Gilmar Barbosa",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -4245,7 +4245,7 @@
           "parlamentar_id_sapl": 9,
           "nome_parlamentar": "Gilmar Barbosa",
           "nome_no_sapl": "Gilmar Barbosa",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",

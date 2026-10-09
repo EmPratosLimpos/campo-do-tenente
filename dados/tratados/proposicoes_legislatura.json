@@ -5831,7 +5831,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -6059,7 +6059,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -6135,7 +6135,7 @@
           "parlamentar_id_sapl": 3,
           "nome_parlamentar": "Cleiton Costa",
           "nome_no_sapl": "Cleiton Costa",
-          "primeiro_autor": null
+          "primeiro_autor": true
         },
         {
           "parlamentar_id_sapl": 2,
@@ -10124,7 +10124,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -11306,7 +11306,7 @@
           "parlamentar_id_sapl": 9,
           "nome_parlamentar": "Gilmar Barbosa",
           "nome_no_sapl": "Gilmar Barbosa",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -11503,7 +11503,7 @@
           "parlamentar_id_sapl": 9,
           "nome_parlamentar": "Gilmar Barbosa",
           "nome_no_sapl": "Gilmar Barbosa",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",

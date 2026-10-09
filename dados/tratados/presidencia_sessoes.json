@@ -1,7 +1,7 @@
 {
   "meta": {
     "gerado_por": "dados/tratados/gerar_presidencia_sessoes.py",
-    "arquivo_cargos_mesa": "dados/brutos/lote_20260927_autoria/cargomesa_p1.json",
+    "arquivo_cargos_mesa": "dados/brutos/lote_20261009_autoria/cargomesa_p1.json",
     "ids_cargo_presidente": [
       1
     ],
