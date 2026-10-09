@@ -97,11 +97,7 @@ class TestNotaFactualTela(unittest.TestCase):
     def _abrir_vereadores(self, page):
         page.goto(self.base, wait_until="domcontentloaded", timeout=120000)
         page.wait_for_selector("#bloco-votado-sessao .cab-cartao", timeout=60000)
-        lateral = page.locator("button[data-secao-lateral='vereadores']")
-        if lateral.count():
-            lateral.click(timeout=15000)
-        else:
-            page.locator("#nav-principal button[data-secao='vereadores']").click(timeout=15000)
+        page.locator("#nav-principal button[data-secao='vereadores']").click(timeout=15000)
         page.wait_for_selector("#sel-vereador", state="visible", timeout=60000)
 
     def test_nenhum_vereador_mostra_object_object(self):
