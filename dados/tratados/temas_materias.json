@@ -876,14 +876,14 @@
       "ano": 2025,
       "sigla": "IND",
       "numero": 12,
-      "tema": "Iluminação, serviços urbanos e conectividade",
-      "confianca": "media",
-      "justificativa": "Rede de abastecimento de água, serviço urbano.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Rede de abastecimento de água: saneamento em Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/69",
       "classificado_por": "claude-opus-5-5",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-09-27"
+      "data": "2026-10-09"
     },
     {
       "id": 70,
@@ -1016,14 +1016,14 @@
       "ano": 2025,
       "sigla": "IND",
       "numero": 22,
-      "tema": "Iluminação, serviços urbanos e conectividade",
-      "confianca": "media",
-      "justificativa": "Esgoto sanitário para famílias de baixa renda.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Esgoto sanitário para famílias de baixa renda: saneamento em Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/79",
       "classificado_por": "claude-opus-5-5",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-09-27"
+      "data": "2026-10-09"
     },
     {
       "id": 80,
@@ -2388,14 +2388,14 @@
       "ano": 2025,
       "sigla": "PLEG",
       "numero": 7,
-      "tema": "Agricultura e pecuária",
-      "confianca": "media",
-      "justificativa": "Divulgação de informações no site da Prefeitura.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Divulgação de serviços de saneamento básico no site da Prefeitura: Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/193",
       "classificado_por": "claude-opus-5-5",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-09-27"
+      "data": "2026-10-09"
     },
     {
       "id": 27,
@@ -3284,14 +3284,14 @@
       "ano": 2025,
       "sigla": "REQ",
       "numero": 8,
-      "tema": "Iluminação, serviços urbanos e conectividade",
-      "confianca": "media",
-      "justificativa": "Obras da companhia de saneamento.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Obras da companhia de saneamento: saneamento em Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/112",
       "classificado_por": "claude-opus-5-5",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-09-27"
+      "data": "2026-10-09"
     },
     {
       "id": 102,
@@ -3634,14 +3634,14 @@
       "ano": 2025,
       "sigla": "REQ",
       "numero": 34,
-      "tema": "Iluminação, serviços urbanos e conectividade",
-      "confianca": "media",
-      "justificativa": "Limpeza de fossas sépticas.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Limpeza de fossas sépticas: saneamento em Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/220",
       "classificado_por": "claude-opus-5-5",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-09-27"
+      "data": "2026-10-09"
     },
     {
       "id": 221,
@@ -3662,14 +3662,14 @@
       "ano": 2025,
       "sigla": "REQ",
       "numero": 36,
-      "tema": "Iluminação, serviços urbanos e conectividade",
-      "confianca": "media",
-      "justificativa": "Ligação à rede de esgoto.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Ligação à rede de esgoto: saneamento em Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/234",
       "classificado_por": "claude-opus-5-5",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-09-27"
+      "data": "2026-10-09"
     },
     {
       "id": 169,
@@ -3704,14 +3704,14 @@
       "ano": 2025,
       "sigla": "VET",
       "numero": 3,
-      "tema": "Agricultura e pecuária",
-      "confianca": "media",
-      "justificativa": "Veto à divulgação de informações no site da Prefeitura.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Veto parcial ao PL 7/2025 sobre divulgação de saneamento: Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/213",
       "classificado_por": "claude-opus-5-5",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-09-27"
+      "data": "2026-10-09"
     },
     {
       "id": 277,
@@ -4404,14 +4404,14 @@
       "ano": 2026,
       "sigla": "IND",
       "numero": 12,
-      "tema": "Iluminação, serviços urbanos e conectividade",
-      "confianca": "media",
-      "justificativa": "Manilhamento de córrego, drenagem.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Manilhamento de córrego e drenagem: infraestrutura urbana em Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/350",
       "classificado_por": "claude-opus-5-5",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-09-27"
+      "data": "2026-10-09"
     },
     {
       "id": 352,
@@ -5510,14 +5510,14 @@
       "ano": 2026,
       "sigla": "REQ",
       "numero": 9,
-      "tema": "Iluminação, serviços urbanos e conectividade",
-      "confianca": "media",
-      "justificativa": "Falta de abastecimento de água.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Falta de abastecimento de água: saneamento em Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/605",
       "classificado_por": "claude-opus-5-5",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-09-27"
+      "data": "2026-10-09"
     },
     {
       "id": 696,
@@ -5608,14 +5608,14 @@
       "ano": 2026,
       "sigla": "REQ",
       "numero": 17,
-      "tema": "Meio ambiente e proteção animal",
-      "confianca": "media",
-      "justificativa": "Mau cheiro de estação de esgoto, poluição.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Estação de esgoto e mau cheiro: saneamento em Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/889",
       "classificado_por": "claude-opus-5-5",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-09-27"
+      "data": "2026-10-09"
     },
     {
       "id": 966,
@@ -5692,14 +5692,14 @@
       "ano": 2026,
       "sigla": "IND",
       "numero": 35,
-      "tema": "Iluminação, serviços urbanos e conectividade",
+      "tema": "Desenvolvimento e moradia",
       "confianca": "alta",
-      "justificativa": "Limpeza e manutenção de bueiros, serviço urbano. Consenso 3 de 3.",
+      "justificativa": "Limpeza e manutenção de bueiros: drenagem em Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/1052",
       "classificado_por": "consenso D-047: muse-spark-1.3, mimo-v2.6-flash, nemotron-3-ultra",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-10-08"
+      "data": "2026-10-09"
     },
     {
       "id": 1054,
@@ -5748,14 +5748,14 @@
       "ano": 2026,
       "sigla": "REQ",
       "numero": 19,
-      "tema": "Iluminação, serviços urbanos e conectividade",
-      "confianca": "media",
-      "justificativa": "Problemas na rede de esgoto (SANEPAR), serviço urbano. Consenso 2 de 3.",
+      "tema": "Desenvolvimento e moradia",
+      "confianca": "alta",
+      "justificativa": "Rede de esgoto da Sanepar: saneamento em Desenvolvimento e moradia.",
       "link": "https://sapl.campodotenente.pr.leg.br/materia/1058",
       "classificado_por": "consenso D-047: muse-spark-1.3, mimo-v2.6-flash, nemotron-3-ultra",
       "revisada_por_humano": true,
       "revisado_por": "mantenedor",
-      "data": "2026-10-08"
+      "data": "2026-10-09"
     },
     {
       "id": 1097,
