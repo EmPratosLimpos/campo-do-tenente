@@ -133,7 +133,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": true
+          "primeiro_autor": null
         }
       ],
       "situacao_final": "Aprovado",
@@ -527,7 +527,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": true
+          "primeiro_autor": null
         }
       ],
       "situacao_final": "Aprovado",
@@ -938,7 +938,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         },
         {
           "parlamentar_id_sapl": 7,
@@ -1006,7 +1006,7 @@
           "parlamentar_id_sapl": 2,
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "nome_no_sapl": "Dr. Marcos Rodrigues",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
@@ -1043,7 +1043,7 @@
           "parlamentar_id_sapl": 7,
           "nome_parlamentar": "Josemar Veiga",
           "nome_no_sapl": "Josemar Veiga",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
@@ -1148,7 +1148,7 @@
           "parlamentar_id_sapl": 7,
           "nome_parlamentar": "Josemar Veiga",
           "nome_no_sapl": "Josemar Veiga",
-          "primeiro_autor": null
+          "primeiro_autor": true
         },
         {
           "parlamentar_id_sapl": 4,
@@ -1401,7 +1401,7 @@
           "parlamentar_id_sapl": 2,
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "nome_no_sapl": "Dr. Marcos Rodrigues",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
@@ -1611,7 +1611,7 @@
           "parlamentar_id_sapl": 2,
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "nome_no_sapl": "Dr. Marcos Rodrigues",
-          "primeiro_autor": null
+          "primeiro_autor": true
         },
         {
           "parlamentar_id_sapl": 9,
@@ -1988,7 +1988,7 @@
           "parlamentar_id_sapl": 2,
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "nome_no_sapl": "Dr. Marcos Rodrigues",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
@@ -2265,7 +2265,7 @@
           "parlamentar_id_sapl": 2,
           "nome_parlamentar": "Dr. Marcos Rodrigues",
           "nome_no_sapl": "Dr. Marcos Rodrigues",
-          "primeiro_autor": null
+          "primeiro_autor": true
         }
       ],
       "situacao_final": "Aprovado",
@@ -3290,7 +3290,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": true
+          "primeiro_autor": null
         }
       ],
       "situacao_final": "Aprovado",
@@ -3518,7 +3518,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": true
+          "primeiro_autor": null
         }
       ],
       "situacao_final": "Aprovado",
@@ -3594,7 +3594,7 @@
           "parlamentar_id_sapl": 3,
           "nome_parlamentar": "Cleiton Costa",
           "nome_no_sapl": "Cleiton Costa",
-          "primeiro_autor": true
+          "primeiro_autor": null
         },
         {
           "parlamentar_id_sapl": 2,
@@ -6224,7 +6224,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         },
         {
           "parlamentar_id_sapl": 5,
@@ -7072,7 +7072,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         },
         {
           "parlamentar_id_sapl": 4,
@@ -7185,7 +7185,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": null
+          "primeiro_autor": true
         },
         {
           "parlamentar_id_sapl": 4,
@@ -7583,7 +7583,7 @@
           "parlamentar_id_sapl": 6,
           "nome_parlamentar": "Gustavo Vizentin",
           "nome_no_sapl": "Gustavo Vizentin",
-          "primeiro_autor": true
+          "primeiro_autor": null
         }
       ],
       "situacao_final": "Aprovado",

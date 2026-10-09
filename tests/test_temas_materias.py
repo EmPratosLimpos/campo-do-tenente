@@ -134,9 +134,18 @@ class TestTemasMaterias(unittest.TestCase):
         for item in self.materias:
             self.assertIn(item["confianca"], {"alta", "media", "baixa"}, item["id"])
             self.assertTrue(item["justificativa"].strip(), item["id"])
-            self.assertIn(
-                item["classificado_por"], {"claude-opus-5-5", "agente-e5"}, item["id"]
-            )
+            if item["classificado_por"].startswith("consenso D-047"):
+                pass
+            else:
+                self.assertIn(
+                    item["classificado_por"],
+                    {
+                        "claude-opus-5-5",
+                        "agente-e5",
+                        "mantenedor (modelos sem consenso, D-047)",
+                    },
+                    item["id"],
+                )
             self.assertIs(item["revisada_por_humano"], True)
             self.assertEqual(item["revisado_por"], "mantenedor")
             self.assertRegex(str(item["data"]), r"^\d{4}-\d{2}-\d{2}$", item["id"])

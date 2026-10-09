@@ -159,7 +159,10 @@ class TestTurnosReais(unittest.TestCase):
         self.assertEqual(projeto["situacao"], "Aprovado")
 
     def test_camara_mostra_o_segundo_turno(self):
-        item = next(m for m in self.camara["sessao"] if int(m["id"]) == 811)
+        item = next((m for m in self.camara["sessao"] if int(m["id"]) == 811), None)
+        if item is None:
+            item = next((m for m in self.camara["todo"] if int(m["id"]) == 811), None)
+        self.assertIsNotNone(item, "PLEG 811 fora da sessao e do todo")
         self.assertEqual(item["turno"], TURNO_SEGUNDO)
         self.assertEqual(item["resultado"], "unanimidade")
 

@@ -42,7 +42,8 @@
     "rotulo_votacao_tipo_nao_informado": "nao informado no SAPL",
     "observacao_executivo": "D-058: votacao_tipo vem do campo tipo_votacao do item da Ordem do Dia ligado ao registro de votacao, com o mesmo id que o SAPL usa. O codigo vira rotulo pela tabela oficial tipovotacao quando ela esta nos brutos. Sem tabela, o rotulo so sai quando todos os votos validos daquele codigo concordam sobre o voto individual: com voto individual e nominal, sem voto individual e simbolica. Codigo sem confirmacao, materia sem voto valido e item da Ordem do Dia ausente ficam como nao informado no SAPL. Nos vetos, veto_tipo vem do começo da ementa oficial e veto_situacao vem do resultado do voto valido do proprio veto. materia_vetada_id tem prioridade na revisao do mantenedor em vetos_revisados.json (fonte revisao_mantenedor). Sem revisao, a regra automatica exige os dois criterios juntos: numero e ano citados na ementa, sem zero a esquerda, levando a materia de projeto de lei, e texto da sumula com a ementa dela parecidas, com similaridade de token de 0,85 para cima (fonte automatica, com o valor medido em materia_vetada_similaridade). Um criterio so, ou mais de um candidato, deixa o vinculo nulo com fonte pendente_revisao."
   },
-  "sessao": [
+  "sessao": [],
+  "mes": [
     {
       "id": 752,
       "tipo_sigla": "PLEX",
@@ -243,7 +244,6 @@
       "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
     }
   ],
-  "mes": [],
   "todo": [
     {
       "id": 254,
