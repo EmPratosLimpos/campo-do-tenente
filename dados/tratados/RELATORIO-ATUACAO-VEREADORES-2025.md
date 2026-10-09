@@ -1,8 +1,8 @@
 # Atuação dos vereadores nas sessões ordinárias de 2025
 
 Cidade: Campo do Tenente (PR)
-Dado coletado em: 2026-09-29T22:57:44-03:00
-Fonte da data: dados/brutos/lote_20260927_autoria/indice.json campo atualizado_em
+Dado coletado em: 2026-10-08T19:40:06-03:00
+Fonte da data: dados/brutos/lote_20260929_tramitacao/indice.json campo atualizado_em
 Script: `dados/tratados/gerar_atuacao_vereadores.py`
 Fonte dos fatos: arquivos em `dados/brutos/`, `dados/tratados/vereadores.json`, `dados/tratados/presidencia_sessoes.json` e `dados/tratados/autoria_materias.json`.
 

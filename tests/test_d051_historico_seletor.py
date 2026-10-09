@@ -62,10 +62,25 @@ class TestTotalIgualSoma(unittest.TestCase):
                     for n in vo["nominais"]:
                         self.assertIn(n.get("turno"), TURNOS_VALIDOS, n.get("votacao_id"))
 
-    def test_marcos_rodrigues_legislatura_98(self):
+    def test_marcos_rodrigues_legislatura_soma_dos_anos(self):
         leg = carregar("atuacao_vereadores_legislatura.json")
         v = next(x for x in leg["vereadores"] if x.get("slug_codigo") == "dr-marcos-rodrigues")
-        self.assertEqual(v["votos"]["total_registros"], 98)
+        esperado_total = 0
+        ids_anos = set()
+        for ano in leg["meta"]["anos_recorte"]:
+            dados = carregar(f"atuacao_vereadores_{int(ano)}.json")
+            va = next(
+                (x for x in dados["vereadores"] if x["id_sapl"] == v["id_sapl"]),
+                None,
+            )
+            if va is None:
+                continue
+            esperado_total += va["votos"]["total_registros"]
+            ids_anos.update(n.get("votacao_id") for n in va["votos"]["nominais"])
+        self.assertEqual(v["votos"]["total_registros"], esperado_total)
+        self.assertEqual(
+            {n.get("votacao_id") for n in v["votos"]["nominais"]}, ids_anos
+        )
 
 
 class TestSeletorEstatico(unittest.TestCase):

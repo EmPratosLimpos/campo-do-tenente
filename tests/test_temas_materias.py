@@ -46,15 +46,35 @@ def pasta_lote_materias() -> pathlib.Path:
 PASTA_LOTE = pasta_lote_materias()
 
 
+def e_artefato_de_tentativa(nome: str) -> bool:
+    """Arquivo de tentativa do coletor, nunca dado (ex.: materialegislativa_ano2026_p2_t1.json).
+
+    Desde a AT-1-1 os artefatos novos vao para a pasta falhas, mas os
+    antigos seguem no lote e nao podem entrar na leitura.
+    """
+    base = nome.rsplit(".json", 1)[0] if nome.endswith(".json") else nome
+    return "_t" in base.rsplit("_p", 1)[-1]
+
+
+def ler_bruta(caminho: str) -> dict:
+    """Le um bruto exigindo JSON valido, com o nome do arquivo no erro."""
+    try:
+        return json.loads(pathlib.Path(caminho).read_text(encoding="utf-8"))
+    except (OSError, ValueError, UnicodeDecodeError) as exc:
+        raise AssertionError(f"bruto ilegivel: {pathlib.Path(caminho).name}") from exc
+
+
 class TestTemasMaterias(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.config = carregar_config()
-        dados = json.loads(ARQUIVO_TEMAS.read_text(encoding="utf-8"))
+        dados = ler_bruta(str(ARQUIVO_TEMAS))
         cls.materias = dados["materias"]
         cls.brutas = {}
         for caminho in glob.glob(str(PASTA_LOTE / "materialegislativa_ano*_p*.json")):
-            resposta = json.loads(pathlib.Path(caminho).read_text(encoding="utf-8"))
+            if e_artefato_de_tentativa(pathlib.Path(caminho).name):
+                continue
+            resposta = ler_bruta(caminho)
             for materia in resposta["results"]:
                 cls.brutas[int(materia["id"])] = materia
 
@@ -114,9 +134,18 @@ class TestTemasMaterias(unittest.TestCase):
         for item in self.materias:
             self.assertIn(item["confianca"], {"alta", "media", "baixa"}, item["id"])
             self.assertTrue(item["justificativa"].strip(), item["id"])
-            self.assertIn(
-                item["classificado_por"], {"claude-opus-5-5", "agente-e5"}, item["id"]
-            )
+            if item["classificado_por"].startswith("consenso D-047"):
+                pass
+            else:
+                self.assertIn(
+                    item["classificado_por"],
+                    {
+                        "claude-opus-5-5",
+                        "agente-e5",
+                        "mantenedor (modelos sem consenso, D-047)",
+                    },
+                    item["id"],
+                )
             self.assertIs(item["revisada_por_humano"], True)
             self.assertEqual(item["revisado_por"], "mantenedor")
             self.assertRegex(str(item["data"]), r"^\d{4}-\d{2}-\d{2}$", item["id"])

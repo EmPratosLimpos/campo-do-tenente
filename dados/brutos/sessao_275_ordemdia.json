@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 708,
+      "__str__": "Ordem do Dia/Expediente: 3 - Indicação nº 35 de 2026 em 35ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/708",
+      "metadata": {},
+      "data_ordem": "2026-10-06",
+      "observacao": "",
+      "numero_ordem": 3,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 275,
+      "materia": 1052,
+      "tramitacao": null
+    },
+    {
+      "id": 709,
+      "__str__": "Ordem do Dia/Expediente: 4 - Indicação nº 36 de 2026 em 35ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/709",
+      "metadata": {},
+      "data_ordem": "2026-10-06",
+      "observacao": "",
+      "numero_ordem": 4,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 275,
+      "materia": 1054,
+      "tramitacao": null
+    },
+    {
+      "id": 710,
+      "__str__": "Ordem do Dia/Expediente: 5 - Indicação nº 37 de 2026 em 35ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/710",
+      "metadata": {},
+      "data_ordem": "2026-10-06",
+      "observacao": "",
+      "numero_ordem": 5,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 275,
+      "materia": 1055,
+      "tramitacao": null
+    },
+    {
+      "id": 711,
+      "__str__": "Ordem do Dia/Expediente: 6 - Requerimento nº 19 de 2026 em 35ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "link_detail_backend": "/sessao/ordemdia/711",
+      "metadata": {},
+      "data_ordem": "2026-10-06",
+      "observacao": "",
+      "numero_ordem": 6,
+      "resultado": "Aprovada por Unanimidade",
+      "tipo_votacao": 2,
+      "votacao_aberta": false,
+      "registro_aberto": true,
+      "sessao_plenaria": 275,
+      "materia": 1058,
+      "tramitacao": null
+    }
+  ],
+  "total": 4
+}

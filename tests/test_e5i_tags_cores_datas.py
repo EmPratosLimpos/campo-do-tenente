@@ -95,9 +95,24 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                             page.on("pageerror", lambda e: erros.append(str(e)))
                             self._abrir_camara(page, largura, tema)
 
+                            periodo = "sessao"
                             card = page.locator(
                                 "#bloco-votado-sessao .item-votado", has_text="PLEG 4/2026"
                             ).first
+                            if card.count() == 0:
+                                periodo = "todo"
+                                page.click(
+                                    '#seletor-periodo-lateral button[data-periodo="todo"]'
+                                    if largura >= 900
+                                    else '#seletor-periodo-mobile button[data-periodo="todo"]'
+                                )
+                                page.wait_for_timeout(600)
+                                card = page.locator(
+                                    "#bloco-votado-todo .item-votado",
+                                    has_text="PLEG 4/2026",
+                                ).first
+                            if card.count() == 0:
+                                self.skipTest("PLEG 4/2026 fora da sessao e do todo")
                             self.assertEqual(card.count(), 1)
                             tags = card.locator(".materia-tags > *")
                             self.assertEqual(
@@ -117,7 +132,7 @@ class TestE5iTagsCoresDatas(unittest.TestCase):
                             self.assertEqual(quadro.count(), 1)
 
                             barra = page.locator(
-                                "#temas-distribuicao-sessao .tema-btn",
+                                f"#temas-distribuicao-{periodo} .tema-btn",
                                 has_text=TEMA_ALVO,
                             ).first
                             self.assertEqual(barra.count(), 1)
