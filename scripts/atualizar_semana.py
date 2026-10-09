@@ -2,7 +2,8 @@
 """Atualiza os dados da semana a partir do SAPL.
 
 Ordem: lote pequeno, sessoes ordinarias novas mais a ultima ja coletada,
-autoria, tramitacao das materias novas ou ainda em tramitacao, derivacao,
+autoria, tramitacao das materias novas ou ainda em tramitacao,
+classificacao de temas novos por consenso (D-047), derivacao,
 vereadores, presidencia, autoria tratada, atuacao por ano, temas, dados da
 tela, sanidade, hash, testes e regras.
 
@@ -37,6 +38,8 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ / "coletor") not in sys.path:
     sys.path.insert(0, str(RAIZ / "coletor"))
+if str(RAIZ / "scripts") not in sys.path:
+    sys.path.insert(0, str(RAIZ / "scripts"))
 
 import coletar_lote  # noqa: E402
 from coletar_autoria import PARAMS_AUTORIA_ESTAVEL, PLANO, conferir_autoria  # noqa: E402
@@ -937,6 +940,7 @@ def montar_entrada(
     contagens: list[str],
     hashes: list[str],
     avisos: list[str] | None = None,
+    temas: list[str] | None = None,
 ) -> str:
     linhas = [
         f"## {data_iso}: atualização semanal dos dados",
@@ -955,6 +959,8 @@ def montar_entrada(
             linhas.append(f"- {linha}")
     else:
         linhas.append("- Nenhum hash de atuação mudou.")
+    for linha in temas or []:
+        linhas.append(f"- {linha}")
     for aviso in avisos or []:
         linhas.append(f"- Coleta com aviso: {aviso}. Valeu o arquivo ja salvo.")
     linhas.append(f"- Pedidos ao SAPL nesta execução: {pedidos}.")
@@ -1226,6 +1232,24 @@ def main(argv: list[str] | None = None) -> int:
             print("Nada mudou. Tratados nao foram regravados.")
         return 0
 
+    import classificar_temas
+
+    resumo_temas: dict = {"novas": [], "consenso": [], "pendentes": [], "avisos": [], "tokens_total": 0}
+    sem_chave_temas = classificar_temas.ler_chave() is None
+    try:
+        resumo_temas = classificar_temas.classificar_novas(cfg, classificar_temas.ler_chave())
+    except (SystemExit, OSError, ValueError) as exc:
+        print(f"Classificador de temas pulado: {exc}")
+        resumo_temas = {"novas": [], "consenso": [], "pendentes": [], "avisos": [str(exc)[:160]], "tokens_total": 0}
+    print(
+        f"Temas: {len(resumo_temas.get('consenso') or [])} por consenso, "
+        f"{len(resumo_temas.get('pendentes') or [])} pendentes, "
+        f"{int(resumo_temas.get('tokens_total') or 0)} tokens."
+    )
+    linhas_temas = classificar_temas.linhas_changelog_temas(resumo_temas, sem_chave_temas)
+    for aviso in resumo_temas.get("avisos") or []:
+        linhas_temas.append(f"Aviso do classificador de temas: {aviso}.")
+
     contagens_antes = ler_json(RESUMO_INSUMOS).get("contagens") or {}
     hashes_antes = ler_hashes(anos)
     rodar(["coletor/derivar_insumos.py"])
@@ -1246,6 +1270,7 @@ def main(argv: list[str] | None = None) -> int:
         linhas_contagem(contagens_antes, contagens_depois),
         linhas_hash(hashes_antes, hashes_depois),
         avisos_coleta,
+        linhas_temas,
     )
     gravar_changelog(entrada)
     print("CHANGELOG atualizado.")
