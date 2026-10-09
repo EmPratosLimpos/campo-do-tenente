@@ -423,12 +423,13 @@ def coletar_sessao_completa(
     """Coleta por sessao dos 7 pacotes grandes: presencas, ordem, justificativa, mesa, registros e votos.
 
     Recusa a sessao quando a ordem tem itens e vieram zero registros,
-    ou quando ha registros e zero votos. Sessao nova com presenca ou
-    ordem do dia com total_entries 0 tambem e recusada, pois ausencia
-    ainda nao lancada nao pode virar falta sem justificativa. Vazio
-    nesse ponto indica filtro mudado no SAPL ou coleta quebrada, por
-    isso nada e publicado. A recusa restaura os arquivos previos e
-    grava um aviso sessao_<id>_recusada.json para o log e para a issue.
+    ou quando ha registros e zero votos. Sessao nova com presenca
+    zerada (total_entries 0) tambem e recusada, pois ausencia ainda nao
+    lancada nao pode virar falta sem justificativa. Ordem do dia vazia
+    em sessao nova nao recusa: vira aviso no CHANGELOG. Vazio nesse
+    ponto indica filtro mudado no SAPL ou coleta quebrada, por isso
+    nada e publicado. A recusa restaura os arquivos previos e grava um
+    aviso sessao_<id>_recusada.json para o log e para a issue.
 
     A decisao de sessao nova e tomada uma vez por execucao: quem chama
     passa e_nova (True quando a sessao nao tinha nenhum dos 4 recursos
@@ -457,7 +458,7 @@ def coletar_sessao_completa(
         pedir_recurso(coletor, sid, caminho, recurso)
     pedir_mesa_por_sessao(coletor, sid)
     if e_nova:
-        for recurso in RECURSOS_PRESENCA_E_ORDEM:
+        for recurso in RECURSOS_PRESENCA:
             total = total_entries_da_pagina(pasta, f"sessao_{sid}_{recurso}")
             if total == 0:
                 recusar_sessao_vazia(
@@ -465,7 +466,7 @@ def coletar_sessao_completa(
                     sid,
                     (
                         f"sessao nova com {recurso} zerado (total_entries 0). "
-                        "A presenca ou a ordem ainda nao foi lancada no SAPL. "
+                        "A presenca ainda nao foi lancada no SAPL. "
                         "Ausencia nao vira falta."
                     ),
                     {"recurso": recurso, "total_entries": 0},

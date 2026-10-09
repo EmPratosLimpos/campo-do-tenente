@@ -61,6 +61,7 @@ from coletar_por_sessao import (  # noqa: E402
     conferir_prefixo,
     gravar_conferencia,
     sessoes_ordinarias,
+    total_entries_da_pagina,
 )
 from config_cidade import (  # noqa: E402
     ARQUIVO_CONFIG,
@@ -1097,6 +1098,20 @@ def separar_divergencias_por_alvo(
     return bloqueantes, avisos
 
 
+def avisos_ordem_vazia(pasta_sessao: Path, ids_novas: list[int] | set[int]) -> list[str]:
+    """Sessao nova sem itens na ordem do dia: aviso, nunca recusa.
+
+    Presenca zerada continua recusando na coleta. Ordem vazia e comum
+    (sessao so com expediente) e nao pode travar a semana.
+    """
+    avisos: list[str] = []
+    for sid in sorted({int(item) for item in ids_novas}):
+        total = total_entries_da_pagina(pasta_sessao, f"sessao_{sid}_ordemdia")
+        if total == 0:
+            avisos.append(f"sessao {sid} sem itens na ordem do dia no SAPL")
+    return avisos
+
+
 def conferir_coleta_por_sessao(pasta_sessao: Path, sessoes: list[dict]) -> list[dict]:
     """Confere pagina a pagina da coleta por sessao e grava a conferencia.
 
@@ -1274,10 +1289,12 @@ def main(argv: list[str] | None = None) -> int:
                 return 2
 
         try:
-            avisos_coleta = repetir_pendentes(
-                pendentes,
-                [int(item["id"]) for item in lista_alvo],
-                args.simulado,
+            avisos_coleta.extend(
+                repetir_pendentes(
+                    pendentes,
+                    [int(item["id"]) for item in lista_alvo],
+                    args.simulado,
+                )
             )
         except OrcamentoEsgotado as exc:
             print(f"PAROU: {exc}")
@@ -1289,6 +1306,12 @@ def main(argv: list[str] | None = None) -> int:
             if aviso_autoria is not None:
                 print(f"  {aviso_autoria}")
                 avisos_coleta.append(aviso_autoria)
+        if pasta_sessao is not None and lista_novas and not args.simulado:
+            for aviso in avisos_ordem_vazia(
+                pasta_sessao, [int(item["id"]) for item in lista_novas]
+            ):
+                print(f"  aviso: {aviso}.")
+                avisos_coleta.append(aviso)
         if pasta_sessao is not None and lista_alvo and not args.simulado:
             divergencias = conferir_coleta_por_sessao(pasta_sessao, sessoes)
             bloqueantes, avisos_conf = separar_divergencias_por_alvo(
