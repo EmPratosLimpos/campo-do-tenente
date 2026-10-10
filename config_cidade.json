@@ -25,7 +25,9 @@
       "minimo_respostas_por_materia": 10,
       "retencao_identificadores_dias": 30
     },
-    "dias_maximos_rodada": 60
+    "dias_maximos_rodada": 60,
+    "worker_url": "",
+    "turnstile_site_key": ""
   },
   "sapl": {
     "endereco_base": "https://sapl.campodotenente.pr.leg.br",

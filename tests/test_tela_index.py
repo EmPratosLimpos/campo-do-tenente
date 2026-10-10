@@ -33,10 +33,11 @@ class TestTelaIndex(unittest.TestCase):
 
     def test_csp_github_pages(self):
         csp = self.csp()
-        for proibido in ("cloudflare", "workers.dev", "challenges.cloudflare"):
-            self.assertNotIn(proibido, csp)
+        self.assertNotIn("workers.dev", csp)
+        self.assertNotIn("*", csp)
         for exigido in (
-            "frame-src 'none'",
+            "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",
+            "frame-src https://challenges.cloudflare.com",
             "child-src 'none'",
             "worker-src 'none'",
             "object-src 'none'",
@@ -47,18 +48,43 @@ class TestTelaIndex(unittest.TestCase):
             self.assertIn(exigido, csp)
         self.assertIn("'unsafe-inline'", csp)
 
+    def test_csp_connect_src_worker_url(self):
+        csp = self.csp()
+        worker = (self.cfg.get("votacao_popular") or {}).get("worker_url") or ""
+        worker = worker.strip()
+        if worker:
+            self.assertIn(worker, csp)
+            resto = csp.replace(worker, "")
+            self.assertNotIn("workers.dev", resto)
+        else:
+            self.assertNotIn("workers.dev", csp)
+
     def test_sem_votacao_popular_nem_campo_largo(self):
         tudo = self.index.lower()
         for termo in (
-            "turnstile",
-            "workers.dev",
-            "challenges.cloudflare",
-            "geolocation",
-            "btn-votar-fab",
             "campo largo",
             "campolargo",
         ):
             self.assertNotIn(termo, tudo, termo)
+        worker_cfg = ((self.cfg.get("votacao_popular") or {}).get("worker_url") or "").strip().lower()
+        if worker_cfg:
+            self.assertIn(worker_cfg, tudo)
+        proibidos_extra = ("campolargo", "campo largo")
+        for host in (
+            "campolargo",
+            "campo-largo",
+            "campo largo",
+        ):
+            self.assertNotIn(host, tudo, host)
+        connect = self.csp()
+        partes = [p.strip() for p in connect.split(";")]
+        connect_src = next((p for p in partes if p.startswith("connect-src")), "")
+        permitidos_connect = {"'self'", "https://eu.i.posthog.com", "https://eu-assets.i.posthog.com"}
+        if worker_cfg:
+            permitidos_connect.add(worker_cfg)
+        for pedaco in connect_src.replace("connect-src", "").strip().split():
+            if pedaco.startswith("https://") or pedaco == "'self'":
+                self.assertIn(pedaco, permitidos_connect, pedaco)
 
     def test_config_e_moldura(self):
         self.assertIn("config_cidade.json", self.js)
