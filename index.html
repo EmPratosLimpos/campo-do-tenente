@@ -3644,6 +3644,7 @@
     flex: 0 0 auto;
   }
 
+  .btn-votar-fab {
     position: fixed;
     z-index: 50;
     right: max(16px, calc(50% - 195px + 16px));
@@ -3668,13 +3669,24 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 10px 22px rgba(0, 0, 0, 0.16);
     transition: background-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
   }
-    background: var(--primaria);
-  }
-    transform: translateY(1px);
-  }
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
+  .btn-votar-fab:hover { background: var(--primaria); }
+  .btn-votar-fab:active { transform: translateY(1px); }
+  .btn-votar-fab svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .votacao-ja-votou-msg {
+    position: fixed;
+    z-index: 49;
+    right: max(16px, calc(50% - 195px + 16px));
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    max-width: min(280px, calc(100vw - 32px));
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: var(--superficie);
+    border: 1px solid var(--linha);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--texto-suave);
+    box-shadow: var(--sombra);
   }
 
   .votacao-overlay {
@@ -4297,6 +4309,8 @@
       bottom: 16px;
       border-radius: 0 0 20px 20px;
     }
+    .btn-votar-fab,
+    .votacao-ja-votou-msg {
       bottom: calc(88px + env(safe-area-inset-bottom, 0px));
     }
     .conteudo {
@@ -4910,6 +4924,43 @@
   .folha-generica-corpo > * { margin: 0; }
   .folha-generica-corpo > .pessoa { justify-self: stretch; }
   .folha-generica-corpo .apoio { font-size: 14px; color: var(--texto-suave); }
+
+  .votacao-ja-votou-msg {
+    margin: 8px 16px 0;
+    font-size: var(--t-apoio, 13px);
+    color: var(--texto-suave);
+    text-align: center;
+  }
+  .votacao-resultado-materia {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--linha);
+  }
+  .vp-barra-resultado {
+    display: flex;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--superficie-2);
+    margin: 6px 0;
+  }
+  .vp-barra-seg {
+    display: block;
+    height: 100%;
+    background: var(--neutro, #5b6573);
+  }
+  .vp-cartao-tipo { font-weight: 800; font-size: var(--t-cartao, 17px); margin: 0 0 8px; }
+  .btn-voto-opcao {
+    flex: 1;
+    background: var(--superficie-2) !important;
+    color: var(--texto) !important;
+    border-color: var(--linha-forte) !important;
+  }
+  .btn-voto-opcao .btn-swipe-circulo {
+    background: var(--superficie) !important;
+    color: var(--texto) !important;
+    border-color: var(--linha-forte) !important;
+  }
   .folha-generica-corpo .pessoa-falta .avatar {
     grid-row: span 2;
     width: 48px;
@@ -5238,6 +5289,63 @@
       </div>
     </div>
     <div class="resumo-sheet-corpo" id="resumo-sheet-corpo"></div>
+  </div>
+</div>
+
+<button type="button" class="btn-votar-fab" id="btn-votar-fab" hidden aria-haspopup="dialog" aria-controls="votacao-overlay">
+  <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
+  Votar
+</button>
+<p class="votacao-ja-votou-msg" id="votacao-ja-votou-msg" hidden></p>
+
+<div class="votacao-overlay" id="votacao-overlay" aria-hidden="true">
+  <div class="votacao-modal" role="dialog" aria-modal="true" aria-labelledby="votacao-titulo-modal" id="votacao-modal">
+    <div class="votacao-cabecalho">
+      <h2 id="votacao-titulo-modal">Votar</h2>
+      <button type="button" class="share-sheet-fechar" id="votacao-btn-fechar" aria-label="Fechar">
+        <svg class="ic" width="18" height="18" aria-hidden="true"><use href="#ic-fechar"/></svg>
+      </button>
+    </div>
+    <div class="votacao-corpo">
+      <p class="votacao-aviso" id="votacao-aviso-fixo">Consulta informal, não é pesquisa nem plebiscito.</p>
+      <p class="votacao-erro" id="votacao-erro-msg" hidden role="alert"></p>
+      <div id="votacao-passo-termos">
+        <div class="votacao-termos">
+          <h3>Termos curtos</h3>
+          <div class="votacao-termos-texto">
+            <p>Guardamos só o resultado da checagem de localização, nunca a coordenada.</p>
+            <p>Identificador do aparelho e do endereço ficam só cifrados no servidor e são apagados 30 dias depois de a rodada fechar.</p>
+            <p>Um voto por aparelho por rodada. Você vota nos projetos sem ver o autor durante a escolha.</p>
+          </div>
+        </div>
+        <div id="votacao-turnstile" class="votacao-turnstile-slot"></div>
+        <div class="votacao-acoes">
+          <button type="button" class="btn-votacao-acao btn-votacao-pri" id="votacao-btn-localizacao">Permitir localização e continuar</button>
+          <button type="button" class="btn-votacao-acao btn-votacao-sec" id="votacao-btn-fechar-erro" hidden>Fechar</button>
+        </div>
+      </div>
+      <div id="votacao-passo-cartoes" hidden>
+        <p class="voto-progresso" id="votacao-progresso" aria-live="polite"></p>
+        <div class="voto-swipe-palco" id="votacao-cartao-palco"></div>
+        <div class="voto-botoes" role="group" aria-label="Útil ou Inútil">
+          <button type="button" class="btn-swipe btn-voto-opcao" id="votacao-btn-inutil"><span class="btn-swipe-circulo" aria-hidden="true">←</span>Inútil</button>
+          <button type="button" class="btn-swipe btn-voto-opcao" id="votacao-btn-util"><span class="btn-swipe-circulo" aria-hidden="true">→</span>Útil</button>
+        </div>
+        <button type="button" class="btn-votacao-acao btn-votacao-sec" id="votacao-btn-voltar" style="margin-top:12px">Voltar para mudar resposta</button>
+      </div>
+      <div id="votacao-passo-resumo" hidden>
+        <ul class="votacao-lista" id="votacao-resumo-lista"></ul>
+        <div class="votacao-acoes">
+          <button type="button" class="btn-votacao-acao btn-votacao-pri" id="votacao-btn-enviar">Enviar</button>
+        </div>
+      </div>
+      <div id="votacao-passo-fim" hidden>
+        <div id="votacao-fim-corpo"></div>
+        <div class="votacao-acoes">
+          <button type="button" class="btn-votacao-acao btn-votacao-pri" id="votacao-btn-fechar-fim">Fechar</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -5644,6 +5752,7 @@
 })(window);
 </script>
 <script src="assets/posthog-1.435.8.js"></script>
+<script src="tela/votacao_popular.js"></script>
 <script>
 (function () {
   "use strict";
@@ -7731,10 +7840,11 @@
       notasWrap.innerHTML = blocoCas + renderNotasParlamentar(v);
     }
 
+    var blocoPopular = window.VotacaoPopular ? VotacaoPopular.htmlConsolidadoVereador(v) : "";
     conteudo.innerHTML =
       '<div class="vereadores-grade">' +
       '<div class="vereadores-coluna">' + renderSecaoPresenca(v) + renderSecaoPLL(v) + renderSecaoPedidos(v) + "</div>" +
-      '<div class="vereadores-coluna">' + renderSecaoVotos(v) + "</div>" +
+      '<div class="vereadores-coluna">' + renderSecaoVotos(v) + blocoPopular + "</div>" +
       "</div>" +
       '<footer class="rodape-coleta" aria-label="Informações sobre a coleta de dados"></footer>';
 
@@ -8691,6 +8801,7 @@ var MAPA_VAR_CATEGORIA = {
       '<div class="linha-meta">' + htmlLinhaTipoMateria(m.tipo || "") +
       (datas ? '<span class="materia-datas">' + esc(datas) + "</span>" : "") + "</div>" +
       htmlLinkSapMateria(m.id, "Ver no SAPL") +
+      (window.VotacaoPopular ? VotacaoPopular.blocoResultadoMateria(m.id) : "") +
       "</li>";
   }
 
@@ -8773,7 +8884,9 @@ var MAPA_VAR_CATEGORIA = {
       '<p class="materia-assunto">' + esc(ementaExibicao(item.ementa || "")) + "</p>" +
       '<div class="linha-meta">' + htmlLinhaTipoMateria(tipoLinha) +
       (dataTxt ? '<span class="materia-datas">' + esc(dataTxt) + "</span>" : "") + "</div>" +
-      link + "</li>";
+      link +
+      (window.VotacaoPopular && item.id ? VotacaoPopular.htmlParaMateria(item.id) : "") +
+      "</li>";
   }
 
   function renderBlocoVotadoPeriodo(periodo) {
@@ -10495,6 +10608,31 @@ var MAPA_VAR_CATEGORIA = {
     });
   }
 
+  function proposicoesAutorVereador(idSapl) {
+    return (PROPOSICOES_CAMARA.todo || []).filter(function (item) {
+      return (item.autores || []).some(function (a) {
+        return String(a.parlamentar_id_sapl) === String(idSapl);
+      });
+    });
+  }
+
+  function initVotacaoPopularTela() {
+    if (!window.VotacaoPopular) return Promise.resolve();
+    return VotacaoPopular.init({
+      esc: esc,
+      urlSegura: urlSegura,
+      formatarData: formatarData,
+      formatarDataHora: formatarDataHora,
+      getConfig: function () { return CONFIG_CIDADE; },
+      captureEvento: captureEvento,
+      proposicoesAutor: proposicoesAutorVereador,
+      onResultados: function () {
+        ["sessao", "mes", "todo"].forEach(renderBlocoVotadoPeriodo);
+        if (estado.vereadorId) renderApp();
+      },
+    });
+  }
+
   carregarConfig().then(function () {
     aplicarTema(temaInicial());
     initPosthog();
@@ -10504,7 +10642,14 @@ var MAPA_VAR_CATEGORIA = {
     initResumoSheet();
     initFolhaGenerica();
     initNavegacao();
-    return carregarMateriasCamara().then(carregarProposicoesCamara).then(initMateriasCamara).then(carregarExecutivoPrefeito);
+    var btnFim = document.getElementById("votacao-btn-fechar-fim");
+    if (btnFim) btnFim.addEventListener("click", function () {
+      var ov = document.getElementById("votacao-overlay");
+      if (ov) { ov.classList.remove("ativo"); ov.setAttribute("aria-hidden", "true"); }
+    });
+    return initVotacaoPopularTela().then(function () {
+      return carregarMateriasCamara().then(carregarProposicoesCamara).then(initMateriasCamara).then(carregarExecutivoPrefeito);
+    });
   }).then(carregar);
 })();
 </script>
