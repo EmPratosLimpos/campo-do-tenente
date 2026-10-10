@@ -1,7 +1,8 @@
-"""Playwright: fluxo da votacao popular com Worker e Turnstile falsos (V4b)."""
+"""Playwright: fluxo da votacao popular com Worker e Turnstile falsos (V4b2)."""
 
 from __future__ import annotations
 
+import copy
 import json
 import pathlib
 import re
@@ -316,6 +317,9 @@ class TestVotacaoPlaywright(unittest.TestCase):
     def _aguardar_botao_votar(self, page):
         page.wait_for_selector("#btn-votar-fab:not([hidden])", timeout=30000)
 
+    def _aviso_consulta_visivel_overlay(self, page):
+        return page.locator("#votacao-overlay .votacao-aviso:not([hidden])").count()
+
     def _fluxo_completo(self, page):
         self._aguardar_botao_votar(page)
         page.locator("#btn-votar-fab").click()
@@ -337,8 +341,7 @@ class TestVotacaoPlaywright(unittest.TestCase):
                     self.assertEqual(erros, [])
                     self.assertEqual(reqs, [])
                     self.assertEqual(page._vp_console_erros, [])
-                    avisos = page.locator("#votacao-fim-corpo .votacao-aviso").count()
-                    self.assertEqual(avisos, 1)
+                    self.assertEqual(self._aviso_consulta_visivel_overlay(page), 1)
                     self.assertIn("Útil", page.locator("#votacao-fim-corpo").inner_text())
                     self.assertIn("Inútil", page.locator("#votacao-fim-corpo").inner_text())
                     self._assert_sem_vazamento_layout(page)
@@ -510,6 +513,41 @@ class TestVotacaoPlaywright(unittest.TestCase):
         self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
             {
                 "materia_id": 101,
+                "respostas": "menos de 10",
+                "percentual_util": None,
+                "percentual_inutil": None,
+            },
+            {
+                "materia_id": 102,
+                "respostas": 42,
+                "percentual_util": 50,
+                "percentual_inutil": 50,
+            },
+        ]
+        self._sync_worker_state()
+        with sync_playwright() as p:
+            ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
+            self._fluxo_completo(page)
+            self.assertEqual(self._aviso_consulta_visivel_overlay(page), 1)
+            bloco101 = page.locator(
+                "#votacao-fim-corpo .votacao-resultado-materia[data-vp-materia='101']"
+            )
+            txt101 = bloco101.inner_text().lower()
+            self.assertIn("menos de 10 respostas", txt101)
+            self.assertNotIn("respostas nesta mat", txt101)
+            self.assertRegex(txt101, r"pleg|req")
+            self.assertEqual(
+                page.locator(
+                    "#votacao-fim-corpo .votacao-resultado-materia[data-vp-materia='101'] .vp-barra-resultado"
+                ).count(),
+                0,
+            )
+            ctx.close()
+
+    def test_menos_respostas_numero_worker_ignorado_na_tela(self):
+        self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
+            {
+                "materia_id": 101,
                 "respostas": 4,
                 "percentual_util": None,
                 "percentual_inutil": None,
@@ -525,13 +563,24 @@ class TestVotacaoPlaywright(unittest.TestCase):
         with sync_playwright() as p:
             ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
             self._fluxo_completo(page)
-            txt = page.locator("#votacao-fim-corpo").inner_text().lower()
-            self.assertIn("menos de 10", txt)
-            self.assertEqual(
-                page.locator(
-                    "#votacao-fim-corpo .votacao-resultado-materia[data-vp-materia='101'] .vp-barra-resultado"
-                ).count(),
-                0,
+            bloco101 = page.locator(
+                "#votacao-fim-corpo .votacao-resultado-materia[data-vp-materia='101']"
+            )
+            txt101 = bloco101.inner_text().lower()
+            self.assertIn("menos de 10 respostas", txt101)
+            self.assertNotIn("4 respostas", txt101)
+            self.assertNotIn("respostas nesta mat", txt101)
+            ctx.close()
+
+    def test_aviso_consulta_antes_do_voto(self):
+        with sync_playwright() as p:
+            ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
+            self._aguardar_botao_votar(page)
+            page.locator("#btn-votar-fab").click()
+            page.wait_for_selector("#votacao-overlay.ativo", timeout=10000)
+            self.assertEqual(self._aviso_consulta_visivel_overlay(page), 1)
+            self.assertFalse(
+                page.evaluate("() => document.getElementById('votacao-aviso-fixo').hidden")
             )
             ctx.close()
 
@@ -585,6 +634,8 @@ class TestVotacaoPlaywright(unittest.TestCase):
             texto = card.inner_text()
             self.assertIn(f"Útil {pu}%", texto)
             self.assertIn(f"Inútil {pi}%", texto)
+            self.assertIn("Matérias desta rodada de autoria deste vereador.", texto)
+            self.assertNotIn("Nas matérias desta rodada em que este vereador é autor.", texto)
             self.assertEqual(page.locator(".votacao-consolidado .votacao-aviso").count(), 1)
             self._ir_vereador(page, "100")
             self.assertEqual(page.locator(".votacao-consolidado").count(), 0)
@@ -664,6 +715,120 @@ class TestVotacaoPlaywright(unittest.TestCase):
             )
             self.assertTrue(all(estilos.values()), estilos)
             ctx.close()
+
+    def test_regenerar_prints_resultados_v4b2(self):
+        """Somente fim, perfil e menos-respostas (390 e 1440, claro e escuro)."""
+        quatro = [
+            {
+                "id": 201,
+                "sigla": "PLEG",
+                "numero": "1",
+                "ano": "2026",
+                "ementa": "Print um.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/201",
+            },
+            {
+                "id": 202,
+                "sigla": "REQ",
+                "numero": "2",
+                "ano": "2026",
+                "ementa": "Print dois.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/202",
+            },
+            {
+                "id": 203,
+                "sigla": "PLEG",
+                "numero": "3",
+                "ano": "2026",
+                "ementa": "Print tres.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/203",
+            },
+            {
+                "id": 204,
+                "sigla": "IND",
+                "numero": "4",
+                "ano": "2026",
+                "ementa": "Print quatro.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/204",
+            },
+        ]
+        materias_duas = list(self.estado_worker["rodada"]["materias"])
+        gerados = []
+        with sync_playwright() as p:
+            for largura in (390, 1440):
+                for tema in ("claro", "escuro"):
+                    self.estado_worker["rodada"]["materias"] = copy.deepcopy(materias_duas)
+                    self.estado_worker["rodada"]["status"] = "aberta"
+                    self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
+                        {
+                            "materia_id": 101,
+                            "respostas": 42,
+                            "percentual_util": 55,
+                            "percentual_inutil": 45,
+                        },
+                        {
+                            "materia_id": 102,
+                            "respostas": "menos de 10",
+                            "percentual_util": None,
+                            "percentual_inutil": None,
+                        },
+                    ]
+                    self._sync_worker_state()
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    self._fluxo_completo(page)
+                    gerados.append(self._screenshot(page, "fim", largura, tema))
+                    ctx.close()
+
+                    self.estado_worker["rodada"]["materias"] = quatro[:2]
+                    self.estado_worker["rodada"]["materias"][0]["id"] = 66
+                    self.estado_worker["rodada"]["materias"][1]["id"] = 67
+                    self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
+                        {
+                            "materia_id": 66,
+                            "respostas": 40,
+                            "percentual_util": 60,
+                            "percentual_inutil": 40,
+                        },
+                        {
+                            "materia_id": 67,
+                            "respostas": 20,
+                            "percentual_util": 80,
+                            "percentual_inutil": 20,
+                        },
+                    ]
+                    self._sync_worker_state()
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    page.evaluate("localStorage.setItem('epl_vp_votou:sessao:999','1');")
+                    page.reload(wait_until="networkidle", timeout=90000)
+                    self._ir_vereador(page, "5")
+                    gerados.append(self._screenshot(page, "perfil", largura, tema))
+                    ctx.close()
+
+                    self.estado_worker["rodada"]["materias"] = quatro
+                    self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
+                        {
+                            "materia_id": 201,
+                            "respostas": "menos de 10",
+                            "percentual_util": None,
+                            "percentual_inutil": None,
+                        }
+                    ]
+                    self._sync_worker_state()
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    self._aguardar_botao_votar(page)
+                    page.locator("#btn-votar-fab").click()
+                    page.evaluate(
+                        "window.turnstile = { render: function(el, o) { o.callback('f'); return 1; } };"
+                    )
+                    page.locator("#votacao-btn-localizacao").click()
+                    page.wait_for_selector("#votacao-passo-cartoes:not([hidden])", timeout=15000)
+                    for _ in quatro:
+                        page.locator("#votacao-btn-util").click()
+                    page.locator("#votacao-btn-enviar").click()
+                    page.wait_for_selector("#votacao-passo-fim:not([hidden])", timeout=15000)
+                    gerados.append(self._screenshot(page, "menos-respostas", largura, tema))
+                    ctx.close()
+        self.assertEqual(len(gerados), 12)
 
     def test_gerar_prints_votacao(self):
         quatro = [
@@ -820,7 +985,7 @@ class TestVotacaoPlaywright(unittest.TestCase):
                     self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
                         {
                             "materia_id": 201,
-                            "respostas": 3,
+                            "respostas": "menos de 10",
                             "percentual_util": None,
                             "percentual_inutil": None,
                         }
