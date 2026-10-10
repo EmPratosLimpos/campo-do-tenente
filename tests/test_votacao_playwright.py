@@ -1,4 +1,4 @@
-"""Playwright: fluxo da votacao popular com Worker e Turnstile falsos."""
+"""Playwright: fluxo da votacao popular com Worker e Turnstile falsos (V4b)."""
 
 from __future__ import annotations
 
