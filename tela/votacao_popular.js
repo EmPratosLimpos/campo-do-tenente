@@ -245,6 +245,7 @@
     var soma = 0;
     var temNumero = false;
     (resultados.materias || []).forEach(function (r) {
+      if (r.percentual_util == null) return;
       if (typeof r.respostas === "number") {
         soma += r.respostas;
         temNumero = true;
@@ -275,7 +276,9 @@
 
   function textoMenosRespostas(achado) {
     if (typeof achado.respostas === "string" && achado.respostas) {
-      return achado.respostas;
+      var s = String(achado.respostas).trim();
+      if (/respostas/i.test(s)) return s;
+      return s + " respostas";
     }
     return "menos de " + minimoRespostas + " respostas";
   }
@@ -327,7 +330,7 @@
       corpo = htmlBarra(achado.percentual_util, achado.percentual_inutil);
     }
     var total =
-      typeof achado.respostas === "number"
+      achado.percentual_util != null && typeof achado.respostas === "number"
         ? achado.respostas + " respostas nesta mat\u00e9ria"
         : "";
     return (
@@ -393,7 +396,7 @@
       '<p class="apoio votacao-total-bloco">' +
       esc(totTxt) +
       "</p>" +
-      '<p class="resumo">Nas mat\u00e9rias desta rodada em que este vereador \u00e9 autor.</p>' +
+      '<p class="apoio">Mat\u00e9rias desta rodada de autoria deste vereador.</p>' +
       htmlBarra(pu, pi) +
       "</article>"
     );
@@ -431,6 +434,8 @@
       var node = el(mapa[k]);
       if (node) node.hidden = k !== nome;
     });
+    var avisoFixo = el("votacao-aviso-fixo");
+    if (avisoFixo) avisoFixo.hidden = nome === "fim";
     if (nome === "termos") renderTurnstile();
     if (nome === "cartoes") renderCartao();
     if (nome === "resumo") renderResumo();
