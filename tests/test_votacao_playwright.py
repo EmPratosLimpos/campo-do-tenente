@@ -191,6 +191,21 @@ class TestVotacaoPlaywright(unittest.TestCase):
     def _turnstile_route(self, page):
         page.route("**/turnstile/**", lambda r: r.fulfill(status=200, body="/* mock */"))
 
+    def _url_permitida(self, u: str) -> bool:
+        if "127.0.0.1:8809" in u:
+            return True
+        if u.startswith("https://eu.i.posthog.com") or u.startswith(
+            "https://eu-assets.i.posthog.com"
+        ):
+            return True
+        if "fonts.googleapis" in u or "fonts.gstatic" in u:
+            return True
+        if "goatcounter" in u:
+            return True
+        if "challenges.cloudflare.com" in u or "turnstile" in u:
+            return True
+        return False
+
     def _nova_pagina(self, p, largura, tema, geo=None):
         context = p.chromium.launch().new_context(
             viewport={"width": largura, "height": 900},
@@ -202,22 +217,22 @@ class TestVotacaoPlaywright(unittest.TestCase):
             "window.turnstile = { render: function(el, o) { if (o.callback) o.callback('fake'); return 1; } };"
         )
         erros = []
+        console_erros = []
+
+        def on_console(msg):
+            if msg.type == "error":
+                console_erros.append(msg.text)
+
+        page.on("console", on_console)
         page.on("pageerror", lambda e: erros.append(str(e)))
         reqs_externas = []
+        todas_reqs = []
 
         def on_req(req):
             u = req.url
-            if "127.0.0.1:8809" in u:
-                return
-            if u.startswith("https://eu.i.posthog.com") or u.startswith("https://eu-assets.i.posthog.com"):
-                return
-            if "fonts.googleapis" in u or "fonts.gstatic" in u:
-                return
-            if "goatcounter" in u:
-                return
-            if "turnstile" in u:
-                return
-            reqs_externas.append(u)
+            todas_reqs.append(u)
+            if not self._url_permitida(u):
+                reqs_externas.append(u)
 
         page.on("request", on_req)
         self._sync_worker_state()
@@ -229,7 +244,74 @@ class TestVotacaoPlaywright(unittest.TestCase):
             page.evaluate("document.documentElement.setAttribute('data-tema','escuro')")
         else:
             page.evaluate("document.documentElement.removeAttribute('data-tema')")
+        page._vp_console_erros = console_erros
+        page._vp_todas_reqs = todas_reqs
         return context, page, erros, reqs_externas
+
+    def _assert_sem_vazamento_layout(self, page, seletor_modal="#votacao-modal"):
+        ok = page.evaluate(
+            """(sel) => {
+              const modal = document.querySelector(sel);
+              if (!modal) return { ok: true };
+              const mr = modal.getBoundingClientRect();
+              const vw = window.innerWidth;
+              const vh = window.innerHeight;
+              if (document.documentElement.scrollWidth > vw + 1) return { ok: false, why: 'scroll-x' };
+              const nodes = modal.querySelectorAll('p, span, li, button, h2, h3, div');
+              for (const n of nodes) {
+                const st = getComputedStyle(n);
+                if (st.display === 'none' || st.visibility === 'hidden') continue;
+                const r = n.getBoundingClientRect();
+                if (r.width < 2 || r.height < 2) continue;
+                if (r.right > mr.right + 1 || r.left < mr.left - 1) return { ok: false, why: 'overflow-card', el: n.className };
+              }
+              const acoes = modal.querySelector('.votacao-acoes');
+              if (acoes) acoes.scrollIntoView({ block: 'end', behavior: 'instant' });
+              const btns = modal.querySelectorAll('.votacao-acoes button, .votacao-cabecalho button');
+              for (const b of btns) {
+                if (b.hidden || b.offsetParent === null) continue;
+                if (b.closest('[hidden]')) continue;
+                const st = getComputedStyle(b);
+                if (st.display === 'none' || st.visibility === 'hidden') continue;
+                const r = b.getBoundingClientRect();
+                if (r.right > vw + 1 || r.left < -1) return { ok: false, why: 'button-horizontal' };
+                if (r.width < 1 || r.height < 1) return { ok: false, why: 'button-zero' };
+              }
+              const ids = {};
+              document.querySelectorAll('[id]').forEach(el => { ids[el.id] = (ids[el.id]||0)+1; });
+              const dup = Object.keys(ids).filter(k => ids[k] > 1);
+              if (dup.length) return { ok: false, why: 'dup-id', dup };
+              const body = modal.innerText || '';
+              if (/\\besc\\(|undefined|NaN|\\bnull\\b/.test(body)) return { ok: false, why: 'leak-text' };
+              return { ok: true };
+            }""",
+            seletor_modal,
+        )
+        self.assertTrue(ok.get("ok"), ok)
+
+    def _screenshot(self, page, tela, largura, tema):
+        nome = f"votacao-{tela}-{largura}-{tema}.png"
+        page.screenshot(path=str(self.prints / nome), full_page=True)
+        return nome
+
+    def _ir_camara(self, page):
+        largura = page.viewport_size["width"] if page.viewport_size else 390
+        if largura >= 900:
+            page.locator("button[data-secao-lateral='camara']").click(timeout=15000)
+        else:
+            page.locator("#nav-principal button[data-secao='camara']").click(timeout=15000)
+        page.wait_for_selector("#painel-camara.ativo", timeout=30000)
+
+    def _ir_vereador(self, page, id_sapl: str):
+        largura = page.viewport_size["width"] if page.viewport_size else 390
+        if largura >= 900:
+            page.locator("button[data-secao-lateral='vereadores']").click(timeout=15000)
+        else:
+            page.locator("#nav-principal button[data-secao='vereadores']").click(timeout=15000)
+        page.wait_for_selector("#painel-vereadores.ativo", timeout=30000)
+        page.wait_for_selector("#sel-vereador", timeout=60000)
+        page.select_option("#sel-vereador", id_sapl)
+        page.wait_for_timeout(600)
 
     def _aguardar_botao_votar(self, page):
         page.wait_for_selector("#btn-votar-fab:not([hidden])", timeout=30000)
@@ -246,7 +328,7 @@ class TestVotacaoPlaywright(unittest.TestCase):
         page.locator("#votacao-btn-enviar").click()
         page.wait_for_selector("#votacao-passo-fim:not([hidden])", timeout=15000)
 
-    def test_fluxo_completo_e_prints(self):
+    def test_fluxo_completo_sem_erros_rede(self):
         with sync_playwright() as p:
             for largura in (390, 1440):
                 for tema in ("claro", "escuro"):
@@ -254,10 +336,12 @@ class TestVotacaoPlaywright(unittest.TestCase):
                     self._fluxo_completo(page)
                     self.assertEqual(erros, [])
                     self.assertEqual(reqs, [])
-                    ov = page.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 1")
-                    self.assertTrue(ov)
-                    nome = f"votacao-fim-{largura}-{tema}.png"
-                    page.screenshot(path=str(self.prints / nome), full_page=True)
+                    self.assertEqual(page._vp_console_erros, [])
+                    avisos = page.locator("#votacao-fim-corpo .votacao-aviso").count()
+                    self.assertEqual(avisos, 1)
+                    self.assertIn("Útil", page.locator("#votacao-fim-corpo").inner_text())
+                    self.assertIn("Inútil", page.locator("#votacao-fim-corpo").inner_text())
+                    self._assert_sem_vazamento_layout(page)
                     ctx.close()
 
     def test_sem_worker_url_esconde_botao(self):
@@ -421,6 +505,354 @@ class TestVotacaoPlaywright(unittest.TestCase):
             self.assertNotIn("autor", html)
             self.assertNotIn("vereador", html)
             ctx.close()
+
+    def test_menos_de_dez_respostas_sem_barra(self):
+        self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
+            {
+                "materia_id": 101,
+                "respostas": 4,
+                "percentual_util": None,
+                "percentual_inutil": None,
+            },
+            {
+                "materia_id": 102,
+                "respostas": 42,
+                "percentual_util": 50,
+                "percentual_inutil": 50,
+            },
+        ]
+        self._sync_worker_state()
+        with sync_playwright() as p:
+            ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
+            self._fluxo_completo(page)
+            txt = page.locator("#votacao-fim-corpo").inner_text().lower()
+            self.assertIn("menos de 10", txt)
+            self.assertEqual(
+                page.locator(
+                    "#votacao-fim-corpo .votacao-resultado-materia[data-vp-materia='101'] .vp-barra-resultado"
+                ).count(),
+                0,
+            )
+            ctx.close()
+
+    def test_consolidado_vereador_autor(self):
+        rodada_mats = [
+            {
+                "id": 66,
+                "sigla": "PLEG",
+                "numero": "1",
+                "ano": "2026",
+                "ementa": "Ementa consolidado A.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/66",
+            },
+            {
+                "id": 67,
+                "sigla": "PLEG",
+                "numero": "2",
+                "ano": "2026",
+                "ementa": "Ementa consolidado B.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/67",
+            },
+        ]
+        self.estado_worker["rodada"]["materias"] = rodada_mats
+        self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
+            {
+                "materia_id": 66,
+                "respostas": 40,
+                "percentual_util": 60,
+                "percentual_inutil": 40,
+            },
+            {
+                "materia_id": 67,
+                "respostas": 20,
+                "percentual_util": 80,
+                "percentual_inutil": 20,
+            },
+        ]
+        util = round(0.6 * 40 + 0.8 * 20)
+        inutil = round(0.4 * 40 + 0.2 * 20)
+        soma = util + inutil
+        pu = round((util / soma) * 100)
+        pi = round((inutil / soma) * 100)
+        self._sync_worker_state()
+        with sync_playwright() as p:
+            ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
+            page.evaluate("localStorage.setItem('epl_vp_votou:sessao:999','1');")
+            page.reload(wait_until="networkidle", timeout=90000)
+            self._ir_vereador(page, "5")
+            card = page.locator(".votacao-consolidado")
+            self.assertEqual(card.count(), 1)
+            texto = card.inner_text()
+            self.assertIn(f"Útil {pu}%", texto)
+            self.assertIn(f"Inútil {pi}%", texto)
+            self.assertEqual(page.locator(".votacao-consolidado .votacao-aviso").count(), 1)
+            self._ir_vereador(page, "100")
+            self.assertEqual(page.locator(".votacao-consolidado").count(), 0)
+            ctx.close()
+
+    def test_pedidos_so_dominios_permitidos(self):
+        with sync_playwright() as p:
+            ctx, page, _, reqs = self._nova_pagina(p, 390, "claro")
+            self._fluxo_completo(page)
+            self.assertEqual(reqs, [])
+            bloqueados = [u for u in page._vp_todas_reqs if not self._url_permitida(u)]
+            self.assertEqual(bloqueados, [])
+            ctx.close()
+
+    def test_console_sem_erros_no_fluxo(self):
+        with sync_playwright() as p:
+            ctx, page, erros, _ = self._nova_pagina(p, 390, "claro")
+            self._fluxo_completo(page)
+            self.assertEqual(erros, [])
+            self.assertEqual(page._vp_console_erros, [])
+            ctx.close()
+
+    def test_layout_fluxo_varias_larguras(self):
+        with sync_playwright() as p:
+            for largura in (320, 390, 900, 1440):
+                ctx, page, _, _ = self._nova_pagina(p, largura, "claro")
+                self._aguardar_botao_votar(page)
+                self._screenshot(page, "botao", largura, "claro")
+                page.locator("#btn-votar-fab").click()
+                self._assert_sem_vazamento_layout(page)
+                page.evaluate(
+                    "window.turnstile = { render: function(el, o) { o.callback('f'); return 1; } };"
+                )
+                page.locator("#votacao-btn-localizacao").click()
+                page.wait_for_selector("#votacao-passo-cartoes:not([hidden])", timeout=15000)
+                self._assert_sem_vazamento_layout(page)
+                page.locator("#votacao-btn-util").click()
+                page.locator("#votacao-btn-inutil").click()
+                page.wait_for_selector("#votacao-passo-resumo:not([hidden])", timeout=10000)
+                self._assert_sem_vazamento_layout(page)
+                page.locator("#votacao-btn-enviar").click()
+                page.wait_for_selector("#votacao-passo-fim:not([hidden])", timeout=15000)
+                self._assert_sem_vazamento_layout(page)
+                ctx.close()
+
+    def test_aviso_uma_vez_camara(self):
+        with sync_playwright() as p:
+            ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
+            page.evaluate("localStorage.setItem('epl_vp_votou:sessao:999','1');")
+            page.reload(wait_until="networkidle", timeout=90000)
+            self._ir_camara(page)
+            cab = page.locator("#bloco-votado-sessao .votacao-bloco-resultados-cab .votacao-aviso")
+            self.assertEqual(cab.count(), 1)
+            self.assertEqual(
+                page.locator("#bloco-votado-sessao .votacao-resultado-materia .votacao-aviso").count(),
+                0,
+            )
+            ctx.close()
+
+    def test_botao_fechar_mesmo_estilo_padrao(self):
+        with sync_playwright() as p:
+            ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
+            self._fluxo_completo(page)
+            estilos = page.evaluate(
+                """() => {
+                const fechar = document.getElementById('votacao-btn-fechar-fim');
+                const ref = document.getElementById('votacao-btn-enviar');
+                const gf = getComputedStyle(fechar);
+                const gr = getComputedStyle(ref);
+                return {
+                  bg: gf.backgroundColor === gr.backgroundColor,
+                  col: gf.color === gr.color,
+                  fw: gf.fontWeight === gr.fontWeight,
+                  br: gf.borderRadius === gr.borderRadius,
+                };
+              }"""
+            )
+            self.assertTrue(all(estilos.values()), estilos)
+            ctx.close()
+
+    def test_gerar_prints_votacao(self):
+        quatro = [
+            {
+                "id": 201,
+                "sigla": "PLEG",
+                "numero": "1",
+                "ano": "2026",
+                "ementa": "Print um.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/201",
+            },
+            {
+                "id": 202,
+                "sigla": "REQ",
+                "numero": "2",
+                "ano": "2026",
+                "ementa": "Print dois.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/202",
+            },
+            {
+                "id": 203,
+                "sigla": "PLEG",
+                "numero": "3",
+                "ano": "2026",
+                "ementa": "Print tres.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/203",
+            },
+            {
+                "id": 204,
+                "sigla": "IND",
+                "numero": "4",
+                "ano": "2026",
+                "ementa": "Print quatro.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/204",
+            },
+        ]
+        self.estado_worker["rodada"]["materias"] = quatro
+        mats_res = [
+            {"materia_id": 201, "respostas": 42, "percentual_util": 55, "percentual_inutil": 45},
+            {"materia_id": 202, "respostas": "menos de 10", "percentual_util": None, "percentual_inutil": None},
+            {"materia_id": 203, "respostas": 30, "percentual_util": 70, "percentual_inutil": 30},
+            {"materia_id": 204, "respostas": 25, "percentual_util": 40, "percentual_inutil": 60},
+        ]
+        self.estado_worker["resultados"]["rodadas"][0]["materias"] = mats_res
+        self._sync_worker_state()
+        gerados = []
+        with sync_playwright() as p:
+            for largura in (390, 1440):
+                for tema in ("claro", "escuro"):
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    self._aguardar_botao_votar(page)
+                    gerados.append(self._screenshot(page, "botao", largura, tema))
+                    page.locator("#btn-votar-fab").click()
+                    gerados.append(self._screenshot(page, "termos", largura, tema))
+                    ctx.close()
+
+                    ctx = p.chromium.launch().new_context(
+                        viewport={"width": largura, "height": 900},
+                        geolocation={"latitude": -25.95, "longitude": -49.68},
+                        permissions=["geolocation"],
+                    )
+                    page = ctx.new_page()
+                    page.add_init_script(
+                        "navigator.geolocation = { getCurrentPosition: function(ok, err) { if (typeof err === 'function') err({ code: 1 }); } };"
+                    )
+                    self._config_route(page)
+                    self._sync_worker_state()
+                    page.goto(self.base, wait_until="networkidle", timeout=90000)
+                    if tema == "escuro":
+                        page.evaluate("document.documentElement.setAttribute('data-tema','escuro')")
+                    self._aguardar_botao_votar(page)
+                    page.locator("#btn-votar-fab").click()
+                    page.locator("#votacao-btn-localizacao").click()
+                    page.wait_for_selector("#votacao-erro-msg:not([hidden])", timeout=10000)
+                    gerados.append(self._screenshot(page, "erro-gps", largura, tema))
+                    ctx.close()
+
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    self.estado_worker["verificar_erro"] = "fora_do_municipio"
+                    self._sync_worker_state()
+                    page.reload(wait_until="networkidle")
+                    self._aguardar_botao_votar(page)
+                    page.locator("#btn-votar-fab").click()
+                    page.evaluate(
+                        "window.turnstile = { render: function(el, o) { o.callback('f'); return 1; } };"
+                    )
+                    page.locator("#votacao-btn-localizacao").click()
+                    page.wait_for_selector("#votacao-erro-msg:not([hidden])", timeout=10000)
+                    gerados.append(self._screenshot(page, "erro-fora", largura, tema))
+                    self.estado_worker["verificar_erro"] = None
+                    ctx.close()
+
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    self._aguardar_botao_votar(page)
+                    page.locator("#btn-votar-fab").click()
+                    page.evaluate(
+                        "window.turnstile = { render: function(el, o) { o.callback('f'); return 1; } };"
+                    )
+                    page.locator("#votacao-btn-localizacao").click()
+                    page.wait_for_selector("#votacao-passo-cartoes:not([hidden])", timeout=15000)
+                    gerados.append(self._screenshot(page, "cartao", largura, tema))
+                    page.locator("#votacao-btn-util").focus()
+                    gerados.append(self._screenshot(page, "cartao-foco", largura, tema))
+                    page.locator("#votacao-btn-util").click()
+                    page.locator("#votacao-btn-inutil").click()
+                    page.locator("#votacao-btn-util").click()
+                    page.locator("#votacao-btn-inutil").click()
+                    page.wait_for_selector("#votacao-passo-resumo:not([hidden])", timeout=10000)
+                    gerados.append(self._screenshot(page, "resumo", largura, tema))
+                    page.locator("#votacao-btn-enviar").click()
+                    page.wait_for_selector("#votacao-passo-fim:not([hidden])", timeout=15000)
+                    gerados.append(self._screenshot(page, "fim", largura, tema))
+                    ctx.close()
+
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    page.evaluate("localStorage.setItem('epl_vp_votou:sessao:999','1');")
+                    page.reload(wait_until="networkidle")
+                    gerados.append(self._screenshot(page, "ja-votou", largura, tema))
+                    ctx.close()
+
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    page.evaluate("localStorage.setItem('epl_vp_votou:sessao:999','1');")
+                    page.reload(wait_until="networkidle")
+                    self._ir_camara(page)
+                    gerados.append(self._screenshot(page, "camara", largura, tema))
+                    ctx.close()
+
+                    self.estado_worker["rodada"]["materias"] = quatro[:2]
+                    self.estado_worker["rodada"]["materias"][0]["id"] = 66
+                    self.estado_worker["rodada"]["materias"][1]["id"] = 67
+                    self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
+                        {
+                            "materia_id": 66,
+                            "respostas": 40,
+                            "percentual_util": 60,
+                            "percentual_inutil": 40,
+                        },
+                        {
+                            "materia_id": 67,
+                            "respostas": 20,
+                            "percentual_util": 80,
+                            "percentual_inutil": 20,
+                        },
+                    ]
+                    self._sync_worker_state()
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    page.evaluate("localStorage.setItem('epl_vp_votou:sessao:999','1');")
+                    page.reload(wait_until="networkidle")
+                    self._ir_vereador(page, "5")
+                    gerados.append(self._screenshot(page, "perfil", largura, tema))
+                    ctx.close()
+
+                    self.estado_worker["rodada"]["materias"] = quatro
+                    self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
+                        {
+                            "materia_id": 201,
+                            "respostas": 3,
+                            "percentual_util": None,
+                            "percentual_inutil": None,
+                        }
+                    ]
+                    self._sync_worker_state()
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    self._aguardar_botao_votar(page)
+                    page.locator("#btn-votar-fab").click()
+                    page.evaluate(
+                        "window.turnstile = { render: function(el, o) { o.callback('f'); return 1; } };"
+                    )
+                    page.locator("#votacao-btn-localizacao").click()
+                    page.wait_for_selector("#votacao-passo-cartoes:not([hidden])", timeout=15000)
+                    for _ in quatro:
+                        page.locator("#votacao-btn-util").click()
+                    page.locator("#votacao-btn-enviar").click()
+                    page.wait_for_selector("#votacao-passo-fim:not([hidden])", timeout=15000)
+                    gerados.append(self._screenshot(page, "menos-respostas", largura, tema))
+                    ctx.close()
+                    self.estado_worker["rodada"]["materias"] = quatro
+
+                    self.estado_worker["rodada"]["status"] = "fechada"
+                    self.estado_worker["rodada"]["materias"] = []
+                    self._sync_worker_state()
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    page.evaluate("localStorage.setItem('epl_vp_votou:sessao:999','1');")
+                    page.reload(wait_until="networkidle")
+                    gerados.append(self._screenshot(page, "rodada-fechada", largura, tema))
+                    self.estado_worker["rodada"]["status"] = "aberta"
+                    self.estado_worker["rodada"]["materias"] = quatro
+                    ctx.close()
+        self.assertGreaterEqual(len(gerados), 52)
 
 
 if __name__ == "__main__":

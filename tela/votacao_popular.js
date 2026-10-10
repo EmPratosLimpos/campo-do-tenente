@@ -226,15 +226,82 @@
     return partes.join(". ") + (partes.length ? "." : "");
   }
 
+  function materiaRodadaPorId(materiaId) {
+    var lista = (rodada && rodada.materias) || [];
+    for (var i = 0; i < lista.length; i++) {
+      if (String(lista[i].id) === String(materiaId)) return lista[i];
+    }
+    return null;
+  }
+
+  function tituloMateriaId(materiaId) {
+    var m = materiaRodadaPorId(materiaId);
+    if (m) return tituloMateria(m);
+    return "";
+  }
+
+  function totalRespostasRodada() {
+    if (!resultados) return "";
+    var soma = 0;
+    var temNumero = false;
+    (resultados.materias || []).forEach(function (r) {
+      if (typeof r.respostas === "number") {
+        soma += r.respostas;
+        temNumero = true;
+      }
+    });
+    if (!temNumero) return "";
+    return soma + " respostas no total";
+  }
+
+  function htmlCabecalhoBlocoResultados() {
+    if (!podeVerResultados() || !resultados) return "";
+    var html =
+      '<div class="votacao-bloco-resultados-cab">' +
+      '<p class="votacao-aviso">' +
+      esc(AVISO_CONSULTA) +
+      "</p>";
+    var meta = metaResultado();
+    if (meta) {
+      html += '<p class="apoio votacao-meta-bloco">' + esc(meta) + "</p>";
+    }
+    var tot = totalRespostasRodada();
+    if (tot) {
+      html += '<p class="apoio votacao-total-bloco">' + esc(tot) + "</p>";
+    }
+    html += "</div>";
+    return html;
+  }
+
+  function textoMenosRespostas(achado) {
+    if (typeof achado.respostas === "string" && achado.respostas) {
+      return achado.respostas;
+    }
+    return "menos de " + minimoRespostas + " respostas";
+  }
+
   function htmlBarra(u, i) {
+    var pu = esc(String(u));
+    var pi = esc(String(i));
     return (
-      '<div class="vp-barra-resultado" role="img" aria-label="' +
-      esc(u + "% \u00fatil, " + i + "% in\u00fatil") +
-      '"><span class="vp-barra-seg" style="width:' +
-      esc(String(u)) +
-      '%"></span><span class="vp-barra-seg vp-barra-seg-b" style="width:' +
-      esc(String(i)) +
-      '%"></span></div>'
+      '<p class="votacao-resultado-linhas">' +
+      '<span class="votacao-pct-util">\u00datil ' +
+      pu +
+      "%</span> " +
+      '<span class="votacao-pct-inutil">In\u00fatil ' +
+      pi +
+      "%</span></p>" +
+      '<div class="vp-barra-resultado" aria-hidden="true">' +
+      '<span class="vp-barra-seg vp-barra-util" style="width:' +
+      pu +
+      '%"><span class="vp-barra-label">\u00datil ' +
+      pu +
+      "%</span></span>" +
+      '<span class="vp-barra-seg vp-barra-inutil" style="width:' +
+      pi +
+      '%"><span class="vp-barra-label">In\u00fatil ' +
+      pi +
+      "%</span></span></div>"
     );
   }
 
@@ -249,38 +316,28 @@
       }
     }
     if (!achado) return "";
+    var titulo = tituloMateriaId(materiaId);
     var corpo;
     if (achado.percentual_util == null) {
-      var menos =
-        typeof achado.respostas === "string"
-          ? achado.respostas
-          : "menos de " + minimoRespostas;
       corpo =
-        '<p class="votacao-resultado-linha apoio">' + esc(menos) + "</p>";
+        '<p class="votacao-resultado-linha apoio">' +
+        esc(textoMenosRespostas(achado)) +
+        "</p>";
     } else {
-      corpo =
-        '<p class="votacao-resultado-linha">' +
-        esc(String(achado.percentual_util)) +
-        "% \u00fatil \u00b7 " +
-        esc(String(achado.percentual_inutil)) +
-        "% in\u00fatil</p>" +
-        htmlBarra(achado.percentual_util, achado.percentual_inutil);
+      corpo = htmlBarra(achado.percentual_util, achado.percentual_inutil);
     }
     var total =
       typeof achado.respostas === "number"
-        ? achado.respostas + " respostas"
+        ? achado.respostas + " respostas nesta mat\u00e9ria"
         : "";
     return (
       '<div class="votacao-resultado-materia" data-vp-materia="' +
       esc(String(materiaId)) +
-      '"><p class="votacao-aviso">' +
-      esc(AVISO_CONSULTA) +
-      "</p>" +
+      '">' +
+      (titulo ? '<p class="vp-materia-titulo">' + titulo + "</p>" : "") +
       corpo +
       (total ? '<p class="apoio">' + esc(total) + "</p>" : "") +
-      '<p class="apoio">' +
-      esc(metaResultado()) +
-      "</p></div>"
+      "</div>"
     );
   }
 
@@ -323,21 +380,22 @@
     if (!soma) return "";
     var pu = Math.round((util / soma) * 100);
     var pi = Math.round((inutil / soma) * 100);
+    var totTxt = soma + " respostas no total";
     return (
       '<article class="cartao ac-cartao votacao-consolidado" aria-labelledby="tit-vp-cons">' +
       '<h2 class="t2" id="tit-vp-cons">Consulta informal na rodada atual</h2>' +
       '<p class="votacao-aviso">' +
       esc(AVISO_CONSULTA) +
       "</p>" +
-      '<p class="resumo">Nas mat\u00e9rias desta rodada em que este vereador \u00e9 autor: <strong>' +
-      esc(String(pu)) +
-      "%</strong> \u00fatil e <strong>" +
-      esc(String(pi)) +
-      "%</strong> in\u00fatil.</p>" +
-      htmlBarra(pu, pi) +
-      '<p class="apoio">' +
+      '<p class="apoio votacao-meta-bloco">' +
       esc(metaResultado()) +
-      "</p></article>"
+      "</p>" +
+      '<p class="apoio votacao-total-bloco">' +
+      esc(totTxt) +
+      "</p>" +
+      '<p class="resumo">Nas mat\u00e9rias desta rodada em que este vereador \u00e9 autor.</p>' +
+      htmlBarra(pu, pi) +
+      "</article>"
     );
   }
 
@@ -528,13 +586,10 @@
       })
       .join("");
     host.innerHTML =
-      '<p class="votacao-aviso">' +
-      esc(AVISO_CONSULTA) +
-      '</p><ul class="votacao-lista">' +
+      htmlCabecalhoBlocoResultados() +
+      '<ul class="votacao-lista">' +
       blocos +
-      '</ul><p class="apoio">' +
-      esc(metaResultado()) +
-      "</p>";
+      "</ul>";
   }
 
   function pedirLocalizacao() {
@@ -773,8 +828,13 @@
     recarregar: carregarRodada,
     htmlParaMateria: htmlParaMateria,
     blocoResultadoMateria: blocoResultadoMateria,
+    htmlCabecalhoBlocoResultados: htmlCabecalhoBlocoResultados,
     htmlConsolidadoVereador: htmlConsolidadoVereador,
     podeVerResultados: podeVerResultados,
-    _teste: { mensagemCodigo: mensagemCodigo, htmlConsolidadoVereador: htmlConsolidadoVereador },
+    _teste: {
+      mensagemCodigo: mensagemCodigo,
+      htmlConsolidadoVereador: htmlConsolidadoVereador,
+      textoMenosRespostas: textoMenosRespostas,
+    },
   };
 })(typeof window !== "undefined" ? window : globalThis);
