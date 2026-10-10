@@ -125,7 +125,8 @@ class TestEnderecoNaTela(unittest.TestCase):
         self.assertNotIn(DOMINIO_PROPRIO, csp)
         self.assertNotIn("github.io", csp)
         self.assertIn("default-src 'self'", csp)
-        self.assertIn("frame-src 'none'", csp)
+        self.assertIn("frame-src https://challenges.cloudflare.com", csp)
+        self.assertNotIn("workers.dev", csp)
 
 
 class TestEnderecoAntigoSumiuDoRepositorio(unittest.TestCase):
