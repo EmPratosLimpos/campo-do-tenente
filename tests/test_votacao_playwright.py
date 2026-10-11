@@ -36,6 +36,41 @@ def _cfg_com_worker():
     return cfg
 
 
+def _materia_resultado(
+    materia_id,
+    respostas,
+    percentual_util,
+    percentual_inutil,
+    total_util=None,
+    total_inutil=None,
+):
+    """Formato novo do Worker: totais exatos acima do minimo."""
+    item = {
+        "materia_id": materia_id,
+        "respostas": respostas,
+        "percentual_util": percentual_util,
+        "percentual_inutil": percentual_inutil,
+    }
+    if percentual_util is not None:
+        item["total_util"] = (
+            total_util if total_util is not None else round(respostas * percentual_util / 100)
+        )
+        item["total_inutil"] = (
+            total_inutil
+            if total_inutil is not None
+            else respostas - item["total_util"]
+        )
+    return item
+
+
+_TURNSTILE_INIT = (
+    "window.turnstile = { render: function(el, o) {"
+    " window.__turnstileOpts = o;"
+    " if (o.callback) o.callback('fake');"
+    " return 1; } };"
+)
+
+
 class _Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(RAIZ), **kwargs)
@@ -58,6 +93,28 @@ class _Handler(SimpleHTTPRequestHandler):
                 return self._json(500, {"codigo": "erro_interno", "erro": "fora"})
             return self._json(200, st.get("rodada") or {})
         if self.path.startswith("/api/resultados"):
+            status = st.get("resultados_http_status")
+            if status:
+                cod = st.get("resultados_http_codigo") or "erro_interno"
+                if status == 429:
+                    self.send_response(429)
+                    self.send_header("Retry-After", "5")
+                    self.send_header("Content-Type", "application/json")
+                    body = json.dumps(
+                        {
+                            "codigo": cod,
+                            "erro": "Muitos pedidos.",
+                            "tentar_depois_s": 5,
+                        }
+                    ).encode("utf-8")
+                    self.send_header("Content-Length", str(len(body)))
+                    self.end_headers()
+                    self.wfile.write(body)
+                    return
+                return self._json(
+                    int(status),
+                    {"codigo": cod, "erro": "msg teste"},
+                )
             return self._json(200, st.get("resultados") or {})
         return super().do_GET()
 
@@ -79,7 +136,12 @@ class _Handler(SimpleHTTPRequestHandler):
                 self.wfile.write(body)
                 return
             if cod:
-                status = 409 if cod in ("ja_votou", "teto_endereco") else 400
+                if cod == "corpo_grande":
+                    status = 413
+                elif cod in ("ja_votou", "teto_endereco"):
+                    status = 409
+                else:
+                    status = 400
                 return self._json(status, {"codigo": cod, "erro": "msg teste"})
             return self._json(
                 200,
@@ -150,12 +212,7 @@ class TestVotacaoPlaywright(unittest.TestCase):
                         "rodada_id": "sessao:999",
                         "status": "aberta",
                         "materias": [
-                            {
-                                "materia_id": 101,
-                                "respostas": 42,
-                                "percentual_util": 60,
-                                "percentual_inutil": 40,
-                            },
+                            _materia_resultado(101, 42, 60, 40, 25, 17),
                             {
                                 "materia_id": 102,
                                 "respostas": "menos de 10",
@@ -188,6 +245,12 @@ class TestVotacaoPlaywright(unittest.TestCase):
         WORKER_STATE["rodada"] = self.estado_worker["rodada"]
         WORKER_STATE["resultados"] = self.estado_worker["resultados"]
         WORKER_STATE["verificar_erro"] = self.estado_worker.get("verificar_erro")
+        WORKER_STATE["resultados_http_status"] = self.estado_worker.get(
+            "resultados_http_status"
+        )
+        WORKER_STATE["resultados_http_codigo"] = self.estado_worker.get(
+            "resultados_http_codigo"
+        )
 
     def _turnstile_route(self, page):
         page.route("**/turnstile/**", lambda r: r.fulfill(status=200, body="/* mock */"))
@@ -214,9 +277,7 @@ class TestVotacaoPlaywright(unittest.TestCase):
             permissions=["geolocation"],
         )
         page = context.new_page()
-        page.add_init_script(
-            "window.turnstile = { render: function(el, o) { if (o.callback) o.callback('fake'); return 1; } };"
-        )
+        page.add_init_script(_TURNSTILE_INIT)
         erros = []
         console_erros = []
 
@@ -517,12 +578,7 @@ class TestVotacaoPlaywright(unittest.TestCase):
                 "percentual_util": None,
                 "percentual_inutil": None,
             },
-            {
-                "materia_id": 102,
-                "respostas": 42,
-                "percentual_util": 50,
-                "percentual_inutil": 50,
-            },
+            _materia_resultado(102, 42, 50, 50, 21, 21),
         ]
         self._sync_worker_state()
         with sync_playwright() as p:
@@ -552,12 +608,7 @@ class TestVotacaoPlaywright(unittest.TestCase):
                 "percentual_util": None,
                 "percentual_inutil": None,
             },
-            {
-                "materia_id": 102,
-                "respostas": 42,
-                "percentual_util": 50,
-                "percentual_inutil": 50,
-            },
+            _materia_resultado(102, 42, 50, 50, 21, 21),
         ]
         self._sync_worker_state()
         with sync_playwright() as p:
@@ -605,24 +656,14 @@ class TestVotacaoPlaywright(unittest.TestCase):
         ]
         self.estado_worker["rodada"]["materias"] = rodada_mats
         self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
-            {
-                "materia_id": 66,
-                "respostas": 40,
-                "percentual_util": 60,
-                "percentual_inutil": 40,
-            },
-            {
-                "materia_id": 67,
-                "respostas": 20,
-                "percentual_util": 80,
-                "percentual_inutil": 20,
-            },
+            _materia_resultado(66, 40, 60, 40, 24, 16),
+            _materia_resultado(67, 20, 80, 20, 16, 4),
         ]
-        util = round(0.6 * 40 + 0.8 * 20)
-        inutil = round(0.4 * 40 + 0.2 * 20)
+        util = 24 + 16
+        inutil = 16 + 4
         soma = util + inutil
         pu = round((util / soma) * 100)
-        pi = round((inutil / soma) * 100)
+        pi = 100 - pu
         self._sync_worker_state()
         with sync_playwright() as p:
             ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
@@ -640,6 +681,102 @@ class TestVotacaoPlaywright(unittest.TestCase):
             self._ir_vereador(page, "100")
             self.assertEqual(page.locator(".votacao-consolidado").count(), 0)
             ctx.close()
+
+    def test_consolidado_soma_totais_worker(self):
+        rodada_mats = [
+            {
+                "id": 66,
+                "sigla": "PLEG",
+                "numero": "1",
+                "ano": "2026",
+                "ementa": "Consolidado A.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/66",
+            },
+            {
+                "id": 67,
+                "sigla": "PLEG",
+                "numero": "2",
+                "ano": "2026",
+                "ementa": "Consolidado B.",
+                "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/67",
+            },
+        ]
+        self.estado_worker["rodada"]["materias"] = rodada_mats
+        self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
+            _materia_resultado(66, 200, 1, 99, 1, 199),
+            _materia_resultado(67, 40, 75, 25, 30, 10),
+        ]
+        util = 1 + 30
+        inutil = 199 + 10
+        soma = util + inutil
+        self.assertEqual(soma, 240)
+        pu = round((util / soma) * 100)
+        pi = 100 - pu
+        self.assertEqual(pu, 13)
+        self.assertEqual(pi, 87)
+        self._sync_worker_state()
+        with sync_playwright() as p:
+            ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
+            page.evaluate("localStorage.setItem('epl_vp_votou:sessao:999','1');")
+            page.reload(wait_until="networkidle", timeout=90000)
+            self._ir_vereador(page, "5")
+            card = page.locator(".votacao-consolidado")
+            texto = card.inner_text()
+            self.assertIn("240 respostas no total", texto)
+            self.assertIn(f"Útil {pu}%", texto)
+            self.assertIn(f"Inútil {pi}%", texto)
+            self.assertNotIn("202 respostas", texto)
+            ctx.close()
+
+    def test_fim_sem_resultados_apos_voto(self):
+        for status, cod in ((500, "erro_interno"), (429, "limite_pedidos")):
+            self.estado_worker["resultados_http_status"] = status
+            self.estado_worker["resultados_http_codigo"] = cod
+            self._sync_worker_state()
+            with sync_playwright() as p:
+                ctx, page, erros, _ = self._nova_pagina(p, 390, "claro")
+                self._fluxo_completo(page)
+                self.assertEqual(self._aviso_consulta_visivel_overlay(page), 1)
+                corpo = page.locator("#votacao-fim-corpo").inner_text()
+                self.assertIn("Consulta informal", corpo)
+                self.assertIn(
+                    "Seu voto foi registrado. Os resultados não puderam ser carregados agora",
+                    corpo,
+                )
+                self.assertTrue(
+                    page.locator("#votacao-btn-fechar-fim").is_visible()
+                )
+                self.assertEqual(erros, [])
+                ctx.close()
+            self.estado_worker.pop("resultados_http_status", None)
+            self.estado_worker.pop("resultados_http_codigo", None)
+
+    def test_turnstile_action_votacao(self):
+        with sync_playwright() as p:
+            ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
+            self._aguardar_botao_votar(page)
+            page.locator("#btn-votar-fab").click()
+            page.wait_for_selector("#votacao-passo-termos:not([hidden])", timeout=10000)
+            action = page.evaluate("() => window.__turnstileOpts && window.__turnstileOpts.action")
+            self.assertEqual(action, "votacao")
+            ctx.close()
+
+    def test_corpo_grande_mensagem(self):
+        self.estado_worker["verificar_erro"] = "corpo_grande"
+        self._sync_worker_state()
+        with sync_playwright() as p:
+            ctx, page, _, _ = self._nova_pagina(p, 390, "claro")
+            self._aguardar_botao_votar(page)
+            page.locator("#btn-votar-fab").click()
+            page.evaluate(
+                "window.turnstile = { render: function(el, o) { o.callback('f'); return 1; } };"
+            )
+            page.locator("#votacao-btn-localizacao").click()
+            page.wait_for_selector("#votacao-erro-msg:not([hidden])", timeout=10000)
+            msg = page.locator("#votacao-erro-msg").inner_text()
+            self.assertIn("Pedido grande demais. Recarregue a página e tente de novo.", msg)
+            ctx.close()
+        self.estado_worker["verificar_erro"] = None
 
     def test_pedidos_so_dominios_permitidos(self):
         with sync_playwright() as p:
@@ -760,12 +897,7 @@ class TestVotacaoPlaywright(unittest.TestCase):
                     self.estado_worker["rodada"]["materias"] = copy.deepcopy(materias_duas)
                     self.estado_worker["rodada"]["status"] = "aberta"
                     self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
-                        {
-                            "materia_id": 101,
-                            "respostas": 42,
-                            "percentual_util": 55,
-                            "percentual_inutil": 45,
-                        },
+                        _materia_resultado(101, 42, 55, 45, 23, 19),
                         {
                             "materia_id": 102,
                             "respostas": "menos de 10",
@@ -779,22 +911,24 @@ class TestVotacaoPlaywright(unittest.TestCase):
                     gerados.append(self._screenshot(page, "fim", largura, tema))
                     ctx.close()
 
+                    self.estado_worker["resultados_http_status"] = 500
+                    self.estado_worker["resultados_http_codigo"] = "erro_interno"
+                    self._sync_worker_state()
+                    ctx, page, _, _ = self._nova_pagina(p, largura, tema)
+                    self._fluxo_completo(page)
+                    gerados.append(
+                        self._screenshot(page, "fim-sem-resultados", largura, tema)
+                    )
+                    self.estado_worker.pop("resultados_http_status", None)
+                    self.estado_worker.pop("resultados_http_codigo", None)
+                    ctx.close()
+
                     self.estado_worker["rodada"]["materias"] = quatro[:2]
                     self.estado_worker["rodada"]["materias"][0]["id"] = 66
                     self.estado_worker["rodada"]["materias"][1]["id"] = 67
                     self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
-                        {
-                            "materia_id": 66,
-                            "respostas": 40,
-                            "percentual_util": 60,
-                            "percentual_inutil": 40,
-                        },
-                        {
-                            "materia_id": 67,
-                            "respostas": 20,
-                            "percentual_util": 80,
-                            "percentual_inutil": 20,
-                        },
+                        _materia_resultado(66, 40, 60, 40, 24, 16),
+                        _materia_resultado(67, 20, 80, 20, 16, 4),
                     ]
                     self._sync_worker_state()
                     ctx, page, _, _ = self._nova_pagina(p, largura, tema)
@@ -828,7 +962,7 @@ class TestVotacaoPlaywright(unittest.TestCase):
                     page.wait_for_selector("#votacao-passo-fim:not([hidden])", timeout=15000)
                     gerados.append(self._screenshot(page, "menos-respostas", largura, tema))
                     ctx.close()
-        self.assertEqual(len(gerados), 12)
+        self.assertEqual(len(gerados), 16)
 
     def test_gerar_prints_votacao(self):
         quatro = [
@@ -867,10 +1001,15 @@ class TestVotacaoPlaywright(unittest.TestCase):
         ]
         self.estado_worker["rodada"]["materias"] = quatro
         mats_res = [
-            {"materia_id": 201, "respostas": 42, "percentual_util": 55, "percentual_inutil": 45},
-            {"materia_id": 202, "respostas": "menos de 10", "percentual_util": None, "percentual_inutil": None},
-            {"materia_id": 203, "respostas": 30, "percentual_util": 70, "percentual_inutil": 30},
-            {"materia_id": 204, "respostas": 25, "percentual_util": 40, "percentual_inutil": 60},
+            _materia_resultado(201, 42, 55, 45, 23, 19),
+            {
+                "materia_id": 202,
+                "respostas": "menos de 10",
+                "percentual_util": None,
+                "percentual_inutil": None,
+            },
+            _materia_resultado(203, 30, 70, 30, 21, 9),
+            _materia_resultado(204, 25, 40, 60, 10, 15),
         ]
         self.estado_worker["resultados"]["rodadas"][0]["materias"] = mats_res
         self._sync_worker_state()
@@ -960,18 +1099,8 @@ class TestVotacaoPlaywright(unittest.TestCase):
                     self.estado_worker["rodada"]["materias"][0]["id"] = 66
                     self.estado_worker["rodada"]["materias"][1]["id"] = 67
                     self.estado_worker["resultados"]["rodadas"][0]["materias"] = [
-                        {
-                            "materia_id": 66,
-                            "respostas": 40,
-                            "percentual_util": 60,
-                            "percentual_inutil": 40,
-                        },
-                        {
-                            "materia_id": 67,
-                            "respostas": 20,
-                            "percentual_util": 80,
-                            "percentual_inutil": 20,
-                        },
+                        _materia_resultado(66, 40, 60, 40, 24, 16),
+                        _materia_resultado(67, 20, 80, 20, 16, 4),
                     ]
                     self._sync_worker_state()
                     ctx, page, _, _ = self._nova_pagina(p, largura, tema)
