@@ -60,6 +60,21 @@ class TestWorkerVotacao(unittest.TestCase):
         self.assertIn("trg_vp_autorizacao_uso_unico", schema)
         self.assertIn("RAISE(ABORT, 'autorizacao_reutilizada')", schema)
         self.assertIn("vp_config", schema)
+        self.assertIn("trg_vp_participacao_autorizacao", schema)
+        self.assertIn("RAISE(ABORT, 'autorizacao_invalida')", schema)
+        self.assertIn("COALESCE(", schema)
+        self.assertIn("jti TEXT NOT NULL", schema)
+
+    def test_chave_do_teto_em_um_lugar_so_no_codigo(self):
+        fonte = (PASTA_WORKER / "src" / "index.js").read_text(encoding="utf-8")
+        self.assertIn('const CHAVE_TETO = "teto_votos_por_endereco_por_rodada"', fonte)
+        self.assertEqual(
+            fonte.count('"teto_votos_por_endereco_por_rodada"'),
+            1,
+            "chave do teto repetida no codigo, use CHAVE_TETO",
+        )
+        schema = (PASTA_WORKER / "schema.sql").read_text(encoding="utf-8")
+        self.assertIn("chave = 'teto_votos_por_endereco_por_rodada'", schema)
 
     def test_wrangler_sem_segredo_e_com_dois_ambientes(self):
         toml = (PASTA_WORKER / "wrangler.toml").read_text(encoding="utf-8")

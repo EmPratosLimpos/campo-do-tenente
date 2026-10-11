@@ -2,7 +2,15 @@
 --
 -- Nenhum numero de limite fixo aqui: o teto por endereco fica em vp_config,
 -- gravado pelo Worker a partir de src/dados_cidade.js (gerado do config),
--- para o trigger do teto ler dentro da mesma transacao.
+-- como primeira instrucao do proprio batch do voto, para o trigger do teto
+-- ler dentro da mesma transacao. Sem a linha do teto em vp_config, o trigger
+-- falha fechado e recusa a participacao com teto_endereco.
+--
+-- A coluna jti em vp_participacoes nao e dado pessoal: e o id da autorizacao
+-- de uso unico. O trigger da autorizacao confere, dentro da mesma transacao,
+-- que existe linha em vp_autorizacoes com o mesmo jti, rodada e aparelho ja
+-- marcada como usada. Sem ela, o batch aborta com autorizacao_invalida e
+-- nada e gravado.
 --
 -- Colunas ementa e link_sapl em vp_materias: extensao aditiva a ESPEC secao 3
 -- para GET /api/rodada sair do D1, a mesma fonte que valida o voto.
@@ -42,6 +50,7 @@ CREATE TABLE vp_participacoes (
   aparelho_hash TEXT NOT NULL,
   endereco_hash TEXT NOT NULL,
   criada_em TEXT NOT NULL,
+  jti TEXT NOT NULL,
   PRIMARY KEY (rodada_id, aparelho_hash)
 );
 
@@ -78,8 +87,11 @@ CREATE TABLE vp_config (
 CREATE INDEX idx_vp_part_endereco ON vp_participacoes (rodada_id, endereco_hash);
 CREATE INDEX idx_vp_votos_materia ON vp_votos (rodada_id, materia_id);
 
--- Teto por endereco atomico: aborta o INSERT (e com ele o batch inteiro)
--- quando a contagem do endereco na rodada ja atingiu o teto.
+-- Teto por endereco atomico e com falha fechada: aborta o INSERT (e com ele
+-- o batch inteiro) quando a contagem do endereco na rodada ja atingiu o teto.
+-- Sem a linha do teto em vp_config, o COALESCE vira 0 e qualquer contagem
+-- (ate zero) aborta com teto_endereco. A chave aqui tem de ser igual a
+-- constante CHAVE_TETO em src/index.js; ha teste que falha se divergir.
 CREATE TRIGGER trg_vp_teto_endereco
 BEFORE INSERT ON vp_participacoes
 WHEN (
@@ -87,11 +99,35 @@ WHEN (
     WHERE rodada_id = NEW.rodada_id
       AND endereco_hash = NEW.endereco_hash)
   >=
-  (SELECT CAST(valor AS INTEGER) FROM vp_config
-    WHERE chave = 'teto_votos_por_endereco_por_rodada')
+  COALESCE(
+    (SELECT CAST(valor AS INTEGER) FROM vp_config
+      WHERE chave = 'teto_votos_por_endereco_por_rodada'),
+    0
+  )
 )
 BEGIN
   SELECT RAISE(ABORT, 'teto_endereco');
+END;
+
+-- Autorizacao valida dentro da mesma transacao: aborta o INSERT (e com ele
+-- o batch inteiro) quando nao existe linha em vp_autorizacoes com o mesmo
+-- jti, rodada e aparelho ja marcada como usada. O UPDATE que marca usada = 1
+-- e a primeira escrita util do batch, entao um jti inexistente, ainda nao
+-- marcado ou de outra rodada ou aparelho aborta aqui com autorizacao_invalida
+-- antes de qualquer participacao, voto ou total ser gravado.
+CREATE TRIGGER trg_vp_participacao_autorizacao
+BEFORE INSERT ON vp_participacoes
+WHEN (
+  NOT EXISTS (
+    SELECT 1 FROM vp_autorizacoes
+    WHERE jti = NEW.jti
+      AND rodada_id = NEW.rodada_id
+      AND aparelho_hash = NEW.aparelho_hash
+      AND usada <> 0
+  )
+)
+BEGIN
+  SELECT RAISE(ABORT, 'autorizacao_invalida');
 END;
 
 -- Uso unico da autorizacao: o segundo UPDATE no mesmo jti aborta o batch.

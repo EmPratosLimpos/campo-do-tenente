@@ -35,7 +35,12 @@ import { DADOS_CIDADE } from "./dados_cidade.js";
 const CABECALHO_MODO_TESTE = "X-Modo-Teste";
 const URL_VERIFICAR_TURNSTILE =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-const CHAVE_TETO = "teto_votos_por_endereco_por_rodada";
+// Unico lugar do codigo com o texto da chave do teto. O schema.sql repete o
+// mesmo texto no trigger; ha teste que falha se os dois divergirem.
+export const CHAVE_TETO = "teto_votos_por_endereco_por_rodada";
+// A rotina agendada so apaga autorizacao vencida ha mais que esta margem,
+// para nao apagar o jti de um voto que ainda esta em andamento.
+const MARGEM_RETENCAO_AUTORIZACAO_S = 3600;
 
 function limites() {
   return DADOS_CIDADE.limites;
@@ -232,13 +237,13 @@ async function fecharRodadaD1(DB, rodadaId, agoraIso) {
     .run();
 }
 
-// Garante vp_config com o teto atual, para o trigger ler dentro do batch.
-async function garantirConfigTeto(DB) {
-  await DB.prepare(
-    "INSERT INTO vp_config (chave, valor) VALUES ('teto_votos_por_endereco_por_rodada', ?) ON CONFLICT (chave) DO UPDATE SET valor = excluded.valor",
-  )
-    .bind(String(limites().teto_votos_por_endereco_por_rodada))
-    .run();
+// Devolve a declaracao que grava o teto atual em vp_config. Ela e a primeira
+// instrucao do proprio batch do voto, para o trigger do teto ler dentro da
+// mesma transacao. A chave vai como parametro, a partir de CHAVE_TETO.
+function declaracaoConfigTeto(DB) {
+  return DB.prepare(
+    "INSERT INTO vp_config (chave, valor) VALUES (?, ?) ON CONFLICT (chave) DO UPDATE SET valor = excluded.valor",
+  ).bind(CHAVE_TETO, String(limites().teto_votos_por_endereco_por_rodada));
 }
 
 // Devolve { estado: "aberta", rodada } ou { estado: "fechada" | "sem_materias", rodadaId }.
@@ -543,6 +548,9 @@ function mapearErroBatch(mensagem) {
   if (texto.includes("autorizacao_reutilizada")) {
     return "autorizacao_reutilizada";
   }
+  if (texto.includes("autorizacao_invalida")) {
+    return "autorizacao_invalida";
+  }
   if (texto.includes("UNIQUE constraint failed")) {
     return "ja_votou";
   }
@@ -615,15 +623,19 @@ async function rotaVotar(request, env) {
       rotuloEndereco(rodada.rodada_id, endereco),
     );
 
-    await garantirConfigTeto(env.DB);
-
+    // Batch em uma transacao so, nesta ordem: teto atual, marcar a
+    // autorizacao como usada, inserir a participacao com o jti, inserir os
+    // votos, somar os totais. O trigger da autorizacao aborta o batch antes
+    // de qualquer gravacao quando o jti nao existe, ainda nao foi marcado,
+    // venceu e foi apagado, ou e de outra rodada ou aparelho.
     const lote = [
+      declaracaoConfigTeto(env.DB),
       env.DB.prepare(
         "UPDATE vp_autorizacoes SET usada = 1 WHERE jti = ?",
       ).bind(conf.payload.jti),
       env.DB.prepare(
-        "INSERT INTO vp_participacoes (rodada_id, aparelho_hash, endereco_hash, criada_em) VALUES (?, ?, ?, ?)",
-      ).bind(rodada.rodada_id, aparelhoHash, enderecoHash, agoraISO()),
+        "INSERT INTO vp_participacoes (rodada_id, aparelho_hash, endereco_hash, criada_em, jti) VALUES (?, ?, ?, ?, ?)",
+      ).bind(rodada.rodada_id, aparelhoHash, enderecoHash, agoraISO(), conf.payload.jti),
     ];
     for (const resposta of corpo.respostas) {
       lote.push(
@@ -656,7 +668,10 @@ async function rotaVotar(request, env) {
       const status = codigo === "ja_votou" || codigo === "teto_endereco" || codigo === "autorizacao_reutilizada" ? 409 : 400;
       return erroCodigo(request, env, codigo, status);
     }
-    if (!resultados || !resultados[0] || resultados[0].meta.changes !== 1) {
+    // Defesa extra: a protecao real contra jti invalido e o trigger dentro
+    // do batch. Aqui so se confere que o UPDATE da autorizacao (segunda
+    // instrucao, depois do upsert do teto) alterou exatamente uma linha.
+    if (!resultados || !resultados[1] || resultados[1].meta.changes !== 1) {
       return erroCodigo(request, env, "autorizacao_invalida", 400);
     }
 
@@ -763,8 +778,10 @@ async function rotinaRetencao(env, agora) {
       .bind(linha.rodada_id)
       .run();
   }
+  // So apaga autorizacao vencida ha mais que a margem, para nao apagar o
+  // jti de um voto que ainda esta em andamento e passar a recusar esse voto.
   await env.DB.prepare("DELETE FROM vp_autorizacoes WHERE expira_em <= ?")
-    .bind(agora)
+    .bind(agora - MARGEM_RETENCAO_AUTORIZACAO_S)
     .run();
   const janelaAtual = janelaIndice(agora, limites().limite_geral_janela_s);
   await env.DB.prepare("DELETE FROM vp_taxa WHERE janela_minuto < ?")

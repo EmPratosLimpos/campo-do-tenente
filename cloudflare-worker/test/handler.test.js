@@ -199,18 +199,25 @@ class D1Falso {
       if (this.participacoes.has(chave)) {
         throw new Error("UNIQUE constraint failed: vp_participacoes.rodada_id, vp_participacoes.aparelho_hash");
       }
+      // Mesma ordem dos triggers reais: teto (falha fechada) e depois jti.
       const tetoTexto = this.config.get("teto_votos_por_endereco_por_rodada");
-      if (tetoTexto !== undefined) {
-        let n = 0;
-        for (const linha of this.participacoes.values()) {
-          if (linha.rodada_id === p[0] && linha.endereco_hash === p[2]) n += 1;
-        }
-        if (n >= Number(tetoTexto)) {
-          throw new Error("teto_endereco");
-        }
+      const tetoNum = Number(tetoTexto);
+      if (tetoTexto === undefined || !Number.isFinite(tetoNum)) {
+        throw new Error("teto_endereco");
+      }
+      let n = 0;
+      for (const linha of this.participacoes.values()) {
+        if (linha.rodada_id === p[0] && linha.endereco_hash === p[2]) n += 1;
+      }
+      if (n >= tetoNum) {
+        throw new Error("teto_endereco");
+      }
+      const aut = this.autorizacoes.get(p[4]);
+      if (!aut || aut.rodada_id !== p[0] || aut.aparelho_hash !== p[1] || aut.usada === 0) {
+        throw new Error("autorizacao_invalida");
       }
       this.participacoes.set(chave, {
-        rodada_id: p[0], aparelho_hash: p[1], endereco_hash: p[2], criada_em: p[3],
+        rodada_id: p[0], aparelho_hash: p[1], endereco_hash: p[2], criada_em: p[3], jti: p[4],
       });
       return this._ok(1);
     }
@@ -995,7 +1002,8 @@ describe("retencao, modo de teste e privacidade", () => {
     db.votos.set("sessao:800|h1|1", { rodada_id: "sessao:800", materia_id: 1, aparelho_hash: "h1", valor: "util" });
     db.votos.set("sessao:900|h2|2", { rodada_id: "sessao:900", materia_id: 2, aparelho_hash: "h2", valor: "util" });
     db.autorizacoes.set("jti-velha", { jti: "jti-velha", rodada_id: "sessao:800", aparelho_hash: "h1", expira_em: 1, usada: 1 });
-    db.autorizacoes.set("jti-vencida", { jti: "jti-vencida", rodada_id: "sessao:900", aparelho_hash: "h2", expira_em: agora - 10, usada: 0 });
+    db.autorizacoes.set("jti-vencida", { jti: "jti-vencida", rodada_id: "sessao:900", aparelho_hash: "h2", expira_em: agora - 3700, usada: 0 });
+    db.autorizacoes.set("jti-recente", { jti: "jti-recente", rodada_id: "sessao:900", aparelho_hash: "h2", expira_em: agora - 10, usada: 0 });
     db.autorizacoes.set("jti-boa", { jti: "jti-boa", rodada_id: "sessao:900", aparelho_hash: "h2", expira_em: agora + 600, usada: 0 });
     db.totais.set("sessao:800|1", { rodada_id: "sessao:800", materia_id: 1, total_util: 5, total_inutil: 1 });
     db.totais.set("sessao:900|2", { rodada_id: "sessao:900", materia_id: 2, total_util: 2, total_inutil: 0 });
@@ -1009,6 +1017,7 @@ describe("retencao, modo de teste e privacidade", () => {
     assert.equal(db.participacoes.has("sessao:900|h2"), true);
     assert.equal(db.votos.has("sessao:900|h2|2"), true);
     assert.equal(db.autorizacoes.has("jti-vencida"), false);
+    assert.equal(db.autorizacoes.has("jti-recente"), true);
     assert.equal(db.autorizacoes.has("jti-boa"), true);
     assert.equal(db.totais.get("sessao:800|1").total_util, 5);
     assert.equal(db.taxa.has("hashvelho|1"), false);
