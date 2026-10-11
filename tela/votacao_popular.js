@@ -19,6 +19,9 @@
   var STORAGE_VOTO_PREFIX = "epl_vp_votou:";
   var AVISO_CONSULTA =
     "Consulta informal, n\u00e3o \u00e9 pesquisa nem plebiscito.";
+  var MSG_FIM_SEM_RESULTADOS =
+    "Seu voto foi registrado. Os resultados n\u00e3o puderam ser carregados agora; tente ver mais tarde.";
+  var fimSemResultados = false;
 
   function cfg() {
     return deps.getConfig ? deps.getConfig() : null;
@@ -137,6 +140,8 @@
         "Autoriza\u00e7\u00e3o inv\u00e1lida ou vencida. Refa\u00e7a a verifica\u00e7\u00e3o.",
       autorizacao_reutilizada:
         "Autoriza\u00e7\u00e3o j\u00e1 usada. Refa\u00e7a a verifica\u00e7\u00e3o.",
+      corpo_grande:
+        "Pedido grande demais. Recarregue a p\u00e1gina e tente de novo.",
       erro_interno: "Servidor indispon\u00edvel. Tente de novo em instantes.",
     };
     if (codigo && mapa[codigo]) return mapa[codigo];
@@ -255,6 +260,20 @@
     return soma + " respostas no total";
   }
 
+  function htmlCabecalhoFimSemResultados() {
+    if (!podeVerResultados()) return "";
+    return (
+      '<div class="votacao-bloco-resultados-cab">' +
+      '<p class="votacao-aviso">' +
+      esc(AVISO_CONSULTA) +
+      "</p>" +
+      '<p class="apoio votacao-fim-sem-resultados">' +
+      esc(MSG_FIM_SEM_RESULTADOS) +
+      "</p>" +
+      "</div>"
+    );
+  }
+
   function htmlCabecalhoBlocoResultados() {
     if (!podeVerResultados() || !resultados) return "";
     var html =
@@ -371,18 +390,19 @@
         if (String(r.materia_id) === String(mid)) achado = r;
       });
       if (!achado || achado.percentual_util == null) return;
-      var tot =
-        typeof achado.respostas === "number"
-          ? achado.respostas
-          : parseInt(String(achado.respostas), 10) || 0;
-      if (!tot) return;
-      util += Math.round((achado.percentual_util / 100) * tot);
-      inutil += Math.round((achado.percentual_inutil / 100) * tot);
+      if (
+        typeof achado.total_util !== "number" ||
+        typeof achado.total_inutil !== "number"
+      ) {
+        return;
+      }
+      util += achado.total_util;
+      inutil += achado.total_inutil;
     });
     var soma = util + inutil;
     if (!soma) return "";
     var pu = Math.round((util / soma) * 100);
-    var pi = Math.round((inutil / soma) * 100);
+    var pi = 100 - pu;
     var totTxt = soma + " respostas no total";
     return (
       '<article class="cartao ac-cartao votacao-consolidado" aria-labelledby="tit-vp-cons">' +
@@ -409,6 +429,7 @@
     ov.setAttribute("aria-hidden", "false");
     document.body.classList.add("folha-aberta");
     mostrarErro("");
+    fimSemResultados = false;
     irPasso("termos");
     captureEvento("votacao_iniciada");
   }
@@ -482,6 +503,7 @@
         if (!box || !global.turnstile) return;
         widgetTurnstileId = turnstile.render(box, {
           sitekey: turnstileKey,
+          action: "votacao",
           callback: function (token) {
             turnstileToken = token;
           },
@@ -582,6 +604,11 @@
   function renderFim() {
     var host = el("votacao-fim-corpo");
     if (!host) return;
+    if (fimSemResultados) {
+      host.innerHTML =
+        htmlCabecalhoFimSemResultados() + '<ul class="votacao-lista"></ul>';
+      return;
+    }
     var itens = (resultados && resultados.materias) || [];
     var blocos = itens
       .map(function (r) {
@@ -686,7 +713,8 @@
         }
         marcarVotoLocal(resp.corpo.rodada_id || rodada.rodada_id);
         captureEvento("votacao_enviada");
-        return carregarResultados().then(function () {
+        return carregarResultados().then(function (ok) {
+          fimSemResultados = ok === false;
           irPasso("fim");
           atualizarEntrada();
           if (deps.onResultados) deps.onResultados();
@@ -716,13 +744,20 @@
   }
 
   function carregarResultados() {
-    if (!podeVerResultados()) return Promise.resolve();
+    if (!podeVerResultados()) return Promise.resolve(true);
     return fetchJson(apiUrl("/api/resultados"))
       .then(function (resp) {
-        if (!resp.ok || !resp.corpo) return;
+        if (!resp.ok || !resp.corpo) {
+          resultados = null;
+          return false;
+        }
         resultados = normalizarResultados(resp.corpo);
+        return !!resultados;
       })
-      .catch(function () { /* silencioso */ });
+      .catch(function () {
+        resultados = null;
+        return false;
+      });
   }
 
   function carregarRodada() {
