@@ -128,6 +128,14 @@ function logLinha(fase, detalhe) {
   console.log(`[votacao] ${fase} ${detalhe}`);
 }
 
+// Erro interno no log: so rota, codigo interno curto e classe do erro.
+// Nunca mensagem completa, pilha, IP, endereco, aparelho, hash, coordenada,
+// jti, token ou segredo.
+function logErro(rota, codigo, erro) {
+  const tipo = erro && erro.name ? String(erro.name) : "desconhecido";
+  console.error(`[votacao] erro rota=${rota} codigo=${codigo} tipo=${tipo}`);
+}
+
 // ---------------------------------------------------------------------------
 // Limite de pedidos por HMAC do endereco
 // ---------------------------------------------------------------------------
@@ -204,7 +212,8 @@ async function buscarRodadaPublica(env) {
       return null;
     }
     return obj;
-  } catch {
+  } catch (e) {
+    logErro("rodada", "rodada_busca", e);
     return null;
   }
 }
@@ -398,7 +407,8 @@ async function verificarTurnstile(token, segredo, endereco, env) {
       return false;
     }
     return true;
-  } catch {
+  } catch (e) {
+    logErro("verificar", "turnstile_rede", e);
     return false;
   }
 }
@@ -451,7 +461,8 @@ async function rotaRodada(request, env) {
     }
     logLinha("rodada", `aberta ${sinc.rodada.rodada_id}`);
     return respostaJSON(request, env, sinc.rodada, 200, "no-store");
-  } catch {
+  } catch (e) {
+    logErro("rodada", "rodada_erro", e);
     return erroInterno(request, env);
   }
 }
@@ -604,7 +615,8 @@ async function rotaVerificar(request, env) {
       200,
       "no-store",
     );
-  } catch {
+  } catch (e) {
+    logErro("verificar", "verificar_erro", e);
     return erroInterno(request, env);
   }
 }
@@ -742,6 +754,7 @@ async function rotaVotar(request, env) {
     } catch (e) {
       const codigo = mapearErroBatch(e);
       if (codigo === "erro_interno") {
+        logErro("votar", "d1_batch", e);
         return erroInterno(request, env);
       }
       const status = codigo === "ja_votou" || codigo === "teto_endereco" || codigo === "autorizacao_reutilizada" ? 409 : 400;
@@ -762,7 +775,8 @@ async function rotaVotar(request, env) {
       200,
       "no-store",
     );
-  } catch {
+  } catch (e) {
+    logErro("votar", "votar_erro", e);
     return erroInterno(request, env);
   }
 }
@@ -828,7 +842,8 @@ async function rotaResultados(request, env, url) {
       );
     }
     return resp;
-  } catch {
+  } catch (e) {
+    logErro("resultados", "resultados_erro", e);
     return erroInterno(request, env);
   }
 }
@@ -907,7 +922,8 @@ export default {
         return await rotaResultados(request, env, url);
       }
       return erroCodigo(request, env, "pedido_invalido", 404);
-    } catch {
+    } catch (e) {
+      logErro("roteador", "roteador_erro", e);
       return erroInterno(request, env);
     }
   },
@@ -916,7 +932,8 @@ export default {
     try {
       const total = await rotinaRetencao(env, agoraS());
       logLinha("retencao", `rodadas limpas=${total}`);
-    } catch {
+    } catch (e) {
+      logErro("retencao", "retencao_erro", e);
       logLinha("retencao", "falha na limpeza");
     }
   },

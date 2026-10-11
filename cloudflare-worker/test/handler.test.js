@@ -1245,6 +1245,54 @@ describe("retencao, modo de teste e privacidade", () => {
     }
   });
 
+  it("erro interno registra so rota, codigo e tipo, sem dado pessoal", async () => {
+    const mundo = montarMundo();
+    const linhas = [];
+    const realErr = console.error;
+    console.error = (...args) => linhas.push(args.join(" "));
+    const ipMarcado = "203.0.113.199";
+    try {
+      const r = await handler.fetch(
+        pedido("/api/verificar", {
+          metodo: "POST",
+          corpo: { turnstile_token: "t", aparelho_id: "aparelho-marcado-xyz", lat: LAT_DENTRO, lon: LON_DENTRO, precisao_m: 12 },
+          ip: ipMarcado,
+        }),
+        mundo.env,
+        {},
+      );
+      const token = (await corpoJSON(r)).autorizacao;
+      const materias = mundo.rede.rodada.materias.map((m) => ({ materia_id: m.id, valor: "util" }));
+      mundo.db.falharNoLote = 3;
+      const rv = await handler.fetch(
+        pedido("/api/votar", {
+          metodo: "POST",
+          corpo: { autorizacao: token, aparelho_id: "aparelho-marcado-xyz", respostas: materias },
+          ip: ipMarcado,
+        }),
+        mundo.env,
+        {},
+      );
+      assert.equal(rv.status, 500);
+      mundo.db.falharNoLote = 0;
+      const payloadTexto = Buffer.from(
+        token.split(".")[0].replace(/-/g, "+").replace(/_/g, "/"),
+        "base64",
+      ).toString("utf-8");
+      const jti = JSON.parse(payloadTexto).jti;
+      assert.ok(linhas.length > 0, "erro interno sem registro no log");
+      const proibidos = [ipMarcado, String(LAT_DENTRO), String(LON_DENTRO), "aparelho-marcado-xyz", jti, token, SEGREDO_HMAC, "segredo-falso-turnstile", "modo-falso-abc123"];
+      for (const texto of linhas) {
+        for (const segredo of proibidos) {
+          assert.ok(!texto.includes(segredo), `vazamento no log: ${texto.slice(0, 160)}`);
+        }
+      }
+      assert.ok(linhas.some((t) => t.includes("rota=votar") && t.includes("codigo=d1_batch") && t.includes("tipo=")));
+    } finally {
+      console.error = realErr;
+    }
+  });
+
   it("nenhuma resposta ou log contem IP, coordenada, aparelho ou segredo", async () => {
     const mundo = montarMundo();
     const linhas = [];

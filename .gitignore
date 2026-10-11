@@ -74,9 +74,7 @@ backups/local/
 
 # Wrangler
 .wrangler/
-
-# Cloudflare worker (secrets in wrangler.toml)
-cloudflare-worker/wrangler.toml
+tmp_build/
 
 # Cloudflare Pages
 _wrangler/
