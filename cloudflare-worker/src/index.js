@@ -41,6 +41,10 @@ export const CHAVE_TETO = "teto_votos_por_endereco_por_rodada";
 // A rotina agendada so apaga autorizacao vencida ha mais que esta margem,
 // para nao apagar o jti de um voto que ainda esta em andamento.
 const MARGEM_RETENCAO_AUTORIZACAO_S = 3600;
+// Teto de corpo dos POST, antes de ler e interpretar o JSON.
+const LIMITE_CORPO_BYTES = 32 * 1024;
+// Acao do Turnstile que a tela envia no widget da votacao.
+const ACAO_TURNSTILE = "votacao";
 
 function limites() {
   return DADOS_CIDADE.limites;
@@ -298,6 +302,12 @@ async function sincronizarRodada(env, agora) {
       }
       await env.DB.batch(lote);
     }
+    // Rodada que ja esta com status diferente de aberta no D1 nunca volta a
+    // ser servida como aberta, mesmo que o arquivo publico (ou o cache dele)
+    // ainda diga aberta.
+    if (existente && existente.status !== "aberta") {
+      return { estado: "fechada", rodadaId: publica.rodada_id };
+    }
     const limiteIdade = fechaAteS(publica.data_sessao);
     if (limiteIdade !== null && agora > limiteIdade) {
       await fecharRodadaD1(env.DB, publica.rodada_id, agoraIso);
@@ -343,7 +353,24 @@ async function sincronizarRodada(env, agora) {
 // Turnstile no servidor
 // ---------------------------------------------------------------------------
 
-async function verificarTurnstile(token, segredo, endereco) {
+// Hosts aceitos na resposta do siteverify: o host de SITE_ORIGEM e, so no
+// ambiente de teste, localhost e 127.0.0.1.
+function hostsTurnstileEsperados(env) {
+  const lista = [];
+  try {
+    if (env.SITE_ORIGEM) {
+      lista.push(new URL(env.SITE_ORIGEM).hostname);
+    }
+  } catch {
+    // SITE_ORIGEM invalida: nenhum host passa.
+  }
+  if (env.AMBIENTE === "teste") {
+    lista.push("localhost", "127.0.0.1");
+  }
+  return lista;
+}
+
+async function verificarTurnstile(token, segredo, endereco, env) {
   if (!token || !segredo) {
     return false;
   }
@@ -358,9 +385,40 @@ async function verificarTurnstile(token, segredo, endereco) {
       }),
     });
     const json = await resp.json();
-    return !!(json && json.success);
+    if (!(json && json.success)) {
+      return false;
+    }
+    if (
+      typeof json.hostname !== "string" ||
+      !hostsTurnstileEsperados(env).includes(json.hostname)
+    ) {
+      return false;
+    }
+    if (json.action !== undefined && json.action !== ACAO_TURNSTILE) {
+      return false;
+    }
+    return true;
   } catch {
     return false;
+  }
+}
+
+// Recusa cedo, antes de ler o corpo: Content-Length anunciado acima do teto.
+function corpoAnunciadoGrande(request) {
+  const anunciado = Number(request.headers.get("Content-Length"));
+  return Number.isFinite(anunciado) && anunciado > LIMITE_CORPO_BYTES;
+}
+
+// Le o corpo como texto, recusa acima do teto e interpreta o JSON.
+async function lerCorpoJSON(request) {
+  const texto = await request.text();
+  if (texto.length > LIMITE_CORPO_BYTES) {
+    return { grande: true };
+  }
+  try {
+    return { corpo: JSON.parse(texto) };
+  } catch {
+    return { invalido: true };
   }
 }
 
@@ -410,9 +468,19 @@ async function rotaVerificar(request, env) {
       return erroLimite(request, env, geral.tentarDepois);
     }
 
+    if (corpoAnunciadoGrande(request)) {
+      return erroCodigo(request, env, "corpo_grande", 413);
+    }
     let corpo;
     try {
-      corpo = await request.json();
+      const lido = await lerCorpoJSON(request);
+      if (lido.grande) {
+        return erroCodigo(request, env, "corpo_grande", 413);
+      }
+      if (lido.invalido) {
+        return erroCodigo(request, env, "pedido_invalido", 400);
+      }
+      corpo = lido.corpo;
     } catch {
       return erroCodigo(request, env, "pedido_invalido", 400);
     }
@@ -444,6 +512,7 @@ async function rotaVerificar(request, env) {
       corpo ? corpo.turnstile_token : "",
       env.TURNSTILE_SECRET_KEY,
       endereco,
+      env,
     );
     if (!captchaOk) {
       return erroCodigo(request, env, "captcha_invalido", 400);
@@ -573,9 +642,19 @@ async function rotaVotar(request, env) {
       return erroLimite(request, env, proprio.tentarDepois);
     }
 
+    if (corpoAnunciadoGrande(request)) {
+      return erroCodigo(request, env, "corpo_grande", 413);
+    }
     let corpo;
     try {
-      corpo = await request.json();
+      const lido = await lerCorpoJSON(request);
+      if (lido.grande) {
+        return erroCodigo(request, env, "corpo_grande", 413);
+      }
+      if (lido.invalido) {
+        return erroCodigo(request, env, "pedido_invalido", 400);
+      }
+      corpo = lido.corpo;
     } catch {
       return erroCodigo(request, env, "pedido_invalido", 400);
     }

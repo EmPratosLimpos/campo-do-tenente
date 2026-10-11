@@ -354,12 +354,15 @@ const MS_BASE = Date.parse("2026-10-20T12:00:00Z");
 
 function montarMundo({ ambiente = "teste", rodada = rodadaFalsa(900) } = {}) {
   const db = new D1Falso();
-  const rede = { turnstile: true, rodada };
+  const rede = {
+    turnstile: { success: true, hostname: "site.falso", action: "votacao" },
+    rodada,
+  };
   global.fetch = async (url, opts) => {
     void opts;
     const texto = String(url);
     if (texto.includes("siteverify")) {
-      return { ok: true, json: async () => ({ success: rede.turnstile }) };
+      return { ok: true, json: async () => rede.turnstile };
     }
     if (texto === "https://site.falso/dados/tratados/votacao_rodada.json") {
       if (rede.rodada === null) {
@@ -383,18 +386,19 @@ function montarMundo({ ambiente = "teste", rodada = rodadaFalsa(900) } = {}) {
   return { db, env, rede };
 }
 
-function pedido(rota, { metodo = "GET", corpo = null, ip = `${IP_BASE}7`, origin = "https://site.falso", extras = {} } = {}) {
+function pedido(rota, { metodo = "GET", corpo = null, corpoTexto = null, ip = `${IP_BASE}7`, origin = "https://site.falso", extras = {} } = {}) {
   const headers = {
     "Content-Type": "application/json",
     "CF-Connecting-IP": ip,
     Origin: origin,
     ...extras,
   };
+  const body = corpoTexto !== null ? corpoTexto : corpo === null ? undefined : JSON.stringify(corpo);
   return new Request(`https://worker.falso${rota}`, {
     metodo,
     method: metodo,
     headers,
-    body: corpo === null ? undefined : JSON.stringify(corpo),
+    body,
   });
 }
 
@@ -766,7 +770,7 @@ describe("respostas e GPS", () => {
     assert.equal(ruim.status, 400);
     assert.equal((await corpoJSON(ruim)).codigo, "precisao_ruim");
 
-    mundo.rede.turnstile = false;
+    mundo.rede.turnstile = { success: false };
     const captcha = await handler.fetch(
       pedido("/api/verificar", {
         metodo: "POST",
@@ -1086,6 +1090,159 @@ describe("retencao, modo de teste e privacidade", () => {
     const prod = montarMundo({ ambiente: "producao" });
     const negado = await handler.fetch(pedido("/api/rodada", { origin: "http://localhost:8000" }), prod.env, {});
     assert.equal(negado.headers.get("Access-Control-Allow-Origin"), "https://site.falso");
+  });
+
+  it("turnstile: hostname errado ou acao errada viram captcha_invalido", async () => {
+    const respostas = [
+      { success: true, hostname: "site-errado.falso", action: "votacao" },
+      { success: true, hostname: "site.falso", action: "outra-acao" },
+      { success: true },
+    ];
+    for (const resposta of respostas) {
+      const mundo = montarMundo();
+      mundo.rede.turnstile = resposta;
+      const r = await handler.fetch(
+        pedido("/api/verificar", {
+          metodo: "POST",
+          corpo: { turnstile_token: "t", aparelho_id: "ap-cap-1", lat: LAT_DENTRO, lon: LON_DENTRO, precisao_m: 10 },
+          ip: `${IP_BASE}111`,
+        }),
+        mundo.env,
+        {},
+      );
+      assert.equal(r.status, 400, JSON.stringify(resposta));
+      assert.equal((await corpoJSON(r)).codigo, "captcha_invalido");
+    }
+  });
+
+  it("turnstile: resposta sem acao passa e localhost so vale no teste", async () => {
+    const semAcao = montarMundo();
+    semAcao.rede.turnstile = { success: true, hostname: "site.falso" };
+    const rOk = await handler.fetch(
+      pedido("/api/verificar", {
+        metodo: "POST",
+        corpo: { turnstile_token: "t", aparelho_id: "ap-cap-2", lat: LAT_DENTRO, lon: LON_DENTRO, precisao_m: 10 },
+        ip: `${IP_BASE}112`,
+      }),
+      semAcao.env,
+      {},
+    );
+    assert.equal(rOk.status, 200);
+
+    const teste = montarMundo({ ambiente: "teste" });
+    teste.rede.turnstile = { success: true, hostname: "127.0.0.1", action: "votacao" };
+    const rLocal = await handler.fetch(
+      pedido("/api/verificar", {
+        metodo: "POST",
+        corpo: { turnstile_token: "t", aparelho_id: "ap-cap-3", lat: LAT_DENTRO, lon: LON_DENTRO, precisao_m: 10 },
+        ip: `${IP_BASE}113`,
+      }),
+      teste.env,
+      {},
+    );
+    assert.equal(rLocal.status, 200);
+
+    const prod = montarMundo({ ambiente: "producao" });
+    prod.rede.turnstile = { success: true, hostname: "127.0.0.1", action: "votacao" };
+    const rProd = await handler.fetch(
+      pedido("/api/verificar", {
+        metodo: "POST",
+        corpo: { turnstile_token: "t", aparelho_id: "ap-cap-4", lat: LAT_DENTRO, lon: LON_DENTRO, precisao_m: 10 },
+        ip: `${IP_BASE}114`,
+      }),
+      prod.env,
+      {},
+    );
+    assert.equal(rProd.status, 400);
+    assert.equal((await corpoJSON(rProd)).codigo, "captcha_invalido");
+  });
+
+  it("corpo acima de 32 KB e recusado com 413 corpo_grande", async () => {
+    const mundo = montarMundo();
+    const anunciado = await handler.fetch(
+      pedido("/api/verificar", {
+        metodo: "POST",
+        corpoTexto: "{}",
+        ip: `${IP_BASE}121`,
+        extras: { "Content-Length": String(100 * 1024) },
+      }),
+      mundo.env,
+      {},
+    );
+    assert.equal(anunciado.status, 413);
+    assert.equal((await corpoJSON(anunciado)).codigo, "corpo_grande");
+
+    const lido = await handler.fetch(
+      pedido("/api/verificar", {
+        metodo: "POST",
+        corpo: { turnstile_token: "t", aparelho_id: `ap-${"x".repeat(40000)}`, lat: LAT_DENTRO, lon: LON_DENTRO, precisao_m: 10 },
+        ip: `${IP_BASE}122`,
+      }),
+      mundo.env,
+      {},
+    );
+    assert.equal(lido.status, 413);
+    assert.equal((await corpoJSON(lido)).codigo, "corpo_grande");
+
+    const voto = await handler.fetch(
+      pedido("/api/votar", {
+        metodo: "POST",
+        corpoTexto: "{}",
+        ip: `${IP_BASE}123`,
+        extras: { "Content-Length": String(100 * 1024) },
+      }),
+      mundo.env,
+      {},
+    );
+    assert.equal(voto.status, 413);
+    assert.equal((await corpoJSON(voto)).codigo, "corpo_grande");
+  });
+
+  it("rodada fechada no D1 nao volta a abrir pelo arquivo publico", async () => {
+    const mundo = montarMundo();
+    await verificarEVotar(mundo, { aparelho: "ap-fecha-1", ip: `${IP_BASE}131` });
+    const rodadaId = mundo.rede.rodada.rodada_id;
+    mundo.db.rodadas.get(rodadaId).status = "fechada";
+    mundo.db.rodadas.get(rodadaId).fechada_em = "2026-10-20T00:00:00.000Z";
+    const r = await handler.fetch(pedido("/api/rodada", { ip: `${IP_BASE}132` }), mundo.env, {});
+    const corpo = await corpoJSON(r);
+    assert.equal(corpo.status, "fechada");
+    const v = await handler.fetch(
+      pedido("/api/verificar", {
+        metodo: "POST",
+        corpo: { turnstile_token: "t", aparelho_id: "ap-fecha-2", lat: LAT_DENTRO, lon: LON_DENTRO, precisao_m: 10 },
+        ip: `${IP_BASE}133`,
+      }),
+      mundo.env,
+      {},
+    );
+    assert.equal(v.status, 400);
+    assert.equal((await corpoJSON(v)).codigo, "rodada_fechada");
+  });
+
+  it("resultados acima do minimo trazem totais exatos que somam 100", async () => {
+    const mundo = montarMundo();
+    const rodadaId = mundo.rede.rodada.rodada_id;
+    mundo.db.rodadas.set(rodadaId, {
+      rodada_id: rodadaId, sessao_id: 900, data_sessao: "2026-10-06",
+      status: "aberta", criada_em: "2026-10-20T00:00:00.000Z", fechada_em: null,
+    });
+    const [m1, m2] = mundo.rede.rodada.materias;
+    mundo.db.totais.set(`${rodadaId}|${m1.id}`, { rodada_id: rodadaId, materia_id: m1.id, total_util: 1, total_inutil: 199 });
+    mundo.db.totais.set(`${rodadaId}|${m2.id}`, { rodada_id: rodadaId, materia_id: m2.id, total_util: 150, total_inutil: 50 });
+    const r = await handler.fetch(pedido("/api/resultados", { ip: `${IP_BASE}141` }), mundo.env, {});
+    const corpo = await corpoJSON(r);
+    assert.equal(r.status, 200);
+    const mats = corpo.rodadas[0].materias;
+    const primeira = mats.find((m) => m.materia_id === m1.id);
+    assert.equal(primeira.respostas, 200);
+    assert.equal(primeira.total_util, 1);
+    assert.equal(primeira.total_inutil, 199);
+    assert.equal(primeira.percentual_util, 1);
+    assert.equal(primeira.percentual_inutil, 99);
+    for (const m of mats) {
+      assert.equal(m.percentual_util + m.percentual_inutil, 100);
+    }
   });
 
   it("nenhuma resposta ou log contem IP, coordenada, aparelho ou segredo", async () => {

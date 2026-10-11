@@ -107,12 +107,15 @@ const MS_BASE = Date.parse("2026-10-20T12:00:00Z");
 
 function montarMundoReal({ ambiente = "teste", rodada = rodadaFalsa(900) } = {}) {
   const db = new D1Real();
-  const rede = { turnstile: true, rodada };
+  const rede = {
+    turnstile: { success: true, hostname: "site.falso", action: "votacao" },
+    rodada,
+  };
   global.fetch = async (url, opts) => {
     void opts;
     const texto = String(url);
     if (texto.includes("siteverify")) {
-      return { ok: true, json: async () => ({ success: rede.turnstile }) };
+      return { ok: true, json: async () => rede.turnstile };
     }
     if (texto === "https://site.falso/dados/tratados/votacao_rodada.json") {
       if (rede.rodada === null) {
@@ -136,18 +139,19 @@ function montarMundoReal({ ambiente = "teste", rodada = rodadaFalsa(900) } = {})
   return { db, env, rede };
 }
 
-function pedido(rota, { metodo = "GET", corpo = null, ip = `${IP_BASE}7`, origin = "https://site.falso", extras = {} } = {}) {
+function pedido(rota, { metodo = "GET", corpo = null, corpoTexto = null, ip = `${IP_BASE}7`, origin = "https://site.falso", extras = {} } = {}) {
   const headers = {
     "Content-Type": "application/json",
     "CF-Connecting-IP": ip,
     Origin: origin,
     ...extras,
   };
+  const body = corpoTexto !== null ? corpoTexto : corpo === null ? undefined : JSON.stringify(corpo);
   return new Request(`https://worker.falso${rota}`, {
     metodo,
     method: metodo,
     headers,
-    body: corpo === null ? undefined : JSON.stringify(corpo),
+    body,
   });
 }
 
@@ -353,6 +357,97 @@ describe("teto no SQLite real", () => {
       /teto_endereco/,
     );
     assert.equal(await mundo.db.contar("vp_participacoes", "rodada_id = ?", "sessao:900"), 0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Turnstile, corpo grande, rodada fechada e totais no SQLite real
+// ---------------------------------------------------------------------------
+
+describe("turnstile e corpo no SQLite real", () => {
+  it("hostname errado ou acao errada viram captcha_invalido", async () => {
+    for (const resposta of [
+      { success: true, hostname: "site-errado.falso", action: "votacao" },
+      { success: true, hostname: "site.falso", action: "outra-acao" },
+    ]) {
+      const mundo = montarMundoReal();
+      mundo.rede.turnstile = resposta;
+      const r = await soVerificar(mundo, { aparelho: "ap-cap-1", ip: `${IP_BASE}111` });
+      assert.equal(r.status, 400, JSON.stringify(resposta));
+      assert.equal(r.corpo.codigo, "captcha_invalido");
+    }
+  });
+
+  it("corpo acima de 32 KB e recusado com 413 corpo_grande", async () => {
+    const mundo = montarMundoReal();
+    const anunciado = await handler.fetch(
+      pedido("/api/votar", {
+        metodo: "POST",
+        corpoTexto: "{}",
+        ip: `${IP_BASE}121`,
+        extras: { "Content-Length": String(100 * 1024) },
+      }),
+      mundo.env,
+      {},
+    );
+    assert.equal(anunciado.status, 413);
+    assert.equal((await anunciado.json()).codigo, "corpo_grande");
+
+    const lido = await handler.fetch(
+      pedido("/api/verificar", {
+        metodo: "POST",
+        corpo: { turnstile_token: "t", aparelho_id: `ap-${"x".repeat(40000)}`, lat: LAT_DENTRO, lon: LON_DENTRO, precisao_m: 10 },
+        ip: `${IP_BASE}122`,
+      }),
+      mundo.env,
+      {},
+    );
+    assert.equal(lido.status, 413);
+    assert.equal((await lido.json()).codigo, "corpo_grande");
+  });
+});
+
+describe("rodada fechada no SQLite real", () => {
+  it("D1 fechada com arquivo aberto: verificar e votar recusam", async () => {
+    const mundo = montarMundoReal();
+    const { env } = mundo;
+    const fluxo = await verificarEVotar(mundo, { aparelho: "ap-fecha-1", ip: `${IP_BASE}131` });
+    assert.equal(fluxo.votarStatus, 200);
+    const rodadaId = mundo.rede.rodada.rodada_id;
+    await env.DB.prepare(
+      "UPDATE vp_rodadas SET status = 'fechada', fechada_em = ? WHERE rodada_id = ?",
+    ).bind("2026-10-20T00:00:00.000Z", rodadaId).run();
+    const r = await handler.fetch(pedido("/api/rodada", { ip: `${IP_BASE}132` }), env, {});
+    assert.equal((await r.json()).status, "fechada");
+    const v = await soVerificar(mundo, { aparelho: "ap-fecha-2", ip: `${IP_BASE}133` });
+    assert.equal(v.status, 400);
+    assert.equal(v.corpo.codigo, "rodada_fechada");
+  });
+});
+
+describe("resultados no SQLite real", () => {
+  it("1 util e 199 inutil: totais exatos e percentuais que somam 100", async () => {
+    const mundo = montarMundoReal();
+    const { env } = mundo;
+    const rodadaId = mundo.rede.rodada.rodada_id;
+    const r0 = await handler.fetch(pedido("/api/rodada", { ip: `${IP_BASE}141` }), env, {});
+    assert.equal(r0.status, 200);
+    const [m1, m2] = mundo.rede.rodada.materias;
+    await env.DB.prepare(
+      "UPDATE vp_totais SET total_util = ?, total_inutil = ? WHERE rodada_id = ? AND materia_id = ?",
+    ).bind(1, 199, rodadaId, m1.id).run();
+    await env.DB.prepare(
+      "UPDATE vp_totais SET total_util = ?, total_inutil = ? WHERE rodada_id = ? AND materia_id = ?",
+    ).bind(150, 50, rodadaId, m2.id).run();
+    const r = await handler.fetch(pedido("/api/resultados", { ip: `${IP_BASE}142` }), env, {});
+    const corpo = await r.json();
+    assert.equal(r.status, 200);
+    const primeira = corpo.rodadas[0].materias.find((m) => m.materia_id === m1.id);
+    assert.equal(primeira.respostas, 200);
+    assert.equal(primeira.total_util, 1);
+    assert.equal(primeira.total_inutil, 199);
+    assert.equal(primeira.percentual_util, 1);
+    assert.equal(primeira.percentual_inutil, 99);
   });
 });
 

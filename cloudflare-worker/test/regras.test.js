@@ -377,8 +377,38 @@ describe("resultados e limites", () => {
       minimo,
     });
     assert.equal(visivel.respostas, 10);
+    assert.equal(visivel.total_util, 7);
+    assert.equal(visivel.total_inutil, 3);
     assert.equal(visivel.percentual_util, 70);
     assert.equal(visivel.percentual_inutil, 30);
+  });
+
+  it("1 util e 199 inutil: 1 e 99, com totais exatos", () => {
+    const minimo = DADOS_CIDADE.limites.minimo_respostas_por_materia;
+    const visivel = formatarMateriaResultado({
+      materiaId: 5,
+      util: 1,
+      inutil: 199,
+      minimo,
+    });
+    assert.equal(visivel.respostas, 200);
+    assert.equal(visivel.total_util, 1);
+    assert.equal(visivel.total_inutil, 199);
+    assert.equal(visivel.percentual_util, 1);
+    assert.equal(visivel.percentual_inutil, 99);
+    assert.equal(visivel.percentual_util + visivel.percentual_inutil, 100);
+  });
+
+  it("abaixo do minimo nao traz contagem", () => {
+    const minimo = DADOS_CIDADE.limites.minimo_respostas_por_materia;
+    const oculto = formatarMateriaResultado({
+      materiaId: 5,
+      util: 3,
+      inutil: 1,
+      minimo,
+    });
+    assert.ok(!("total_util" in oculto));
+    assert.ok(!("total_inutil" in oculto));
   });
 
   it("janela de limite e conta regressiva", () => {

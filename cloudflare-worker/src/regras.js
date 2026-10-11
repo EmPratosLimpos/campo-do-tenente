@@ -19,6 +19,7 @@ export const MENSAGENS_ERRO = {
   fora_do_municipio:
     "Voce parece estar fora do municipio. A consulta vale para quem esta no municipio.",
   captcha_invalido: "Verificacao anti robo falhou. Tente de novo.",
+  corpo_grande: "Pedido grande demais. Tente de novo.",
   ja_votou: "Este aparelho ja votou nesta rodada.",
   teto_endereco: "Muitos votos nesta conexao para esta rodada.",
   limite_pedidos: "Muitos pedidos. Aguarde e tente de novo.",
@@ -492,11 +493,16 @@ export function formatarMateriaResultado({ materiaId, util, inutil, minimo }) {
       percentual_inutil: null,
     };
   }
+  // Acima do minimo, com as contagens exatas por lado. O segundo percentual
+  // e o complemento do primeiro, para os dois somarem sempre 100.
+  const percentualUtil = Math.round((util / total) * 100);
   return {
     materia_id: materiaId,
     respostas: total,
-    percentual_util: Math.round((util / total) * 100),
-    percentual_inutil: Math.round((inutil / total) * 100),
+    total_util: util,
+    total_inutil: inutil,
+    percentual_util: percentualUtil,
+    percentual_inutil: 100 - percentualUtil,
   };
 }
 
