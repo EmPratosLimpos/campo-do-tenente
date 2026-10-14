@@ -8,6 +8,9 @@
 name = "epl-votacao-campo-do-tenente"
 main = "src/index.js"
 compatibility_date = "2026-09-01"
+workers_dev = true
+# Sem endereco de previa por versao: so a versao atual fica acessivel.
+preview_urls = false
 
 [vars]
 AMBIENTE = "producao"
