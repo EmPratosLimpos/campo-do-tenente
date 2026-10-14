@@ -24,7 +24,7 @@ vars = { AMBIENTE = "teste", SITE_ORIGEM = "https://empratoslimpos.com", RODADA_
 [[env.teste.d1_databases]]
 binding = "DB"
 database_name = "epl-votacao-campo-do-tenente-teste"
-database_id = "PREENCHER_NA_PARADA_2"
+database_id = "870f90f4-8582-47bc-9540-8871ed4700d4"
 
 [env.producao]
 vars = { AMBIENTE = "producao", SITE_ORIGEM = "https://empratoslimpos.com", RODADA_URL = "https://empratoslimpos.com/dados/tratados/votacao_rodada.json", TURNSTILE_SITE_KEY = "PREENCHER_NA_PARADA_2", RODADA_ID_LOCAL = "" }
