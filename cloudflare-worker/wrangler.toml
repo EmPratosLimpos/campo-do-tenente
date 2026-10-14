@@ -2,6 +2,8 @@
 # o slug vem do nome da cidade em config_cidade.json ("Campo do Tenente").
 # Nenhum segredo neste arquivo. Segredos so no cofre, com secret put,
 # na Parada 2. database_id sai na Parada 2.
+# No ambiente teste a rodada vem da branch da votacao no GitHub, porque o
+# arquivo so chega ao site no merge.
 
 name = "epl-votacao-campo-do-tenente"
 main = "src/index.js"
@@ -18,7 +20,7 @@ RODADA_ID_LOCAL = ""
 crons = ["0 12 * * *"]
 
 [env.teste]
-vars = { AMBIENTE = "teste", SITE_ORIGEM = "https://empratoslimpos.com", RODADA_URL = "https://empratoslimpos.com/dados/tratados/votacao_rodada.json", TURNSTILE_SITE_KEY = "PREENCHER_NA_PARADA_2", RODADA_ID_LOCAL = "" }
+vars = { AMBIENTE = "teste", SITE_ORIGEM = "https://empratoslimpos.com", RODADA_URL = "https://raw.githubusercontent.com/EmPratosLimpos/campo-do-tenente/refs/heads/EmPratosLimpos/votacao/dados/tratados/votacao_rodada.json", TURNSTILE_SITE_KEY = "0x4AAAAAAFWshH_PN_WUsT3e", RODADA_ID_LOCAL = "" }
 [[env.teste.d1_databases]]
 binding = "DB"
 database_name = "epl-votacao-campo-do-tenente-teste"
