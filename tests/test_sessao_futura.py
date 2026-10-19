@@ -20,9 +20,9 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "coletor"))
 
+from calendario import data_da_sessao  # noqa: E402
 from coletar_por_sessao import (  # noqa: E402
     coletar_sessao_completa,
-    data_da_sessao,
     exigir_minimo_de_sessoes,
     sessoes_desta_execucao,
 )
