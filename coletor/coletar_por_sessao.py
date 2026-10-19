@@ -11,9 +11,10 @@ Rodar:  python coletor/coletar_por_sessao.py
 from __future__ import annotations
 
 import json
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 
+from calendario import hoje_na_cidade, sessao_ja_aconteceu
 from coletar_lote import (
     PAGE_SIZE,
     ColetorLote,
@@ -102,6 +103,35 @@ def sessoes_ordinarias(
         por_id.values(),
         key=lambda item: (item.get("data_inicio") or "", int(item.get("numero") or 0), item["id"]),
     )
+
+
+def sessoes_desta_execucao(
+    sessoes: list[dict], hoje: date
+) -> tuple[list[dict], list[dict]]:
+    """Separa as ordinarias que ja aconteceram das que ainda vao acontecer.
+
+    Sessao com data_inicio depois de hoje, no fuso da cidade, fica fora
+    do alvo: nao e baixada, nao e recusada e nao entra na contagem de
+    sessoes novas desta execucao. Ela volta na proxima execucao, quando
+    ja tiver acontecido. Sessao de hoje ou de antes segue a regra atual,
+    inclusive a recusa por presenca zerada. Data invalida fica no alvo e
+    segue o caminho de erro de sempre. O piso de sessoes continua sendo
+    conferido na lista inteira, antes deste corte.
+    """
+    vigentes: list[dict] = []
+    futuras: list[dict] = []
+    for sessao in sessoes:
+        if sessao_ja_aconteceu(sessao, hoje):
+            vigentes.append(sessao)
+        else:
+            futuras.append(sessao)
+    for sessao in futuras:
+        print(
+            f"sessao {int(sessao['id'])} numero {sessao.get('numero')} "
+            f"de {sessao.get('data_inicio')} ainda nao aconteceu: "
+            "fica para a proxima execucao"
+        )
+    return vigentes, futuras
 
 
 def exigir_minimo_de_sessoes(sessoes: list[dict], cfg: dict) -> None:
@@ -644,8 +674,9 @@ def main() -> None:
     tipo = id_tipo_sessao_ordinaria(cfg)
     anos = anos_recorte(cfg)
     origem = pasta_lote_origem(BRUTOS, anos)
-    sessoes = sessoes_ordinarias(origem, tipo, anos)
-    exigir_minimo_de_sessoes(sessoes, cfg)
+    todas = sessoes_ordinarias(origem, tipo, anos)
+    exigir_minimo_de_sessoes(todas, cfg)
+    sessoes, _futuras = sessoes_desta_execucao(todas, hoje_na_cidade())
     pasta = BRUTOS / f"lote_{datetime.now().strftime('%Y%m%d')}_porsessao"
     coletor = ColetorLote(cfg, pasta, teto=TETO_POR_SESSAO)
     print(f"Coleta por sessao em dados/brutos/{pasta.name}")

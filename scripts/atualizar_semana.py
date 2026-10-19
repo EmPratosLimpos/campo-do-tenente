@@ -61,6 +61,8 @@ from coletar_por_sessao import (  # noqa: E402
     coletar_sessao_completa,
     conferir_prefixo,
     gravar_conferencia,
+    hoje_na_cidade,
+    sessoes_desta_execucao,
     sessoes_ordinarias,
     total_entries_da_pagina,
 )
@@ -1168,7 +1170,7 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("A pausa do SAPL esta abaixo de 2,5 s. Nao vou continuar.")
 
     cfg = carregar_config()
-    hoje = date.today()
+    hoje = hoje_na_cidade()
     fonte = endereco_sapl(cfg)
     orcamento = OrcamentoExecucao(TETO_EXECUCAO)
     pasta_lote = pasta_lote_mais_recente(BRUTOS)
@@ -1230,13 +1232,21 @@ def main(argv: list[str] | None = None) -> int:
         tipo = id_tipo_sessao_ordinaria(cfg)
         sessoes = sessoes_ordinarias(pasta_lote, tipo)
         conferir_lista_nao_regrediu(sessoes_antes, sessoes)
+        sessoes_coletaveis, sessoes_futuras = sessoes_desta_execucao(sessoes, hoje)
         pasta_sessao = pasta_porsessao_mais_recente(BRUTOS)
         if pasta_sessao is None:
-            lista_novas = list(sessoes)
-            lista_alvo = list(sessoes)
+            lista_novas = list(sessoes_coletaveis)
+            lista_alvo = list(sessoes_coletaveis)
         else:
-            lista_novas, lista_alvo = sessoes_alvo_para_coleta(sessoes, pasta_sessao)
+            lista_novas, lista_alvo = sessoes_alvo_para_coleta(
+                sessoes_coletaveis, pasta_sessao
+            )
         print(f"Sessoes ordinarias no lote: {len(sessoes)}")
+        if sessoes_futuras:
+            print(
+                f"Sessoes ordinarias fora do alvo por ainda nao terem acontecido: "
+                f"{len(sessoes_futuras)}. O piso segue conferido na lista inteira."
+            )
         print(f"Sessoes ordinarias novas: {len(lista_novas)}")
         if lista_alvo and len(lista_alvo) > len(lista_novas):
             print(f"Sessoes para revisao de lancamento atrasado: {len(lista_alvo) - len(lista_novas)}")
@@ -1277,7 +1287,7 @@ def main(argv: list[str] | None = None) -> int:
                     "fora da rotina semanal. Nada foi publicado."
                 )
                 return 2
-            conferir_coleta_por_sessao(pasta_sessao, sessoes)
+            conferir_coleta_por_sessao(pasta_sessao, sessoes_coletaveis)
 
         pasta_autoria = pasta_autoria_mais_recente(BRUTOS)
         retrato_autoria_antes = retrato_autoria(pasta_autoria)
@@ -1337,7 +1347,7 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"  aviso: {aviso}.")
                 avisos_conferencia.append(aviso)
         if pasta_sessao is not None and lista_alvo and not args.simulado:
-            divergencias = conferir_coleta_por_sessao(pasta_sessao, sessoes)
+            divergencias = conferir_coleta_por_sessao(pasta_sessao, sessoes_coletaveis)
             bloqueantes, avisos_conf = separar_divergencias_por_alvo(
                 divergencias,
                 [int(item["id"]) for item in lista_novas],
