@@ -8,6 +8,8 @@ inteira, antes do corte.
 
 from __future__ import annotations
 
+import ast
+import builtins
 import contextlib
 import io
 import json
@@ -127,6 +129,81 @@ class TestSessaoFuturaFicaFora(unittest.TestCase):
         with self.assertRaises(SystemExit) as ctx:
             exigir_minimo_de_sessoes(vigentes, cfg_piso(3))
         self.assertIn("2026: piso 3, achei 2", str(ctx.exception))
+
+
+def _nomes_do_modulo(arvore: ast.Module) -> set[str]:
+    """Nomes que o modulo define no escopo global: imports, defs e atribuicoes."""
+    definidos: set[str] = set()
+    for no in arvore.body:
+        if isinstance(no, ast.Import):
+            for apelido in no.names:
+                definidos.add((apelido.asname or apelido.name).split(".")[0])
+        elif isinstance(no, ast.ImportFrom):
+            for apelido in no.names:
+                definidos.add(apelido.asname or apelido.name)
+        elif isinstance(no, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            definidos.add(no.name)
+        elif isinstance(no, (ast.Assign, ast.AnnAssign, ast.AugAssign)):
+            alvos = no.targets if isinstance(no, ast.Assign) else [no.target]
+            for alvo in alvos:
+                for nome in ast.walk(alvo):
+                    if isinstance(nome, ast.Name):
+                        definidos.add(nome.id)
+    return definidos
+
+
+def _nomes_locais(no_funcao: ast.AST) -> set[str]:
+    """Nomes que a funcao amarra: args, atribuicoes, for, with, except e defs."""
+    locais: set[str] = set()
+    for no in ast.walk(no_funcao):
+        if isinstance(no, ast.Name) and isinstance(no.ctx, ast.Store):
+            locais.add(no.id)
+        elif isinstance(no, ast.arg):
+            locais.add(no.arg)
+        elif isinstance(no, ast.ExceptHandler) and no.name:
+            locais.add(no.name)
+        elif isinstance(no, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            locais.add(no.name)
+    return locais
+
+
+def nomes_indefinidos_em_main(fonte: str) -> set[str]:
+    """Nomes usados no main que nao sao locais, builtins nem do modulo."""
+    arvore = ast.parse(fonte)
+    definidos_no_modulo = _nomes_do_modulo(arvore)
+    main = next(
+        no
+        for no in arvore.body
+        if isinstance(no, ast.FunctionDef) and no.name == "main"
+    )
+    locais = _nomes_locais(main)
+    usados = {
+        no.id
+        for no in ast.walk(main)
+        if isinstance(no, ast.Name) and isinstance(no.ctx, ast.Load)
+    }
+    conhecidos = definidos_no_modulo | set(dir(builtins))
+    return usados - locais - conhecidos
+
+
+class TestMainSemNomeIndefinido(unittest.TestCase):
+    """O main do coletor por sessao nao pode usar nome que o modulo nao define.
+
+    O commit da sessao futura trocou o import de datetime por date e deixou
+    o datetime.now() no nome da pasta, um NameError que a rotina semanal nao
+    alcanca porque ela nao passa por esse main.
+    """
+
+    def test_todo_nome_do_main_esta_definido_no_modulo(self):
+        caminho = RAIZ / "coletor" / "coletar_por_sessao.py"
+        fonte = caminho.read_text(encoding="utf-8")
+        compile(fonte, str(caminho), "exec")
+        indefinidos = nomes_indefinidos_em_main(fonte)
+        self.assertEqual(
+            indefinidos,
+            set(),
+            f"nomes usados no main sem definicao no modulo: {sorted(indefinidos)}",
+        )
 
 
 if __name__ == "__main__":

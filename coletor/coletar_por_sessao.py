@@ -11,7 +11,7 @@ Rodar:  python coletor/coletar_por_sessao.py
 from __future__ import annotations
 
 import json
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 from calendario import hoje_na_cidade, sessao_ja_aconteceu
