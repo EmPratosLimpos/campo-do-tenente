@@ -100,7 +100,12 @@ class TestSessaoNovaNaoQuebra(unittest.TestCase):
             for materia in resposta["results"]:
                 brutas[int(materia["id"])] = materia
         tratadas = ler(RAIZ / "dados" / "tratados" / "temas_materias.json")["materias"]
-        self.assertEqual({item["id"] for item in tratadas}, set(brutas))
+        pendentes_path = RAIZ / "dados" / "tratados" / "temas_pendentes.json"
+        pendentes = ler(pendentes_path)["pendentes"]
+        ids_temas = {item["id"] for item in tratadas}
+        ids_pendentes = {item["id"] for item in pendentes}
+        self.assertEqual(ids_temas & ids_pendentes, set())
+        self.assertEqual(ids_temas | ids_pendentes, set(brutas))
         brutas[SESSAO_FALSA] = {"id": SESSAO_FALSA}
         tratadas = list(tratadas) + [{"id": SESSAO_FALSA}]
         self.assertEqual({item["id"] for item in tratadas}, set(brutas))
