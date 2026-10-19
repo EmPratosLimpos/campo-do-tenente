@@ -14,6 +14,13 @@ ementa, o link do SAPL e as tres respostas. O resto da semana sai
 normalmente. Entrada com revisada_por_humano true NUNCA e alterada.
 Entrada ja classificada por consenso nao e classificada de novo.
 
+A materia que fica sem tema nunca some em silencio: ela e registrada
+em dados/tratados/temas_pendentes.json (id, ano, sigla, numero, link,
+motivo curto e data), de forma deterministica e com quebra de linha
+LF. Materia que ganha tema, por consenso ou por revisao humana, sai
+desse arquivo. Assim toda materia do lote tem tema em
+temas_materias.json ou esta registrada como pendente.
+
 A chave e lida so da variavel de ambiente OPENCODE_ZEN_API_KEY. Sem
 a chave, nada e classificado, a execucao NAO falha: as materias novas
 voltam como pendentes (aviso no CHANGELOG e issue de revisao).
@@ -56,6 +63,7 @@ from config_cidade import (  # noqa: E402
 )
 
 ARQUIVO_TEMAS = RAIZ / "dados" / "tratados" / "temas_materias.json"
+PENDENTES_NOME = "temas_pendentes.json"
 BRUTOS = RAIZ / "dados" / "brutos"
 
 NOME_VAR_CHAVE = "OPENCODE_ZEN_API_KEY"
@@ -648,6 +656,97 @@ def gravar_entradas(entradas: list[dict]) -> None:
     ARQUIVO_TEMAS.write_bytes(texto.encode("utf-8"))
 
 
+def caminho_pendentes() -> Path:
+    """Arquivo das materias sem tema, ao lado do temas_materias.json."""
+    return ARQUIVO_TEMAS.with_name(PENDENTES_NOME)
+
+
+def ler_pendentes() -> dict:
+    """Le o temas_pendentes.json; ausente ou ilegivel vira lista vazia."""
+    caminho = caminho_pendentes()
+    if not caminho.is_file():
+        return {"pendentes": []}
+    try:
+        dados = json.loads(caminho.read_text(encoding="utf-8"))
+    except (OSError, ValueError, UnicodeDecodeError):
+        return {"pendentes": []}
+    if not isinstance(dados, dict) or not isinstance(dados.get("pendentes"), list):
+        return {"pendentes": []}
+    return dados
+
+
+def entrada_pendente(materia: dict, motivo: str, hoje: str) -> dict:
+    """Registro de uma materia sem tema, sem repetir nenhum dado de tema."""
+    numero = materia.get("numero")
+    return {
+        "id": int(materia["id"]),
+        "ano": int(materia.get("ano") or 0),
+        "sigla": str(materia.get("sigla") or ""),
+        "numero": int(numero) if numero is not None else numero,
+        "link": materia.get("link") or link_materia(int(materia["id"])),
+        "motivo": str(motivo or "")[:200],
+        "data": hoje,
+    }
+
+
+def sincronizar_pendentes(
+    resultado: dict, brutas: dict[int, dict], dados_temas: dict, hoje: str
+) -> None:
+    """Registra as pendentes desta execucao e remove as que ganharam tema.
+
+    O arquivo fica sempre com ids do lote e nunca com id que ja tem tema,
+    ordenado por id e gravado em LF. Id que saiu do lote tambem sai daqui,
+    para nada fora do recorte ficar registrado.
+    """
+    caminho = caminho_pendentes()
+    lote_ids = {int(mid) for mid in brutas}
+    com_tema = {int(item["id"]) for item in dados_temas.get("materias") or []}
+    com_tema |= {int(item["id"]) for item in resultado.get("consenso") or []}
+    anteriores: dict[int, dict] = {}
+    for item in ler_pendentes().get("pendentes") or []:
+        if not isinstance(item, dict):
+            continue
+        try:
+            mid = int(item.get("id"))
+        except (TypeError, ValueError):
+            continue
+        if mid in lote_ids and mid not in com_tema:
+            anteriores[mid] = item
+    for pendente in resultado.get("pendentes") or []:
+        materia = pendente.get("materia") or {}
+        if materia.get("id") is None:
+            continue
+        mid = int(materia["id"])
+        anteriores[mid] = entrada_pendente(materia, pendente.get("motivo") or "", hoje)
+    lista = [anteriores[mid] for mid in sorted(anteriores)]
+    dados = {
+        "descricao": (
+            "Materias do recorte ainda sem tema, aguardando revisao do "
+            "mantenedor (D-047). Materia que ganha tema sai daqui."
+        ),
+        "fonte": "scripts/classificar_temas.py",
+        "total": len(lista),
+        "pendentes": lista,
+    }
+    texto = json.dumps(dados, ensure_ascii=False, indent=2) + "\n"
+    caminho.write_bytes(texto.encode("utf-8"))
+
+
+def cobertura_do_lote(
+    lote_ids, ids_temas, ids_pendentes
+) -> tuple[list[int], list[int]]:
+    """Invariante do lote: (sem_registro, duplicados).
+
+    sem_registro sao ids do lote que nao estao nem em temas nem em
+    pendentes (perda silenciosa). duplicados sao ids nos dois arquivos
+    ao mesmo tempo. Os testes de cobertura exigem os dois vazios.
+    """
+    lote = {int(x) for x in lote_ids}
+    temas = {int(x) for x in ids_temas}
+    pendentes = {int(x) for x in ids_pendentes}
+    return sorted(lote - temas - pendentes), sorted(temas & pendentes)
+
+
 def titulo_revisao(materia: dict) -> str:
     return f"Tema para revisao: {materia.get('sigla')} {materia.get('numero')}/{materia.get('ano')}"
 
@@ -786,6 +885,10 @@ def classificar_novas(
         "modelos": list(nomes_modelos),
     }
     if not novas:
+        if gravar:
+            sincronizar_pendentes(resultado, brutas, dados_temas, dia)
+        if abrir_issues:
+            resultado["avisos"].extend(abrir_issues_revisao(resultado, correr))
         return resultado
     if chave:
         sessao_id = uuid.uuid4().hex
@@ -806,6 +909,8 @@ def classificar_novas(
             resultado["pendentes"].append(
                 {"materia": materia, "votos": [], "motivo": "sem chave do classificador na execucao"}
             )
+    if gravar:
+        sincronizar_pendentes(resultado, brutas, dados_temas, dia)
     if abrir_issues:
         resultado["avisos"].extend(abrir_issues_revisao(resultado, correr))
     return resultado
@@ -818,15 +923,29 @@ def linhas_changelog_temas(resultado: dict, sem_chave: bool) -> list[str]:
         return []
     n_consenso = len(resultado.get("consenso") or [])
     n_pendentes = len(resultado.get("pendentes") or [])
+    linhas = []
     if sem_chave:
-        return [
+        linhas.append(
             f"Temas de {len(novas)} materias novas aguardam classificacao "
             "(a execucao nao tinha a chave do classificador)."
-        ]
-    return [
-        f"Temas de materias novas: {n_consenso} por consenso de tres modelos (D-047), "
-        f"{n_pendentes} aguardam revisao do mantenedor."
-    ]
+        )
+    else:
+        linhas.append(
+            f"Temas de materias novas: {n_consenso} por consenso de tres modelos (D-047), "
+            f"{n_pendentes} aguardam revisao do mantenedor."
+        )
+    pendentes = resultado.get("pendentes") or []
+    if pendentes:
+        refs = []
+        for pendente in pendentes:
+            materia = pendente.get("materia") or {}
+            refs.append(
+                f"{materia.get('sigla')} {materia.get('numero')}/{materia.get('ano')}"
+            )
+        linhas.append(
+            "Materias novas sem tema, registradas como pendentes: " + ", ".join(refs) + "."
+        )
+    return linhas
 
 
 def sondar_ultimas_revisadas(cfg: dict | None = None, chave: str | None = None, pedir=pedir_modelo) -> dict:
