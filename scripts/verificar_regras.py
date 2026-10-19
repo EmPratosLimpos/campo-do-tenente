@@ -4,6 +4,7 @@ Script de verificacao compulsoria de regras de governanca e sanidade.
 Executado localmente por qualquer agente ou desenvolvedor antes de commits.
 """
 
+import argparse
 import hashlib
 import pathlib
 import re
@@ -19,7 +20,38 @@ from config_cidade import anos_recorte, carregar_config  # noqa: E402
 from marcas_ia import verificar_commits_marcas_ia  # noqa: E402
 
 
-def main():
+def conferir_branch(branch: str, rotina_semanal: bool = False) -> list[str]:
+    """Devolve os erros da checagem de branch.
+
+    A rotina semanal roda na main de proposito e so publica dados, por isso
+    recebe uma dispensa explicita dessa checagem. Sem a dispensa, trabalhar
+    na main continua sendo violacao.
+    """
+    if branch != "main":
+        return []
+    if rotina_semanal:
+        print(
+            "Rotina semanal: checagem de branch dispensada; "
+            "o workflow confere que so dados mudaram"
+        )
+        return []
+    return ["VIOLACAO: Nao e permitido realizar trabalho ou commits diretamente na branch 'main'!"]
+
+
+def main(argv: list[str] | None = None):
+    parser = argparse.ArgumentParser(
+        description="Verificacao compulsoria de regras de governanca e sanidade."
+    )
+    parser.add_argument(
+        "--rotina-semanal",
+        action="store_true",
+        help=(
+            "Dispensa apenas a checagem da branch main. Uso exclusivo da rotina "
+            "semanal, que roda na main e publica so dados."
+        ),
+    )
+    args = parser.parse_args(argv)
+
     erros = []
     print("=======================================================")
     print("Verificando conformidade com as regras de governanca...")
@@ -32,8 +64,7 @@ def main():
     res = subprocess.run(["git", "branch", "--show-current"], cwd=ROOT, capture_output=True, text=True)
     branch = res.stdout.strip()
     print(f"Branch atual: {branch}")
-    if branch == "main":
-        erros.append("VIOLACAO: Nao e permitido realizar trabalho ou commits diretamente na branch 'main'!")
+    erros.extend(conferir_branch(branch, args.rotina_semanal))
 
     # 2. Testes de sanidade de dados
     print("\nExecutando coletor/testes_sanidade.py...")
