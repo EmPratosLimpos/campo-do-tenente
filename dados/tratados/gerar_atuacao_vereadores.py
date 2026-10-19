@@ -41,6 +41,7 @@ from config_cidade import (  # noqa: E402
     uf_cidade,
 )
 from csv_seguro import EscritorSeguro  # noqa: E402
+from gerar_hash_integridade import gravar_hash  # noqa: E402
 CONFIG = carregar_config()
 DOIS_TURNOS = tipos_dois_turnos(CONFIG)
 TURNO_PRIMEIRO = "1o turno"
@@ -123,6 +124,16 @@ def escrever_lf(caminho: Path, texto: str) -> None:
     if "\r" in texto:
         raise SystemExit(f"{rel(caminho)} ainda tem quebra de linha CR.")
     caminho.write_bytes(texto.encode("utf-8"))
+
+
+def escrever_json_com_hash(caminho: Path, texto: str) -> None:
+    """Grava o JSON anual e o .sha256 no mesmo passo.
+
+    O hash e sempre do arquivo que acabou de ser salvo, por isso o teste
+    de integridade nunca compara com o hash da semana passada.
+    """
+    escrever_lf(caminho, texto)
+    gravar_hash(caminho, caminho.with_name(caminho.name + ".sha256"))
 
 
 def recusar_campos_pessoais(obj, caminho: str = "") -> None:
@@ -2404,14 +2415,16 @@ def gerar_do_ano(ano: int) -> None:
     arquivo_json = DIR_SCRIPT / f"atuacao_vereadores_{ano}.json"
     arquivo_csv = DIR_SCRIPT / f"atuacao_vereadores_{ano}.csv"
     arquivo_relatorio = DIR_SCRIPT / f"RELATORIO-ATUACAO-VEREADORES-{ano}.md"
+    arquivo_hash = arquivo_json.with_name(arquivo_json.name + ".sha256")
     texto_json = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     texto_csv = montar_csv(vereadores)
     texto_relatorio = montar_relatorio(payload)
     if ano_fechado_sem_mudanca(ano, texto_json, texto_csv, texto_relatorio):
+        gravar_hash(arquivo_json, arquivo_hash)
         print(f"{ano}: ano fechado sem mudanca de conteudo. Arquivos mantidos.")
         print(f"  {rel(arquivo_json)}")
         return
-    escrever_lf(arquivo_json, texto_json)
+    escrever_json_com_hash(arquivo_json, texto_json)
     escrever_csv(arquivo_csv, vereadores)
     escrever_relatorio(arquivo_relatorio, payload)
     print(

@@ -17,22 +17,54 @@ def calcular_hash_sha256(caminho):
     return sha256.hexdigest()
 
 
+def gravar_hash(caminho_json, caminho_hash) -> str:
+    """Grava o .sha256 do JSON e devolve o hash calculado.
+
+    Usado pelo gerador da atuacao, no mesmo passo em que o JSON e
+    escrito, e pelos testes. Os caminhos sao explicitos para o mesmo
+    codigo servir ao repositorio e a uma copia temporaria. O JSON tem
+    que estar em LF, para o hash ser o mesmo em qualquer sistema.
+    """
+    caminho_json = pathlib.Path(caminho_json)
+    caminho_hash = pathlib.Path(caminho_hash)
+    if not caminho_json.exists():
+        raise SystemExit(f"Arquivo nao encontrado: {caminho_json}")
+    conteudo = caminho_json.read_bytes()
+    if b"\r" in conteudo:
+        raise SystemExit(
+            f"{caminho_json} nao esta em LF. O hash tem que ser o do conteudo com fim de linha LF."
+        )
+    hash_hex = calcular_hash_sha256(caminho_json)
+    caminho_hash.parent.mkdir(parents=True, exist_ok=True)
+    caminho_hash.write_bytes((hash_hex + "\n").encode("ascii"))
+    return hash_hex
+
+
+def conferir_hash(caminho_json, caminho_hash) -> None:
+    """Levanta SystemExit quando o hash salvo nao corresponde ao arquivo salvo."""
+    caminho_json = pathlib.Path(caminho_json)
+    caminho_hash = pathlib.Path(caminho_hash)
+    if not caminho_json.exists():
+        raise SystemExit(f"Arquivo nao encontrado: {caminho_json}")
+    if not caminho_hash.is_file():
+        raise SystemExit(
+            f"Hash ausente para {caminho_json}. "
+            "Rode python coletor/gerar_hash_integridade.py"
+        )
+    calculado = calcular_hash_sha256(caminho_json)
+    salvo = caminho_hash.read_text(encoding="utf-8").strip()
+    if calculado != salvo:
+        raise SystemExit(
+            f"Hash SHA256 de {caminho_json} nao confere: "
+            f"calculado {calculado}, salvo {salvo}"
+        )
+
+
 def gerar_hash_do_ano(ano: int) -> None:
     arquivo_json = pathlib.Path(f"dados/tratados/atuacao_vereadores_{ano}.json")
     arquivo_hash = pathlib.Path(f"dados/tratados/atuacao_vereadores_{ano}.json.sha256")
-    if not arquivo_json.exists():
-        raise SystemExit(f"Arquivo nao encontrado: {arquivo_json}")
-
-    conteudo = arquivo_json.read_bytes()
-    if b"\r" in conteudo:
-        raise SystemExit(
-            f"{arquivo_json} nao esta em LF. O hash tem que ser o do conteudo com fim de linha LF."
-        )
-    hash_hex = calcular_hash_sha256(arquivo_json)
+    hash_hex = gravar_hash(arquivo_json, arquivo_hash)
     data_hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    arquivo_hash.parent.mkdir(parents=True, exist_ok=True)
-    arquivo_hash.write_bytes((hash_hex + "\n").encode("ascii"))
 
     print(f"Arquivo: {arquivo_json}")
     print(f"SHA256: {hash_hex}")
