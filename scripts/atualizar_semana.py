@@ -947,6 +947,14 @@ def rodar(argumentos: list[str]) -> None:
         raise SystemExit(resultado.returncode)
 
 
+COMANDO_VERIFICAR_REGRAS = ["scripts/verificar_regras.py", "--rotina-semanal"]
+
+
+def verificar_regras_da_rotina() -> None:
+    """Roda as regras dispensando so a checagem de branch da rotina semanal."""
+    rodar(COMANDO_VERIFICAR_REGRAS)
+
+
 def ler_json(caminho: Path) -> dict:
     """Le um bruto como dicionario, sem nunca estourar JSONDecodeError.
 
@@ -1397,7 +1405,7 @@ def main(argv: list[str] | None = None) -> int:
     rodar(["coletor/testes_sanidade.py"])
     rodar(["-m", "unittest", "discover", "-s", "tests"])
     rodar(["coletor/gerar_hash_integridade.py"])
-    rodar(["scripts/verificar_regras.py"])
+    verificar_regras_da_rotina()
 
     try:
         resumo_temas["avisos"].extend(
