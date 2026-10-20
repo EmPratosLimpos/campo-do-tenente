@@ -1,0 +1,101 @@
+{
+  "pagination": {},
+  "results": [
+    {
+      "id": 1355,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 5 - Requerimento nº 20 de 2026 em 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-10-13T20:18:30.698552-03:00",
+      "votacao": 287,
+      "parlamentar": 6,
+      "ordem": 718,
+      "expediente": null
+    },
+    {
+      "id": 1356,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 5 - Requerimento nº 20 de 2026 em 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-10-13T20:18:30.675005-03:00",
+      "votacao": 287,
+      "parlamentar": 2,
+      "ordem": 718,
+      "expediente": null
+    },
+    {
+      "id": 1357,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 5 - Requerimento nº 20 de 2026 em 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-10-13T20:18:30.709971-03:00",
+      "votacao": 287,
+      "parlamentar": 7,
+      "ordem": 718,
+      "expediente": null
+    },
+    {
+      "id": 1358,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 5 - Requerimento nº 20 de 2026 em 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-10-13T20:18:30.660990-03:00",
+      "votacao": 287,
+      "parlamentar": 3,
+      "ordem": 718,
+      "expediente": null
+    },
+    {
+      "id": 1359,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 5 - Requerimento nº 20 de 2026 em 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-10-13T20:18:30.737850-03:00",
+      "votacao": 287,
+      "parlamentar": 100,
+      "ordem": 718,
+      "expediente": null
+    },
+    {
+      "id": 1360,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 5 - Requerimento nº 20 de 2026 em 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-10-13T20:18:30.649092-03:00",
+      "votacao": 287,
+      "parlamentar": 8,
+      "ordem": 718,
+      "expediente": null
+    },
+    {
+      "id": 1361,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 5 - Requerimento nº 20 de 2026 em 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Sim",
+      "data_hora": "2026-10-13T20:18:30.686752-03:00",
+      "votacao": 287,
+      "parlamentar": 9,
+      "ordem": 718,
+      "expediente": null
+    },
+    {
+      "id": 1362,
+      "__str__": "Votação: Ordem: Ordem do Dia/Expediente: 5 - Requerimento nº 20 de 2026 em 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta - Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "voto": "Não Votou",
+      "data_hora": "2026-10-13T20:18:30.726189-03:00",
+      "votacao": 287,
+      "parlamentar": 4,
+      "ordem": 718,
+      "expediente": null
+    }
+  ]
+}

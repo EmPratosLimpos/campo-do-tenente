@@ -25,11 +25,12 @@
       "dados/brutos/lote_20261009_autoria/autoria_p10.json",
       "dados/brutos/lote_20261009_autoria/autoria_p11.json",
       "dados/brutos/lote_20261009_autoria/autoria_p12.json",
-      "dados/brutos/lote_20261009_autoria/autoria_p13.json"
+      "dados/brutos/lote_20261009_autoria/autoria_p13.json",
+      "dados/brutos/lote_20261009_autoria/autoria_p14.json"
     ],
-    "autoria_total_entries_api": 1281,
-    "autoria_total_linhas_lidas": 1281,
-    "autoria_ids_distintos": 1281,
+    "autoria_total_entries_api": 1313,
+    "autoria_total_linhas_lidas": 1313,
+    "autoria_ids_distintos": 1313,
     "nota_autoria": "A lista materia/autoria repetiu ids entre paginas e o filtro por ano foi ignorado pelo SAPL. Ela so informa o primeiro autor. A ligacao materia e autor vem do campo autores da propria materia.",
     "por_ano": {
       "2025": {
@@ -48,16 +49,16 @@
         ]
       },
       "2026": {
-        "n_materias": 147,
-        "total_entries_api": 147,
-        "n_pares_materia_autor": 181,
+        "n_materias": 160,
+        "total_entries_api": 160,
+        "n_pares_materia_autor": 210,
         "materias_por_tipo_de_autor": {
-          "Chefe do Poder Executivo Municipal": 35,
+          "Chefe do Poder Executivo Municipal": 37,
           "Comissão": 3,
           "MESA DIRETORA": 1,
-          "Parlamentar": 74,
+          "Parlamentar": 83,
           "sem autor registrado no SAPL": 19,
-          "Órgão": 16
+          "Órgão": 18
         },
         "arquivos_materias": [
           "dados/brutos/lote_20260926/materialegislativa_ano2026_p1.json",
@@ -10920,6 +10921,497 @@
           "tipo_autor": "Órgão",
           "parlamentar_id_sapl": null,
           "nome_no_sapl": "Secretária Legislativa - SLEG",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1194,
+      "ano": 2026,
+      "numero": 2,
+      "tipo_materia_id": 10,
+      "rotulo_sapl": "Moção nº 2 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 16,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 8,
+          "nome_no_sapl": "Beto Maurer",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 2,
+          "autor_id": 8,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 3,
+          "nome_no_sapl": "Cleiton Costa",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 3,
+          "autor_id": 13,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 2,
+          "nome_no_sapl": "Dr. Marcos Rodrigues",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 4,
+          "autor_id": 9,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 9,
+          "nome_no_sapl": "Gilmar Barbosa",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 5,
+          "autor_id": 10,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 6,
+          "nome_no_sapl": "Gustavo Vizentin",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 6,
+          "autor_id": 12,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 7,
+          "nome_no_sapl": "Josemar Veiga",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 7,
+          "autor_id": 14,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 4,
+          "nome_no_sapl": "Kinho Lazarino",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 8,
+          "autor_id": 15,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 9,
+          "autor_id": 24,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 100,
+          "nome_no_sapl": "Rivanildo Cavalheiro",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1195,
+      "ano": 2026,
+      "numero": 4,
+      "tipo_materia_id": 4,
+      "rotulo_sapl": "Projeto de Decreto Legislativo nº 4 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1195",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 16,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 8,
+          "nome_no_sapl": "Beto Maurer",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 2,
+          "autor_id": 8,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 3,
+          "nome_no_sapl": "Cleiton Costa",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 3,
+          "autor_id": 13,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 2,
+          "nome_no_sapl": "Dr. Marcos Rodrigues",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 4,
+          "autor_id": 9,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 9,
+          "nome_no_sapl": "Gilmar Barbosa",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 5,
+          "autor_id": 10,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 6,
+          "nome_no_sapl": "Gustavo Vizentin",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 6,
+          "autor_id": 12,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 7,
+          "nome_no_sapl": "Josemar Veiga",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 7,
+          "autor_id": 14,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 4,
+          "nome_no_sapl": "Kinho Lazarino",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 8,
+          "autor_id": 15,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        },
+        {
+          "ordem_no_sapl": 9,
+          "autor_id": 24,
+          "primeiro_autor": false,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 100,
+          "nome_no_sapl": "Rivanildo Cavalheiro",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1196,
+      "ano": 2026,
+      "numero": 20,
+      "tipo_materia_id": 14,
+      "rotulo_sapl": "Requerimento nº 20 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1196",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 24,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 100,
+          "nome_no_sapl": "Rivanildo Cavalheiro",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1197,
+      "ano": 2026,
+      "numero": 37,
+      "tipo_materia_id": 19,
+      "rotulo_sapl": "Ata Sessão nº 37 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1197",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 7,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 5,
+          "tipo_autor": "Órgão",
+          "parlamentar_id_sapl": null,
+          "nome_no_sapl": "Secretária Legislativa - SLEG",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1198,
+      "ano": 2026,
+      "numero": 38,
+      "tipo_materia_id": 19,
+      "rotulo_sapl": "Ata Sessão nº 38 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1198",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 7,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 5,
+          "tipo_autor": "Órgão",
+          "parlamentar_id_sapl": null,
+          "nome_no_sapl": "Secretária Legislativa - SLEG",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1199,
+      "ano": 2026,
+      "numero": 14,
+      "tipo_materia_id": 1,
+      "rotulo_sapl": "Projeto de Lei Origem Poder Executivo nº 14 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1199",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 17,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 7,
+          "tipo_autor": "Chefe do Poder Executivo Municipal",
+          "parlamentar_id_sapl": null,
+          "nome_no_sapl": "Weverton Willian Vizentin",
+          "cargo_no_sapl": "Prefeito",
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1200,
+      "ano": 2026,
+      "numero": 15,
+      "tipo_materia_id": 1,
+      "rotulo_sapl": "Projeto de Lei Origem Poder Executivo nº 15 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1200",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 17,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 7,
+          "tipo_autor": "Chefe do Poder Executivo Municipal",
+          "parlamentar_id_sapl": null,
+          "nome_no_sapl": "Weverton Willian Vizentin",
+          "cargo_no_sapl": "Prefeito",
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1277,
+      "ano": 2026,
+      "numero": 39,
+      "tipo_materia_id": 9,
+      "rotulo_sapl": "Indicação nº 39 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1277",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 8,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 3,
+          "nome_no_sapl": "Cleiton Costa",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1278,
+      "ano": 2026,
+      "numero": 3,
+      "tipo_materia_id": 10,
+      "rotulo_sapl": "Moção nº 3 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1278",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 15,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1279,
+      "ano": 2026,
+      "numero": 38,
+      "tipo_materia_id": 9,
+      "rotulo_sapl": "Indicação nº 38 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1279",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 10,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 6,
+          "nome_no_sapl": "Gustavo Vizentin",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1280,
+      "ano": 2026,
+      "numero": 40,
+      "tipo_materia_id": 9,
+      "rotulo_sapl": "Indicação nº 40 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1280",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 10,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 6,
+          "nome_no_sapl": "Gustavo Vizentin",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1281,
+      "ano": 2026,
+      "numero": 21,
+      "tipo_materia_id": 14,
+      "rotulo_sapl": "Requerimento nº 21 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1281",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 15,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 5,
+          "nome_no_sapl": "Rafael Ventura",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1282,
+      "ano": 2026,
+      "numero": 22,
+      "tipo_materia_id": 14,
+      "rotulo_sapl": "Requerimento nº 22 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1282",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 10,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 2,
+          "tipo_autor": "Parlamentar",
+          "parlamentar_id_sapl": 6,
+          "nome_no_sapl": "Gustavo Vizentin",
           "cargo_no_sapl": null,
           "lacuna": null
         }

@@ -3,24 +3,24 @@
     "gerado_por": "dados/tratados/gerar_dados_tela.py",
     "cidade": "Campo do Tenente",
     "uf": "PR",
-    "dado_coletado_em": "2026-10-09T00:44:04-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20261009_autoria/indice.json campo atualizado_em",
-    "n_sessoes_ordinarias": 67,
+    "dado_coletado_em": "2026-10-20T00:40:16+00:00",
+    "fonte_data_coleta": "dados/brutos/lote_20260929_tramitacao/indice.json campo atualizado_em",
+    "n_sessoes_ordinarias": 68,
     "piso_sessoes_ordinarias": 33,
     "n_vereadores": 10,
     "piso_vereadores": 10,
     "n_projetos_lei_legislativo": 23,
-    "n_projetos_lei_executivo": 39,
-    "n_projetos_lei_legislativo_e_executivo": 62,
+    "n_projetos_lei_executivo": 41,
+    "n_projetos_lei_legislativo_e_executivo": 64,
     "piso_projetos_lei_legislativo_e_executivo": 18,
-    "n_presencas": 584,
+    "n_presencas": 592,
     "n_faltas_com_justificativa": 31,
-    "n_faltas_sem_justificativa": 11,
-    "n_sessoes_fora_do_mandato": 12,
+    "n_faltas_sem_justificativa": 12,
+    "n_sessoes_fora_do_mandato": 13,
     "n_sessoes_licenca": 0,
-    "n_votacoes": 245,
-    "n_registros_votacao": 245,
-    "n_votacoes_com_voto_individual": 129,
+    "n_votacoes": 246,
+    "n_registros_votacao": 246,
+    "n_votacoes_com_voto_individual": 130,
     "n_votacoes_sem_voto_individual": 116,
     "n_nominais_primeiro_turno": 133,
     "n_nominais_turno_nao_identificado": 0,
@@ -28,13 +28,13 @@
     "votacoes_turno_nao_identificado": [],
     "rotulo_sem_voto_individual": "voto individual nao registrado no SAPL",
     "contagem_estados": {
-      "sim": 792,
+      "sim": 799,
       "nao": 3,
       "abstencao": 2,
       "nao_votou": 0,
-      "presidente_que_nao_votou": 87,
+      "presidente_que_nao_votou": 88,
       "ausente_com_justificativa": 84,
-      "ausente_sem_justificativa": 12,
+      "ausente_sem_justificativa": 13,
       "fora_do_mandato": 0,
       "presente_sem_voto_individual_registrado": 2
     },
@@ -125,7 +125,7 @@
     },
     "temas_materias_presente": true,
     "fonte_temas": "dados/tratados/temas_materias.json",
-    "revisada_por_humano": true,
+    "revisada_por_humano": false,
     "arquivos_de_origem": [
       "dados/brutos/contagem_votacoes_ordinarias_2026.json",
       "dados/brutos/materias-2026-resposta-original.csv",
@@ -1334,6 +1334,23 @@
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 4,
       "n_votacoes_sem_voto_individual": 0
+    },
+    {
+      "id": 276,
+      "numero": 36,
+      "data": "2026-10-13",
+      "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "n_votacoes_contagem": 1,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+      "presidente_id_sapl": 4,
+      "n_presentes": 8,
+      "n_faltas_com_justificativa": 0,
+      "n_faltas_sem_justificativa": 1,
+      "n_fora_do_mandato": 1,
+      "n_licenca": 0,
+      "n_registros_votacao": 1,
+      "n_votacoes_com_voto_individual": 1,
+      "n_votacoes_sem_voto_individual": 0
     }
   ],
   "projetos_lei": [
@@ -1415,7 +1432,7 @@
       "ano": "2025",
       "tipo_sigla": "PLEX",
       "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
-      "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\nPROFESSORES E EDUCADORES INFANTIS",
+      "ementa": "ALTERA O ART. 46 DA LEI 686/2010, AMPLIANDO A QUANTIDADE DE TEMPO DESTINADO A HORA-ATIVIDADE DOS\r\nPROFESSORES E EDUCADORES INFANTIS",
       "tema": "Educação",
       "revisada_por_humano": true,
       "autoria": {
@@ -4686,6 +4703,78 @@
       "nome_oficial_ultimo_registro": null
     },
     {
+      "id": 1199,
+      "numero": "14",
+      "ano": "2026",
+      "tipo_sigla": "PLEX",
+      "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
+      "ementa": "Autoriza o poder executivo a abrir crédito adicional especial no valor de r$ 112.000,00 (cento e doze mil reais), destinado ao atendimento de despesas de exercícios anteriores, mediante a inclusão das respectivas dotações orçamentárias no orçamento vigente.",
+      "tema": "Administração e finanças",
+      "revisada_por_humano": false,
+      "autoria": {
+        "rotulo": null,
+        "autores": [
+          {
+            "ordem_no_sapl": 1,
+            "autor_id": 17,
+            "tipo_autor": "Chefe do Poder Executivo Municipal",
+            "parlamentar_id_sapl": null,
+            "nome_no_sapl": "Weverton Willian Vizentin",
+            "cargo_no_sapl": "Prefeito",
+            "lacuna": null
+          }
+        ],
+        "autoria_conjunta": false,
+        "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1199"
+      },
+      "autoria_conjunta": false,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1199",
+      "texto_original": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/materialegislativa/2026/1199/pl014_-_credito_adicional.pdf",
+      "votacoes_ordinarias": [],
+      "situacao": "Em tramitacao",
+      "data_sessao": null,
+      "resultado_texto_sapl": null,
+      "frase_resultado_sapl": null,
+      "sessao_id": null,
+      "nome_oficial_ultimo_registro": null
+    },
+    {
+      "id": 1200,
+      "numero": "15",
+      "ano": "2026",
+      "tipo_sigla": "PLEX",
+      "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
+      "ementa": "Altera a lei municipal nº 511, de 16 de dezembro de 2005, que dispõe sobre a reestruturação do regime próprio de previdência social do município de campo do tenente/pr, para redefinir a estrutura de governança, composição dos conselhos, regras de certificação e instituir a cédula de presença.",
+      "tema": "Administração e finanças",
+      "revisada_por_humano": false,
+      "autoria": {
+        "rotulo": null,
+        "autores": [
+          {
+            "ordem_no_sapl": 1,
+            "autor_id": 17,
+            "tipo_autor": "Chefe do Poder Executivo Municipal",
+            "parlamentar_id_sapl": null,
+            "nome_no_sapl": "Weverton Willian Vizentin",
+            "cargo_no_sapl": "Prefeito",
+            "lacuna": null
+          }
+        ],
+        "autoria_conjunta": false,
+        "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1200"
+      },
+      "autoria_conjunta": false,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1200",
+      "texto_original": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/materialegislativa/2026/1200/pl015_-_iprecampo.pdf",
+      "votacoes_ordinarias": [],
+      "situacao": "Em tramitacao",
+      "data_sessao": null,
+      "resultado_texto_sapl": null,
+      "frase_resultado_sapl": null,
+      "sessao_id": null,
+      "nome_oficial_ultimo_registro": null
+    },
+    {
       "id": 244,
       "numero": "1",
       "ano": "2026",
@@ -5137,8 +5226,8 @@
       ],
       "presenca": {
         "sessoes_ordinarias": 60,
-        "sessoes_do_ano": 67,
-        "sessoes_fora_do_mandato": 7,
+        "sessoes_do_ano": 68,
+        "sessoes_fora_do_mandato": 8,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
         "presencas": 36,
@@ -7873,17 +7962,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 67,
-        "sessoes_do_ano": 67,
+        "sessoes_ordinarias": 68,
+        "sessoes_do_ano": 68,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 63,
+        "presencas": 64,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 3,
         "faltas_totais": 4,
-        "percentual_faltas": 5.97,
-        "taxa_presenca": 94.03,
+        "percentual_faltas": 5.88,
+        "taxa_presenca": 94.12,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -8696,11 +8785,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 96,
+        "sim": 97,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -8720,7 +8821,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 102,
+        "total_registros": 103,
         "primeiro_turno_registros": 24,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -10050,6 +10151,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -10198,10 +10312,10 @@
         ]
       },
       "proposicoes_req_moc_ind": {
-        "total": 53,
+        "total": 54,
         "por_tipo": {
           "IND": 25,
-          "MOC": 8,
+          "MOC": 9,
           "PLEG": 7,
           "REQ": 13
         },
@@ -10697,6 +10811,16 @@
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
           },
           {
+            "id": 1194,
+            "tipo_sigla": "MOC",
+            "tipo_nome": "Moção",
+            "numero": "2",
+            "ano": "2026",
+            "ementa": "Moção de Aplausos aposentados outubro de 2025 á outubro de 2026",
+            "tema": "Homenagens, nomes e datas",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+          },
+          {
             "id": 811,
             "tipo_sigla": "PLEG",
             "tipo_nome": "Projeto de Lei Origem do Poder Legislativo",
@@ -10915,17 +11039,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 67,
-        "sessoes_do_ano": 67,
+        "sessoes_ordinarias": 68,
+        "sessoes_do_ano": 68,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 66,
+        "presencas": 67,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 1,
-        "percentual_faltas": 1.49,
-        "taxa_presenca": 98.51,
+        "percentual_faltas": 1.47,
+        "taxa_presenca": 98.53,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -11738,11 +11862,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 97,
+        "sim": 98,
         "nao": 1,
         "abstencao": 0,
         "nao_votou": 0,
@@ -11762,7 +11898,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 102,
+        "total_registros": 103,
         "primeiro_turno_registros": 24,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -13092,6 +13228,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -13145,10 +13294,10 @@
         ]
       },
       "proposicoes_req_moc_ind": {
-        "total": 27,
+        "total": 29,
         "por_tipo": {
-          "IND": 13,
-          "MOC": 5,
+          "IND": 14,
+          "MOC": 6,
           "PLEG": 2,
           "REQ": 7
         },
@@ -13384,6 +13533,16 @@
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/802"
           },
           {
+            "id": 1277,
+            "tipo_sigla": "IND",
+            "tipo_nome": "Indicação",
+            "numero": "39",
+            "ano": "2026",
+            "ementa": "Solicita a manutenção da estrada da localidade do Santana.",
+            "tema": "Ruas, trânsito e transporte",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+          },
+          {
             "id": 1056,
             "tipo_sigla": "MOC",
             "tipo_nome": "Moção",
@@ -13392,6 +13551,16 @@
             "ementa": "Moção de Aplausos para alunas intercambistas.",
             "tema": "Homenagens, nomes e datas",
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+          },
+          {
+            "id": 1194,
+            "tipo_sigla": "MOC",
+            "tipo_nome": "Moção",
+            "numero": "2",
+            "ano": "2026",
+            "ementa": "Moção de Aplausos aposentados outubro de 2025 á outubro de 2026",
+            "tema": "Homenagens, nomes e datas",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
           },
           {
             "id": 696,
@@ -13602,17 +13771,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 67,
-        "sessoes_do_ano": 67,
+        "sessoes_ordinarias": 68,
+        "sessoes_do_ano": 68,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 64,
+        "presencas": 65,
         "faltas_com_justificativa": 2,
         "faltas_sem_justificativa": 1,
         "faltas_totais": 3,
-        "percentual_faltas": 4.48,
-        "taxa_presenca": 95.52,
+        "percentual_faltas": 4.41,
+        "taxa_presenca": 95.59,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -14433,6 +14602,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": true,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
@@ -14441,7 +14622,7 @@
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
-        "presidente_que_nao_votou": 0,
+        "presidente_que_nao_votou": 1,
         "ausente_com_justificativa": 4,
         "ausente_sem_justificativa": 3,
         "fora_do_mandato": 0,
@@ -14457,7 +14638,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 102,
+        "total_registros": 103,
         "primeiro_turno_registros": 24,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -15787,6 +15968,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "presidente_que_nao_votou",
+            "rotulo": "Presidente que não votou",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Não Votou",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -15896,10 +16090,10 @@
         ]
       },
       "proposicoes_req_moc_ind": {
-        "total": 31,
+        "total": 32,
         "por_tipo": {
           "IND": 11,
-          "MOC": 8,
+          "MOC": 9,
           "PLEG": 5,
           "REQ": 7
         },
@@ -16185,6 +16379,16 @@
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
           },
           {
+            "id": 1194,
+            "tipo_sigla": "MOC",
+            "tipo_nome": "Moção",
+            "numero": "2",
+            "ano": "2026",
+            "ementa": "Moção de Aplausos aposentados outubro de 2025 á outubro de 2026",
+            "tema": "Homenagens, nomes e datas",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+          },
+          {
             "id": 698,
             "tipo_sigla": "PLEG",
             "tipo_nome": "Projeto de Lei Origem do Poder Legislativo",
@@ -16393,17 +16597,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 67,
-        "sessoes_do_ano": 67,
+        "sessoes_ordinarias": 68,
+        "sessoes_do_ano": 68,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
         "presencas": 67,
         "faltas_com_justificativa": 0,
-        "faltas_sem_justificativa": 0,
-        "faltas_totais": 0,
-        "percentual_faltas": 0.0,
-        "taxa_presenca": 100.0,
+        "faltas_sem_justificativa": 1,
+        "faltas_totais": 1,
+        "percentual_faltas": 1.47,
+        "taxa_presenca": 98.53,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -17208,6 +17412,18 @@
             "justificativa": false,
             "era_presidente": true,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "falta_sem_justificativa",
+            "rotulo_situacao": "Falta sem justificativa",
+            "presente_sessao_plenaria": false,
+            "presente_ordem_dia": false,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
@@ -17218,7 +17434,7 @@
         "nao_votou": 0,
         "presidente_que_nao_votou": 87,
         "ausente_com_justificativa": 0,
-        "ausente_sem_justificativa": 0,
+        "ausente_sem_justificativa": 1,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
         "rotulos": {
@@ -17232,7 +17448,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 102,
+        "total_registros": 103,
         "primeiro_turno_registros": 24,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -18562,6 +18778,19 @@
             "voto_texto_sapl": "Não Votou",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "ausente_sem_justificativa",
+            "rotulo": "Ausente sem justificativa",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": null,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -18816,12 +19045,12 @@
         ]
       },
       "proposicoes_req_moc_ind": {
-        "total": 67,
+        "total": 70,
         "por_tipo": {
           "IND": 27,
-          "MOC": 8,
+          "MOC": 10,
           "PLEG": 13,
-          "REQ": 19
+          "REQ": 20
         },
         "lista": [
           {
@@ -19395,6 +19624,26 @@
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
           },
           {
+            "id": 1194,
+            "tipo_sigla": "MOC",
+            "tipo_nome": "Moção",
+            "numero": "2",
+            "ano": "2026",
+            "ementa": "Moção de Aplausos aposentados outubro de 2025 á outubro de 2026",
+            "tema": "Homenagens, nomes e datas",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+          },
+          {
+            "id": 1278,
+            "tipo_sigla": "MOC",
+            "tipo_nome": "Moção",
+            "numero": "3",
+            "ano": "2026",
+            "ementa": "Moção de Aplauso 003-2026 - Doralice de França",
+            "tema": "Homenagens, nomes e datas",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+          },
+          {
             "id": 244,
             "tipo_sigla": "PLEG",
             "tipo_nome": "Projeto de Lei Origem do Poder Legislativo",
@@ -19473,6 +19722,16 @@
             "ementa": "Solicita esclarecimentos acerca do conteúdo de e-mail em anexo, referente ao IPRECAMPO – Instituto de Previdência dos Servidores Públicos de Campo do Tenente.",
             "tema": "Administração e finanças",
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/248"
+          },
+          {
+            "id": 1281,
+            "tipo_sigla": "REQ",
+            "tipo_nome": "Requerimento",
+            "numero": "21",
+            "ano": "2026",
+            "ementa": "Solicita transparência e informações sobre os convênios do município.",
+            "tema": "Administração e finanças",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1281"
           },
           {
             "id": 253,
@@ -19673,12 +19932,12 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 67,
-        "sessoes_do_ano": 67,
+        "sessoes_ordinarias": 68,
+        "sessoes_do_ano": 68,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 67,
+        "presencas": 68,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -20488,11 +20747,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 102,
+        "sim": 103,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -20512,7 +20783,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 102,
+        "total_registros": 103,
         "primeiro_turno_registros": 24,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -21842,6 +22113,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -21951,12 +22235,12 @@
         ]
       },
       "proposicoes_req_moc_ind": {
-        "total": 67,
+        "total": 71,
         "por_tipo": {
-          "IND": 28,
-          "MOC": 9,
+          "IND": 30,
+          "MOC": 10,
           "PLEG": 5,
-          "REQ": 25
+          "REQ": 26
         },
         "lista": [
           {
@@ -22530,6 +22814,16 @@
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/816"
           },
           {
+            "id": 1279,
+            "tipo_sigla": "IND",
+            "tipo_nome": "Indicação",
+            "numero": "38",
+            "ano": "2026",
+            "ementa": "Solicita a instalação de câmeras de monitoramento nas creches municipais de Campo do Tenente, visando reforçar a segurança das crianças, dos profissionais e de toda a comunidade escolar.",
+            "tema": "Educação",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+          },
+          {
             "id": 288,
             "tipo_sigla": "IND",
             "tipo_nome": "Indicação",
@@ -22538,6 +22832,16 @@
             "ementa": "Indica ao Poder Executivo Municipal a instalação de um novo ponto de ônibus na Localidade do Ribeirão Vermelho, BR116, KM 181, próximo a antiga escolinha.",
             "tema": "Ruas, trânsito e transporte",
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/288"
+          },
+          {
+            "id": 1280,
+            "tipo_sigla": "IND",
+            "tipo_nome": "Indicação",
+            "numero": "40",
+            "ano": "2026",
+            "ementa": "Solicita a pintura de faixas de pedestres e a implantação e revitalização da sinalização horizontal e vertical em todo o Município, especialmente na Avenida Gabriel Kaiss, na Rua André Valenga e na Avenida Miguel Komarchewski.",
+            "tema": "Ruas, trânsito e transporte",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1280"
           },
           {
             "id": 295,
@@ -22558,6 +22862,16 @@
             "ementa": "Moção de Aplausos para alunas intercambistas.",
             "tema": "Homenagens, nomes e datas",
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+          },
+          {
+            "id": 1194,
+            "tipo_sigla": "MOC",
+            "tipo_nome": "Moção",
+            "numero": "2",
+            "ano": "2026",
+            "ementa": "Moção de Aplausos aposentados outubro de 2025 á outubro de 2026",
+            "tema": "Homenagens, nomes e datas",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
           },
           {
             "id": 698,
@@ -22608,6 +22922,16 @@
             "ementa": "Solicita informações sobre o andamento das obras de pavimentação no Município, com especial atenção à Rua Wenceslau Hubner.",
             "tema": "Ruas, trânsito e transporte",
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/795"
+          },
+          {
+            "id": 1282,
+            "tipo_sigla": "REQ",
+            "tipo_nome": "Requerimento",
+            "numero": "22",
+            "ano": "2026",
+            "ementa": "Solicita informações acerca da previsão para execução dos serviços de pintura de faixas de pedestres e implantação e revitalização da sinalização horizontal e vertical no Município.",
+            "tema": "Ruas, trânsito e transporte",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1282"
           },
           {
             "id": 251,
@@ -22808,12 +23132,12 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 67,
-        "sessoes_do_ano": 67,
+        "sessoes_ordinarias": 68,
+        "sessoes_do_ano": 68,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 67,
+        "presencas": 68,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -23623,11 +23947,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 100,
+        "sim": 101,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -23647,7 +23983,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 102,
+        "total_registros": 103,
         "primeiro_turno_registros": 24,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -24977,6 +25313,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -25048,10 +25397,10 @@
         ]
       },
       "proposicoes_req_moc_ind": {
-        "total": 21,
+        "total": 22,
         "por_tipo": {
           "IND": 10,
-          "MOC": 5,
+          "MOC": 6,
           "PLEG": 3,
           "REQ": 3
         },
@@ -25245,6 +25594,16 @@
             "ementa": "Moção de Aplausos para alunas intercambistas.",
             "tema": "Homenagens, nomes e datas",
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+          },
+          {
+            "id": 1194,
+            "tipo_sigla": "MOC",
+            "tipo_nome": "Moção",
+            "numero": "2",
+            "ano": "2026",
+            "ementa": "Moção de Aplausos aposentados outubro de 2025 á outubro de 2026",
+            "tema": "Homenagens, nomes e datas",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
           },
           {
             "id": 250,
@@ -25445,17 +25804,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 67,
-        "sessoes_do_ano": 67,
+        "sessoes_ordinarias": 68,
+        "sessoes_do_ano": 68,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 62,
+        "presencas": 63,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 5,
         "faltas_totais": 5,
-        "percentual_faltas": 7.46,
-        "taxa_presenca": 92.54,
+        "percentual_faltas": 7.35,
+        "taxa_presenca": 92.65,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -26260,11 +26619,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 92,
+        "sim": 93,
         "nao": 2,
         "abstencao": 0,
         "nao_votou": 0,
@@ -26284,7 +26655,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 102,
+        "total_registros": 103,
         "primeiro_turno_registros": 24,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -27614,6 +27985,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -27628,10 +28012,10 @@
         "lista": []
       },
       "proposicoes_req_moc_ind": {
-        "total": 11,
+        "total": 12,
         "por_tipo": {
           "IND": 5,
-          "MOC": 5,
+          "MOC": 6,
           "REQ": 1
         },
         "lista": [
@@ -27734,6 +28118,16 @@
             "ementa": "Moção de Aplausos para alunas intercambistas.",
             "tema": "Homenagens, nomes e datas",
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+          },
+          {
+            "id": 1194,
+            "tipo_sigla": "MOC",
+            "tipo_nome": "Moção",
+            "numero": "2",
+            "ano": "2026",
+            "ementa": "Moção de Aplausos aposentados outubro de 2025 á outubro de 2026",
+            "tema": "Homenagens, nomes e datas",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
           },
           {
             "id": 253,
@@ -27924,17 +28318,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 67,
-        "sessoes_do_ano": 67,
+        "sessoes_ordinarias": 68,
+        "sessoes_do_ano": 68,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 62,
+        "presencas": 63,
         "faltas_com_justificativa": 3,
         "faltas_sem_justificativa": 2,
         "faltas_totais": 5,
-        "percentual_faltas": 7.46,
-        "taxa_presenca": 92.54,
+        "percentual_faltas": 7.35,
+        "taxa_presenca": 92.65,
         "por_sessao": [
           {
             "sessao_id": 4,
@@ -28763,11 +29157,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 95,
+        "sim": 96,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -28787,7 +29193,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 102,
+        "total_registros": 103,
         "primeiro_turno_registros": 24,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -30117,6 +30523,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -30131,10 +30550,10 @@
         "lista": []
       },
       "proposicoes_req_moc_ind": {
-        "total": 19,
+        "total": 20,
         "por_tipo": {
           "IND": 11,
-          "MOC": 5,
+          "MOC": 6,
           "REQ": 3
         },
         "lista": [
@@ -30317,6 +30736,16 @@
             "ementa": "Moção de Aplausos para alunas intercambistas.",
             "tema": "Homenagens, nomes e datas",
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+          },
+          {
+            "id": 1194,
+            "tipo_sigla": "MOC",
+            "tipo_nome": "Moção",
+            "numero": "2",
+            "ano": "2026",
+            "ementa": "Moção de Aplausos aposentados outubro de 2025 á outubro de 2026",
+            "tema": "Homenagens, nomes e datas",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
           },
           {
             "id": 253,
@@ -30531,12 +30960,12 @@
       },
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 30,
-        "sessoes_do_ano": 35,
+        "sessoes_ordinarias": 31,
+        "sessoes_do_ano": 36,
         "sessoes_fora_do_mandato": 5,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 30,
+        "presencas": 31,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -30902,11 +31331,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 89,
+        "sim": 90,
         "nao": 0,
         "abstencao": 2,
         "nao_votou": 0,
@@ -30926,7 +31367,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 91,
+        "total_registros": 92,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 2,
@@ -32113,6 +32554,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -32127,10 +32581,11 @@
         "lista": []
       },
       "proposicoes_req_moc_ind": {
-        "total": 5,
+        "total": 7,
         "por_tipo": {
           "IND": 4,
-          "MOC": 1
+          "MOC": 2,
+          "REQ": 1
         },
         "lista": [
           {
@@ -32182,6 +32637,26 @@
             "ementa": "Moção de Aplausos para alunas intercambistas.",
             "tema": "Homenagens, nomes e datas",
             "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+          },
+          {
+            "id": 1194,
+            "tipo_sigla": "MOC",
+            "tipo_nome": "Moção",
+            "numero": "2",
+            "ano": "2026",
+            "ementa": "Moção de Aplausos aposentados outubro de 2025 á outubro de 2026",
+            "tema": "Homenagens, nomes e datas",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+          },
+          {
+            "id": 1196,
+            "tipo_sigla": "REQ",
+            "tipo_nome": "Requerimento",
+            "numero": "20",
+            "ano": "2026",
+            "ementa": "Solicita informações referentes à manutenção da Rua Tadeu Posniak.",
+            "tema": "Ruas, trânsito e transporte",
+            "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },

@@ -2,11 +2,11 @@
   "fonte": "https://sapl.campodotenente.pr.leg.br",
   "pausa_segundos": 2.5,
   "page_size": 100,
-  "teto_pedidos": 691,
-  "total_pedidos": 304,
+  "teto_pedidos": 704,
+  "total_pedidos": 312,
   "iniciado_em": "2026-09-27T11:14:59-03:00",
-  "atualizado_em": "2026-10-08T19:38:29-03:00",
-  "duracao_segundos": 1221.8,
+  "atualizado_em": "2026-10-20T00:38:40+00:00",
+  "duracao_segundos": 1283.6,
   "pedidos": [
     {
       "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenariapresenca/?sessao_plenaria=4&page_size=100&page=1",
@@ -2135,6 +2135,62 @@
       "status": 200,
       "arquivo": "sessao_275_votoparlamentar_votacao_284_p1.json",
       "n": 304
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?sessao_plenaria=275&page_size=100&page=1",
+      "quando": "2026-10-20T00:37:46+00:00",
+      "status": 200,
+      "arquivo": "sessao_275_ordemdia_p1.json",
+      "n": 305
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenariapresenca/?sessao_plenaria=276&page_size=100&page=1",
+      "quando": "2026-10-20T00:38:20+00:00",
+      "status": 200,
+      "arquivo": "sessao_276_sessaoplenariapresenca_p1.json",
+      "n": 306
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/presencaordemdia/?sessao_plenaria=276&page_size=100&page=1",
+      "quando": "2026-10-20T00:38:24+00:00",
+      "status": 200,
+      "arquivo": "sessao_276_presencaordemdia_p1.json",
+      "n": 307
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/ordemdia/?sessao_plenaria=276&page_size=100&page=1",
+      "quando": "2026-10-20T00:38:27+00:00",
+      "status": 200,
+      "arquivo": "sessao_276_ordemdia_p1.json",
+      "n": 308
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/justificativaausencia/?sessao_plenaria=276&page_size=100&page=1",
+      "quando": "2026-10-20T00:38:30+00:00",
+      "status": 200,
+      "arquivo": "sessao_276_justificativaausencia_p1.json",
+      "n": 309
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/integrantemesa/?sessao_plenaria=276&page_size=100&page=1",
+      "quando": "2026-10-20T00:38:33+00:00",
+      "status": 200,
+      "arquivo": "sessao_276_integrantemesa_p1.json",
+      "n": 310
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/registrovotacao/?ordem=718&page_size=100&page=1",
+      "quando": "2026-10-20T00:38:36+00:00",
+      "status": 200,
+      "arquivo": "sessao_276_registrovotacao_ordem_718_p1.json",
+      "n": 311
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/votoparlamentar/?votacao=287&page_size=100&page=1",
+      "quando": "2026-10-20T00:38:39+00:00",
+      "status": 200,
+      "arquivo": "sessao_276_votoparlamentar_votacao_287_p1.json",
+      "n": 312
     }
   ]
 }

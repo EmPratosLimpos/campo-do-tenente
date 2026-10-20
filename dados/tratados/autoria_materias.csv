@@ -602,3 +602,32 @@ materia_id;ano;numero;rotulo_sapl;autor_id;ordem_no_sapl;primeiro_autor;tipo_aut
 1056;2026;1;Moção nº 1 de 2026;24;9;false;2;Parlamentar;100;Rivanildo Cavalheiro;;https://sapl.campodotenente.pr.leg.br/materia/1056
 1058;2026;19;Requerimento nº 19 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/1058
 1097;2026;36;Ata Sessão nº 36 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/1097
+1194;2026;2;Moção nº 2 de 2026;16;1;false;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/1194
+1194;2026;2;Moção nº 2 de 2026;8;2;false;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/1194
+1194;2026;2;Moção nº 2 de 2026;13;3;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/1194
+1194;2026;2;Moção nº 2 de 2026;9;4;false;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/1194
+1194;2026;2;Moção nº 2 de 2026;10;5;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1194
+1194;2026;2;Moção nº 2 de 2026;12;6;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/1194
+1194;2026;2;Moção nº 2 de 2026;14;7;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/1194
+1194;2026;2;Moção nº 2 de 2026;15;8;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/1194
+1194;2026;2;Moção nº 2 de 2026;24;9;false;2;Parlamentar;100;Rivanildo Cavalheiro;;https://sapl.campodotenente.pr.leg.br/materia/1194
+1195;2026;4;Projeto de Decreto Legislativo nº 4 de 2026;16;1;false;2;Parlamentar;8;Beto Maurer;;https://sapl.campodotenente.pr.leg.br/materia/1195
+1195;2026;4;Projeto de Decreto Legislativo nº 4 de 2026;8;2;false;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/1195
+1195;2026;4;Projeto de Decreto Legislativo nº 4 de 2026;13;3;false;2;Parlamentar;2;Dr. Marcos Rodrigues;;https://sapl.campodotenente.pr.leg.br/materia/1195
+1195;2026;4;Projeto de Decreto Legislativo nº 4 de 2026;9;4;false;2;Parlamentar;9;Gilmar Barbosa;;https://sapl.campodotenente.pr.leg.br/materia/1195
+1195;2026;4;Projeto de Decreto Legislativo nº 4 de 2026;10;5;false;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1195
+1195;2026;4;Projeto de Decreto Legislativo nº 4 de 2026;12;6;false;2;Parlamentar;7;Josemar Veiga;;https://sapl.campodotenente.pr.leg.br/materia/1195
+1195;2026;4;Projeto de Decreto Legislativo nº 4 de 2026;14;7;false;2;Parlamentar;4;Kinho Lazarino;;https://sapl.campodotenente.pr.leg.br/materia/1195
+1195;2026;4;Projeto de Decreto Legislativo nº 4 de 2026;15;8;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/1195
+1195;2026;4;Projeto de Decreto Legislativo nº 4 de 2026;24;9;false;2;Parlamentar;100;Rivanildo Cavalheiro;;https://sapl.campodotenente.pr.leg.br/materia/1195
+1196;2026;20;Requerimento nº 20 de 2026;24;1;true;2;Parlamentar;100;Rivanildo Cavalheiro;;https://sapl.campodotenente.pr.leg.br/materia/1196
+1197;2026;37;Ata Sessão nº 37 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/1197
+1198;2026;38;Ata Sessão nº 38 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/1198
+1199;2026;14;Projeto de Lei Origem Poder Executivo nº 14 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1199
+1200;2026;15;Projeto de Lei Origem Poder Executivo nº 15 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1200
+1277;2026;39;Indicação nº 39 de 2026;8;1;true;2;Parlamentar;3;Cleiton Costa;;https://sapl.campodotenente.pr.leg.br/materia/1277
+1278;2026;3;Moção nº 3 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/1278
+1279;2026;38;Indicação nº 38 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1279
+1280;2026;40;Indicação nº 40 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1280
+1281;2026;21;Requerimento nº 21 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/1281
+1282;2026;22;Requerimento nº 22 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1282

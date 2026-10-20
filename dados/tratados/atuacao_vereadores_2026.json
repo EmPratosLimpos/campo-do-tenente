@@ -4,24 +4,24 @@
     "cidade": "Campo do Tenente",
     "uf": "PR",
     "ano": 2026,
-    "dado_coletado_em": "2026-10-09T00:44:04-03:00",
-    "fonte_data_coleta": "dados/brutos/lote_20261009_autoria/indice.json campo atualizado_em",
-    "n_sessoes_ordinarias": 35,
+    "dado_coletado_em": "2026-10-20T00:40:16+00:00",
+    "fonte_data_coleta": "dados/brutos/lote_20260929_tramitacao/indice.json campo atualizado_em",
+    "n_sessoes_ordinarias": 36,
     "piso_sessoes_ordinarias": 33,
     "n_vereadores": 10,
     "piso_vereadores": 10,
     "n_projetos_lei_legislativo": 5,
-    "n_projetos_lei_executivo": 13,
-    "n_projetos_lei_legislativo_e_executivo": 18,
+    "n_projetos_lei_executivo": 15,
+    "n_projetos_lei_legislativo_e_executivo": 20,
     "piso_projetos_lei_legislativo_e_executivo": 18,
-    "n_presencas": 305,
+    "n_presencas": 313,
     "n_faltas_com_justificativa": 29,
-    "n_faltas_sem_justificativa": 4,
-    "n_sessoes_fora_do_mandato": 12,
+    "n_faltas_sem_justificativa": 5,
+    "n_sessoes_fora_do_mandato": 13,
     "n_sessoes_licenca": 0,
-    "n_votacoes": 130,
-    "n_registros_votacao": 130,
-    "n_votacoes_com_voto_individual": 110,
+    "n_votacoes": 131,
+    "n_registros_votacao": 131,
+    "n_votacoes_com_voto_individual": 111,
     "n_votacoes_sem_voto_individual": 20,
     "n_nominais_primeiro_turno": 133,
     "n_nominais_turno_nao_identificado": 0,
@@ -29,13 +29,13 @@
     "votacoes_turno_nao_identificado": [],
     "rotulo_sem_voto_individual": "voto individual nao registrado no SAPL",
     "contagem_estados": {
-      "sim": 713,
+      "sim": 720,
       "nao": 2,
       "abstencao": 2,
       "nao_votou": 0,
-      "presidente_que_nao_votou": 87,
+      "presidente_que_nao_votou": 88,
       "ausente_com_justificativa": 84,
-      "ausente_sem_justificativa": 11,
+      "ausente_sem_justificativa": 12,
       "fora_do_mandato": 0,
       "presente_sem_voto_individual_registrado": 2
     },
@@ -135,7 +135,7 @@
     },
     "temas_materias_presente": true,
     "fonte_temas": "dados/tratados/temas_materias.json",
-    "revisada_por_humano": true,
+    "revisada_por_humano": false,
     "arquivos_de_origem": [
       "dados/brutos/contagem_votacoes_ordinarias_2026.json",
       "dados/brutos/materias-2026-resposta-original.csv",
@@ -741,6 +741,23 @@
       "n_licenca": 0,
       "n_registros_votacao": 4,
       "n_votacoes_com_voto_individual": 4,
+      "n_votacoes_sem_voto_individual": 0
+    },
+    {
+      "id": 276,
+      "numero": 36,
+      "data": "2026-10-13",
+      "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "n_votacoes_contagem": 1,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+      "presidente_id_sapl": 4,
+      "n_presentes": 8,
+      "n_faltas_com_justificativa": 0,
+      "n_faltas_sem_justificativa": 1,
+      "n_fora_do_mandato": 1,
+      "n_licenca": 0,
+      "n_registros_votacao": 1,
+      "n_votacoes_com_voto_individual": 1,
       "n_votacoes_sem_voto_individual": 0
     }
   ],
@@ -18480,6 +18497,157 @@
         }
       ],
       "conclusao_do_painel": null
+    },
+    {
+      "id": 287,
+      "sessao_id": 276,
+      "numero_sessao": 36,
+      "data_sessao": "2026-10-13",
+      "rotulo_sessao": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "materia_id": 1196,
+      "ordem": 718,
+      "data_hora": "2026-10-13T20:18:30.640205-03:00",
+      "texto_registro_sapl": "Ordem: Ordem do Dia/Expediente: 5 - Requerimento nº 20 de 2026 em 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura - Votação: Aprovada por Maioria Absoluta",
+      "resultado_texto_sapl": "MAIORIA ABSOLUTA",
+      "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
+      "situacao_oficial_sapl": "Aprovado",
+      "turno": "turno unico",
+      "tipo_resultado_nome": "Aprovada por Maioria Absoluta",
+      "totais_oficiais": {
+        "numero_votos_sim": 7,
+        "numero_votos_nao": 0,
+        "numero_abstencoes": 0
+      },
+      "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+      "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196",
+      "autoria": {
+        "rotulo": null,
+        "autores": [
+          {
+            "ordem_no_sapl": 1,
+            "autor_id": 24,
+            "tipo_autor": "Parlamentar",
+            "parlamentar_id_sapl": 100,
+            "nome_no_sapl": "Rivanildo Cavalheiro",
+            "cargo_no_sapl": null,
+            "lacuna": null,
+            "nome_parlamentar": "Rivanildo Cavalheiro",
+            "slug_codigo": "rivanildo-cavalheiro"
+          }
+        ],
+        "autoria_conjunta": false,
+        "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+      },
+      "presidente_id_sapl": 4,
+      "voto_individual_registrado": true,
+      "rotulo": null,
+      "estados_por_vereador": [
+        {
+          "id_sapl": 1,
+          "nome_parlamentar": "Jorge Quege",
+          "estado": "fora_do_mandato",
+          "rotulo": "Fora do mandato naquela data",
+          "turno": "turno unico",
+          "tipo_resultado": "Aprovada por Maioria Absoluta",
+          "voto_texto_sapl": null,
+          "voto_texto_sapl_fora_do_mandato": null,
+          "motivo": "Mandato cassado",
+          "materia_motivo_id": 792,
+          "link_motivo": "https://sapl.campodotenente.pr.leg.br/materia/792",
+          "fonte_oficial_encontrada": true
+        },
+        {
+          "id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "tipo_resultado": "Aprovada por Maioria Absoluta",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "tipo_resultado": "Aprovada por Maioria Absoluta",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "tipo_resultado": "Aprovada por Maioria Absoluta",
+          "voto_texto_sapl": "Não Votou",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "ausente_sem_justificativa",
+          "rotulo": "Ausente sem justificativa",
+          "turno": "turno unico",
+          "tipo_resultado": "Aprovada por Maioria Absoluta",
+          "voto_texto_sapl": null,
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "tipo_resultado": "Aprovada por Maioria Absoluta",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "tipo_resultado": "Aprovada por Maioria Absoluta",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "tipo_resultado": "Aprovada por Maioria Absoluta",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "tipo_resultado": "Aprovada por Maioria Absoluta",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        },
+        {
+          "id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "tipo_resultado": "Aprovada por Maioria Absoluta",
+          "voto_texto_sapl": "Sim",
+          "voto_texto_sapl_fora_do_mandato": null
+        }
+      ],
+      "conclusao_do_painel": null
     }
   ],
   "projetos_lei": [
@@ -19285,6 +19453,78 @@
       "nome_oficial_ultimo_registro": null
     },
     {
+      "id": 1199,
+      "numero": "14",
+      "ano": "2026",
+      "tipo_sigla": "PLEX",
+      "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
+      "ementa": "Autoriza o poder executivo a abrir crédito adicional especial no valor de r$ 112.000,00 (cento e doze mil reais), destinado ao atendimento de despesas de exercícios anteriores, mediante a inclusão das respectivas dotações orçamentárias no orçamento vigente.",
+      "tema": "Administração e finanças",
+      "revisada_por_humano": false,
+      "autoria": {
+        "rotulo": null,
+        "autores": [
+          {
+            "ordem_no_sapl": 1,
+            "autor_id": 17,
+            "tipo_autor": "Chefe do Poder Executivo Municipal",
+            "parlamentar_id_sapl": null,
+            "nome_no_sapl": "Weverton Willian Vizentin",
+            "cargo_no_sapl": "Prefeito",
+            "lacuna": null
+          }
+        ],
+        "autoria_conjunta": false,
+        "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1199"
+      },
+      "autoria_conjunta": false,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1199",
+      "texto_original": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/materialegislativa/2026/1199/pl014_-_credito_adicional.pdf",
+      "votacoes_ordinarias": [],
+      "situacao": "Em tramitacao",
+      "data_sessao": null,
+      "resultado_texto_sapl": null,
+      "frase_resultado_sapl": null,
+      "sessao_id": null,
+      "nome_oficial_ultimo_registro": null
+    },
+    {
+      "id": 1200,
+      "numero": "15",
+      "ano": "2026",
+      "tipo_sigla": "PLEX",
+      "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
+      "ementa": "Altera a lei municipal nº 511, de 16 de dezembro de 2005, que dispõe sobre a reestruturação do regime próprio de previdência social do município de campo do tenente/pr, para redefinir a estrutura de governança, composição dos conselhos, regras de certificação e instituir a cédula de presença.",
+      "tema": "Administração e finanças",
+      "revisada_por_humano": false,
+      "autoria": {
+        "rotulo": null,
+        "autores": [
+          {
+            "ordem_no_sapl": 1,
+            "autor_id": 17,
+            "tipo_autor": "Chefe do Poder Executivo Municipal",
+            "parlamentar_id_sapl": null,
+            "nome_no_sapl": "Weverton Willian Vizentin",
+            "cargo_no_sapl": "Prefeito",
+            "lacuna": null
+          }
+        ],
+        "autoria_conjunta": false,
+        "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1200"
+      },
+      "autoria_conjunta": false,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1200",
+      "texto_original": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/materialegislativa/2026/1200/pl015_-_iprecampo.pdf",
+      "votacoes_ordinarias": [],
+      "situacao": "Em tramitacao",
+      "data_sessao": null,
+      "resultado_texto_sapl": null,
+      "frase_resultado_sapl": null,
+      "sessao_id": null,
+      "nome_oficial_ultimo_registro": null
+    },
+    {
       "id": 244,
       "numero": "1",
       "ano": "2026",
@@ -19736,8 +19976,8 @@
       ],
       "presenca": {
         "sessoes_ordinarias": 28,
-        "sessoes_do_ano": 35,
-        "sessoes_fora_do_mandato": 7,
+        "sessoes_do_ano": 36,
+        "sessoes_fora_do_mandato": 8,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
         "presencas": 4,
@@ -21627,17 +21867,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 35,
-        "sessoes_do_ano": 35,
+        "sessoes_ordinarias": 36,
+        "sessoes_do_ano": 36,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 33,
+        "presencas": 34,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 1,
         "faltas_totais": 2,
-        "percentual_faltas": 5.71,
-        "taxa_presenca": 94.29,
+        "percentual_faltas": 5.56,
+        "taxa_presenca": 94.44,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -22066,11 +22306,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 87,
+        "sim": 88,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -22090,7 +22342,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 93,
+        "total_registros": 94,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -23303,6 +23555,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -23356,17 +23621,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 35,
-        "sessoes_do_ano": 35,
+        "sessoes_ordinarias": 36,
+        "sessoes_do_ano": 36,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 34,
+        "presencas": 35,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 1,
-        "percentual_faltas": 2.86,
-        "taxa_presenca": 97.14,
+        "percentual_faltas": 2.78,
+        "taxa_presenca": 97.22,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -23795,11 +24060,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 89,
+        "sim": 90,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -23819,7 +24096,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 93,
+        "total_registros": 94,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -25032,6 +25309,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -25064,17 +25354,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 35,
-        "sessoes_do_ano": 35,
+        "sessoes_ordinarias": 36,
+        "sessoes_do_ano": 36,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 33,
+        "presencas": 34,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 1,
         "faltas_totais": 2,
-        "percentual_faltas": 5.71,
-        "taxa_presenca": 94.29,
+        "percentual_faltas": 5.56,
+        "taxa_presenca": 94.44,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -25503,6 +25793,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": true,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
@@ -25511,7 +25813,7 @@
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
-        "presidente_que_nao_votou": 0,
+        "presidente_que_nao_votou": 1,
         "ausente_com_justificativa": 4,
         "ausente_sem_justificativa": 3,
         "fora_do_mandato": 0,
@@ -25527,7 +25829,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 93,
+        "total_registros": 94,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -26740,6 +27042,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "presidente_que_nao_votou",
+            "rotulo": "Presidente que não votou",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Não Votou",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -26793,17 +27108,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 35,
-        "sessoes_do_ano": 35,
+        "sessoes_ordinarias": 36,
+        "sessoes_do_ano": 36,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
         "presencas": 35,
         "faltas_com_justificativa": 0,
-        "faltas_sem_justificativa": 0,
-        "faltas_totais": 0,
-        "percentual_faltas": 0.0,
-        "taxa_presenca": 100.0,
+        "faltas_sem_justificativa": 1,
+        "faltas_totais": 1,
+        "percentual_faltas": 2.78,
+        "taxa_presenca": 97.22,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -27224,6 +27539,18 @@
             "justificativa": false,
             "era_presidente": true,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "falta_sem_justificativa",
+            "rotulo_situacao": "Falta sem justificativa",
+            "presente_sessao_plenaria": false,
+            "presente_ordem_dia": false,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
@@ -27234,7 +27561,7 @@
         "nao_votou": 0,
         "presidente_que_nao_votou": 87,
         "ausente_com_justificativa": 0,
-        "ausente_sem_justificativa": 0,
+        "ausente_sem_justificativa": 1,
         "fora_do_mandato": 0,
         "presente_sem_voto_individual_registrado": 0,
         "rotulos": {
@@ -27248,7 +27575,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 93,
+        "total_registros": 94,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -28461,6 +28788,19 @@
             "voto_texto_sapl": "Não Votou",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "ausente_sem_justificativa",
+            "rotulo": "Ausente sem justificativa",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": null,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -28551,12 +28891,12 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 35,
-        "sessoes_do_ano": 35,
+        "sessoes_ordinarias": 36,
+        "sessoes_do_ano": 36,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 35,
+        "presencas": 36,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -28982,11 +29322,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 93,
+        "sim": 94,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -29006,7 +29358,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 93,
+        "total_registros": 94,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -30219,6 +30571,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -30272,12 +30637,12 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 35,
-        "sessoes_do_ano": 35,
+        "sessoes_ordinarias": 36,
+        "sessoes_do_ano": 36,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 35,
+        "presencas": 36,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -30703,11 +31068,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 91,
+        "sim": 92,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -30727,7 +31104,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 93,
+        "total_registros": 94,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -31940,6 +32317,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -31972,17 +32362,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 35,
-        "sessoes_do_ano": 35,
+        "sessoes_ordinarias": 36,
+        "sessoes_do_ano": 36,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 33,
+        "presencas": 34,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 2,
         "faltas_totais": 2,
-        "percentual_faltas": 5.71,
-        "taxa_presenca": 94.29,
+        "percentual_faltas": 5.56,
+        "taxa_presenca": 94.44,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -32403,11 +32793,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 84,
+        "sim": 85,
         "nao": 2,
         "abstencao": 0,
         "nao_votou": 0,
@@ -32427,7 +32829,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 93,
+        "total_registros": 94,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -33640,6 +34042,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -33672,17 +34087,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 35,
-        "sessoes_do_ano": 35,
+        "sessoes_ordinarias": 36,
+        "sessoes_do_ano": 36,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 33,
+        "presencas": 34,
         "faltas_com_justificativa": 2,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 2,
-        "percentual_faltas": 5.71,
-        "taxa_presenca": 94.29,
+        "percentual_faltas": 5.56,
+        "taxa_presenca": 94.44,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -34119,11 +34534,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 86,
+        "sim": 87,
         "nao": 0,
         "abstencao": 0,
         "nao_votou": 0,
@@ -34143,7 +34570,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 93,
+        "total_registros": 94,
         "primeiro_turno_registros": 14,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 3,
@@ -35356,6 +35783,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },
@@ -35412,12 +35852,12 @@
       },
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 30,
-        "sessoes_do_ano": 35,
+        "sessoes_ordinarias": 31,
+        "sessoes_do_ano": 36,
         "sessoes_fora_do_mandato": 5,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 30,
+        "presencas": 31,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -35783,11 +36223,23 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275"
+          },
+          {
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "rotulo": "36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276"
           }
         ]
       },
       "votos": {
-        "sim": 89,
+        "sim": 90,
         "nao": 0,
         "abstencao": 2,
         "nao_votou": 0,
@@ -35807,7 +36259,7 @@
           "fora_do_mandato": "Fora do mandato naquela data",
           "presente_sem_voto_individual_registrado": "Presente na sessão sem voto individual registrado"
         },
-        "total_registros": 91,
+        "total_registros": 92,
         "primeiro_turno_registros": 10,
         "turno_nao_identificado_registros": 0,
         "nao_deliberativo_registros": 2,
@@ -36994,6 +37446,19 @@
             "voto_texto_sapl": "Sim",
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/275",
             "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1058"
+          },
+          {
+            "votacao_id": 287,
+            "sessao_id": 276,
+            "data_sessao": "2026-10-13",
+            "materia_id": 1196,
+            "estado": "sim",
+            "rotulo": "Sim",
+            "turno": "turno unico",
+            "tipo_resultado": "Aprovada por Maioria Absoluta",
+            "voto_texto_sapl": "Sim",
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
+            "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
           }
         ]
       },

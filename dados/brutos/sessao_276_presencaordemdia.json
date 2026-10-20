@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 819,
+      "__str__": "Sessão: 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Beto Maurer",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "parlamentar": 8
+    },
+    {
+      "id": 820,
+      "__str__": "Sessão: 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "parlamentar": 3
+    },
+    {
+      "id": 821,
+      "__str__": "Sessão: 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "parlamentar": 2
+    },
+    {
+      "id": 822,
+      "__str__": "Sessão: 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "parlamentar": 9
+    },
+    {
+      "id": 823,
+      "__str__": "Sessão: 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "parlamentar": 6
+    },
+    {
+      "id": 824,
+      "__str__": "Sessão: 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "parlamentar": 7
+    },
+    {
+      "id": 825,
+      "__str__": "Sessão: 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "parlamentar": 4
+    },
+    {
+      "id": 826,
+      "__str__": "Sessão: 36ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "parlamentar": 100
+    }
+  ],
+  "total": 8
+}
