@@ -60,6 +60,18 @@ class TestChamadaDaRotina(unittest.TestCase):
         self.assertEqual(argumentos[0], "scripts/verificar_regras.py")
         self.assertIn("--rotina-semanal", argumentos)
 
+    def test_workflow_semanal_chama_verificar_regras_com_a_opcao(self):
+        workflow = RAIZ / ".github" / "workflows" / "atualizacao_semanal.yml"
+        chamadas = [
+            linha
+            for linha in workflow.read_text(encoding="utf-8").splitlines()
+            if "verificar_regras.py" in linha
+        ]
+        self.assertTrue(chamadas)
+        for linha in chamadas:
+            with self.subTest(linha=linha.strip()):
+                self.assertIn("--rotina-semanal", linha)
+
 
 if __name__ == "__main__":
     unittest.main()
