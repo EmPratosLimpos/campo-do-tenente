@@ -98,7 +98,7 @@ jobs:
           set -o pipefail
           python coletor/testes_sanidade.py 2>&1 | tee "$RUNNER_TEMP/sanidade.log"
           python -m unittest discover -s tests 2>&1 | tee "$RUNNER_TEMP/testes.log"
-          python scripts/verificar_regras.py 2>&1 | tee "$RUNNER_TEMP/regras.log"
+          python scripts/verificar_regras.py --rotina-semanal 2>&1 | tee "$RUNNER_TEMP/regras.log"
 
       - name: Commit na main so com dados
         if: steps.publicada.outputs.ja != 'true' && steps.mudanca.outputs.houve == 'true'
