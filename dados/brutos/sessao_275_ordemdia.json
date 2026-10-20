@@ -11,7 +11,7 @@
       "resultado": "Aprovada por Unanimidade",
       "tipo_votacao": 2,
       "votacao_aberta": false,
-      "registro_aberto": true,
+      "registro_aberto": false,
       "sessao_plenaria": 275,
       "materia": 1052,
       "tramitacao": null
@@ -27,7 +27,7 @@
       "resultado": "Aprovada por Unanimidade",
       "tipo_votacao": 2,
       "votacao_aberta": false,
-      "registro_aberto": true,
+      "registro_aberto": false,
       "sessao_plenaria": 275,
       "materia": 1054,
       "tramitacao": null
@@ -43,7 +43,7 @@
       "resultado": "Aprovada por Unanimidade",
       "tipo_votacao": 2,
       "votacao_aberta": false,
-      "registro_aberto": true,
+      "registro_aberto": false,
       "sessao_plenaria": 275,
       "materia": 1055,
       "tramitacao": null
@@ -59,7 +59,7 @@
       "resultado": "Aprovada por Unanimidade",
       "tipo_votacao": 2,
       "votacao_aberta": false,
-      "registro_aberto": true,
+      "registro_aberto": false,
       "sessao_plenaria": 275,
       "materia": 1058,
       "tramitacao": null

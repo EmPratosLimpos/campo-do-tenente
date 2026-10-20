@@ -24,6 +24,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(Path(__file__).resolve().parent) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from calendario import hoje_na_cidade, sessao_ja_aconteceu  # noqa: E402
 from config_cidade import (  # noqa: E402
     anos_recorte,
     carregar_config,
@@ -551,6 +552,22 @@ def derivar(
             item = dict(linha)
             item["_ano_arquivo"] = ano
             sessoes.append(item)
+
+    # Sessao ordinaria que ainda nao aconteceu nao entra na derivacao: nao
+    # pede arquivo por sessao, nao recebe pacote vazio e nao aparece na
+    # contagem. Ela volta quando ja tiver acontecido e a coleta a trouxer.
+    # Data invalida continua na derivacao e segue o caminho de erro de sempre.
+    hoje = hoje_na_cidade()
+    todas_sessoes = sessoes
+    sessoes = [item for item in todas_sessoes if sessao_ja_aconteceu(item, hoje)]
+    for sessao in todas_sessoes:
+        if sessao_ja_aconteceu(sessao, hoje):
+            continue
+        print(
+            f"sessao {int(sessao['id'])} numero {sessao.get('numero')} "
+            f"de {sessao.get('data_inicio')} ainda nao aconteceu: "
+            "a derivacao de hoje nao conta esta sessao"
+        )
 
     ordem_linhas, nomes_ordem = ler_paginas(pasta_lote, escolher_prefixo(pasta_lote, "ordemdia"))
     avulsas, nomes_avulsas = ler_ordens_avulsas(pasta_lote)

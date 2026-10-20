@@ -5,9 +5,11 @@ import sys
 import unittest
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
-for pasta in ("coletor", "dados/tratados"):
+for pasta in ("coletor", "dados/tratados", "scripts"):
     if str(RAIZ / pasta) not in sys.path:
         sys.path.insert(0, str(RAIZ / pasta))
+
+from classificar_temas import cobertura_do_lote  # noqa: E402
 
 from config_cidade import (  # noqa: E402
     carregar_config,
@@ -70,6 +72,8 @@ class TestTemasMaterias(unittest.TestCase):
         cls.config = carregar_config()
         dados = ler_bruta(str(ARQUIVO_TEMAS))
         cls.materias = dados["materias"]
+        pendentes = ARQUIVO_TEMAS.with_name("temas_pendentes.json")
+        cls.pendentes = ler_bruta(str(pendentes))["pendentes"] if pendentes.is_file() else []
         cls.brutas = {}
         for caminho in glob.glob(str(PASTA_LOTE / "materialegislativa_ano*_p*.json")):
             if e_artefato_de_tentativa(pathlib.Path(caminho).name):
@@ -93,15 +97,23 @@ class TestTemasMaterias(unittest.TestCase):
 
     def test_materias_sem_repeticao_e_completas(self):
         ids = [item["id"] for item in self.materias]
-        self.assertEqual(len(ids), len(self.brutas))
-        self.assertGreater(len(ids), 0)
+        pids = [item["id"] for item in self.pendentes]
+        self.assertGreater(len(ids) + len(pids), 0)
         self.assertEqual(len(set(ids)), len(ids))
+        self.assertEqual(len(set(pids)), len(pids))
+        self.assertEqual(set(ids) & set(pids), set())
 
     def test_cobre_todas_as_materias_do_lote(self):
-        self.assertEqual({item["id"] for item in self.materias}, set(self.brutas))
+        sem_registro, duplicados = cobertura_do_lote(
+            self.brutas,
+            [item["id"] for item in self.materias],
+            [item["id"] for item in self.pendentes],
+        )
+        self.assertEqual(sem_registro, [], "materia do lote sem tema e sem pendente")
+        self.assertEqual(duplicados, [], "id nos dois arquivos ao mesmo tempo")
 
     def test_ano_numero_do_lote(self):
-        for item in self.materias:
+        for item in list(self.materias) + list(self.pendentes):
             bruta = self.brutas[item["id"]]
             self.assertEqual(item["ano"], bruta["ano"], item["id"])
             self.assertEqual(item["numero"], bruta["numero"], item["id"])

@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "id": 293,
+      "__str__": "Presidente - Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "cargo": 1,
+      "parlamentar": 4
+    },
+    {
+      "id": 294,
+      "__str__": "Primeiro-Secretário - Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "cargo": 3,
+      "parlamentar": 6
+    },
+    {
+      "id": 295,
+      "__str__": "Segundo-Secretário - Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 276,
+      "cargo": 4,
+      "parlamentar": 7
+    }
+  ],
+  "total": 3
+}

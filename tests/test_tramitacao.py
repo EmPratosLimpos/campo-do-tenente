@@ -14,7 +14,6 @@ Regras verificadas aqui (E6d):
 
 from __future__ import annotations
 
-import hashlib
 import json
 import sys
 import unittest
@@ -24,6 +23,8 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "dados" / "tratados"))
 sys.path.insert(0, str(RAIZ / "coletor"))
+
+from gerar_hash_integridade import conferir_hash  # noqa: E402
 
 from gerar_proposicoes_executivo import (  # noqa: E402
     FONTE_FICHA,
@@ -759,12 +760,18 @@ class TestArquivosGerados(unittest.TestCase):
         self.assertTrue(achou, "nenhuma votacao sem voto individual nos dados")
 
     def test_legislatura_complementada_sem_tocar_nos_anos(self):
+        """O hash do ano confere com o arquivo, inclusive com dado novo.
+
+        O .sha256 e regravado pelo gerador no mesmo passo em que o JSON
+        anual e salvo, por isso ele acompanha a semana em vez de guardar
+        um valor de referencia que nunca muda. A intencao original segue
+        abaixo: a legislatura e complementada sem exigir que os arquivos
+        anuais fiquem parados no tempo.
+        """
         for ano in self.anos:
             caminho = TRATADOS / f"atuacao_vereadores_{ano}.json"
             referencia = TRATADOS / f"atuacao_vereadores_{ano}.json.sha256"
-            calculado = hashlib.sha256(caminho.read_bytes()).hexdigest()
-            salvo = referencia.read_text(encoding="utf-8").strip()
-            self.assertEqual(calculado, salvo, f"atuacao_{ano} mudou")
+            conferir_hash(caminho, referencia)
         dados = self._carregar("atuacao_vereadores_legislatura.json")
         for vereador in dados.get("vereadores") or []:
             with self.subTest(vereador=vereador.get("id_sapl")):

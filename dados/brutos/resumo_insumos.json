@@ -6,8 +6,8 @@
       "ordemdia": {
         "ids_lote_antigo": 643,
         "ids_lote_antigo_nas_ordinarias": 639,
-        "ids_por_sessao": 660,
-        "ids_novos": 21,
+        "ids_por_sessao": 661,
+        "ids_novos": 22,
         "ids_novos_lista": [
           19,
           68,
@@ -29,7 +29,8 @@
           708,
           709,
           710,
-          711
+          711,
+          718
         ],
         "ids_que_sumiram": [],
         "sessoes_com_divergencia": [],
@@ -38,8 +39,8 @@
       "sessaoplenariapresenca": {
         "ids_lote_antigo": 578,
         "ids_lote_antigo_nas_ordinarias": 548,
-        "ids_por_sessao": 584,
-        "ids_novos": 36,
+        "ids_por_sessao": 592,
+        "ids_novos": 44,
         "ids_novos_lista": [
           46,
           97,
@@ -76,7 +77,15 @@
           843,
           844,
           845,
-          846
+          846,
+          847,
+          848,
+          849,
+          850,
+          851,
+          852,
+          853,
+          854
         ],
         "ids_que_sumiram": [],
         "sessoes_com_divergencia": [],
@@ -85,8 +94,8 @@
       "presencaordemdia": {
         "ids_lote_antigo": 555,
         "ids_lote_antigo_nas_ordinarias": 525,
-        "ids_por_sessao": 565,
-        "ids_novos": 40,
+        "ids_por_sessao": 573,
+        "ids_novos": 48,
         "ids_novos_lista": [
           4,
           39,
@@ -127,7 +136,15 @@
           815,
           816,
           817,
-          818
+          818,
+          819,
+          820,
+          821,
+          822,
+          823,
+          824,
+          825,
+          826
         ],
         "ids_que_sumiram": [],
         "sessoes_com_divergencia": [],
@@ -144,8 +161,8 @@
       },
       "integrantemesa": {
         "ids_lote_antigo": 272,
-        "ids_por_sessao": 12,
-        "ids_novos": 8,
+        "ids_por_sessao": 15,
+        "ids_novos": 11,
         "ids_novos_lista": [
           284,
           285,
@@ -154,7 +171,10 @@
           289,
           290,
           291,
-          292
+          292,
+          293,
+          294,
+          295
         ],
         "ids_que_sumiram": [
           1,
@@ -430,13 +450,14 @@
         "arquivos": [
           "dados/brutos/lote_20260927_porsessao/sessao_273_integrantemesa_p1.json",
           "dados/brutos/lote_20260927_porsessao/sessao_274_integrantemesa_p1.json",
-          "dados/brutos/lote_20260927_porsessao/sessao_275_integrantemesa_p1.json"
+          "dados/brutos/lote_20260927_porsessao/sessao_275_integrantemesa_p1.json",
+          "dados/brutos/lote_20260927_porsessao/sessao_276_integrantemesa_p1.json"
         ]
       },
       "registrovotacao": {
         "ids_lote_antigo": 241,
-        "ids_por_sessao": 14,
-        "ids_novos": 10,
+        "ids_por_sessao": 15,
+        "ids_novos": 11,
         "ids_novos_lista": [
           274,
           275,
@@ -447,7 +468,8 @@
           281,
           282,
           283,
-          284
+          284,
+          287
         ],
         "ids_que_sumiram": [
           3,
@@ -692,13 +714,14 @@
         "arquivos": [
           "dados/brutos/lote_20260927_porsessao/sessao_273_registrovotacao_p1.json",
           "dados/brutos/lote_20260927_porsessao/sessao_274_registrovotacao_p1.json",
-          "dados/brutos/lote_20260927_porsessao/sessao_275_registrovotacao_p1.json"
+          "dados/brutos/lote_20260927_porsessao/sessao_275_registrovotacao_p1.json",
+          "dados/brutos/lote_20260927_porsessao/sessao_276_registrovotacao_p1.json"
         ]
       },
       "votoparlamentar": {
         "ids_lote_antigo": 1041,
-        "ids_por_sessao": 126,
-        "ids_novos": 90,
+        "ids_por_sessao": 134,
+        "ids_novos": 98,
         "ids_novos_lista": [
           1240,
           1241,
@@ -789,7 +812,15 @@
           1335,
           1336,
           1337,
-          1338
+          1338,
+          1355,
+          1356,
+          1357,
+          1358,
+          1359,
+          1360,
+          1361,
+          1362
         ],
         "ids_que_sumiram": [
           1,
@@ -1802,7 +1833,8 @@
         "arquivos": [
           "dados/brutos/lote_20260927_porsessao/sessao_273_votoparlamentar_p1.json",
           "dados/brutos/lote_20260927_porsessao/sessao_274_votoparlamentar_p1.json",
-          "dados/brutos/lote_20260927_porsessao/sessao_275_votoparlamentar_p1.json"
+          "dados/brutos/lote_20260927_porsessao/sessao_275_votoparlamentar_p1.json",
+          "dados/brutos/lote_20260927_porsessao/sessao_276_votoparlamentar_p1.json"
         ]
       }
     }
@@ -1850,15 +1882,15 @@
       "arquivo": "dados/brutos/contagem_votacoes_ordinarias_2025.json"
     },
     "2026": {
-      "sessoes_ordinarias": 35,
-      "votacoes": 130,
-      "votacoes_com_voto_individual": 110,
+      "sessoes_ordinarias": 36,
+      "votacoes": 131,
+      "votacoes_com_voto_individual": 111,
       "votacoes_sem_voto_individual": 20,
-      "n_nao_votou": 103,
-      "n_votacoes_com_nao_votou": 103,
-      "n_votacoes_com_exatamente_um_nao_votou": 103,
-      "n_presencas_sessao": 305,
-      "n_presencas_ordem_dia": 286,
+      "n_nao_votou": 104,
+      "n_votacoes_com_nao_votou": 104,
+      "n_votacoes_com_exatamente_um_nao_votou": 104,
+      "n_presencas_sessao": 313,
+      "n_presencas_ordem_dia": 294,
       "n_justificativas": 6,
       "lacuna_sessoes_ordinarias": {
         "numeros_ausentes_no_sapl": [],
@@ -1899,20 +1931,20 @@
       "autorias": "O JSON traz autores como identificadores numericos, sem nome. A coluna Autorias ficou vazia. Nomes nao foram inventados."
     },
     "2026": {
-      "total": 147,
+      "total": 160,
       "por_sigla": {
-        "ATA": 36,
+        "ATA": 38,
         "COMPR": 2,
         "EMD": 2,
-        "IND": 37,
-        "MOC": 1,
+        "IND": 40,
+        "MOC": 3,
         "OFEX": 22,
-        "PDL": 3,
+        "PDL": 4,
         "PLCL": 1,
         "PLEG": 5,
-        "PLEX": 13,
+        "PLEX": 15,
         "PRE": 7,
-        "REQ": 18
+        "REQ": 21
       },
       "arquivos": [
         "dados/brutos/lote_20260926/materialegislativa_ano2026_p1.json",
@@ -1998,7 +2030,8 @@
       "dados/brutos/lote_20260927_porsessao/sessao_272_ordemdia_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_273_ordemdia_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_274_ordemdia_p1.json",
-      "dados/brutos/lote_20260927_porsessao/sessao_275_ordemdia_p1.json"
+      "dados/brutos/lote_20260927_porsessao/sessao_275_ordemdia_p1.json",
+      "dados/brutos/lote_20260927_porsessao/sessao_276_ordemdia_p1.json"
     ],
     "expedientemateria": [
       "dados/brutos/lote_20260926/expedientemateria_p1.json"
@@ -2009,7 +2042,8 @@
       "dados/brutos/lote_20260926/registrovotacao_p3.json",
       "dados/brutos/lote_20260927_porsessao/sessao_273_registrovotacao_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_274_registrovotacao_p1.json",
-      "dados/brutos/lote_20260927_porsessao/sessao_275_registrovotacao_p1.json"
+      "dados/brutos/lote_20260927_porsessao/sessao_275_registrovotacao_p1.json",
+      "dados/brutos/lote_20260927_porsessao/sessao_276_registrovotacao_p1.json"
     ],
     "votoparlamentar": [
       "dados/brutos/lote_20260926/votoparlamentar_p1.json",
@@ -2025,7 +2059,8 @@
       "dados/brutos/lote_20260926/votoparlamentar_p11.json",
       "dados/brutos/lote_20260927_porsessao/sessao_273_votoparlamentar_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_274_votoparlamentar_p1.json",
-      "dados/brutos/lote_20260927_porsessao/sessao_275_votoparlamentar_p1.json"
+      "dados/brutos/lote_20260927_porsessao/sessao_275_votoparlamentar_p1.json",
+      "dados/brutos/lote_20260927_porsessao/sessao_276_votoparlamentar_p1.json"
     ],
     "sessaoplenariapresenca": [
       "dados/brutos/lote_20260927_porsessao/sessao_1_sessaoplenariapresenca_p1.json",
@@ -2094,7 +2129,8 @@
       "dados/brutos/lote_20260927_porsessao/sessao_272_sessaoplenariapresenca_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_273_sessaoplenariapresenca_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_274_sessaoplenariapresenca_p1.json",
-      "dados/brutos/lote_20260927_porsessao/sessao_275_sessaoplenariapresenca_p1.json"
+      "dados/brutos/lote_20260927_porsessao/sessao_275_sessaoplenariapresenca_p1.json",
+      "dados/brutos/lote_20260927_porsessao/sessao_276_sessaoplenariapresenca_p1.json"
     ],
     "presencaordemdia": [
       "dados/brutos/lote_20260927_porsessao/sessao_1_presencaordemdia_p1.json",
@@ -2163,7 +2199,8 @@
       "dados/brutos/lote_20260927_porsessao/sessao_272_presencaordemdia_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_273_presencaordemdia_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_274_presencaordemdia_p1.json",
-      "dados/brutos/lote_20260927_porsessao/sessao_275_presencaordemdia_p1.json"
+      "dados/brutos/lote_20260927_porsessao/sessao_275_presencaordemdia_p1.json",
+      "dados/brutos/lote_20260927_porsessao/sessao_276_presencaordemdia_p1.json"
     ],
     "justificativaausencia": [
       "dados/brutos/lote_20260927_porsessao/sessao_1_justificativaausencia_p1.json",
@@ -2232,7 +2269,8 @@
       "dados/brutos/lote_20260927_porsessao/sessao_272_justificativaausencia_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_273_justificativaausencia_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_274_justificativaausencia_p1.json",
-      "dados/brutos/lote_20260927_porsessao/sessao_275_justificativaausencia_p1.json"
+      "dados/brutos/lote_20260927_porsessao/sessao_275_justificativaausencia_p1.json",
+      "dados/brutos/lote_20260927_porsessao/sessao_276_justificativaausencia_p1.json"
     ],
     "integrantemesa": [
       "dados/brutos/lote_20260926/integrantemesa_p1.json",
@@ -2240,7 +2278,8 @@
       "dados/brutos/lote_20260926/integrantemesa_p3.json",
       "dados/brutos/lote_20260927_porsessao/sessao_273_integrantemesa_p1.json",
       "dados/brutos/lote_20260927_porsessao/sessao_274_integrantemesa_p1.json",
-      "dados/brutos/lote_20260927_porsessao/sessao_275_integrantemesa_p1.json"
+      "dados/brutos/lote_20260927_porsessao/sessao_275_integrantemesa_p1.json",
+      "dados/brutos/lote_20260927_porsessao/sessao_276_integrantemesa_p1.json"
     ],
     "parlamentar": [
       "dados/brutos/lote_20260926/parlamentar_p1.json"
