@@ -10,6 +10,12 @@ on:
     # Repeticao de Quinta-feira as 10:00 em Brasilia (13:00 UTC), so se a semana nao saiu.
     - cron: '0 13 * * 4'
   workflow_dispatch:
+    inputs:
+      forcar:
+        description: 'Pula a trava de semana ja publicada'
+        type: boolean
+        default: false
+        required: false
 
 permissions:
   contents: write
@@ -43,15 +49,22 @@ jobs:
 
       - name: Ver se a semana ja foi publicada
         id: publicada
+        env:
+          FORCAR: ${{ github.event_name == 'workflow_dispatch' && inputs.forcar }}
         run: |
-          segunda=$(TZ=America/Sao_Paulo date -d 'last-monday' +%Y-%m-%d)
-          echo "Procurando publicacao desde segunda ${segunda}."
-          if git log --since="$segunda" --grep="Atualiza dados ate a sessao ordinaria" --oneline | grep -q .; then
-            echo "ja=true" >> "$GITHUB_OUTPUT"
-            echo "Semana ja publicada. Termino sem nada."
-          else
+          if [[ "$FORCAR" == "true" ]]; then
             echo "ja=false" >> "$GITHUB_OUTPUT"
-            echo "Semana ainda nao publicada. Sigo com a coleta."
+            echo "Disparo manual com forcar: trava da semana pulada."
+          else
+            segunda=$(TZ=America/Sao_Paulo date -d 'last-monday' +%Y-%m-%d)
+            echo "Procurando publicacao desde segunda ${segunda}."
+            if git log --since="$segunda" --grep="Atualiza dados ate a sessao ordinaria" --oneline | grep -q .; then
+              echo "ja=true" >> "$GITHUB_OUTPUT"
+              echo "Semana ja publicada. Termino sem nada."
+            else
+              echo "ja=false" >> "$GITHUB_OUTPUT"
+              echo "Semana ainda nao publicada. Sigo com a coleta."
+            fi
           fi
 
       - name: Atualizar a semana
