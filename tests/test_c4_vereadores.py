@@ -129,6 +129,10 @@ class TestPresidenciaPorSessao(unittest.TestCase):
         cls.ids_tabela = {
             v["id_sapl"] for v in ler(DIR_TRATADOS / "vereadores.json")["vereadores"]
         }
+        cls.complemento = {
+            int(s["sessao_id"]): s
+            for s in ler(DIR_TRATADOS / "presidencia_complementar.json")["sessoes"]
+        }
 
     def test_todas_as_ordinarias_tem_presidente_ou_lacuna(self):
         total = 0
@@ -153,15 +157,42 @@ class TestPresidenciaPorSessao(unittest.TestCase):
         self.assertGreaterEqual(total, 1)
 
     def test_presidente_confere_com_a_mesa_da_sessao(self):
+        cargos_presidente = set(self.dados["meta"]["ids_cargo_presidente"])
         for bloco in self.dados["por_ano"].values():
             for s in bloco["sessoes"]:
                 if s["presidente_id_sapl"] is None:
                     continue
-                mesa = ler(DIR_BRUTOS / f"sessao_{s['sessao_id']}_integrantemesa.json")["results"]
-                linha = [m for m in mesa if m["id"] == s["integrante_mesa_id"]]
-                self.assertEqual(len(linha), 1)
-                self.assertEqual(linha[0]["parlamentar"], s["presidente_id_sapl"])
-                self.assertIn(linha[0]["cargo"], self.dados["meta"]["ids_cargo_presidente"])
+                with self.subTest(sessao=s["sessao_id"]):
+                    if s.get("origem_presidencia") == "expediente":
+                        self.conferir_presidencia_pelo_expediente(s, cargos_presidente)
+                    else:
+                        mesa = ler(
+                            DIR_BRUTOS / f"sessao_{s['sessao_id']}_integrantemesa.json"
+                        )["results"]
+                        linha = [m for m in mesa if m["id"] == s["integrante_mesa_id"]]
+                        self.assertEqual(len(linha), 1)
+                        self.assertEqual(linha[0]["parlamentar"], s["presidente_id_sapl"])
+                        self.assertIn(linha[0]["cargo"], cargos_presidente)
+
+    def conferir_presidencia_pelo_expediente(self, s, cargos_presidente):
+        arquivo = DIR_BRUTOS / f"sessao_{s['sessao_id']}_integrantemesa.json"
+        self.assertTrue(arquivo.exists(), f"mesa da sessao {s['sessao_id']} ausente")
+        mesa = ler(arquivo)["results"]
+        com_cargo_presidente = [m for m in mesa if m["cargo"] in cargos_presidente]
+        self.assertEqual(
+            com_cargo_presidente,
+            [],
+            f"sessao {s['sessao_id']}: mesa deveria estar sem presidente",
+        )
+        self.assertIsNone(s["integrante_mesa_id"])
+        entrada = self.complemento.get(int(s["sessao_id"]))
+        self.assertIsNotNone(
+            entrada,
+            f"sessao {s['sessao_id']} sem entrada em presidencia_complementar.json",
+        )
+        self.assertEqual(entrada["presidente_id_sapl"], s["presidente_id_sapl"])
+        self.assertEqual(entrada["link_fonte"], s["link_fonte"])
+        self.assertEqual(entrada["trecho"], s["trecho"])
 
 
 class TestAutoriaMaterias(unittest.TestCase):
