@@ -1,0 +1,13 @@
+{
+  "nota": "So vale quando a mesa da sessao vem vazia no SAPL; a mesa do SAPL sempre vence; D-079.",
+  "sessoes": [
+    {
+      "sessao_id": 277,
+      "presidente_id_sapl": 5,
+      "fonte": "expediente",
+      "link_fonte": "https://sapl.campodotenente.pr.leg.br/sessao/277/expediente",
+      "trecho": "sob a Presidência do Excelentíssimo Vereador Rafael de Jesus Ventura",
+      "conferido_em": "2026-10-23"
+    }
+  ]
+}

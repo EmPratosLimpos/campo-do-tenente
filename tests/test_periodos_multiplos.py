@@ -204,12 +204,21 @@ class TestPreviaMultiplaVotacao(unittest.TestCase):
                 "#bloco-votado-todo .cab-cartao", state="visible", timeout=60000
             )
             page.wait_for_timeout(400)
+            seletor_item = (
+                '#bloco-votado-todo li.item-votado:has-text("' + tipo + '")'
+            )
+            for _ in range(30):
+                if page.locator(seletor_item).count() > 0:
+                    break
+                botao = page.locator("#bloco-votado-todo .btn-mostrar-mais-materia")
+                if botao.count() == 0 or not botao.first.is_visible():
+                    break
+                botao.first.click()
+                page.wait_for_timeout(200)
             texto = page.inner_text("body")
             self.assertIn(tipo, texto)
             self.assertIn("2º turno", texto)
-            item = page.locator(
-                '#bloco-votado-todo li.item-votado:has-text("' + tipo + '")'
-            )
+            item = page.locator(seletor_item)
             self.assertGreater(item.count(), 0, tipo + " deveria aparecer na lista Tudo")
             datas = item.locator(".materia-datas").inner_text()
             for d in datas_voto:

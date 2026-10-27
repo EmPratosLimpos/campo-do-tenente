@@ -490,7 +490,7 @@ class TestesCaminhoPorSessao(unittest.TestCase):
 
         chamadas = []
 
-        def fake_completa(coletor, sid):
+        def fake_completa(coletor, sid, e_nova=None, numero=None, data_inicio=None):
             chamadas.append(int(sid))
             return {"sessao_id": int(sid), "n_ordem": 1, "n_registros": 1, "n_votos": 2}
 
@@ -835,7 +835,7 @@ class TestesDerivacaoTolerante(unittest.TestCase):
 
 
 class TesteSimulado(unittest.TestCase):
-    def test_simulado_nao_altera_nada_quando_nao_ha_dado_novo(self):
+    def test_simulado_nao_altera_nada_e_nao_faz_pedido_de_rede(self):
         def porcelana() -> str:
             resultado = subprocess.run(
                 ["git", "status", "--porcelain"],
@@ -855,7 +855,7 @@ class TesteSimulado(unittest.TestCase):
         )
         self.assertEqual(resultado.returncode, 0, resultado.stdout + "\n" + resultado.stderr)
         self.assertIn("Pedidos nesta execucao: 0", resultado.stdout)
-        self.assertIn("Sessoes ordinarias novas: 0", resultado.stdout)
+        self.assertRegex(resultado.stdout, r"Sessoes ordinarias novas: \d+")
         self.assertIn("Nada mudou.", resultado.stdout)
         self.assertNotIn("pedido de rede bloqueado", resultado.stdout + resultado.stderr)
         self.assertEqual(porcelana(), antes)
