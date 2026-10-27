@@ -21,23 +21,22 @@
       "REQ": 56
     },
     "por_situacao_final": {
-      "Aprovado": 116,
-      "Sem registro de votação nem de tramitação no SAPL": 66,
-      "Em tramitacao": 3,
+      "Aprovado": 124,
+      "Sem registro de votação nem de tramitação no SAPL": 61,
       "Proposição encaminhada ao Executivo": 2,
-      "Aguardando a inclusão na ordem do dia": 1,
+      "Em tramitacao": 1,
       "Proposição aprovada": 1,
       "Proposição retirada pelo autor": 1
     },
     "por_situacao_final_fonte": {
-      "votacao": 116,
-      "tramitacao": 5,
-      "ficha_sapl": 3,
-      "sem_registro": 66
+      "votacao": 124,
+      "tramitacao": 4,
+      "ficha_sapl": 1,
+      "sem_registro": 61
     },
-    "itens_com_votacao_valida": 116,
-    "itens_sem_votacao_valida": 74,
-    "votos_nominais_registrados": 504,
+    "itens_com_votacao_valida": 124,
+    "itens_sem_votacao_valida": 66,
+    "votos_nominais_registrados": 576,
     "rotulo_sem_votacao": "sem votacao registrada no SAPL",
     "rotulo_sem_voto_valido": "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)",
     "rotulo_sem_voto_individual": "votacao registrada sem voto nominal no SAPL",
@@ -47,20 +46,20 @@
   },
   "sessao": [
     {
-      "id": 1196,
-      "tipo_sigla": "REQ",
-      "tipo_nome": "Requerimento",
-      "tipo": "REQ 20/2026",
-      "numero": "20",
+      "id": 1279,
+      "tipo_sigla": "IND",
+      "tipo_nome": "Indicação",
+      "tipo": "IND 38/2026",
+      "numero": "38",
       "ano": "2026",
-      "ementa": "Solicita informações referentes à manutenção da Rua Tadeu Posniak.",
-      "tema": "Ruas, trânsito e transporte",
+      "ementa": "Solicita a instalação de câmeras de monitoramento nas creches municipais de Campo do Tenente, visando reforçar a segurança das crianças, dos profissionais e de toda a comunidade escolar.",
+      "tema": "Educação",
       "revisada_por_humano": false,
       "autores": [
         {
-          "parlamentar_id_sapl": 100,
-          "nome_parlamentar": "Rivanildo Cavalheiro",
-          "nome_no_sapl": "Rivanildo Cavalheiro",
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "nome_no_sapl": "Gustavo Vizentin",
           "primeiro_autor": true
         }
       ],
@@ -72,37 +71,37 @@
       "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
       "votacoes_registradas": [
         {
-          "registro_votacao_id": 287,
-          "sessao_id": 276,
-          "data_sessao": "2026-10-13",
+          "registro_votacao_id": 294,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
           "turno": "turno unico",
           "deliberativa": true,
           "voto_valido": true,
-          "tipo_resultado_nome": "Aprovada por Maioria Absoluta",
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
           "situacao_oficial_sapl": "Aprovado",
-          "resultado_texto_sapl": "MAIORIA ABSOLUTA",
-          "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
-          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
         }
       ],
       "votacao": {
-        "data_sessao": "2026-10-13",
-        "sessao_id": 276,
-        "registro_votacao_id": 287,
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 294,
         "turno": "turno unico",
-        "resultado_texto_sapl": "MAIORIA ABSOLUTA",
+        "resultado_texto_sapl": "UNANIMIDADE",
         "situacao_oficial_sapl": "Aprovado",
-        "frase_resultado_sapl": "Aprovada por Maioria Absoluta",
-        "tipo_resultado_nome": "Aprovada por Maioria Absoluta",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
         "totais_oficiais": {
-          "numero_votos_sim": 7,
+          "numero_votos_sim": 8,
           "numero_votos_nao": 0,
           "numero_abstencoes": 0
         },
         "voto_individual_registrado": true,
-        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
       },
       "votacao_rotulo": null,
       "votos_nominais": [
@@ -113,10 +112,10 @@
           "rotulo": "Sim",
           "turno": "turno unico",
           "voto_texto_sapl": "Sim",
-          "data_sessao": "2026-10-13",
-          "sessao_id": 276,
-          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
         },
         {
           "parlamentar_id_sapl": 3,
@@ -125,10 +124,10 @@
           "rotulo": "Sim",
           "turno": "turno unico",
           "voto_texto_sapl": "Sim",
-          "data_sessao": "2026-10-13",
-          "sessao_id": 276,
-          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
         },
         {
           "parlamentar_id_sapl": 2,
@@ -137,10 +136,10 @@
           "rotulo": "Sim",
           "turno": "turno unico",
           "voto_texto_sapl": "Sim",
-          "data_sessao": "2026-10-13",
-          "sessao_id": 276,
-          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
         },
         {
           "parlamentar_id_sapl": 9,
@@ -149,10 +148,10 @@
           "rotulo": "Sim",
           "turno": "turno unico",
           "voto_texto_sapl": "Sim",
-          "data_sessao": "2026-10-13",
-          "sessao_id": 276,
-          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
         },
         {
           "parlamentar_id_sapl": 6,
@@ -161,10 +160,10 @@
           "rotulo": "Sim",
           "turno": "turno unico",
           "voto_texto_sapl": "Sim",
-          "data_sessao": "2026-10-13",
-          "sessao_id": 276,
-          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
         },
         {
           "parlamentar_id_sapl": 7,
@@ -173,34 +172,34 @@
           "rotulo": "Sim",
           "turno": "turno unico",
           "voto_texto_sapl": "Sim",
-          "data_sessao": "2026-10-13",
-          "sessao_id": 276,
-          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
         },
         {
           "parlamentar_id_sapl": 4,
           "nome_parlamentar": "Kinho Lazarino",
-          "estado": "presidente_que_nao_votou",
-          "rotulo": "Presidente que não votou",
+          "estado": "sim",
+          "rotulo": "Sim",
           "turno": "turno unico",
-          "voto_texto_sapl": "Não Votou",
-          "data_sessao": "2026-10-13",
-          "sessao_id": 276,
-          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
         },
         {
           "parlamentar_id_sapl": 5,
           "nome_parlamentar": "Rafael Ventura",
-          "estado": "ausente_sem_justificativa",
-          "rotulo": "Ausente sem justificativa",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
           "turno": "turno unico",
-          "voto_texto_sapl": null,
-          "data_sessao": "2026-10-13",
-          "sessao_id": 276,
-          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
         },
         {
           "parlamentar_id_sapl": 100,
@@ -209,14 +208,1340 @@
           "rotulo": "Sim",
           "turno": "turno unico",
           "voto_texto_sapl": "Sim",
-          "data_sessao": "2026-10-13",
-          "sessao_id": 276,
-          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/276",
-          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
         }
       ],
       "votos_nominais_rotulo": null,
-      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1196"
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+    },
+    {
+      "id": 1277,
+      "tipo_sigla": "IND",
+      "tipo_nome": "Indicação",
+      "tipo": "IND 39/2026",
+      "numero": "39",
+      "ano": "2026",
+      "ementa": "Solicita a manutenção da estrada da localidade do Santana.",
+      "tema": "Ruas, trânsito e transporte",
+      "revisada_por_humano": false,
+      "autores": [
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "nome_no_sapl": "Cleiton Costa",
+          "primeiro_autor": true
+        }
+      ],
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
+      "em_tramitacao": false,
+      "resultado_ficha_sapl": "",
+      "ultima_tramitacao": null,
+      "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 295,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 295,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        }
+      ],
+      "votos_nominais_rotulo": null,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+    },
+    {
+      "id": 1280,
+      "tipo_sigla": "IND",
+      "tipo_nome": "Indicação",
+      "tipo": "IND 40/2026",
+      "numero": "40",
+      "ano": "2026",
+      "ementa": "Solicita a pintura de faixas de pedestres e a implantação e revitalização da sinalização horizontal e vertical em todo o Município, especialmente na Avenida Gabriel Kaiss, na Rua André Valenga e na Avenida Miguel Komarchewski.",
+      "tema": "Ruas, trânsito e transporte",
+      "revisada_por_humano": false,
+      "autores": [
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "nome_no_sapl": "Gustavo Vizentin",
+          "primeiro_autor": true
+        }
+      ],
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
+      "em_tramitacao": false,
+      "resultado_ficha_sapl": "",
+      "ultima_tramitacao": null,
+      "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 296,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 296,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        }
+      ],
+      "votos_nominais_rotulo": null,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+    },
+    {
+      "id": 1056,
+      "tipo_sigla": "MOC",
+      "tipo_nome": "Moção",
+      "tipo": "MOC 1/2026",
+      "numero": "1",
+      "ano": "2026",
+      "ementa": "Moção de Aplausos para alunas intercambistas.",
+      "tema": "Homenagens, nomes e datas",
+      "revisada_por_humano": true,
+      "autores": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "nome_no_sapl": "Beto Maurer",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "nome_no_sapl": "Cleiton Costa",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "nome_no_sapl": "Dr. Marcos Rodrigues",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "nome_no_sapl": "Gilmar Barbosa",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "nome_no_sapl": "Gustavo Vizentin",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "nome_no_sapl": "Josemar Veiga",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "nome_no_sapl": "Kinho Lazarino",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "nome_no_sapl": "Rafael Ventura",
+          "primeiro_autor": true
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "nome_no_sapl": "Rivanildo Cavalheiro",
+          "primeiro_autor": false
+        }
+      ],
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
+      "em_tramitacao": true,
+      "resultado_ficha_sapl": "",
+      "ultima_tramitacao": {
+        "data": "2026-10-05",
+        "status_id": 4,
+        "status_sigla": "AGORDIA",
+        "status_descricao": "Aguardando a inclusão na ordem do dia",
+        "situacao": "em curso",
+        "unidade_origem_id": 5,
+        "unidade_origem": "Protocolo - PROT",
+        "unidade_destino_id": 3,
+        "unidade_destino": "Gabinete da Presidência - GPRES",
+        "texto": "",
+        "urgente": false,
+        "resumo_sapl": "Moção nº 1 de 2026 | Aguardando a inclusão na ordem do dia | 05/10/2026"
+      },
+      "ultima_tramitacao_rotulo": null,
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 291,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 291,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        }
+      ],
+      "votos_nominais_rotulo": null,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+    },
+    {
+      "id": 1194,
+      "tipo_sigla": "MOC",
+      "tipo_nome": "Moção",
+      "tipo": "MOC 2/2026",
+      "numero": "2",
+      "ano": "2026",
+      "ementa": "Moção de Aplausos aposentados outubro de 2025 á outubro de 2026",
+      "tema": "Homenagens, nomes e datas",
+      "revisada_por_humano": false,
+      "autores": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "nome_no_sapl": "Beto Maurer",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "nome_no_sapl": "Cleiton Costa",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "nome_no_sapl": "Dr. Marcos Rodrigues",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "nome_no_sapl": "Gilmar Barbosa",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "nome_no_sapl": "Gustavo Vizentin",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "nome_no_sapl": "Josemar Veiga",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "nome_no_sapl": "Kinho Lazarino",
+          "primeiro_autor": false
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "nome_no_sapl": "Rafael Ventura",
+          "primeiro_autor": true
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "nome_no_sapl": "Rivanildo Cavalheiro",
+          "primeiro_autor": false
+        }
+      ],
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
+      "em_tramitacao": true,
+      "resultado_ficha_sapl": "",
+      "ultima_tramitacao": {
+        "data": "2026-10-09",
+        "status_id": 4,
+        "status_sigla": "AGORDIA",
+        "status_descricao": "Aguardando a inclusão na ordem do dia",
+        "situacao": "em curso",
+        "unidade_origem_id": 5,
+        "unidade_origem": "Protocolo - PROT",
+        "unidade_destino_id": 3,
+        "unidade_destino": "Gabinete da Presidência - GPRES",
+        "texto": "",
+        "urgente": false,
+        "resumo_sapl": "Moção nº 2 de 2026 | Aguardando a inclusão na ordem do dia | 09/10/2026"
+      },
+      "ultima_tramitacao_rotulo": null,
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 292,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 292,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        }
+      ],
+      "votos_nominais_rotulo": null,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+    },
+    {
+      "id": 1278,
+      "tipo_sigla": "MOC",
+      "tipo_nome": "Moção",
+      "tipo": "MOC 3/2026",
+      "numero": "3",
+      "ano": "2026",
+      "ementa": "Moção de Aplauso 003-2026 - Doralice de França",
+      "tema": "Homenagens, nomes e datas",
+      "revisada_por_humano": false,
+      "autores": [
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "nome_no_sapl": "Rafael Ventura",
+          "primeiro_autor": true
+        }
+      ],
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
+      "em_tramitacao": true,
+      "resultado_ficha_sapl": "",
+      "ultima_tramitacao": null,
+      "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 293,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 293,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        }
+      ],
+      "votos_nominais_rotulo": null,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+    },
+    {
+      "id": 1281,
+      "tipo_sigla": "REQ",
+      "tipo_nome": "Requerimento",
+      "tipo": "REQ 21/2026",
+      "numero": "21",
+      "ano": "2026",
+      "ementa": "Solicita transparência e informações sobre os convênios do município.",
+      "tema": "Administração e finanças",
+      "revisada_por_humano": false,
+      "autores": [
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "nome_no_sapl": "Rafael Ventura",
+          "primeiro_autor": true
+        }
+      ],
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
+      "em_tramitacao": false,
+      "resultado_ficha_sapl": "",
+      "ultima_tramitacao": null,
+      "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 297,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 297,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        }
+      ],
+      "votos_nominais_rotulo": null,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+    },
+    {
+      "id": 1282,
+      "tipo_sigla": "REQ",
+      "tipo_nome": "Requerimento",
+      "tipo": "REQ 22/2026",
+      "numero": "22",
+      "ano": "2026",
+      "ementa": "Solicita informações acerca da previsão para execução dos serviços de pintura de faixas de pedestres e implantação e revitalização da sinalização horizontal e vertical no Município.",
+      "tema": "Ruas, trânsito e transporte",
+      "revisada_por_humano": false,
+      "autores": [
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "nome_no_sapl": "Gustavo Vizentin",
+          "primeiro_autor": true
+        }
+      ],
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
+      "em_tramitacao": false,
+      "resultado_ficha_sapl": "",
+      "ultima_tramitacao": null,
+      "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 298,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 298,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        }
+      ],
+      "votos_nominais_rotulo": null,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1282"
     }
   ],
   "mes": [
@@ -15508,17 +16833,158 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
-      "situacao_final_fonte": "sem_registro",
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
       "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
-      "votacoes_registradas": [],
-      "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
-      "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 294,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 294,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1279"
+        }
+      ],
+      "votos_nominais_rotulo": null,
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1279"
     },
     {
@@ -15539,17 +17005,158 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
-      "situacao_final_fonte": "sem_registro",
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
       "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
-      "votacoes_registradas": [],
-      "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
-      "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 295,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 295,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1277"
+        }
+      ],
+      "votos_nominais_rotulo": null,
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1277"
     },
     {
@@ -15773,17 +17380,158 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
-      "situacao_final_fonte": "sem_registro",
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
       "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
-      "votacoes_registradas": [],
-      "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
-      "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 296,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 296,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1280"
+        }
+      ],
+      "votos_nominais_rotulo": null,
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1280"
     },
     {
@@ -16837,8 +18585,8 @@
           "primeiro_autor": false
         }
       ],
-      "situacao_final": "Aguardando a inclusão na ordem do dia",
-      "situacao_final_fonte": "tramitacao",
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": true,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": {
@@ -16856,11 +18604,152 @@
         "resumo_sapl": "Moção nº 1 de 2026 | Aguardando a inclusão na ordem do dia | 05/10/2026"
       },
       "ultima_tramitacao_rotulo": null,
-      "votacoes_registradas": [],
-      "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
-      "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 291,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 291,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1056"
+        }
+      ],
+      "votos_nominais_rotulo": null,
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1056"
     },
     {
@@ -16929,17 +18818,171 @@
           "primeiro_autor": false
         }
       ],
-      "situacao_final": "Em tramitacao",
-      "situacao_final_fonte": "ficha_sapl",
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": true,
       "resultado_ficha_sapl": "",
-      "ultima_tramitacao": null,
-      "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
-      "votacoes_registradas": [],
-      "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
-      "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "ultima_tramitacao": {
+        "data": "2026-10-09",
+        "status_id": 4,
+        "status_sigla": "AGORDIA",
+        "status_descricao": "Aguardando a inclusão na ordem do dia",
+        "situacao": "em curso",
+        "unidade_origem_id": 5,
+        "unidade_origem": "Protocolo - PROT",
+        "unidade_destino_id": 3,
+        "unidade_destino": "Gabinete da Presidência - GPRES",
+        "texto": "",
+        "urgente": false,
+        "resumo_sapl": "Moção nº 2 de 2026 | Aguardando a inclusão na ordem do dia | 09/10/2026"
+      },
+      "ultima_tramitacao_rotulo": null,
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 292,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 292,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1194"
+        }
+      ],
+      "votos_nominais_rotulo": null,
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1194"
     },
     {
@@ -16960,17 +19003,158 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Em tramitacao",
-      "situacao_final_fonte": "ficha_sapl",
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": true,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
       "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
-      "votacoes_registradas": [],
-      "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
-      "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 293,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 293,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1278"
+        }
+      ],
+      "votos_nominais_rotulo": null,
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1278"
     },
     {
@@ -19777,8 +21961,21 @@
       "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
-      "ultima_tramitacao": null,
-      "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
+      "ultima_tramitacao": {
+        "data": "2026-10-15",
+        "status_id": 41,
+        "status_sigla": "ENCAMIN",
+        "status_descricao": "Proposição encaminhada ao Executivo",
+        "situacao": "fim",
+        "unidade_origem_id": 6,
+        "unidade_origem": "Secretária Legislativa - SLEG",
+        "unidade_destino_id": 2,
+        "unidade_destino": "Executivo Municipal - PREF",
+        "texto": "",
+        "urgente": false,
+        "resumo_sapl": "Requerimento nº 20 de 2026 | Proposição encaminhada ao Executivo | 15/10/2026"
+      },
+      "ultima_tramitacao_rotulo": null,
       "votacoes_registradas": [
         {
           "registro_votacao_id": 287,
@@ -19945,17 +22142,158 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
-      "situacao_final_fonte": "sem_registro",
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
       "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
-      "votacoes_registradas": [],
-      "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
-      "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 297,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 297,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1281"
+        }
+      ],
+      "votos_nominais_rotulo": null,
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1281"
     },
     {
@@ -19976,17 +22314,158 @@
           "primeiro_autor": true
         }
       ],
-      "situacao_final": "Sem registro de votação nem de tramitação no SAPL",
-      "situacao_final_fonte": "sem_registro",
+      "situacao_final": "Aprovado",
+      "situacao_final_fonte": "votacao",
       "em_tramitacao": false,
       "resultado_ficha_sapl": "",
       "ultima_tramitacao": null,
       "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
-      "votacoes_registradas": [],
-      "votacao": null,
-      "votacao_rotulo": "sem votacao registrada no SAPL",
-      "votos_nominais": [],
-      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "votacoes_registradas": [
+        {
+          "registro_votacao_id": 298,
+          "sessao_id": 277,
+          "data_sessao": "2026-10-20",
+          "turno": "turno unico",
+          "deliberativa": true,
+          "voto_valido": true,
+          "tipo_resultado_nome": "Aprovada por Unanimidade",
+          "situacao_oficial_sapl": "Aprovado",
+          "resultado_texto_sapl": "UNANIMIDADE",
+          "frase_resultado_sapl": "Aprovada por Unanimidade",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        }
+      ],
+      "votacao": {
+        "data_sessao": "2026-10-20",
+        "sessao_id": 277,
+        "registro_votacao_id": 298,
+        "turno": "turno unico",
+        "resultado_texto_sapl": "UNANIMIDADE",
+        "situacao_oficial_sapl": "Aprovado",
+        "frase_resultado_sapl": "Aprovada por Unanimidade",
+        "tipo_resultado_nome": "Aprovada por Unanimidade",
+        "totais_oficiais": {
+          "numero_votos_sim": 8,
+          "numero_votos_nao": 0,
+          "numero_abstencoes": 0
+        },
+        "voto_individual_registrado": true,
+        "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+        "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+      },
+      "votacao_rotulo": null,
+      "votos_nominais": [
+        {
+          "parlamentar_id_sapl": 8,
+          "nome_parlamentar": "Beto Maurer",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 3,
+          "nome_parlamentar": "Cleiton Costa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 2,
+          "nome_parlamentar": "Dr. Marcos Rodrigues",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 9,
+          "nome_parlamentar": "Gilmar Barbosa",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 6,
+          "nome_parlamentar": "Gustavo Vizentin",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 7,
+          "nome_parlamentar": "Josemar Veiga",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 4,
+          "nome_parlamentar": "Kinho Lazarino",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 5,
+          "nome_parlamentar": "Rafael Ventura",
+          "estado": "presidente_que_nao_votou",
+          "rotulo": "Presidente que não votou",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Não Votou",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        },
+        {
+          "parlamentar_id_sapl": 100,
+          "nome_parlamentar": "Rivanildo Cavalheiro",
+          "estado": "sim",
+          "rotulo": "Sim",
+          "turno": "turno unico",
+          "voto_texto_sapl": "Sim",
+          "data_sessao": "2026-10-20",
+          "sessao_id": 277,
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "link_materia": "https://sapl.campodotenente.pr.leg.br/materia/1282"
+        }
+      ],
+      "votos_nominais_rotulo": null,
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1282"
     },
     {

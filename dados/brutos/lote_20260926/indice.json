@@ -2,11 +2,11 @@
   "fonte": "https://sapl.campodotenente.pr.leg.br",
   "pausa_segundos": 2.5,
   "page_size": 100,
-  "teto_pedidos": 484,
-  "total_pedidos": 89,
+  "teto_pedidos": 489,
+  "total_pedidos": 92,
   "iniciado_em": "2026-09-26T23:58:24-03:00",
-  "atualizado_em": "2026-10-20T00:37:38+00:00",
-  "duracao_segundos": 493.6,
+  "atualizado_em": "2026-10-27T17:35:51+00:00",
+  "duracao_segundos": 546.3,
   "pedidos": [
     {
       "url": "https://sapl.campodotenente.pr.leg.br/api/",
@@ -630,6 +630,27 @@
       "status": 200,
       "arquivo": "materialegislativa_ano2026_p2.json",
       "n": 89
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/sessaoplenaria/?data_inicio__year=2026&page_size=100&page=1",
+      "quando": "2026-10-27T17:35:38+00:00",
+      "status": 200,
+      "arquivo": "sessaoplenaria_ano2026_p1.json",
+      "n": 90
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/sessao/expedientemateria/?page_size=100&page=1",
+      "quando": "2026-10-27T17:35:42+00:00",
+      "status": 200,
+      "arquivo": "expedientemateria_p1.json",
+      "n": 91
+    },
+    {
+      "url": "https://sapl.campodotenente.pr.leg.br/api/materia/materialegislativa/?ano=2026&page_size=100&page=1",
+      "quando": "2026-10-27T17:35:49+00:00",
+      "status": 200,
+      "arquivo": "materialegislativa_ano2026_p1.json",
+      "n": 92
     }
   ]
 }

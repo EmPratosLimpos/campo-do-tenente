@@ -1,0 +1,11 @@
+{
+  "sessao_id": 280,
+  "motivo": "sessao nova com sessaoplenariapresenca zerado (total_entries 0). A presenca ainda nao foi lancada no SAPL. Ausencia nao vira falta.",
+  "recurso": "sessaoplenariapresenca",
+  "data_inicio": "2026-10-27",
+  "data_execucao": "2026-10-27",
+  "detalhe": {
+    "recurso": "sessaoplenariapresenca",
+    "total_entries": 0
+  }
+}

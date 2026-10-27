@@ -2,16 +2,18 @@
   "meta": {
     "gerado_por": "dados/tratados/gerar_presidencia_sessoes.py",
     "arquivo_cargos_mesa": "dados/brutos/lote_20261009_autoria/cargomesa_p1.json",
+    "arquivo_complemento": "dados/tratados/presidencia_complementar.json",
     "ids_cargo_presidente": [
       1
     ],
-    "regra": "Presidente da sessao e o integrante da mesa daquela sessao com o cargo oficial Presidente. O rotulo 'Presidente que nao votou' so vale quando o voto dessa pessoa esta registrado como 'Não Votou'."
+    "regra": "Presidente da sessao e o integrante da mesa daquela sessao com o cargo oficial Presidente. O rotulo 'Presidente que nao votou' so vale quando o voto dessa pessoa esta registrado como 'Não Votou'. Quando a mesa da sessao vem vazia no SAPL, o complemento presidencia_complementar.json pode indicar a presidencia pelo texto de abertura do expediente; a mesa do SAPL sempre vence (D-079)."
   },
   "por_ano": {
     "2025": {
       "arquivo_sessoes": "dados/brutos/contagem_votacoes_ordinarias_2025.json",
       "n_sessoes_ordinarias": 32,
       "n_com_presidente": 32,
+      "n_pelo_expediente": 0,
       "lacunas": [],
       "sessoes": [
         {
@@ -23,7 +25,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 5,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 1,
@@ -34,7 +37,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 1,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 2,
@@ -45,7 +49,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 9,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 3,
@@ -56,7 +61,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 13,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 5,
@@ -67,7 +73,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 17,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 6,
@@ -78,7 +85,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 21,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 7,
@@ -89,7 +97,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 25,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 8,
@@ -100,7 +109,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 29,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 9,
@@ -111,7 +121,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 33,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 10,
@@ -122,7 +133,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 37,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 11,
@@ -133,7 +145,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 40,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 12,
@@ -144,7 +157,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 44,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 13,
@@ -155,7 +169,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 48,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 14,
@@ -166,7 +181,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 52,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 15,
@@ -177,7 +193,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 56,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 16,
@@ -188,7 +205,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 60,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 17,
@@ -199,7 +217,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 64,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 18,
@@ -210,7 +229,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 68,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 19,
@@ -221,7 +241,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 72,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 20,
@@ -232,7 +253,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 76,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 21,
@@ -243,7 +265,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 80,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 22,
@@ -254,7 +277,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 84,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 23,
@@ -265,7 +289,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 88,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 24,
@@ -276,7 +301,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 92,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 25,
@@ -287,7 +313,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 96,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 27,
@@ -298,7 +325,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 100,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 28,
@@ -309,7 +337,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 104,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 29,
@@ -320,7 +349,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 108,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 30,
@@ -331,7 +361,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 112,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 31,
@@ -342,7 +373,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 116,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 33,
@@ -353,7 +385,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 120,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 34,
@@ -364,14 +397,16 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 124,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         }
       ]
     },
     "2026": {
       "arquivo_sessoes": "dados/brutos/contagem_votacoes_ordinarias_2026.json",
-      "n_sessoes_ordinarias": 36,
-      "n_com_presidente": 36,
+      "n_sessoes_ordinarias": 37,
+      "n_com_presidente": 37,
+      "n_pelo_expediente": 1,
       "lacunas": [],
       "sessoes": [
         {
@@ -383,7 +418,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 136,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 38,
@@ -394,7 +430,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 140,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 39,
@@ -405,7 +442,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 148,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 41,
@@ -416,7 +454,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 152,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 42,
@@ -427,7 +466,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 160,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 45,
@@ -438,7 +478,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 164,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 48,
@@ -449,7 +490,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 170,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 49,
@@ -460,7 +502,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 174,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 50,
@@ -471,7 +514,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 178,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 51,
@@ -482,7 +526,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 182,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 52,
@@ -493,7 +538,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 186,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 53,
@@ -504,7 +550,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 191,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 54,
@@ -515,7 +562,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 195,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 55,
@@ -526,7 +574,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 200,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 56,
@@ -537,7 +586,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 204,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 80,
@@ -548,7 +598,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 208,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 81,
@@ -559,7 +610,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 212,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 257,
@@ -570,7 +622,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 216,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 258,
@@ -581,7 +634,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 221,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 259,
@@ -592,7 +646,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 225,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 260,
@@ -603,7 +658,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 230,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 261,
@@ -614,7 +670,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 234,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 262,
@@ -625,7 +682,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 238,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 263,
@@ -636,7 +694,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 244,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 264,
@@ -647,7 +706,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 248,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 265,
@@ -658,7 +718,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 252,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 266,
@@ -669,7 +730,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 256,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 267,
@@ -680,7 +742,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 260,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 269,
@@ -691,7 +754,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 264,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 270,
@@ -702,7 +766,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 268,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 271,
@@ -713,7 +778,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 272,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 272,
@@ -724,7 +790,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 276,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 273,
@@ -735,7 +802,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 280,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 274,
@@ -746,7 +814,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 284,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 275,
@@ -757,7 +826,8 @@
           "presidente_id_sapl": 5,
           "presidente_nome_parlamentar": "Rafael Ventura",
           "integrante_mesa_id": 289,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
         },
         {
           "sessao_id": 276,
@@ -768,7 +838,22 @@
           "presidente_id_sapl": 4,
           "presidente_nome_parlamentar": "Kinho Lazarino",
           "integrante_mesa_id": 293,
-          "lacuna": null
+          "lacuna": null,
+          "origem_presidencia": "mesa"
+        },
+        {
+          "sessao_id": 277,
+          "numero": 37,
+          "data": "2026-10-20",
+          "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277",
+          "arquivo_de_origem": "dados/brutos/sessao_277_integrantemesa.json",
+          "presidente_id_sapl": 5,
+          "presidente_nome_parlamentar": "Rafael Ventura",
+          "integrante_mesa_id": null,
+          "lacuna": null,
+          "origem_presidencia": "expediente",
+          "link_fonte": "https://sapl.campodotenente.pr.leg.br/sessao/277/expediente",
+          "trecho": "sob a Presidência do Excelentíssimo Vereador Rafael de Jesus Ventura"
         }
       ]
     }

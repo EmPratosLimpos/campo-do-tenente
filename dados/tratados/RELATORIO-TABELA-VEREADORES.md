@@ -1,6 +1,6 @@
 # Tabela unica de vereadores da legislatura de Campo do Tenente
 
-Gerada em: 2026-10-19T21:42:36-03:00
+Gerada em: 2026-10-27T14:40:02-03:00
 Script: `dados/tratados/gerar_tabela_vereadores.py`
 Fonte: exatamente os arquivos oficiais guardados em `dados/brutos/`. Nada foi inventado na mao.
 
