@@ -581,40 +581,54 @@ def coletar_sessoes_novas(
     sessoes: list[dict],
     pendentes: list | None = None,
     ids_novas: set[int] | list[int] | None = None,
-) -> None:
+    adiadas: set[int] | None = None,
+) -> set[int]:
     """Coleta por sessao dos pacotes grandes, com mesa, registros e votos.
 
     Com fila de pendentes, a sessao que falhar por rede ou recusa do
     SAPL nao para as outras: entra na fila e e refeita por inteiro uma
     vez ao fim. A recusa por vazio suspeito continua parando, pois
-    indica filtro mudado no SAPL.
+    indica filtro mudado no SAPL. A sessao nova sem presenca lancada
+    e adiada, entra no conjunto devolvido e nao conta como nova.
 
     A decisao de sessao nova e tomada uma vez aqui (id em ids_novas) e
     reaproveitada na repeticao, em vez de olhar o disco de novo. Sem
     ids_novas, cada sessao decide pelo disco, so para uso isolado.
     """
     novas = {int(item) for item in ids_novas} if ids_novas is not None else None
+    adiadas_nesta = adiadas if adiadas is not None else set()
     for sessao in sessoes:
         sid = int(sessao["id"])
-        print(f"sessao {sid} numero {sessao.get('numero')} {sessao.get('data_inicio')}")
+        numero = sessao.get("numero")
+        data_inicio = sessao.get("data_inicio")
+        print(f"sessao {sid} numero {numero} {data_inicio}")
         if novas is None:
             e_nova = None
         else:
             e_nova = sid in novas
         try:
-            if e_nova is None:
-                resumo = coletar_sessao_completa(coletor, sid)
-            else:
-                resumo = coletar_sessao_completa(coletor, sid, e_nova)
+            resumo = coletar_sessao_completa(
+                coletor, sid, e_nova, numero=numero, data_inicio=data_inicio
+            )
         except PedidoPendente as exc:
             if pendentes is None:
                 raise
-            if e_nova is None:
-                refazer = lambda sid=sid: coletar_sessao_completa(coletor, sid)
-            else:
-                refazer = lambda sid=sid, e_nova=e_nova: coletar_sessao_completa(
-                    coletor, sid, e_nova
+            def refazer(
+                sid=sid,
+                e_nova=e_nova,
+                numero=numero,
+                data_inicio=data_inicio,
+            ):
+                resumo = coletar_sessao_completa(
+                    coletor,
+                    sid,
+                    e_nova,
+                    numero=numero,
+                    data_inicio=data_inicio,
                 )
+                if resumo.get("adiada"):
+                    adiadas_nesta.add(int(sid))
+                return resumo
             pendentes.append(
                 {
                     "descricao": f"sessao {sid} ({exc.motivo})",
@@ -626,10 +640,14 @@ def coletar_sessoes_novas(
                 }
             )
             continue
+        if resumo.get("adiada"):
+            adiadas_nesta.add(sid)
+            continue
         print(
             f"  ordem {resumo['n_ordem']}, "
             f"registros {resumo['n_registros']}, votos {resumo['n_votos']}"
         )
+    return adiadas_nesta
 
 
 def coletar_autoria(coletor: ColetorLote, anos: list[int], simulado: bool, pendentes: list | None = None) -> None:
@@ -1145,6 +1163,34 @@ def avisos_ordem_vazia(pasta_sessao: Path, ids_novas: list[int] | set[int]) -> l
     return avisos
 
 
+def remover_sessoes_adiadas(
+    lista_novas: list[dict],
+    lista_alvo: list[dict],
+    sessoes_coletaveis: list[dict],
+    adiadas: set[int],
+) -> tuple[list[dict], list[dict], list[dict]]:
+    """Tira das listas da execucao as sessoes novas adiadas por falta de presenca."""
+    if not adiadas:
+        return lista_novas, lista_alvo, sessoes_coletaveis
+
+    def manter(sessao: dict) -> bool:
+        return int(sessao["id"]) not in adiadas
+
+    return (
+        [sessao for sessao in lista_novas if manter(sessao)],
+        [sessao for sessao in lista_alvo if manter(sessao)],
+        [sessao for sessao in sessoes_coletaveis if manter(sessao)],
+    )
+
+
+def resumo_sessoes_adiadas(adiadas: set[int]) -> None:
+    """Linha unica no log da rotina com as sessoes que ficaram para depois."""
+    if not adiadas:
+        return
+    ids = ", ".join(str(item) for item in sorted(adiadas))
+    print(f"Sessoes ordinarias adiadas por falta de presenca: {len(adiadas)} ({ids})")
+
+
 def conferir_coleta_por_sessao(pasta_sessao: Path, sessoes: list[dict]) -> list[dict]:
     """Confere pagina a pagina da coleta por sessao e grava a conferencia.
 
@@ -1224,6 +1270,7 @@ def main(argv: list[str] | None = None) -> int:
     original_urlopen = coletar_lote.urllib.request.urlopen
     lista_novas: list[dict] = []
     lista_alvo: list[dict] = []
+    adiadas: set[int] = set()
     try:
         if args.simulado:
             coletar_lote.urllib.request.urlopen = bloqueio_de_rede
@@ -1287,6 +1334,7 @@ def main(argv: list[str] | None = None) -> int:
                     lista_alvo,
                     pendentes,
                     {int(item["id"]) for item in lista_novas},
+                    adiadas,
                 )
             except OrcamentoEsgotado as exc:
                 print(f"PAROU: {exc}")
@@ -1295,6 +1343,9 @@ def main(argv: list[str] | None = None) -> int:
                     "fora da rotina semanal. Nada foi publicado."
                 )
                 return 2
+            lista_novas, lista_alvo, sessoes_coletaveis = remover_sessoes_adiadas(
+                lista_novas, lista_alvo, sessoes_coletaveis, adiadas
+            )
             conferir_coleta_por_sessao(pasta_sessao, sessoes_coletaveis)
 
         pasta_autoria = pasta_autoria_mais_recente(BRUTOS)
@@ -1340,6 +1391,10 @@ def main(argv: list[str] | None = None) -> int:
         except OrcamentoEsgotado as exc:
             print(f"PAROU: {exc}")
             return 2
+        lista_novas, lista_alvo, sessoes_coletaveis = remover_sessoes_adiadas(
+            lista_novas, lista_alvo, sessoes_coletaveis, adiadas
+        )
+        resumo_sessoes_adiadas(adiadas)
         avisos_conferencia: list[str] = []
         if not args.simulado:
             aviso_autoria = conferir_autoria_apos_repeticao(

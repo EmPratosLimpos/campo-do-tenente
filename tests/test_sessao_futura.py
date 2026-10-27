@@ -18,6 +18,7 @@ import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
+from unittest import mock
 
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "coletor"))
@@ -112,15 +113,23 @@ class TestSessaoFuturaFicaFora(unittest.TestCase):
         self.assertEqual([item["id"] for item in vigentes], [900])
         self.assertEqual(futuras, [])
 
-    def test_hoje_com_presenca_zerada_continua_recusada(self):
+    def test_hoje_com_presenca_zerada_fica_adiada(self):
         with tempfile.TemporaryDirectory() as tmp:
             pasta = Path(tmp)
             coletor = ColetorFalso(pasta, 276)
-            with self.assertRaises(SystemExit) as ctx:
-                coletar_sessao_completa(coletor, 276, e_nova=True)
-            self.assertIn("sessao 276 recusada", str(ctx.exception))
-            self.assertIn("sessaoplenariapresenca zerado", str(ctx.exception))
-            self.assertTrue((pasta / "sessao_276_recusada.json").is_file())
+            with mock.patch(
+                "coletar_por_sessao.hoje_na_cidade", return_value=HOJE
+            ):
+                resumo = coletar_sessao_completa(
+                    coletor,
+                    276,
+                    e_nova=True,
+                    numero=36,
+                    data_inicio=HOJE.isoformat(),
+                )
+            self.assertTrue(resumo["adiada"])
+            self.assertTrue((pasta / "sessao_276_adiada.json").is_file())
+            self.assertFalse((pasta / "sessao_276_recusada.json").exists())
 
     def test_piso_continua_conferido_na_lista_inteira(self):
         cheia = sessoes_de_teste()

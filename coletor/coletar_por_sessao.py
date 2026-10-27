@@ -14,7 +14,7 @@ import json
 from datetime import date, datetime
 from pathlib import Path
 
-from calendario import hoje_na_cidade, sessao_ja_aconteceu
+from calendario import data_da_sessao, hoje_na_cidade, sessao_ja_aconteceu
 from coletar_lote import (
     PAGE_SIZE,
     ColetorLote,
@@ -388,6 +388,94 @@ def gravar_aviso_sessao_recusada(pasta: Path, sid: int, motivo: str, detalhe: di
     return caminho
 
 
+def dias_max_espera_presenca(cfg: dict) -> int:
+    """Dias que uma sessao nova pode esperar o lancamento de presenca.
+
+    O valor vem de config_cidade.json, nunca fica fixo no codigo.
+    """
+    valor = (cfg.get("coleta") or {}).get("dias_max_espera_presenca")
+    if isinstance(valor, bool) or not isinstance(valor, int) or valor < 0:
+        raise SystemExit(
+            "config_cidade.json: coleta.dias_max_espera_presenca deve ser "
+            "um numero inteiro de dias maior ou igual a zero."
+        )
+    return int(valor)
+
+
+def restaurar_arquivos_previos(
+    pasta: Path, restaurar: dict[str, bytes | None] | None
+) -> None:
+    """Devolve os consolidados ao estado anterior a coleta.
+
+    Chave e o nome do arquivo, valor e o conteudo previo ou None
+    quando nao existia.
+    """
+    for nome, conteudo in (restaurar or {}).items():
+        caminho = pasta / nome
+        if conteudo is None:
+            if caminho.is_file():
+                caminho.unlink()
+        else:
+            caminho.write_bytes(conteudo)
+
+
+def gravar_aviso_sessao_adiada(
+    pasta: Path,
+    sid: int,
+    motivo: str,
+    detalhe: dict,
+    data_inicio: str | None,
+    data_execucao: str,
+) -> Path:
+    """Aviso estruturado quando a sessao nova fica para a proxima execucao.
+
+    O arquivo nao entra na derivacao. Serve para o log e para a pessoa
+    ver que a sessao existe, mas a presenca ainda nao foi lancada no
+    SAPL. Nada e publicado a partir de uma sessao adiada.
+    """
+    caminho = pasta / f"sessao_{int(sid)}_adiada.json"
+    dado = {
+        "sessao_id": int(sid),
+        "motivo": motivo,
+        "recurso": detalhe.get("recurso"),
+        "data_inicio": data_inicio,
+        "data_execucao": data_execucao,
+        "detalhe": detalhe,
+    }
+    texto = json.dumps(dado, ensure_ascii=False, indent=2) + "\n"
+    tmp = caminho.with_suffix(".json.tmp")
+    tmp.write_bytes(texto.encode("utf-8"))
+    tmp.replace(caminho)
+    return caminho
+
+
+def adiar_sessao_sem_presenca(
+    pasta: Path,
+    sid: int,
+    motivo: str,
+    detalhe: dict,
+    restaurar: dict[str, bytes | None] | None,
+    numero,
+    data_inicio: str | None,
+    data_execucao: str,
+) -> Path:
+    """Adia a sessao nova sem presenca lancada, sem derrubar a execucao."""
+    restaurar_arquivos_previos(pasta, restaurar)
+    aviso = gravar_aviso_sessao_adiada(
+        pasta,
+        sid,
+        motivo,
+        detalhe,
+        data_inicio=data_inicio,
+        data_execucao=data_execucao,
+    )
+    print(
+        f"sessao {int(sid)} numero {numero} de {data_inicio} "
+        "sem presenca lancada no SAPL: fica para a proxima execucao"
+    )
+    return aviso
+
+
 def recusar_sessao_vazia(
     pasta: Path,
     sid: int,
@@ -402,13 +490,7 @@ def recusar_sessao_vazia(
     bom quando o SAPL responde vazio. Chave e o nome do arquivo,
     valor e o conteudo previo ou None quando nao existia.
     """
-    for nome, conteudo in (restaurar or {}).items():
-        caminho = pasta / nome
-        if conteudo is None:
-            if caminho.is_file():
-                caminho.unlink()
-        else:
-            caminho.write_bytes(conteudo)
+    restaurar_arquivos_previos(pasta, restaurar)
     aviso = gravar_aviso_sessao_recusada(pasta, sid, motivo, detalhe)
     print(f"sessao {int(sid)} recusada: {motivo} Aviso em {aviso.name}. Nada foi publicado.")
     raise SystemExit(
@@ -448,14 +530,22 @@ def total_entries_da_pagina(pasta: Path, prefixo: str) -> int | None:
 
 
 def coletar_sessao_completa(
-    coletor: ColetorLote, sid: int, e_nova: bool | None = None
+    coletor: ColetorLote,
+    sid: int,
+    e_nova: bool | None = None,
+    numero=None,
+    data_inicio: str | None = None,
 ) -> dict:
     """Coleta por sessao dos 7 pacotes grandes: presencas, ordem, justificativa, mesa, registros e votos.
 
     Recusa a sessao quando a ordem tem itens e vieram zero registros,
     ou quando ha registros e zero votos. Sessao nova com presenca
-    zerada (total_entries 0) tambem e recusada, pois ausencia ainda nao
-    lancada nao pode virar falta sem justificativa. Ordem do dia vazia
+    zerada (total_entries 0) recente e adiada: ausencia ainda nao
+    lancada nao pode virar falta sem justificativa, mas tambem nao
+    pode derrubar a execucao inteira. A sessao adiada restaura os
+    arquivos previos e grava um aviso sessao_<id>_adiada.json. Se a
+    data_inicio for mais antiga que coleta.dias_max_espera_presenca,
+    a recusa de hoje continua, para alguem ver. Ordem do dia vazia
     em sessao nova nao recusa: vira aviso no CHANGELOG. Vazio nesse
     ponto indica filtro mudado no SAPL ou coleta quebrada, por isso
     nada e publicado. A recusa restaura os arquivos previos e grava um
@@ -471,6 +561,9 @@ def coletar_sessao_completa(
     aviso_antigo = pasta / f"sessao_{sid}_recusada.json"
     if aviso_antigo.is_file():
         aviso_antigo.unlink()
+    aviso_adiado_antigo = pasta / f"sessao_{sid}_adiada.json"
+    if aviso_adiado_antigo.is_file():
+        aviso_adiado_antigo.unlink()
     previos = {}
     for recurso in (RECURSO_REGISTRO, RECURSO_VOTO):
         caminho = pasta / f"sessao_{sid}_{recurso}_p1.json"
@@ -491,15 +584,43 @@ def coletar_sessao_completa(
         for recurso in RECURSOS_PRESENCA:
             total = total_entries_da_pagina(pasta, f"sessao_{sid}_{recurso}")
             if total == 0:
+                motivo = (
+                    f"sessao nova com {recurso} zerado (total_entries 0). "
+                    "A presenca ainda nao foi lancada no SAPL. "
+                    "Ausencia nao vira falta."
+                )
+                detalhe = {"recurso": recurso, "total_entries": 0}
+                hoje = hoje_na_cidade()
+                limite = dias_max_espera_presenca(carregar_config())
+                quando = data_da_sessao({"data_inicio": data_inicio})
+                recente = quando is not None and (hoje - quando).days <= limite
+                if recente:
+                    adiar_sessao_sem_presenca(
+                        pasta,
+                        sid,
+                        motivo,
+                        detalhe,
+                        previos,
+                        numero=numero,
+                        data_inicio=data_inicio,
+                        data_execucao=hoje.isoformat(),
+                    )
+                    return {
+                        "sessao_id": sid,
+                        "adiada": True,
+                        "motivo": motivo,
+                        "recurso": recurso,
+                        "n_ordem": 0,
+                        "n_registros": 0,
+                        "n_votos": 0,
+                    }
+                detalhe["data_inicio"] = data_inicio
+                detalhe["dias_max_espera_presenca"] = limite
                 recusar_sessao_vazia(
                     coletor.pasta,
                     sid,
-                    (
-                        f"sessao nova com {recurso} zerado (total_entries 0). "
-                        "A presenca ainda nao foi lancada no SAPL. "
-                        "Ausencia nao vira falta."
-                    ),
-                    {"recurso": recurso, "total_entries": 0},
+                    motivo,
+                    detalhe,
                     restaurar=previos,
                 )
     ids_ordem = ler_ids_ordem_da_sessao(coletor.pasta, sid)

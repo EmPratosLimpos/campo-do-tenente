@@ -11,6 +11,10 @@
     "legislatura_inicio": 2025,
     "legislatura_fim": 2028
   },
+  "coleta": {
+    "nota": "C5: dias maximos que uma sessao nova pode esperar o lancamento de presenca no SAPL. A sessao recente sem presenca fica adiada para a proxima execucao; acima desse limite, a execucao para para revisao.",
+    "dias_max_espera_presenca": 7
+  },
   "campos_pessoais_removidos": {
     "nota": "SEG2: campos que identificam quem fez a operacao no SAPL. Nenhum dado de votante, nem de quem registrou, fica no repositorio. A remocao e feita antes de gravar, por uma funcao so, e a trava de testes_sanidade.py recusa esses campos em qualquer arquivo de dados/.",
     "lista": [
