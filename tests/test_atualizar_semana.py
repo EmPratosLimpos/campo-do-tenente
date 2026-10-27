@@ -490,7 +490,7 @@ class TestesCaminhoPorSessao(unittest.TestCase):
 
         chamadas = []
 
-        def fake_completa(coletor, sid):
+        def fake_completa(coletor, sid, e_nova=None, numero=None, data_inicio=None):
             chamadas.append(int(sid))
             return {"sessao_id": int(sid), "n_ordem": 1, "n_registros": 1, "n_votos": 2}
 

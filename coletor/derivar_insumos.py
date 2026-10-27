@@ -534,6 +534,35 @@ def lacuna_ordinarias(ano: int, ordinarias: list[dict]) -> dict:
     }
 
 
+def ids_sessoes_adiadas(pasta_porsessao: Path | None) -> set[int]:
+    """Ids com aviso sessao_<id>_adiada.json na pasta por sessao desta execucao.
+
+    A sessao adiada nao entra na derivacao: fica fora dos pacotes, das
+    contagens e de qualquer arquivo tratado. O aviso e apagado quando a
+    coleta completa da sessao acontece depois.
+    """
+    if pasta_porsessao is None:
+        return set()
+    adiadas: set[int] = set()
+    for caminho in sorted(pasta_porsessao.glob("sessao_*_adiada.json")):
+        try:
+            dados = ler_json(caminho)
+        except (OSError, ValueError, UnicodeDecodeError):
+            print(f"AVISO: aviso adiado ilegivel pulado em {caminho.name}.")
+            continue
+        if not isinstance(dados, dict):
+            continue
+        identificador = dados.get("sessao_id")
+        if identificador is None:
+            partes = caminho.stem.split("_")
+            identificador = partes[1] if len(partes) > 1 else None
+        try:
+            adiadas.add(int(identificador))
+        except (TypeError, ValueError):
+            continue
+    return adiadas
+
+
 def derivar(
     pasta_lote: Path,
     pasta_saida: Path,
@@ -556,15 +585,30 @@ def derivar(
     # Sessao ordinaria que ainda nao aconteceu nao entra na derivacao: nao
     # pede arquivo por sessao, nao recebe pacote vazio e nao aparece na
     # contagem. Ela volta quando ja tiver acontecido e a coleta a trouxer.
-    # Data invalida continua na derivacao e segue o caminho de erro de sempre.
+    # A sessao nova adiada por falta de presenca segue a mesma regra nesta
+    # execucao. Data invalida continua na derivacao e segue o caminho de
+    # erro de sempre.
     hoje = hoje_na_cidade()
     todas_sessoes = sessoes
-    sessoes = [item for item in todas_sessoes if sessao_ja_aconteceu(item, hoje)]
+    adiadas = ids_sessoes_adiadas(pasta_porsessao)
+    sessoes = [
+        item
+        for item in todas_sessoes
+        if sessao_ja_aconteceu(item, hoje) and int(item["id"]) not in adiadas
+    ]
     for sessao in todas_sessoes:
+        sid = int(sessao["id"])
+        if sid in adiadas:
+            print(
+                f"sessao {sid} numero {sessao.get('numero')} "
+                f"de {sessao.get('data_inicio')} adiada por falta de presenca: "
+                "a derivacao de hoje nao conta esta sessao"
+            )
+            continue
         if sessao_ja_aconteceu(sessao, hoje):
             continue
         print(
-            f"sessao {int(sessao['id'])} numero {sessao.get('numero')} "
+            f"sessao {sid} numero {sessao.get('numero')} "
             f"de {sessao.get('data_inicio')} ainda nao aconteceu: "
             "a derivacao de hoje nao conta esta sessao"
         )
