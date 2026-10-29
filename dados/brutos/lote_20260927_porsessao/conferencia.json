@@ -1,5 +1,5 @@
 {
-  "sessoes_ordinarias": 69,
+  "sessoes_ordinarias": 70,
   "ids_sessoes": [
     4,
     1,
@@ -69,7 +69,8 @@
     274,
     275,
     276,
-    277
+    277,
+    280
   ],
   "recursos": [
     "sessaoplenariapresenca",
@@ -79,19 +80,19 @@
   ],
   "por_recurso": {
     "sessaoplenariapresenca": {
-      "sessoes_conferidas": 69,
+      "sessoes_conferidas": 70,
       "sessoes_com_divergencia": 0
     },
     "presencaordemdia": {
-      "sessoes_conferidas": 69,
+      "sessoes_conferidas": 70,
       "sessoes_com_divergencia": 0
     },
     "ordemdia": {
-      "sessoes_conferidas": 69,
+      "sessoes_conferidas": 70,
       "sessoes_com_divergencia": 0
     },
     "justificativaausencia": {
-      "sessoes_conferidas": 69,
+      "sessoes_conferidas": 70,
       "sessoes_com_divergencia": 0
     }
   },

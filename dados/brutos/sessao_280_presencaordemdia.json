@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "id": 837,
+      "__str__": "Sessão: 38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Cleiton Costa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 280,
+      "parlamentar": 3
+    },
+    {
+      "id": 836,
+      "__str__": "Sessão: 38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Dr. Marcos Rodrigues",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 280,
+      "parlamentar": 2
+    },
+    {
+      "id": 843,
+      "__str__": "Sessão: 38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gilmar Barbosa",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 280,
+      "parlamentar": 9
+    },
+    {
+      "id": 840,
+      "__str__": "Sessão: 38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Gustavo Vizentin",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 280,
+      "parlamentar": 6
+    },
+    {
+      "id": 841,
+      "__str__": "Sessão: 38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Josemar Veiga",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 280,
+      "parlamentar": 7
+    },
+    {
+      "id": 838,
+      "__str__": "Sessão: 38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Kinho Lazarino",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 280,
+      "parlamentar": 4
+    },
+    {
+      "id": 839,
+      "__str__": "Sessão: 38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rafael Ventura",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 280,
+      "parlamentar": 5
+    },
+    {
+      "id": 842,
+      "__str__": "Sessão: 38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura Parlamentar: Rivanildo Cavalheiro",
+      "link_detail_backend": "",
+      "metadata": {},
+      "sessao_plenaria": 280,
+      "parlamentar": 100
+    }
+  ],
+  "total": 8
+}

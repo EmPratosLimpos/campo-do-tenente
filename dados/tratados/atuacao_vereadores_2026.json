@@ -4,20 +4,20 @@
     "cidade": "Campo do Tenente",
     "uf": "PR",
     "ano": 2026,
-    "dado_coletado_em": "2026-10-27T17:39:55+00:00",
-    "fonte_data_coleta": "dados/brutos/lote_20260929_tramitacao/indice.json campo atualizado_em",
-    "n_sessoes_ordinarias": 37,
+    "dado_coletado_em": "2026-10-29T01:21:00+00:00",
+    "fonte_data_coleta": "dados/brutos/lote_20261009_autoria/indice.json campo atualizado_em",
+    "n_sessoes_ordinarias": 38,
     "piso_sessoes_ordinarias": 33,
     "n_vereadores": 10,
     "piso_vereadores": 10,
     "n_projetos_lei_legislativo": 5,
-    "n_projetos_lei_executivo": 15,
-    "n_projetos_lei_legislativo_e_executivo": 20,
+    "n_projetos_lei_executivo": 16,
+    "n_projetos_lei_legislativo_e_executivo": 21,
     "piso_projetos_lei_legislativo_e_executivo": 18,
-    "n_presencas": 322,
+    "n_presencas": 330,
     "n_faltas_com_justificativa": 29,
-    "n_faltas_sem_justificativa": 5,
-    "n_sessoes_fora_do_mandato": 14,
+    "n_faltas_sem_justificativa": 6,
+    "n_sessoes_fora_do_mandato": 15,
     "n_sessoes_licenca": 0,
     "n_votacoes": 141,
     "n_registros_votacao": 141,
@@ -775,6 +775,23 @@
       "n_licenca": 0,
       "n_registros_votacao": 10,
       "n_votacoes_com_voto_individual": 10,
+      "n_votacoes_sem_voto_individual": 0
+    },
+    {
+      "id": 280,
+      "numero": 38,
+      "data": "2026-10-27",
+      "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "n_votacoes_contagem": 0,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/sessao/280",
+      "presidente_id_sapl": 5,
+      "n_presentes": 8,
+      "n_faltas_com_justificativa": 0,
+      "n_faltas_sem_justificativa": 1,
+      "n_fora_do_mandato": 1,
+      "n_licenca": 0,
+      "n_registros_votacao": 0,
+      "n_votacoes_com_voto_individual": 0,
       "n_votacoes_sem_voto_individual": 0
     }
   ],
@@ -21393,6 +21410,42 @@
       "nome_oficial_ultimo_registro": null
     },
     {
+      "id": 1289,
+      "numero": "16",
+      "ano": "2026",
+      "tipo_sigla": "PLEX",
+      "tipo_descricao": "Projeto de Lei Origem Poder Executivo",
+      "ementa": "OFÍCIO Nº315/2026 – GAB e demais anexos. Projeto de Lei n°016/2026 que ESTIMA A RECEITA E FIXA A DESPESA DO MUNICÍPIO DE CAMPO DO TENENTE PARA O EXERCÍCIO DE 2027.",
+      "tema": "Administração e finanças",
+      "revisada_por_humano": false,
+      "autoria": {
+        "rotulo": null,
+        "autores": [
+          {
+            "ordem_no_sapl": 1,
+            "autor_id": 17,
+            "tipo_autor": "Chefe do Poder Executivo Municipal",
+            "parlamentar_id_sapl": null,
+            "nome_no_sapl": "Weverton Willian Vizentin",
+            "cargo_no_sapl": "Prefeito",
+            "lacuna": null
+          }
+        ],
+        "autoria_conjunta": false,
+        "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1289"
+      },
+      "autoria_conjunta": false,
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1289",
+      "texto_original": "http://sapl.campodotenente.pr.leg.br/media/sapl/public/materialegislativa/2026/1289/projeto_de_lei016.pdf",
+      "votacoes_ordinarias": [],
+      "situacao": "Em tramitacao",
+      "data_sessao": null,
+      "resultado_texto_sapl": null,
+      "frase_resultado_sapl": null,
+      "sessao_id": null,
+      "nome_oficial_ultimo_registro": null
+    },
+    {
       "id": 244,
       "numero": "1",
       "ano": "2026",
@@ -21844,8 +21897,8 @@
       ],
       "presenca": {
         "sessoes_ordinarias": 28,
-        "sessoes_do_ano": 37,
-        "sessoes_fora_do_mandato": 9,
+        "sessoes_do_ano": 38,
+        "sessoes_fora_do_mandato": 10,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
         "presencas": 4,
@@ -23735,17 +23788,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 37,
-        "sessoes_do_ano": 37,
+        "sessoes_ordinarias": 38,
+        "sessoes_do_ano": 38,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 35,
+        "presencas": 36,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 1,
         "faltas_totais": 2,
-        "percentual_faltas": 5.41,
-        "taxa_presenca": 94.59,
+        "percentual_faltas": 5.26,
+        "taxa_presenca": 94.74,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -24198,6 +24251,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277"
+          },
+          {
+            "sessao_id": 280,
+            "data_sessao": "2026-10-27",
+            "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/280"
           }
         ]
       },
@@ -25631,17 +25696,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 37,
-        "sessoes_do_ano": 37,
+        "sessoes_ordinarias": 38,
+        "sessoes_do_ano": 38,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 36,
+        "presencas": 37,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 1,
-        "percentual_faltas": 2.7,
-        "taxa_presenca": 97.3,
+        "percentual_faltas": 2.63,
+        "taxa_presenca": 97.37,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -26094,6 +26159,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277"
+          },
+          {
+            "sessao_id": 280,
+            "data_sessao": "2026-10-27",
+            "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/280"
           }
         ]
       },
@@ -27506,17 +27583,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 37,
-        "sessoes_do_ano": 37,
+        "sessoes_ordinarias": 38,
+        "sessoes_do_ano": 38,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 35,
+        "presencas": 36,
         "faltas_com_justificativa": 1,
         "faltas_sem_justificativa": 1,
         "faltas_totais": 2,
-        "percentual_faltas": 5.41,
-        "taxa_presenca": 94.59,
+        "percentual_faltas": 5.26,
+        "taxa_presenca": 94.74,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -27969,6 +28046,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277"
+          },
+          {
+            "sessao_id": 280,
+            "data_sessao": "2026-10-27",
+            "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/280"
           }
         ]
       },
@@ -29402,17 +29491,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 37,
-        "sessoes_do_ano": 37,
+        "sessoes_ordinarias": 38,
+        "sessoes_do_ano": 38,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 36,
+        "presencas": 37,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 1,
         "faltas_totais": 1,
-        "percentual_faltas": 2.7,
-        "taxa_presenca": 97.3,
+        "percentual_faltas": 2.63,
+        "taxa_presenca": 97.37,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -29857,6 +29946,18 @@
             "justificativa": false,
             "era_presidente": true,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277"
+          },
+          {
+            "sessao_id": 280,
+            "data_sessao": "2026-10-27",
+            "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": true,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/280"
           }
         ]
       },
@@ -31327,12 +31428,12 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 37,
-        "sessoes_do_ano": 37,
+        "sessoes_ordinarias": 38,
+        "sessoes_do_ano": 38,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 37,
+        "presencas": 38,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -31782,6 +31883,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277"
+          },
+          {
+            "sessao_id": 280,
+            "data_sessao": "2026-10-27",
+            "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/280"
           }
         ]
       },
@@ -33215,12 +33328,12 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 37,
-        "sessoes_do_ano": 37,
+        "sessoes_ordinarias": 38,
+        "sessoes_do_ano": 38,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 37,
+        "presencas": 38,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -33670,6 +33783,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277"
+          },
+          {
+            "sessao_id": 280,
+            "data_sessao": "2026-10-27",
+            "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/280"
           }
         ]
       },
@@ -35082,17 +35207,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 37,
-        "sessoes_do_ano": 37,
+        "sessoes_ordinarias": 38,
+        "sessoes_do_ano": 38,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
         "presencas": 35,
         "faltas_com_justificativa": 0,
-        "faltas_sem_justificativa": 2,
-        "faltas_totais": 2,
-        "percentual_faltas": 5.41,
-        "taxa_presenca": 94.59,
+        "faltas_sem_justificativa": 3,
+        "faltas_totais": 3,
+        "percentual_faltas": 7.89,
+        "taxa_presenca": 92.11,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -35537,6 +35662,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277"
+          },
+          {
+            "sessao_id": 280,
+            "data_sessao": "2026-10-27",
+            "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "falta_sem_justificativa",
+            "rotulo_situacao": "Falta sem justificativa",
+            "presente_sessao_plenaria": false,
+            "presente_ordem_dia": false,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/280"
           }
         ]
       },
@@ -36949,17 +37086,17 @@
       "nota_factual": null,
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 37,
-        "sessoes_do_ano": 37,
+        "sessoes_ordinarias": 38,
+        "sessoes_do_ano": 38,
         "sessoes_fora_do_mandato": 0,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 35,
+        "presencas": 36,
         "faltas_com_justificativa": 2,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 2,
-        "percentual_faltas": 5.41,
-        "taxa_presenca": 94.59,
+        "percentual_faltas": 5.26,
+        "taxa_presenca": 94.74,
         "por_sessao": [
           {
             "sessao_id": 37,
@@ -37420,6 +37557,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277"
+          },
+          {
+            "sessao_id": 280,
+            "data_sessao": "2026-10-27",
+            "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/280"
           }
         ]
       },
@@ -38856,12 +39005,12 @@
       },
       "afastamentos": [],
       "presenca": {
-        "sessoes_ordinarias": 32,
-        "sessoes_do_ano": 37,
+        "sessoes_ordinarias": 33,
+        "sessoes_do_ano": 38,
         "sessoes_fora_do_mandato": 5,
         "sessoes_licenca": 0,
         "sessoes_por_afastamento": {},
-        "presencas": 32,
+        "presencas": 33,
         "faltas_com_justificativa": 0,
         "faltas_sem_justificativa": 0,
         "faltas_totais": 0,
@@ -39251,6 +39400,18 @@
             "justificativa": false,
             "era_presidente": false,
             "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/277"
+          },
+          {
+            "sessao_id": 280,
+            "data_sessao": "2026-10-27",
+            "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+            "situacao": "presente",
+            "rotulo_situacao": "Presente",
+            "presente_sessao_plenaria": true,
+            "presente_ordem_dia": true,
+            "justificativa": false,
+            "era_presidente": false,
+            "link_sessao": "https://sapl.campodotenente.pr.leg.br/sessao/280"
           }
         ]
       },
