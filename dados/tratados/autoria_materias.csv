@@ -631,3 +631,7 @@ materia_id;ano;numero;rotulo_sapl;autor_id;ordem_no_sapl;primeiro_autor;tipo_aut
 1280;2026;40;Indicação nº 40 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1280
 1281;2026;21;Requerimento nº 21 de 2026;15;1;true;2;Parlamentar;5;Rafael Ventura;;https://sapl.campodotenente.pr.leg.br/materia/1281
 1282;2026;22;Requerimento nº 22 de 2026;10;1;true;2;Parlamentar;6;Gustavo Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1282
+1286;2026;23;Oficio do Poder Executivo nº 23 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1286
+1287;2026;39;Ata Sessão nº 39 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/1287
+1288;2026;40;Ata Sessão nº 40 de 2026;7;1;true;5;Órgão;;Secretária Legislativa - SLEG;;https://sapl.campodotenente.pr.leg.br/materia/1288
+1289;2026;16;Projeto de Lei Origem Poder Executivo nº 16 de 2026;17;1;true;7;Chefe do Poder Executivo Municipal;;Weverton Willian Vizentin;;https://sapl.campodotenente.pr.leg.br/materia/1289

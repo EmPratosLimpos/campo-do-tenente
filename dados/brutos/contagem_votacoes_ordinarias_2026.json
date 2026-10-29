@@ -1,7 +1,7 @@
 {
   "ano": 2026,
   "id_tipo_sessao_ordinaria": 3,
-  "total_sessoes_ordinarias": 37,
+  "total_sessoes_ordinarias": 38,
   "total_votacoes": 141,
   "votacoes_com_voto_individual": 121,
   "votacoes_sem_voto_individual": 20,
@@ -9,8 +9,8 @@
   "n_nao_votou": 114,
   "n_votacoes_com_nao_votou": 114,
   "n_votacoes_com_exatamente_um_nao_votou": 114,
-  "n_presencas_sessao": 322,
-  "n_presencas_ordem_dia": 303,
+  "n_presencas_sessao": 330,
+  "n_presencas_ordem_dia": 311,
   "n_justificativas": 6,
   "lacuna_sessoes_ordinarias": {
     "numeros_ausentes_no_sapl": [],
@@ -2590,6 +2590,21 @@
           "voto_individual": "registrado"
         }
       ]
+    },
+    {
+      "id": 280,
+      "numero": 38,
+      "data": "2026-10-27",
+      "rotulo": "38ª Sessão Ordinária da 2ª Sessão Legislativa da 16ª Legislatura",
+      "tipo": 3,
+      "n_votacoes": 0,
+      "n_votacoes_com_voto_individual": 0,
+      "n_votacoes_sem_voto_individual": 0,
+      "n_nao_votou": 0,
+      "n_presencas_sessao": 8,
+      "n_presencas_ordem_dia": 8,
+      "n_justificativas": 0,
+      "votacoes": []
     }
   ]
 }

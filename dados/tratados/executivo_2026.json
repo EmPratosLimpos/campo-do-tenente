@@ -3,7 +3,7 @@
     "gerado_por": "dados/tratados/gerar_proposicoes_executivo.py",
     "ano": 2026,
     "grupo": "executivo",
-    "total": 15,
+    "total": 16,
     "fonte_tramitacao": "dados/brutos/lote_20260929_tramitacao",
     "fonte_atuacao": [
       "dados/tratados/atuacao_vereadores_2025.json",
@@ -11,24 +11,25 @@
     ],
     "status_decodificados": 28,
     "por_tipo_sigla": {
-      "PLEX": 15
+      "PLEX": 16
     },
     "por_situacao_final": {
       "Aprovado": 7,
       "Aguardando emissão de parecer da comissão": 3,
       "Aguardando a inclusão na ordem do dia": 2,
       "Adiada discussão e votação.": 1,
+      "Em tramitacao": 1,
       "Proposição transformada em lei": 1,
       "Rejeitado": 1
     },
     "por_situacao_final_fonte": {
       "votacao": 8,
       "tramitacao": 7,
-      "ficha_sapl": 0,
+      "ficha_sapl": 1,
       "sem_registro": 0
     },
     "itens_com_votacao_valida": 7,
-    "itens_sem_votacao_valida": 8,
+    "itens_sem_votacao_valida": 9,
     "votos_nominais_registrados": 69,
     "rotulo_sem_votacao": "sem votacao registrada no SAPL",
     "rotulo_sem_voto_valido": "votacao registrada sem voto valido (so 1o turno ou sem deliberacao)",
@@ -37,7 +38,7 @@
     "situacao_sem_registro": "Sem registro de votação nem de tramitação no SAPL",
     "observacao": "Votacao e votos nominais saem so do voto valido: 2o turno ou turno unico, e so registro deliberativo, lido pelo id do tipo de resultado do SAPL. Pedido de Vistas, materia adiada e retirada de pauta nao sao votacao e ficam como fato de tramitacao. Materia votada so no 1o turno nao tem voto valido. Voto nominal so entra de quem estava no mandato na data da sessao. A situacao final nunca e deduzida: com voto valido ou rejeicao no 1o turno vem do registro de votacao; sem voto valido, mas com tramitacao, vem do texto oficial do status do SAPL; sem registro nenhum, vem do campo em_tramitacao da ficha, e False vira o rotulo de ausencia. O campo situacao_final_fonte diz de onde cada uma veio.",
     "por_votacao_tipo": {
-      "nao informado no SAPL": 8,
+      "nao informado no SAPL": 9,
       "nominal": 7
     },
     "rotulo_votacao_tipo_nao_informado": "nao informado no SAPL",
@@ -725,6 +726,36 @@
       "votos_nominais": [],
       "votos_nominais_rotulo": "sem votacao registrada no SAPL",
       "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1200",
+      "votacao_tipo": "nao informado no SAPL",
+      "materia_vetada_id": null,
+      "materia_vetada_fonte": null,
+      "materia_vetada_tipo": null,
+      "materia_vetada_link": null,
+      "materia_vetada_rotulo": "sem indicacao estruturada no SAPL, ver ementa"
+    },
+    {
+      "id": 1289,
+      "tipo_sigla": "PLEX",
+      "tipo_nome": "Projeto de Lei Origem Poder Executivo",
+      "tipo": "PLEX 16/2026",
+      "numero": "16",
+      "ano": "2026",
+      "ementa": "OFÍCIO Nº315/2026 – GAB e demais anexos. Projeto de Lei n°016/2026 que ESTIMA A RECEITA E FIXA A DESPESA DO MUNICÍPIO DE CAMPO DO TENENTE PARA O EXERCÍCIO DE 2027.",
+      "tema": "Administração e finanças",
+      "revisada_por_humano": false,
+      "autores": [],
+      "situacao_final": "Em tramitacao",
+      "situacao_final_fonte": "ficha_sapl",
+      "em_tramitacao": true,
+      "resultado_ficha_sapl": "",
+      "ultima_tramitacao": null,
+      "ultima_tramitacao_rotulo": "sem tramitacao registrada no SAPL",
+      "votacoes_registradas": [],
+      "votacao": null,
+      "votacao_rotulo": "sem votacao registrada no SAPL",
+      "votos_nominais": [],
+      "votos_nominais_rotulo": "sem votacao registrada no SAPL",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1289",
       "votacao_tipo": "nao informado no SAPL",
       "materia_vetada_id": null,
       "materia_vetada_fonte": null,

@@ -24,6 +24,23 @@ Está prevista uma atualização semanal automática. Cada vez que ela trouxer s
 
 ---
 
+## 2026-10-28: atualização semanal dos dados
+
+**O que mudou nos dados**
+- Sessão ordinária 38, data 2026-10-27 (registro 280).
+- 2026: sessões ordinárias de 37 para 38, presenças na sessão de 322 para 330.
+- Hash SHA-256 de atuacao_vereadores_2026.json: 8e1a5102ef8ddc21bb6baccb0b5489f19641ccfa5d9f3692aa140222613c06a8.
+- Temas de materias novas: 4 por consenso de tres modelos (D-047), 0 aguardam revisao do mantenedor.
+- sessao 280 sem itens na ordem do dia no SAPL.
+- Pedidos ao SAPL nesta execução: 81.
+
+**O que mudou na tela**
+- Nenhuma. A tela só muda depois que o mantenedor aprovar.
+
+**De onde veio**
+- SAPL consultado: https://sapl.campodotenente.pr.leg.br.
+- Coleta de 2026-10-28.
+
 ## 2026-10-27: atualização semanal dos dados
 
 **O que mudou nos dados**

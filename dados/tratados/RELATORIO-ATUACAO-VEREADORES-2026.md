@@ -1,18 +1,18 @@
 # Atuação dos vereadores nas sessões ordinárias de 2026
 
 Cidade: Campo do Tenente (PR)
-Dado coletado em: 2026-10-27T17:39:55+00:00
-Fonte da data: dados/brutos/lote_20260929_tramitacao/indice.json campo atualizado_em
+Dado coletado em: 2026-10-29T01:21:00+00:00
+Fonte da data: dados/brutos/lote_20261009_autoria/indice.json campo atualizado_em
 Script: `dados/tratados/gerar_atuacao_vereadores.py`
 Fonte dos fatos: arquivos em `dados/brutos/`, `dados/tratados/vereadores.json`, `dados/tratados/presidencia_sessoes.json` e `dados/tratados/autoria_materias.json`.
 
 ## Em uma frase
 
-Nas 37 sessões ordinárias de 2026 que estão no SAPL, os 10 vereadores com mandato nesse ano tiveram presença, voto e projetos de lei lidos do registro oficial.
+Nas 38 sessões ordinárias de 2026 que estão no SAPL, os 10 vereadores com mandato nesse ano tiveram presença, voto e projetos de lei lidos do registro oficial.
 
 ## O que este recorte cobre
 
-Ano 2026. Só sessão ordinária. O piso de sessões (33) é mínimo: o arquivo traz 37, que é pelo menos esse piso.
+Ano 2026. Só sessão ordinária. O piso de sessões (33) é mínimo: o arquivo traz 38, que é pelo menos esse piso.
 
 Presença e voto nominal só entram quando a data da sessão cai dentro do mandato da pessoa, pelas datas da tabela de vereadores. Sessão fora desse intervalo não aparece na lista da pessoa: a atuação de quem saiu fica congelada na data de saída.
 
@@ -60,7 +60,7 @@ Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/1
 
 Presente em 4 das 28 sessões em que a presença conta (taxa 14,29%).
 
-Faltas com justificativa: 24. Faltas sem justificativa: 0. Sessões fora do mandato: 9.
+Faltas com justificativa: 24. Faltas sem justificativa: 0. Sessões fora do mandato: 10.
 
 ### Dr. Marcos Rodrigues
 
@@ -68,7 +68,7 @@ Partido: MDB (MOVIMENTO DEMOCRÁTICO BRASILEIRO)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/2
 
-Presente em 35 das 37 sessões em que a presença conta (taxa 94,59%).
+Presente em 36 das 38 sessões em que a presença conta (taxa 94,74%).
 
 Faltas com justificativa: 1. Faltas sem justificativa: 1. Sessões fora do mandato: 0.
 
@@ -78,7 +78,7 @@ Partido: PDT (PARTIDO DEMOCRÁTICO TRABALHISTA)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/3
 
-Presente em 36 das 37 sessões em que a presença conta (taxa 97,30%).
+Presente em 37 das 38 sessões em que a presença conta (taxa 97,37%).
 
 Faltas com justificativa: 1. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
@@ -88,7 +88,7 @@ Partido: MDB (MOVIMENTO DEMOCRÁTICO BRASILEIRO)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/4
 
-Presente em 35 das 37 sessões em que a presença conta (taxa 94,59%).
+Presente em 36 das 38 sessões em que a presença conta (taxa 94,74%).
 
 Faltas com justificativa: 1. Faltas sem justificativa: 1. Sessões fora do mandato: 0.
 
@@ -98,7 +98,7 @@ Partido: PL (PARTIDO LIBERAL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/5
 
-Presente em 36 das 37 sessões em que a presença conta (taxa 97,30%).
+Presente em 37 das 38 sessões em que a presença conta (taxa 97,37%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 1. Sessões fora do mandato: 0.
 
@@ -108,7 +108,7 @@ Partido: UNIÃO (UNIÃO BRASIL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/6
 
-Presente em 37 das 37 sessões em que a presença conta (taxa 100,00%).
+Presente em 38 das 38 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
@@ -118,7 +118,7 @@ Partido: PL (PARTIDO LIBERAL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/7
 
-Presente em 37 das 37 sessões em que a presença conta (taxa 100,00%).
+Presente em 38 das 38 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
@@ -128,9 +128,9 @@ Partido: PP (PARTIDO PROGRESSISTA)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/8
 
-Presente em 35 das 37 sessões em que a presença conta (taxa 94,59%).
+Presente em 35 das 38 sessões em que a presença conta (taxa 92,11%).
 
-Faltas com justificativa: 0. Faltas sem justificativa: 2. Sessões fora do mandato: 0.
+Faltas com justificativa: 0. Faltas sem justificativa: 3. Sessões fora do mandato: 0.
 
 ### Gilmar Barbosa
 
@@ -138,7 +138,7 @@ Partido: UNIÃO (UNIÃO BRASIL)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/9
 
-Presente em 35 das 37 sessões em que a presença conta (taxa 94,59%).
+Presente em 36 das 38 sessões em que a presença conta (taxa 94,74%).
 
 Faltas com justificativa: 2. Faltas sem justificativa: 0. Sessões fora do mandato: 0.
 
@@ -148,7 +148,7 @@ Partido: PP (PARTIDO PROGRESSISTA)
 
 Página oficial: https://sapl.campodotenente.pr.leg.br/parlamentar/100
 
-Presente em 32 das 32 sessões em que a presença conta (taxa 100,00%).
+Presente em 33 das 33 sessões em que a presença conta (taxa 100,00%).
 
 Faltas com justificativa: 0. Faltas sem justificativa: 0. Sessões fora do mandato: 5.
 
@@ -302,7 +302,7 @@ Votações sem voto individual não entram nesta lista. No ano foram 20.
 
 ## Projetos de lei
 
-Projetos de lei do Legislativo: 5. Projetos de lei do Executivo: 15. Soma, conferida como mínimo: 20 (piso 18).
+Projetos de lei do Legislativo: 5. Projetos de lei do Executivo: 16. Soma, conferida como mínimo: 21 (piso 18).
 
 A autoria veio de `autoria_materias.json`. A lista de cada vereador abaixo só inclui projeto de lei do Legislativo em que o id do parlamentar aparece como autor.
 
@@ -374,11 +374,11 @@ Nenhum projeto de lei do Legislativo com esta autoria neste ano.
 
 ## Totais
 
-- Sessões ordinárias no SAPL: 37
+- Sessões ordinárias no SAPL: 38
 - Vereadores com mandato no ano: 10
-- Presenças dentro do mandato: 322
+- Presenças dentro do mandato: 330
 - Faltas com justificativa: 29
-- Faltas sem justificativa: 5
+- Faltas sem justificativa: 6
 - Afastamentos que não contam como falta: 0
 - Votações: 141
 - Votações com voto individual: 121

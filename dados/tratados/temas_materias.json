@@ -1,7 +1,7 @@
 {
   "descricao": "Tema principal de cada materia do recorte, lido da ementa oficial no SAPL.",
   "fonte": "dados/brutos/lote_20260926/materialegislativa_ano*_p*.json",
-  "total": 425,
+  "total": 429,
   "materias": [
     {
       "id": 1,
@@ -5952,6 +5952,62 @@
       "revisada_por_humano": false,
       "revisado_por": "",
       "data": "2026-10-20"
+    },
+    {
+      "id": 1286,
+      "ano": 2026,
+      "sigla": "OFEX",
+      "numero": 23,
+      "tema": "não se aplica",
+      "confianca": "alta",
+      "justificativa": "Ofício do Executivo que apenas encaminha documento (impacto orçamentário-financeiro de PL), sem tratar de tema próprio.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1286",
+      "classificado_por": "consenso D-047: glm-5.3-flash, mimo-v2.6-flash",
+      "revisada_por_humano": false,
+      "revisado_por": "",
+      "data": "2026-10-29"
+    },
+    {
+      "id": 1287,
+      "ano": 2026,
+      "sigla": "ATA",
+      "numero": 39,
+      "tema": "não se aplica",
+      "confianca": "alta",
+      "justificativa": "O documento é uma ata de reunião (ATA 39/2026), que apenas registra a sessão e não trata de um tema próprio.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1287",
+      "classificado_por": "consenso D-047: glm-5.3-flash, mimo-v2.6-flash",
+      "revisada_por_humano": false,
+      "revisado_por": "",
+      "data": "2026-10-29"
+    },
+    {
+      "id": 1288,
+      "ano": 2026,
+      "sigla": "ATA",
+      "numero": 40,
+      "tema": "não se aplica",
+      "confianca": "alta",
+      "justificativa": "Trata-se de uma ata (ATA 40/2026) que apenas registra a reunião, sem tema próprio.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1288",
+      "classificado_por": "consenso D-047: glm-5.3-flash, mimo-v2.6-flash",
+      "revisada_por_humano": false,
+      "revisado_por": "",
+      "data": "2026-10-29"
+    },
+    {
+      "id": 1289,
+      "ano": 2026,
+      "sigla": "PLEX",
+      "numero": 16,
+      "tema": "Administração e finanças",
+      "confianca": "alta",
+      "justificativa": "Trata-se do projeto de lei que estima a receita e fixa a despesa do município (LOA), tema orçamentário-financeiro.",
+      "link": "https://sapl.campodotenente.pr.leg.br/materia/1289",
+      "classificado_por": "consenso D-047: glm-5.3-flash, mimo-v2.6-flash",
+      "revisada_por_humano": false,
+      "revisado_por": "",
+      "data": "2026-10-29"
     }
   ]
 }

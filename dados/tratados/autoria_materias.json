@@ -28,9 +28,9 @@
       "dados/brutos/lote_20261009_autoria/autoria_p13.json",
       "dados/brutos/lote_20261009_autoria/autoria_p14.json"
     ],
-    "autoria_total_entries_api": 1314,
-    "autoria_total_linhas_lidas": 1314,
-    "autoria_ids_distintos": 1314,
+    "autoria_total_entries_api": 1318,
+    "autoria_total_linhas_lidas": 1318,
+    "autoria_ids_distintos": 1318,
     "nota_autoria": "A lista materia/autoria repetiu ids entre paginas e o filtro por ano foi ignorado pelo SAPL. Ela so informa o primeiro autor. A ligacao materia e autor vem do campo autores da propria materia.",
     "por_ano": {
       "2025": {
@@ -49,16 +49,16 @@
         ]
       },
       "2026": {
-        "n_materias": 160,
-        "total_entries_api": 160,
-        "n_pares_materia_autor": 210,
+        "n_materias": 164,
+        "total_entries_api": 164,
+        "n_pares_materia_autor": 214,
         "materias_por_tipo_de_autor": {
-          "Chefe do Poder Executivo Municipal": 37,
+          "Chefe do Poder Executivo Municipal": 39,
           "Comissão": 3,
           "MESA DIRETORA": 1,
           "Parlamentar": 83,
           "sem autor registrado no SAPL": 19,
-          "Órgão": 18
+          "Órgão": 20
         },
         "arquivos_materias": [
           "dados/brutos/lote_20260926/materialegislativa_ano2026_p1.json",
@@ -11413,6 +11413,98 @@
           "parlamentar_id_sapl": 6,
           "nome_no_sapl": "Gustavo Vizentin",
           "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1286,
+      "ano": 2026,
+      "numero": 23,
+      "tipo_materia_id": 15,
+      "rotulo_sapl": "Oficio do Poder Executivo nº 23 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1286",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 17,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 7,
+          "tipo_autor": "Chefe do Poder Executivo Municipal",
+          "parlamentar_id_sapl": null,
+          "nome_no_sapl": "Weverton Willian Vizentin",
+          "cargo_no_sapl": "Prefeito",
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1287,
+      "ano": 2026,
+      "numero": 39,
+      "tipo_materia_id": 19,
+      "rotulo_sapl": "Ata Sessão nº 39 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1287",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 7,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 5,
+          "tipo_autor": "Órgão",
+          "parlamentar_id_sapl": null,
+          "nome_no_sapl": "Secretária Legislativa - SLEG",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1288,
+      "ano": 2026,
+      "numero": 40,
+      "tipo_materia_id": 19,
+      "rotulo_sapl": "Ata Sessão nº 40 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1288",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 7,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 5,
+          "tipo_autor": "Órgão",
+          "parlamentar_id_sapl": null,
+          "nome_no_sapl": "Secretária Legislativa - SLEG",
+          "cargo_no_sapl": null,
+          "lacuna": null
+        }
+      ]
+    },
+    {
+      "materia_id": 1289,
+      "ano": 2026,
+      "numero": 16,
+      "tipo_materia_id": 1,
+      "rotulo_sapl": "Projeto de Lei Origem Poder Executivo nº 16 de 2026",
+      "link_sapl": "https://sapl.campodotenente.pr.leg.br/materia/1289",
+      "autoria_rotulo": null,
+      "autorias": [
+        {
+          "ordem_no_sapl": 1,
+          "autor_id": 17,
+          "primeiro_autor": true,
+          "primeiro_autor_rotulo": null,
+          "tipo_autor_id": 7,
+          "tipo_autor": "Chefe do Poder Executivo Municipal",
+          "parlamentar_id_sapl": null,
+          "nome_no_sapl": "Weverton Willian Vizentin",
+          "cargo_no_sapl": "Prefeito",
           "lacuna": null
         }
       ]
